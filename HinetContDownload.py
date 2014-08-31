@@ -14,8 +14,8 @@
 """Download coutinuous waveform datas from Hi-net.
 
 Usage:
-    HinetContDownloader.py (--all | --new | --ids=IDFILE) [--procs=N]
-    HinetContDownloader.py -h
+    HinetContDownload.py (--all | --new | --ids=IDFILE) [--procs=N]
+    HinetContDownload.py -h
 
 Options:
     -h --help     Show this help.
