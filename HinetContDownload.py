@@ -43,7 +43,7 @@ base = "http://www.hinet.bosai.go.jp/REGS/download/cont/"
 
 def download(url, params):
     d = requests.get(url, params=params, auth=(user, passwd), stream=True)
-    if r.status_code == 401:
+    if d.status_code == 401:
         print("Unauthorized.")
         sys.exit()
 

@@ -121,7 +121,7 @@ payload = {
     'LANG':  'en',       # english version of web
     'rn':    str(int((datetime.now() - datetime(1970, 1, 1)).total_seconds()))
 }
-requests.post(url, params=payload, auth=(user, passwd), timeout=5)
+r = requests.post(url, params=payload, auth=(user, passwd), timeout=5)
 if r.status_code == 401:
     print("Unauthorized.")
     sys.exit()
