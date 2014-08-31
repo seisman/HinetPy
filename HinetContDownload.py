@@ -43,6 +43,10 @@ base = "http://www.hinet.bosai.go.jp/REGS/download/cont/"
 
 def download(url, params):
     d = requests.get(url, params=params, auth=(user, passwd), stream=True)
+    if r.status_code == 401:
+        print("Unauthorized.")
+        sys.exit()
+
     # file size
     size = int(d.headers['Content-Length'].strip())
     # file name
@@ -76,6 +80,9 @@ def get_ids():
     if arguments['--new'] or arguments['--all']:
         status = base + "cont_status.php"
         r = requests.get(status, auth=(user, passwd))
+        if r.status_code == 401:
+            print("Unauthorized.")
+            sys.exit()
         soup = BeautifulSoup(r.content)
 
         if arguments['--new']:
