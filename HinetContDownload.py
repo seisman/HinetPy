@@ -27,6 +27,7 @@ Options:
 """
 import re
 import sys
+import configparser
 import multiprocessing
 
 import requests
@@ -34,8 +35,10 @@ from docopt import docopt
 from bs4 import BeautifulSoup
 
 # specify user name and password
-user = "xxxxxx"
-passwd = "xxxxxxxxxx"
+config = configparser.ConfigParser()
+config.read("Hinet.cfg")
+user = config['Account']['User']
+passwd = config['Account']['Password']
 
 # base url for continuous waveform data
 base = "http://www.hinet.bosai.go.jp/REGS/download/cont/"

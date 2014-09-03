@@ -21,13 +21,16 @@ Options:
 
 """
 import sys
+import configparser
 
 import requests
 from docopt import docopt
 
 # specify user name and password
-user = "xxxxxx"
-passwd = "xxxxxxxxxx"
+config = configparser.ConfigParser()
+config.read("Hinet.cfg")
+user = config['Account']['User']
+passwd = config['Account']['Password']
 
 # base url for continuous waveform data
 base = "http://www.hinet.bosai.go.jp/REGS/JMA/"

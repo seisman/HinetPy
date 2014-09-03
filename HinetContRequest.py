@@ -50,14 +50,18 @@ Codes of org & net:
 """
 
 import sys
+import configparser
 from datetime import date, datetime
 
 import requests
 from docopt import docopt
 
 # User name & passwd
-user = "xxxxxx"
-passwd = "xxxxxxxxxx"
+config = configparser.ConfigParser()
+config.read("Hinet.cfg")
+user = config['Account']['User']
+passwd = config['Account']['Password']
+
 base = "http://www.hinet.bosai.go.jp/REGS/download/cont/"
 
 # all legal codes
