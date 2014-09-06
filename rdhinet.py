@@ -15,8 +15,8 @@ Usage:
 
 Options:
     -h          Show this helo.
-    -C <comps>  Components list separated with commas. Avaiable components are
-                U, N, E, X, Y.  [default: U,N,E]
+    -C <comps>  Selection of components to extract.
+                Avaiable components are U, N, E, X, Y. [default: UNE]
     -D <outdir> Output directory for SAC files.
     -P <procs>  Parallel using multiple processes. Set number of cpus to <procs>
                 if <procs> equals 0.    [default: 0]
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     win_prm(chfile)
 
     # get channel NO. lists for channel table
-    comps = arguments['-C'].split(",")
+    comps = set(arguments['-C'])
     chno = get_chno(chfile, comps)
 
     # extract sac files
