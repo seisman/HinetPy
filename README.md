@@ -5,3 +5,4 @@ This is a collection of scripts for Hi-net data request, download and process.
 - `HinetJMADownload.py`: Download arrival time data or focal mechanism catalog.
 
 - `rdhinet.py`: Extract SAC data files from Hi-net WIN32 files.
+- `ch2pz.py`: Convert Hi-net Channel Table file to SAC PZ files
