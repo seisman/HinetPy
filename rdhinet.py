@@ -10,14 +10,15 @@
 """Extract SAC data files from Hi-net WIN32 files
 
 Usage:
-    rdhinet.py DIRNAME [-C <comps>] [-D <outdir>] [-P <procs>]
+    rdhinet.py DIRNAME [-C <comps>] [-D <outdir>] [-S <suffix>] [-P <procs>]
     rdhinet.py -h
 
 Options:
-    -h          Show this helo.
+    -h          Show this help.
     -C <comps>  Selection of components to extract.
                 Avaiable components are U, N, E, X, Y. [default: UNE]
     -D <outdir> Output directory for SAC files.
+    -S <suffix> Suffix of output SAC files.
     -P <procs>  Parallel using multiple processes. Set number of cpus to <procs>
                 if <procs> equals 0.    [default: 0]
 
@@ -27,6 +28,7 @@ import os
 import glob
 import shlex
 import zipfile
+import datetime
 import subprocess
 import multiprocessing
 
@@ -38,7 +40,7 @@ win2sac = "win2sac_32"
 
 
 def unzip(zips):
-    """unzip zip file list"""
+    """unzip zip filelist"""
 
     for file in zips:
         print("Unzip %s" % (file))
@@ -48,7 +50,7 @@ def unzip(zips):
 
 
 def win32_cat(cnts, cnt_total):
-    """ merge WIN32 files to one total WIN32 file"""
+    """merge WIN32 files to one total WIN32 file"""
 
     print("Total %d win32 files" % (len(cnts)))
     cmd = "%s %s -o %s" % (catwin32, ' '.join(cnts), cnt_total)
@@ -57,7 +59,7 @@ def win32_cat(cnts, cnt_total):
 
 
 def win_prm(chfile, prmfile="win.prm"):
-    """ four line parameters file"""
+    """four line parameters file"""
 
     with open(prmfile, "w") as f:
         f.write(".\n")
@@ -86,17 +88,17 @@ def get_chno(chfile, comps):
 def _exctract_channel(tup):
     """extract only one channel for one time"""
 
-    winfile, chno, sacfile, outdir, prmfile = tup
-    subprocess.call([win2sac, winfile, chno, sacfile, outdir, prmfile],
+    winfile, chno, outdir, prmfile = tup
+    subprocess.call([win2sac, winfile, chno, "SAC", outdir, prmfile],
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL)
 
 
-def win32_sac(winfile, ch_no, sacfile="SAC", outdir=".", prmfile="win.prm"):
+def win32_sac(winfile, ch_no, outdir=".", prmfile="win.prm"):
 
     tuple_list = []
-    for ch in ch_no:
-        t = winfile, ch, sacfile, outdir, prmfile
+    for ch in chno:
+        t = winfile, ch, outdir, prmfile
         tuple_list.append(t)
 
     procs = int(arguments['-P'])
@@ -112,6 +114,13 @@ def win32_sac(winfile, ch_no, sacfile="SAC", outdir=".", prmfile="win.prm"):
 
         pool = multiprocessing.Pool(processes=procs)
         pool.map(_exctract_channel, tuple_list)
+
+def rename_sac(outdir, sacfile=None):
+    for file in glob.glob(outdir + '/*.SAC'):
+        dest = os.path.splitext(file)[0]
+        if sacfile:
+            dest += "." + sacfile
+        os.rename(file, dest)
 
 
 def unlink_lists(files):
@@ -150,3 +159,6 @@ if __name__ == "__main__":
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     win32_sac(cnt_total, chno, outdir=outdir)
+
+    sacfile = arguments['-S']
+    rename_sac(outdir, sacfile);
