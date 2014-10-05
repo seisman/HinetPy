@@ -85,20 +85,21 @@ def get_chno(chfile, comps):
     print("Total %d channels" % len(chno))
     return chno
 
+
 def _exctract_channel(tup):
     """extract only one channel for one time"""
 
-    winfile, chno, outdir, prmfile = tup
-    subprocess.call([win2sac, winfile, chno, "SAC", outdir, prmfile],
+    winfile, chno, outdir, prmfile, pmax = tup
+    subprocess.call([win2sac, winfile, chno, "SAC", outdir, prmfile, '-m'+str(pmax)],
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL)
 
 
-def win32_sac(winfile, ch_no, outdir=".", prmfile="win.prm"):
+def win32_sac(winfile, ch_no, outdir=".", prmfile="win.prm", pmax=2000000):
 
     tuple_list = []
     for ch in chno:
-        t = winfile, ch, outdir, prmfile
+        t = winfile, ch, outdir, prmfile, pmax
         tuple_list.append(t)
 
     procs = int(arguments['-P'])
@@ -114,6 +115,7 @@ def win32_sac(winfile, ch_no, outdir=".", prmfile="win.prm"):
 
         pool = multiprocessing.Pool(processes=procs)
         pool.map(_exctract_channel, tuple_list)
+
 
 def rename_sac(outdir, sacfile=None):
     for file in glob.glob(outdir + '/*.SAC'):
@@ -158,7 +160,11 @@ if __name__ == "__main__":
         outdir = arguments['-D']
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    win32_sac(cnt_total, chno, outdir=outdir)
+
+    # maximum number of points
+    pmax = len(cnts) * 60 * 100
+
+    win32_sac(cnt_total, chno, outdir=outdir, pmax=pmax)
 
     sacfile = arguments['-S']
-    rename_sac(outdir, sacfile);
+    rename_sac(outdir, sacfile)
