@@ -104,7 +104,7 @@ def get_ids():
         with open(arguments['--ids'], "r") as fid:
             ids = fid.read().splitlines()
 
-    return ids
+    return ids[::-1]  # return id in reverse order
 
 
 if __name__ == '__main__':
