@@ -16,7 +16,8 @@ Usage:
 Options:
     -h          Show this help.
     -C <comps>  Selection of components to extract.
-                Avaiable components are U, N, E, X, Y. [default: UNE]
+                Avaiable components are U, N, E, X, Y et. al.
+                Default to extract all components.
     -D <outdir> Output directory for SAC files.
     -S <suffix> Suffix of output SAC files.
     -P <procs>  Parallel using multiple processes. Set number of cpus to <procs>
@@ -79,7 +80,7 @@ def get_chno(chfile, comps):
 
             items = line.split()
             no, comp = items[0], items[4]
-            if comp in comps:
+            if comps is None or comp in comps:
                 chno.append(no)
 
     print("Total %d channels" % len(chno))
@@ -151,7 +152,9 @@ if __name__ == "__main__":
     win_prm(chfile)
 
     # get channel NO. lists for channel table
-    comps = set(arguments['-C'])
+    comps = None
+    if arguments['-C']:
+        comps = arguments['-C'].split(",")
     chno = get_chno(chfile, comps)
 
     # extract sac files
