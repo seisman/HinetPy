@@ -15,7 +15,7 @@ Usage:
 
 Options:
     -h          Show this help.
-    -C <comps>  Selection of components to extract.
+    -C <comps>  Components to extract, delimited using commas.
                 Avaiable components are U, N, E, X, Y et. al.
                 Default to extract all components.
     -D <outdir> Output directory for SAC files.
