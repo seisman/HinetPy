@@ -5,7 +5,9 @@
 #
 #  Revision History:
 #    2014-09-03  Dongdong Tian  Initial Coding
-#
+#    2014-10-05  Dongdong Tian  Fix bugs:
+#                               - handle datas with more than 2000000 points
+#                               - delimite components code with commas
 
 """Extract SAC data files from Hi-net WIN32 files
 
