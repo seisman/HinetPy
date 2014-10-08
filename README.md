@@ -1,4 +1,8 @@
+**Warning** : It is still under development, the usage of all scripts may change.
+
 This is a collection of scripts for Hi-net data request, download and process.
+
+All python scripts are only testet under Python 3.4.
 
 - `HinetContRequest.py`: Request continuous waveform data from Hi-net.
 - `HinetContDownload.py`: Download continuous waveform datas from Hi-net.
