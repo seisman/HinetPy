@@ -20,8 +20,8 @@ Options:
     -C <comps>  Components to extract, delimited using commas.
                 Avaiable components are U, N, E, X, Y et. al.
                 Default to extract all components.
-    -D <outdir> Output directory for SAC files.
-    -S <suffix> Suffix of output SAC files.
+    -D <outdir> Output directory for SAC files, relative to DIRNAME.
+    -S <suffix> Suffix of output SAC files. Default: no suffix.
     -P <procs>  Parallel using multiple processes. Set number of cpus to <procs>
                 if <procs> equals 0.    [default: 0]
 
@@ -145,7 +145,7 @@ if __name__ == "__main__":
 
     # merge win32 files
     cnts = sorted(glob.glob("??????????????????.cnt"))
-    cnt_total = "%s_%d.cnt" % (cnts[0][0:11], len(cnts))
+    cnt_total = "%s_%d.cnt" % (cnts[0][0:12], len(cnts))
     win32_cat(cnts, cnt_total)
     unlink_lists(cnts)
 
