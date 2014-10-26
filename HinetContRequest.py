@@ -50,19 +50,17 @@ Codes of org & net:
 """
 
 import sys
+import time
 import configparser
 from datetime import date, datetime
 
 import requests
+from bs4 import BeautifulSoup
 from docopt import docopt
 
-# User name & passwd
-config = configparser.ConfigParser()
-config.read("Hinet.cfg")
-user = config['Account']['User']
-passwd = config['Account']['Password']
-
 base = "http://www.hinet.bosai.go.jp/REGS/download/cont/"
+request = base + "cont_request.php"
+status = base + 'cont_status.php'
 
 # all legal codes
 code_list = ['0101', '0103', '0103A',
@@ -75,57 +73,87 @@ code_list = ['0101', '0103', '0103A',
              '0701', '0702', '0703', '0705'
              ]
 
-start = date(2004, 4, 1)    # start date of avaiable data
-today = date.today()        # end date of avaiable data
 
-arguments = docopt(__doc__)
+def cont_request(org, net, event, span, arc):
+    ''' one time request '''
 
-# Code for org & net
-code = arguments['--code']
-if code not in code_list:
-    print("%s: Error code for organization and network." % (code))
-    sys.exit()
-org, net = code[0:2], code[2:]
+    payload = {
+        'org1':  org,
+        'org2':  net,
+        'year':  event.strftime("%Y"),
+        'month': event.strftime("%m"),
+        'day':   event.strftime("%d"),
+        'hour':  event.strftime("%H"),
+        'min':   event.strftime("%M"),
+        'span':  str(span),
+        'arc':   arc,
+        'size':  '93680',    # estimated size of the data, it is not important
+        'LANG':  'en',       # english version of web
+        'rn': str(int((datetime.now() - datetime(1970, 1, 1)).total_seconds()))
+    }
+    r = requests.post(request, params=payload, auth=(user, passwd), timeout=5)
+    if r.status_code == 401:
+        print("Unauthorized.")
+        sys.exit()
 
-# compressed format
-arc = arguments['--arc']
-if arc not in ["Z", "GZIP", "ZIP", "LHZ"]:
-    print("%s: Error in compressed format." % (arc))
-    sys.exit()
+    s = requests.get(status, auth=(user, passwd))
+    soup = BeautifulSoup(s.content)
+    id = str(soup.find("tr", class_="bglist1").contents[0].string)
 
-# start time and time span
-year = int(arguments['<year>'])
-month = int(arguments['<month>'])
-day = int(arguments['<day>'])
-hour = int(arguments['<hour>'])
-minute = int(arguments['<min>'])
-span = int(arguments['<span>'])
+    # check data status
+    while True:
+        s = requests.get(status, auth=(user, passwd))
+        soup = BeautifulSoup(s.content)
+        if str(soup.find("tr", class_="bglist1").contents[0].string) == id:
+            time.sleep(2)  # still preparing data
+        elif str(soup.find("tr", class_="bglist2").contents[0].string) == id:
+            break          # data avaiable
+        elif str(soup.find("tr", class_="bglist3").contents[0].string) == id:
+            print("What's bglist3?")
+        elif str(soup.find("tr", class_="bglist4").contents[0].string) == id:
+            print("Error!")
 
-# check validity of time
-event = datetime(year, month, day, hour, minute)
-if event.date() < start or event.date() > today:
-    print("Not within Hi-net service period")
-    sys.exit()
 
-print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), span))
+if __name__ == "__main__":
 
-# Countinuous waveform data download
-url = base + "cont_request.php"
-payload = {
-    'org1':  org,
-    'org2':  net,
-    'year':  event.strftime("%Y"),
-    'month': event.strftime("%m"),
-    'day':   event.strftime("%d"),
-    'hour':  event.strftime("%H"),
-    'min':   event.strftime("%M"),
-    'span':  str(span),
-    'arc':   arc,
-    'size':  '93680',    # estimated size of the data, it is not important
-    'LANG':  'en',       # english version of web
-    'rn':    str(int((datetime.now() - datetime(1970, 1, 1)).total_seconds()))
-}
-r = requests.post(url, params=payload, auth=(user, passwd), timeout=5)
-if r.status_code == 401:
-    print("Unauthorized.")
-    sys.exit()
+    # User name & passwd
+    config = configparser.ConfigParser()
+    config.read("Hinet.cfg")
+    user = config['Account']['User']
+    passwd = config['Account']['Password']
+
+    start = date(2004, 4, 1)    # start date of avaiable data
+    today = date.today()        # end date of avaiable data
+
+    arguments = docopt(__doc__)
+
+    # Code for org & net
+    code = arguments['--code']
+    if code not in code_list:
+        print("%s: Error code for organization and network." % (code))
+        sys.exit()
+    org, net = code[0:2], code[2:]
+
+    # compressed format
+    arc = arguments['--arc']
+    if arc not in ["Z", "GZIP", "ZIP", "LHZ"]:
+        print("%s: Error in compressed format." % (arc))
+        sys.exit()
+
+    # start time and time span
+    year = int(arguments['<year>'])
+    month = int(arguments['<month>'])
+    day = int(arguments['<day>'])
+    hour = int(arguments['<hour>'])
+    minute = int(arguments['<min>'])
+    span = int(arguments['<span>'])
+
+    # check validity of time
+    event = datetime(year, month, day, hour, minute)
+    if event.date() < start or event.date() > today:
+        print("Not within Hi-net service period")
+        sys.exit()
+
+    print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), span))
+
+    cont_request(org, net, event, span, arc)
