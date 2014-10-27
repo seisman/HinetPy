@@ -12,18 +12,14 @@
 #   2014-08-22  Dongdong Tian   Add option for selection of code
 #   2014-08-30  Dongdong Tian   Add option for compressed format.
 #                               Default value (ZIP) is highly recommended.
+#   2014-10-27  Dongdong Tian   Support requests with long time span
 #
 
 """Request continuous waveform data from Hi-net.
 
 Usage:
-    HinetContRequest.py <year> <month> <day> <hour> <min> <span> [options]
+    HinetContRequest.py <year> <month> <day> <hour> <min> <span>
     HinetContRequest.py -h
-
-Options:
-    -h --help    Show this help.
-    --code=CODE  Select code for organization and network. [default: 0101]
-    --arc=ARC    Compressed format: Z, GZIP, ZIP, LZH. [default: ZIP]
 
 Codes of org & net:
     '0101' : 'NIED:NIED Hi-net',
@@ -52,7 +48,7 @@ Codes of org & net:
 import sys
 import time
 import configparser
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 import requests
 from bs4 import BeautifulSoup
@@ -60,7 +56,7 @@ from docopt import docopt
 
 base = "http://www.hinet.bosai.go.jp/REGS/download/cont/"
 request = base + "cont_request.php"
-status = base + 'cont_status.php'
+status = base + "cont_status.php"
 
 # all legal codes
 code_list = ['0101', '0103', '0103A',
@@ -114,6 +110,15 @@ def cont_request(org, net, event, span, arc):
             print("Error!")
 
 
+def date_check(event):
+
+    start = date(2004, 4, 1)    # start date of avaiable data
+    today = date.today()        # end date of avaiable data
+
+    if event.date() < start or event.date() > today:
+        print("Not within Hi-net service period")
+        sys.exit()
+
 if __name__ == "__main__":
 
     # User name & passwd
@@ -121,25 +126,22 @@ if __name__ == "__main__":
     config.read("Hinet.cfg")
     user = config['Account']['User']
     passwd = config['Account']['Password']
-
-    start = date(2004, 4, 1)    # start date of avaiable data
-    today = date.today()        # end date of avaiable data
-
-    arguments = docopt(__doc__)
+    maxspan = int(config['Cont']['MaxSpan'])
 
     # Code for org & net
-    code = arguments['--code']
+    code = config['Cont']['Net']
     if code not in code_list:
         print("%s: Error code for organization and network." % (code))
         sys.exit()
     org, net = code[0:2], code[2:]
 
     # compressed format
-    arc = arguments['--arc']
+    arc = config['Cont']['Format']
     if arc not in ["Z", "GZIP", "ZIP", "LHZ"]:
         print("%s: Error in compressed format." % (arc))
         sys.exit()
 
+    arguments = docopt(__doc__)
     # start time and time span
     year = int(arguments['<year>'])
     month = int(arguments['<month>'])
@@ -150,10 +152,12 @@ if __name__ == "__main__":
 
     # check validity of time
     event = datetime(year, month, day, hour, minute)
-    if event.date() < start or event.date() > today:
-        print("Not within Hi-net service period")
-        sys.exit()
+    date_check(event)
 
     print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), span))
 
-    cont_request(org, net, event, span, arc)
+    while span > 0:
+        req_span = min(span, maxspan)
+        cont_request(org, net, event, req_span, arc)
+        event += timedelta(minutes=req_span)
+        span -= req_span
