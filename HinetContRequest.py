@@ -13,6 +13,7 @@
 #   2014-08-30  Dongdong Tian   Add option for compressed format.
 #                               Default value (ZIP) is highly recommended.
 #   2014-10-27  Dongdong Tian   Support requests with long time span
+#                               Support downloading after requests
 #
 
 """Request continuous waveform data from Hi-net.
@@ -48,6 +49,7 @@ Codes of org & net:
 import sys
 import time
 import configparser
+import multiprocessing
 from datetime import date, datetime, timedelta
 
 import requests
@@ -109,6 +111,8 @@ def cont_request(org, net, event, span, arc):
         elif str(soup.find("tr", class_="bglist4").contents[0].string) == id:
             print("Error!")
 
+    return id
+
 
 def date_check(event):
 
@@ -118,6 +122,37 @@ def date_check(event):
     if event.date() < start or event.date() > today:
         print("Not within Hi-net service period")
         sys.exit()
+
+
+def download(url, params):
+    d = requests.get(url, params=params, auth=(user, passwd), stream=True)
+    if d.status_code == 401:
+        print("Unauthorized.")
+        sys.exit()
+
+    # file size
+    size = int(d.headers['Content-Length'].strip())
+    # file name
+    disposition = d.headers['Content-Disposition'].strip()
+    fname = disposition.split('filename=')[1].strip('\'"')
+
+    print("Downloading %s ..." % (fname))
+    with open(fname, "wb") as fd:
+        self = 0
+        for chunk in d.iter_content(chunk_size=1024):
+            if chunk:  # filter out keep-alive new chunks
+                fd.write(chunk)
+                fd.flush()
+            self += len(chunk)
+
+
+def cont_download(id):
+    """Download continuous waveform data of specified id"""
+
+    url = base + "cont_download.php"
+    params = {"id": id}
+    download(url, params)
+
 
 if __name__ == "__main__":
 
@@ -156,8 +191,12 @@ if __name__ == "__main__":
 
     print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), span))
 
+    ids = []
     while span > 0:
         req_span = min(span, maxspan)
-        cont_request(org, net, event, req_span, arc)
+        id = cont_request(org, net, event, req_span, arc)
+        ids.append(id)
         event += timedelta(minutes=req_span)
         span -= req_span
+
+    multiprocessing.Pool(processes=10).map(cont_download, ids)
