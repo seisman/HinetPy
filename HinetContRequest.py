@@ -124,7 +124,7 @@ def argument_parser(arguments):
     return datetime(year, month, day, hour, minute)
 
 
-def cont_request(org, net, event, span, arc):
+def cont_request(org, net, event, span):
     ''' request continuous data with limited time span '''
 
     payload = {
@@ -136,7 +136,7 @@ def cont_request(org, net, event, span, arc):
         'hour':  event.strftime("%H"),
         'min':   event.strftime("%M"),
         'span':  str(span),
-        'arc':   arc,
+        'arc':   'ZIP',
         'size':  '93680',    # estimated size of the data, it is not important
         'LANG':  'en',       # english version of web
         'rn': str(int((datetime.now() - datetime(1970, 1, 1)).total_seconds()))
@@ -225,12 +225,6 @@ if __name__ == "__main__":
     code = config['Cont']['Net']
     org, net = code_parser(code)
 
-    # compressed format
-    arc = config['Cont']['Format']
-    if arc not in ["Z", "GZIP", "ZIP", "LHZ"]:
-        print("%s: Error in compressed format." % (arc))
-        sys.exit()
-
     arguments = docopt(__doc__)
     event = argument_parser(arguments)
     span = int(arguments['<span>'])
@@ -241,7 +235,7 @@ if __name__ == "__main__":
     ids = []
     while span > 0:
         req_span = min(span, maxspan)
-        id = cont_request(org, net, event, req_span, arc)
+        id = cont_request(org, net, event, req_span)
         ids.append(id)
         event += timedelta(minutes=req_span)
         span -= req_span
