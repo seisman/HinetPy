@@ -22,8 +22,12 @@
 """Request continuous waveform data from Hi-net.
 
 Usage:
-    HinetContRequest.py <year> <month> <day> <hour> <min> <span>
+    HinetContRequest.py <year> <month> <day> <hour> <min> <span> [options]
     HinetContRequest.py -h
+
+Options:
+    -h, --help      Show this help.
+    --code=CODE     Select code for organization and network.
 
 Codes of org & net:
     '0101' : 'NIED:NIED Hi-net',
@@ -221,11 +225,14 @@ if __name__ == "__main__":
     maxspan = int(config['Cont']['MaxSpan'])
     catwin32 = config['Tools']['catwin32']
 
+    arguments = docopt(__doc__)
+
     # Code for org & net
     code = config['Cont']['Net']
+    if arguments['--code']:
+        code = arguments['--code']
     org, net = code_parser(code)
 
-    arguments = docopt(__doc__)
     event = argument_parser(arguments)
     span = int(arguments['<span>'])
     date_check(event)
