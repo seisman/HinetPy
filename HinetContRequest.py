@@ -238,14 +238,14 @@ if __name__ == "__main__":
 
     print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), span))
 
-    ids, zips = [], []
+    ids = []
     while span > 0:
         req_span = min(span, maxspan)
         id = cont_request(org, net, event, req_span, arc)
         ids.append(id)
-        zips.append("%s.zip" % id)
         event += timedelta(minutes=req_span)
         span -= req_span
+    zips = [x+'.zip' for x in ids]
 
     procs = min(len(ids), multiprocessing.cpu_count())
     multiprocessing.Pool(processes=procs).map(cont_download, ids)
