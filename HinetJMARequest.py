@@ -7,11 +7,11 @@
 #   2014-08-31  Dongdong Tian   Initial Coding
 #
 
-"""Download arrival time data or focal mechanism catalog from Hi-net.
+"""Request arrival time data or focal mechanism catalog from Hi-net.
 
 Usage:
-    HinetJMADownload.py (--measure | --mecha) <yyyymmdd> <span> [--os=OS]
-    HinetJMADownload.py -h
+    HinetJMARequest.py (--measure | --mecha) <yyyymmdd> <span> [--os=OS]
+    HinetJMARequest.py -h
 
 Options:
     -h --help     Show this help.
@@ -48,7 +48,6 @@ def download(url, params):
     disposition = d.headers['Content-Disposition'].strip()
     fname = disposition.split('filename=')[1].strip('\'"')
 
-    print("Downloading %s ..." % (fname))
     with open(fname, "wb") as fd:
         self = 0
         for chunk in d.iter_content(chunk_size=1024):
