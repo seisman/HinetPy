@@ -26,8 +26,10 @@ Usage:
     HinetContRequest.py -h
 
 Options:
-    -h, --help      Show this help.
-    --code=CODE     Select code for organization and network.
+    -h, --help              Show this help.
+    -c CODE --code=CODE     Select code for organization and network.
+    -o FILE --output=FILE   Output filename. Default: YYYYMMDDHHMM_SPAN.cnt.
+    -d DIR --directory=DIR  Output directory. Default: current directory.
 
 Codes of org & net:
     '0101' : 'NIED:NIED Hi-net',
@@ -258,5 +260,14 @@ if __name__ == "__main__":
     # merge win32 files
     cnts = sorted(glob.glob("??????????????????.cnt"))
     cnt_total = "%s_%d.cnt" % (cnts[0][0:12], len(cnts))
+    if arguments['--output']:
+        cnt_total = arguments['--output']
+
+    if arguments['--directory']:
+        dir = arguments['--directory']
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+        cnt_total = os.path.join(dir, cnt_total)
+
     win32_cat(cnts, cnt_total)
     unlink_lists(cnts)
