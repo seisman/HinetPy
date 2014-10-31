@@ -17,9 +17,13 @@
 #                               Unzip and merge files.
 #                               Move options to configure file.
 #                               Add progressbar.
+#   2014-10-31  Dongdong Tian   Remove option for compressed format, use ZIP.
+#                               Add option for selection of code.
+#                               Add option for output directory and filename.
+#                               Adjust time span distribution strategy.
 #
 
-"""Request continuous waveform data from Hi-net.
+"""Request continuous waveform data from NIED Hi-net.
 
 Usage:
     HinetContRequest.py <year> <month> <day> <hour> <min> <span> [options]
@@ -58,6 +62,7 @@ Codes of org & net:
 import os
 import sys
 import time
+import math
 import glob
 import shlex
 import zipfile
@@ -236,14 +241,16 @@ if __name__ == "__main__":
 
     print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), total_span))
 
+    count = math.ceil(total_span/maxspan)
+    span = [total_span//count for i in range(0, count)]
+    for i in range(0, total_span % count):
+        span[i] += 1
+
     ids = []
-    span = total_span
-    while span > 0:
-        req_span = min(span, maxspan)
-        id = cont_request(org, net, event, req_span)
+    for i in range(0, count):
+        id = cont_request(org, net, event, span[i])
         ids.append(id)
-        event += timedelta(minutes=req_span)
-        span -= req_span
+        event += timedelta(minutes=span[i])
     zips = [x+'.zip' for x in ids]
 
     procs = min(len(ids), multiprocessing.cpu_count())
