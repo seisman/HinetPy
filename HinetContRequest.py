@@ -187,7 +187,7 @@ def cont_download(id):
                 fd.flush()
 
     if os.path.getsize(fname) != total_length:
-        print("File %s is not complete!")
+        print("File %s is not complete!" % (fname))
 
 
 def unzip(zips):
