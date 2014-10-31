@@ -64,7 +64,6 @@ import sys
 import time
 import math
 import glob
-import shlex
 import zipfile
 import subprocess
 import configparser
@@ -202,9 +201,7 @@ def unzip(zips):
 def win32_cat(cnts, cnt_total):
     """merge WIN32 files to one total WIN32 file"""
 
-    cmd = "%s %s -o %s" % (catwin32, ' '.join(cnts), cnt_total)
-    args = shlex.split(cmd)
-    subprocess.call(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.call([catwin32] + cnts + ['-o', cnt_total])
 
 
 def unlink_lists(files):
