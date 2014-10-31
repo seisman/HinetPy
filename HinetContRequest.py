@@ -71,10 +71,10 @@ import configparser
 import multiprocessing
 from datetime import date, datetime, timedelta
 
-from clint.textui import progress
 import requests
-from bs4 import BeautifulSoup
 from docopt import docopt
+from bs4 import BeautifulSoup
+from clint.textui import progress
 
 # basic urls
 base = "http://www.hinet.bosai.go.jp/REGS/download/cont/"
@@ -172,7 +172,7 @@ def cont_download(id):
     auth_check(d.status_code)
 
     # file size
-    total_length = int(d.headers['Content-Length'].strip())
+    total_length = int(d.headers.get('Content-Length'))
     # file name
     # disposition = d.headers['Content-Disposition'].strip()
     # fname = disposition.split('filename=')[1].strip('\'"')
