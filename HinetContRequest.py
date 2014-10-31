@@ -119,17 +119,6 @@ def code_parser(code):
     return org, net
 
 
-def argument_parser(arguments):
-
-    year = int(arguments['<year>'])
-    month = int(arguments['<month>'])
-    day = int(arguments['<day>'])
-    hour = int(arguments['<hour>'])
-    minute = int(arguments['<min>'])
-
-    return datetime(year, month, day, hour, minute)
-
-
 def cont_request(org, net, event, span):
     ''' request continuous data with limited time span '''
 
@@ -235,13 +224,20 @@ if __name__ == "__main__":
         code = arguments['--code']
     org, net = code_parser(code)
 
-    event = argument_parser(arguments)
-    span = int(arguments['<span>'])
+    year = int(arguments['<year>'])
+    month = int(arguments['<month>'])
+    day = int(arguments['<day>'])
+    hour = int(arguments['<hour>'])
+    minute = int(arguments['<min>'])
+    total_span = int(arguments['<span>'])
+
+    event = datetime(year, month, day, hour, minute)
     date_check(event)
 
-    print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), span))
+    print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), total_span))
 
     ids = []
+    span = total_span
     while span > 0:
         req_span = min(span, maxspan)
         id = cont_request(org, net, event, req_span)
@@ -258,8 +254,8 @@ if __name__ == "__main__":
     unlink_lists(zips)
 
     # merge win32 files
-    cnts = sorted(glob.glob("??????????????????.cnt"))
-    cnt_total = "%s_%d.cnt" % (cnts[0][0:12], len(cnts))
+    cnts = glob.glob("??????????????????.cnt")
+    cnt_total = "%s_%d.cnt" % (event.strftime("%Y%m%d%H%M"), total_span)
     if arguments['--output']:
         cnt_total = arguments['--output']
 
@@ -271,3 +267,9 @@ if __name__ == "__main__":
 
     win32_cat(cnts, cnt_total)
     unlink_lists(cnts)
+
+    if arguments['--directory']:
+        chfile = "%s_%s_%s.euc.ch" % (org, net, event.strftime("%Y%m%d"))
+        os.rename(chfile, os.path.join(dir, chfile))
+    os.unlink("%s_%s_%s.sjis.ch" % (org, net, event.strftime("%Y%m%d")))
+    os.unlink("readme.txt")
