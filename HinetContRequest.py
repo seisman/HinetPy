@@ -354,10 +354,10 @@ if __name__ == "__main__":
 
     # get cnt and ch filename
     if not volc:
-        cnts = glob.glob("????????????%s??.cnt" % code[0:4])
+        cnts = sorted(glob.glob("????????????%s??.cnt" % code[0:4]))
         ch_prefix = "%s_%s" % (code[0:2], code[2:4])
     else:
-        cnts = glob.glob("????????????%s.cnt" % code[0:4])
+        cnts = sorted(glob.glob("????????????%s.cnt" % code[0:4]))
         ch_prefix = "%s_%s_%s" % (code[0:2], code[2:4], code[4:6])
 
     cnt_total = "%s_%s_%d.cnt" % (code, event.strftime("%Y%m%d%H%M"), total_span)
