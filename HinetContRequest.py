@@ -21,6 +21,9 @@
 #                               Add option for selection of code.
 #                               Add option for output directory and filename.
 #                               Adjust time span distribution strategy.
+#   2014-11-01  Dongdong Tian   Support volcanos data from NIED Hi-net website.
+#                               Add option for channel table filename.
+#                               Modify the default filename for cnt and ch.
 #
 
 """Request continuous waveform data from NIED Hi-net.
@@ -32,8 +35,9 @@ Usage:
 Options:
     -h, --help              Show this help.
     -c CODE --code=CODE     Select code for organization and network.
-    -o FILE --output=FILE   Output filename. Default: YYYYMMDDHHMM_SPAN.cnt.
     -d DIR --directory=DIR  Output directory. Default: current directory.
+    -o FILE --output=FILE   Output filename. Default: CODE_YYYYMMDDHHMM_SPAN.cnt
+    -t FILE --ctable=FILE   Channel table filename. Default: CODE_YYYYMMDD.ch
 
 Codes of org & net:
     '0101' : 'NIED:NIED Hi-net',
@@ -48,8 +52,10 @@ Codes of org & net:
     '0207' : 'UNIV:Nagoya University',
     '0208' : 'UNIV:Kochi University',
     '0209' : 'UNIV:Kagoshima University',
-    '0301' : 'JMA:JMA',
-    '0401' : 'OTHER:JAMSTEC',
+    '0301' : 'JMA:JMA Seismometer Network',
+    '0401' : 'JAMSTEC:JAMSTEC Realtime Data from the Deep Sea Floor Observatory',
+    '0402' : 'JAMSTEC:JAMSTEC DONET1 (broadband)',
+    '0402A': 'JAMSTEC:JAMSTEC DONET1 (strong motion)';
     '0501' : 'OTHER:AIST',
     '0601' : 'OTHER:GSI',
     '0701' : 'LOCAL:Tokyo Metropolitan Government',
@@ -57,6 +63,64 @@ Codes of org & net:
     '0703' : 'LOCAL:Aomori Prefectural Government',
     '0705' : 'LOCAL:Shizuoka Prefectural Government',
 
+Codes for NIED V-net (0105):
+    '010503' : '0105:Usuzan';
+    '010505' : '0105:Iwatesan';
+    '010507' : '0105:Asamayama';
+    '010509' : '0105:Fujisan';
+    '010510' : '0105:Miyakejima';
+    '010511' : '0105:Izu-Oshima';
+    '010512' : '0105:Asosan';
+    '010514' : '0105:Kirishimayama';
+
+Codes for JMA Volcanic Seismometer Network (0302):
+    '030201' : '0302:Atosanupuri';
+    '030202' : '0302:Meakandake';
+    '030203' : '0302:Taisetsuzan';
+    '030204' : '0302:Tokachidake';
+    '030205' : '0302:Tarumaesan';
+    '030206' : '0302:Kuttara';
+    '030207' : '0302:Usuzan';
+    '030208' : '0302:Hokkaido-Komagatake';
+    '030209' : '0302:Esan';
+    '030210' : '0302:Iwakisan';
+    '030247' : '0302:Hakkodasan';
+    '030211' : '0302:Akita-Yakeyama';
+    '030212' : '0302:Iwatesan';
+    '030213' : '0302:Akita-Komagatake';
+    '030214' : '0302:Chokaisan';
+    '030215' : '0302:Kurikomayama';
+    '030216' : '0302:Zaozan';
+    '030217' : '0302:Azumayama';
+    '030218' : '0302:Adatarayama';
+    '030219' : '0302:Bandaisan';
+    '030220' : '0302:Nasudake';
+    '030221' : '0302:Nikko-Shiranesan';
+    '030222' : '0302:Kusatsu-Shiranesan';
+    '030223' : '0302:Asamayama';
+    '030224' : '0302:Niigata-Yakeyama';
+    '030225' : '0302:Yakedake';
+    '030226' : '0302:Norikuradake';
+    '030227' : '0302:Ontakesan';
+    '030228' : '0302:Hakusan';
+    '030229' : '0302:Fujisan';
+    '030230' : '0302:Hakoneyama';
+    '030231' : '0302:Izu-Tobu Volcanoes';
+    '030232' : '0302:Izu-Oshima';
+    '030233' : '0302:Niijima';
+    '030234' : '0302:Kozushima';
+    '030235' : '0302:Miyakejima';
+    '030236' : '0302:Hachijojima';
+    '030237' : '0302:Aogashima';
+    '030238' : '0302:Tsurumidake and Garandake';
+    '030239' : '0302:Kujusan';
+    '030240' : '0302:Asosan';
+    '030241' : '0302:Unzendake';
+    '030242' : '0302:Kirishimayama';
+    '030243' : '0302:Sakurajima';
+    '030244' : '0302:Satsuma-Iojima';
+    '030245' : '0302:Kuchinoerabujima';
+    '030246' : '0302:Suwanosejima';
 """
 
 import os
@@ -86,10 +150,22 @@ code_list = ['0101', '0103', '0103A',
              '0201', '0202', '0203', '0204', '0205',
              '0206', '0207', '0208', '0209',
              '0301',
-             '0401',
+             '0401', '0402', '0402A',
              '0501',
              '0601',
              '0701', '0702', '0703', '0705',
+             '010503', '010505', '010507', '010509',
+             '010510', '010511', '010512', '010514',
+             '030201', '030202', '030203', '030204', '030205',
+             '030206', '030207', '030208', '030209', '030210',
+             '030211', '030212', '030213', '030214', '030215',
+             '030216', '030217', '030218', '030219', '030220',
+             '030221', '030222', '030223', '030224', '030225',
+             '030226', '030227', '030228', '030229', '030230',
+             '030231', '030232', '030233', '030234', '030235',
+             '030236', '030237', '030238', '030239', '030240',
+             '030241', '030242', '030243', '030244', '030245',
+             '030246', '030247',
              ]
 
 
@@ -101,12 +177,22 @@ def auth_check(status_code):
         sys.exit()
 
 
-def date_check(event):
+def date_check(code, event):
     ''' check if waveform data are available '''
 
-    start = date(2004, 4, 1)    # start date of avaiable data
-    today = date.today()        # end date of avaiable data
+    # start date of avaiable data
+    if code[0:4] == '0105':  # NIED V-net
+        start = date(2010, 4, 1)
+    elif code[0:4] == '0302':  # JMA Volcanic Seismometer Network
+        start = date(2010, 12, 1)
+    elif code[0:4] == '0705':  # Shizuoka Prefectural Government
+        start = date(2004, 6, 15)
+    elif code[0:4] == '0402':  # JAMSTEC DONET1
+        start = date(2014, 10, 1)
+    else:
+        start = date(2004, 4, 1)
 
+    today = date.today()        # end date of avaiable data
     if event.date() < start or event.date() > today:
         print("Not within Hi-net service period.")
         sys.exit()
@@ -118,17 +204,24 @@ def code_parser(code):
     if code not in code_list:
         print("%s: Error code for organization and network." % (code))
         sys.exit()
-    org, net = code[0:2], code[2:]
 
-    return org, net
+    if len(code) == 6:  # volcanos
+        org, net = code[0:2], code[2:4]
+        volc = code
+    else:
+        org, net = code[0:2], code[2:]
+        volc = None
+
+    return org, net, volc
 
 
-def cont_request(org, net, event, span):
+def cont_request(org, net, volc, event, span):
     ''' request continuous data with limited time span '''
 
     payload = {
         'org1':  org,
         'org2':  net,
+        'volc':  volc,
         'year':  event.strftime("%Y"),
         'month': event.strftime("%m"),
         'day':   event.strftime("%d"),
@@ -155,10 +248,11 @@ def cont_request(org, net, event, span):
             time.sleep(2)  # still preparing data
         elif str(soup.find("tr", class_="bglist2").contents[0].string) == id:
             break          # data available
-        elif str(soup.find("tr", class_="bglist3").contents[0].string) == id:
-            print("What's bglist3?")
         elif str(soup.find("tr", class_="bglist4").contents[0].string) == id:
             print("Error!")
+            sys.exit()
+        elif str(soup.find("tr", class_="bglist3").contents[0].string) == id:
+            print("What's bglist3?")
 
     return id
 
@@ -201,7 +295,9 @@ def unzip(zips):
 def win32_cat(cnts, cnt_total):
     """merge WIN32 files to one total WIN32 file"""
 
-    subprocess.call([catwin32] + cnts + ['-o', cnt_total])
+    subprocess.call([catwin32] + cnts + ['-o', cnt_total],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL)
 
 
 def unlink_lists(files):
@@ -219,12 +315,11 @@ if __name__ == "__main__":
     catwin32 = config['Tools']['catwin32']
 
     arguments = docopt(__doc__)
-
     # Code for org & net
     code = config['Cont']['Net']
     if arguments['--code']:
         code = arguments['--code']
-    org, net = code_parser(code)
+    org, net, volc = code_parser(code)
 
     year = int(arguments['<year>'])
     month = int(arguments['<month>'])
@@ -234,7 +329,7 @@ if __name__ == "__main__":
     total_span = int(arguments['<span>'])
 
     event = datetime(year, month, day, hour, minute)
-    date_check(event)
+    date_check(code, event)
 
     print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), total_span))
 
@@ -244,10 +339,10 @@ if __name__ == "__main__":
         span[i] += 1
 
     ids = []
+    start = event
     for i in range(0, count):
-        id = cont_request(org, net, event, span[i])
-        ids.append(id)
-        event += timedelta(minutes=span[i])
+        ids.append(cont_request(org, net, volc, start, span[i]))
+        start += timedelta(minutes=span[i])
     zips = [x+'.zip' for x in ids]
 
     procs = min(len(ids), multiprocessing.cpu_count())
@@ -257,23 +352,34 @@ if __name__ == "__main__":
     unzip(zips)
     unlink_lists(zips)
 
-    # merge win32 files
-    cnts = glob.glob("??????????????????.cnt")
-    cnt_total = "%s_%d.cnt" % (event.strftime("%Y%m%d%H%M"), total_span)
+    # get cnt and ch filename
+    if not volc:
+        cnts = glob.glob("????????????%s??.cnt" % code[0:4])
+        ch_prefix = "%s_%s" % (code[0:2], code[2:4])
+    else:
+        cnts = glob.glob("????????????%s.cnt" % code[0:4])
+        ch_prefix = "%s_%s_%s" % (code[0:2], code[2:4], code[4:6])
+
+    cnt_total = "%s_%s_%d.cnt" % (code, event.strftime("%Y%m%d%H%M"), total_span)
     if arguments['--output']:
         cnt_total = arguments['--output']
+
+    cheuc = "%s_%s.euc.ch" % (ch_prefix, event.strftime("%Y%m%d"))
+    chfile = "%s_%s.ch" % (code, event.strftime("%Y%m%d"))
+    if arguments['--ctable']:
+        chfile = arguments['--ctable']
 
     if arguments['--directory']:
         dir = arguments['--directory']
         if not os.path.exists(dir):
             os.makedirs(dir)
         cnt_total = os.path.join(dir, cnt_total)
+        chfile = os.path.join(dir, chfile)
 
     win32_cat(cnts, cnt_total)
     unlink_lists(cnts)
+    os.rename(cheuc, chfile)
 
-    if arguments['--directory']:
-        chfile = "%s_%s_%s.euc.ch" % (org, net, event.strftime("%Y%m%d"))
-        os.rename(chfile, os.path.join(dir, chfile))
-    os.unlink("%s_%s_%s.sjis.ch" % (org, net, event.strftime("%Y%m%d")))
-    os.unlink("readme.txt")
+    os.unlink("%s_%s.sjis.ch" % (ch_prefix, event.strftime("%Y%m%d")))
+    if os.path.exists("readme.txt"):
+        os.unlink("readme.txt")
