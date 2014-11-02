@@ -24,8 +24,8 @@ Options:
                 Default to extract all components.
     -D <outdir> Output directory for SAC files, relative to DIRNAME.
     -S <suffix> Suffix of output SAC files. Default: no suffix.
-    -P <procs>  Parallel using multiple processes. Set number of CPUs to <procs>
-                if <procs> equals 0.    [default: 0]
+    -P <procs>  Parallel using multiple processes.
+                Set number of CPUs to <procs> if <procs> equals 0. [default: 0]
 """
 
 import os
@@ -72,7 +72,14 @@ def _exctract_channel(tup):
 
     winfile, chno, outdir, prmfile, pmax = tup
     #   print(winfile, chno, outdir, prmfile, pmax)
-    subprocess.call([win2sac, winfile, chno, "SAC", outdir, '-p'+prmfile, '-m'+str(pmax)],
+    subprocess.call([win2sac,
+                     winfile,
+                     chno,
+                     "SAC",
+                     outdir,
+                     '-p'+prmfile,
+                     '-m'+str(pmax)
+                     ],
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL)
 
