@@ -1,15 +1,17 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#  Author: Dongdong Tian @ USTC
+# Author: Dongdong Tian @ USTC
 #
-#  Revision History:
-#    2014-09-03  Dongdong Tian  Initial Coding
-#    2014-10-05  Dongdong Tian  Fix bugs:
+# Revision History:
+#   2014-09-03  Dongdong Tian   Initial Coding
+#   2014-10-05  Dongdong Tian   Fix bugs:
 #                               - handle datas with more than 2000000 points
 #                               - delimite components code with commas
+#   2014-11-01  Dongdong Tian   Modify to fit new version of request script
+#
 
-"""Extract SAC data files from Hi-net WIN32 files
+"""Extract SAC data files from NIED Hi-net WIN32 files
 
 Usage:
     rdhinet.py DIRNAME [-C <comps>] [-D <outdir>] [-S <suffix>] [-P <procs>]
@@ -22,43 +24,19 @@ Options:
                 Default to extract all components.
     -D <outdir> Output directory for SAC files, relative to DIRNAME.
     -S <suffix> Suffix of output SAC files. Default: no suffix.
-    -P <procs>  Parallel using multiple processes. Set number of cpus to <procs>
+    -P <procs>  Parallel using multiple processes. Set number of CPUs to <procs>
                 if <procs> equals 0.    [default: 0]
-
 """
 
 import os
 import glob
-import shlex
-import zipfile
-import datetime
 import subprocess
 import multiprocessing
 
 from docopt import docopt
 
 # external tools from Hi-net
-catwin32 = "catwin32"
 win2sac = "win2sac_32"
-
-
-def unzip(zips):
-    """unzip zip filelist"""
-
-    for file in zips:
-        print("Unzip %s" % (file))
-        zipFile = zipfile.ZipFile(file, "r")
-        for name in zipFile.namelist():
-            zipFile.extract(name)
-
-
-def win32_cat(cnts, cnt_total):
-    """merge WIN32 files to one total WIN32 file"""
-
-    print("Total %d win32 files" % (len(cnts)))
-    cmd = "%s %s -o %s" % (catwin32, ' '.join(cnts), cnt_total)
-    args = shlex.split(cmd)
-    subprocess.call(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def win_prm(chfile, prmfile="win.prm"):
@@ -93,7 +71,8 @@ def _exctract_channel(tup):
     """extract only one channel for one time"""
 
     winfile, chno, outdir, prmfile, pmax = tup
-    subprocess.call([win2sac, winfile, chno, "SAC", outdir, prmfile, '-m'+str(pmax)],
+    #   print(winfile, chno, outdir, prmfile, pmax)
+    subprocess.call([win2sac, winfile, chno, "SAC", outdir, '-p'+prmfile, '-m'+str(pmax)],
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL)
 
@@ -120,38 +99,28 @@ def win32_sac(winfile, ch_no, outdir=".", prmfile="win.prm", pmax=2000000):
         pool.map(_exctract_channel, tuple_list)
 
 
-def rename_sac(outdir, sacfile=None):
-    for file in glob.glob(outdir + '/*.SAC'):
-        dest = os.path.splitext(file)[0]
+def rename_sac(dirname, outdir, sacfile=None):
+    for file in glob.glob(os.path.join(dirname, "*.SAC")):
+        dir, base = os.path.split(file)
+        filename = os.path.splitext(base)[0]
         if sacfile:
-            dest += "." + sacfile
+            filename += "." + sacfile
+        dest = os.path.join(outdir, filename)
         os.rename(file, dest)
-
-
-def unlink_lists(files):
-    for f in files:
-        os.unlink(f)
 
 
 if __name__ == "__main__":
     arguments = docopt(__doc__)
+    dirname = arguments['DIRNAME']
 
-    # change directory
-    os.chdir(arguments['DIRNAME'])
-    print("Working in dir %s" % (arguments['DIRNAME']))
+    chfile = glob.glob(os.path.join(dirname, "*_????????.ch"))[0]
+    cntfile = glob.glob(os.path.join(dirname, "*_????????????_*.cnt"))[0]
+    root, ext = os.path.splitext(cntfile)
+    span = int(root.split('_')[2])  # time span in minutes
 
-    # unzip zip files
-    unzip(glob.glob("??_??_????????????_*_?????.zip"))
-
-    # merge win32 files
-    cnts = sorted(glob.glob("??????????????????.cnt"))
-    cnt_total = "%s_%d.cnt" % (cnts[0][0:12], len(cnts))
-    win32_cat(cnts, cnt_total)
-    unlink_lists(cnts)
-
-    chfile = glob.glob("??_??_????????.euc.ch")[0]
     # generate win32 paramerter file
-    win_prm(chfile)
+    prmfile = os.path.join(dirname, "win.prm")
+    win_prm(chfile, prmfile=prmfile)
 
     # get channel NO. lists for channel table
     comps = None
@@ -159,17 +128,17 @@ if __name__ == "__main__":
         comps = arguments['-C'].split(",")
     chno = get_chno(chfile, comps)
 
-    # extract sac files
-    outdir = '.'
+    # maximum number of points
+    pmax = span * 60 * 100  # assume data sample rate = 0.01
+    # extrac sac files to dirname
+    win32_sac(cntfile, chno, outdir=dirname, prmfile=prmfile, pmax=pmax)
+    os.unlink(prmfile)
+
+    # rename SAC files and move to outdir
+    outdir = dirname
     if arguments['-D']:
         outdir = arguments['-D']
-    if not os.path.exists(outdir):
-        os.makedirs(outdir)
+        if not os.path.exists(outdir):
+            os.makedirs(outdir)
 
-    # maximum number of points
-    pmax = len(cnts) * 60 * 100
-
-    win32_sac(cnt_total, chno, outdir=outdir, pmax=pmax)
-
-    sacfile = arguments['-S']
-    rename_sac(outdir, sacfile)
+    rename_sac(dirname, outdir, arguments['-S'])
