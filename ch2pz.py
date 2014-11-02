@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 #  Author:  Dongdong Tian @ USTC
@@ -6,20 +6,21 @@
 #  Revision History:
 #    2014-09-05 Dongdong Tian   Initial Coding
 #
-'''Convert Hi-net Channel Table file to SAC PZ files
+'''Convert NIED Hi-net Channel Table file to SAC PZ files
 
 Usage:
-    ch2pz.py CHFILE [-C <comps>] [-D <outdir>] [-S <suffix>]
+    ch2pz.py DIRNAME [-C <comps>] [-D <outdir>] [-S <suffix>]
 
 Options:
-    -C <comps>      Channel Components to convert. Choose from U,N,E,X,Y.
-                    [default: UNE]
+    -C <comps>      Channel Components to convert. Choose from U,N,E,X,Y et. al.
+                    Default to convert all components.
     -D <outdir>     Output directory of SAC PZ files. Use the directory of
                     Channel Table file as default.
     -S <suffix>     Suffix for SAC PZ files. [default: SAC_PZ]
 '''
 
 import os
+import glob
 import math
 
 from docopt import docopt
@@ -37,12 +38,7 @@ def find_poles(damping, freq):
     return real, imaginary
 
 
-def write_pz(pzfile, real, imaginary, constant, outdir='.'):
-
-    if not os.path.exists(outdir):
-        os.makedirs(outdir)
-
-    pzfile = os.path.join(outdir, pzfile)
+def write_pz(pzfile, real, imaginary, constant):
 
     with open(pzfile, "w") as pz:
         pz.write("ZEROS 3\n")
@@ -62,7 +58,7 @@ def ch2pz(chfile, comps, outdir, suffix):
             items = line.split()
             station, comp = items[3], items[4]
 
-            if comp not in comps:
+            if not (comps is None or comp in comps):
                 continue
 
             gain, damping = float(items[7]), float(items[10])
@@ -78,23 +74,28 @@ def ch2pz(chfile, comps, outdir, suffix):
             pzfile = "%s.%s" % (station, comp)
             if suffix:
                 pzfile += '.' + suffix
+            pzfile = os.path.join(outdir, pzfile)
 
-            write_pz(pzfile, real, imaginary, constant, outdir)
+            write_pz(pzfile, real, imaginary, constant)
 
 
 if __name__ == "__main__":
     arguments = docopt(__doc__)
-    print(arguments)
 
-    chfile = arguments['CHFILE']
-    comps = arguments['-C']
+    dirname = arguments['DIRNAME']
+    chfile = glob.glob(os.path.join(dirname, "*_????????.ch"))[0]
+    if arguments['-C']:
+        comps = arguments['-C'].split(',')
+    else:
+        comps = None
+
     suffix = arguments['-S']
 
     if arguments['-D']:
         outdir = arguments['-D']
+        if not os.path.exists(outdir):
+            os.makedirs(outdir)
     else:
-        outdir = os.path.dirname(chfile)
-        if outdir == '':
-            outdir = '.'
+        outdir = dirname
 
     ch2pz(chfile, comps, outdir, suffix)
