@@ -12,11 +12,11 @@ Usage:
     ch2pz.py DIRNAME [-C <comps>] [-D <outdir>] [-S <suffix>]
 
 Options:
-    -C <comps>  Channel Components to convert. Choose from U,N,E,X,Y et. al.
-                Default to convert all components.
-    -D <outdir> Output directory of SAC PZ files. Use the directory of
-                Channel Table file as default.
-    -S <suffix> Suffix for SAC PZ files. [default: SAC_PZ]
+    -C <comps>    Channel Components to convert. Choose from U,N,E,X,Y et. al.
+                  Default to convert all components.
+    -D <outdir>   Output directory of SAC PZ files. Use the directory of
+                  Channel Table file as default.
+    -S <suffix>   Suffix for SAC PZ files. [default: SAC_PZ]
 '''
 
 import os
