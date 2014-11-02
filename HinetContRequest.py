@@ -36,7 +36,8 @@ Options:
     -h, --help              Show this help.
     -c CODE --code=CODE     Select code for organization and network.
     -d DIR --directory=DIR  Output directory. Default: current directory.
-    -o FILE --output=FILE   Output filename. Default: CODE_YYYYMMDDHHMM_SPAN.cnt
+    -o FILE --output=FILE   Output filename.
+                            Default: CODE_YYYYMMDDHHMM_SPAN.cnt
     -t FILE --ctable=FILE   Channel table filename. Default: CODE_YYYYMMDD.ch
 
 Codes of org & net:
@@ -53,7 +54,7 @@ Codes of org & net:
     '0208' : 'UNIV:Kochi University',
     '0209' : 'UNIV:Kagoshima University',
     '0301' : 'JMA:JMA Seismometer Network',
-    '0401' : 'JAMSTEC:JAMSTEC Realtime Data from the Deep Sea Floor Observatory',
+    '0401' : 'JAMSTEC: Realtime Data from the Deep Sea Floor Observatory',
     '0402' : 'JAMSTEC:JAMSTEC DONET1 (broadband)',
     '0402A': 'JAMSTEC:JAMSTEC DONET1 (strong motion)';
     '0501' : 'OTHER:AIST',
@@ -326,16 +327,16 @@ if __name__ == "__main__":
     day = int(arguments['<day>'])
     hour = int(arguments['<hour>'])
     minute = int(arguments['<min>'])
-    total_span = int(arguments['<span>'])
+    timespan = int(arguments['<span>'])
 
     event = datetime(year, month, day, hour, minute)
     date_check(code, event)
 
-    print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), total_span))
+    print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), timespan))
 
-    count = math.ceil(total_span/maxspan)
-    span = [total_span//count for i in range(0, count)]
-    for i in range(0, total_span % count):
+    count = math.ceil(timespan/maxspan)
+    span = [timespan//count for i in range(0, count)]
+    for i in range(0, timespan % count):
         span[i] += 1
 
     ids = []
@@ -360,7 +361,7 @@ if __name__ == "__main__":
         cnts = sorted(glob.glob("????????????%s.cnt" % code[0:4]))
         ch_prefix = "%s_%s_%s" % (code[0:2], code[2:4], code[4:6])
 
-    cnt_total = "%s_%s_%d.cnt" % (code, event.strftime("%Y%m%d%H%M"), total_span)
+    cnt_total = "%s_%s_%d.cnt" % (code, event.strftime("%Y%m%d%H%M"), timespan)
     if arguments['--output']:
         cnt_total = arguments['--output']
 
