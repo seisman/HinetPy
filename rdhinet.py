@@ -22,7 +22,7 @@ Options:
     -C <comps>  Components to extract, delimited using commas.
                 Avaiable components are U, N, E, X, Y et. al.
                 Default to extract all components.
-    -D <outdir> Output directory for SAC files, relative to DIRNAME.
+    -D <outdir> Output directory for SAC files.
     -S <suffix> Suffix of output SAC files. Default: no suffix.
     -P <procs>  Parallel using multiple processes.
                 Set number of CPUs to <procs> if <procs> equals 0. [default: 0]
