@@ -381,6 +381,6 @@ if __name__ == "__main__":
     unlink_lists(cnts)
     os.rename(cheuc, chfile)
 
-    os.unlink("%s_%s.sjis.ch" % (ch_prefix, event.strftime("%Y%m%d")))
+    unlink_lists(glob.glob("*.*.ch"))
     if os.path.exists("readme.txt"):
         os.unlink("readme.txt")
