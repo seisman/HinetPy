@@ -48,19 +48,19 @@ of these scripts.
 
 #### Examples ####
 
-#.  Request data of Hi-net start from 2010-10-01T15:00:00 (JST) with duration of 20 minutes
+1.  Request data of Hi-net start from 2010-10-01T15:00:00 (JST) with duration of 20 minutes
 
         python HinetContRequest.py 2010 10 01 15 00 20
 
-#.  Request data of F-net start from 2010-10-01T15:00:00 (JST) with duration of 20 minutes
+2.  Request data of F-net start from 2010-10-01T15:00:00 (JST) with duration of 20 minutes
 
         python HinetContRequest.py 2010 10 01 15 00 20 -c 0103
 
-#.  Request data of Hi-net, with customized output directory and filename
+3.  Request data of Hi-net, with customized output directory and filename
 
         python HinetContRequest.py 2010 10 01 15 00 20 -d aaa -o aaa.cnt -t aaa.ch
 
-#.  Request data of Hi-net, use default filename and customized output directory. (**Highly Recommended**)
+4.  Request data of Hi-net, use default filename and customized output directory. (**Highly Recommended**)
 
         python HinetContRequest.py 2010 10 01 15 00 20 -d 201010010600
 
@@ -96,11 +96,11 @@ you will get a directory `201010010600` with two file inside:
 
 #### Examples ####
 
-#.  Extract all channels
+1.  Extract all channels
 
         python rdhinet.py 201010010600
 
-#.  Extract NEU components with suffix 'SAC'
+2.  Extract NEU components with suffix 'SAC'
 
         python rdhinet.py 201010010600 -C U,N,E -S SAC
 
@@ -129,11 +129,11 @@ If you run `python rdhinet.py 201010010600 -C U`, you will get SAC files looks l
 
 #### Examples ####
 
-#.  Extract all channels
+1.  Extract all channels
 
         python ch2pz.py 201010010600
 
-#.  Extract NEU components
+2.  Extract NEU components
 
         python ch2pz.py 201010010600 -C U,N,E
 
