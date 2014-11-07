@@ -7,11 +7,14 @@ The user assumes full responsibility for the use of all scripts. The author are
 of these scripts.
 
 ## Dependency ##
-- Python 3.4
-- [docopt](http://docopt.org/)
-- [BeautifulSoup4](http://www.crummy.com/software/BeautifulSoup/)
-- [requests](http://docs.python-requests.org)
-- [clint](https://github.com/kennethreitz/clint)
+
+- Python 3.4 (Not work under 2.6, 2.7; Not Tested under 3.3)
+- Python third-party modules
+    - [docopt](http://docopt.org/)
+    - [BeautifulSoup4](http://www.crummy.com/software/BeautifulSoup/)
+    - [requests](http://docs.python-requests.org)
+    - [clint](https://github.com/kennethreitz/clint)
+- catwin32 from Hi-net win32tools
 
 ## How to Use ##
 
