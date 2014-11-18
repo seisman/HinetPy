@@ -1,5 +1,9 @@
 # NIED Hi-net data request and process scripts #
 
+- Author: Dongdong Tian @ USTC
+- Date: 2014-08-13
+- Update: 2014-11-18
+
 This is a collection of scripts for Hi-net data request, download and process.
 It does not come with any warranties, nor is it guaranteed to work on your computer.
 The user assumes full responsibility for the use of all scripts. The author are
