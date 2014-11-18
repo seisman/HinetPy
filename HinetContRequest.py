@@ -258,7 +258,7 @@ def cont_request(org, net, volc, event, span):
     return id
 
 
-def cont_download(id):
+def cont_download_requests(id):
     ''' Download continuous waveform data of specified id '''
 
     d = requests.get(download, params={"id": id},
@@ -282,6 +282,12 @@ def cont_download(id):
 
     if os.path.getsize(fname) != total_length:
         print("File %s is not complete!" % (fname))
+
+
+def cont_download_wget(id):
+
+    subprocess.call(["wget", '-c', '--user=' + user, '--password=' + passwd,
+                     download + "?id=" + id, "-O", id + ".zip"])
 
 
 def unzip(zips):
@@ -314,6 +320,7 @@ if __name__ == "__main__":
     passwd = config['Account']['Password']
     maxspan = int(config['Cont']['MaxSpan'])
     catwin32 = config['Tools']['catwin32']
+    method = config['Tools']['downloader']
 
     arguments = docopt(__doc__)
     # Code for org & net
@@ -344,10 +351,14 @@ if __name__ == "__main__":
     for i in range(0, count):
         ids.append(cont_request(org, net, volc, start, span[i]))
         start += timedelta(minutes=span[i])
+        time.sleep(2)
     zips = [x+'.zip' for x in ids]
 
     procs = min(len(ids), multiprocessing.cpu_count())
-    multiprocessing.Pool(processes=procs).map(cont_download, ids)
+    if method == 'requests':
+        multiprocessing.Pool(processes=procs).map(cont_download_requests, ids)
+    elif method == 'wget':
+        multiprocessing.Pool(processes=procs).map(cont_download_wget, ids)
 
     # unzip zip files
     unzip(zips)
