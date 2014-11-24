@@ -203,7 +203,7 @@ def code_parser(code):
     ''' parser network code '''
 
     if code not in code_list:
-        print("%s: Error code for organization and network." % (code))
+        print("{}: Error code for organization and network.".format(code))
         sys.exit()
 
     if len(code) == 6:  # volcanos
@@ -270,7 +270,7 @@ def cont_download_requests(id):
     # file name
     # disposition = d.headers['Content-Disposition'].strip()
     # fname = disposition.split('filename=')[1].strip('\'"')
-    fname = "%s.zip" % id   # now use id as filename
+    fname = "{}.zip".format(id)   # now use id as filename
 
     with open(fname, "wb") as fd:
         for chunk in progress.bar(d.iter_content(chunk_size=1024),
@@ -281,7 +281,7 @@ def cont_download_requests(id):
                 fd.flush()
 
     if os.path.getsize(fname) != total_length:
-        print("File %s is not complete!" % (fname))
+        print("File {} is not complete!".format(fname))
 
 
 def cont_download_wget(id):
@@ -339,7 +339,7 @@ if __name__ == "__main__":
     event = datetime(year, month, day, hour, minute)
     date_check(code, event)
 
-    print("%s ~%s" % (event.strftime("%Y-%m-%d %H:%M"), timespan))
+    print("{} ~{}".format(event.strftime("%Y-%m-%d %H:%M"), timespan))
 
     count = math.ceil(timespan/maxspan)
     span = [timespan//count for i in range(0, count)]
@@ -366,18 +366,18 @@ if __name__ == "__main__":
 
     # get cnt and ch filename
     if not volc:
-        cnts = sorted(glob.glob("????????????%s??.cnt" % code[0:4]))
-        ch_prefix = "%s_%s" % (code[0:2], code[2:4])
+        cnts = sorted(glob.glob("????????????{}??.cnt".format(code[0:4])))
+        ch_prefix = "{}_{}".format(code[0:2], code[2:4])
     else:
-        cnts = sorted(glob.glob("????????????%s.cnt" % code[0:4]))
-        ch_prefix = "%s_%s_%s" % (code[0:2], code[2:4], code[4:6])
+        cnts = sorted(glob.glob("????????????{}.cnt".format(code[0:4])))
+        ch_prefix = "{}_{}_{}".format(code[0:2], code[2:4], code[4:6])
 
-    cnt_total = "%s_%s_%d.cnt" % (code, event.strftime("%Y%m%d%H%M"), timespan)
+    cnt_total = "{}_{}_{}.cnt".format(code, event.strftime("%Y%m%d%H%M"), timespan)
     if arguments['--output']:
         cnt_total = arguments['--output']
 
-    cheuc = "%s_%s.euc.ch" % (ch_prefix, event.strftime("%Y%m%d"))
-    chfile = "%s_%s.ch" % (code, event.strftime("%Y%m%d"))
+    cheuc = "{}_{}.euc.ch".format(ch_prefix, event.strftime("%Y%m%d"))
+    chfile = "{}_{}.ch".format(code, event.strftime("%Y%m%d"))
     if arguments['--ctable']:
         chfile = arguments['--ctable']
 
