@@ -170,11 +170,14 @@ code_list = ['0101', '0103', '0103A',
              ]
 
 
-def auth_check(status_code):
-    ''' check authorization '''
+def status_check(status_code):
+    ''' check request status '''
 
     if status_code == 401:
         print("Unauthorized. Check your username and password!")
+        sys.exit()
+    else:
+        print("status code: {}".format(status_code))
         sys.exit()
 
 
@@ -234,8 +237,9 @@ def cont_request(org, net, volc, event, span):
         'LANG':  'en',       # english version of web
         'rn': str(int((datetime.now() - datetime(1970, 1, 1)).total_seconds()))
     }
+
     r = requests.post(request, params=payload, auth=(user, passwd))
-    auth_check(r.status_code)
+    status_check(r.status_code)
 
     status_html = requests.get(status, auth=(user, passwd)).text
     id = re.search(r'<td class="bgcolist2">(?P<ID>\d{10})</td>',
@@ -269,7 +273,7 @@ def cont_download_requests(id):
 
     d = requests.get(download, params={"id": id},
                      auth=(user, passwd), stream=True)
-    auth_check(d.status_code)
+    status_check(d.status_code)
 
     # file size
     total_length = int(d.headers.get('Content-Length'))
