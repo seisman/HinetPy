@@ -125,6 +125,7 @@ Codes for JMA Volcanic Seismometer Network (0302):
 """
 
 import os
+import re
 import sys
 import time
 import math
@@ -137,7 +138,6 @@ from datetime import date, datetime, timedelta
 
 import requests
 from docopt import docopt
-from bs4 import BeautifulSoup
 from clint.textui import progress
 
 # basic urls
@@ -237,23 +237,29 @@ def cont_request(org, net, volc, event, span):
     r = requests.post(request, params=payload, auth=(user, passwd))
     auth_check(r.status_code)
 
-    s = requests.get(status, auth=(user, passwd))
-    soup = BeautifulSoup(s.content)
-    id = str(soup.find("tr", class_="bglist1").contents[0].string)
+    status_html = requests.get(status, auth=(user, passwd)).text
+    id = re.search(r'<td class="bgcolist2">(?P<ID>\d{10})</td>',
+                   status_html).group('ID')
 
     # check data status
+    p = re.compile(r'<tr class="bglist(?P<OPT>\d)">'
+                   + r'<td class="bgcolist2">'
+                   + id
+                   + r'</td>')
+
     while True:
-        s = requests.get(status, auth=(user, passwd))
-        soup = BeautifulSoup(s.content)
-        if str(soup.find("tr", class_="bglist1").contents[0].string) == id:
-            time.sleep(2)  # still preparing data
-        elif str(soup.find("tr", class_="bglist2").contents[0].string) == id:
-            break          # data available
-        elif str(soup.find("tr", class_="bglist4").contents[0].string) == id:
+        status_html = requests.get(status, auth=(user, passwd)).text
+        opt = p.search(status_html).group('OPT')
+        if opt == '1':  # still preparing data
+            time.sleep(2)
+        elif opt == '2':  # data available
+            break
+        elif opt == '4':  # Error
             print("Error!")
             sys.exit()
-        elif str(soup.find("tr", class_="bglist3").contents[0].string) == id:
+        elif opt == '3':  # ?
             print("What's bglist3?")
+            sys.exit()
 
     return id
 
