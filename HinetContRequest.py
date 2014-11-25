@@ -173,7 +173,9 @@ code_list = ['0101', '0103', '0103A',
 def status_check(status_code):
     ''' check request status '''
 
-    if status_code == 401:
+    if status_code == 200:
+        pass
+    elif status_code == 401:
         print("Unauthorized. Check your username and password!")
         sys.exit()
     else:
@@ -238,8 +240,13 @@ def cont_request(org, net, volc, event, span):
         'rn': str(int((datetime.now() - datetime(1970, 1, 1)).total_seconds()))
     }
 
-    r = requests.post(request, params=payload, auth=(user, passwd))
-    status_check(r.status_code)
+
+    try:
+        r = requests.post(request, params=payload, auth=(user, passwd))
+        status_check(r.status_code)
+    except requests.exceptions.ConnectionError:
+        print("Name or service not known")
+        sys.exit(0)
 
     status_html = requests.get(status, auth=(user, passwd)).text
     id = re.search(r'<td class="bgcolist2">(?P<ID>\d{10})</td>',
@@ -271,9 +278,13 @@ def cont_request(org, net, volc, event, span):
 def cont_download_requests(id):
     ''' Download continuous waveform data of specified id '''
 
-    d = requests.get(download, params={"id": id},
+    try:
+        d = requests.get(download, params={"id": id},
                      auth=(user, passwd), stream=True)
-    status_check(d.status_code)
+        status_check(d.status_code)
+    except requests.exceptions.ConnectionError:
+        print("Name or service not known")
+        sys.exit(0)
 
     # file size
     total_length = int(d.headers.get('Content-Length'))
