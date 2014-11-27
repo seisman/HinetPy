@@ -130,6 +130,7 @@ import sys
 import time
 import math
 import glob
+import logging
 import zipfile
 import subprocess
 import configparser
@@ -173,13 +174,13 @@ code_list = ['0101', '0103', '0103A',
 def status_check(status_code):
     ''' check request status '''
 
-    if status_code == 200:
+    if status_code == 200:  # succeed
         pass
     elif status_code == 401:
-        print("Unauthorized. Check your username and password!")
+        logging.error("Unauthorized. Check your username and password!")
         sys.exit()
     else:
-        print("status code: {}".format(status_code))
+        logging.error("Status code: {}".format(status_code))
         sys.exit()
 
 
@@ -200,7 +201,7 @@ def date_check(code, event):
 
     today = date.today()        # end date of avaiable data
     if event.date() < start or event.date() > today:
-        print("Not within Hi-net service period.")
+        logging.error("Not within Hi-net service period.")
         sys.exit()
 
 
@@ -208,7 +209,7 @@ def code_parser(code):
     ''' parser network code '''
 
     if code not in code_list:
-        print("{}: Error code for organization and network.".format(code))
+        logging.error("{}: Error code for org and net.".format(code))
         sys.exit()
 
     if len(code) == 6:  # volcanos
@@ -234,19 +235,18 @@ def cont_request(org, net, volc, event, span):
         'hour':  event.strftime("%H"),
         'min':   event.strftime("%M"),
         'span':  str(span),
-        'arc':   'ZIP',
+        'arc':   'ZIP',      # zip format is preferred
         'size':  '93680',    # estimated size of the data, it is not important
         'LANG':  'en',       # english version of web
         'rn': str(int((datetime.now() - datetime(1970, 1, 1)).total_seconds()))
     }
 
-
     try:
         r = requests.post(request, params=payload, auth=(user, passwd))
         status_check(r.status_code)
     except requests.exceptions.ConnectionError:
-        print("Name or service not known")
-        sys.exit(0)
+        logging.error("Name or service not known")
+        sys.exit()
 
     status_html = requests.get(status, auth=(user, passwd)).text
     id = re.search(r'<td class="bgcolist2">(?P<ID>\d{10})</td>',
@@ -264,15 +264,13 @@ def cont_request(org, net, volc, event, span):
         if opt == '1':  # still preparing data
             time.sleep(2)
         elif opt == '2':  # data available
-            break
+            return id
         elif opt == '4':  # Error
-            print("Error!")
-            sys.exit()
+            logging.error("Error in data status.")
+            sys.exit(0)
         elif opt == '3':  # ?
-            print("What's bglist3?")
-            sys.exit()
-
-    return id
+            logging.error("What's bglist3?")
+            sys.exit(0)
 
 
 def cont_download_requests(id):
@@ -280,10 +278,10 @@ def cont_download_requests(id):
 
     try:
         d = requests.get(download, params={"id": id},
-                     auth=(user, passwd), stream=True)
+                         auth=(user, passwd), stream=True)
         status_check(d.status_code)
     except requests.exceptions.ConnectionError:
-        print("Name or service not known")
+        logging.error("Name or service not known")
         sys.exit(0)
 
     # file size
@@ -302,7 +300,8 @@ def cont_download_requests(id):
                 fd.flush()
 
     if os.path.getsize(fname) != total_length:
-        print("File {} is not complete!".format(fname))
+        logging.warning("File {} is not complete!".format(fname))
+        sys.exit(0)
 
 
 def cont_download_wget(id):
@@ -343,6 +342,8 @@ if __name__ == "__main__":
     catwin32 = config['Tools']['catwin32']
     method = config['Tools']['downloader']
 
+    logging.basicConfig(level=logging.DEBUG)
+
     arguments = docopt(__doc__)
     # Code for org & net
     code = config['Cont']['Net']
@@ -360,7 +361,8 @@ if __name__ == "__main__":
     event = datetime(year, month, day, hour, minute)
     date_check(code, event)
 
-    print("{} ~{}".format(event.strftime("%Y-%m-%d %H:%M"), timespan))
+    logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
+    logging.getLogger("requests").setLevel(logging.WARNING)
 
     count = math.ceil(timespan/maxspan)
     span = [timespan//count for i in range(0, count)]
