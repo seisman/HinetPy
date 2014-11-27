@@ -174,9 +174,9 @@ code_list = ['0101', '0103', '0103A',
 def status_check(status_code):
     ''' check request status '''
 
-    if status_code == 200:  # succeed
+    if status_code == requests.codes.ok:  # succeed
         pass
-    elif status_code == 401:
+    elif status_code == requests.codes.unauthorized:
         logging.error("Unauthorized. Check your username and password!")
         sys.exit()
     else:
