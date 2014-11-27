@@ -142,13 +142,13 @@ from docopt import docopt
 from clint.textui import progress
 
 # basic urls
-base = "http://www.hinet.bosai.go.jp/REGS/download/cont/"
-request = base + "cont_request.php"
-status = base + "cont_status.php"
-download = base + "cont_download.php"
+BASE = "http://www.hinet.bosai.go.jp/REGS/download/cont/"
+REQUEST = BASE + "cont_request.php"
+STATUS = BASE + "cont_status.php"
+DOWNLOAD = BASE + "cont_download.php"
 
 # all legal codes
-code_list = ['0101', '0103', '0103A',
+CODE_LIST = ['0101', '0103', '0103A',
              '0201', '0202', '0203', '0204', '0205',
              '0206', '0207', '0208', '0209',
              '0301',
@@ -208,7 +208,7 @@ def date_check(code, event):
 def code_parser(code):
     ''' parser network code '''
 
-    if code not in code_list:
+    if code not in CODE_LIST:
         logging.error("{}: Error code for org and net.".format(code))
         sys.exit()
 
@@ -242,13 +242,13 @@ def cont_request(org, net, volc, event, span):
     }
 
     try:
-        r = requests.post(request, params=payload, auth=(user, passwd))
+        r = requests.post(REQUEST, params=payload, auth=(user, passwd))
         status_check(r.status_code)
     except requests.exceptions.ConnectionError:
         logging.error("Name or service not known")
         sys.exit()
 
-    status_html = requests.get(status, auth=(user, passwd)).text
+    status_html = requests.get(STATUS, auth=(user, passwd)).text
     id = re.search(r'<td class="bgcolist2">(?P<ID>\d{10})</td>',
                    status_html).group('ID')
 
@@ -259,7 +259,7 @@ def cont_request(org, net, volc, event, span):
                    + r'</td>')
 
     while True:
-        status_html = requests.get(status, auth=(user, passwd)).text
+        status_html = requests.get(STATUS, auth=(user, passwd)).text
         opt = p.search(status_html).group('OPT')
         if opt == '1':  # still preparing data
             time.sleep(2)
@@ -277,7 +277,7 @@ def cont_download_requests(id):
     ''' Download continuous waveform data of specified id '''
 
     try:
-        d = requests.get(download, params={"id": id},
+        d = requests.get(DOWNLOAD, params={"id": id},
                          auth=(user, passwd), stream=True)
         status_check(d.status_code)
     except requests.exceptions.ConnectionError:
@@ -307,7 +307,7 @@ def cont_download_requests(id):
 def cont_download_wget(id):
 
     subprocess.call(["wget", '-c', '--user=' + user, '--password=' + passwd,
-                     download + "?id=" + id, "-O", id + ".zip"])
+                     DOWNLOAD + "?id=" + id, "-O", id + ".zip"])
 
 
 def unzip(zips):
