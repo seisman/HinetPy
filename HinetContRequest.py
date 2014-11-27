@@ -180,8 +180,8 @@ def status_check(status_code):
         logging.error("Unauthorized. Check your username and password!")
         sys.exit()
     else:
-        logging.error("Status code: {}".format(status_code))
-        sys.exit()
+        logging.warning("Status code: {}".format(status_code))
+        logging.warning("Report this status code to seisman.info@gmail.com")
 
 
 def date_check(code, event):
@@ -211,8 +211,7 @@ def code_parser(code):
     if code not in CODE_LIST:
         logging.error("{}: Error code for org and net.".format(code))
         sys.exit()
-
-    if len(code) == 6:  # volcanos
+    elif len(code) == 6:  # volcanos
         org, net = code[0:2], code[2:4]
         volc = code
     else:
@@ -249,16 +248,16 @@ def cont_request(org, net, volc, event, span):
         sys.exit()
 
     status_html = requests.get(STATUS, auth=(user, passwd)).text
+    # assume the first one is the right one
     id = re.search(r'<td class="bgcolist2">(?P<ID>\d{10})</td>',
                    status_html).group('ID')
 
-    # check data status
     p = re.compile(r'<tr class="bglist(?P<OPT>\d)">'
                    + r'<td class="bgcolist2">'
                    + id
                    + r'</td>')
 
-    while True:
+    while True:  # check data status
         status_html = requests.get(STATUS, auth=(user, passwd)).text
         opt = p.search(status_html).group('OPT')
         if opt == '1':  # still preparing data
@@ -267,10 +266,10 @@ def cont_request(org, net, volc, event, span):
             return id
         elif opt == '4':  # Error
             logging.error("Error in data status.")
-            sys.exit(0)
+            sys.exit()
         elif opt == '3':  # ?
             logging.error("What's bglist3?")
-            sys.exit(0)
+            sys.exit()
 
 
 def cont_download_requests(id):
@@ -282,13 +281,11 @@ def cont_download_requests(id):
         status_check(d.status_code)
     except requests.exceptions.ConnectionError:
         logging.error("Name or service not known")
-        sys.exit(0)
+        sys.exit()
 
     # file size
     total_length = int(d.headers.get('Content-Length'))
     # file name
-    # disposition = d.headers['Content-Disposition'].strip()
-    # fname = disposition.split('filename=')[1].strip('\'"')
     fname = "{}.zip".format(id)   # now use id as filename
 
     with open(fname, "wb") as fd:
@@ -300,8 +297,8 @@ def cont_download_requests(id):
                 fd.flush()
 
     if os.path.getsize(fname) != total_length:
-        logging.warning("File {} is not complete!".format(fname))
-        sys.exit(0)
+        logging.error("File {} is not complete!".format(fname))
+        sys.exit()
 
 
 def cont_download_wget(id):
