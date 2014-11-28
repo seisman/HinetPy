@@ -221,6 +221,18 @@ def code_parser(code):
     return org, net, volc
 
 
+def datetime_parser(args):
+    ''' extract datetime information from arguments'''
+
+    year = int(args['<year>'])
+    month = int(args['<month>'])
+    day = int(args['<day>'])
+    hour = int(args['<hour>'])
+    minute = int(args['<min>'])
+
+    return datetime(year, month, day, hour, minute)
+
+
 def cont_request(org, net, volc, event, span):
     ''' request continuous data with limited time span '''
 
@@ -328,61 +340,40 @@ def unlink_lists(files):
     for f in files:
         os.unlink(f)
 
+def evenly_timespan(timespan, maxspan):
+    count = math.ceil(timespan/maxspan)
+    span = [timespan//count for i in range(0, count)]
+    for i in range(0, timespan % count):
+        span[i] += 1
+
+    return span
+
 
 if __name__ == "__main__":
-    # User name & passwd
+    logging.basicConfig(level=logging.DEBUG)
+    logging.getLogger("requests").setLevel(logging.WARNING)
     config = configparser.ConfigParser()
     config.read("Hinet.cfg")
+    arguments = docopt(__doc__)
+
+    # global configure
     user = config['Account']['User']
     passwd = config['Account']['Password']
-    maxspan = int(config['Cont']['MaxSpan'])
     catwin32 = config['Tools']['catwin32']
-    method = config['Tools']['downloader']
 
-    logging.basicConfig(level=logging.DEBUG)
-
-    arguments = docopt(__doc__)
     # Code for org & net
     code = config['Cont']['Net']
     if arguments['--code']:
         code = arguments['--code']
     org, net, volc = code_parser(code)
 
-    year = int(arguments['<year>'])
-    month = int(arguments['<month>'])
-    day = int(arguments['<day>'])
-    hour = int(arguments['<hour>'])
-    minute = int(arguments['<min>'])
-    timespan = int(arguments['<span>'])
-
-    event = datetime(year, month, day, hour, minute)
+    # parser arguments
+    event = datetime_parser(arguments)
     date_check(code, event)
 
-    logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
-    logging.getLogger("requests").setLevel(logging.WARNING)
-
-    count = math.ceil(timespan/maxspan)
-    span = [timespan//count for i in range(0, count)]
-    for i in range(0, timespan % count):
-        span[i] += 1
-
-    ids = []
-    start = event
-    for i in range(0, count):
-        ids.append(cont_request(org, net, volc, start, span[i]))
-        start += timedelta(minutes=span[i])
-        time.sleep(2)
-    zips = [x+'.zip' for x in ids]
-
-    procs = min(len(ids), multiprocessing.cpu_count())
-    if method == 'requests':
-        multiprocessing.Pool(processes=procs).map(cont_download_requests, ids)
-    elif method == 'wget':
-        multiprocessing.Pool(processes=procs).map(cont_download_wget, ids)
-
-    # unzip zip files
-    unzip(zips)
-    unlink_lists(zips)
+    timespan = int(arguments['<span>'])
+    maxspan = int(config['Cont']['MaxSpan'])
+    span = evenly_timespan(timespan, maxspan)
 
     # get cnt and ch filename
     if not volc:
@@ -396,22 +387,43 @@ if __name__ == "__main__":
     if arguments['--output']:
         cnt_total = arguments['--output']
 
+    eucs = glob.glob("*.euc.ch")
     cheuc = "{}_{}.euc.ch".format(ch_prefix, event.strftime("%Y%m%d"))
     chfile = "{}_{}.ch".format(code, event.strftime("%Y%m%d"))
     if arguments['--ctable']:
         chfile = arguments['--ctable']
+
+    logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
+
+    ids = []
+    for minutes in span:
+        ids.append(cont_request(org, net, volc, event, minutes))
+        event += timedelta(minutes=minutes)
+        time.sleep(1)
+    zips = [x+'.zip' for x in ids]
+
+    procs = min(len(ids), multiprocessing.cpu_count())
+    method = config['Tools']['downloader']
+    if method == 'requests':
+        multiprocessing.Pool(processes=procs).map(cont_download_requests, ids)
+    elif method == 'wget':
+        multiprocessing.Pool(processes=procs).map(cont_download_wget, ids)
+
+    # unzip zip files
+    unzip(zips)
 
     if arguments['--directory']:
         dir = arguments['--directory']
         if not os.path.exists(dir):
             os.makedirs(dir)
         cnt_total = os.path.join(dir, cnt_total)
-        chfile = os.path.join(dir, chfile)
+        os.rename(cheuc, os.path.join(dir, chfile))
 
     win32_cat(cnts, cnt_total)
-    unlink_lists(cnts)
-    os.rename(cheuc, chfile)
 
-    unlink_lists(glob.glob("*.*.ch"))
-    if os.path.exists("readme.txt"):
-        os.unlink("readme.txt")
+    unlink_lists(zips)
+    unlink_lists(cnts)
+#    eucs.remove(cheuc)
+    unlink_lists(eucs)
+    unlink_lists(glob.glob("*.sjis.ch"))
+    os.unlink("readme.txt")
