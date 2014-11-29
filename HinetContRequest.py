@@ -374,6 +374,12 @@ if __name__ == "__main__":
     # timespan
     timespan = int(arguments['<span>'])
     maxspan = int(config['Cont']['MaxSpan'])
+    if not 1<=maxspan<=60:
+        logging.error("maxspan is not in the range[1,60]")
+        sys.exit()
+    if not 1<=timespan<=(2**31-1)/100:
+        logging.error("timespan is not in the range[1,(2^32-1)/100]")
+        sys.exit()
     span = evenly_timespan(timespan, maxspan)
 
     logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
