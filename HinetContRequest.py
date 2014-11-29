@@ -221,7 +221,7 @@ def code_parser(code):
     return org, net, volc
 
 
-def datetime_parser(args):
+def event_parser(args):
     ''' extract datetime information from arguments'''
 
     year = int(args['<year>'])
@@ -368,7 +368,7 @@ if __name__ == "__main__":
     org, net, volc = code_parser(code)
 
     # parser arguments
-    event = datetime_parser(arguments)
+    event = event_parser(arguments)
     date_check(code, event)
 
     # timespan
