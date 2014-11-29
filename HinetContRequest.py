@@ -323,9 +323,8 @@ def unzip(zips):
     """unzip zip filelist"""
 
     for file in zips:
-        zipFile = zipfile.ZipFile(file, "r")
-        for name in zipFile.namelist():
-            zipFile.extract(name)
+        with zipfile.ZipFile(file, 'r') as zipFile:
+            zipFile.extractall()
 
 
 def win32_cat(cnts, cnt_total):
@@ -340,6 +339,7 @@ def unlink_lists(files):
     for f in files:
         os.unlink(f)
 
+
 def evenly_timespan(timespan, maxspan):
     count = math.ceil(timespan/maxspan)
     span = [timespan//count for i in range(0, count)]
@@ -350,7 +350,7 @@ def evenly_timespan(timespan, maxspan):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     logging.getLogger("requests").setLevel(logging.WARNING)
     config = configparser.ConfigParser()
     config.read("Hinet.cfg")
@@ -371,27 +371,10 @@ if __name__ == "__main__":
     event = datetime_parser(arguments)
     date_check(code, event)
 
+    # timespan
     timespan = int(arguments['<span>'])
     maxspan = int(config['Cont']['MaxSpan'])
     span = evenly_timespan(timespan, maxspan)
-
-    # get cnt and ch filename
-    if not volc:
-        cnts = sorted(glob.glob("????????????{}??.cnt".format(code[0:4])))
-        ch_prefix = "{}_{}".format(code[0:2], code[2:4])
-    else:
-        cnts = sorted(glob.glob("????????????{}.cnt".format(code[0:4])))
-        ch_prefix = "{}_{}_{}".format(code[0:2], code[2:4], code[4:6])
-
-    cnt_total = "{}_{}_{}.cnt".format(code, event.strftime("%Y%m%d%H%M"), timespan)
-    if arguments['--output']:
-        cnt_total = arguments['--output']
-
-    eucs = glob.glob("*.euc.ch")
-    cheuc = "{}_{}.euc.ch".format(ch_prefix, event.strftime("%Y%m%d"))
-    chfile = "{}_{}.ch".format(code, event.strftime("%Y%m%d"))
-    if arguments['--ctable']:
-        chfile = arguments['--ctable']
 
     logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
 
@@ -412,18 +395,42 @@ if __name__ == "__main__":
     # unzip zip files
     unzip(zips)
 
+    outdir = os.getcwd()  # use current directory as default
     if arguments['--directory']:
-        dir = arguments['--directory']
-        if not os.path.exists(dir):
-            os.makedirs(dir)
-        cnt_total = os.path.join(dir, cnt_total)
-        os.rename(cheuc, os.path.join(dir, chfile))
+        outdir = arguments['--directory']
+        if not os.path.exists(outdir):
+            os.makedirs(outdir)
 
+    # set cnt_total
+    cnt_total = "{}_{}_{}.cnt".format(code, event.strftime("%Y%m%d%H%M"), timespan)
+    if arguments['--output']:
+        cnt_total = arguments['--output']
+    cnt_total = os.path.join(outdir, cnt_total)
+
+    if not volc:
+        cnts = sorted(glob.glob("????????????{}??.cnt".format(code[0:4])))
+    else:
+        cnts = sorted(glob.glob("????????????{}.cnt".format(code[0:4])))
     win32_cat(cnts, cnt_total)
+
+    # set channel table file
+    if not volc:
+        ch_prefix = "{}_{}".format(code[0:2], code[2:4])
+    else:
+        ch_prefix = "{}_{}_{}".format(code[0:2], code[2:4], code[4:6])
+    cheuc = "{}_{}.euc.ch".format(ch_prefix, event.strftime("%Y%m%d"))
+
+    chfile = "{}_{}.ch".format(code, event.strftime("%Y%m%d"))
+    if arguments['--ctable']:
+        chfile = arguments['--ctable']
+    chfile = os.path.join(outdir, chfile)
+
+    eucs = glob.glob("*.euc.ch")
+    eucs.remove(cheuc)
+    os.rename(cheuc, chfile)
 
     unlink_lists(zips)
     unlink_lists(cnts)
-#    eucs.remove(cheuc)
     unlink_lists(eucs)
     unlink_lists(glob.glob("*.sjis.ch"))
     os.unlink("readme.txt")
