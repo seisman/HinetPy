@@ -4,6 +4,11 @@
 - Date: 2014-08-13
 - Update: 2014-11-18
 
+## Attention ##
+
+**The scripts are broken since the update of Hinet website on Dec. 1st, 2014.
+I will try to fix them at late December.**
+
 This is a collection of scripts for Hi-net data request, download and process.
 It does not come with any warranties, nor is it guaranteed to work on your computer.
 The user assumes full responsibility for the use of all scripts. The author are
