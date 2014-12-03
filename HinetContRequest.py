@@ -388,7 +388,11 @@ if __name__ == "__main__":
     if not 1 <= timespan <= (2**31-1)/100:
         logging.error("timespan is not in the range[1,(2^32-1)/100]")
         sys.exit()
+
     span = evenly_timespan(timespan, maxspan)
+    if len(span)>140:
+        logging.error("Too long time duration for one request.")
+        sys.exit()
 
     logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
 
@@ -404,6 +408,7 @@ if __name__ == "__main__":
 
     # unzip zip files
     unzip(zips)
+    unlink_lists(zips)
 
     outdir = os.getcwd()  # use current directory as default
     if arguments['--directory']:
@@ -441,7 +446,6 @@ if __name__ == "__main__":
     eucs.remove(cheuc)
     os.rename(cheuc, chfile)
 
-    unlink_lists(zips)
     unlink_lists(cnts)
     unlink_lists(eucs)
     unlink_lists(glob.glob("*.sjis.ch"))
