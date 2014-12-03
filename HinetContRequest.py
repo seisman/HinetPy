@@ -180,9 +180,9 @@ def auth_check(auth):
 
     try:
         r = requests.post(AUTH, data=auth, verify=False,
-                          allow_redirects=False, timeout=60)
+                          allow_redirects=False, timeout=20)
     except requests.exceptions.ConnectTimeout:
-        logging.error("ConnectTimeout for 60 seconds.")
+        logging.error("ConnectTimeout in 20 seconds.")
         sys.exit()
     except requests.exceptions.ConnectionError:
         logging.error("Name or service not known")
