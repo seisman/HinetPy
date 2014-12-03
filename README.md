@@ -17,7 +17,18 @@ of these scripts.
     - [docopt](http://docopt.org/)
     - [requests](http://docs.python-requests.org)
     - [clint](https://github.com/kennethreitz/clint)
-- catwin32 from Hi-net win32tools
+- Hinet [win32tools](https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools): `catwin32` and `win2sac_32`
+
+## How to get ##
+
+clone this repo to your work directory:
+
+    git clone https://github.com/seisman/HinetScripts.git
+
+update this repo:
+
+    git pull
+
 
 ## How to Use ##
 
