@@ -334,7 +334,7 @@ def unzip(zips):
 def win32_cat(cnts, cnt_total):
     """merge WIN32 files to one total WIN32 file"""
 
-    subprocess.call([catwin32, '-s', '-o', cnt_total] + cnts,
+    subprocess.call([catwin32, '-o', cnt_total] + cnts,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL)
 
