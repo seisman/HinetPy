@@ -24,6 +24,9 @@
 #   2014-11-01  Dongdong Tian   Support volcanos data from NIED Hi-net website.
 #                               Add option for channel table filename.
 #                               Modify the default filename for cnt and ch.
+#   2014-12-03  Dongdong Tian   Hi-net website updated on Dec. 1st 2014.
+#                               Skip SSL verification.
+#                               Use post method for SSL authentication.
 #
 
 """Request continuous waveform data from NIED Hi-net.
@@ -142,10 +145,11 @@ from docopt import docopt
 from clint.textui import progress
 
 # basic urls
-BASE = "http://www.hinet.bosai.go.jp/REGS/download/cont/"
-REQUEST = BASE + "cont_request.php"
-STATUS = BASE + "cont_status.php"
-DOWNLOAD = BASE + "cont_download.php"
+AUTH = "https://hinetwww11.bosai.go.jp/auth/"
+CONT = AUTH + "download/cont/"
+STATUS = CONT + "cont_status.php"
+REQUEST = CONT + "cont_request.php"
+DOWNLOAD = CONT + "cont_download.php"
 
 # all legal codes
 CODE_LIST = ['0101', '0103', '0103A',
@@ -171,13 +175,23 @@ CODE_LIST = ['0101', '0103', '0103A',
              ]
 
 
-def status_check(status_code):
-    ''' check request status '''
+def auth_check(auth):
+    ''' check authentication '''
 
-    if status_code == requests.codes.ok:  # succeed
+    try:
+        r = requests.post(AUTH, data=auth, verify=False,
+                          allow_redirects=False, timeout=60)
+    except requests.exceptions.ConnectTimeout:
+        logging.error("ConnectTimeout for 60 seconds.")
+        sys.exit()
+    except requests.exceptions.ConnectionError:
+        logging.error("Name or service not known")
+        sys.exit()
+
+    if r.status_code == requests.codes.ok:  # succeed
         pass
-    elif status_code == requests.codes.unauthorized:
-        logging.error("Unauthorized. Check your username and password!")
+    elif r.status_code == requests.codes.found:  # redirect
+        logging.error("Maybe unauthorized. Check your username and password!")
         sys.exit()
     else:
         logging.warning("Status code: {}".format(status_code))
@@ -199,8 +213,7 @@ def date_check(code, event):
     else:
         start = date(2004, 4, 1)
 
-    today = date.today()        # end date of avaiable data
-    if event.date() < start or event.date() > today:
+    if not start <= event.date() <= date.today():
         logging.error("Not within Hi-net service period.")
         sys.exit()
 
@@ -253,16 +266,14 @@ def cont_request(org, net, volc, event, span):
     }
 
     try:
-        r = requests.post(REQUEST, params=payload, auth=(user, passwd))
-        status_check(r.status_code)
+        r = requests.post(REQUEST, params=payload, data=auth, verify=False)
     except requests.exceptions.ConnectionError:
         logging.error("Name or service not known")
         sys.exit()
 
-    status_html = requests.get(STATUS, auth=(user, passwd)).text
     # assume the first one is the right one
     id = re.search(r'<td class="bgcolist2">(?P<ID>\d{10})</td>',
-                   status_html).group('ID')
+                   r.text).group('ID')
 
     p = re.compile(r'<tr class="bglist(?P<OPT>\d)">'
                    + r'<td class="bgcolist2">'
@@ -270,7 +281,7 @@ def cont_request(org, net, volc, event, span):
                    + r'</td>')
 
     while True:  # check data status
-        status_html = requests.get(STATUS, auth=(user, passwd)).text
+        status_html = requests.post(STATUS, data=auth, verify=False).text
         opt = p.search(status_html).group('OPT')
         if opt == '1':  # still preparing data
             time.sleep(2)
@@ -284,13 +295,12 @@ def cont_request(org, net, volc, event, span):
             sys.exit()
 
 
-def cont_download_requests(id):
+def cont_download(id):
     ''' Download continuous waveform data of specified id '''
 
     try:
-        d = requests.get(DOWNLOAD, params={"id": id},
-                         auth=(user, passwd), stream=True)
-        status_check(d.status_code)
+        d = requests.post(DOWNLOAD, params={"id": id}, data=auth,
+                          verify=False, stream=True)
     except requests.exceptions.ConnectionError:
         logging.error("Name or service not known")
         sys.exit()
@@ -311,12 +321,6 @@ def cont_download_requests(id):
     if os.path.getsize(fname) != total_length:
         logging.error("File {} is not complete!".format(fname))
         sys.exit()
-
-
-def cont_download_wget(id):
-
-    subprocess.call(["wget", '-c', '--user=' + user, '--password=' + passwd,
-                     DOWNLOAD + "?id=" + id, "-O", id + ".zip"])
 
 
 def unzip(zips):
@@ -352,13 +356,17 @@ def evenly_timespan(timespan, maxspan):
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     logging.getLogger("requests").setLevel(logging.WARNING)
+    requests.packages.urllib3.disable_warnings()
     config = configparser.ConfigParser()
     config.read("Hinet.cfg")
     arguments = docopt(__doc__)
 
     # global configure
-    user = config['Account']['User']
-    passwd = config['Account']['Password']
+    auth = {
+        'auth_un': config['Account']['User'],
+        'auth_pw': config['Account']['Password'],
+        }
+    auth_check(auth)
     catwin32 = config['Tools']['catwin32']
 
     # Code for org & net
@@ -374,10 +382,10 @@ if __name__ == "__main__":
     # timespan
     timespan = int(arguments['<span>'])
     maxspan = int(config['Cont']['MaxSpan'])
-    if not 1<=maxspan<=60:
+    if not 1 <= maxspan <= 60:
         logging.error("maxspan is not in the range[1,60]")
         sys.exit()
-    if not 1<=timespan<=(2**31-1)/100:
+    if not 1 <= timespan <= (2**31-1)/100:
         logging.error("timespan is not in the range[1,(2^32-1)/100]")
         sys.exit()
     span = evenly_timespan(timespan, maxspan)
@@ -392,11 +400,7 @@ if __name__ == "__main__":
     zips = [x+'.zip' for x in ids]
 
     procs = min(len(ids), multiprocessing.cpu_count())
-    method = config['Tools']['downloader']
-    if method == 'requests':
-        multiprocessing.Pool(processes=procs).map(cont_download_requests, ids)
-    elif method == 'wget':
-        multiprocessing.Pool(processes=procs).map(cont_download_wget, ids)
+    multiprocessing.Pool(processes=procs).map(cont_download, ids)
 
     # unzip zip files
     unzip(zips)
@@ -408,7 +412,9 @@ if __name__ == "__main__":
             os.makedirs(outdir)
 
     # set cnt_total
-    cnt_total = "{}_{}_{}.cnt".format(code, event.strftime("%Y%m%d%H%M"), timespan)
+    cnt_total = "{}_{}_{}.cnt".format(code,
+                                      event.strftime("%Y%m%d%H%M"),
+                                      timespan)
     if arguments['--output']:
         cnt_total = arguments['--output']
     cnt_total = os.path.join(outdir, cnt_total)
