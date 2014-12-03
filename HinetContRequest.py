@@ -354,7 +354,9 @@ def evenly_timespan(timespan, maxspan):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s %(levelname)-7s %(message)s',
+                        datefmt='%H:%M:%S')
     logging.getLogger("requests").setLevel(logging.WARNING)
     requests.packages.urllib3.disable_warnings()
     config = configparser.ConfigParser()
@@ -390,17 +392,24 @@ if __name__ == "__main__":
         sys.exit()
 
     span = evenly_timespan(timespan, maxspan)
-    if len(span)>140:
+    count = len(span)
+    if count > 140:
         logging.error("Too long time duration for one request.")
         sys.exit()
 
     logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
 
     ids = []
-    for minutes in span:
-        ids.append(cont_request(org, net, volc, event, minutes))
-        event += timedelta(minutes=minutes)
-        time.sleep(1)
+    count_len = len(str(count))
+    for i in range(0, count):
+        logging.info("[%s/%s] => %s ~%s",
+                     str(i+1).zfill(count_len),
+                     str(count).zfill(count_len),
+                     event.strftime("%Y-%m-%d %H:%M"),
+                     span[i]
+                     )
+        ids.append(cont_request(org, net, volc, event, span[i]))
+        event += timedelta(minutes=span[i])
     zips = [x+'.zip' for x in ids]
 
     procs = min(len(ids), multiprocessing.cpu_count())
