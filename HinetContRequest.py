@@ -133,6 +133,7 @@ import sys
 import time
 import math
 import glob
+import shutil
 import logging
 import zipfile
 import subprocess
@@ -331,6 +332,14 @@ def unzip(zips):
             zipFile.extractall()
 
 
+def cmd_exists(cmd):
+    ''' check if a cmd exists '''
+
+    if not shutil.which(cmd):
+        logging.error("%s not in your PATH or not executable.", cmd)
+        sys.exit()
+
+
 def win32_cat(cnts, cnt_total):
     """merge WIN32 files to one total WIN32 file"""
 
@@ -359,6 +368,7 @@ if __name__ == "__main__":
                         datefmt='%H:%M:%S')
     logging.getLogger("requests").setLevel(logging.WARNING)
     requests.packages.urllib3.disable_warnings()
+
     config = configparser.ConfigParser()
     config.read("Hinet.cfg")
     arguments = docopt(__doc__)
@@ -369,7 +379,9 @@ if __name__ == "__main__":
         'auth_pw': config['Account']['Password'],
         }
     auth_check(auth)
-    catwin32 = config['Tools']['catwin32']
+
+    catwin32 = os.path.expanduser(config['Tools']['catwin32'])
+    cmd_exists(catwin32)
 
     # Code for org & net
     code = config['Cont']['Net']
@@ -410,12 +422,12 @@ if __name__ == "__main__":
                      )
         ids.append(cont_request(org, net, volc, event, span[i]))
         event += timedelta(minutes=span[i])
-    zips = [x+'.zip' for x in ids]
 
     procs = min(len(ids), multiprocessing.cpu_count())
     multiprocessing.Pool(processes=procs).map(cont_download, ids)
 
     # unzip zip files
+    zips = [x+'.zip' for x in ids]
     unzip(zips)
     unlink_lists(zips)
 
