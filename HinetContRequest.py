@@ -309,14 +309,6 @@ def unzip(zips):
             zipFile.extractall()
 
 
-def cmd_exists(cmd):
-    ''' check if a cmd exists '''
-
-    if not shutil.which(cmd):
-        logging.error("%s not in your PATH or not executable.", cmd)
-        sys.exit()
-
-
 def win32_cat(cnts, cnt_total):
     """merge WIN32 files to one total WIN32 file"""
 
@@ -357,7 +349,6 @@ if __name__ == "__main__":
         }
 
     catwin32 = os.path.expanduser(config['Tools']['catwin32'])
-    cmd_exists(catwin32)
 
     # Code for org & net
     code = config['Cont']['Net']
