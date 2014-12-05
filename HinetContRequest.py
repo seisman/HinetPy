@@ -27,6 +27,7 @@
 #   2014-12-03  Dongdong Tian   Hi-net website updated on Dec. 1st 2014.
 #                               Skip SSL verification.
 #                               Use post method for SSL authentication.
+#   2014-12-05  Dongdong Tian   Add -m option to specify maxspan.
 #
 
 """Request continuous waveform data from NIED Hi-net.
@@ -38,6 +39,7 @@ Usage:
 Options:
     -h, --help              Show this help.
     -c CODE --code=CODE     Select code for organization and network.
+    -m SPAN --maxspan=SPAN  Max time span for sub-requests
     -d DIR --directory=DIR  Output directory. Default: current directory.
     -o FILE --output=FILE   Output filename.
                             Default: CODE_YYYYMMDDHHMM_SPAN.cnt
@@ -362,12 +364,15 @@ if __name__ == "__main__":
 
     # timespan
     timespan = int(arguments['<span>'])
-    maxspan = int(config['Cont']['MaxSpan'])
-    if not 1 <= maxspan <= 60:
-        logging.error("maxspan is not in the range[1,60]")
-        sys.exit()
     if not 1 <= timespan <= (2**31-1)/100:
         logging.error("timespan is not in the range[1,(2^32-1)/100]")
+        sys.exit()
+
+    maxspan = int(config['Cont']['MaxSpan'])
+    if arguments['--maxspan']:
+        maxspan = int(arguments['--maxspan'])
+    if not 1 <= maxspan <= 60:
+        logging.error("maxspan is not in the range[1,60]")
         sys.exit()
 
     span = evenly_timespan(timespan, maxspan)
