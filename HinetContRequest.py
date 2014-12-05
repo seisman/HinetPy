@@ -176,29 +176,6 @@ CODE_LIST = ['0101', '0103', '0103A',
              ]
 
 
-def auth_check(auth):
-    ''' check authentication '''
-
-    try:
-        r = requests.post(AUTH, data=auth, verify=False,
-                          allow_redirects=False, timeout=20)
-    except requests.exceptions.ConnectTimeout:
-        logging.error("ConnectTimeout in 20 seconds.")
-        sys.exit()
-    except requests.exceptions.ConnectionError:
-        logging.error("Name or service not known")
-        sys.exit()
-
-    if r.status_code == requests.codes.ok:  # succeed
-        pass
-    elif r.status_code == requests.codes.found:  # redirect
-        logging.error("Maybe unauthorized. Check your username and password!")
-        sys.exit()
-    else:
-        logging.warning("Status code: {}".format(status_code))
-        logging.warning("Report this status code to seisman.info@gmail.com")
-
-
 def date_check(code, event):
     ''' check if waveform data are available '''
 
@@ -378,7 +355,6 @@ if __name__ == "__main__":
         'auth_un': config['Account']['User'],
         'auth_pw': config['Account']['Password'],
         }
-    auth_check(auth)
 
     catwin32 = os.path.expanduser(config['Tools']['catwin32'])
     cmd_exists(catwin32)
