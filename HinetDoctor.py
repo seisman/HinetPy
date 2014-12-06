@@ -7,6 +7,8 @@
 #   2014-12-05  Dongdong Tian   Initial Coding
 #
 import os
+import re
+import sys
 import shutil
 import logging
 import configparser
@@ -14,14 +16,11 @@ import configparser
 import requests
 
 AUTH = "https://hinetwww11.bosai.go.jp/auth/"
+CONT = AUTH + "download/cont/"
 
-def auth_check(user, passwd):
+
+def auth_check(auth):
     ''' check authentication '''
-
-    auth = {
-        'auth_un': user,
-        'auth_pw': passwd,
-        }
 
     try:
         r = requests.post(AUTH, data=auth, verify=False,
@@ -53,6 +52,25 @@ def cmd_exists(cmd):
         sys.exit()
 
 
+def check_version(auth):
+
+    try:
+        r = requests.post(CONT, data=auth, verify=False,
+                          allow_redirects=False, timeout=20)
+    except requests.exceptions.ConnectTimeout:
+        logging.error("ConnectTimeout in 20 seconds.")
+        sys.exit()
+    except requests.exceptions.ConnectionError:
+        logging.error("Name or service not known")
+        sys.exit()
+
+    version = re.search(r'cont\.js\?(?P<VER>\d{6})', r.text).group('VER')
+
+    if version != '141201':
+        logging.warning("Hi-net website seems to have been updated. "
+                        "These scripts may be working or not working")
+
+
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s %(levelname)-7s %(message)s',
@@ -62,9 +80,13 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('Hinet.cfg')
 
-    user = config['Account']['User']
-    passwd = config['Account']['Password']
-    auth_check(user, passwd)
+    auth = {
+        'auth_un': config['Account']['User'],
+        'auth_pw': config['Account']['Password'],
+        }
+    auth_check(auth)
+
+    check_version(auth)
 
     catwin32 = os.path.expanduser(config['Tools']['catwin32'])
     cmd_exists(catwin32)
