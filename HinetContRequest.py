@@ -442,4 +442,5 @@ if __name__ == "__main__":
     unlink_lists(cnts)
     unlink_lists(eucs)
     unlink_lists(glob.glob("*.sjis.ch"))
-    os.unlink("readme.txt")
+    if os.path.exists("readme.txt"):
+        os.unlink("readme.txt")
