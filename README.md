@@ -1,5 +1,7 @@
 # NIED Hi-net data request and process scripts #
 
+**Scripts Broken at 2014-12-09. I will try to fix them later.**
+
 - Author: Dongdong Tian @ USTC
 - Date: 2014-08-13
 - Update: 2014-12-03
