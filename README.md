@@ -2,7 +2,7 @@
 
 - Author: Dongdong Tian @ USTC
 - Date: 2014-08-13
-- Update: 2014-12-03
+- Update: 2014-12-27
 
 This is a collection of scripts for Hi-net data request, download and process.
 It does not come with any warranties, nor is it guaranteed to work on your computer.
@@ -42,6 +42,16 @@ update this repo:
 - `Maxspan` : Maximum record length for one request.
 - `catwin32` : Path to `catwin32` supplied by Hi-net win32tools.
 
+### Check Your Configure ###
+
+Just run `python HinetDoctor.py` to check your configure file:
+
+1. Is username and password correct?
+2. Has Hi-net website been updated?
+3. Is catwin32 command in you path and executable?
+4. How many station are selected for Hi-net and F-net?
+5. Is maxspan in allowed range?
+
 ### Request and Download Data ###
 
 `HinetContRequest.py` is used to request and download data from Hi-net server.
@@ -58,6 +68,7 @@ update this repo:
 	Options:
 	    -h, --help              Show this help.
 	    -c CODE --code=CODE     Select code for organization and network.
+        -m SPAN --maxspan=SPAN  Max time span for sub-requests
 	    -d DIR --directory=DIR  Output directory. Default: current directory.
 	    -o FILE --output=FILE   Output filename.
 	                            Default: CODE_YYYYMMDDHHMM_SPAN.cnt
