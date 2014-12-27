@@ -178,7 +178,7 @@ CODE_LIST = ['0101', '0103', '0103A',
              ]
 
 
-def date_check(code, event):
+def check_date(code, event):
     ''' check if waveform data are available '''
 
     # start date of avaiable data
@@ -194,11 +194,11 @@ def date_check(code, event):
         start = date(2004, 4, 1)
 
     if not start <= event.date() <= date.today():
-        logging.error("Not within Hi-net service period.")
+        logging.error("Not within service period.")
         sys.exit()
 
 
-def code_parser(code):
+def parse_code(code):
     ''' parser network code '''
 
     if code not in CODE_LIST:
@@ -214,7 +214,7 @@ def code_parser(code):
     return org, net, volc
 
 
-def event_parser(args):
+def parse_event(args):
     ''' extract datetime information from arguments'''
 
     year = int(args['<year>'])
@@ -314,7 +314,7 @@ def unzip(zips):
             zipFile.extractall()
 
 
-def win32_cat(cnts, cnt_total):
+def cat_win32(cnts, cnt_total):
     """merge WIN32 files to one total WIN32 file"""
 
     subprocess.call([catwin32, '-o', cnt_total] + cnts,
@@ -347,7 +347,7 @@ if __name__ == "__main__":
     config.read("Hinet.cfg")
     arguments = docopt(__doc__)
 
-    # global configure
+    # global variables
     auth = {
         'auth_un': config['Account']['User'],
         'auth_pw': config['Account']['Password'],
@@ -363,11 +363,11 @@ if __name__ == "__main__":
     code = config['Cont']['Net']
     if arguments['--code']:
         code = arguments['--code']
-    org, net, volc = code_parser(code)
+    org, net, volc = parse_code(code)
 
     # parser arguments
-    event = event_parser(arguments)
-    date_check(code, event)
+    event = parse_event(arguments)
+    check_date(code, event)
 
     # timespan
     timespan = int(arguments['<span>'])
@@ -428,7 +428,7 @@ if __name__ == "__main__":
         cnts = sorted(glob.glob("????????????{}??.cnt".format(code[0:4])))
     else:
         cnts = sorted(glob.glob("????????????{}.cnt".format(code[0:4])))
-    win32_cat(cnts, cnt_total)
+    cat_win32(cnts, cnt_total)
 
     # set channel table file
     if not volc:
