@@ -24,10 +24,11 @@
 #   2014-11-01  Dongdong Tian   Support volcanos data from NIED Hi-net website.
 #                               Add option for channel table filename.
 #                               Modify the default filename for cnt and ch.
-#   2014-12-03  Dongdong Tian   Hi-net website updated on Dec. 1st 2014.
+#   2014-12-03  Dongdong Tian   Hi-net website updated on Dec. 1st, 2014.
 #                               Skip SSL verification.
 #                               Use post method for SSL authentication.
 #   2014-12-05  Dongdong Tian   Add -m option to specify maxspan.
+#   2014-12-27  Dongdong Tian   Fix bugs caused by update on Dec. 1st, 2014
 #
 
 """Request continuous waveform data from NIED Hi-net.
@@ -135,7 +136,6 @@ import sys
 import time
 import math
 import glob
-import shutil
 import logging
 import zipfile
 import subprocess
@@ -246,7 +246,7 @@ def cont_request(org, net, volc, event, span):
     }
 
     try:
-        r = requests.post(REQUEST, params=payload, data=auth, verify=False)
+        r = s.post(REQUEST, params=payload)
     except requests.exceptions.ConnectionError:
         logging.error("Name or service not known")
         sys.exit()
@@ -261,7 +261,7 @@ def cont_request(org, net, volc, event, span):
                    + r'</td>')
 
     while True:  # check data status
-        status_html = requests.post(STATUS, data=auth, verify=False).text
+        status_html = s.post(STATUS).text
         opt = p.search(status_html).group('OPT')
         if opt == '1':  # still preparing data
             time.sleep(2)
@@ -279,8 +279,11 @@ def cont_download(id):
     ''' Download continuous waveform data of specified id '''
 
     try:
-        d = requests.post(DOWNLOAD, params={"id": id}, data=auth,
-                          verify=False, stream=True)
+        dn = requests.Session()
+        dn.verify = False
+        dn.post(AUTH)
+        dn.post(AUTH, data=auth)
+        d = dn.post(DOWNLOAD, params={"id": id}, stream=True)
     except requests.exceptions.ConnectionError:
         logging.error("Name or service not known")
         sys.exit()
@@ -349,6 +352,10 @@ if __name__ == "__main__":
         'auth_un': config['Account']['User'],
         'auth_pw': config['Account']['Password'],
         }
+    s = requests.Session()
+    s.verify = False
+    s.post(AUTH)  # get cookies
+    s.post(AUTH, data=auth)  # login
 
     catwin32 = os.path.expanduser(config['Tools']['catwin32'])
 
