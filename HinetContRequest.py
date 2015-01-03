@@ -261,7 +261,12 @@ def cont_request(org, net, volc, event, span):
                    + r'</td>')
 
     while True:  # check data status
-        status_html = s.post(STATUS).text
+        try:
+            status_html = s.post(STATUS).text
+        except requests.exceptions.ConnectionError:
+            logging.error("Error in fetch status")
+            sys.exit()
+
         opt = p.search(status_html).group('OPT')
         if opt == '1':  # still preparing data
             time.sleep(2)
