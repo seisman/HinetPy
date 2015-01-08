@@ -6,6 +6,7 @@
 # Revision History:
 #   2014-08-31  Dongdong Tian   Initial Coding
 #   2014-12-03  Dongdong Tian   Update to Hinet V141201
+#   2015-01-08  Dongdong Tian   Fix bugs caused by update on Dec. 1st, 2014
 #
 
 """Request arrival time data or focal mechanism catalog from Hi-net.
@@ -36,7 +37,9 @@ auth = {
     }
 
 # base url for continuous waveform data
-base = "https://hinetwww11.bosai.go.jp/auth/JMA/"
+AUTH = "https://hinetwww11.bosai.go.jp/auth/"
+BASE = AUTH + "JMA/"
+URL = BASE + "dlDialogue.php"
 
 
 if __name__ == '__main__':
@@ -52,7 +55,6 @@ if __name__ == '__main__':
     span = arguments['<span>']
     os = arguments['--os'][0:1]
 
-    url = base + "dlDialogue.php"
     params = {
         "data": data,
         "rtm": rtm,
@@ -60,15 +62,16 @@ if __name__ == '__main__':
         "os": os,
     }
 
-    d = requests.post(url, params=params, data=auth, verify=False, stream=True)
-    if d.status_code == requests.codes.found:
-        print("Maybe unauthorized. Check your username and password.")
-        sys.exit()
+    s = requests.Session()
+    s.verify = False
+    s.post(AUTH) # get cookies
+    s.post(AUTH, data=auth) # login
+
+    d = s.post(URL, params=params, stream=True)
 
     # file size
     size = int(d.headers['Content-Length'].strip())
     # file name
-    print(data, rtm, span)
     fname = "{}_{}_{}.txt".format(data, rtm, span)
 
     with open(fname, "wb") as fd:
