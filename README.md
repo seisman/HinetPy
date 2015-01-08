@@ -58,6 +58,16 @@ Just take Hi-net as example, Hi-net network has about 800 station and 24000 chan
 
 The request script `HinetContRequest.py` helps you break through the limitation. Using this script, you can requst datas with a much longer record length, this script will split the request into multiple sub-request, each has a record length no more than `Maxspan` minutes.
 
+## Quick Start ##
+
+If you want a quick start, just run like this:
+
+    $ python HinetContRequest.py 2010 10 01 15 00 20 -d 201010010600
+    $ python rdhinet.py 201010010600
+    $ python ch2pz.py 201010010600
+
+if everything goes right, you will have one cnt file, one channel table file, several SAC files and SAC polezero files in directory.
+
 ## Scripts ##
 
 ### HinetDoctor.py ###
@@ -154,7 +164,7 @@ In most cases, what you need is only `-C` option.
 
 If you run `python rdhinet.py 201010010600 -C U`, you will get SAC files looks like `N.FRNH.U` under directory `201010010600`.
 
-### ch2py ###
+### ch2py.py ###
 
 `ch2pz.py` is used to extract SAC PZ files from Channel Table file.
 
