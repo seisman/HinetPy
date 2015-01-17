@@ -1,7 +1,7 @@
 # Python Scripts for NIED continuous waveform data requesting and processing #
 
 - Author: Dongdong Tian @ USTC
-- Update: 2014-12-27
+- Update: 2015-01-17
 
 This is a collection of scripts to request, download and process continuous waveform data  avaiable from [NIED Hi-net](http://www.hinet.bosai.go.jp/) website.
 
