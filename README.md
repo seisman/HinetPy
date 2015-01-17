@@ -196,3 +196,9 @@ If you run `python rdhinet.py 201010010600 -C U`, you will get SAC files looks l
 In most cases, what you need is only `-C` option.
 
 If you run `python ch2pz.py 201010010600 -C U`, you will get SAC PoleZero files looks like `N.FRNH.U.SAC_PZ` under directory `201010010600`.
+
+#### Attentions ####
+
+- ch2pz.py only works for components whose input have unit of `m/s`.
+
+
