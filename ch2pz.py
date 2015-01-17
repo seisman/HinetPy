@@ -5,6 +5,7 @@
 #
 #  Revision History:
 #    2014-09-05 Dongdong Tian   Initial Coding
+#    2015-01-17 Dongdong Tian   Only works for velocity input
 #
 '''Convert NIED Hi-net Channel Table file to SAC PZ files
 
@@ -56,9 +57,13 @@ def ch2pz(chfile, comps, outdir, suffix):
                 continue
 
             items = line.split()
-            station, comp = items[3], items[4]
+            station, comp, unit = items[3], items[4], items[8]
 
             if not (comps is None or comp in comps):
+                continue
+
+            if unit != 'm/s':  # only works for velocity
+                print("Warning: %s.%s isn't velocity in m/s" % (station, comp))
                 continue
 
             gain, damping = float(items[7]), float(items[10])
