@@ -29,6 +29,7 @@
 #                               Use post method for SSL authentication.
 #   2014-12-05  Dongdong Tian   Add -m option to specify maxspan.
 #   2014-12-27  Dongdong Tian   Fix bugs caused by update on Dec. 1st, 2014
+#   2015-01-08  Dongdong Tian   Naming cnt file with start time not end time.
 #
 
 """Request continuous waveform data from NIED Hi-net.
@@ -395,6 +396,11 @@ if __name__ == "__main__":
 
     logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
 
+    # set cnt_total
+    cnt_total = "{}_{}_{}.cnt".format(code,
+                                      event.strftime("%Y%m%d%H%M"),
+                                      timespan)
+
     ids = []
     count_len = len(str(count))
     for i in range(0, count):
@@ -421,10 +427,6 @@ if __name__ == "__main__":
         if not os.path.exists(outdir):
             os.makedirs(outdir)
 
-    # set cnt_total
-    cnt_total = "{}_{}_{}.cnt".format(code,
-                                      event.strftime("%Y%m%d%H%M"),
-                                      timespan)
     if arguments['--output']:
         cnt_total = arguments['--output']
     cnt_total = os.path.join(outdir, cnt_total)
