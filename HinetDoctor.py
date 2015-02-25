@@ -6,6 +6,7 @@
 # Revision History:
 #   2014-12-05  Dongdong Tian   Initial Coding
 #   2014-12-27  Dongdong Tian   Fix bugs caused by update on Dec. 1st, 2014
+#   2015-02-25  Dongdong Tian   Add data download service for ADEP (code=0801).
 #
 
 import os
@@ -124,6 +125,8 @@ def check_maxspan(code, maxspan, hinet, fnet):
         allowed_max_span = min(int(12000/hinet/3), 60)
     elif code in ['0103', '0103A']:
         allowed_max_span = min(int(12000/fnet/6), 60)
+    elif code == '0801':
+        allowed_max_span = 15
     else:
         allowed_max_span = 60
 

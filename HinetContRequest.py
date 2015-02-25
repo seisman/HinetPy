@@ -30,6 +30,7 @@
 #   2014-12-05  Dongdong Tian   Add -m option to specify maxspan.
 #   2014-12-27  Dongdong Tian   Fix bugs caused by update on Dec. 1st, 2014
 #   2015-01-08  Dongdong Tian   Naming cnt file with start time not end time.
+#   2015-02-25  Dongdong Tian   Add data download service for ADEP (code=0801).
 #
 
 """Request continuous waveform data from NIED Hi-net.
@@ -70,6 +71,7 @@ Codes of org & net:
     '0702' : 'LOCAL:Hot Spring Research Institute of Kanagawa Prefecture',
     '0703' : 'LOCAL:Aomori Prefectural Government',
     '0705' : 'LOCAL:Shizuoka Prefectural Government',
+    '0801' : 'OTHER:ADEP',
 
 Codes for NIED V-net (0105):
     '010503' : '0105:Usuzan';
@@ -164,6 +166,7 @@ CODE_LIST = ['0101', '0103', '0103A',
              '0501',
              '0601',
              '0701', '0702', '0703', '0705',
+             '0801',
              '010503', '010505', '010507', '010509',
              '010510', '010511', '010512', '010514',
              '030201', '030202', '030203', '030204', '030205',
@@ -191,6 +194,8 @@ def check_date(code, event):
         start = date(2004, 6, 15)
     elif code[0:4] == '0402':  # JAMSTEC DONET1
         start = date(2014, 10, 1)
+    elif code[0:4] == '0801':  # ADEP
+        start = date(2015, 1, 1)
     else:
         start = date(2004, 4, 1)
 
