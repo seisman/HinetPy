@@ -1,9 +1,9 @@
 # Python Scripts for NIED continuous waveform data requesting and processing #
 
 - Author: Dongdong Tian @ USTC
-- Update: 2015-01-17
+- Update: 2015-03-21
 
-This is a collection of scripts to request, download and process continuous waveform data  avaiable from [NIED Hi-net](http://www.hinet.bosai.go.jp/) website.
+This is a collection of scripts to request, download and process continuous waveform data avaiable from [NIED Hi-net](http://www.hinet.bosai.go.jp/) website.
 
 It does not come with any warranties, nor is it guaranteed to work on your computer.
 The user assumes full responsibility for the use of all scripts. The author is
@@ -21,11 +21,11 @@ of these scripts.
 
 ## How to get ##
 
-If you use git, just clone this repo to your work directory:
+If you use git, just clone it to your working directory:
 
     git clone https://github.com/seisman/HinetScripts.git
 
-You can update this repo using:
+After `git clone`, you can get the latest version anytime with just one command:
 
     git pull
 
@@ -33,17 +33,20 @@ If you do not use git, just click the "Download ZIP" button on the right.
 
 ## Before you use it ##
 
-1. Register on the [NIED Hi-net](http://www.hinet.bosai.go.jp/) website, so you can access to NIED waveform data;
+1. Register on the [NIED Hi-net](http://www.hinet.bosai.go.jp/) website, so you have access to NIED waveform data;
 2. Download [win32tools](https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools) and compile them, make sure binary `catwin32` and `win2sac_32` are in you PATH;
 3. Request, download and process data manually at least one time, make sure that you know  the whole procedures and limitations of NIED website;
-3. Modify configure file `Hinet.cfg` to your needs:
+4. Modify configure file `Hinet.cfg` to your needs:
 
    - `User` & `Password`
    - `Net` : Network code to request waveform data as default
    - `Maxspan`: Maximum record length allowed for one web request
    - `catwin32`: Path to `catwin32` supplied by win32tools
 
-4. Run `HinetDoctor.py` to check your configure file;
+5. Run `HinetDoctor.py` to check your configure file;
+
+If you can read Chinese, this [post](http://seisman.info/hinet-things.html) may help you understand details.
+
 
 ### What is network code? ###
 Each network is represented by a network code. For example, Hi-net network has a code of '0101', while V-net '0105'. You can see the full code list by run `python HinetContRequest.py -h`.
@@ -54,19 +57,19 @@ NIED Hi-net website set a limitation of data size in one request:
 1. Record Length < 60 min
 2. Number of channels * Record Length <= 12000 min
 
-Just take Hi-net as example, Hi-net network has about 800 station and 24000 channels. According to the limitations, the record length should be no more than 5 minutes long in one web request. So the Maxspan, allowed maximum record length, should be no more than 5 for Hi-net network with all stations selected.
+Just take Hi-net as example, Hi-net network has about 800 station and 24000 channels. According to the limitations, the record length should be no more than 5 minutes long in one web request. So the `Maxspan`, allowed maximum record length, should be no more than 5 for Hi-net network with all stations selected.
 
 The request script `HinetContRequest.py` helps you break through the limitation. Using this script, you can requst datas with a much longer record length, this script will split the request into multiple sub-request, each has a record length no more than `Maxspan` minutes.
 
 ## Quick Start ##
 
-If you want a quick start, just run like this:
+If you want a quick start, just run like this, commands below will request waveform data from 2010:10:01T15:20:00(+0900) to 2010:10:01T15:20:00(+0900):
 
     $ python HinetContRequest.py 2010 10 01 15 00 20 -d 201010010600
     $ python rdhinet.py 201010010600
     $ python ch2pz.py 201010010600
 
-if everything goes right, you will have one cnt file, one channel table file, several SAC files and SAC polezero files in directory.
+if everything goes right, you will have one cnt file, one channel table file, several SAC files and SAC polezero files under directory `201010010600`.
 
 ## Scripts ##
 
@@ -76,13 +79,13 @@ if everything goes right, you will have one cnt file, one channel table file, se
 
 1. Is username and password correct?
 2. Has Hi-net website been updated?
-3. Is catwin32 command in you path and executable?
-4. How many station are selected for Hi-net and F-net?
+3. Is command `catwin32` in you path and executable?
+4. How many stations are selected for Hi-net and F-net?
 5. Is `Maxspan` in allowed range?
 
 ### HinetContRequest.py ###
 
-`HinetContRequest.py` is used to request and download data from Hi-net server.
+`HinetContRequest.py` is used to request and download data from NIED server.
 
 #### Usage ####
 
@@ -112,13 +115,17 @@ if everything goes right, you will have one cnt file, one channel table file, se
 
         python HinetContRequest.py 2010 10 01 15 00 20 -c 0103
 
-3.  Request data of Hi-net, with customized output directory and filename
+3.  Request data of Hi-net, use default filename and customized output directory. (**Highly Recommended**)
+
+        python HinetContRequest.py 2010 10 01 15 00 20 -d 201010010600
+
+4.  Request data of Hi-net, with customized output directory and filename
 
         python HinetContRequest.py 2010 10 01 15 00 20 -d aaa -o aaa.cnt -t aaa.ch
 
-4.  Request data of Hi-net, use default filename and customized output directory. (**Highly Recommended**)
-
-        python HinetContRequest.py 2010 10 01 15 00 20 -d 201010010600
+    **WARNING** Although this script supports customized output filenames,
+    you should never use `-o` and `-t` options, because the cnt filename and channel table filename
+    are hard coded in `rdhinet.py` and `ch2pz.py`.
 
 If you run `HinetContRequest.py` in the highly recommender way,
 you will get a directory `201010010600` with two file inside:
@@ -200,5 +207,3 @@ If you run `python ch2pz.py 201010010600 -C U`, you will get SAC PoleZero files 
 #### Attentions ####
 
 - ch2pz.py only works for components whose input have unit of `m/s`.
-
-
