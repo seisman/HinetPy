@@ -9,6 +9,7 @@
 #                               - handle datas with more than 2000000 points
 #                               - delimite components code with commas
 #   2014-11-01  Dongdong Tian   Modify to fit new version of request script
+#   2015-03-21  Dongdong Tian   Fix a bug when dirname contains underscore.
 #
 
 """Extract SAC data files from NIED Hi-net WIN32 files
@@ -29,6 +30,7 @@ Options:
 """
 
 import os
+import re
 import glob
 import subprocess
 import multiprocessing
@@ -122,8 +124,8 @@ if __name__ == "__main__":
 
     chfile = glob.glob(os.path.join(dirname, "*_????????.ch"))[0]
     cntfile = glob.glob(os.path.join(dirname, "*_????????????_*.cnt"))[0]
-    root, ext = os.path.splitext(cntfile)
-    span = int(root.split('_')[2])  # time span in minutes
+    basename = os.path.basename(cntfile)
+    span = int(re.search(r'\d+_\d+_(?P<SPAN>\d+)\.cnt', basename).group('SPAN'))
 
     # generate win32 paramerter file
     prmfile = os.path.join(dirname, "win.prm")
