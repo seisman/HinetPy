@@ -64,8 +64,8 @@ if __name__ == '__main__':
 
     s = requests.Session()
     s.verify = False
-    s.post(AUTH) # get cookies
-    s.post(AUTH, data=auth) # login
+    s.post(AUTH)  # get cookies
+    s.post(AUTH, data=auth)  # login
 
     d = s.post(URL, params=params, stream=True)
 

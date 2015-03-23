@@ -125,7 +125,7 @@ if __name__ == "__main__":
     chfile = glob.glob(os.path.join(dirname, "*_????????.ch"))[0]
     cntfile = glob.glob(os.path.join(dirname, "*_????????????_*.cnt"))[0]
     basename = os.path.basename(cntfile)
-    span = int(re.search(r'\d+_\d+_(?P<SPAN>\d+)\.cnt', basename).group('SPAN'))
+    span = int(re.search(r'\d+_\d+_(?P<ST>\d+)\.cnt', basename).group('ST'))
 
     # generate win32 paramerter file
     prmfile = os.path.join(dirname, "win.prm")

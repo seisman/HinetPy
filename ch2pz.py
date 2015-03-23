@@ -70,8 +70,7 @@ def ch2pz(chfile, comps, outdir, suffix):
             try:
                 freq = 2.0 * math.pi / float(items[9])
             except ZeroDivisionError:
-                print("Warning: %s.%s Natural period of the seismometer=0!"
-                        % (station, comp))
+                print("Warning: %s.%s Natural period = 0!" % (station, comp))
                 continue
             pre_amp, lsb_value = float(items[11]), float(items[12])
 
