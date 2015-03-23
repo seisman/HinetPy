@@ -67,7 +67,12 @@ def ch2pz(chfile, comps, outdir, suffix):
                 continue
 
             gain, damping = float(items[7]), float(items[10])
-            freq = 2.0 * math.pi / float(items[9])
+            try:
+                freq = 2.0 * math.pi / float(items[9])
+            except ZeroDivisionError:
+                print("Warning: %s.%s Natural period of the seismometer=0!"
+                        % (station, comp))
+                continue
             pre_amp, lsb_value = float(items[11]), float(items[12])
 
             A0 = 2*damping
