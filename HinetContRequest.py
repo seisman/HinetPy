@@ -261,10 +261,8 @@ def cont_request(org, net, volc, event, span):
     id = re.search(r'<td class="bgcolist2">(?P<ID>\d{10})</td>',
                    r.text).group('ID')
 
-    p = re.compile(r'<tr class="bglist(?P<OPT>\d)">'
-                   + r'<td class="bgcolist2">'
-                   + id
-                   + r'</td>')
+    p = re.compile(r'<tr class="bglist(?P<OPT>\d)">' +
+                   r'<td class="bgcolist2">' + id + r'</td>')
 
     while True:  # check data status
         try:
