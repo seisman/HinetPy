@@ -9,7 +9,8 @@
 #                               - handle datas with more than 2000000 points
 #                               - delimite components code with commas
 #   2014-11-01  Dongdong Tian   Modify to fit new version of request script
-#   2015-03-21  Dongdong Tian   Fix a bug when dirname contains underscore.
+#   2015-03-21  Dongdong Tian   Fix a bug when dirname contains underscore
+#   2015-05-18  Dongdong Tian   Keep endian of SAC data same as current machine
 #
 
 """Extract SAC data files from NIED Hi-net WIN32 files
@@ -79,6 +80,7 @@ def _exctract_channel(tup):
                      chno,
                      "SAC",
                      outdir,
+                     '-e',
                      '-p'+prmfile,
                      '-m'+str(pmax)
                      ],
