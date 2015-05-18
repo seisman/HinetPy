@@ -150,6 +150,9 @@ import requests
 from docopt import docopt
 from clint.textui import progress
 
+# external tools from Hi-net
+catwin32 = "catwin32"
+
 # basic urls
 AUTH = "https://hinetwww11.bosai.go.jp/auth/"
 CONT = AUTH + "download/cont/"
@@ -365,8 +368,6 @@ if __name__ == "__main__":
     s.verify = False
     s.post(AUTH)  # get cookies
     s.post(AUTH, data=auth)  # login
-
-    catwin32 = os.path.expanduser(config['Tools']['catwin32'])
 
     # Code for org & net
     code = config['Cont']['Net']

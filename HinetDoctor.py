@@ -154,8 +154,8 @@ if __name__ == '__main__':
 
     check_version(auth)
 
-    catwin32 = os.path.expanduser(config['Tools']['catwin32'])
-    cmd_exists(catwin32)
+    cmd_exists("catwin32")
+    cmd_exists("win2sac_32")
 
     hinet, fnet = check_station_number()
 
