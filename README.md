@@ -1,7 +1,7 @@
 # Python Scripts for NIED continuous waveform data requesting and processing #
 
 - Author: Dongdong Tian @ USTC
-- Update: 2015-03-21
+- Update: 2015-05-18
 
 This is a collection of scripts to request, download and process continuous waveform data avaiable from [NIED Hi-net](http://www.hinet.bosai.go.jp/) website.
 
@@ -17,11 +17,11 @@ of these scripts.
     - [requests](http://docs.python-requests.org)
     - [clint](https://github.com/kennethreitz/clint)
     - [docopt](http://docopt.org/)
-- Hinet [win32tools](https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools): `catwin32` and `win2sac_32`
+- Hinet [win32tools](https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools): `catwin32` and `win2sac_32` in your `PATH`
 
 ## How to get ##
 
-If you use git, just clone it to your working directory:
+If you use `git`, just clone it to your working directory:
 
     git clone https://github.com/seisman/HinetScripts.git
 
@@ -29,7 +29,7 @@ After `git clone`, you can get the latest version anytime with just one command:
 
     git pull
 
-If you do not use git, just click the "Download ZIP" button on the right.
+If you do not use `git`, just click the "Download ZIP" button on the right.
 
 ## Before you use it ##
 
@@ -38,14 +38,13 @@ If you do not use git, just click the "Download ZIP" button on the right.
 3. Request, download and process data manually at least one time, make sure that you know  the whole procedures and limitations of NIED website;
 4. Modify configure file `Hinet.cfg` to your needs:
 
-   - `User` & `Password`
+   - `User` and `Password`
    - `Net` : Network code to request waveform data as default
    - `Maxspan`: Maximum record length allowed for one web request
-   - `catwin32`: Path to `catwin32` supplied by win32tools
 
 5. Run `HinetDoctor.py` to check your configure file;
 
-If you can read Chinese, this [post](http://seisman.info/hinet-things.html) may help you understand details.
+If you can read Chinese, posts listed [here](http://seisman.info/hinet-things.html) may help you understand details.
 
 
 ### What is network code? ###
@@ -59,12 +58,13 @@ NIED Hi-net website set a limitation of data size in one request:
 
 Just take Hi-net as example, Hi-net network has about 800 station and 24000 channels. According to the limitations, the record length should be no more than 5 minutes long in one web request. So the `Maxspan`, allowed maximum record length, should be no more than 5 for Hi-net network with all stations selected.
 
-The request script `HinetContRequest.py` helps you break through the limitation. Using this script, you can requst datas with a much longer record length, this script will split the request into multiple sub-request, each has a record length no more than `Maxspan` minutes.
+The request script `HinetContRequest.py` helps you break through the limitation. Using this script, you can requst datas with a much longer record length, this script will split the request into multiple sub-requests, each has a record length no more than `Maxspan` minutes.
 
 ## Quick Start ##
 
 If you want a quick start, just run like this, commands below will request waveform data from 2010:10:01T15:20:00(+0900) to 2010:10:01T15:20:00(+0900):
 
+    $ python HinetDoctor.py
     $ python HinetContRequest.py 2010 10 01 15 00 20 -d 201010010600
     $ python rdhinet.py 201010010600
     $ python ch2pz.py 201010010600
@@ -75,13 +75,13 @@ if everything goes right, you will have one cnt file, one channel table file, se
 
 ### HinetDoctor.py ###
 
-`HinetDoctor.py` helps you check your configure file, you should run it when you modify `Hinet.cfg`.
+`HinetDoctor.py` helps you check your configure file, you should run it everytime after you modify `Hinet.cfg`.
 
 1. Is username and password correct?
 2. Has Hi-net website been updated?
-3. Is command `catwin32` in you path and executable?
-4. How many stations are selected for Hi-net and F-net?
-5. Is `Maxspan` in allowed range?
+3. Are `catwin32` and `win2sac_32` in PATH and executable?
+3. How many stations are selected for Hi-net and F-net?
+4. Is `Maxspan` in allowed range?
 
 ### HinetContRequest.py ###
 
