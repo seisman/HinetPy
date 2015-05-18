@@ -356,7 +356,9 @@ if __name__ == "__main__":
     requests.packages.urllib3.disable_warnings()
 
     config = configparser.ConfigParser()
-    config.read("Hinet.cfg")
+    if not config.read("Hinet.cfg"):
+        logging.error("Configure file `Hinet.cfg' not found.")
+        sys.exit()
     arguments = docopt(__doc__)
 
     # global variables

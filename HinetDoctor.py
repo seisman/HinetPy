@@ -144,7 +144,9 @@ if __name__ == '__main__':
     logging.getLogger("requests").setLevel(logging.WARNING)
     requests.packages.urllib3.disable_warnings()
     config = configparser.ConfigParser()
-    config.read('Hinet.cfg')
+    if not config.read("Hinet.cfg"):
+        logging.error("Configure file `Hinet.cfg' not found.")
+        sys.exit()
 
     auth = {
         'auth_un': config['Account']['User'],

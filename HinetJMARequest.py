@@ -30,7 +30,9 @@ from docopt import docopt
 
 # specify user name and password
 config = configparser.ConfigParser()
-config.read("Hinet.cfg")
+if not config.read("Hinet.cfg"):
+    logging.error("Configure file `Hinet.cfg' not found.")
+    sys.exit()
 auth = {
     'auth_un': config['Account']['User'],
     'auth_pw': config['Account']['Password'],
