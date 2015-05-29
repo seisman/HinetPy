@@ -152,7 +152,7 @@ you will get a directory `201010010600` with two file inside:
 	Options:
 	    -h          Show this help.
 	    -C <comps>  Components to extract, delimited using commas.
-	                Avaiable components are U, N, E, X, Y et. al.
+	                Avaiable components are U, N, E, X, Y et al.
 	                Default to extract all components.
 	    -D <outdir> Output directory for SAC files.
 	    -S <suffix> Suffix of output SAC files. Default: no suffix.
