@@ -64,7 +64,7 @@ The request script `HinetContRequest.py` helps you break through the limitation.
 
 ## Quick Start ##
 
-If you want a quick start, just run like this, commands below will request waveform data from 2010:10:01T15:20:00(+0900) to 2010:10:01T15:20:00(+0900):
+If you want a quick start, just run like this, commands below will request waveform data from 2010:10:01T15:00:00(+0900) to 2010:10:01T15:20:00(+0900):
 
     $ python HinetDoctor.py
     $ python HinetContRequest.py 2010 10 01 15 00 20 -d 201010010600
