@@ -1,7 +1,7 @@
 # Python Scripts for NIED continuous waveform data requesting and processing #
 
 - Author: Dongdong Tian @ USTC
-- Update: 2015-05-18
+- Update: 2015-05-29
 
 This is a collection of scripts to request, download and process continuous waveform data avaiable from [NIED Hi-net](http://www.hinet.bosai.go.jp/) website.
 
@@ -84,6 +84,46 @@ if everything goes right, you will have one cnt file, one channel table file, se
 3. Are `catwin32` and `win2sac_32` in PATH and executable?
 3. How many stations are selected for Hi-net and F-net?
 4. Is `Maxspan` in allowed range?
+
+### StationSelector.py ###
+
+`StationSelector.py` is used to select stations you want to request data.
+
+#### Usage ####
+
+    Select Hi-net/F-net stations to request waveform data from NIED
+
+    Usage:
+        StationSelector.py -c CODE [-l LIST]
+        StationSelector.py -h
+
+    Options:
+        -h, --help              Show this help.
+        -c CODE, --code=CODE    Network code. Hi-net: 0101, F-net: 0103.
+        -l LIST, --list=LIST    Station list file.
+
+#### Notes ####
+
+1. You can only select station of Hi-net or F-net.
+2. All stations will be selected if -l options is NOT used.
+3. List file contains station list, one station per line, lines start with '#' will be ignored.
+4. This script does NOT check whether a station belongs to a network.
+5. You may need to run `HinetDoctor.py` again to check your station selection.
+
+#### Examples ####
+
+1. Select all stations of Hi-net
+
+        $ python StationSelector.py -c 0101
+
+2. Select several stations list in a file:
+
+        $ cat sta.list
+        N.FJ2H
+        N.OTWH
+        N.IICH
+        N.SMGH
+        $ python StationSelector.py -c 0101 -l sta.list
 
 ### HinetContRequest.py ###
 
