@@ -33,16 +33,18 @@ If you do not use `git`, just click the "Download ZIP" button on the right.
 
 ## Before you use it ##
 
-1. Register on the [NIED Hi-net](http://www.hinet.bosai.go.jp/) website, so you have access to NIED waveform data;
-2. Download [win32tools](https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools) and compile them, make sure binary `catwin32` and `win2sac_32` are in you PATH;
-3. Request, download and process data manually at least one time, make sure that you know  the whole procedures and limitations of NIED website;
-4. Modify configure file `Hinet.cfg` to your needs:
+1. Make sure you have Python 3.4
+2. Install Python third-party modules by `pip install -r requirements.txt`
+3. Register on the [NIED Hi-net](http://www.hinet.bosai.go.jp/) website, so you have access to NIED waveform data;
+4. Download [win32tools](https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools) and compile them, make sure binary `catwin32` and `win2sac_32` are in you PATH;
+5. Request, download and process data manually at least one time, make sure that you know  the whole procedures and limitations of NIED website;
+6. Modify configure file `Hinet.cfg` to your needs:
 
    - `User` and `Password`
    - `Net` : Network code to request waveform data as default
    - `Maxspan`: Maximum record length allowed for one web request
 
-5. Run `HinetDoctor.py` to check your configure file;
+7. Run `HinetDoctor.py` to check your configure file;
 
 If you can read Chinese, posts listed [here](http://seisman.info/hinet-things.html) may help you understand details.
 
