@@ -11,7 +11,7 @@
 #   2014-11-01  Dongdong Tian   Modify to fit new version of request script
 #   2015-03-21  Dongdong Tian   Fix a bug when dirname contains underscore
 #   2015-05-18  Dongdong Tian   Keep endian of SAC data same as current machine
-#
+#   2015-06-05  Dongdong Tian   Fix a bug with code 0103A and 0402A
 
 """Extract SAC data files from NIED Hi-net WIN32 files
 
@@ -31,7 +31,6 @@ Options:
 """
 
 import os
-import re
 import glob
 import subprocess
 import multiprocessing
@@ -127,7 +126,7 @@ if __name__ == "__main__":
     chfile = glob.glob(os.path.join(dirname, "*_????????.ch"))[0]
     cntfile = glob.glob(os.path.join(dirname, "*_????????????_*.cnt"))[0]
     basename = os.path.basename(cntfile)
-    span = int(re.search(r'\d+_\d+_(?P<ST>\d+)\.cnt', basename).group('ST'))
+    span = int(os.path.splitext(basename)[0].split("_")[2])
 
     # generate win32 paramerter file
     prmfile = os.path.join(dirname, "win.prm")
