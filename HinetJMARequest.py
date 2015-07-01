@@ -28,15 +28,6 @@ import configparser
 import requests
 from docopt import docopt
 
-# specify user name and password
-config = configparser.ConfigParser()
-if not config.read("Hinet.cfg"):
-    logging.error("Configure file `Hinet.cfg' not found.")
-    sys.exit()
-auth = {
-    'auth_un': config['Account']['User'],
-    'auth_pw': config['Account']['Password'],
-    }
 
 # base url for continuous waveform data
 AUTH = "https://hinetwww11.bosai.go.jp/auth/"
@@ -45,6 +36,16 @@ URL = BASE + "dlDialogue.php"
 
 
 if __name__ == '__main__':
+    # specify user name and password
+    config = configparser.ConfigParser()
+    if not config.read("Hinet.cfg"):
+        logging.error("Configure file `Hinet.cfg' not found.")
+        sys.exit()
+    auth = {
+        'auth_un': config['Account']['User'],
+        'auth_pw': config['Account']['Password'],
+    }
+
     arguments = docopt(__doc__)
     requests.packages.urllib3.disable_warnings()
 
@@ -65,14 +66,11 @@ if __name__ == '__main__':
     }
 
     s = requests.Session()
-    s.verify = False
-    s.post(AUTH)  # get cookies
+    s.post(AUTH, verify=False)  # get cookies
     s.post(AUTH, data=auth)  # login
 
     d = s.post(URL, params=params, stream=True)
 
-    # file size
-    size = int(d.headers['Content-Length'].strip())
     # file name
     fname = "{}_{}_{}.txt".format(data, rtm, span)
 
