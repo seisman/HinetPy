@@ -31,6 +31,7 @@
 #   2014-12-27  Dongdong Tian   Fix bugs caused by update on Dec. 1st, 2014
 #   2015-01-08  Dongdong Tian   Naming cnt file with start time not end time.
 #   2015-02-25  Dongdong Tian   Add data download service for ADEP (code=0801).
+#   2015-06-27  Dongdong Tian   Move URLs to configure file
 #
 
 """Request continuous waveform data from NIED Hi-net.
@@ -153,12 +154,6 @@ from clint.textui import progress
 # external tools from Hi-net
 catwin32 = "catwin32"
 
-# basic urls
-AUTH = "https://hinetwww11.bosai.go.jp/auth/"
-CONT = AUTH + "download/cont/"
-STATUS = CONT + "cont_status.php"
-REQUEST = CONT + "cont_request.php"
-DOWNLOAD = CONT + "cont_download.php"
 
 # all legal codes
 CODE_LIST = ['0101', '0103', '0103A',
@@ -292,8 +287,7 @@ def cont_download(id):
 
     try:
         dn = requests.Session()
-        dn.verify = False
-        dn.post(AUTH)
+        dn.post(AUTH, verify=False)
         dn.post(AUTH, data=auth)
         d = dn.post(DOWNLOAD, params={"id": id}, stream=True)
     except requests.exceptions.ConnectionError:
@@ -361,14 +355,20 @@ if __name__ == "__main__":
         sys.exit()
     arguments = docopt(__doc__)
 
+    # basic urls
+    AUTH = config['URL']['AUTH']
+    CONT = config['URL']['CONT']
+    STATUS = config['URL']['STATUS']
+    REQUEST = config['URL']['REQUEST']
+    DOWNLOAD = config['URL']['DOWNLOAD']
+
     # global variables
     auth = {
         'auth_un': config['Account']['User'],
         'auth_pw': config['Account']['Password'],
         }
     s = requests.Session()
-    s.verify = False
-    s.post(AUTH)  # get cookies
+    s.post(AUTH, verify=False)  # get cookies
     s.post(AUTH, data=auth)  # login
 
     # Code for org & net

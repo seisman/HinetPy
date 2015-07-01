@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Author: Dongdong Tian @ USTC
@@ -7,6 +7,7 @@
 #   2014-12-05  Dongdong Tian   Initial Coding
 #   2014-12-27  Dongdong Tian   Fix bugs caused by update on Dec. 1st, 2014
 #   2015-02-25  Dongdong Tian   Add data download service for ADEP (code=0801).
+#   2015-06-27  Dongdong Tian   Move URLs to configure file
 #
 
 import os
@@ -18,18 +19,13 @@ import configparser
 
 import requests
 
-AUTH = "https://hinetwww11.bosai.go.jp/auth/"
-CONT = AUTH + "download/cont/"
-SELECT = CONT + "select_info.php"
-
 
 def auth_check(auth):
     ''' check authentication '''
 
     try:
         s = requests.Session()
-        s.verify = False
-        s.post(AUTH)  # get cookies
+        s.post(AUTH, verify=False)  # get cookies
         r = s.post(AUTH, data=auth, timeout=20)  # login
     except requests.exceptions.ConnectTimeout:
         logging.error("ConnectTimeout in 20 seconds.")
@@ -40,9 +36,10 @@ def auth_check(auth):
 
     inout = re.search(r'auth_log(?P<LOG>.*)\.png', r.text).group('LOG')
 
-    if inout == 'in':
-        logging.info("Username and Password is right.")
-    elif inout == 'out':
+    logging.info("Username: %s", auth['auth_un'])
+    logging.info("Password: %s", auth['auth_pw'])
+
+    if inout == 'out':
         logging.error("Maybe unauthorized. Check your username and password!")
         sys.exit()
 
@@ -61,8 +58,7 @@ def check_version(auth):
 
     try:
         s = requests.Session()
-        s.verify = False
-        s.post(AUTH)
+        s.post(AUTH, verify=False)
         s.post(AUTH, data=auth)
         r = s.post(CONT, timeout=20)
     except requests.exceptions.ConnectTimeout:
@@ -85,10 +81,9 @@ def check_station_number():
 
     try:
         s = requests.Session()
-        s.verify = False
-        s.post(AUTH)
+        s.post(AUTH, verify=False)
         s.post(AUTH, data=auth)
-        r = s.post(SELECT, timeout=20)
+        r = s.post(STATION, timeout=20)
     except requests.exceptions.ConnectTimeout:
         logging.error("ConnectTimeout in 20 seconds.")
         sys.exit()
@@ -147,6 +142,10 @@ if __name__ == '__main__':
     if not config.read("Hinet.cfg"):
         logging.error("Configure file `Hinet.cfg' not found.")
         sys.exit()
+
+    AUTH = config['URL']['AUTH']
+    CONT = config['URL']['CONT']
+    STATION = config['URL']['STATION']
 
     auth = {
         'auth_un': config['Account']['User'],
