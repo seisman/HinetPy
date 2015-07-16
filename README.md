@@ -250,4 +250,5 @@ If you run `python ch2pz.py 201010010600 -C U`, you will get SAC PoleZero files 
 
 #### Attentions ####
 
-- ch2pz.py only works for components whose input have unit of `m/s`.
+- `ch2pz.py` only works for components whose input have unit of `m/s`.
+- `ch2pz.py` may only works for Hi-net short period instruments.
