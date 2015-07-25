@@ -1,7 +1,7 @@
 # Python Scripts for NIED continuous waveform data requesting and processing #
 
 - Author: Dongdong Tian @ USTC
-- Update: 2015-06-27
+- Update: 2015-07-25
 
 This is a collection of scripts to request, download and process continuous waveform data avaiable from [NIED Hi-net](http://www.hinet.bosai.go.jp/) website.
 
@@ -12,7 +12,7 @@ of these scripts.
 
 ## Dependency ##
 
-- **Python 3.4** (**Not** work under Python 2; **Not** Tested under Python 3.3)
+- Python 3.4 or 3.3 (Python 2 is **NOT** supported)
 - Python third-party modules
     - [requests](http://docs.python-requests.org)
     - [clint](https://github.com/kennethreitz/clint)
@@ -219,6 +219,12 @@ If you run `python rdhinet.py 201010010600 -C U`, you will get SAC files looks l
 
 `ch2pz.py` is used to extract SAC PZ files from Channel Table file.
 
+#### Attentions ####
+
+- `ch2pz.py` only works for components whose input have unit of `m/s`.
+- `ch2pz.py` may only works for Hi-net short period instruments.
+- `ch2pz.py` does NOT work for F-net.
+
 #### Usage ####
 
 	$ python ch2pz.py -h
@@ -247,8 +253,3 @@ If you run `python rdhinet.py 201010010600 -C U`, you will get SAC files looks l
 In most cases, what you need is only `-C` option.
 
 If you run `python ch2pz.py 201010010600 -C U`, you will get SAC PoleZero files looks like `N.FRNH.U.SAC_PZ` under directory `201010010600`.
-
-#### Attentions ####
-
-- `ch2pz.py` only works for components whose input have unit of `m/s`.
-- `ch2pz.py` may only works for Hi-net short period instruments.
