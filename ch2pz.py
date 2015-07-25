@@ -6,6 +6,7 @@
 #  Revision History:
 #    2014-09-05 Dongdong Tian   Initial Coding
 #    2015-01-17 Dongdong Tian   Only works for velocity input
+#    2015-07-25 Dongdong Tian   Not work for F-net.
 #
 '''Convert NIED Hi-net Channel Table file to SAC PZ files
 
@@ -21,6 +22,7 @@ Options:
 '''
 
 import os
+import sys
 import glob
 import math
 
@@ -93,6 +95,13 @@ if __name__ == "__main__":
 
     dirname = arguments['DIRNAME']
     chfile = glob.glob(os.path.join(dirname, "*_????????.ch"))[0]
+
+    code = os.path.basename(chfile).split("_")[0]
+    if code in ['0103', '0103A']:
+        print("This script does not work for F-net!")
+        print("Exit Now!")
+        sys.exit()
+
     if arguments['-C']:
         comps = arguments['-C'].split(',')
     else:
