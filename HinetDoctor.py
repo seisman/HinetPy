@@ -8,6 +8,7 @@
 #   2014-12-27  Dongdong Tian   Fix bugs caused by update on Dec. 1st, 2014
 #   2015-02-25  Dongdong Tian   Add data download service for ADEP (code=0801).
 #   2015-06-27  Dongdong Tian   Move URLs to configure file
+#   2015-07-25  Dongdong Tian   Hi-net website updated, nothing changes
 #
 
 import os
@@ -70,7 +71,7 @@ def check_version(auth):
 
     version = re.search(r'cont\.js\?(?P<VER>\d{6})', r.text).group('VER')
 
-    if version == '141201':
+    if version == '150708':
         logging.info("Hi-net website version = %s.", version)
     else:
         logging.warning("Hi-net website seems to have been updated. "
