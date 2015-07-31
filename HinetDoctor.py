@@ -16,8 +16,13 @@ import re
 import sys
 import shutil
 import logging
-import configparser
+try:
+    import configparser
+except ImportError:
+    raise RuntimeError("Python 2.X is NOT supported.")
 
+import clint
+import docopt
 import requests
 
 
@@ -134,12 +139,17 @@ def check_maxspan(code, maxspan, hinet, fnet):
 
 
 if __name__ == '__main__':
+    if sys.version_info < (3, 3):
+        raise RuntimeError("Python 3.4 or 3.3 is required")
+
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s %(levelname)-7s %(message)s',
                         datefmt='%H:%M:%S')
     logging.getLogger("requests").setLevel(logging.WARNING)
     requests.packages.urllib3.disable_warnings()
+
     config = configparser.ConfigParser()
+    logging.info("Reading Hi-net configure file...")
     if not config.read("Hinet.cfg"):
         logging.error("Configure file `Hinet.cfg' not found.")
         sys.exit()
