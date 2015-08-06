@@ -11,7 +11,6 @@
 #   2015-07-25  Dongdong Tian   Hi-net website updated, nothing changes
 #
 
-import os
 import re
 import sys
 import shutil
@@ -29,6 +28,9 @@ import requests
 def auth_check(auth):
     ''' check authentication '''
 
+    logging.info("Username: %s", auth['auth_un'])
+    logging.info("Password: %s", auth['auth_pw'])
+
     try:
         s = requests.Session()
         s.post(AUTH, verify=False)  # get cookies
@@ -41,9 +43,6 @@ def auth_check(auth):
         sys.exit()
 
     inout = re.search(r'auth_log(?P<LOG>.*)\.png', r.text).group('LOG')
-
-    logging.info("Username: %s", auth['auth_un'])
-    logging.info("Password: %s", auth['auth_pw'])
 
     if inout == 'out':
         logging.error("Maybe unauthorized. Check your username and password!")
