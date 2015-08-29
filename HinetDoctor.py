@@ -75,7 +75,7 @@ def check_version(auth):
 
     version = re.search(r'cont\.js\?(?P<VER>\d{6})', r.text).group('VER')
 
-    if version == '150708':
+    if version == '150815':
         logging.info("Hi-net website version = %s.", version)
     else:
         logging.warning("Hi-net website seems to have been updated. "
