@@ -171,5 +171,5 @@ if __name__ == '__main__':
     hinet, fnet = check_station_number()
 
     code = config['Cont']['Net']
-    maxspan = int(config['Cont']['MaxSpan'])
+    maxspan = config.getint('Cont', 'MaxSpan')
     check_maxspan(code, maxspan, hinet, fnet)

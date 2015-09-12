@@ -32,6 +32,7 @@
 #   2015-01-08  Dongdong Tian   Naming cnt file with start time not end time.
 #   2015-02-25  Dongdong Tian   Add data download service for ADEP (code=0801).
 #   2015-06-27  Dongdong Tian   Move URLs to configure file
+#   2015-09-12  Dongdong Tian   One more try if request fails
 #
 
 """Request continuous waveform data from NIED Hi-net.
@@ -262,7 +263,8 @@ def cont_request(org, net, volc, event, span):
     p = re.compile(r'<tr class="bglist(?P<OPT>\d)">' +
                    r'<td class="bgcolist2">' + id + r'</td>')
 
-    while True:  # check data status
+    # wait until the data is ready
+    for count in range(0, max_sleep_count):
         try:
             status_html = s.post(STATUS).text
         except requests.exceptions.ConnectionError:
@@ -271,15 +273,17 @@ def cont_request(org, net, volc, event, span):
 
         opt = p.search(status_html).group('OPT')
         if opt == '1':  # still preparing data
-            time.sleep(2)
+            time.sleep(sleep_time)
         elif opt == '2':  # data available
             return id
         elif opt == '4':  # Error
             logging.error("Error in data status.")
             sys.exit()
         elif opt == '3':  # ?
-            logging.error("What's bglist3?")
+            logging.error("What's bglist3? Send me the web page source!")
             sys.exit()
+    else:   # wait too long time
+        return '-1'
 
 
 def cont_download(id):
@@ -371,6 +375,9 @@ if __name__ == "__main__":
     s.post(AUTH, verify=False)  # get cookies
     s.post(AUTH, data=auth)  # login
 
+    max_sleep_count = config.getint('Request', 'MaxSleepCount')
+    sleep_time = config.getfloat('Request', 'SleepTime')
+
     # Code for org & net
     code = config['Cont']['Net']
     if arguments['--code']:
@@ -383,11 +390,13 @@ if __name__ == "__main__":
 
     # timespan
     timespan = int(arguments['<span>'])
-    if not 1 <= timespan <= (2**31-1)/100:
-        logging.error("timespan is not in the range[1,(2^32-1)/100]")
+    # upper limit is determined by the max number of data points
+    # allowed in code s4win2sacm.c
+    if not 1 <= timespan <= (2**31-1)/6000:
+        logging.error("timespan is not in the range[1, 357913]")
         sys.exit()
 
-    maxspan = int(config['Cont']['MaxSpan'])
+    maxspan = config.getint('Cont', 'MaxSpan')
     if arguments['--maxspan']:
         maxspan = int(arguments['--maxspan'])
     if not 1 <= maxspan <= 60:
@@ -397,7 +406,8 @@ if __name__ == "__main__":
     span = evenly_timespan(timespan, maxspan)
     count = len(span)
     if count > 140:
-        logging.error("Too long time duration for one request.")
+        logging.error("Time span (%d) greater than allowed value (%d*140).",
+                timespan, maxspan)
         sys.exit()
 
     logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
@@ -408,15 +418,20 @@ if __name__ == "__main__":
                                       timespan)
 
     ids = []
-    count_len = len(str(count))
     for i in range(0, count):
-        logging.info("[%s/%s] => %s ~%s",
-                     str(i+1).zfill(count_len),
-                     str(count).zfill(count_len),
-                     event.strftime("%Y-%m-%d %H:%M"),
-                     span[i]
-                     )
-        ids.append(cont_request(org, net, volc, event, span[i]))
+        logging.info("[%s/%d] => %s ~%d",
+                     str(i+1).zfill(len(str(count))), count,
+                     event.strftime("%Y-%m-%d %H:%M"), span[i])
+
+        id = cont_request(org, net, volc, event, span[i])
+        if id == '-1':  # give it one more chance
+            id = cont_request(org, net, volc, event, span[i])
+
+        if id != '-1':
+            ids.append(id)
+        else:
+            logging.error("Return code of data status is -1!")
+            sys.exit()
         event += timedelta(minutes=span[i])
 
     procs = min(len(ids), multiprocessing.cpu_count())
