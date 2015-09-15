@@ -139,7 +139,7 @@ def check_maxspan(code, maxspan, hinet, fnet):
 
 if __name__ == '__main__':
     if sys.version_info < (3, 3):
-        raise RuntimeError("Python 3.4 or 3.3 is required")
+        raise RuntimeError("Python 3.3, 3.4 or 3.5 is required")
 
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s %(levelname)-7s %(message)s',

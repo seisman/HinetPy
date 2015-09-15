@@ -12,7 +12,7 @@ of these scripts.
 
 ## Dependency ##
 
-- Python 3.4 or 3.3 (Python 2 is **NOT** supported)
+- Python 3.3, 3.4, 3.5 (Python 2 is **NOT** supported)
 - Python third-party modules
     - [requests](http://docs.python-requests.org)
     - [clint](https://github.com/kennethreitz/clint)
