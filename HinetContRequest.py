@@ -41,6 +41,10 @@ Usage:
     HinetContRequest.py <year> <month> <day> <hour> <min> <span> [options]
     HinetContRequest.py -h
 
+Arguments for continuous waveform data:
+    <year>, <month>, <day>, <hour>, <min>: Starting time in JST.
+    <span>:                                Duration in minute.
+
 Options:
     -h, --help              Show this help.
     -c CODE --code=CODE     Select code for organization and network.
@@ -407,7 +411,7 @@ if __name__ == "__main__":
     count = len(span)
     if count > 140:
         logging.error("Time span (%d) greater than allowed value (%d*140).",
-                timespan, maxspan)
+                      timespan, maxspan)
         sys.exit()
 
     logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
