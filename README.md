@@ -11,6 +11,37 @@ computer. The user assumes full responsibility for the use of all scripts.
 The author is **NOT** responsible for any damage that may follow from correct
 *or* incorrect use of these scripts.
 
+
+## Table of Contents ##
+
+* [Dependency](#dependency)
+* [How to get](#how-to-get)
+* [Before you use it](#before-you-use-it)
+* [Quick Start](#quick-start)
+* [Scripts](#scripts)
+  * [HinetDoctor.py](#hinetdoctorpy)
+  * [StationSelector.py](#stationselectorpy)
+    * [Usage](#usage)
+    * [Notes](#notes)
+    * [Examples](#examples)
+  * [HinetContRequest.py](#hinetcontrequestpy)
+    * [Usage](#usage-1)
+    * [Examples](#examples-1)
+    * [Notes](#notes-1)
+  * [rdhinet.py](#rdhinetpy)
+    * [Usage](#usage-2)
+    * [Examples](#examples-2)
+  * [ch2py.py](#ch2pypy)
+    * [Attentions](#attentions)
+    * [Usage](#usage-3)
+    * [Examples](#examples-3)
+* [FAQ](#faq)
+  * [What is network code?](#what-is-network-code)
+  * [What is Maxspan? And how to choose it?](#what-is-maxspan-and-how-to-choose-it)
+  * [What is the workflow of HinetContRequest.py?](#what-is-the-workflow-of-hinetcontrequestpy)
+  * [What is MaxSleepCount and SleepTime?](#what-is-maxsleepcount-and-sleeptime)
+
+
 ## Dependency ##
 
 - Python 3.3, 3.4, 3.5 (Python 2 is **NOT** supported)
@@ -290,7 +321,7 @@ limitation. Using this script, you can requst datas with a much longer
 record length, this script will split the request into multiple
 sub-requests, each has a record length no more than `Maxspan` minutes.
 
-### What's the workflow of HinetContRequest.py ###
+### What's the workflow of HinetContRequest.py? ###
 
 1. read configure file
 2. login Hi-net website
@@ -315,7 +346,7 @@ it will sleep for `SleepTime` seconds, and then check the status again, until
 the data is ready or the number of checks larger than `MaxSleepCount`.
 
 So the maximum sleep time for one request is MaxSleepCount\*SleepTime seconds,
-if the data is still not ready, the script will report a error.
+if the data is still not ready, the script will report an error.
 
 [win32tools]: https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools
 [NIED Hi-net]: http://www.hinet.bosai.go.jp
