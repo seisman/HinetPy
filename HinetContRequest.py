@@ -33,6 +33,7 @@
 #   2015-02-25  Dongdong Tian   Add data download service for ADEP (code=0801).
 #   2015-06-27  Dongdong Tian   Move URLs to configure file
 #   2015-09-12  Dongdong Tian   One more try if request fails
+#   2015-11-10  Dongdong Tian   Fix a bug in channel table file naming
 #
 
 """Request continuous waveform data from NIED Hi-net.
@@ -416,27 +417,23 @@ if __name__ == "__main__":
 
     logging.info("%s ~%s", event.strftime("%Y-%m-%d %H:%M"), timespan)
 
-    # set cnt_total
-    cnt_total = "{}_{}_{}.cnt".format(code,
-                                      event.strftime("%Y%m%d%H%M"),
-                                      timespan)
-
     ids = []
+    subevent = event
     for i in range(0, count):
         logging.info("[%s/%d] => %s ~%d",
                      str(i+1).zfill(len(str(count))), count,
-                     event.strftime("%Y-%m-%d %H:%M"), span[i])
+                     subevent.strftime("%Y-%m-%d %H:%M"), span[i])
 
-        id = cont_request(org, net, volc, event, span[i])
+        id = cont_request(org, net, volc, subevent, span[i])
         if id == '-1':  # give it one more chance
-            id = cont_request(org, net, volc, event, span[i])
+            id = cont_request(org, net, volc, subevent, span[i])
 
         if id != '-1':
             ids.append(id)
         else:
             logging.error("Return code of data status is -1!")
             sys.exit()
-        event += timedelta(minutes=span[i])
+        subevent += timedelta(minutes=span[i])
 
     procs = min(len(ids), multiprocessing.cpu_count())
     multiprocessing.Pool(processes=procs).map(cont_download, ids)
@@ -451,6 +448,11 @@ if __name__ == "__main__":
         outdir = arguments['--directory']
         if not os.path.exists(outdir):
             os.makedirs(outdir)
+
+    # set cnt_total
+    cnt_total = "{}_{}_{}.cnt".format(code,
+                                      event.strftime("%Y%m%d%H%M"),
+                                      timespan)
 
     if arguments['--output']:
         cnt_total = arguments['--output']
@@ -468,18 +470,14 @@ if __name__ == "__main__":
     else:
         ch_prefix = "{}_{}_{}".format(code[0:2], code[2:4], code[4:6])
     cheuc = "{}_{}.euc.ch".format(ch_prefix, event.strftime("%Y%m%d"))
-
     chfile = "{}_{}.ch".format(code, event.strftime("%Y%m%d"))
     if arguments['--ctable']:
         chfile = arguments['--ctable']
     chfile = os.path.join(outdir, chfile)
-
-    eucs = glob.glob("*.euc.ch")
-    eucs.remove(cheuc)
     os.rename(cheuc, chfile)
 
     unlink_lists(cnts)
-    unlink_lists(eucs)
+    unlink_lists(glob.glob("*.euc.ch"))
     unlink_lists(glob.glob("*.sjis.ch"))
     if os.path.exists("readme.txt"):
         os.unlink("readme.txt")
