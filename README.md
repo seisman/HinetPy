@@ -61,7 +61,7 @@ After `git clone`, you can get the latest version anytime with just one command:
 
     git pull
 
-If you do not use `git`, just click the "Download ZIP" button on the right.
+If you do not use `git`, just click the "Download ZIP" button on the top.
 
 ## Before you use it ##
 
