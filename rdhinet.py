@@ -69,7 +69,7 @@ def get_chno(chfile, comps):
     return chno
 
 
-def _exctract_channel(tup):
+def _extract_channel(tup):
     """extract only one channel for one time"""
 
     winfile, chno, outdir, prmfile, pmax = tup
@@ -98,7 +98,7 @@ def win32_sac(winfile, ch_no, outdir=".", prmfile="win.prm", pmax=2000000):
 
     if procs == 1:
         for t in tuple_list:
-            _exctract_channel(t)
+            _extract_channel(t)
     else:
         if procs == 0:
             procs = multiprocessing.cpu_count()
@@ -106,7 +106,7 @@ def win32_sac(winfile, ch_no, outdir=".", prmfile="win.prm", pmax=2000000):
             procs = min(multiprocessing.cpu_count(), procs)
 
         pool = multiprocessing.Pool(processes=procs)
-        pool.map(_exctract_channel, tuple_list)
+        pool.map(_extract_channel, tuple_list)
 
 
 def rename_sac(dirname, outdir, sacfile=None):
