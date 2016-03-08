@@ -89,10 +89,12 @@ If you want a quick start, just copy and run commands below.
 This quick start exmaple, shows how to request waveform data from
 2010:10:01T15:00:00(+0900) to 2010:10:01T15:20:00(+0900):
 
-    $ python HinetDoctor.py
-    $ python HinetContRequest.py 2010 10 01 15 00 20 -d 201010010600
-    $ python rdhinet.py 201010010600
-    $ python ch2pz.py 201010010600
+```
+$ python HinetDoctor.py
+$ python HinetContRequest.py 2010 10 01 15 00 20 -d 201010010600
+$ python rdhinet.py 201010010600
+$ python ch2pz.py 201010010600
+```
 
 If everything goes right, you will have one cnt file, one channel table file,
 several SAC files and SAC polezero files under directory `201010010600`.
@@ -120,16 +122,18 @@ This script is only for people who need to change stations frequently.
 
 #### Usage ####
 
-    Select Hi-net/F-net stations to request waveform data from NIED
+```
+Select Hi-net/F-net stations to request waveform data from NIED
 
-    Usage:
-        StationSelector.py -c CODE [-l LIST]
-        StationSelector.py -h
+Usage:
+    StationSelector.py -c CODE [-l LIST]
+    StationSelector.py -h
 
-    Options:
-        -h, --help              Show this help.
-        -c CODE, --code=CODE    Network code. Hi-net: 0101, F-net: 0103.
-        -l LIST, --list=LIST    Station list file.
+Options:
+    -h, --help              Show this help.
+    -c CODE, --code=CODE    Network code. Hi-net: 0101, F-net: 0103.
+    -l LIST, --list=LIST    Station list file.
+```
 
 #### Notes ####
 
@@ -144,16 +148,18 @@ This script is only for people who need to change stations frequently.
 
 1. Select all stations of Hi-net
 
-        $ python StationSelector.py -c 0101
+       $ python StationSelector.py -c 0101
 
 2. Select several stations list in a file:
 
-        $ cat sta.list
-        N.FJ2H
-        N.OTWH
-        N.IICH
-        N.SMGH
-        $ python StationSelector.py -c 0101 -l sta.list
+   ```
+   $ cat sta.list
+   N.FJ2H
+   N.OTWH
+   N.IICH
+   N.SMGH
+   $ python StationSelector.py -c 0101 -l sta.list
+   ```
 
 ### HinetContRequest.py ###
 
@@ -161,25 +167,27 @@ This script is only for people who need to change stations frequently.
 
 #### Usage ####
 
-	$ python HinetContRequest.py -h
-	Request continuous waveform data from NIED Hi-net.
+```
+$ python HinetContRequest.py -h
+Request continuous waveform data from NIED Hi-net.
 
-	Usage:
-	    HinetContRequest.py <year> <month> <day> <hour> <min> <span> [options]
-	    HinetContRequest.py -h
+Usage:
+    HinetContRequest.py <year> <month> <day> <hour> <min> <span> [options]
+    HinetContRequest.py -h
 
-    Arguments for continuous waveform data:
-        <year>, <month>, <day>, <hour>, <min>: Starting time in JST time.
-        <span>:                                Duration in minutes.
+Arguments for continuous waveform data:
+    <year>, <month>, <day>, <hour>, <min>: Starting time in JST time.
+    <span>:                                Duration in minutes.
 
-	Options:
-	    -h, --help              Show this help.
-	    -c CODE --code=CODE     Select code for organization and network.
-        -m SPAN --maxspan=SPAN  Max time span for sub-requests
-	    -d DIR --directory=DIR  Output directory. Default: current directory.
-	    -o FILE --output=FILE   Output filename.
-	                            Default: CODE_YYYYMMDDHHMM_SPAN.cnt
-	    -t FILE --ctable=FILE   Channel table filename. Default: CODE_YYYYMMDD.ch
+Options:
+    -h, --help              Show this help.
+    -c CODE --code=CODE     Select code for organization and network.
+    -m SPAN --maxspan=SPAN  Max time span for sub-requests
+    -d DIR --directory=DIR  Output directory. Default: current directory.
+    -o FILE --output=FILE   Output filename.
+                            Default: CODE_YYYYMMDDHHMM_SPAN.cnt
+    -t FILE --ctable=FILE   Channel table filename. Default: CODE_YYYYMMDD.ch
+```
 
 #### Examples ####
 
@@ -224,21 +232,23 @@ you will get a directory `201010010600` with two file inside:
 
 #### Usage ####
 
-	Extract SAC data files from NIED Hi-net WIN32 files
+```
+Extract SAC data files from NIED Hi-net WIN32 files
 
-	Usage:
-	    rdhinet.py DIRNAME [-C <comps>] [-D <outdir>] [-S <suffix>] [-P <procs>]
-	    rdhinet.py -h
+Usage:
+    rdhinet.py DIRNAME [-C <comps>] [-D <outdir>] [-S <suffix>] [-P <procs>]
+    rdhinet.py -h
 
-	Options:
-	    -h          Show this help.
-	    -C <comps>  Components to extract, delimited using commas.
-	                Avaiable components are U, N, E, X, Y et al.
-	                Default to extract all components.
-	    -D <outdir> Output directory for SAC files.
-	    -S <suffix> Suffix of output SAC files. Default: no suffix.
-	    -P <procs>  Parallel using multiple processes.
-	                Set number of CPUs to <procs> if <procs> equals 0. [default: 0]
+Options:
+    -h          Show this help.
+    -C <comps>  Components to extract, delimited using commas.
+                Avaiable components are U, N, E, X, Y et al.
+                Default to extract all components.
+    -D <outdir> Output directory for SAC files.
+    -S <suffix> Suffix of output SAC files. Default: no suffix.
+    -P <procs>  Parallel using multiple processes.
+                Set number of CPUs to <procs> if <procs> equals 0. [default: 0]
+```
 
 #### Examples ####
 
@@ -267,18 +277,20 @@ looks like `N.FRNH.U` under directory `201010010600`.
 
 #### Usage ####
 
-	$ python ch2pz.py -h
-	Convert NIED Hi-net Channel Table file to SAC PZ files
+```
+$ python ch2pz.py -h
+Convert NIED Hi-net Channel Table file to SAC PZ files
 
-	Usage:
-	    ch2pz.py DIRNAME [-C <comps>] [-D <outdir>] [-S <suffix>]
+Usage:
+    ch2pz.py DIRNAME [-C <comps>] [-D <outdir>] [-S <suffix>]
 
-	Options:
-	    -C <comps>    Channel Components to convert. Choose from U,N,E,X,Y et. al.
-	                  Default to convert all components.
-	    -D <outdir>   Output directory of SAC PZ files. Use the directory of
-	                  Channel Table file as default.
-	    -S <suffix>   Suffix for SAC PZ files. [default: SAC_PZ]
+Options:
+    -C <comps>    Channel Components to convert. Choose from U,N,E,X,Y et. al.
+                  Default to convert all components.
+    -D <outdir>   Output directory of SAC PZ files. Use the directory of
+                  Channel Table file as default.
+    -S <suffix>   Suffix for SAC PZ files. [default: SAC_PZ]
+```
 
 #### Examples ####
 
