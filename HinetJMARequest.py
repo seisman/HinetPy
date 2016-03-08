@@ -38,7 +38,7 @@ URL = BASE + "dlDialogue.php"
 if __name__ == '__main__':
     # specify user name and password
     config = configparser.ConfigParser()
-    if config.read("Hinet.cfg"):
+    if not config.read("Hinet.cfg"):
         sys.exit("Error: Configure file `Hinet.cfg' not found.")
     auth = {
         'auth_un': config['Account']['User'],
