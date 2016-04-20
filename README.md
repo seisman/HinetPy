@@ -2,7 +2,7 @@
 
 - Author: [Dongdong Tian](https://github.com/seisman) @ USTC
 - Project Homepage: http://seisman.github.io/HinetScripts
-- Last Updated: 2015-07-25
+- Last Updated: 2016-04-20
 
 This project contains Python scripts for requesting and processing continuous seismic waveform data from [NIED Hi-net][].
 
@@ -10,10 +10,10 @@ This project contains Python scripts for requesting and processing continuous se
 ### Dependency
 
 - Python 3.3+
-- Python third-party modules
-  - [requests](http://docs.python-requests.org)
-  - [clint](https://github.com/kennethreitz/clint)
-  - [docopt](http://docopt.org/)
+- Python modules:
+  [requests](http://docs.python-requests.org),
+  [clint](https://github.com/kennethreitz/clint),
+  [docopt](http://docopt.org/)
 - Hinet [win32tools][]: `catwin32` and `win2sac_32` in your `PATH`
 
 
