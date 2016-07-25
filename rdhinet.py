@@ -123,32 +123,35 @@ if __name__ == "__main__":
     arguments = docopt(__doc__)
     dirname = arguments['DIRNAME']
 
-    chfile = glob.glob(os.path.join(dirname, "*_????????.ch"))[0]
-    cntfile = glob.glob(os.path.join(dirname, "*_????????????_*.cnt"))[0]
-    basename = os.path.basename(cntfile)
-    span = int(os.path.splitext(basename)[0].split("_")[2])
+    chfiles = glob.glob(os.path.join(dirname, "*_????????.ch"))
+    cntfiles = glob.glob(os.path.join(dirname, "*_????????????_*.cnt"))
 
-    # generate win32 paramerter file
-    prmfile = os.path.join(dirname, "win.prm")
-    win_prm(chfile, prmfile=prmfile)
+    # loop over cnt files
+    for cntfile, chfile in zip(cntfiles, chfiles):
+        basename = os.path.basename(cntfile)
+        span = int(os.path.splitext(basename)[0].split("_")[2])
 
-    # get channel NO. lists for channel table
-    comps = None
-    if arguments['-C']:
-        comps = arguments['-C'].split(",")
-    chno = get_chno(chfile, comps)
+        # generate win32 paramerter file
+        prmfile = os.path.join(dirname, "win.prm")
+        win_prm(chfile, prmfile=prmfile)
 
-    # maximum number of points
-    pmax = span * 60 * 100  # assume data sample rate = 0.01
-    # extrac sac files to dirname
-    win32_sac(cntfile, chno, outdir=dirname, prmfile=prmfile, pmax=pmax)
-    os.unlink(prmfile)
+        # get channel NO. lists for channel table
+        comps = None
+        if arguments['-C']:
+            comps = arguments['-C'].split(",")
+        chno = get_chno(chfile, comps)
 
-    # rename SAC files and move to outdir
-    outdir = dirname
-    if arguments['-D']:
-        outdir = arguments['-D']
-        if not os.path.exists(outdir):
-            os.makedirs(outdir)
+        # maximum number of points
+        pmax = span * 60 * 100  # assume data sample rate = 0.01
+        # extrac sac files to dirname
+        win32_sac(cntfile, chno, outdir=dirname, prmfile=prmfile, pmax=pmax)
+        os.unlink(prmfile)
 
-    rename_sac(dirname, outdir, arguments['-S'])
+        # rename SAC files and move to outdir
+        outdir = dirname
+        if arguments['-D']:
+            outdir = arguments['-D']
+            if not os.path.exists(outdir):
+                os.makedirs(outdir)
+
+        rename_sac(dirname, outdir, arguments['-S'])
