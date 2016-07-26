@@ -2,7 +2,7 @@
 
 - Author: [Dongdong Tian](https://github.com/seisman) @ USTC
 - Project Homepage: http://seisman.github.io/HinetScripts
-- Last Updated: 2016-04-20
+- Last Updated: 2016-07-27
 
 This project contains Python scripts for requesting and processing continuous seismic waveform data from [NIED Hi-net][].
 

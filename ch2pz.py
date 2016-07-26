@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#  Author:  Dongdong Tian @ USTC
+# Author:  Dongdong Tian @ USTC
 #
-#  Revision History:
-#    2014-09-05 Dongdong Tian   Initial Coding
-#    2015-01-17 Dongdong Tian   Only works for velocity input
-#    2015-07-25 Dongdong Tian   Not work for F-net.
+# Revision History:
+#   2014-09-05  Dongdong Tian  Initial Coding
+#   2015-01-17  Dongdong Tian  Only works for velocity input
+#   2015-07-25  Dongdong Tian  Not work for F-net.
+#   2016-07-27  Dongdong Tian  Extract multiple channel table files in one directory
 #
 '''Convert NIED Hi-net Channel Table file to SAC PZ files
 
@@ -94,13 +95,6 @@ if __name__ == "__main__":
     arguments = docopt(__doc__)
 
     dirname = arguments['DIRNAME']
-    chfile = glob.glob(os.path.join(dirname, "*_????????.ch"))[0]
-
-    code = os.path.basename(chfile).split("_")[0]
-    if code in ['0103', '0103A']:
-        print("This script does not work for F-net!")
-        print("Exit Now!")
-        sys.exit()
 
     if arguments['-C']:
         comps = arguments['-C'].split(',')
@@ -116,4 +110,12 @@ if __name__ == "__main__":
     else:
         outdir = dirname
 
-    ch2pz(chfile, comps, outdir, suffix)
+    chfiles = glob.glob(os.path.join(dirname, "*_????????.ch"))
+
+    for chfile in chfiles:
+        code = os.path.basename(chfile).split("_")[0]
+        if code in ['0103', '0103A']:
+            print("This script does not work for F-net!")
+            print("Exit Now!")
+            sys.exit()
+        ch2pz(chfile, comps, outdir, suffix)

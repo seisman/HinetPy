@@ -12,6 +12,7 @@
 #   2015-03-21  Dongdong Tian   Fix a bug when dirname contains underscore
 #   2015-05-18  Dongdong Tian   Keep endian of SAC data same as current machine
 #   2015-06-05  Dongdong Tian   Fix a bug with code 0103A and 0402A
+#   2016-07-24  Dongdong Tian   Extract multiple cnt files in one directory
 
 """Extract SAC data files from NIED Hi-net WIN32 files
 
