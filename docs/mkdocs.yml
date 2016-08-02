@@ -15,7 +15,6 @@ pages:
 - LICENSE: LICENSE.md
 
 extra:
-  version: 0.1
   author:
     github: 'seisman'
 
