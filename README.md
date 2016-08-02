@@ -2,6 +2,7 @@
 
 - Author: [Dongdong Tian](https://github.com/seisman) @ USTC
 - Project Homepage: https://seisman.github.io/HinetScripts
+- Latest Release: [![GitHub release](https://img.shields.io/github/release/seisman/HinetScripts.svg)]()
 
 This project contains Python scripts for requesting and processing continuous seismic waveform data from [NIED Hi-net][].
 
@@ -25,6 +26,6 @@ several SAC files and SAC polezero files under directory `201010010600`.
 
 ## License
 
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the [MIT license](LICENSE).
 
 [NIED Hi-net]: http://www.hinet.bosai.go.jp
