@@ -1,0 +1,25 @@
+site_name: HinetScripts
+site_url: https://seisman.github.io/HinetScripts/
+site_description: 'Python Scripts for requesting, downloading and processing seismic waveform data from NIED Hi-net.'
+site_author: SeisMan
+docs_dir: .
+repo_url: https://github.com/seisman/HinetScripts
+theme: material
+copyright: 'Copyright (c) 2016 Dongdong Tian'
+
+pages:
+- Introduction: index.md
+- Quick Start: quick-start.md
+- Scripts: scripts.md
+- FAQ: FAQ.md
+- LICENSE: LICENSE.md
+
+extra:
+  version: 0.1
+  author:
+    github: 'seisman'
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: '#'
