@@ -12,4 +12,4 @@ script:
 
 after_success:
     - ghp-import -b gh-pages -n site -m 'Update by travis'
-    - git push "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages --force
+    - git push "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages --force --quiet
