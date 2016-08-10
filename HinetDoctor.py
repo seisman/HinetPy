@@ -24,77 +24,36 @@ import clint
 import docopt
 import requests
 
-
-def auth_check(auth):
-    ''' check authentication '''
-
-    logging.info("Username: %s", auth['auth_un'])
-    logging.info("Password: %s", auth['auth_pw'])
-
-    try:
-        s = requests.Session()
-        s.post(AUTH, verify=False)  # get cookies
-        r = s.post(AUTH, data=auth, timeout=20)  # login
-    except requests.exceptions.ConnectTimeout:
-        logging.error("ConnectTimeout in 20 seconds.")
-        sys.exit()
-    except requests.exceptions.ConnectionError:
-        logging.error("Name or service not known")
-        sys.exit()
-
-    inout = re.search(r'auth_log(?P<LOG>.*)\.png', r.text).group('LOG')
-
-    if inout == 'out':
-        logging.error("Maybe unauthorized. Check your username and password!")
-        sys.exit()
+from util import auth_login, CONT, STATION
 
 
 def cmd_exists(cmd):
     ''' check if a cmd exists '''
 
-    if shutil.which(cmd):
-        logging.info("%s in your PATH.", cmd)
+    cmd_path = shutil.which(cmd)
+    if cmd_path:
+        logging.info("%s in your PATH: %s", cmd, cmd_path)
     else:
         logging.error("%s not in your PATH or not executable.", cmd)
-        sys.exit()
 
 
-def check_version(auth):
+def check_version(s):
+    ''' check version of Hinet website '''
 
-    try:
-        s = requests.Session()
-        s.post(AUTH, verify=False)
-        s.post(AUTH, data=auth)
-        r = s.post(CONT, timeout=20)
-    except requests.exceptions.ConnectTimeout:
-        logging.error("ConnectTimeout in 20 seconds.")
-        sys.exit()
-    except requests.exceptions.ConnectionError:
-        logging.error("Name or service not known")
-        sys.exit()
-
+    r = s.get(CONT)
     version = re.search(r'cont\.js\?(?P<VER>\d{6})', r.text).group('VER')
 
     if version == '160422':
         logging.info("Hi-net website version = %s.", version)
     else:
         logging.warning("Hi-net website seems to have been updated. "
-                        "These scripts may be working or not working")
+                        "These scripts may not work as expected.")
 
 
-def check_station_number():
+def check_station_number(s):
+    ''' check selected number of stations of Hi-net and F-net '''
 
-    try:
-        s = requests.Session()
-        s.post(AUTH, verify=False)
-        s.post(AUTH, data=auth)
-        r = s.post(STATION, timeout=20)
-    except requests.exceptions.ConnectTimeout:
-        logging.error("ConnectTimeout in 20 seconds.")
-        sys.exit()
-    except requests.exceptions.ConnectionError:
-        logging.error("Name or service not known")
-        sys.exit()
+    r = s.get(STATION)
 
     # Hi-net station numbers
     hinet = re.compile(r'<td class="td1">(?P<CHN>N\..{3}H)<\/td>')
@@ -114,6 +73,7 @@ def check_station_number():
 
 
 def check_maxspan(code, maxspan, hinet, fnet):
+    ''' check if maxspan in allowed range '''
 
     if code == '0301':
         allowed_max_span = 13
@@ -121,9 +81,9 @@ def check_maxspan(code, maxspan, hinet, fnet):
         allowed_max_span = 59
     elif code == '0203':
         allowed_max_span = 39
-    elif code == '0101':  # hinet
+    elif code == '0101':  # Hi-net
         allowed_max_span = min(int(12000/hinet/3), 60)
-    elif code in ['0103', '0103A']:
+    elif code in ['0103', '0103A']:  # F-net
         allowed_max_span = min(int(12000/fnet/6), 60)
     elif code == '0801':
         allowed_max_span = 15
@@ -137,15 +97,16 @@ def check_maxspan(code, maxspan, hinet, fnet):
                       allowed_max_span)
 
 
-if __name__ == '__main__':
+def main():
+    ''' main function '''
+
     if sys.version_info < (3, 3):
         raise RuntimeError("Python 3.3, 3.4 or 3.5 is required")
 
-    logging.basicConfig(level=logging.INFO,
+    logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s %(levelname)-7s %(message)s',
                         datefmt='%H:%M:%S')
     logging.getLogger("requests").setLevel(logging.WARNING)
-    requests.packages.urllib3.disable_warnings()
 
     config = configparser.ConfigParser()
     logging.info("Reading Hi-net configure file...")
@@ -153,23 +114,18 @@ if __name__ == '__main__':
         logging.error("Configure file `Hinet.cfg' not found.")
         sys.exit()
 
-    AUTH = config['URL']['AUTH']
-    CONT = config['URL']['CONT']
-    STATION = config['URL']['STATION']
+    username = config['Account']['User']
+    password = config['Account']['Password']
+    s = auth_login(username, password)
+    check_version(s)
 
-    auth = {
-        'auth_un': config['Account']['User'],
-        'auth_pw': config['Account']['Password'],
-        }
-    auth_check(auth)
-
-    check_version(auth)
+    hinet, fnet = check_station_number(s)
+    code = config['Cont']['Net']
+    maxspan = config.getint('Cont', 'MaxSpan')
+    check_maxspan(code, maxspan, hinet, fnet)
 
     cmd_exists("catwin32")
     cmd_exists("win2sac_32")
 
-    hinet, fnet = check_station_number()
-
-    code = config['Cont']['Net']
-    maxspan = config.getint('Cont', 'MaxSpan')
-    check_maxspan(code, maxspan, hinet, fnet)
+if __name__ == '__main__':
+    main()

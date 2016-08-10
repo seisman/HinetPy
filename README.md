@@ -4,7 +4,8 @@
 - Project Homepage: https://seisman.github.io/HinetScripts
 - Latest Release: [![GitHub release](https://img.shields.io/github/release/seisman/HinetScripts.svg)](https://github.com/seisman/HinetScripts/releases)
 
-This project contains Python scripts for requesting and processing continuous seismic waveform data from [NIED Hi-net][].
+This project contains Python scripts for requesting, downloading and processing
+continuous seismic waveform data from [NIED Hi-net](http://www.hinet.bosai.go.jp).
 
 
 ## Quick Preview
@@ -27,5 +28,3 @@ several SAC files and SAC polezero files under directory `201010010600`.
 ## License
 
 This project is licensed under the terms of the [MIT license](LICENSE).
-
-[NIED Hi-net]: http://www.hinet.bosai.go.jp

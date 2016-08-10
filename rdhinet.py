@@ -58,7 +58,7 @@ def get_chno(chfile, comps):
     chno = []
     with open(chfile, "r") as f:
         for line in f:
-            if line[0] == '#':
+            if line.strip().startswith('#'):
                 continue
 
             items = line.split()

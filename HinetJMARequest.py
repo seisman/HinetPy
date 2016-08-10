@@ -25,28 +25,20 @@ Options:
 import sys
 import configparser
 
-import requests
 from docopt import docopt
 
-
-# base url for continuous waveform data
-AUTH = "https://hinetwww11.bosai.go.jp/auth/"
-BASE = AUTH + "JMA/"
-URL = BASE + "dlDialogue.php"
+from util import auth_login, JMA
 
 
-if __name__ == '__main__':
+def main():
     # specify user name and password
     config = configparser.ConfigParser()
     if not config.read("Hinet.cfg"):
         sys.exit("Error: Configure file `Hinet.cfg' not found.")
-    auth = {
-        'auth_un': config['Account']['User'],
-        'auth_pw': config['Account']['Password'],
-    }
+    username = config['Account']['User']
+    password = config['Account']['Password']
 
     arguments = docopt(__doc__)
-    requests.packages.urllib3.disable_warnings()
 
     if arguments['--measure']:
         data = "measure"
@@ -55,6 +47,8 @@ if __name__ == '__main__':
 
     rtm = arguments['<yyyymmdd>']
     span = arguments['<span>']
+    if int(span) < 1 or int(span) > 7:
+        sys.exit("Span should be in [1,7].")
     os = arguments['--os'][0:1]
 
     params = {
@@ -64,17 +58,16 @@ if __name__ == '__main__':
         "os": os,
     }
 
-    s = requests.Session()
-    s.post(AUTH, verify=False)  # get cookies
-    s.post(AUTH, data=auth)  # login
+    s = auth_login(username, password)
+    d = s.post(JMA, params=params, stream=True)
 
-    d = s.post(URL, params=params, stream=True)
-
-    # file name
     fname = "{}_{}_{}.txt".format(data, rtm, span)
-
     with open(fname, "wb") as fd:
         for chunk in d.iter_content(chunk_size=1024):
             if chunk:  # filter out keep-alive new chunks
                 fd.write(chunk)
                 fd.flush()
+
+
+if __name__ == '__main__':
+    main()

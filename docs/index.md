@@ -9,9 +9,7 @@ avaiable from [NIED Hi-net][] website.
 
 ## How to get ##
 
-- Git users: `git clone https://github.com/seisman/HinetScripts.git`
-
-- Other users: [Download ZIP](https://github.com/seisman/HinetScripts/archive/master.zip)
+`git clone https://github.com/seisman/HinetScripts.git`
 
 ## Before you use it ##
 
@@ -32,9 +30,6 @@ in my blog may help you understand details.
 
 如果你能读懂中文，我博客列出的一些 [博文](http://seisman.info/hinet-things.html)
 会帮助你更好地理解其中的细节。部分博文未及时更新，若有冲突，请以本文为准。
-
-
-
 
 [win32tools]: https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools
 [NIED Hi-net]: http://www.hinet.bosai.go.jp

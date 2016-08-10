@@ -32,15 +32,15 @@ import logging
 import configparser
 
 from docopt import docopt
-import requests
+
+from util import auth_login, SELECT
 
 
-if __name__ == "__main__":
+def main():
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s %(levelname)-7s %(message)s',
                         datefmt='%H:%M:%S')
     logging.getLogger("requests").setLevel(logging.WARNING)
-    requests.packages.urllib3.disable_warnings()
 
     arguments = docopt(__doc__)
     config = configparser.ConfigParser()
@@ -48,23 +48,13 @@ if __name__ == "__main__":
         logging.error("Configure file `Hinet.cfg' not found.")
         sys.exit()
 
-    AUTH = config['URL']['AUTH']
-    SELECT = config['URL']['SELECT']
-    STATION = config['URL']['STATION']
-
-    auth = {
-        'auth_un': config['Account']['User'],
-        'auth_pw': config['Account']['Password'],
-    }
-
-    s = requests.Session()
-    s.post(AUTH, verify=False)    # get cookies
-    s.post(AUTH, data=auth)  # login
+    username = config['Account']['User']
+    password = config['Account']['Password']
 
     code = arguments['--code']
     if code not in ["0101", "0103"]:
         logging.error("Network code must be 0101 or 0103.")
-        sys.exit(-1)
+        sys.exit()
     else:
         net = "Hi-net" if code == "0101" else "F-net"
 
@@ -81,6 +71,11 @@ if __name__ == "__main__":
         'mode': '1',
     }
     # select stations
+    s = auth_login(username, password)
     s.post(SELECT, data=payload)
 
     logging.info("%s stations selected for %s.", count, net)
+
+
+if __name__ == "__main__":
+    main()

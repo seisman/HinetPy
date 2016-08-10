@@ -56,7 +56,7 @@ def ch2pz(chfile, comps, outdir, suffix):
 
     with open(chfile, "r") as f:
         for line in f:
-            if line[0] == '#':
+            if line.starswith('#'):
                 continue
 
             items = line.split()
@@ -96,10 +96,7 @@ if __name__ == "__main__":
 
     dirname = arguments['DIRNAME']
 
-    if arguments['-C']:
-        comps = arguments['-C'].split(',')
-    else:
-        comps = None
+    comps = arguments['-C'].split(',') if arguments['-C'] else None
 
     suffix = arguments['-S']
 

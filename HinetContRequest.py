@@ -157,8 +157,7 @@ import requests
 from docopt import docopt
 from clint.textui import progress
 
-# external tools from Hi-net
-catwin32 = "catwin32"
+from util import auth_login, AUTH, CONT, STATUS, REQUEST, DOWNLOAD
 
 
 # all legal codes
@@ -236,7 +235,7 @@ def parse_event(args):
     return datetime(year, month, day, hour, minute)
 
 
-def cont_request(org, net, volc, event, span):
+def cont_request(s, org, net, volc, event, span):
     ''' request continuous data with limited time span '''
 
     payload = {
@@ -294,14 +293,8 @@ def cont_request(org, net, volc, event, span):
 def cont_download(id):
     ''' Download continuous waveform data of specified id '''
 
-    try:
-        dn = requests.Session()
-        dn.post(AUTH, verify=False)
-        dn.post(AUTH, data=auth)
-        d = dn.post(DOWNLOAD, params={"id": id}, stream=True)
-    except requests.exceptions.ConnectionError:
-        logging.error("Name or service not known")
-        sys.exit()
+    s = auth_login(username, password)
+    d = s.post(DOWNLOAD, params={"id": id}, stream=True)
 
     # file size
     total_length = int(d.headers.get('Content-Length'))
@@ -332,7 +325,7 @@ def unzip(zips):
 def cat_win32(cnts, cnt_total):
     """merge WIN32 files to one total WIN32 file"""
 
-    subprocess.call([catwin32, '-o', cnt_total] + cnts,
+    subprocess.call(['catwin32', '-o', cnt_total] + cnts,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL)
 
@@ -356,7 +349,6 @@ if __name__ == "__main__":
                         format='%(asctime)s %(levelname)-7s %(message)s',
                         datefmt='%H:%M:%S')
     logging.getLogger("requests").setLevel(logging.WARNING)
-    requests.packages.urllib3.disable_warnings()
 
     config = configparser.ConfigParser()
     if not config.read("Hinet.cfg"):
@@ -364,21 +356,9 @@ if __name__ == "__main__":
         sys.exit()
     arguments = docopt(__doc__)
 
-    # basic urls
-    AUTH = config['URL']['AUTH']
-    CONT = config['URL']['CONT']
-    STATUS = config['URL']['STATUS']
-    REQUEST = config['URL']['REQUEST']
-    DOWNLOAD = config['URL']['DOWNLOAD']
-
-    # global variables
-    auth = {
-        'auth_un': config['Account']['User'],
-        'auth_pw': config['Account']['Password'],
-        }
-    s = requests.Session()
-    s.post(AUTH, verify=False)  # get cookies
-    s.post(AUTH, data=auth)  # login
+    username = config['Account']['User']
+    password = config['Account']['Password']
+    s = auth_login(username, password)
 
     max_sleep_count = config.getint('Request', 'MaxSleepCount')
     sleep_time = config.getfloat('Request', 'SleepTime')
@@ -424,9 +404,9 @@ if __name__ == "__main__":
                      str(i+1).zfill(len(str(count))), count,
                      subevent.strftime("%Y-%m-%d %H:%M"), span[i])
 
-        id = cont_request(org, net, volc, subevent, span[i])
+        id = cont_request(s, org, net, volc, subevent, span[i])
         if id == '-1':  # give it one more chance
-            id = cont_request(org, net, volc, subevent, span[i])
+            id = cont_request(s, org, net, volc, subevent, span[i])
 
         if id != '-1':
             ids.append(id)
