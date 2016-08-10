@@ -1,0 +1,15 @@
+language: python
+branch:
+  only:
+    - travis
+
+install:
+    - pip install mkdocs mkdocs-material ghp-import
+
+script:
+    - cd docs/
+    - mkdocs build --clean --quiet
+
+after_success:
+    - ghp-import -b gh-pages -n site -m 'Update by travis'
+    - git push "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages --force
