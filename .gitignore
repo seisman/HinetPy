@@ -1,3 +1,4 @@
 *.pl
 secrets
 docs/site/
+__pycache__
