@@ -1,7 +1,7 @@
 language: python
 branch:
   only:
-    - travis
+    - master
 
 install:
     - pip install mkdocs mkdocs-material ghp-import
