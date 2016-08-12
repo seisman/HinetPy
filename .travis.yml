@@ -1,15 +1,15 @@
 language: python
 branch:
   only:
-    - master
+  - master
 
 install:
-    - pip install mkdocs mkdocs-material ghp-import
+  - pip install mkdocs mkdocs-material ghp-import
 
 script:
-    - cd docs/
-    - mkdocs build --clean --quiet
+  - cd docs/
+  - mkdocs build --clean --quiet
 
 after_success:
-    - ghp-import -b gh-pages -n site -m 'Update by travis'
-    - git push "https://${GH_TOKEN}@github.com/seisman/HinetScripts" gh-pages:gh-pages --force --quiet
+  - ghp-import -b gh-pages -n site -m 'Update by travis'
+  - git push "https://${GH_TOKEN}@github.com/seisman/HinetScripts" gh-pages:gh-pages --force --quiet
