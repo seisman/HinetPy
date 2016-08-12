@@ -2,3 +2,6 @@
 secrets
 docs/site/
 __pycache__
+tests/*
+!tests/Hinet.cfg
+!tests/test-*.py
