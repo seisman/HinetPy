@@ -38,9 +38,6 @@ import multiprocessing
 
 from docopt import docopt
 
-# external tools from Hi-net
-win2sac = "win2sac_32"
-
 
 def win_prm(chfile, prmfile="win.prm"):
     """four line parameters file"""
@@ -73,86 +70,99 @@ def get_chno(chfile, comps):
 def _extract_channel(tup):
     """extract only one channel for one time"""
 
-    winfile, chno, outdir, prmfile, pmax = tup
+    winfile, chno, suffix, outdir, prmfile, pmax = tup
     #   print(winfile, chno, outdir, prmfile, pmax)
-    subprocess.call([win2sac,
+    subprocess.call(['win2sac_32',
                      winfile,
                      chno,
-                     "SAC",
+                     suffix,
                      outdir,
                      '-e',
                      '-p'+prmfile,
                      '-m'+str(pmax)
-                     ],
+                    ],
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL)
 
 
-def win32_sac(winfile, ch_no, outdir=".", prmfile="win.prm", pmax=2000000):
+def win32_sac(winfile, chno, suffix,
+              outdir=".", prmfile="win.prm", pmax=2000000, procs=1):
+    ''' extract SAC files from winfile '''
 
     tuple_list = []
     for ch in chno:
-        t = winfile, ch, outdir, prmfile, pmax
+        t = winfile, ch, suffix, outdir, prmfile, pmax
         tuple_list.append(t)
 
-    procs = int(arguments['-P'])
-
-    if procs == 1:
+    if procs == 1:  # serial
         for t in tuple_list:
             _extract_channel(t)
-    else:
-        if procs == 0:
-            procs = multiprocessing.cpu_count()
-        else:
-            procs = min(multiprocessing.cpu_count(), procs)
-
+    else:           # parallel
         pool = multiprocessing.Pool(processes=procs)
         pool.map(_extract_channel, tuple_list)
 
-
-def rename_sac(dirname, outdir, sacfile=None):
-    for file in glob.glob(os.path.join(dirname, "*.SAC")):
-        dir, base = os.path.split(file)
-        filename = os.path.splitext(base)[0]
-        if sacfile:
-            filename += "." + sacfile
-        dest = os.path.join(outdir, filename)
-        os.rename(file, dest)
+    os.unlink(prmfile)
 
 
-if __name__ == "__main__":
+def get_procs(procs):
+    ''' determine number of processors used in extracting '''
+
+    cpu_count = multiprocessing.cpu_count()
+    procs = cpu_count if procs == 0 else min(cpu_count, procs)
+
+    return procs
+
+
+def remove_suffix(outdir):
+    ''' remove suffix ".SAC" from SAC files '''
+
+    for filename in glob.glob(os.path.join(outdir, "*.SAC")):
+        os.rename(filename, filename[:-4])  # remove '.SAC'
+
+
+def main():
     arguments = docopt(__doc__)
     dirname = arguments['DIRNAME']
 
     chfiles = glob.glob(os.path.join(dirname, "*_????????.ch"))
     cntfiles = glob.glob(os.path.join(dirname, "*_????????????_*.cnt"))
+    prmfile = os.path.join(dirname, "win.prm")
 
     # loop over cnt files
     for cntfile, chfile in zip(cntfiles, chfiles):
-        basename = os.path.basename(cntfile)
-        span = int(os.path.splitext(basename)[0].split("_")[2])
-
-        # generate win32 paramerter file
-        prmfile = os.path.join(dirname, "win.prm")
-        win_prm(chfile, prmfile=prmfile)
-
-        # get channel NO. lists for channel table
-        comps = None
-        if arguments['-C']:
-            comps = arguments['-C'].split(",")
+        # chno: get channel NO. lists for channel table
+        comps = arguments['-C'].split(",") if arguments['-C'] else None
         chno = get_chno(chfile, comps)
 
-        # maximum number of points
+        # suffix: determine suffix of SAC files
+        suffix = arguments['-S'] if arguments['-S'] else 'SAC'
+
+        # outdir: determine output directory
+        outdir = arguments['-D'] if arguments['-D'] else dirname
+        if not os.path.exists(outdir):
+            os.makedirs(outdir)
+
+        # prmfile: generate win32 paramerter file
+        win_prm(chfile, prmfile=prmfile)
+
+        # pmax: determine number of points from filename
+        basename = os.path.basename(cntfile)
+        span = int(os.path.splitext(basename)[0].split("_")[2])
         pmax = span * 60 * 100  # assume data sample rate = 0.01
+
+        # procs
+        procs = get_procs(int(arguments['-P']))
+
         # extrac sac files to dirname
-        win32_sac(cntfile, chno, outdir=dirname, prmfile=prmfile, pmax=pmax)
-        os.unlink(prmfile)
+        win32_sac(cntfile, chno, suffix,
+                  outdir=outdir,
+                  prmfile=prmfile,
+                  pmax=pmax,
+                  procs=procs)
 
-        # rename SAC files and move to outdir
-        outdir = dirname
-        if arguments['-D']:
-            outdir = arguments['-D']
-            if not os.path.exists(outdir):
-                os.makedirs(outdir)
+        if not arguments['-S']:
+            remove_suffix(outdir)
 
-        rename_sac(dirname, outdir, arguments['-S'])
+
+if __name__ == "__main__":
+    main()
