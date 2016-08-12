@@ -56,7 +56,7 @@ def ch2pz(chfile, comps, outdir, suffix):
 
     with open(chfile, "r") as f:
         for line in f:
-            if line.starswith('#'):
+            if line.startswith('#'):
                 continue
 
             items = line.split()
