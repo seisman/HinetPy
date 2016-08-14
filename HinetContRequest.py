@@ -456,8 +456,6 @@ if __name__ == "__main__":
     chfile = os.path.join(outdir, chfile)
     os.rename(cheuc, chfile)
 
-    unlink_lists(cnts)
-    unlink_lists(glob.glob("*.euc.ch"))
-    unlink_lists(glob.glob("*.sjis.ch"))
+    unlink_lists(cnts + glob.glob("*.euc.ch") + glob.glob("*.sjis.ch"))
     if os.path.exists("readme.txt"):
         os.unlink("readme.txt")
