@@ -13,6 +13,7 @@
 
 Usage:
     ch2pz.py DIRNAME [-C <comps>] [-D <outdir>] [-S <suffix>]
+    ch2pz.py -h
 
 Options:
     -C <comps>    Channel Components to convert. Choose from U,N,E,X,Y et. al.
@@ -43,6 +44,7 @@ def find_poles(damping, freq):
 
 
 def write_pz(pzfile, real, imaginary, constant):
+    ''' write SAC PZ file '''
 
     with open(pzfile, "w") as pz:
         pz.write("ZEROS 3\n")
@@ -93,23 +95,15 @@ def ch2pz(chfile, comps, outdir, suffix):
 
 if __name__ == "__main__":
     arguments = docopt(__doc__)
-
     dirname = arguments['DIRNAME']
-
     comps = arguments['-C'].split(',') if arguments['-C'] else None
-
     suffix = arguments['-S']
 
-    if arguments['-D']:
-        outdir = arguments['-D']
-        if not os.path.exists(outdir):
-            os.makedirs(outdir)
-    else:
-        outdir = dirname
+    outdir = arguments['-D'] if arguments['-D'] else dirname
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
 
-    chfiles = glob.glob(os.path.join(dirname, "*_????????.ch"))
-
-    for chfile in chfiles:
+    for chfile in glob.glob(os.path.join(dirname, "*_????????.ch")):
         code = os.path.basename(chfile).split("_")[0]
         if code in ['0103', '0103A']:
             print("This script does not work for F-net!")
