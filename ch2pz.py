@@ -107,6 +107,7 @@ if __name__ == "__main__":
         code = os.path.basename(chfile).split("_")[0]
         if code in ['0103', '0103A']:
             print("This script does not work for F-net!")
+            print("Please use https://github.com/seisman/FnetScript!")
             print("Exit Now!")
             sys.exit()
         ch2pz(chfile, comps, outdir, suffix)
