@@ -203,3 +203,23 @@ In most cases, what you need is only `-C` option.
 
 If you run `python ch2pz.py 201010010600 -C U`, you will get SAC PoleZero
 files looks like `N.FRNH.U.SAC_PZ` under directory `201010010600`.
+
+
+## HinetJMARequest.py
+
+### Usage
+
+```
+$ python HinetJMARequest.py -h
+Request arrival time data or focal mechanism catalog from Hi-net.
+
+Usage:
+    HinetJMARequest.py (--measure | --mecha) <yyyymmdd> <span> [--os=OS]
+    HinetJMARequest.py -h
+
+Options:
+    -h --help     Show this help.
+    --measure     Request arrival time data.
+    --mecha       Request focal mechanism catalog.
+    --os=OS       Line break format, choose from DOS or UNIX. [default: DOS]
+```

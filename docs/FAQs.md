@@ -1,20 +1,20 @@
-### What is network code? ###
+### What is network code?
 
 Each network is represented by a network code. For example, Hi-net
 network has a code of `0101`, while V-net `0105`.
 
 For a list of all network codes supported, please refer to [Networks](/networks).
 
-### What is Maxspan? And how to choose it? ###
+### What is Maxspan? And how to choose a suital value?
 
-NIED Hi-net website sets a limitation of data size in one request:
+NIED Hi-net website sets a limitation of data size in individual request:
 
 1. Record Length <= 60 min
 2. Number of channels * Record Length <= 12000 min
 
-Just take Hi-net as example, Hi-net network has about 800 station and
+As an example, Hi-net network has about 800 stations and
 24000 channels. According to the limitations, the record length should
-be no more than 5 minutes long in one web request. So the `Maxspan`,
+be no more than 5 minutes long in one request. So the `Maxspan`,
 allowed maximum record length, should be no more than 5 for Hi-net
 network with all stations selected.
 
@@ -23,7 +23,7 @@ limitation. Using this script, you can requst datas with a much longer
 record length, this script will split the request into multiple
 sub-requests, each has a record length no more than `Maxspan` minutes.
 
-### What's the workflow of HinetContRequest.py? ###
+### What's the workflow of HinetContRequest.py?
 
 1. read configure file
 2. login Hi-net website
@@ -37,7 +37,7 @@ sub-requests, each has a record length no more than `Maxspan` minutes.
 8. unzip all zip files, merge all cnt files into one cnt file
 9. rename and cleanup
 
-### What's MaxSleepCount and SleepTime? ###
+### What's MaxSleepCount and SleepTime?
 
 After posting a data request, Hi-net server will deal with this request and
 prepare waveform data. During the preparation, user is not allowed to post
@@ -47,6 +47,6 @@ The script will check the status of data preparation. If the data is not ready,
 it will sleep for `SleepTime` seconds, and then check the status again, until
 the data is ready or the number of checks larger than `MaxSleepCount`.
 
-So the maximum sleep time for one request is MaxSleepCount\*SleepTime seconds,
-if the data is still not ready, the script will report an error.
+So the maximum sleep time for one request is MaxSleepCount\*SleepTime seconds.
+If the data is still not ready, the script will report an error.
 
