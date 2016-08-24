@@ -81,63 +81,63 @@ Codes of org & net:
     '0801' : 'OTHER:ADEP',
 
 Codes for NIED V-net (0105):
-    '010503' : '0105:Usuzan';
-    '010505' : '0105:Iwatesan';
-    '010507' : '0105:Asamayama';
-    '010509' : '0105:Fujisan';
-    '010510' : '0105:Miyakejima';
-    '010511' : '0105:Izu-Oshima';
-    '010512' : '0105:Asosan';
-    '010514' : '0105:Kirishimayama';
+    '010503' : '0105:Usuzan',
+    '010505' : '0105:Iwatesan',
+    '010507' : '0105:Asamayama',
+    '010509' : '0105:Fujisan',
+    '010510' : '0105:Miyakejima',
+    '010511' : '0105:Izu-Oshima',
+    '010512' : '0105:Asosan',
+    '010514' : '0105:Kirishimayama',
 
 Codes for JMA Volcanic Seismometer Network (0302):
-    '030201' : '0302:Atosanupuri';
-    '030202' : '0302:Meakandake';
-    '030203' : '0302:Taisetsuzan';
-    '030204' : '0302:Tokachidake';
-    '030205' : '0302:Tarumaesan';
-    '030206' : '0302:Kuttara';
-    '030207' : '0302:Usuzan';
-    '030208' : '0302:Hokkaido-Komagatake';
-    '030209' : '0302:Esan';
-    '030210' : '0302:Iwakisan';
-    '030247' : '0302:Hakkodasan';
-    '030211' : '0302:Akita-Yakeyama';
-    '030212' : '0302:Iwatesan';
-    '030213' : '0302:Akita-Komagatake';
-    '030214' : '0302:Chokaisan';
-    '030215' : '0302:Kurikomayama';
-    '030216' : '0302:Zaozan';
-    '030217' : '0302:Azumayama';
-    '030218' : '0302:Adatarayama';
-    '030219' : '0302:Bandaisan';
-    '030220' : '0302:Nasudake';
-    '030221' : '0302:Nikko-Shiranesan';
-    '030222' : '0302:Kusatsu-Shiranesan';
-    '030223' : '0302:Asamayama';
-    '030224' : '0302:Niigata-Yakeyama';
-    '030225' : '0302:Yakedake';
-    '030226' : '0302:Norikuradake';
-    '030227' : '0302:Ontakesan';
-    '030228' : '0302:Hakusan';
-    '030229' : '0302:Fujisan';
-    '030230' : '0302:Hakoneyama';
-    '030231' : '0302:Izu-Tobu Volcanoes';
-    '030232' : '0302:Izu-Oshima';
-    '030233' : '0302:Niijima';
-    '030234' : '0302:Kozushima';
-    '030235' : '0302:Miyakejima';
-    '030236' : '0302:Hachijojima';
-    '030237' : '0302:Aogashima';
-    '030238' : '0302:Tsurumidake and Garandake';
-    '030239' : '0302:Kujusan';
-    '030240' : '0302:Asosan';
-    '030241' : '0302:Unzendake';
-    '030242' : '0302:Kirishimayama';
-    '030243' : '0302:Sakurajima';
-    '030244' : '0302:Satsuma-Iojima';
-    '030245' : '0302:Kuchinoerabujima';
-    '030246' : '0302:Suwanosejima';
+    '030201' : '0302:Atosanupuri',
+    '030202' : '0302:Meakandake',
+    '030203' : '0302:Taisetsuzan',
+    '030204' : '0302:Tokachidake',
+    '030205' : '0302:Tarumaesan',
+    '030206' : '0302:Kuttara',
+    '030207' : '0302:Usuzan',
+    '030208' : '0302:Hokkaido-Komagatake',
+    '030209' : '0302:Esan',
+    '030210' : '0302:Iwakisan',
+    '030247' : '0302:Hakkodasan',
+    '030211' : '0302:Akita-Yakeyama',
+    '030212' : '0302:Iwatesan',
+    '030213' : '0302:Akita-Komagatake',
+    '030214' : '0302:Chokaisan',
+    '030215' : '0302:Kurikomayama',
+    '030216' : '0302:Zaozan',
+    '030217' : '0302:Azumayama',
+    '030218' : '0302:Adatarayama',
+    '030219' : '0302:Bandaisan',
+    '030220' : '0302:Nasudake',
+    '030221' : '0302:Nikko-Shiranesan',
+    '030222' : '0302:Kusatsu-Shiranesan',
+    '030223' : '0302:Asamayama',
+    '030224' : '0302:Niigata-Yakeyama',
+    '030225' : '0302:Yakedake',
+    '030226' : '0302:Norikuradake',
+    '030227' : '0302:Ontakesan',
+    '030228' : '0302:Hakusan',
+    '030229' : '0302:Fujisan',
+    '030230' : '0302:Hakoneyama',
+    '030231' : '0302:Izu-Tobu Volcanoes',
+    '030232' : '0302:Izu-Oshima',
+    '030233' : '0302:Niijima',
+    '030234' : '0302:Kozushima',
+    '030235' : '0302:Miyakejima',
+    '030236' : '0302:Hachijojima',
+    '030237' : '0302:Aogashima',
+    '030238' : '0302:Tsurumidake and Garandake',
+    '030239' : '0302:Kujusan',
+    '030240' : '0302:Asosan',
+    '030241' : '0302:Unzendake',
+    '030242' : '0302:Kirishimayama',
+    '030243' : '0302:Sakurajima',
+    '030244' : '0302:Satsuma-Iojima',
+    '030245' : '0302:Kuchinoerabujima',
+    '030246' : '0302:Suwanosejima',
 """
 
 import os
@@ -156,32 +156,8 @@ import requests
 from docopt import docopt
 from clint.textui import progress
 
-from util import auth_login, read_config, AUTH, CONT, STATUS, REQUEST, DOWNLOAD
-
-
-# all legal codes
-CODE_LIST = ['0101', '0103', '0103A',
-             '0201', '0202', '0203', '0204', '0205',
-             '0206', '0207', '0208', '0209',
-             '0301',
-             '0401', '0402', '0402A',
-             '0501',
-             '0601',
-             '0701', '0702', '0703', '0705',
-             '0801',
-             '010503', '010505', '010507', '010509',
-             '010510', '010511', '010512', '010514',
-             '030201', '030202', '030203', '030204', '030205',
-             '030206', '030207', '030208', '030209', '030210',
-             '030211', '030212', '030213', '030214', '030215',
-             '030216', '030217', '030218', '030219', '030220',
-             '030221', '030222', '030223', '030224', '030225',
-             '030226', '030227', '030228', '030229', '030230',
-             '030231', '030232', '030233', '030234', '030235',
-             '030236', '030237', '030238', '030239', '030240',
-             '030241', '030242', '030243', '030244', '030245',
-             '030246', '030247',
-             ]
+from util import auth_login, read_config
+from util import AUTH, CONT, STATUS, REQUEST, DOWNLOAD, CODE_LIST
 
 
 def check_date(code, event):
