@@ -81,13 +81,19 @@ Codes of org & net:
     '0801' : 'OTHER:ADEP',
 
 Codes for NIED V-net (0105):
+    '010501' : '0105:Tokachidake',
+    '010502' : '0105:Tarumaesan',
     '010503' : '0105:Usuzan',
+    '010504' : '0105:Hokkaido-Komagatake',
     '010505' : '0105:Iwatesan',
+    '010506' : '0105:Nasudake',
     '010507' : '0105:Asamayama',
+    '010508' : '0105:Kusatsu-Shiranesan',
     '010509' : '0105:Fujisan',
     '010510' : '0105:Miyakejima',
     '010511' : '0105:Izu-Oshima',
     '010512' : '0105:Asosan',
+    '010513' : '0105:Unzendake',
     '010514' : '0105:Kirishimayama',
 
 Codes for JMA Volcanic Seismometer Network (0302):
@@ -186,7 +192,7 @@ def parse_code(code):
     ''' parser network code '''
 
     if code not in CODE_LIST:
-        logging.error("{}: Error code for org and net.".format(code))
+        logging.error("{}: Incorrect network code.".format(code))
         sys.exit()
     elif len(code) == 6:  # volcanos
         org, net = code[0:2], code[2:4]
@@ -247,7 +253,7 @@ def cont_request(s, org, net, volc, event, span):
         try:
             status_html = s.post(STATUS).text
         except requests.exceptions.ConnectionError:
-            logging.error("Error in fetch status")
+            logging.error("Error in fetching data status.")
             sys.exit()
 
         opt = p.search(status_html).group('OPT')
@@ -325,9 +331,9 @@ if __name__ == "__main__":
                         datefmt='%H:%M:%S')
     logging.getLogger("requests").setLevel(logging.WARNING)
 
-    config = read_config('Hinet.cfg')
     arguments = docopt(__doc__)
 
+    config = read_config('Hinet.cfg')
     username = config['Account']['User']
     password = config['Account']['Password']
     s = auth_login(username, password)
@@ -357,7 +363,7 @@ if __name__ == "__main__":
     if arguments['--maxspan']:
         maxspan = int(arguments['--maxspan'])
     if not 1 <= maxspan <= 60:
-        logging.error("maxspan is not in the range[1,60]")
+        logging.error("maxspan is not in the range [1,60]")
         sys.exit()
 
     span = evenly_timespan(timespan, maxspan)

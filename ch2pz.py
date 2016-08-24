@@ -93,7 +93,7 @@ def ch2pz(chfile, comps, outdir, suffix):
             write_pz(pzfile, real, imaginary, constant)
 
 
-if __name__ == "__main__":
+def main():
     arguments = docopt(__doc__)
     dirname = arguments['DIRNAME']
     comps = arguments['-C'].split(',') if arguments['-C'] else None
@@ -111,3 +111,7 @@ if __name__ == "__main__":
             print("Exit Now!")
             sys.exit()
         ch2pz(chfile, comps, outdir, suffix)
+
+
+if __name__ == "__main__":
+    main()
