@@ -61,3 +61,23 @@ def read_config(config_file):
         sys.exit()
 
     return config
+
+
+def get_station_number(s, net):
+    ''' check selected number of stations of Hi-net and F-net '''
+
+    if net == 'Hi-net':
+        pattern = r'<td class="td1">(?P<CHN>N\..{3}H)<\/td>'
+        max_station_number = 777
+    elif net == 'F-net':
+        pattern = r'<td class="td1">(?P<CHN>N\..{3}F)<\/td>'
+        max_station_number = 73
+
+    r = s.get(STATION)
+    station_count = len(re.findall(pattern, r.text))
+    if station_count == 0:
+        station_count = max_station_number
+
+    logging.info("Selected Stations of %s: %d", net, station_count)
+
+    return station_count

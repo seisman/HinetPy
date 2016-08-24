@@ -21,7 +21,7 @@ import clint
 import docopt
 import requests
 
-from util import auth_login, read_config, CONT, STATION
+from util import auth_login, read_config, get_station_number, CONT
 
 
 def cmd_exists(cmd):
@@ -45,29 +45,6 @@ def check_version(s):
     else:
         logging.warning("Hi-net website seems to have been updated."
                         "These scripts may not work as expected.")
-
-
-def check_station_number(s):
-    ''' check selected number of stations of Hi-net and F-net '''
-
-    r = s.get(STATION)
-
-    # Hi-net station numbers
-    hinet = re.compile(r'<td class="td1">(?P<CHN>N\..{3}H)<\/td>')
-    hinet_count = len(hinet.findall(r.text))
-    if hinet_count == 0:
-        hinet_count = 777
-    logging.info("Selected Stations of Hi-net: %d", hinet_count)
-
-    # F-net station numbers
-    fnet = re.compile(r'<td class="td1">(?P<CHN>N\..{3}F)<\/td>')
-    fnet_count = len(fnet.findall(r.text))
-    if fnet_count == 0:
-        fnet_count = 73
-    logging.info("Selected Stations of F-net: %d", fnet_count)
-
-    return hinet_count, fnet_count
-
 
 def check_maxspan(code, maxspan, hinet, fnet):
     ''' check if maxspan in allowed range '''
@@ -113,7 +90,8 @@ def main():
     s = auth_login(username, password)
     check_version(s)
 
-    hinet, fnet = check_station_number(s)
+    hinet = get_station_number(s, "Hi-net")
+    fnet = get_station_number(s, "F-net")
     code = config['Cont']['Net']
     maxspan = config.getint('Cont', 'MaxSpan')
     check_maxspan(code, maxspan, hinet, fnet)
