@@ -32,7 +32,7 @@ import logging
 
 from docopt import docopt
 
-from util import auth_login, read_config, SELECT
+from util import auth_login, read_config, get_station_number, SELECT
 
 
 def main():
@@ -41,12 +41,8 @@ def main():
                         datefmt='%H:%M:%S')
     logging.getLogger("requests").setLevel(logging.WARNING)
 
+    # parse arguments
     arguments = docopt(__doc__)
-    config = read_config('Hinet.cfg')
-
-    username = config['Account']['User']
-    password = config['Account']['Password']
-
     code = arguments['--code']
     if code not in ["0101", "0103"]:
         logging.error("Network code must be 0101 or 0103.")
@@ -54,23 +50,29 @@ def main():
     else:
         net = "Hi-net" if code == "0101" else "F-net"
 
-    count = 'All'   # default to select all stations
+    stations = None   # default to select all stations
     listfile = arguments['--list']
     if listfile:
         with open(listfile) as f:
             lines = [line.strip() for line in f if not line.startswith("#")]
-        count = len(lines)
+        stations = ':'.join(lines)
+        logging.info("Number of stations in %s: %d", listfile, len(lines))
 
     payload = {
         'net': code,
-        'stcds': ':'.join(lines) if listfile else None,
+        'stcds': stations,
         'mode': '1',
     }
+
     # select stations
+    config = read_config('Hinet.cfg')
+    username = config['Account']['User']
+    password = config['Account']['Password']
     s = auth_login(username, password)
     s.post(SELECT, data=payload)
 
-    logging.info("%s stations selected for %s.", count, net)
+    # check station numbers
+    get_station_number(s, net)
 
 
 if __name__ == "__main__":
