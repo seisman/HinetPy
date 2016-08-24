@@ -24,6 +24,7 @@ Options:
 """
 
 import sys
+from datetime import datetime
 
 from docopt import docopt
 
@@ -38,19 +39,24 @@ def main():
     elif arguments['--mecha']:
         data = "mecha"
 
+    # check date validity
     rtm = arguments['<yyyymmdd>']
+    try:
+        datetime.strptime(rtm, '%Y%m%d')
+    except ValueError:
+        sys.exit("%s: Incorrect date or date format." % rtm)
+
+    # check span
     span = arguments['<span>']
     if not (span.isdigit() and int(span) in range(1, 8)):
         sys.exit("<span> should be integer between 1 and 7.")
-
-    os = arguments['--os'][0:1]
 
     # prepare data to post
     params = {
         "data": data,
         "rtm": rtm,
         "span": span,
-        "os": os,
+        "os": arguments['--os'][0:1],
     }
 
     # specify user name and password
