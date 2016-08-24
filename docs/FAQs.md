@@ -1,8 +1,9 @@
 ### What is network code? ###
 
 Each network is represented by a network code. For example, Hi-net
-network has a code of `0101`, while V-net `0105`. You can see the full
-code list by running `python HinetContRequest.py -h`.
+network has a code of `0101`, while V-net `0105`.
+
+For a list of all network codes supported, please refer to [Networks](/networks).
 
 ### What is Maxspan? And how to choose it? ###
 

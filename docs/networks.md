@@ -1,6 +1,4 @@
-## Network Codes
-
-### Codes
+## Codes
 
     '0101' : 'NIED:NIED Hi-net'
     '0103' : 'NIED:NIED F-net (broadband)'
@@ -26,7 +24,7 @@
     '0705' : 'LOCAL:Shizuoka Prefectural Government'
     '0801' : 'OTHER:ADEP'
 
-### Codes for NIED V-net (0105):
+## Codes for NIED V-net (0105)
 
     '010503' : '0105:Usuzan'
     '010505' : '0105:Iwatesan'
@@ -37,7 +35,7 @@
     '010512' : '0105:Asosan'
     '010514' : '0105:Kirishimayama'
 
-### Codes for JMA Volcanic Seismometer Network (0302):
+## Codes for JMA Volcanic Seismometer Network (0302)
 
     '030201' : '0302:Atosanupuri'
     '030202' : '0302:Meakandake'

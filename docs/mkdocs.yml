@@ -11,7 +11,8 @@ pages:
 - Introduction: index.md
 - Quick Start: quick-start.md
 - Scripts: scripts.md
-- FAQ: FAQ.md
+- FAQs: FAQs.md
+- Networks: networks.md
 - LICENSE: LICENSE.md
 
 extra:
