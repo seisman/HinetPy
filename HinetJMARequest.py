@@ -22,19 +22,17 @@ Options:
     --os=OS       Line break format, choose from DOS or UNIX. [default: DOS]
 
 """
+
 import sys
-import configparser
 
 from docopt import docopt
 
-from util import auth_login, JMA
+from util import auth_login, read_config, JMA
 
 
 def main():
     # specify user name and password
-    config = configparser.ConfigParser()
-    if not config.read("Hinet.cfg"):
-        sys.exit("Error: Configure file `Hinet.cfg' not found.")
+    config = read_config('Hinet.cfg')
     username = config['Account']['User']
     password = config['Account']['Password']
 

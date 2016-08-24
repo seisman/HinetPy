@@ -5,6 +5,7 @@
 import re
 import sys
 import logging
+import configparser
 
 import requests
 
@@ -48,3 +49,15 @@ def auth_login(username, password):
         sys.exit()
 
     return s
+
+
+def read_config(config_file):
+    ''' read configure file '''
+
+    config = configparser.ConfigParser()
+
+    if not config.read(config_file):
+        logging.error("Configure file %s not found!", config_file)
+        sys.exit()
+
+    return config

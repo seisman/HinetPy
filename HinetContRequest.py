@@ -149,7 +149,6 @@ import glob
 import logging
 import zipfile
 import subprocess
-import configparser
 import multiprocessing
 from datetime import date, datetime, timedelta
 
@@ -157,7 +156,7 @@ import requests
 from docopt import docopt
 from clint.textui import progress
 
-from util import auth_login, AUTH, CONT, STATUS, REQUEST, DOWNLOAD
+from util import auth_login, read_config, AUTH, CONT, STATUS, REQUEST, DOWNLOAD
 
 
 # all legal codes
@@ -350,10 +349,7 @@ if __name__ == "__main__":
                         datefmt='%H:%M:%S')
     logging.getLogger("requests").setLevel(logging.WARNING)
 
-    config = configparser.ConfigParser()
-    if not config.read("Hinet.cfg"):
-        logging.error("Configure file `Hinet.cfg' not found.")
-        sys.exit()
+    config = read_config('Hinet.cfg')
     arguments = docopt(__doc__)
 
     username = config['Account']['User']

@@ -21,7 +21,7 @@ import clint
 import docopt
 import requests
 
-from util import auth_login, CONT, STATION
+from util import auth_login, read_config, CONT, STATION
 
 
 def cmd_exists(cmd):
@@ -105,11 +105,8 @@ def main():
                         datefmt='%H:%M:%S')
     logging.getLogger("requests").setLevel(logging.WARNING)
 
-    config = configparser.ConfigParser()
     logging.info("Reading Hi-net configure file...")
-    if not config.read("Hinet.cfg"):
-        logging.error("Configure file `Hinet.cfg' not found.")
-        sys.exit()
+    config = read_config('Hinet.cfg')
 
     username = config['Account']['User']
     password = config['Account']['Password']

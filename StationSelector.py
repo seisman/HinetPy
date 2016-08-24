@@ -29,11 +29,10 @@ Notes:
 
 import sys
 import logging
-import configparser
 
 from docopt import docopt
 
-from util import auth_login, SELECT
+from util import auth_login, read_config, SELECT
 
 
 def main():
@@ -43,10 +42,7 @@ def main():
     logging.getLogger("requests").setLevel(logging.WARNING)
 
     arguments = docopt(__doc__)
-    config = configparser.ConfigParser()
-    if not config.read("Hinet.cfg"):
-        logging.error("Configure file `Hinet.cfg' not found.")
-        sys.exit()
+    config = read_config('Hinet.cfg')
 
     username = config['Account']['User']
     password = config['Account']['Password']
