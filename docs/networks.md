@@ -26,13 +26,19 @@
 
 ## Codes for NIED V-net (0105)
 
+    '010501' : '0105:Tokachidake'
+    '010502' : '0105:Tarumaesan'
     '010503' : '0105:Usuzan'
+    '010504' : '0105:Hokkaido-Komagatake'
     '010505' : '0105:Iwatesan'
+    '010506' : '0105:Nasudake'
     '010507' : '0105:Asamayama'
+    '010508' : '0105:Kusatsu-Shiranesan'
     '010509' : '0105:Fujisan'
     '010510' : '0105:Miyakejima'
     '010511' : '0105:Izu-Oshima'
     '010512' : '0105:Asosan'
+    '010513' : '0105:Unzendake'
     '010514' : '0105:Kirishimayama'
 
 ## Codes for JMA Volcanic Seismometer Network (0302)
@@ -47,7 +53,6 @@
     '030208' : '0302:Hokkaido-Komagatake'
     '030209' : '0302:Esan'
     '030210' : '0302:Iwakisan'
-    '030247' : '0302:Hakkodasan'
     '030211' : '0302:Akita-Yakeyama'
     '030212' : '0302:Iwatesan'
     '030213' : '0302:Akita-Komagatake'
@@ -84,3 +89,4 @@
     '030244' : '0302:Satsuma-Iojima'
     '030245' : '0302:Kuchinoerabujima'
     '030246' : '0302:Suwanosejima'
+    '030247' : '0302:Hakkodasan'
