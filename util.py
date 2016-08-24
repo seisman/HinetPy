@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-''' utility function for HinetScripts '''
+''' utility functions for HinetScripts '''
 
 import re
 import sys
@@ -36,10 +36,10 @@ def auth_login(username, password):
         s.get(AUTH)  # get cookies
         r = s.post(AUTH, data=auth)  # login
     except requests.exceptions.ConnectTimeout:
-        logging.error("ConnectTimeout in 20 seconds.")
+        logging.error("ConnectTimeout in %d seconds.", s.timeout)
         sys.exit()
     except requests.exceptions.ConnectionError:
-        logging.error("Name or service not known")
+        logging.error("Name or service not known.")
         sys.exit()
 
     inout = re.search(r'auth_log(?P<LOG>.*)\.png', r.text).group('LOG')

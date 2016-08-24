@@ -15,10 +15,7 @@ import re
 import sys
 import shutil
 import logging
-try:
-    import configparser
-except ImportError:
-    raise RuntimeError("Python 2.X is NOT supported.")
+import configparser
 
 import clint
 import docopt
@@ -46,7 +43,7 @@ def check_version(s):
     if version == '160422':
         logging.info("Hi-net website version = %s.", version)
     else:
-        logging.warning("Hi-net website seems to have been updated. "
+        logging.warning("Hi-net website seems to have been updated."
                         "These scripts may not work as expected.")
 
 
@@ -101,7 +98,7 @@ def main():
     ''' main function '''
 
     if sys.version_info < (3, 3):
-        raise RuntimeError("Python 3.3, 3.4 or 3.5 is required")
+        raise RuntimeError("Python 3.3 or newer is required")
 
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s %(levelname)-7s %(message)s',
