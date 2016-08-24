@@ -31,13 +31,8 @@ from util import auth_login, read_config, JMA
 
 
 def main():
-    # specify user name and password
-    config = read_config('Hinet.cfg')
-    username = config['Account']['User']
-    password = config['Account']['Password']
-
+    # parse arguments
     arguments = docopt(__doc__)
-
     if arguments['--measure']:
         data = "measure"
     elif arguments['--mecha']:
@@ -45,10 +40,12 @@ def main():
 
     rtm = arguments['<yyyymmdd>']
     span = arguments['<span>']
-    if int(span) < 1 or int(span) > 7:
-        sys.exit("Span should be in [1,7].")
+    if not (span.isdigit() and int(span) in range(1, 8)):
+        sys.exit("<span> should be integer between 1 and 7.")
+
     os = arguments['--os'][0:1]
 
+    # prepare data to post
     params = {
         "data": data,
         "rtm": rtm,
@@ -56,9 +53,13 @@ def main():
         "os": os,
     }
 
+    # specify user name and password
+    config = read_config('Hinet.cfg')
+    username = config['Account']['User']
+    password = config['Account']['Password']
     s = auth_login(username, password)
-    d = s.post(JMA, params=params, stream=True)
 
+    d = s.post(JMA, params=params, stream=True)
     fname = "{}_{}_{}.txt".format(data, rtm, span)
     with open(fname, "wb") as fd:
         for chunk in d.iter_content(chunk_size=1024):
