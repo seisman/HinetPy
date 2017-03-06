@@ -1,8 +1,4 @@
-*.pl
-secrets
-docs/site/
 __pycache__
-tests/*
-!tests/Hinet.cfg
-!tests/test-*.py
-*.pyc
+build
+_build
+.cache
