@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-username = "username"
-password = "password"
+username = "test_username"
+password = "test_password"
 
 import pytest
 import requests

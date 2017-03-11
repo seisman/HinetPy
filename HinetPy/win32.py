@@ -51,28 +51,16 @@ class Channel(object):
         self.lsb_value = lsb_value
 
 
-def extract_sac(win32, ctable, suffix="SAC", outdir=".",
+def extract_sac(data, ctable, suffix="SAC", outdir=".",
                 filter_by_id=None,
                 filter_by_name=None,
                 filter_by_component=None,
                 with_pz=False):
     """Extract data as SAC format files.
 
-    >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch")  # doctest: +SKIP
-
-    Extract all channel with specified SAC suffix and output directory:
-
-    >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
-    ...             suffix="", outdir="20100101000")  # doctest: +SKIP
-
-    Extract only specified channels:
-
-    >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
-    ...             filter_by_name="N.NA*", filter_by_channel='[NE]')  # doctest: +SKIP
-
     Parameters
     ----------
-    win32: str
+    data: str
         win32 file to be processed.
     ctable: str
         Channel table file.
@@ -88,6 +76,20 @@ def extract_sac(win32, ctable, suffix="SAC", outdir=".",
         Filter channels by component.
     with_pz: bool
         Extract PZ files at the same time. PZ file has default suffix ``.SAC_PZ``.
+
+    Examples
+    --------
+    >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch")  # doctest: +SKIP
+
+    Extract all channel with specified SAC suffix and output directory:
+
+    >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
+    ...             suffix="", outdir="20100101000")  # doctest: +SKIP
+
+    Extract only specified channels:
+
+    >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
+    ...             filter_by_name="N.NA*", filter_by_channel='[NE]')  # doctest: +SKIP
     """
 
     channels = _get_channels(ctable)
@@ -102,7 +104,7 @@ def extract_sac(win32, ctable, suffix="SAC", outdir=".",
 
     _write_winprm(ctable)
     for channel in channels:
-        _extract_channel(win32, channel, suffix, outdir)
+        _extract_channel(data, channel, suffix, outdir)
         if with_pz:
             _extract_sacpz(channel, outdir=outdir)
     os.unlink("win.prm")
@@ -111,17 +113,6 @@ def extract_sac(win32, ctable, suffix="SAC", outdir=".",
 def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
                filter_by_chid=None, filter_by_name=None, filter_by_component=None):
     """Extract instrumental response in SAC PZ format from channel table.
-
-    >>> extract_pz("0101_20100101.ch")  # doctest: +SKIP
-
-    Extract all channel with specified suffix and output directory:
-
-    >>> extract_pz("0101_20100101.ch", suffix="", outdir="20100101000")  # doctest: +SKIP
-
-    Extract only specified channels:
-
-    >>> extract_pz("0101_20100101.ch",
-    ...            filter_by_name="N.NA*", filter_by_channel='[NE]')  # doctest: +SKIP
 
     Parameters
     ----------
@@ -137,6 +128,19 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
         Filter channels by name.
     filter_by_component: list of str or wildcard
         Filter channels by component.
+
+    Examples
+    --------
+    >>> extract_pz("0101_20100101.ch")  # doctest: +SKIP
+
+    Extract all channel with specified suffix and output directory:
+
+    >>> extract_pz("0101_20100101.ch", suffix="", outdir="20100101000")  # doctest: +SKIP
+
+    Extract only specified channels:
+
+    >>> extract_pz("0101_20100101.ch",
+    ...            filter_by_name="N.NA*", filter_by_channel='[NE]')  # doctest: +SKIP
     """
     channels = _get_channels(ctable)
     if filter_by_chid or filter_by_name or filter_by_component:
@@ -337,25 +341,25 @@ def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.'):
     return pzfile
 
 
-def merge(cnts, cnt_total, force_sort=False):
+def merge(datas, final_data, force_sort=False):
     """Merge several win32 files to one win32 file.
 
-    >>> merge(['001.cnt', '002.cnt', '003.cnt'], "total.cnt")
+    >>> merge(['001.cnt', '002.cnt', '003.cnt'], "final.cnt")  # doctest: +SKIP
 
     Parameters
     ----------
-    cnts: list of str
+    datas: list of str
         Win32 files to be merged.
-    cnt_total: str
+    final_data: str
         Name of the final win32 file.
     force_sort: bool
         Sort all win32 files by date.
     """
-    cmd = ['catwin32', '-o', cnt_total]
+    cmd = ['catwin32', '-o', final_data]
     if force_sort:  # add -s option to force sort
         cmd.append('-s')
 
-    subprocess.call(cmd + cnts,
+    subprocess.call(cmd + datas,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL)
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-username = "username"
-password = "password"
+username = "test_username"
+password = "test_password"
 
 import os
 from datetime import datetime
@@ -59,27 +59,27 @@ class TestClass:
 
     def test_get_waveform_custom_name_1(self):
         starttime = datetime(2010, 1, 1, 0, 0)
-        win32, chfile = client.get_waveform('0101', starttime, 1, win32_filename="test.cnt", channeltable_filename="test.ch")
+        win32, chfile = client.get_waveform('0101', starttime, 1, data="test.cnt", ctable="test.ch")
 
         assert (win32, chfile) == ("test.cnt", "test.ch")
 
     def test_get_waveform_custom_name_2(self):
         starttime = datetime(2010, 1, 1, 0, 0)
-        win32, chfile = client.get_waveform('0101', starttime, 1, win32_filename="data/test.cnt", channeltable_filename="ch/test.ch")
+        win32, chfile = client.get_waveform('0101', starttime, 1, data="data/test.cnt", ctable="ch/test.ch")
 
         assert os.path.exists("data/test.cnt")
         assert os.path.exists("ch/test.ch")
 
     def test_get_waveform_custom_name_3(self):
         starttime = datetime(2010, 1, 1, 0, 0)
-        win32, chfile = client.get_waveform('0101', starttime, 1, output_directory="data")
+        win32, chfile = client.get_waveform('0101', starttime, 1, outdir="data")
 
         assert os.path.exists("data/0101_201001010000_1.cnt")
         assert os.path.exists("data/0101_20100101.ch")
 
     def test_get_waveform_custom_name_4(self):
         starttime = datetime(2010, 1, 1, 0, 0)
-        win32, chfile = client.get_waveform('0101', starttime, 1, win32_filename="cnt/test.cnt", channeltable_filename="ch/test.ch", output_directory="data")
+        win32, chfile = client.get_waveform('0101', starttime, 1, data="cnt/test.cnt", ctable="ch/test.ch", outdir="data")
 
         assert os.path.exists("cnt/test.cnt")
         assert os.path.exists("ch/test.ch")

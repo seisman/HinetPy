@@ -10,5 +10,7 @@ HinetPy - A Hi-net Client powered by Python
    first-try
    tutorial
    api
+   changelog
+   license
 
 .. automodule:: HinetPy

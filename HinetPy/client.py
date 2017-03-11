@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-"""A Hi-net Client."""
 
 import os
 import re
@@ -39,11 +38,8 @@ class Client(object):
     _ETAG = "16cd-537f317987000"
 
     def __init__(self, user=None, password=None, timeout=120, retries=3,
-                 sleep_time_in_seconds=5, max_sleep_count=30, debug=False):
-        """Hi-net web service request client.
-
-        >>> from HinetPy import Client               # doctest: +SKIP
-        >>> client = Client("username", "password")  # doctest: +SKIP
+                 sleep_time_in_seconds=5, max_sleep_count=30):
+        """Hi-net web service client.
 
         Parameters
         ----------
@@ -56,25 +52,33 @@ class Client(object):
         retries: int
             How many times to retry if request fails.
         sleep_time_in_seconds: int or float
-            How long to wait for the data status check.
+            See notes below.
         max_sleep_count: int
-            How many times to try to check data status.
+            See notes below.
+
+        Examples
+        --------
+
+        >>> from HinetPy import Client               # doctest: +SKIP
+        >>> client = Client("username", "password")  # doctest: +SKIP
 
         Notes
         -----
 
-        Hi-net server ususally spend 10 seconds to 1 minute in data preparation
-        after receiving a data request. During the preparation, users are NOT
-        allowed to request another data. So user has to wait until the data
-        is ready. HinetPy tries to check the data status every
-        ``sleep_time_in_seconds`` seconds until the data is ready. If HinetPy
-        checks the data status for more than ``max_sleep_count`` times, it
-        possibly indicate something wrong happend with this data. Then, HinetPy
-        will retry to request this data ``retries`` times.
+        Hi-net server ususally spend 10 seconds to 1 minute on data preparation
+        after receiving a data request. During the data preparation, users are
+        **NOT** allowed to request another data. So users have to wait until
+        the data is ready.
+
+        HinetPy checks data status every ``sleep_time_in_seconds`` seconds
+        until the data is ready. If HinetPy checks the data status for more
+        than ``max_sleep_count`` times, it possibly indicates something wrong
+        happend with this data. Then, HinetPy will retry to request this data
+        ``retries`` times. Ususally, you don't need to modify these settings
+        unless you know what you're doing.
         """
         self.timeout = timeout
         self.retries = retries
-        self.debug = debug
         self.sleep_time_in_seconds = sleep_time_in_seconds
         self.max_sleep_count = max_sleep_count
         if user and password:
@@ -83,16 +87,19 @@ class Client(object):
     def login(self, user, password):
         """Login in Hi-net server.
 
-        >>> from HinetPy import Client            # doctest: +SKIP
-        >>> client = Client()                     # doctest: +SKIP
-        >>> client.login("username", "password")  # doctest: +SKIP
-
         Parameters
         ----------
         user: str
             Username of Hi-net account.
         password: str
             Password of Hi-net account.
+
+        Examples
+        --------
+
+        >>> from HinetPy import Client            # doctest: +SKIP
+        >>> client = Client()                     # doctest: +SKIP
+        >>> client.login("username", "password")  # doctest: +SKIP
         """
         self.user = user
         self.password = password
@@ -114,22 +121,22 @@ class Client(object):
         logger.debug("Logging into Hi-net server.")
 
     def doctor(self):
-        """ Doctor do some checks.
+        """ Doctor does some checks.
 
         >>> client.doctor()  # doctest: +SKIP
-        [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
         [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.0).
+        [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
         [2017-01-01 21:52:09] INFO: catwin32: /home/user/bin/catwin32.
         [2017-01-01 21:52:09] INFO: win2sac_32: /home/user/bin/win2sac_32.
 
-        Checklist:
+        **Checklist**
 
-        - if Hi-net web service is updated (see :meth:`~HinetPy.client.Client.check_service_update`)
         - if HinetPy has a new release (see :meth:`~HinetPy.client.Client.check_module_release`)
+        - if Hi-net web service is updated (see :meth:`~HinetPy.client.Client.check_service_update`)
         - if catwin32 and win2sac_32 from win32tools in PATH (see :meth:`~HinetPy.client.Client.check_cmd_exists`)
         """
-        self.check_service_update()
         self.check_module_release()
+        self.check_service_update()
         self.check_cmd_exists()
 
     def _request_waveform(self, org, net, volc, starttime, span):
@@ -168,12 +175,13 @@ class Client(object):
             'arc':   'ZIP',
             'size':  '93680',  # the actual size doesn't matter
             'LANG':  'en',
-            'rn': str(int(datetime.now().timestamp()))
         }
 
         # retry if request fails else return id
         for _ in range(self.retries):
             try:
+                # the timestamp determine the unique id
+                payload['rn'] = str(int(datetime.now().timestamp()))
                 r = self.session.post(self._REQUEST, params=payload,
                                       timeout=self.timeout)
                 # assume the first one on status page is the one
@@ -203,6 +211,11 @@ class Client(object):
         else:
             msg = "Data request fails after {} retries".format(self.retries)
             logger.error(msg)
+            msg = "Possible causes:\n" \
+                    "1. max_span too large, call get_allowed_span" \
+                    " and choose a proper value.\n" \
+                    "2. runing two requests simultaneously."
+            print(msg)
             return None
 
     def _download_waveform(self, id):
@@ -263,23 +276,10 @@ class Client(object):
 
         return org, net, volc
 
-    def get_waveform(self, code, starttime, span, max_span=5,
-                     win32_filename=None, channeltable_filename=None,
-                     output_directory=None):
+    def get_waveform(self, code, starttime, span,
+                     max_span=5, data=None, ctable=None, outdir=None):
         '''
         Get waveform from Hi-net server.
-
-        Request 10 minutes data since 2010-01-01T00:00 (GMT+0900) of Hi-net.
-
-        >>> from datetime import datetime
-        >>> starttime = datetime(2010, 1, 1, 0, 0)
-        >>> client.get_waveform('0101', starttime, 10)
-        ('0101_201001010000_10.cnt', '0101_20100101.ch')
-
-        Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:
-
-        >>> client.get_waveform('0103', starttime, 1440, max_span=25)  # doctest: +SKIP
-        ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
         Parameters
         ----------
@@ -291,25 +291,43 @@ class Client(object):
             Time span in minutes.
         max_span: int
             Maximum time span for sub-requests.
-        win32_filename: str
+        data: str
             Filename of downloaded win32 data.
             Default format: CODE_YYYYmmddHHMM_SPAN.cnt
-        channeltable_filename: str
+        ctable: str
             Filename of downloaded channel table file.
             Default format: CODE_YYYYmmdd.ch
-        output_directory: str
+        outdir: str
             Save win32 and channel table data to specified directory.
             Default is current directory.
 
         Returns
         -------
-        win32_filename: str
+        data: str
             Filename of downloaded win32 data.
-        channeltable_filename: str
+        ctable: str
             Filename of downloaded win32 data.
+
+        Examples
+        --------
+
+        Request 10 minutes data since 2010-01-01T00:00 (GMT+0900) from Hi-net.
+
+        >>> from datetime import datetime
+        >>> starttime = datetime(2010, 1, 1, 0, 0)
+        >>> client.get_waveform('0101', starttime, 10)
+        ('0101_201001010000_10.cnt', '0101_20100101.ch')
+
+        Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:
+
+        >>> client.get_waveform('0103', starttime, 1440, max_span=25)  # doctest: +SKIP
+        ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
         Notes
         -----
+        **TimeZone**
+
+        All times in HinetPy are in JST (GMT+0900).
 
         **max_span**
 
@@ -385,9 +403,12 @@ class Client(object):
             return
 
         # 6. download
+        for id in ids:  # check if all id is not None
+            if not id:
+                logger.error("Fail to request some data. Skipping downloading.")
+                return None, None
         for id in ids:
-            if id:  # make sure id is not None
-                self._download_waveform(id)
+            self._download_waveform(id)
         # multiprocessing.Pool(processes=3).map(self._download_waveform, ids)
 
         # post processes
@@ -396,39 +417,39 @@ class Client(object):
 
         # 2. merge all cnt files
         # TODO: sort cnts?
-        if not win32_filename:
-            win32_filename = "{}_{}_{:d}.cnt".format(code,
-                                                     starttime.strftime("%Y%m%d%H%M"),
-                                                     span)
-        outdir = None
-        if os.path.dirname(win32_filename):
-            outdir = os.path.dirname(win32_filename)
-        elif output_directory:
-            outdir = output_directory
-            win32_filename = os.path.join(outdir, win32_filename)
-        if outdir and not os.path.exists(outdir):
-            os.mkdir(outdir)
-        merge(cnts, win32_filename)
+        if not data:
+            data = "{}_{}_{:d}.cnt".format(code,
+                                           starttime.strftime("%Y%m%d%H%M"),
+                                           span)
+        dirname = None
+        if os.path.dirname(data):
+            dirname = os.path.dirname(data)
+        elif outdir:
+            dirname = outdir
+            data = os.path.join(dirname, data)
+        if dirname and not os.path.exists(dirname):
+            os.mkdir(dirname)
+        merge(cnts, data)
 
         # 3. rename channeltable file
-        if not channeltable_filename:
-            channeltable_filename = "{}_{}.ch".format(code, starttime.strftime("%Y%m%d"))
+        if not ctable:
+            ctable = "{}_{}.ch".format(code, starttime.strftime("%Y%m%d"))
 
-        outdir = None
-        if os.path.dirname(channeltable_filename):
-            outdir = os.path.dirname(channeltable_filename)
-        elif output_directory:
-            outdir = output_directory
-            channeltable_filename = os.path.join(outdir, channeltable_filename)
-        if outdir and not os.path.exists(outdir):
-            os.mkdir(outdir)
-        os.rename(ch_euc, channeltable_filename)
+        dirname = None
+        if os.path.dirname(ctable):
+            dirname = os.path.dirname(ctable)
+        elif outdir:
+            dirname = outdir
+            ctable = os.path.join(dirname, ctable)
+        if dirname and not os.path.exists(dirname):
+            os.mkdir(dirname)
+        os.rename(ch_euc, ctable)
 
         # 4. cleanup
         for cnt in cnts:
             os.unlink(cnt)
 
-        return win32_filename, channeltable_filename
+        return data, ctable
 
     def _get_catalog(self, datatype, startdate, span, filename=None, os="DOS"):
         """Request JMA catalog."""
@@ -454,41 +475,37 @@ class Client(object):
     def get_arrivaltime(self, startdate, span, filename=None, os="DOS"):
         """Get JMA arrival time data from Hi-net.
 
+        Parameters
+        ----------
+        startdate: :py:class:`datetime.date`
+            Start date to request.
+        span: int
+            Data length in days.
+        os: str
+            File format. "DOS" or "UNIX".
+        filename: str
+            Filename to save.
+
+        Returns
+        -------
+        filename: str
+            Filename saved.
+
+        Examples
+        --------
+
         >>> from datetime import date
         >>> startdate = date(2010, 1, 1)
         >>> client.get_arrivaltime(startdate, 5)
         'measure_20100101_5.txt'
         >>> client.get_arrivaltime(startdate, 5, filename="arrivaltime.txt")
         'arrivaltime.txt'
-
-        Parameters
-        ----------
-        startdate: :py:class:`datetime.date`
-            Start date to request.
-        span: int
-            Data length in days.
-        os: str
-            File format. "DOS" or "UNIX".
-        filename: str
-            Filename to save.
-
-        Returns
-        -------
-        filename: str
-            Filename saved.
         """
         return self._get_catalog("measure", startdate, span, filename, os)
 
     def get_focalmechanism(self, startdate, span, filename=None, os="DOS"):
         """Get JMA focal mechanism data from Hi-net.
 
-        >>> from datetime import date
-        >>> startdate = date(2010, 1, 1)
-        >>> client.get_focalmechanism(startdate, 5)
-        'focal_20100101_5.txt'
-        >>> client.get_focalmechanism(startdate, 5, filename="focalmechanism.txt")
-        'focalmechanism.txt'
-
         Parameters
         ----------
         startdate: :py:class:`datetime.date`
@@ -504,6 +521,15 @@ class Client(object):
         -------
         filename: str
             Filename saved.
+
+        Examples
+        --------
+        >>> from datetime import date
+        >>> startdate = date(2010, 1, 1)
+        >>> client.get_focalmechanism(startdate, 5)
+        'focal_20100101_5.txt'
+        >>> client.get_focalmechanism(startdate, 5, filename="focalmechanism.txt")
+        'focalmechanism.txt'
         """
         return self._get_catalog("focal", startdate, span, filename, os)
 
@@ -516,7 +542,6 @@ class Client(object):
         0101 N.SFNH 142.1185 45.3346
         ...
         """
-
         # no need to login
         r = requests.get(self._STATION_INFO)
         lines = r.iter_lines()
@@ -586,6 +611,15 @@ class Client(object):
     def select_stations(self, code, stations=None):
         """Select Hi-net/F-net stations
 
+        Parameters
+        ----------
+        code: str
+            Network code.
+        stations: str or list
+            Stations to select.
+
+        Examples
+        --------
         Select only two stations:
 
         >>> client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
@@ -598,12 +632,6 @@ class Client(object):
         >>> client.get_selected_stations('0101')
         0
 
-        Parameters
-        ----------
-        code: str
-            Network code.
-        stations: str or list
-            Stations to select.
         """
 
         if stations:

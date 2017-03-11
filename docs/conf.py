@@ -32,6 +32,9 @@ extensions = ['sphinx.ext.autodoc',
 autodoc_member_order = 'bysource'
 autoclass_content = 'both'
 napoleon_numpy_docstring = True
+napoleon_use_admonition_for_notes = True
+napoleon_use_admonition_for_examples = True
+napoleon_use_admonition_for_references = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -102,6 +105,8 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+suppress_warnings = ['image.nonlocal_uri']
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/3/': None}

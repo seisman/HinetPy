@@ -11,18 +11,18 @@ table. :mod:`~HinetPy.win32` can convert them into SAC and SACPZ format.
 Extract Waveform Data
 ---------------------
 
-Extract all channels from data as SAC format.
+Extract waveform data of all channels as SAC format.
 
 >>> win32.extract_sac(data, ctable)
 
-The default filename has a format of "STATION.COMPONENT.SAC" (``N.NABC.U.SAC``).
+The SAC files has a default filename ``STATION.COMPONENT.SAC`` (e.g. ``N.NABC.U.SAC``).
 You can specify another SAC suffix and a different output directory.
 
 >>> win32.extract_sac(data, ctable, suffix="", outdir="SAC")
 
 If you want to extract only a small subset of channels, you can use ``filter_by_id``,
 ``filter_by_name`` and/or ``filter_by_component`` to filter the channels.
-They can accept a list of string or a string contains wildcard.
+They accept a list of string or a string contains wildcard.
 
 >>> # extract 3 channles by id
 >>> win32.extract_sac(data, ctable, filter_by_id=['3e83', '3e84', '3e85'])
@@ -37,18 +37,18 @@ Extract PZ
 :meth:`~HinetPy.win32.extract_pz` can convert Hi-net channel table to SAC PZ
 format. Its usage is very similar to :meth:`~HinetPy.win32.extract_sac`.
 
-Extract all channels information from channel table:
+Extract information of all channels as SACPZ file:
 
 >>> win32.extract_pz(ctable)
 
-The default filename has a format of "STATION.COMPONENT.SAC_PZ" (``N.NABC.U.SAC_PZ``).
-You can specify another SAC suffix and a different output directory.
+The SACPZ file has a default name ``STATION.COMPONENT.SAC_PZ`` (e.g. ``N.NABC.U.SAC_PZ``).
+You can specify another SACPZ suffix and a different output directory.
 
->>> win32.extract_pz(data, ctable, suffix="SACPZ", outdir="PZ/")
+>>> win32.extract_pz(ctable, suffix="SACPZ", outdir="PZ/")
 
 If you want to extract only a small subset of channels, you can use ``filter_by_id``,
 ``filter_by_name`` and/or ``filter_by_component`` to filter the channels.
-They can accept a list of string or a string contains wildcard.
+They accept a list of string or a string contains wildcard.
 
 >>> # extract 3 channles by id
 >>> win32.extract_pz(ctable, filter_by_id=['3e83', '3e84', '3e85'])

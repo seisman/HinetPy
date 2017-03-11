@@ -10,8 +10,8 @@ from HinetPy import Client
 from HinetPy.header import network
 from HinetPy.win32 import _get_channels
 
-username = "username"
-password = "password"
+username = "test_username"
+password = "test_password"
 client = Client(username, password)
 
 class TestClass:
