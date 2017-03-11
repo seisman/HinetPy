@@ -33,6 +33,7 @@ class Client(object):
     _REQUEST = _CONT + '/cont_request.php'
     _DOWNLOAD = _CONT + '/cont_download.php'
     _STATION_INFO = _HINET + '/st_info/detail/dlDialogue.php?f=CSV'
+    _WIN32TOOLS = _AUTH + '/manual/dlDialogue.php?r=win32tools'
 
     # ETAG for v160422
     _ETAG = "16cd-537f317987000"
@@ -746,6 +747,15 @@ class Client(object):
         else:
             for code in sorted(header.network.keys()):
                 print("{:7s}: {}".format(code, header.network[code].name))
+
+    def _get_win32tools(self):
+        """Download win32 tools"""
+        d = self.session.get(self._WIN32TOOLS, stream=True)
+        with open("win32tools.tar.gz", "wb") as fd:
+            for chunk in d.iter_content(chunk_size=1024):
+                if chunk:  # filter out keep-alive new chunks
+                    fd.write(chunk)
+        return "win32tools.tar.gz"
 
     def __str__(self):
         string = "<== Hi-net web service client ==>\n"
