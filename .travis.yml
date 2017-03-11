@@ -1,15 +1,23 @@
 language: python
-branch:
-  only:
-  - master
+python:
+  - '3.4'
+  - '3.5'
+  - '3.6'
 
 install:
-  - pip install mkdocs mkdocs-material ghp-import
+  - pip install .
+  - pip install -r requirements.txt
+  - pip install travis-sphinx guzzle_sphinx_theme
+  - sed -i "s/test_username/${HINET_USERNAME}/" .travis/install_win32tools.py
+  - sed -i "s/test_password/${HINET_PASSWORD}/" .travis/install_win32tools.py
+  - python .travis/install_win32tools.py
+  - export PATH=${PATH}:${PWD}/win32tools/bin
+  - sed -i "s/test_username/${HINET_USERNAME}/" tests/test_*.py
+  - sed -i "s/test_password/${HINET_PASSWORD}/" tests/test_*.py
 
 script:
-  - cd docs/
-  - mkdocs build --clean --quiet
+  - cd tests; py.test -v; cd ..
+  - travis-sphinx -s docs -b master,docs -n build
 
 after_success:
-  - ghp-import -b gh-pages -n site -m 'Update by travis'
-  - git push "https://${GH_TOKEN}@github.com/seisman/HinetScripts" gh-pages:gh-pages --force --quiet
+    - travis-sphinx -b master,docs deploy
