@@ -12,7 +12,7 @@ request, downloading and format conversion tasks related to `NIED Hi-net`_.
 Dependencies
 ============
 
-#. Python 3.3+
+#. Python 3.4+
 #. `requests <http://docs.python-requests.org/>`_
 #. `win32tools`_ provided by `NIED Hi-net`_
 
