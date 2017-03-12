@@ -75,11 +75,13 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".",
     filter_by_component: list of str or wildcard
         Filter channels by component.
     with_pz: bool
-        Extract PZ files at the same time. PZ file has default suffix ``.SAC_PZ``.
+        Extract PZ files at the same time.
+        PZ file has default suffix ``.SAC_PZ``.
 
     Examples
     --------
-    >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch")  # doctest: +SKIP
+    >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch")
+    ... # doctest: +SKIP
 
     Extract all channel with specified SAC suffix and output directory:
 
@@ -89,7 +91,8 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".",
     Extract only specified channels:
 
     >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
-    ...             filter_by_name="N.NA*", filter_by_channel='[NE]')  # doctest: +SKIP
+    ...             filter_by_name="N.NA*",
+    ...             filter_by_channel='[NE]')  # doctest: +SKIP
     """
 
     channels = _get_channels(ctable)
@@ -111,7 +114,9 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".",
 
 
 def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
-               filter_by_chid=None, filter_by_name=None, filter_by_component=None):
+               filter_by_chid=None,
+               filter_by_name=None,
+               filter_by_component=None):
     """Extract instrumental response in SAC PZ format from channel table.
 
     Parameters
@@ -135,12 +140,14 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
 
     Extract all channel with specified suffix and output directory:
 
-    >>> extract_pz("0101_20100101.ch", suffix="", outdir="20100101000")  # doctest: +SKIP
+    >>> extract_pz("0101_20100101.ch", suffix="", outdir="20100101000")
+    ... # doctest: +SKIP
 
     Extract only specified channels:
 
     >>> extract_pz("0101_20100101.ch",
-    ...            filter_by_name="N.NA*", filter_by_channel='[NE]')  # doctest: +SKIP
+    ...            filter_by_name="N.NA*",
+    ...            filter_by_channel='[NE]')  # doctest: +SKIP
     """
     channels = _get_channels(ctable)
     if filter_by_chid or filter_by_name or filter_by_component:
@@ -214,7 +221,8 @@ def _filter_channels(channels,
                 if fnmatch(getattr(channel, key), filters):
                     filtered_channels.append(channel)
         else:
-            raise ValueError("Incorrect key: only id|name|component are supported.")
+            msg = "Incorrect key: only id|name|component are supported."
+            raise ValueError(msg)
         return filtered_channels
 
     if filter_by_id:
@@ -237,8 +245,8 @@ def _write_winprm(ctable, prmfile="win.prm"):
         f.write(msg)
 
 
-def _extract_channel(winfile, channel,
-                     suffix="SAC", outdir=".", prmfile="win.prm", pmax=2000000):
+def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
+                     prmfile="win.prm", pmax=2000000):
     """Extract one channel data from win32 file.
 
     Parameters
@@ -319,12 +327,14 @@ def _write_pz(pzfile, real, imaginary, constant):
 def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.'):
 
     if channel.unit != 'm/s':  # only works for velocity
-        print("Warning: {}.{} isn't velocity in m/s".format(channel.name, channel.component))
+        print("Warning: {}.{} isn't velocity in m/s".format(channel.name,
+                                                            channel.component))
 
     try:
         freq = 2.0 * math.pi / channel.period
     except ZeroDivisionError:
-        print("Warning: {}.{} Natural period = 0!".format(channel.name, channel.component))
+        print("Warning: {}.{} Natural period = 0!".format(channel.name,
+                                                          channel.component))
 
     A0 = 2 * channel.damping
     factor = math.pow(10, channel.preamplification/20.0)

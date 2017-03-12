@@ -2,7 +2,6 @@
 
 import os
 import re
-import sys
 import time
 import math
 import logging
@@ -17,7 +16,9 @@ from HinetPy import header
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
-logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(level=logging.INFO,
+                    format=FORMAT,
+                    datefmt='%Y-%m-%d %H:%M:%S')
 logger = logging.getLogger(__name__)
 
 
@@ -132,9 +133,12 @@ class Client(object):
 
         **Checklist**
 
-        - if HinetPy has a new release (see :meth:`~HinetPy.client.Client.check_module_release`)
-        - if Hi-net web service is updated (see :meth:`~HinetPy.client.Client.check_service_update`)
-        - if catwin32 and win2sac_32 from win32tools in PATH (see :meth:`~HinetPy.client.Client.check_cmd_exists`)
+        - if HinetPy has a new release
+          (see :meth:`~HinetPy.client.Client.check_module_release`)
+        - if Hi-net web service is updated
+          (see :meth:`~HinetPy.client.Client.check_service_update`)
+        - if catwin32 and win2sac_32 from win32tools in PATH
+          (see :meth:`~HinetPy.client.Client.check_cmd_exists`)
         """
         self.check_module_release()
         self.check_service_update()
@@ -192,14 +196,16 @@ class Client(object):
                                r'<td class="bgcolist2">' + id + r'</td>')
                 # wait until data is ready
                 for _i in range(self.max_sleep_count):
-                    status = self.session.post(self._STATUS, timeout=self.timeout)
+                    status = self.session.post(self._STATUS,
+                                               timeout=self.timeout)
                     opt = p.search(status.text).group('OPT')
                     if opt == '1':  # still preparing data
                         time.sleep(self.sleep_time_in_seconds)
                     elif opt == '2':  # data is available
                         return id
                     elif opt == '3':  # ?
-                        msg = "If you see this, please report an issue on GitHub!"
+                        msg = "If you see this, " \
+                              "please report an issue on GitHub!"
                         logger.error(msg)
                         break
                     elif opt == '4':  # something wrong, retry
@@ -213,9 +219,9 @@ class Client(object):
             msg = "Data request fails after {} retries".format(self.retries)
             logger.error(msg)
             msg = "Possible causes:\n" \
-                    "1. max_span too large, call get_allowed_span" \
-                    " and choose a proper value.\n" \
-                    "2. runing two requests simultaneously."
+                  "1. max_span too large, call get_allowed_span" \
+                  " and choose a proper value.\n" \
+                  "2. runing two requests simultaneously."
             print(msg)
             return None
 
@@ -316,12 +322,13 @@ class Client(object):
 
         >>> from datetime import datetime
         >>> starttime = datetime(2010, 1, 1, 0, 0)
-        >>> client.get_waveform('0101', starttime, 10)
+        >>> client.get_waveform('0101', starttime, 10)  # doctest: +SKIP
         ('0101_201001010000_10.cnt', '0101_20100101.ch')
 
         Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:
 
-        >>> client.get_waveform('0103', starttime, 1440, max_span=25)  # doctest: +SKIP
+        >>> client.get_waveform('0103', starttime, 1440,  # doctest: +SKIP
+        ...                      max_span=25)
         ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
         Notes
@@ -348,7 +355,7 @@ class Client(object):
         2. split a long request into several short sub-requests
         3. loop over all sub-requests and return data id to download
         4. download all data based on data id
-        5. extract all downloaded zip files and merge into one win32 format data
+        5. extract all zip files and merge into one win32 format data
         6. cleanup
         '''
         org, net, volc = self._parse_code(code)
@@ -397,7 +404,8 @@ class Client(object):
                         count,
                         starttimes[i].strftime("%Y-%m-%d %H:%M"),
                         spans[i])
-            id = self._request_waveform(org, net, volc, starttimes[i], spans[i])
+            id = self._request_waveform(org, net, volc,
+                                        starttimes[i], spans[i])
             ids.append(id)
         if len(ids) == 0:
             logger.error("Error in data requesting, exiting now.")
@@ -406,7 +414,7 @@ class Client(object):
         # 6. download
         for id in ids:  # check if all id is not None
             if not id:
-                logger.error("Fail to request some data. Skipping downloading.")
+                logger.error("Fail to request some data. Skipped.")
                 return None, None
         for id in ids:
             self._download_waveform(id)
@@ -466,7 +474,9 @@ class Client(object):
         }
         d = self.session.post(self._JMA, params=params, stream=True)
         if not filename:
-            filename = "{}_{}_{}.txt".format(datatype, startdate.strftime("%Y%m%d"), span)
+            filename = "{}_{}_{}.txt".format(datatype,
+                                             startdate.strftime("%Y%m%d"),
+                                             span)
         with open(filename, "wb") as fd:
             for chunk in d.iter_content(chunk_size=1024):
                 if chunk:  # filter out keep-alive new chunks
@@ -529,7 +539,7 @@ class Client(object):
         >>> startdate = date(2010, 1, 1)
         >>> client.get_focalmechanism(startdate, 5)
         'focal_20100101_5.txt'
-        >>> client.get_focalmechanism(startdate, 5, filename="focalmechanism.txt")
+        >>> client.get_focalmechanism(startdate, 5, filename="focal.txt")
         'focalmechanism.txt'
         """
         return self._get_catalog("focal", startdate, span, filename, os)
@@ -677,8 +687,8 @@ class Client(object):
         latest_release = json.loads(r.text)['tag_name']
 
         if StrictVersion(latest_release) > StrictVersion(__version__):
-            msg = '{} v{} is released. See {} for details.'.format(__title__, latest_release, __repo__)
-            logger.warning(msg)
+            logger.warning("%s v%s is release. See %s for details.",
+                           __title__, latest_release, __repo__)
             return True
         else:
             logger.info("You're using the latest release (v%s)." % __version__)
@@ -739,11 +749,11 @@ class Client(object):
         """
         if code:
             net = header.network[code]
-            string = "== Information of Network {} ==\n".format(code)
-            string += "Name: {}\n".format(net.name)
-            string += "Starttime: {}\n".format(net.starttime.strftime("%Y%m%d"))
-            string += "No. of channels: {}".format(net.channels)
-            print(string)
+            info = "== Information of Network {} ==\n".format(code)
+            info += "Name: {}\n".format(net.name)
+            info += "Starttime: {}\n".format(net.starttime.strftime("%Y%m%d"))
+            info += "No. of channels: {}".format(net.channels)
+            print(info)
         else:
             for code in sorted(header.network.keys()):
                 print("{:7s}: {}".format(code, header.network[code].name))
