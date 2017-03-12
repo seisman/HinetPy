@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.3.1 (2017-03-12):
+ - Fix a technical issue
+
 0.3.0 (2017-03-12):
  - rewritten as a Python package
 
