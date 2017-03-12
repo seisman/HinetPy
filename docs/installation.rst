@@ -4,9 +4,13 @@ Installation
 Python3
 -------
 
-HinetPy need Pyhon 3.3 or above. If you're new to Python, I strongly recommend installing the `Anaconda`_.
+HinetPy need Pyhon 3.4 or above. If you're new to Python, I strongly recommend installing the `Anaconda`_.
 
 .. _Anaconda: https://www.continuum.io/downloads
+
+.. note::
+
+   There is no plan to support Python 2.7.
 
 Third-party modules
 -------------------
