@@ -684,10 +684,13 @@ class Client(object):
 
         url = 'https://api.github.com/repos/seisman/HinetPy/releases/latest'
         r = requests.get(url)
+        if r.status_code != 200:
+            logger.warning("Error in connecting GitHub. Skipped.")
+            return False
         latest_release = json.loads(r.text)['tag_name']
 
         if StrictVersion(latest_release) > StrictVersion(__version__):
-            logger.warning("%s v%s is release. See %s for details.",
+            logger.warning("%s v%s is released. See %s for details.",
                            __title__, latest_release, __repo__)
             return True
         else:
