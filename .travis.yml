@@ -4,20 +4,39 @@ python:
   - '3.5'
   - '3.6'
 
+branches:
+  only:
+  - master
+  - dev
+
 install:
   - pip install .
   - pip install -r requirements.txt
-  - pip install travis-sphinx guzzle_sphinx_theme
+  - pip install guzzle_sphinx_theme
+  # install win32tools
   - sed -i "s/test_username/${HINET_USERNAME}/" .travis/install_win32tools.py
   - sed -i "s/test_password/${HINET_PASSWORD}/" .travis/install_win32tools.py
   - python .travis/install_win32tools.py
+  - tar -xvf win32tools.tar.gz
+  - cd win32tools && make -j && mkdir bin
+  - mv catwin32.src/catwin32 win2sac.src/win2sac_32 bin/ && cd ..
   - export PATH=${PATH}:${PWD}/win32tools/bin
+
+before_script:
   - sed -i "s/test_username/${HINET_USERNAME}/" tests/test_*.py
   - sed -i "s/test_password/${HINET_PASSWORD}/" tests/test_*.py
 
 script:
-  - cd tests; py.test -v; cd ..
-  - travis-sphinx -s docs -b master,docs -n build
+  - py.test -v
 
 after_success:
-    - travis-sphinx -b master,docs deploy
+  - cd docs && make html && cd ..
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: ${GH_TOKEN}
+  local_dir: docs/_build/html
+  on:
+    branch: master
+    python: '3.6'
