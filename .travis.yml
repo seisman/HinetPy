@@ -8,6 +8,8 @@ branches:
   only:
   - master
   - dev
+  - /^fix-.*$/
+  - /^feature-.*$/
 
 install:
   - pip install .
