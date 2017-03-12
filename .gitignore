@@ -2,3 +2,5 @@ __pycache__
 build
 _build
 .cache
+dist
+HinetPy.egg-info

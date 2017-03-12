@@ -125,7 +125,7 @@ class Client(object):
         """ Doctor does some checks.
 
         >>> client.doctor()  # doctest: +SKIP
-        [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.1).
+        [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.2).
         [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
         [2017-01-01 21:52:09] INFO: catwin32: /home/user/bin/catwin32.
         [2017-01-01 21:52:09] INFO: win2sac_32: /home/user/bin/win2sac_32.
@@ -667,7 +667,7 @@ class Client(object):
         """Check whether this module has a new release.
 
         >>> client.check_module_release()  # doctest: +SKIP
-        [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.1).
+        [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.2).
         """
         import json
         from distutils.version import StrictVersion

@@ -5,7 +5,7 @@
 
 __title__ = 'HinetPy'
 __repo__ = 'https://github.com/seisman/HinetPy'
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 __author__ = 'Dongdong Tian'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2013-2017 Dongdong Tian'

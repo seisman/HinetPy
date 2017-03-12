@@ -12,7 +12,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='HinetPy',
-    version='0.3.1',
+    version='0.3.2',
 
     description='A NIED Hi-net web service client '
                 'and win32 tools for seismologists.',
