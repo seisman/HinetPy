@@ -1,24 +1,20 @@
-|build|
-|release|
-|pypi|
-|PythonVersions|
-|license|
+.. image:: https://img.shields.io/travis/seisman/HinetPy/master.svg
+    :target: https://travis-ci.org/seisman/HinetPy
 
-.. |build| image:: https://img.shields.io/travis/seisman/HinetPy/master.svg
-.. |release| image:: https://img.shields.io/github/release/seisman/HinetPy.svg
-.. |license| image:: https://img.shields.io/github/license/seisman/HinetPy.svg
-.. |pypi| image:: https://img.shields.io/pypi/v/HinetPy.svg
-.. |PythonVersions| image:: https://img.shields.io/pypi/pyversions/HinetPy.svg
+.. image:: https://img.shields.io/github/release/seisman/HinetPy.svg
+    :target: https://github.com/seisman/HinetPy/releases
+
+.. image:: https://img.shields.io/pypi/v/HinetPy.svg
+    :target: https://pypi.python.org/pypi/HinetPy/
+
+.. image:: https://img.shields.io/github/license/seisman/HinetPy.svg
+    :target: https://github.com/seisman/HinetPy/blob/master/LICENSE
+
+.. image:: https://img.shields.io/pypi/pyversions/HinetPy.svg
+    :target: https://pypi.python.org/pypi/HinetPy/
 
 `HinetPy`_ is a Python package aiming to automate and simplify tedious data
 request, downloading and format conversion tasks related to `NIED Hi-net`_.
-
-Dependencies
-============
-
-#. Python 3.4+
-#. `requests <http://docs.python-requests.org/>`_
-#. `win32tools`_ provided by `NIED Hi-net`_
 
 Features
 ========
