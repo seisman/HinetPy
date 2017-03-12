@@ -134,13 +134,13 @@ class Client(object):
         **Checklist**
 
         - if HinetPy has a new release
-          (see :meth:`~HinetPy.client.Client.check_module_release`)
+          (see :meth:`~HinetPy.client.Client.check_package_release`)
         - if Hi-net web service is updated
           (see :meth:`~HinetPy.client.Client.check_service_update`)
         - if catwin32 and win2sac_32 from win32tools in PATH
           (see :meth:`~HinetPy.client.Client.check_cmd_exists`)
         """
-        self.check_module_release()
+        self.check_package_release()
         self.check_service_update()
         self.check_cmd_exists()
 
@@ -672,10 +672,10 @@ class Client(object):
                            "This module may FAIL!")
             return True
 
-    def check_module_release(self):
+    def check_package_release(self):
         """Check whether this module has a new release.
 
-        >>> client.check_module_release()  # doctest: +SKIP
+        >>> client.check_package_release()  # doctest: +SKIP
         [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.2).
         """
         import json

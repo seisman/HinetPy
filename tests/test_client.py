@@ -21,8 +21,8 @@ class TestClass:
     def test_check_service_update(self):
         assert client.check_service_update() == False
 
-    def test_check_module_release(self):
-        assert client.check_module_release() == False
+    def test_check_package_release(self):
+        assert client.check_package_release() == False
 
     def test_check_cmd_exists(self):
         assert client.check_cmd_exists() == True
