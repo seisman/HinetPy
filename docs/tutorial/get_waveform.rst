@@ -51,9 +51,9 @@ You can set custom filename for both data and ctable, and also the output
 directory.
 
 >>> data, ctable = client.get_waveform('0101', starttime, 20,
-...                                    win32_filename="201001010000.cnt"
-...                                    channeltable_filename='0101.ch',
-...                                    output_directory='201001010000')
+...                                    data="201001010000.cnt"
+...                                    ctable='0101.ch',
+...                                    outdir='201001010000')
 [2017-03-11 17:46:20] INFO: 2010-01-01 00:00 ~20
 [2017-03-11 17:46:20] INFO: [1/4] => 2010-01-01 00:00 ~5
 [2017-03-11 17:46:41] INFO: [2/4] => 2010-01-01 00:05 ~5
