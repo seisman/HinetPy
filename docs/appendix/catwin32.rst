@@ -1,5 +1,5 @@
-catwin
-======
+catwin32
+========
 
 Merger of two or more data sets saved in WIN32 format.
 

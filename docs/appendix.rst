@@ -4,7 +4,7 @@ Appendix
 .. toctree::
    :maxdepth: 1
 
-   appendix/catwin
+   appendix/catwin32
    appendix/win2sac
    appendix/channeltable
    appendix/response
