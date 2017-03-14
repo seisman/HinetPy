@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.3.3:
+ - ``client.get_waveform`` can accept output filename with deep directory
+ - ``win32.merge`` can accept output filename with deep directory
+ - Always sort cnt files to avoid merge error (7979473)
+ - Fix typos
+
+
 0.3.2 (2017-03-12):
  - Fix another technical issue related to pypi
 
