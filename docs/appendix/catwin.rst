@@ -8,29 +8,35 @@ Usage
 
 ::
 
-    catwin32 File_1 File_2 ... File_n -o OutFile [-s] [-h]
-        File_n        : Input WIN32 file name
-                      : You may use a wild word character.
-        OutFile       : Output WIN32 file name
-        -s            : Sort by date
-        -h            : This usage print
+    catwin32 File_1 File_2 ... File_n [-oOutFile | -o OutFile] [-s] [-h] > [OutFile]
+        File_n        : Input WIN32 file name (accept wildcard).
+        -o OutFile    : Output WIN32 file name. Defaults to stdout if -o is ommitted.
+        -s            : Sort by date and channel number. This option is time consuming.
+        -h            : This usage print.
 
-If ``-s`` option is not used, ``catwin32`` will merge all input win32 files,
-following the orders they appear in the arguments list. Thus, if the win32 files
-are not sorted by date in arguments list, it will result in a wrong win32 file,
-which can not be converted to SAC format.
+By default, ``catwin32`` will merge all input win32 files into one output
+win32 file, following the order they appear in arguments list. If the input
+files in arguments list is not sorted by date and ``-s`` option is not used,
+``win2sac_32`` will fail to convert the output win32 format to SAC format,
+resulting an error ``The time is not sort.``
 
-So, the safer way is to always use ``-s`` to tell ``catwin32`` to sort by date
-before merging. However, sorting by date is too much time consuming. The best
-way is sorting all files in arguments list.
+Two ways to solve this issue:
+
+1. use ``-s`` option
+2. make sure all the win32 files in arguments list are sorted by date
+
+The first way is safer, but it costs too much time. The second way is prefered.
+You can use ``sorted(glob.glob("*.cnt"))`` in Python if the win32 files are
+named with time.
 
 Examples
 --------
 
-::
+Merge all win32 files matching ``20100101*.cnt`` into one win32 file::
 
     catwin32 20100101*.cnt -o 0101_201001010000_5.cnt
 
-::
+Merge several win32 files into one win32 file, sorted by date and
+channal number::
 
     catwin32 1.cnt 2.cnt 3.cnt -o total.cnt -s

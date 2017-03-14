@@ -2,7 +2,7 @@ Appendix
 ========
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
 
    appendix/catwin
    appendix/win2sac
