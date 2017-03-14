@@ -279,7 +279,8 @@ def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
     if suffix == '':  # remove extra suffix
         filename = "{}.{}.SAC".format(channel.name, channel.component)
         filename = os.path.join(outdir, filename)
-        os.rename(filename, filename[:-4])
+        if os.path.exists(filename):  # some channels have no data
+            os.rename(filename, filename[:-4])
 
 
 def _find_poles(damping, freq):
