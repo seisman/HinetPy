@@ -119,6 +119,13 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
                filter_by_component=None):
     """Extract instrumental response in SAC PZ format from channel table.
 
+    .. warning::
+
+       Only works for Hi-net network.
+
+       RESP files of F-net network can be downloaded from
+       `F-net website <http://www.fnet.bosai.go.jp/st_info/response.php?LANG=en>`_.
+
     Parameters
     ----------
     ctable: str
