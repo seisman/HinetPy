@@ -359,7 +359,7 @@ def merge(datas, final_data, force_sort=False):
     datas: list of str
         Win32 files to be merged.
     final_data: str
-        Name of the final win32 file.
+        Filename of ouput win32 file.
     force_sort: bool
         Sort all win32 files by date.
 
@@ -369,7 +369,7 @@ def merge(datas, final_data, force_sort=False):
     win32 files in list by name/time is prefered:
 
     >>> datas = sorted(glob.glob("20130404*.cnt"))
-    >>> merge(datas, "final.cnt")  # doctest: +SKIP
+    >>> merge(datas, "outdir/final.cnt")  # doctest: +SKIP
 
     If win32 files are named randomly, you should set ``force_sort`` to
     ``True`` to force ``catwin32`` to sort all data by time.
@@ -378,6 +378,9 @@ def merge(datas, final_data, force_sort=False):
     >>> datas = ["001.cnt", "002.cnt", "003.cnt"]
     >>> merge(datas, "final.cnt", force_sort=True)  # doctest: +SKIP
     """
+    if os.path.dirname(final_data):
+        os.makedirs(os.path.dirname(final_data), exist_ok=True)
+
     cmd = ['catwin32', '-o', final_data]
     if force_sort:  # add -s option to force sort
         cmd.append('-s')
