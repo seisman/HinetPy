@@ -3,6 +3,7 @@
 import os
 import glob
 import filecmp
+import shutil
 from HinetPy import win32
 
 pwd = os.path.dirname(__file__)
@@ -10,43 +11,53 @@ path = os.path.join(pwd, 'data')
 data = os.path.join(path, "0101_2017031100_2.cnt")
 ctable = os.path.join(path, "0101_20170311.ch")
 
-class TestWin32Class:
+class TestWin32ExtractSACClass:
     def test_extract_sac_1(self):
         outdir = os.path.join(pwd, "test1")
         win32.extract_sac(data, ctable, outdir=outdir)
+        shutil.rmtree(outdir)
 
     def test_extract_sac_2(self):
         outdir = os.path.join(pwd, "test2")
         win32.extract_sac(data, ctable, suffix="", outdir=outdir)
+        shutil.rmtree(outdir)
 
     def test_extract_sac_3(self):
         outdir = os.path.join(pwd, "test3")
         win32.extract_sac(data, ctable, filter_by_id='3e8?', outdir=outdir)
+        shutil.rmtree(outdir)
 
     def test_extract_sac_4(self):
         outdir = os.path.join(pwd, "test4")
         win32.extract_sac(data, ctable, filter_by_name='N.NG*', outdir=outdir)
+        shutil.rmtree(outdir)
 
     def test_extract_sac_5(self):
         outdir = os.path.join(pwd, "test5")
         win32.extract_sac(data, ctable, filter_by_component=['N', 'E'], outdir=outdir)
+        shutil.rmtree(outdir)
 
     def test_extract_sac_6(self):
         outdir = os.path.join(pwd, "test6")
         win32.extract_sac(data, ctable, filter_by_component=['N', 'E'], outdir=outdir, with_pz=True)
+        shutil.rmtree(outdir)
 
 
+class TestWin32ExtractPZClass:
     def test_extract_pz_1(self):
         outdir = os.path.join(pwd, "ch1")
         win32.extract_pz(ctable, outdir=outdir)
+        shutil.rmtree(outdir)
 
     def test_extract_pz_2(self):
         outdir = os.path.join(pwd, "ch2")
         win32.extract_pz(ctable, suffix="SACPZ", outdir=outdir)
+        shutil.rmtree(outdir)
 
     def test_extract_pz_3(self):
         outdir = os.path.join(pwd, "ch3")
         win32.extract_pz(ctable, filter_by_component='U', outdir=outdir)
+        shutil.rmtree(outdir)
 
 class TestWin32MergeClass:
     def test_merge_without_sort(self):
@@ -79,3 +90,4 @@ class TestWin32MergeClass:
         assert os.path.exists(total_data)
         assert filecmp.cmp(total_data, final_to_check)
         os.unlink(total_data)
+        shutil.rmtree("test_merge")
