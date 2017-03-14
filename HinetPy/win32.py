@@ -103,7 +103,7 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".",
                                     filter_by_component)
 
     if not os.path.exists(outdir):
-        os.mkdir(outdir)
+        os.makedirs(outdir, exist_ok=True)
 
     _write_winprm(ctable)
     for channel in channels:
@@ -156,7 +156,7 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
                                     filter_by_chid,
                                     filter_by_component)
     if not os.path.exists(outdir):
-        os.mkdir(outdir)
+        os.makedirs(outdir, exist_ok=True)
 
     for channel in channels:
         _extract_sacpz(channel, suffix=suffix, outdir=outdir)
