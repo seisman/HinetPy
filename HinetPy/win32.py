@@ -351,14 +351,14 @@ def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.'):
     return pzfile
 
 
-def merge(datas, final_data, force_sort=False):
+def merge(datas, total_data, force_sort=False):
     """Merge several win32 files to one win32 file.
 
     Parameters
     ----------
     datas: list of str
         Win32 files to be merged.
-    final_data: str
+    total_data: str
         Filename of ouput win32 file.
     force_sort: bool
         Sort all win32 files by date.
@@ -378,10 +378,10 @@ def merge(datas, final_data, force_sort=False):
     >>> datas = ["001.cnt", "002.cnt", "003.cnt"]
     >>> merge(datas, "final.cnt", force_sort=True)  # doctest: +SKIP
     """
-    if os.path.dirname(final_data):
-        os.makedirs(os.path.dirname(final_data), exist_ok=True)
+    if os.path.dirname(total_data):
+        os.makedirs(os.path.dirname(total_data), exist_ok=True)
 
-    cmd = ['catwin32', '-o', final_data]
+    cmd = ['catwin32', '-o', total_data]
     if force_sort:  # add -s option to force sort
         cmd.append('-s')
 
