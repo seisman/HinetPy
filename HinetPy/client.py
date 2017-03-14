@@ -437,8 +437,6 @@ class Client(object):
         elif outdir:
             dirname = outdir
             data = os.path.join(dirname, data)
-        if dirname and not os.path.exists(dirname):
-            os.mkdir(dirname)
         merge(cnts, data)
 
         # 3. rename channeltable file
