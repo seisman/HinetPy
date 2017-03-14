@@ -423,9 +423,10 @@ class Client(object):
         # post processes
         # 1. unzip files
         cnts, ch_euc = unzip([x + '.zip' for x in ids])
+        # always sort cnts by name/time to avoid use -s option of catwin32
+        cnts = sorted(cnts)
 
         # 2. merge all cnt files
-        # TODO: sort cnts?
         if not data:
             data = "{}_{}_{:d}.cnt".format(code,
                                            starttime.strftime("%Y%m%d%H%M"),

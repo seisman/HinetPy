@@ -354,8 +354,6 @@ def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.'):
 def merge(datas, final_data, force_sort=False):
     """Merge several win32 files to one win32 file.
 
-    >>> merge(['001.cnt', '002.cnt', '003.cnt'], "final.cnt")  # doctest: +SKIP
-
     Parameters
     ----------
     datas: list of str
@@ -364,6 +362,21 @@ def merge(datas, final_data, force_sort=False):
         Name of the final win32 file.
     force_sort: bool
         Sort all win32 files by date.
+
+    Examples
+    --------
+    If win32 files are named by starttime (e.g. ``201304040203.cnt``), sorting
+    win32 files in list by name/time is prefered:
+
+    >>> datas = sorted(glob.glob("20130404*.cnt"))
+    >>> merge(datas, "final.cnt")  # doctest: +SKIP
+
+    If win32 files are named randomly, you should set ``force_sort`` to
+    ``True`` to force ``catwin32`` to sort all data by time.
+    However, it's time consuming. Do NOT use it unless necessary:
+
+    >>> datas = ["001.cnt", "002.cnt", "003.cnt"]
+    >>> merge(datas, "final.cnt", force_sort=True)  # doctest: +SKIP
     """
     cmd = ['catwin32', '-o', final_data]
     if force_sort:  # add -s option to force sort
