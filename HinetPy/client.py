@@ -754,6 +754,7 @@ class Client(object):
             net = header.network[code]
             info = "== Information of Network {} ==\n".format(code)
             info += "Name: {}\n".format(net.name)
+            info += "Homepage: {}\n".format(net.url)
             info += "Starttime: {}\n".format(net.starttime.strftime("%Y%m%d"))
             info += "No. of channels: {}".format(net.channels)
             print(info)
