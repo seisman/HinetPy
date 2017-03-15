@@ -15,31 +15,76 @@ class TestWin32ExtractSACClass:
     def test_extract_sac_1(self):
         outdir = os.path.join(pwd, "test1")
         win32.extract_sac(data, ctable, outdir=outdir)
+
+        sacfiles_to_check = ['N.NNMH.U.SAC',
+                             'N.NNMH.N.SAC',
+                             'N.NNMH.E.SAC',
+                             'N.NGUH.U.SAC',
+                             'N.NGUH.N.SAC',
+                             'N.NGUH.E.SAC']
+        sacfiles = os.listdir(outdir)
+        assert sacfiles == sacfiles_to_check
         shutil.rmtree(outdir)
 
     def test_extract_sac_2(self):
         outdir = os.path.join(pwd, "test2")
         win32.extract_sac(data, ctable, suffix="", outdir=outdir)
+
+        sacfiles_to_check = ['N.NNMH.U',
+                             'N.NNMH.N',
+                             'N.NNMH.E',
+                             'N.NGUH.U',
+                             'N.NGUH.N',
+                             'N.NGUH.E']
+        sacfiles = os.listdir(outdir)
+        assert sacfiles == sacfiles_to_check
         shutil.rmtree(outdir)
 
     def test_extract_sac_3(self):
         outdir = os.path.join(pwd, "test3")
         win32.extract_sac(data, ctable, filter_by_id='3e8?', outdir=outdir)
+
+        sacfiles_to_check = ['N.NNMH.U.SAC',
+                             'N.NNMH.N.SAC',
+                             'N.NNMH.E.SAC']
+        sacfiles = os.listdir(outdir)
+        assert sacfiles == sacfiles_to_check
         shutil.rmtree(outdir)
 
     def test_extract_sac_4(self):
         outdir = os.path.join(pwd, "test4")
         win32.extract_sac(data, ctable, filter_by_name='N.NG*', outdir=outdir)
+        sacfiles_to_check = ['N.NGUH.U.SAC',
+                             'N.NGUH.N.SAC',
+                             'N.NGUH.E.SAC']
+        sacfiles = os.listdir(outdir)
+        assert sacfiles == sacfiles_to_check
         shutil.rmtree(outdir)
 
     def test_extract_sac_5(self):
         outdir = os.path.join(pwd, "test5")
         win32.extract_sac(data, ctable, filter_by_component=['N', 'E'], outdir=outdir)
+        sacfiles_to_check = ['N.NNMH.N.SAC',
+                             'N.NNMH.E.SAC',
+                             'N.NGUH.N.SAC',
+                             'N.NGUH.E.SAC']
+        sacfiles = os.listdir(outdir)
+        assert sacfiles == sacfiles_to_check
         shutil.rmtree(outdir)
 
     def test_extract_sac_6(self):
         outdir = os.path.join(pwd, "test6")
         win32.extract_sac(data, ctable, filter_by_component=['N', 'E'], outdir=outdir, with_pz=True)
+        sacfiles_to_check = ['N.NNMH.N.SAC',
+                             'N.NNMH.N.SAC_PZ',
+                             'N.NNMH.E.SAC',
+                             'N.NNMH.E.SAC_PZ',
+                             'N.NGUH.N.SAC',
+                             'N.NGUH.N.SAC_PZ',
+                             'N.NGUH.E.SAC',
+                             'N.NGUH.E.SAC_PZ']
+        sacfiles = os.listdir(outdir)
+        assert sacfiles == sacfiles_to_check
         shutil.rmtree(outdir)
 
 
@@ -47,16 +92,36 @@ class TestWin32ExtractPZClass:
     def test_extract_pz_1(self):
         outdir = os.path.join(pwd, "ch1")
         win32.extract_pz(ctable, outdir=outdir)
+        pz_to_check = ['N.NNMH.U.SAC_PZ',
+                       'N.NNMH.N.SAC_PZ',
+                       'N.NNMH.E.SAC_PZ',
+                       'N.NGUH.U.SAC_PZ',
+                       'N.NGUH.N.SAC_PZ',
+                       'N.NGUH.E.SAC_PZ']
+        pz = os.listdir(outdir)
+        assert pz == pz_to_check
         shutil.rmtree(outdir)
 
     def test_extract_pz_2(self):
         outdir = os.path.join(pwd, "ch2")
         win32.extract_pz(ctable, suffix="SACPZ", outdir=outdir)
+        pz_to_check = ['N.NNMH.U.SACPZ',
+                       'N.NNMH.N.SACPZ',
+                       'N.NNMH.E.SACPZ',
+                       'N.NGUH.U.SACPZ',
+                       'N.NGUH.N.SACPZ',
+                       'N.NGUH.E.SACPZ']
+        pz = os.listdir(outdir)
+        assert pz == pz_to_check
         shutil.rmtree(outdir)
 
     def test_extract_pz_3(self):
         outdir = os.path.join(pwd, "ch3")
         win32.extract_pz(ctable, filter_by_component='U', outdir=outdir)
+        pz_to_check = ['N.NNMH.U.SAC_PZ',
+                       'N.NGUH.U.SAC_PZ']
+        pz = os.listdir(outdir)
+        assert pz == pz_to_check
         shutil.rmtree(outdir)
 
 class TestWin32MergeClass:
@@ -89,5 +154,4 @@ class TestWin32MergeClass:
         win32.merge(datas, total_data)
         assert os.path.exists(total_data)
         assert filecmp.cmp(total_data, final_to_check)
-        os.unlink(total_data)
         shutil.rmtree("test_merge")
