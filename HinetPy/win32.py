@@ -51,7 +51,7 @@ class Channel(object):
         self.lsb_value = lsb_value
 
 
-def extract_sac(data, ctable, suffix="SAC", outdir=".",
+def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=2000000,
                 filter_by_id=None,
                 filter_by_name=None,
                 filter_by_component=None,
@@ -68,6 +68,8 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".",
         SAC suffix.
     outdir: str
         Output directory.
+    pmax: int
+        Maximum number of data points.
     filter_by_id: list of str or wildcard
         Filter channels by ID.
     filter_by_name: list of str or wildcard
@@ -107,7 +109,7 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".",
 
     _write_winprm(ctable)
     for channel in channels:
-        _extract_channel(data, channel, suffix, outdir)
+        _extract_channel(data, channel, suffix, outdir, pmax=pmax)
         if with_pz:
             _extract_sacpz(channel, outdir=outdir)
     os.unlink("win.prm")
