@@ -339,10 +339,11 @@ class Client(object):
 
         **max_span**
 
-        Hi-net set two limitations of each data request:
+        Hi-net set three limitations of each data request:
 
         1. Record_Length <= 60 min
         2. Number_of_channels * Record_Length <= 12000 min
+        3. Only the latest 150 requested data are kept
 
         For example, Hi-net network has about 24000 channels. Acoording to
         limitation 2, the record length should be no more than 5 minutes
@@ -568,7 +569,7 @@ class Client(object):
     def get_allowed_span(self, code):
         """Get allowed max span for each network.
 
-        Hi-net set a limitation of data file size:
+        Hi-net set two limitations of data file size:
 
         #. Number_of_channels * record_length(min.) <= 12000 min
         #. record_length <= 60min

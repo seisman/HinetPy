@@ -38,6 +38,7 @@ Now we get:
 
    1. Record_Length <= 60 min
    2. Number_of_channels * Record_Length <= 12000 min
+   3. Only the latest 150 requested data are kept
 
    For the example above, Hi-net has about 2350 channels, the record length
    should be no more than 5 minutes. Thus the 20-minutes long data request is
