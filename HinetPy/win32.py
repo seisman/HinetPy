@@ -83,18 +83,16 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=2000000,
     Examples
     --------
     >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch")
-    ... # doctest: +SKIP
 
     Extract all channel with specified SAC suffix and output directory:
 
     >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
-    ...             suffix="", outdir="20100101000")  # doctest: +SKIP
+    ...             suffix="", outdir="20100101000")
 
     Extract only specified channels:
 
     >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
-    ...             filter_by_name="N.NA*",
-    ...             filter_by_channel='[NE]')  # doctest: +SKIP
+    ...             filter_by_name="N.NA*", filter_by_channel='[NE]')
     """
 
     channels = _get_channels(ctable)
@@ -145,18 +143,16 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
 
     Examples
     --------
-    >>> extract_pz("0101_20100101.ch")  # doctest: +SKIP
+    >>> extract_pz("0101_20100101.ch")
 
     Extract all channel with specified suffix and output directory:
 
     >>> extract_pz("0101_20100101.ch", suffix="", outdir="20100101000")
-    ... # doctest: +SKIP
 
     Extract only specified channels:
 
     >>> extract_pz("0101_20100101.ch",
-    ...            filter_by_name="N.NA*",
-    ...            filter_by_channel='[NE]')  # doctest: +SKIP
+    ...            filter_by_name="N.NA*", filter_by_channel='[NE]')
     """
     channels = _get_channels(ctable)
     if filter_by_chid or filter_by_name or filter_by_component:
@@ -379,14 +375,14 @@ def merge(datas, total_data, force_sort=False):
     win32 files in list by name/time is prefered:
 
     >>> datas = sorted(glob.glob("20130404*.cnt"))
-    >>> merge(datas, "outdir/final.cnt")  # doctest: +SKIP
+    >>> merge(datas, "outdir/final.cnt")
 
     If win32 files are named randomly, you should set ``force_sort`` to
     ``True`` to force ``catwin32`` to sort all data by time.
     However, it's time consuming. Do NOT use it unless necessary:
 
     >>> datas = ["001.cnt", "002.cnt", "003.cnt"]
-    >>> merge(datas, "final.cnt", force_sort=True)  # doctest: +SKIP
+    >>> merge(datas, "final.cnt", force_sort=True)
     """
     if os.path.dirname(total_data):
         os.makedirs(os.path.dirname(total_data), exist_ok=True)
@@ -398,8 +394,3 @@ def merge(datas, total_data, force_sort=False):
     subprocess.call(cmd + datas,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL)
-
-
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod()
