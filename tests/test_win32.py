@@ -160,3 +160,14 @@ class TestWin32MergeClass:
         assert os.path.exists(total_data)
         assert filecmp.cmp(total_data, final_to_check)
         shutil.rmtree("test_merge")
+
+    def test_merge_with_wildcard(self):
+        final_to_check = os.path.join(path, "0101_201701010000_3.cnt")
+        total_data = "test_merge_with_wildcard.cnt"
+
+        datas = os.path.join(path, "20170101000?0101VM.cnt")
+        win32.merge(datas, total_data)
+        assert os.path.exists(total_data)
+        assert filecmp.cmp(total_data, final_to_check)
+        os.unlink(total_data)
+

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import math
+import glob
 import subprocess
 from subprocess import Popen, DEVNULL, PIPE
 from fnmatch import fnmatch
@@ -388,7 +389,7 @@ def merge(datas, total_data, force_sort=False):
 
     Parameters
     ----------
-    datas: list of str
+    datas: list of str or wildcard
         Win32 files to be merged.
     total_data: str
         Filename of ouput win32 file.
@@ -409,6 +410,10 @@ def merge(datas, total_data, force_sort=False):
 
     >>> datas = ["001.cnt", "002.cnt", "003.cnt"]
     >>> merge(datas, "final.cnt", force_sort=True)
+
+    You can also use wildcard to specify the win32 files to be merged.
+
+    >>> merge("20130404*.cnt", "final.cnt")
     """
     if os.path.dirname(total_data):
         os.makedirs(os.path.dirname(total_data), exist_ok=True)
@@ -416,6 +421,9 @@ def merge(datas, total_data, force_sort=False):
     cmd = ['catwin32', '-o', total_data]
     if force_sort:  # add -s option to force sort
         cmd.append('-s')
+
+    if isinstance(datas, str):  # wildcard support
+        datas = sorted(glob.glob(datas))
 
     subprocess.call(cmd + datas,
                     stdout=subprocess.DEVNULL,
