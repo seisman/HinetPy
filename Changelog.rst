@@ -4,7 +4,8 @@ Changelog
 0.3.3:
  - change ``Client.check_module_release`` to ``Client.check_package_release``
  - support output filename with deep directory
- - Always sort cnt files to avoid merge error (7979473)
+ - Always sort cnt files to avoid merge error
+ - Set ``pmax`` to 8640000 by default
  - Fix typos
 
 0.3.2 (2017-03-12):
