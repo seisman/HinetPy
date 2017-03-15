@@ -52,7 +52,7 @@ class Channel(object):
         self.lsb_value = lsb_value
 
 
-def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=2000000,
+def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
                 filter_by_id=None,
                 filter_by_name=None,
                 filter_by_component=None,
@@ -251,7 +251,7 @@ def _write_winprm(ctable, prmfile="win.prm"):
 
 
 def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
-                     prmfile="win.prm", pmax=2000000):
+                     prmfile="win.prm", pmax=8640000):
     """Extract one channel data from win32 file.
 
     Parameters
