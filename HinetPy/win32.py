@@ -226,8 +226,7 @@ def _filter_channels(channels,
                 if fnmatch(getattr(channel, key), filters):
                     filtered_channels.append(channel)
         else:
-            msg = "Incorrect key: only id|name|component are supported."
-            raise ValueError(msg)
+            raise ValueError("Only list and wildcard filter are supported.")
         return filtered_channels
 
     if filter_by_id:
