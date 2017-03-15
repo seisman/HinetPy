@@ -81,6 +81,13 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
         Extract PZ files at the same time.
         PZ file has default suffix ``.SAC_PZ``.
 
+    Returns
+    -------
+    sacfiles: list of str
+        List of SAC filenames extracted.
+    pzfiles: list of str
+        List of SAC PZ filenames if ``with_pz`` set to ``True``.
+
     Examples
     --------
     >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch")
@@ -107,11 +114,17 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
         os.makedirs(outdir, exist_ok=True)
 
     _write_winprm(ctable)
+    sacfiles = []
     for channel in channels:
-        _extract_channel(data, channel, suffix, outdir, pmax=pmax)
-        if with_pz:
-            _extract_sacpz(channel, outdir=outdir)
+        sacfile = _extract_channel(data, channel, suffix, outdir, pmax=pmax)
+        sacfiles.append(sacfile)
     os.unlink("win.prm")
+
+    if not with_pz:
+        return sacfiles
+    else:
+        pzfiles = [_extract_sacpz(ch, outdir=outdir) for ch in channels]
+        return sacfiles, pzfiles
 
 
 def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
@@ -142,6 +155,11 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
     filter_by_component: list of str or wildcard
         Filter channels by component.
 
+    Return
+    ------
+    pzfiles: list of str
+        List of SAC PZ filenames.
+
     Examples
     --------
     >>> extract_pz("0101_20100101.ch")
@@ -164,8 +182,11 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
 
+    pzfiles = []
     for channel in channels:
-        _extract_sacpz(channel, suffix=suffix, outdir=outdir)
+        pzfiles.append(_extract_sacpz(channel, suffix=suffix, outdir=outdir))
+
+    return pzfiles
 
 
 def _get_channels(ctable):
@@ -284,9 +305,13 @@ def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
     filename = "{}.{}.{}".format(channel.name, channel.component, suffix)
     if outdir != '.':
         filename = os.path.join(outdir, filename)
-    if suffix == '':  # remove extra dot if suffix is empty
-        if os.path.exists(filename):  # some channels have no data
+
+    if os.path.exists(filename):  # some channels have no data
+        if suffix == '':  # remove extra dot if suffix is empty
             os.rename(filename, filename[:-1])
+            return filename[:-1]
+        else:
+            return filename
 
 
 def _find_poles(damping, freq):
