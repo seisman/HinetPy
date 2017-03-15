@@ -2,6 +2,7 @@
 import os
 import math
 import subprocess
+from subprocess import Popen, DEVNULL, PIPE
 from fnmatch import fnmatch
 
 
@@ -268,23 +269,24 @@ def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
     pmax: int
         Maximum number of data points.
     """
-    # win2sac_32 always need a suffix
-    sacsuffix = "SAC" if suffix == '' else suffix
-    subprocess.call(['win2sac_32',
-                     winfile,
-                     channel.id,
-                     sacsuffix,
-                     outdir,
-                     '-e',
-                     '-p'+prmfile,
-                     '-m'+str(pmax)],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL)
-    if suffix == '':  # remove extra suffix
-        filename = "{}.{}.SAC".format(channel.name, channel.component)
+
+    cmd = ['win2sac_32', winfile, channel.id, suffix, outdir,
+           '-e', '-p'+prmfile, '-m'+str(pmax)]
+    p = Popen(cmd, stdout=DEVNULL, stderr=PIPE)
+
+    # check stderr output
+    for line in p.stderr.read().decode().split("\n"):
+        if 'The number of points is maximum over' in line:
+            msg = "The number of data points is over maximum. " \
+                  "Try to increase pmax."
+            raise ValueError(msg)
+
+    filename = "{}.{}.{}".format(channel.name, channel.component, suffix)
+    if outdir != '.':
         filename = os.path.join(outdir, filename)
+    if suffix == '':  # remove extra dot if suffix is empty
         if os.path.exists(filename):  # some channels have no data
-            os.rename(filename, filename[:-4])
+            os.rename(filename, filename[:-1])
 
 
 def _find_poles(damping, freq):
