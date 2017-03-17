@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.3.4:
+ - `win32.extract_sac`: skip if data not exists
+
 0.3.3 (2017-03-17):
  - change ``network`` to ``NETWORK`` in ``header.py``
  - add wildcard support to ``win32.merge``

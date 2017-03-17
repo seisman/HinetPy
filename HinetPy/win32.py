@@ -2,9 +2,17 @@
 import os
 import math
 import glob
+import logging
 import subprocess
 from subprocess import Popen, DEVNULL, PIPE
 from fnmatch import fnmatch
+
+# Setup the logger
+FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
+logging.basicConfig(level=logging.INFO,
+                    format=FORMAT,
+                    datefmt='%Y-%m-%d %H:%M:%S')
+logger = logging.getLogger(__name__)
 
 
 class Channel(object):
@@ -116,15 +124,18 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
 
     _write_winprm(ctable)
     sacfiles = []
+    pzfiles = []
     for channel in channels:
         sacfile = _extract_channel(data, channel, suffix, outdir, pmax=pmax)
-        sacfiles.append(sacfile)
+        if sacfile:  # skip if data not exists
+            sacfiles.append(sacfile)
+            if with_pz:  # extract pz only if data exists
+                pzfiles.append(_extract_sacpz(channel, outdir=outdir))
     os.unlink("win.prm")
 
     if not with_pz:
         return sacfiles
     else:
-        pzfiles = [_extract_sacpz(ch, outdir=outdir) for ch in channels]
         return sacfiles, pzfiles
 
 
@@ -302,6 +313,10 @@ def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
             msg = "The number of data points is over maximum. " \
                   "Try to increase pmax."
             raise ValueError(msg)
+        elif 'Data for channel {} not existed'.format(channel.id) in line:
+            # return None if no data avaiable
+            logger.warn("Data for channel %s not existed. Skipped.", channel.id)
+            return None
 
     filename = "{}.{}.{}".format(channel.name, channel.component, suffix)
     if outdir != '.':
