@@ -34,6 +34,10 @@ They accept a list of string or a string contains wildcard.
 Extract PZ
 ----------
 
+.. note::
+
+   Hi-net only.
+
 :meth:`~HinetPy.win32.extract_pz` can convert Hi-net channel table to SAC PZ
 format. Its usage is very similar to :meth:`~HinetPy.win32.extract_sac`.
 

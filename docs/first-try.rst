@@ -6,13 +6,13 @@ waveform data from Hi-net website and try to process the data with win32tools.
 Do all the things **manually** at least one time, make sure that you understand
 the whole procedures and the unfriendness and limitations of Hi-net website.
 
-Now let's begin our tour.
+Now let's begin our first tour.
 
 Start python
 ------------
 
 Run python (if you have ipython installed, run ipython), and make sure you're
-using Python 3.3 or above::
+using Python 3.4 or above::
 
     $ python
     Python 3.5.3 |Anaconda custom (64-bit)| (default, Feb 22 2017, 21:13:27)
@@ -71,6 +71,7 @@ the network code. See :meth:`~HinetPy.client.Client.help` for details.
 >>> client.help('0101')  # get more information about NIED Hi-net (0101)
 == Information of Network 0101 ==
 Name: NIED Hi-net
+Homepage: http://www.hinet.bosai.go.jp/
 Starttime: 20040401
 No. of channels: 2336
 

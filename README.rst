@@ -30,12 +30,12 @@ It's simple to request a continuous waveform data from Hi-net, convert the
 data into SAC format and extract instrumental response as SAC PZ file.
 
 >>> from HinetPy import Client, win32
->>> from datetim import datetime
+>>> from datetime import datetime
 >>>
 >>> # You need a Hi-net account to access their data
 >>> client = Client("username", "password")
 >>>
->>> # Let's try to request 20 minutes data since 2010-01-01T00:00(GMT+9) from Hi-net
+>>> # Let's try to request 20 minutes data since 2010-01-01T00:00(GMT+0900) from Hi-net
 >>> starttime = datetime(2010, 1, 1, 0, 0)
 >>> data, ctable = client.get_waveform('0101', starttime, 20)
 >>> # The request process takes several minutes due to the unfriendly design of Hi-net
@@ -43,17 +43,18 @@ data into SAC format and extract instrumental response as SAC PZ file.
 0101_201001010000_20.cnt 0101_20100101.ch
 >>>
 >>> # Let's convert win32 data into SAC format
->>> win32.extract_sac(data, ctable)
+>>> sacfiles = win32.extract_sac(data, ctable)
 >>> ls *.SAC
 N.NGUH.E.SAC  N.NGUH.U.SAC  N.NNMH.N.SAC
 N.NGUH.N.SAC  N.NNMH.E.SAC  N.NNMH.U.SAC
+...
 >>>
 >>> # Let's extract instrument response as PZ file from channel table
->>> win32.extract_pz(ctable)
->>> ls
+>>> pzfiles = win32.extract_pz(ctable)
+>>> ls *.SAC_PZ
 N.NGUH.E.SAC_PZ  N.NGUH.U.SAC_PZ  N.NNMH.N.SAC_PZ
 N.NGUH.N.SAC_PZ  N.NNMH.E.SAC_PZ  N.NNMH.U.SAC_PZ
-
+...
 
 License
 =======

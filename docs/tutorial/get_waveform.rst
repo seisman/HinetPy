@@ -34,7 +34,7 @@ Now we get:
 
 .. note::
 
-   Hi-net set two limitations for data request:
+   Hi-net set three limitations for data request:
 
    1. Record_Length <= 60 min
    2. Number_of_channels * Record_Length <= 12000 min
@@ -43,7 +43,6 @@ Now we get:
    For the example above, Hi-net has about 2350 channels, the record length
    should be no more than 5 minutes. Thus the 20-minutes long data request is
    splitted into four 5-minutes short data subrequests.
-
 
 Custom way
 ----------
@@ -60,21 +59,31 @@ directory.
 [2017-03-11 17:46:41] INFO: [2/4] => 2010-01-01 00:05 ~5
 [2017-03-11 17:46:50] INFO: [3/4] => 2010-01-01 00:10 ~5
 [2017-03-11 17:47:04] INFO: [4/4] => 2010-01-01 00:15 ~5
->>> ls 201001010000
+>>> ls 201001010000/
 0101.ch 201001010000.cnt
 
 Smart way
 ---------
 
-As noted above, Hi-net set two limitations for data request. To break these
-limitations, HinetPy split a long data request into several short sub-requests.
-The maximum length of a sub-request is determined by ``max_span``.
+As noted above, Hi-net set three limitations for data request. To request
+waveform data much longer than limited, HinetPy follow the steps below:
+
+1. split a long data request into several short sub-requests
+2. post all sub-requests and download waveform data segments
+3. merge all data segments into one complete data
+
+The splitting and merging procedure is transpancy for end users. However,
+if you understand the internal procedure, you can have a higher speed by
+choosing a proper parameter value.
+
+The number of sub-requests is determined by the total length of the whole
+data request, and the maximum allowed length of each subrequest (``max_span``).
 ``max_span`` has a default value of 5, which is chosen to fit the need of
 requesting all channels of Hi-net.
 
 In some case, you may have less channels to request. For example, F-net has
-about 450 channels, you can set max_span=26 (12000/450=26); or if you want to
-request data of only 50 Hi-net stations, you can set max_span=60 (12000/150=80>60).
+about 450 channels, you can set max_span a higher value of 26 (12000/450=26),
+which helps decrease the number of subrequests and reduce the time costs.
 
 The easiest way to choose a proper value for ``max_span`` is to call
 :meth:`~HinetPy.client.Client.get_allowed_span`.
