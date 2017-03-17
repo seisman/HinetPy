@@ -91,11 +91,11 @@ NETWORK['0402'] = Network(name='NIED DONET1 (broadband)',
                           channels=132,
                           starttime=datetime(2014, 10, 1, 0, 0),
                           url="http://www.hinet.bosai.go.jp/?LANG=en")
-NETWORK['0402A'] = Network(name='NIED DONET1 (strong motion)',
+NETWORK['0402N'] = Network(name='JAMSTEC NIED DONET1 (broadband)',
                            channels=132,
                            starttime=datetime(2014, 10, 1, 0, 0),
                            url="http://www.hinet.bosai.go.jp/?LANG=en")
-NETWORK['0402N'] = Network(name='JAMSTEC NIED DONET1 (broadband)',
+NETWORK['0402A'] = Network(name='NIED DONET1 (strong motion)',
                            channels=132,
                            starttime=datetime(2014, 10, 1, 0, 0),
                            url="http://www.hinet.bosai.go.jp/?LANG=en")
