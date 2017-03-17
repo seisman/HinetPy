@@ -8,7 +8,7 @@ import pytest
 import requests
 from HinetPy import Client
 
-class TestClass:
+class TestClientLoginClass:
     """Login related tests"""
     def test_client_init_and_login_succeed(self):
         client = Client(username, password)

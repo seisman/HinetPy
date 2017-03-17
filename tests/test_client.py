@@ -11,13 +11,12 @@ import pytest
 import requests
 
 from HinetPy import Client
-from HinetPy.header import network
 from datetime import datetime
 
 client = Client(username, password)
 client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
 
-class TestClass:
+class TestClientCheckClass:
     def test_check_service_update(self):
         assert client.check_service_update() == False
 
@@ -27,6 +26,7 @@ class TestClass:
     def test_check_cmd_exists(self):
         assert client.check_cmd_exists() == True
 
+class TestGetWaveformClass:
     def test_get_waveform_1(self):
         starttime = datetime(2010, 1, 1, 0, 0)
         win32, chfile = client.get_waveform('0101', starttime, 10)

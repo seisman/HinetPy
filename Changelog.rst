@@ -2,6 +2,7 @@ Changelog
 =========
 
 0.3.3:
+ - change ``network`` to ``NETWORK`` in ``header.py``
  - add wildcard support to ``win32.merge``
  - change ``Client.check_module_release`` to ``Client.check_package_release``
  - support output filename with deep directory

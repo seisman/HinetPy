@@ -10,9 +10,9 @@ from datetime import datetime, timedelta
 
 import requests
 
-from HinetPy.win32 import merge
 from HinetPy import __version__, __title__, __repo__
-from HinetPy import header
+from HinetPy.win32 import merge
+from HinetPy.header import NETWORK
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
@@ -273,7 +273,7 @@ class Client(object):
         >>> client._parse_code('010501')
         ('01', '05', '010501')
         """
-        if code not in header.network.keys():
+        if code not in NETWORK.keys():
             msg = "{}: Incorrect network code.".format(code)
             raise ValueError(msg)
         elif code.startswith('0105') or code.startswith('0302'):
@@ -363,7 +363,7 @@ class Client(object):
 
         # 1. check starttime and endtime
         # TODO: correct starttime and endtime if not in allowed range
-        time0 = header.network[code].starttime
+        time0 = NETWORK[code].starttime
         # time1 = UTCTime + JST(GMT+0900) - 2 hour delay
         time1 = datetime.utcnow() + timedelta(hours=9) + timedelta(hours=-2)
         endtime = starttime + timedelta(minutes=span)
@@ -587,7 +587,7 @@ class Client(object):
         max_span: int
             Maximum allowed span in mimutes.
         """
-        channels = header.network[code].channels
+        channels = NETWORK[code].channels
         if code in ('0101', '0103', '0103A'):
             stations = self.get_selected_stations(code)
             if stations != 0:
@@ -751,7 +751,7 @@ class Client(object):
             Network code.
         """
         if code:
-            net = header.network[code]
+            net = NETWORK[code]
             info = "== Information of Network {} ==\n".format(code)
             info += "Name: {}\n".format(net.name)
             info += "Homepage: {}\n".format(net.url)
@@ -759,8 +759,8 @@ class Client(object):
             info += "No. of channels: {}".format(net.channels)
             print(info)
         else:
-            for code in sorted(header.network.keys()):
-                print("{:7s}: {}".format(code, header.network[code].name))
+            for code in sorted(NETWORK.keys()):
+                print("{:7s}: {}".format(code, NETWORK[code].name))
 
     def _get_win32tools(self):
         """Download win32 tools"""
