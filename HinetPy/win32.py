@@ -5,6 +5,7 @@ import glob
 import logging
 import subprocess
 from subprocess import Popen, DEVNULL, PIPE
+from multiprocessing import Pool, cpu_count
 from fnmatch import fnmatch
 
 # Setup the logger
@@ -65,7 +66,7 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
                 filter_by_id=None,
                 filter_by_name=None,
                 filter_by_component=None,
-                with_pz=False):
+                with_pz=False, processes=0):
     """Extract data as SAC format files.
 
     Parameters
@@ -89,13 +90,9 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     with_pz: bool
         Extract PZ files at the same time.
         PZ file has default suffix ``.SAC_PZ``.
-
-    Returns
-    -------
-    sacfiles: list of str
-        List of SAC filenames extracted.
-    pzfiles: list of str
-        List of SAC PZ filenames if ``with_pz`` set to ``True``.
+    processes: int
+        Number of parallel processes to speed up data extraction.
+        Use all processes by default.
 
     Examples
     --------
@@ -122,21 +119,23 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
 
+    if processes == 0:
+        if cpu_count() !=1:
+            processes = cpu_count() - 1
+        else:
+            processes = 1
+    elif processes < 0 or processes > cpu_count():
+        processes = cpu_count() - 1
+
     _write_winprm(ctable)
-    sacfiles = []
-    pzfiles = []
-    for channel in channels:
-        sacfile = _extract_channel(data, channel, suffix, outdir, pmax=pmax)
-        if sacfile:  # skip if data not exists
-            sacfiles.append(sacfile)
-            if with_pz:  # extract pz only if data exists
-                pzfiles.append(_extract_sacpz(channel, outdir=outdir))
+    pool = Pool(processes=processes)
+    args = [(data, ch, suffix, outdir, "win.prm", pmax) for ch in channels]
+    pool.starmap(_extract_channel, args)
     os.unlink("win.prm")
 
-    if not with_pz:
-        return sacfiles
-    else:
-        return sacfiles, pzfiles
+    if with_pz:
+        for channel in channels:
+            _extract_sacpz(channel, outdir=outdir)
 
 
 def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
@@ -167,11 +166,6 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
     filter_by_component: list of str or wildcard
         Filter channels by component.
 
-    Return
-    ------
-    pzfiles: list of str
-        List of SAC PZ filenames.
-
     Examples
     --------
     >>> extract_pz("0101_20100101.ch")
@@ -194,11 +188,8 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
 
-    pzfiles = []
     for channel in channels:
-        pzfiles.append(_extract_sacpz(channel, suffix=suffix, outdir=outdir))
-
-    return pzfiles
+        _extract_sacpz(channel, suffix=suffix, outdir=outdir)
 
 
 def _get_channels(ctable):
