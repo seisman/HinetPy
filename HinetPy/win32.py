@@ -3,6 +3,7 @@ import os
 import math
 import glob
 import logging
+import tempfile
 import subprocess
 from subprocess import Popen, DEVNULL, PIPE
 from multiprocessing import Pool, cpu_count
@@ -127,11 +128,11 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     elif processes < 0 or processes > cpu_count():
         processes = cpu_count() - 1
 
-    _write_winprm(ctable)
     pool = Pool(processes=processes)
-    args = [(data, ch, suffix, outdir, "win.prm", pmax) for ch in channels]
-    pool.starmap(_extract_channel, args)
-    os.unlink("win.prm")
+    with tempfile.NamedTemporaryFile() as ft:
+        _write_winprm(ctable, ft.name)
+        args = [(data, ch, suffix, outdir, ft.name, pmax) for ch in channels]
+        pool.starmap(_extract_channel, args)
 
     if with_pz:
         for channel in channels:
