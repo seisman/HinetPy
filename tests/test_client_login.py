@@ -12,12 +12,12 @@ password = "test_password"
 class TestClientLoginClass:
     """Login related tests"""
     def test_client_init_and_login_succeed(self):
-        client = Client(username, password)
+        Client(username, password)
 
     def test_client_init_and_login_fail(self):
         """ Raise ConnectionError if requests fails. """
         with pytest.raises(requests.ConnectionError):
-            client = Client("anonymous", "anonymous")
+            Client("anonymous", "anonymous")
 
     def test_login_after_init(self):
         client = Client()

@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pytest
-import requests
 from datetime import datetime, timedelta
 
 from HinetPy import Client

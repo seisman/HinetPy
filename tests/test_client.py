@@ -3,13 +3,11 @@
 
 import os
 import shutil
-from datetime import datetime
+from datetime import datetime, date
 
 import pytest
-import requests
 
 from HinetPy import Client
-from datetime import datetime
 
 username = "test_username"
 password = "test_password"
@@ -121,24 +119,28 @@ class TestGetwaveformSpanClass:
 
 class TestGetCatalogClass:
     def test_get_arrivaltime_1(self):
+        startdate = date(2010, 1, 1)
         data = client.get_arrivaltime(startdate, 5)
         assert data == 'measure_20100101_5.txt'
         assert os.path.exists(data)
         os.remove(data)
 
     def test_get_arrivaltime_2(self):
+        startdate = date(2010, 1, 1)
         data = client.get_arrivaltime(startdate, 5, filename="arrivaltime.txt")
         assert data == "arrivaltime.txt"
         assert os.path.exists(data)
         os.remove(data)
 
     def test_get_focalmechanism_1(self):
+        startdate = date(2010, 1, 1)
         data = client.get_focalmechanism(startdate, 5)
         assert data == 'focal_20100101_5.txt'
         assert os.path.exists(data)
         os.remove(data)
 
     def test_get_focalmachanism_2(self):
+        startdate = date(2010, 1, 1)
         data = client.get_focalmechanism(startdate, 5, filename="focal.txt")
         assert data == "focalmechanism.txt"
         assert os.path.exists(data)
@@ -152,7 +154,5 @@ class TestClientOthersClass:
         assert client._parse_code('010503') == ('01', '05', '010503')
         assert client._parse_code('030201') == ('03', '02', '030201')
 
-        with pytest.raise(ValueError):
+        with pytest.raises(ValueError):
             client._parse_code('01013')
-
-
