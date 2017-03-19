@@ -256,8 +256,7 @@ class Client(object):
                             cnts.append(filename)
                         elif filename.endswith(".euc.ch"):
                             ctable = filename
-                    fz.extractall(members=cnts)
-                    fz.extractall(members=[ctable])
+                    fz.extractall(members=cnts+[ctable])
                 return cnts, ctable
             except Exception:
                 continue
