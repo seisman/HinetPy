@@ -53,11 +53,15 @@ to ``#include <stdlib.h>``.
 HinetPy
 -------
 
-To install the latest release version::
+To install the latest **release** version::
 
     pip install HinetPy
 
-To install the latest developing version::
+To install the latest **developing** version::
+
+    pip install git+https://github.com/seisman/HinetPy.git
+
+or::
 
     git clone https://github.com/seisman/HinetPy
     cd HinetPy
