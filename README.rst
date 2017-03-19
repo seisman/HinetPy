@@ -43,14 +43,14 @@ data into SAC format and extract instrumental response as SAC PZ file.
 0101_201001010000_20.cnt 0101_20100101.ch
 >>>
 >>> # Let's convert win32 data into SAC format
->>> sacfiles = win32.extract_sac(data, ctable)
+>>> win32.extract_sac(data, ctable)
 >>> ls *.SAC
 N.NGUH.E.SAC  N.NGUH.U.SAC  N.NNMH.N.SAC
 N.NGUH.N.SAC  N.NNMH.E.SAC  N.NNMH.U.SAC
 ...
 >>>
 >>> # Let's extract instrument response as PZ file from channel table
->>> pzfiles = win32.extract_pz(ctable)
+>>> win32.extract_pz(ctable)
 >>> ls *.SAC_PZ
 N.NGUH.E.SAC_PZ  N.NGUH.U.SAC_PZ  N.NNMH.N.SAC_PZ
 N.NGUH.N.SAC_PZ  N.NNMH.E.SAC_PZ  N.NNMH.U.SAC_PZ
