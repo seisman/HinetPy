@@ -6,6 +6,7 @@ import time
 import math
 import logging
 import zipfile
+from io import BytesIO
 from datetime import datetime, timedelta
 
 import requests
@@ -236,8 +237,10 @@ class Client(object):
 
         Returns
         -------
-        filesize: str
-            Size of data file. 0 if download fails.
+        cnts: list of str
+            Filename of one-minute win32 data.
+        ctable: str
+            Filename of channle table.
         '''
 
         for _ in range(self.retries):
@@ -245,23 +248,23 @@ class Client(object):
                 r = self.session.post(self._DOWNLOAD, data={'id': id},
                                       stream=True, timeout=self.timeout)
 
-                total_length = int(r.headers['Content-Length'])
-                fname = "{}.zip".format(id)
-
-                with open(fname, "wb") as fd:
-                    for chunk in r.iter_content(chunk_size=1024):
-                        if chunk:  # filter out keep-alive new chunks
-                            fd.write(chunk)
-                if os.path.getsize(fname) != total_length:
-                    msg = "File {} is not complete!".format(fname)
-                    logger.error(msg)
-                return total_length
+                cnts = []
+                ctable = None
+                with zipfile.ZipFile(BytesIO(r.content)) as fz:
+                    for filename in fz.namelist():
+                        if filename.endswith(".cnt"):
+                            cnts.append(filename)
+                        elif filename.endswith(".euc.ch"):
+                            ctable = filename
+                    fz.extractall(members=cnts)
+                    fz.extractall(members=[ctable])
+                return cnts, ctable
             except Exception:
                 continue
         else:
             msg = "Data download fails after {} retries".format(self.retries)
             logger.error(msg)
-            return 0
+            return None, None
 
     def _parse_code(self, code):
         """Parse network code.
@@ -413,19 +416,24 @@ class Client(object):
             return
 
         # 6. download
+        cnts = []
+        ch_euc = set()
         for id in ids:  # check if all id is not None
             if not id:
                 logger.error("Fail to request some data. Skipped.")
                 return None, None
         for id in ids:
-            self._download_waveform(id)
+            rvalue = self._download_waveform(id)
+            cnts.extend(rvalue[0])
+            ch_euc.add(rvalue[1])
+
         # multiprocessing.Pool(processes=3).map(self._download_waveform, ids)
 
         # post processes
-        # 1. unzip files
-        cnts, ch_euc = unzip([x + '.zip' for x in ids])
-        # always sort cnts by name/time to avoid use -s option of catwin32
+        # 1. always sort cnts by name/time to avoid use -s option of catwin32
         cnts = sorted(cnts)
+        #    always use the first ctable
+        ch_euc = list(sorted(ch_euc))[0]
 
         # 2. merge all cnt files
         if not data:
@@ -785,25 +793,6 @@ class Client(object):
                 continue
         return string
 
-
-def unzip(zips):
-    """Unzip .cnt and .euc.ch from zipfiles."""
-
-    win32_filelist = []
-    channel_table = ''
-    for file in zips:
-        with zipfile.ZipFile(file, 'r') as zipFile:
-            for filename in zipFile.namelist():
-                if filename.endswith(".cnt"):
-                    zipFile.extract(filename)
-                    win32_filelist.append(filename)
-                elif not channel_table and filename.endswith(".euc.ch"):
-                    zipFile.extract(filename)
-                    channel_table = filename
-
-        os.unlink(file)
-
-    return win32_filelist, channel_table
 
 
 def split_integer(m, n):
