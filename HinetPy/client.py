@@ -463,7 +463,7 @@ class Client(object):
 
         # 4. cleanup
         for cnt in cnts:
-            os.unlink(cnt)
+            os.remove(cnt)
 
         return data, ctable
 
