@@ -793,7 +793,6 @@ class Client(object):
         return string
 
 
-
 def split_integer(m, n):
     '''
     Split an integer into evenly sized chunks

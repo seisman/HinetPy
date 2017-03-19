@@ -12,6 +12,7 @@ path = os.path.join(pwd, 'data')
 data = os.path.join(path, "0101_2017031100_2.cnt")
 ctable = os.path.join(path, "0101_20170311.ch")
 
+
 class TestWin32ExtractSACClass:
     def test_extract_sac_1(self):
         outdir = os.path.join(pwd, "test1")
@@ -56,9 +57,9 @@ class TestWin32ExtractSACClass:
         outdir = os.path.join(pwd, "test4")
         win32.extract_sac(data, ctable, filter_by_name='N.NG*', outdir=outdir)
         sac = sorted(glob.glob(os.path.join(outdir, "N.*.SAC")))
-        filelist  = ['N.NGUH.E.SAC',
-                     'N.NGUH.N.SAC',
-                     'N.NGUH.U.SAC']
+        filelist = ['N.NGUH.E.SAC',
+                    'N.NGUH.N.SAC',
+                    'N.NGUH.U.SAC']
         sac_to_check = [os.path.join(outdir, name) for name in filelist]
         assert sac == sac_to_check
         shutil.rmtree(outdir)
@@ -134,6 +135,7 @@ class TestWin32ExtractPZClass:
         assert pz == pz_to_check
         shutil.rmtree(outdir)
 
+
 class TestWin32MergeClass:
     def test_merge_without_sort(self):
         datas = sorted(glob.glob(os.path.join(path, "20170101000?0101VM.cnt")))
@@ -175,6 +177,7 @@ class TestWin32MergeClass:
         assert os.path.exists(total_data)
         assert filecmp.cmp(total_data, final_to_check)
         os.unlink(total_data)
+
 
 class TestWin32OthersClass:
     def test_get_processes(self):

@@ -1,18 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from datetime import datetime, timedelta
-
 import pytest
 import requests
+from datetime import datetime, timedelta
 
 from HinetPy import Client
 from HinetPy.header import network
 from HinetPy.win32 import _get_channels
 
+
 username = "test_username"
 password = "test_password"
 client = Client(username, password)
+
 
 class TestClass:
     def test_number_of_channels(self):

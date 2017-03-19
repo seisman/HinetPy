@@ -311,7 +311,8 @@ def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
             raise ValueError(msg)
         elif 'Data for channel {} not existed'.format(channel.id) in line:
             # return None if no data avaiable
-            logger.warn("Data for channel %s not existed. Skipped.", channel.id)
+            logger.warn("Data for channel %s not existed. Skipped.",
+                        channel.id)
             return None
 
     filename = "{}.{}.{}".format(channel.name, channel.component, suffix)
