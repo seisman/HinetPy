@@ -15,6 +15,7 @@ install:
   - pip install .
   - pip install -r requirements.txt
   - pip install guzzle_sphinx_theme
+  - pip install codecov coverage pytest-cov
   # install win32tools
   - sed -i "s/test_username/${HINET_USERNAME}/" .travis/install_win32tools.py
   - sed -i "s/test_password/${HINET_PASSWORD}/" .travis/install_win32tools.py
@@ -29,10 +30,11 @@ before_script:
   - sed -i "s/test_password/${HINET_PASSWORD}/" tests/test_*.py
 
 script:
-  - py.test -v
+    - py.test -v --cov=HinetPy tests/
 
 after_success:
   - cd docs && make html && cd ..
+  - codecov
 
 deploy:
   provider: pages
