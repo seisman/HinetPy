@@ -147,10 +147,10 @@ class TestGetCatalogClass:
 
 class TestClientOthersClass:
     def test_parse_code(self):
-        assert client._parse_code('0101') = ('01', '01', None)
-        assert client._parse_code('0103A') = ('01', '03A', None)
-        assert client._parse_code('010503') = ('01', '05', '010503')
-        assert client._parse_code('030201') = ('03', '02', '030201')
+        assert client._parse_code('0101') == ('01', '01', None)
+        assert client._parse_code('0103A') == ('01', '03A', None)
+        assert client._parse_code('010503') == ('01', '05', '010503')
+        assert client._parse_code('030201') == ('03', '02', '030201')
 
         with pytest.raise(ValueError):
             client._parse_code('01013')
