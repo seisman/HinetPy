@@ -5,6 +5,7 @@ username = "test_username"
 password = "test_password"
 
 import os
+import shutil
 from datetime import datetime
 
 import pytest
@@ -26,12 +27,70 @@ class TestClientCheckClass:
     def test_check_cmd_exists(self):
         assert client.check_cmd_exists() == True
 
-class TestGetWaveformClass:
+class TestGetwaveformClass:
     def test_get_waveform_1(self):
         starttime = datetime(2010, 1, 1, 0, 0)
         win32, chfile = client.get_waveform('0101', starttime, 10)
-        assert (win32, chfile) == ('0101_201001010000_10.cnt', '0101_20100101.ch')
 
+        assert win32 == '0101_201001010000_10.cnt'
+        assert os.path.exists(win32)
+        os.remove(win32)
+        assert chfile == '0101_20100101.ch'
+        assert os.path.exists(chfile)
+        os.remove(chfile)
+
+    def test_get_waveform_custom_name_1(self):
+        starttime = datetime(2010, 1, 1, 0, 0)
+        win32, chfile = client.get_waveform('0101', starttime, 1,
+                                            data="customname1.cnt",
+                                            ctable="customname1.ch")
+
+        assert win32 == 'customname1.cnt'
+        assert os.path.exists(win32)
+        os.remove(win32)
+        assert chfile == 'customname1.ch'
+        assert os.path.exists(chfile)
+        os.remove(chfile)
+
+    def test_get_waveform_custom_name_2(self):
+        starttime = datetime(2010, 1, 1, 0, 0)
+        win32, chfile = client.get_waveform('0101', starttime, 1,
+                                            data="customname2/customname2.cnt",
+                                            ctable="customname2/customname2.ch")
+
+        assert win32 == 'customname2/customname2.cnt'
+        assert os.path.exists(win32)
+        assert chfile == 'customname2/customname2.ch'
+        assert os.path.exists(chfile)
+        shutil.rmtree("customname2")
+
+    def test_get_waveform_custom_name_3(self):
+        starttime = datetime(2010, 1, 1, 0, 0)
+        win32, chfile = client.get_waveform('0101', starttime, 1,
+                                            outdir="customname3")
+
+        assert win32 == "customname3/0101_201001010000_1.cnt"
+        assert os.path.exists(win32)
+        assert chfile == "customname3/0101_20100101.ch"
+        assert os.path.exists(chfile)
+        shutil.rmtree("customname3")
+
+    def test_get_waveform_custom_name_4(self):
+        starttime = datetime(2010, 1, 1, 0, 0)
+        win32, chfile = client.get_waveform('0101', starttime, 1,
+                                            data="customname4-cnt/test.cnt",
+                                            ctable="customname4-ch/test.ch",
+                                            outdir="customname4-data")
+
+        assert win32 == "customname4-cnt/test.cnt"
+        assert os.path.exists(win32)
+        assert chfile == "customname4-ch/test.ch"
+        assert os.path.exists(chfile)
+        shutil.rmtree("customname4-cnt")
+        shutil.rmtree("customname4-ch")
+
+
+class TestGetwaveformSpanClass:
     def test_get_waveform_wrong_span_1(self):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
@@ -57,29 +116,3 @@ class TestGetWaveformClass:
         with pytest.raises(ValueError):
             client.get_waveform('0101', starttime, 10, max_span=65)
 
-    def test_get_waveform_custom_name_1(self):
-        starttime = datetime(2010, 1, 1, 0, 0)
-        win32, chfile = client.get_waveform('0101', starttime, 1, data="test.cnt", ctable="test.ch")
-
-        assert (win32, chfile) == ("test.cnt", "test.ch")
-
-    def test_get_waveform_custom_name_2(self):
-        starttime = datetime(2010, 1, 1, 0, 0)
-        win32, chfile = client.get_waveform('0101', starttime, 1, data="data/test.cnt", ctable="ch/test.ch")
-
-        assert os.path.exists("data/test.cnt")
-        assert os.path.exists("ch/test.ch")
-
-    def test_get_waveform_custom_name_3(self):
-        starttime = datetime(2010, 1, 1, 0, 0)
-        win32, chfile = client.get_waveform('0101', starttime, 1, outdir="data")
-
-        assert os.path.exists("data/0101_201001010000_1.cnt")
-        assert os.path.exists("data/0101_20100101.ch")
-
-    def test_get_waveform_custom_name_4(self):
-        starttime = datetime(2010, 1, 1, 0, 0)
-        win32, chfile = client.get_waveform('0101', starttime, 1, data="cnt/test.cnt", ctable="ch/test.ch", outdir="data")
-
-        assert os.path.exists("cnt/test.cnt")
-        assert os.path.exists("ch/test.ch")
