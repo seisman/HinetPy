@@ -117,3 +117,42 @@ class TestGetwaveformSpanClass:
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
             client.get_waveform('0101', starttime, 10, max_span=65)
+
+
+class TestGetCatalogClass:
+    def test_get_arrivaltime_1(self):
+        data = client.get_arrivaltime(startdate, 5)
+        assert data == 'measure_20100101_5.txt'
+        assert os.path.exists(data)
+        os.remove(data)
+
+    def test_get_arrivaltime_2(self):
+        data = client.get_arrivaltime(startdate, 5, filename="arrivaltime.txt")
+        assert data == "arrivaltime.txt"
+        assert os.path.exists(data)
+        os.remove(data)
+
+    def test_get_focalmechanism_1(self):
+        data = client.get_focalmechanism(startdate, 5)
+        assert data == 'focal_20100101_5.txt'
+        assert os.path.exists(data)
+        os.remove(data)
+
+    def test_get_focalmachanism_2(self):
+        data = client.get_focalmechanism(startdate, 5, filename="focal.txt")
+        assert data == "focalmechanism.txt"
+        assert os.path.exists(data)
+        os.remove(data)
+
+
+class TestClientOthersClass:
+    def test_parse_code(self):
+        assert client._parse_code('0101') = ('01', '01', None)
+        assert client._parse_code('0103A') = ('01', '03A', None)
+        assert client._parse_code('010503') = ('01', '05', '010503')
+        assert client._parse_code('030201') = ('03', '02', '030201')
+
+        with pytest.raise(ValueError):
+            client._parse_code('01013')
+
+
