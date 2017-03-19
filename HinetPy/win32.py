@@ -120,15 +120,7 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
 
-    if processes == 0:
-        if cpu_count() !=1:
-            processes = cpu_count() - 1
-        else:
-            processes = 1
-    elif processes < 0 or processes > cpu_count():
-        processes = cpu_count() - 1
-
-    pool = Pool(processes=processes)
+    pool = Pool(processes=_get_processes(processes))
     with tempfile.NamedTemporaryFile() as ft:
         _write_winprm(ctable, ft.name)
         args = [(data, ch, suffix, outdir, ft.name, pmax) for ch in channels]
@@ -137,6 +129,18 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     if with_pz:
         for channel in channels:
             _extract_sacpz(channel, outdir=outdir)
+
+
+def _get_processes(procs):
+    """Choose the best processes."""
+    cpus = cpu_count()
+    if cpus == 1:
+        return cpus
+    else:
+        if not 0 < procs < cpus:
+            return cpus - 1
+        else:
+            return procs
 
 
 def extract_pz(ctable, suffix='SAC_PZ', outdir='.',

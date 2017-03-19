@@ -4,6 +4,7 @@ import os
 import glob
 import filecmp
 import shutil
+from multiprocessing import cpu_count
 from HinetPy import win32
 
 pwd = os.path.dirname(__file__)
@@ -175,3 +176,9 @@ class TestWin32MergeClass:
         assert filecmp.cmp(total_data, final_to_check)
         os.unlink(total_data)
 
+class TestWin32OthersClass:
+    def test_get_processes(self):
+        cpus = cpu_count()
+        assert win32._get_processes(0) == cpus - 1
+        assert win32._get_processes(-5) == cpus - 1
+        assert win32._get_processes(2) == 2
