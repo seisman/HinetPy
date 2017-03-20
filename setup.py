@@ -1,18 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from setuptools import setup
-from codecs import open
+import re
 from os import path
+from codecs import open
+from setuptools import setup
 
 here = path.abspath(path.dirname(__file__))
 
-# Get the long description from the README file
+# get the long description from the README file
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+# get version number from __init__.py
+# https://github.com/kennethreitz/requests/blob/master/setup.py#L52
+with open('HinetPy/__init__.py', 'r') as fd:
+    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
+                        fd.read(), re.MULTILINE).group(1)
+
 setup(
     name='HinetPy',
-    version='0.3.3',
+    version=version,
 
     description='A NIED Hi-net web service client '
                 'and win32 tools for seismologists.',
