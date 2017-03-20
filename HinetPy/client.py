@@ -8,6 +8,7 @@ import logging
 import zipfile
 from io import BytesIO
 from datetime import datetime, timedelta
+from multiprocessing.pool import ThreadPool
 
 import requests
 
@@ -242,11 +243,14 @@ class Client(object):
         ctable: str
             Filename of channle table.
         '''
-
+        # session cannot be shared between threads, so always initialize
+        # a new client for downloading.
+        # Maybe there is other trick way?
+        dlclient = Client(self.user, self.password)
         for _ in range(self.retries):
             try:
-                r = self.session.post(self._DOWNLOAD, data={'id': id},
-                                      stream=True, timeout=self.timeout)
+                r = dlclient.session.post(self._DOWNLOAD, data={'id': id},
+                                          stream=True, timeout=self.timeout)
 
                 cnts = []
                 ctable = None
@@ -286,7 +290,8 @@ class Client(object):
         return org, net, volc
 
     def get_waveform(self, code, starttime, span,
-                     max_span=5, data=None, ctable=None, outdir=None):
+                     max_span=5, data=None, ctable=None, outdir=None,
+                     threads=3):
         '''
         Get waveform from Hi-net server.
 
@@ -309,6 +314,8 @@ class Client(object):
         outdir: str
             Save win32 and channel table data to specified directory.
             Default is current directory.
+        threads: int
+            How many threads used to speedup data downloading.
 
         Returns
         -------
@@ -410,22 +417,23 @@ class Client(object):
             id = self._request_waveform(org, net, volc,
                                         starttimes[i], spans[i])
             ids.append(id)
+
+        # 6. checks
         if len(ids) == 0:
             logger.error("Error in data requesting, exiting now.")
             return
-
-        # 6. download
-        cnts = []
-        ch_euc = set()
         if not all(ids):  # check if all id is not None
             logger.error("Fail to request some data. Skipped.")
             return None, None
-        for id in ids:
-            rvalue = self._download_waveform(id)
-            cnts.extend(rvalue[0])
-            ch_euc.add(rvalue[1])
 
-        # multiprocessing.Pool(processes=3).map(self._download_waveform, ids)
+        # 7. parallel downloading
+        cnts = []
+        ch_euc = set()
+        with ThreadPool(min(threads, len(ids))) as p:
+            rvalue = p.map(self._download_waveform, ids)
+        for value in rvalue:
+            cnts.extend(value[0])
+            ch_euc.add(value[1])
 
         # post processes
         # 1. always sort cnts by name/time to avoid use -s option of catwin32
