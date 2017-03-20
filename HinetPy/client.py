@@ -417,10 +417,9 @@ class Client(object):
         # 6. download
         cnts = []
         ch_euc = set()
-        for id in ids:  # check if all id is not None
-            if not id:
-                logger.error("Fail to request some data. Skipped.")
-                return None, None
+        if not all(ids):  # check if all id is not None
+            logger.error("Fail to request some data. Skipped.")
+            return None, None
         for id in ids:
             rvalue = self._download_waveform(id)
             cnts.extend(rvalue[0])
