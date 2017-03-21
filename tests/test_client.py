@@ -6,29 +6,51 @@ import shutil
 from datetime import datetime, date
 
 import pytest
+import requests
 
 from HinetPy import Client
 
 username = "test_username"
 password = "test_password"
 
-client = Client(username, password)
-client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
+
+# http://docs.pytest.org/en/latest/fixture.html
+@pytest.fixture(scope="module")
+def client():
+    client = Client(username, password)
+    client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
+    yield client
+    client.select_stations('0101')
+
+
+class TestClientLoginClass:
+    """Login related tests"""
+    def test_client_init_and_login_succeed(self):
+        Client(username, password)
+
+    def test_client_init_and_login_fail(self):
+        """ Raise ConnectionError if requests fails. """
+        with pytest.raises(requests.ConnectionError):
+            Client("anonymous", "anonymous")
+
+    def test_login_after_init(self):
+        client = Client()
+        client.login(username, password)
 
 
 class TestClientCheckClass:
-    def test_check_service_update(self):
+    def test_check_service_update(self, client):
         assert not client.check_service_update()
 
-    def test_check_package_release(self):
+    def test_check_package_release(self, client):
         assert not client.check_package_release()
 
-    def test_check_cmd_exists(self):
+    def test_check_cmd_exists(self, client):
         assert client.check_cmd_exists()
 
 
 class TestGetwaveformClass:
-    def test_get_waveform_1(self):
+    def test_get_waveform_1(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
         data, ctable = client.get_waveform('0101', starttime, 10)
 
@@ -39,7 +61,7 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         os.remove(ctable)
 
-    def test_get_waveform_custom_name_1(self):
+    def test_get_waveform_custom_name_1(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
         data, ctable = client.get_waveform('0101', starttime, 1,
                                            data="customname1.cnt",
@@ -52,7 +74,7 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         os.remove(ctable)
 
-    def test_get_waveform_custom_name_2(self):
+    def test_get_waveform_custom_name_2(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
         data, ctable = client.get_waveform('0101', starttime, 1,
                                            data="customname2/customname2.cnt",
@@ -64,7 +86,7 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         shutil.rmtree("customname2")
 
-    def test_get_waveform_custom_name_3(self):
+    def test_get_waveform_custom_name_3(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
         data, ctable = client.get_waveform('0101', starttime, 1,
                                            outdir="customname3")
@@ -75,7 +97,7 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         shutil.rmtree("customname3")
 
-    def test_get_waveform_custom_name_4(self):
+    def test_get_waveform_custom_name_4(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
         data, ctable = client.get_waveform('0101', starttime, 1,
                                            data="customname4-cnt/test.cnt",
@@ -91,55 +113,55 @@ class TestGetwaveformClass:
 
 
 class TestGetwaveformSpanClass:
-    def test_get_waveform_wrong_span_1(self):
+    def test_get_waveform_wrong_span_1(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
             client.get_waveform('0101', starttime, 0)
 
-    def test_get_waveform_wrong_span_2(self):
+    def test_get_waveform_wrong_span_2(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
             client.get_waveform('0101', starttime, -4)
 
-    def test_get_waveform_wrong_span_3(self):
+    def test_get_waveform_wrong_span_3(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(TypeError):
             client.get_waveform('0101', starttime, 2.5)
 
-    def test_get_waveform_wrong_span_4(self):
+    def test_get_waveform_wrong_span_4(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
             client.get_waveform('0101', starttime, 400000)
 
-    def test_get_waveform_wrong_max_span(self):
+    def test_get_waveform_wrong_max_span(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
             client.get_waveform('0101', starttime, 10, max_span=65)
 
 
 class TestGetCatalogClass:
-    def test_get_arrivaltime_1(self):
+    def test_get_arrivaltime_1(self, client):
         startdate = date(2010, 1, 1)
         data = client.get_arrivaltime(startdate, 5)
         assert data == 'measure_20100101_5.txt'
         assert os.path.exists(data)
         os.remove(data)
 
-    def test_get_arrivaltime_2(self):
+    def test_get_arrivaltime_2(self, client):
         startdate = date(2010, 1, 1)
         data = client.get_arrivaltime(startdate, 5, filename="arrivaltime.txt")
         assert data == "arrivaltime.txt"
         assert os.path.exists(data)
         os.remove(data)
 
-    def test_get_focalmechanism_1(self):
+    def test_get_focalmechanism_1(self, client):
         startdate = date(2010, 1, 1)
         data = client.get_focalmechanism(startdate, 5)
         assert data == 'focal_20100101_5.txt'
         assert os.path.exists(data)
         os.remove(data)
 
-    def test_get_focalmachanism_2(self):
+    def test_get_focalmachanism_2(self, client):
         startdate = date(2010, 1, 1)
         data = client.get_focalmechanism(startdate, 5, filename="focal.txt")
         assert data == "focal.txt"
@@ -148,7 +170,7 @@ class TestGetCatalogClass:
 
 
 class TestClientOthersClass:
-    def test_parse_code(self):
+    def test_parse_code(self, client):
         assert client._parse_code('0101') == ('01', '01', None)
         assert client._parse_code('0103A') == ('01', '03A', None)
         assert client._parse_code('010503') == ('01', '05', '010503')
