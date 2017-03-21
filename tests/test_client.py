@@ -15,7 +15,8 @@ password = "test_password"
 
 
 # http://docs.pytest.org/en/latest/fixture.html
-@pytest.fixture(scope="module")
+#@pytest.fixture is better, but pytest prior 2.10 doesn't support
+@pytest.yield_fixture(scope="module")
 def client():
     client = Client(username, password)
     client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
