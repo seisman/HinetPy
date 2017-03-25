@@ -5,6 +5,7 @@ Changelog
  - `win32.extract_sac`: skip if data not exists
  - `win32.extract_sac`: support multiple processes to speedup, and no longer
    return values
+ - `Client.get_waveform`: support multi-threads to speedup
 
 0.3.3 (2017-03-17):
  - change ``network`` to ``NETWORK`` in ``header.py``
