@@ -4,7 +4,6 @@
 """
 
 __title__ = 'HinetPy'
-__repo__ = 'https://github.com/seisman/HinetPy'
 __version__ = '0.3.3'
 __author__ = 'Dongdong Tian'
 __license__ = 'MIT'

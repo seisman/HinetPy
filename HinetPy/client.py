@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 
 import requests
 
-from HinetPy import __version__, __title__, __repo__
+from HinetPy import __version__, __title__
 from HinetPy.win32 import merge
 from HinetPy.header import NETWORK
 
@@ -685,22 +685,21 @@ class Client(object):
         >>> client.check_package_release()  # doctest: +SKIP
         [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.3).
         """
-        import json
         from distutils.version import StrictVersion
 
-        url = 'https://api.github.com/repos/seisman/HinetPy/releases/latest'
+        url = "https://pypi.python.org/pypi/{}/json".format(__title__)
         r = requests.get(url)
         if r.status_code != 200:
-            logger.warning("Error in connecting GitHub. Skipped.")
+            logger.warning("Error in connecting PyPI. Skipped.")
             return False
-        latest_release = json.loads(r.text)['tag_name']
+        latest_release = r.json()['info']['version']
 
         if StrictVersion(latest_release) > StrictVersion(__version__):
             logger.warning("%s v%s is released. See %s for details.",
-                           __title__, latest_release, __repo__)
+                           __title__, latest_release, url)
             return True
         else:
-            logger.info("You're using the latest release (v%s)." % __version__)
+            logger.info("You're using the latest version (v%s)." % __version__)
             return False
 
     def check_cmd_exists(self):
