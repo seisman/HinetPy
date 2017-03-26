@@ -100,7 +100,6 @@ extensions.append("guzzle_sphinx_theme")
 #
 html_theme_options = {
     'project_nav_name': project,
-    "disqus_comments_shortname": "hinetpy",
     # Allow the project link to be overriden to a custom URL.
     "projectlink": "https://seisman.github.io/HinetPy",
 }
