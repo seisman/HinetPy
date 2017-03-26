@@ -1,6 +1,9 @@
 .. image:: https://img.shields.io/travis/seisman/HinetPy/master.svg
     :target: https://travis-ci.org/seisman/HinetPy
 
+.. image:: https://codecov.io/gh/seisman/HinetPy/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/seisman/HinetPy
+
 .. image:: https://img.shields.io/github/release/seisman/HinetPy.svg
     :target: https://github.com/seisman/HinetPy/releases
 
