@@ -422,7 +422,7 @@ class Client(object):
         if len(ids) == 0:
             logger.error("Error in data requesting, exiting now.")
             return
-        if not all(ids):  # check if all id is not None
+        if not all(ids):  # check if all ids are not None
             logger.error("Fail to request some data. Skipped.")
             return None, None
 

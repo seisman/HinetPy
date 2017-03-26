@@ -53,9 +53,9 @@ class TestClientCheckClass:
 class TestGetwaveformClass:
     def test_get_waveform_1(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
-        data, ctable = client.get_waveform('0101', starttime, 10)
+        data, ctable = client.get_waveform('0101', starttime, 9)
 
-        assert data == '0101_201001010000_10.cnt'
+        assert data == '0101_201001010000_9.cnt'
         assert os.path.exists(data)
         os.remove(data)
         assert ctable == '0101_20100101.ch'
@@ -129,15 +129,25 @@ class TestGetwaveformSpanClass:
         with pytest.raises(TypeError):
             client.get_waveform('0101', starttime, 2.5)
 
-    def test_get_waveform_wrong_span_4(self, client):
+    def test_get_waveform_span_larger_than_int(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
             client.get_waveform('0101', starttime, 400000)
+
+    def test_get_waveform_subrequests_larger_than_120(self, client):
+        starttime = datetime(2005, 1, 1, 0, 0)
+        with pytest.raises(ValueError):
+            client.get_waveform('0101', starttime, 1440)
 
     def test_get_waveform_wrong_max_span(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
             client.get_waveform('0101', starttime, 10, max_span=65)
+
+    def test_get_waveform_wrong_starttime(self, client):
+        starttime = datetime(2001, 1, 1, 0, 0)
+        with pytest.raises(ValueError):
+            client.get_waveform('0101', starttime, 1)
 
 
 class TestGetCatalogClass:
@@ -169,6 +179,11 @@ class TestGetCatalogClass:
         assert os.path.exists(data)
         os.remove(data)
 
+    def test_get_catalog_wrong_span(self, client):
+        startdate = date(2010, 1, 1)
+        with pytest.raises(ValueError):
+            data = client.get_arrivaltime(startdate, 10)
+
 
 class TestClientOthersClass:
     def test_parse_code(self, client):
@@ -179,3 +194,27 @@ class TestClientOthersClass:
 
         with pytest.raises(ValueError):
             client._parse_code('01013')
+
+    def test_get_allowed_span(self, client):
+        assert client.get_allowed_span('0401') == 60
+        client.select_stations('0101')
+        assert client.get_allowed_span('0101') == 5
+        client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
+        assert client.get_allowed_span('0101') == 60
+
+    def test_help(self, client):
+        client.help()
+        client.help('0101')
+
+    def test_string(self, client):
+        print(client)
+
+    def test_get_station_list(self, client):
+        client.get_station_list()
+
+    def test_get_selected_stations(self, client):
+        client.get_selected_stations('0101')
+        client.get_selected_stations('0103')
+        with pytest.raises(ValueError):
+            client.get_selected_stations('0501')
+

@@ -4,3 +4,4 @@ _build
 .cache
 dist
 HinetPy.egg-info
+htmlcov
