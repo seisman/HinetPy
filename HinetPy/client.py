@@ -130,8 +130,8 @@ class Client(object):
         >>> client.doctor()  # doctest: +SKIP
         [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.3).
         [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
-        [2017-01-01 21:52:09] INFO: catwin32: /home/user/bin/catwin32.
-        [2017-01-01 21:52:09] INFO: win2sac_32: /home/user/bin/win2sac_32.
+        [2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
+        [2017-01-01 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
 
         **Checklist**
 
@@ -397,43 +397,41 @@ class Client(object):
         # 4. prepare requests
         spans = split_integer(span, max_span)
         count = len(spans)
-        if len(spans) > 120:
-            msg = "Time span {:d} greater than allowed value".format(span)
-            raise ValueError(msg)
         starttimes = [starttime]
         for i in range(1, count):
             dt = starttimes[i-1] + timedelta(minutes=spans[i-1])
             starttimes.append(dt)
 
-        # 5. requests
-        logger.info("%s ~%s", starttime.strftime("%Y-%m-%d %H:%M"), span)
-        ids = []
-        for i in range(count):
-            logger.info("[%s/%d] => %s ~%d",
-                        str(i+1).zfill(len(str(count))),
-                        count,
-                        starttimes[i].strftime("%Y-%m-%d %H:%M"),
-                        spans[i])
-            id = self._request_waveform(org, net, volc,
-                                        starttimes[i], spans[i])
-            ids.append(id)
-
-        # 6. checks
-        if len(ids) == 0:
-            logger.error("Error in data requesting, exiting now.")
-            return
-        if not all(ids):  # check if all ids are not None
-            logger.error("Fail to request some data. Skipped.")
-            return None, None
-
-        # 7. parallel downloading
         cnts = []
         ch_euc = set()
-        with ThreadPool(min(threads, len(ids))) as p:
-            rvalue = p.map(self._download_waveform, ids)
-        for value in rvalue:
-            cnts.extend(value[0])
-            ch_euc.add(value[1])
+        logger.info("%s ~%s", starttime.strftime("%Y-%m-%d %H:%M"), span)
+        for j in range(0, count, 100):
+            ids = []
+            for i in range(j, min(j+100, count)):
+                # 5. requests
+                logger.info("[%s/%d] => %s ~%d",
+                            str(i+1).zfill(len(str(count))),
+                            count,
+                            starttimes[i].strftime("%Y-%m-%d %H:%M"),
+                            spans[i])
+                id = self._request_waveform(org, net, volc,
+                                            starttimes[i], spans[i])
+                ids.append(id)
+
+                # 6. checks
+                if len(ids) == 0:
+                    logger.error("Error in data requesting, exiting now.")
+                    return
+                if not all(ids):  # check if all ids are not None
+                    logger.error("Fail to request some data. Skipped.")
+                    return None, None
+
+            # 7. parallel downloading
+            with ThreadPool(min(threads, len(ids))) as p:
+                rvalue = p.map(self._download_waveform, ids)
+            for value in rvalue:
+                cnts.extend(value[0])
+                ch_euc.add(value[1])
 
         # post processes
         # 1. always sort cnts by name/time to avoid use -s option of catwin32
