@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+'''This module contains Hi-net Client class.'''
 
 import os
 import re
@@ -12,7 +13,6 @@ from multiprocessing.pool import ThreadPool
 
 import requests
 
-from HinetPy import __version__, __title__
 from HinetPy.win32 import merge
 from HinetPy.header import NETWORK
 
@@ -554,7 +554,7 @@ class Client(object):
         >>> client.get_focalmechanism(startdate, 5)
         'focal_20100101_5.txt'
         >>> client.get_focalmechanism(startdate, 5, filename="focal.txt")
-        'focalmechanism.txt'
+        'focal.txt'
         """
         return self._get_catalog("focal", startdate, span, filename, os)
 
@@ -693,6 +693,7 @@ class Client(object):
         >>> client.check_package_release()  # doctest: +SKIP
         [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.3).
         """
+        from HinetPy import __version__, __title__
         from distutils.version import StrictVersion
 
         url = "https://pypi.python.org/pypi/{}/json".format(__title__)

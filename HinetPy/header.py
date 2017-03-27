@@ -1,28 +1,34 @@
 # -*- coding: utf-8 -*-
-"""Network information."""
+"""Client related header information."""
 
 from datetime import datetime
 from collections import namedtuple
 
 Network = namedtuple('Network', "name, channels, starttime, url")
-"""
+""" Namedtuple of network.
+
 .. py:attribute:: name
 
-   Name of network.
+   Network name.
 
 .. py:attribute:: channels
 
-   No of channels in each network.
+   Number of channels the network has.
 
 .. py:attribute:: starttime
 
-   Start time when data is avaiable.
+   Start time (in JST time) when waveform data is avaiable.
 
->>> network = {}
->>> network['0101'] = Network(name='NIED Hi-net',
-                              channels=2336,
-                              starttime=datetime(2004, 4, 1, 0, 0),
-                              url="http://www.hinet.bosai.go.jp/")
+.. py:attribute:: url
+
+   Network homepage.
+
+Namedtuple ``NETWORK`` contains information of all networks available
+from Hi-net website.
+
+>>> from HinetPy.header import NETWORK
+>>> for code in NETWORK.keys():
+...     print(code, NETWORK[code].name)
 """
 
 NETWORK = {}
@@ -55,7 +61,7 @@ NETWORK['0203'] = Network(name='Tokyo University',
 NETWORK['0204'] = Network(name='Kyoto University',
                           channels=196,
                           starttime=datetime(2004, 4, 1, 0, 0),
-                          url="http://www.dpri.kyoto-u.ac.jp/web_e/index_topics.html")
+                          url="http://www.dpri.kyoto-u.ac.jp/en/")
 NETWORK['0205'] = Network(name='Kyushu University',
                           channels=73,
                           starttime=datetime(2004, 4, 1, 0, 0),
@@ -126,11 +132,11 @@ NETWORK['0702'] = Network(name='Hot Spring Research Institute '
 NETWORK['0703'] = Network(name='Aomori Prefectural Government',
                           channels=15,
                           starttime=datetime(2004, 4, 1, 0, 0),
-                          url="http://www.pref.aomori.lg.jp/foreigners/index.html")
+                          url="http://www.pref.aomori.lg.jp/foreigners/")
 NETWORK['0705'] = Network(name='Shizuoka Prefectural Government',
                           channels=3,
                           starttime=datetime(2004, 6, 15, 0, 0),
-                          url="http://www.pref.shizuoka.jp/a_foreign/english/index.html")
+                          url="http://www.pref.shizuoka.jp/a_foreign/english/")
 
 NETWORK['0801'] = Network(name='ADEP',
                           channels=606,

@@ -3,4 +3,3 @@ License
 
 .. include:: ../LICENSE
    :literal:
-

@@ -46,6 +46,15 @@ setup(
     ],
     keywords='NIED Hi-net related tasks',
     packages=['HinetPy'],
-    install_requires=['requests'],
     license='MIT',
+    install_requires=['requests'],
+    extras_require={
+        'dev': [
+            "guzzle_sphinx_theme",
+            "codecov",
+            "coverage",
+            "pytest-cov",
+            "twine",
+        ]
+    },
 )

@@ -111,11 +111,13 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     """
 
     channels = _get_channels(ctable)
+    logger.info("%d channels found in %s.", len(channels), ctable)
     if filter_by_id or filter_by_name or filter_by_component:
         channels = _filter_channels(channels,
                                     filter_by_id,
                                     filter_by_name,
                                     filter_by_component)
+    logger.info("%d channels to be extracted.", len(channels))
 
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
@@ -124,11 +126,16 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     with tempfile.NamedTemporaryFile() as ft:
         _write_winprm(ctable, ft.name)
         args = [(data, ch, suffix, outdir, ft.name, pmax) for ch in channels]
-        pool.starmap(_extract_channel, args)
+        sacfiles = pool.starmap(_extract_channel, args)
+        logger.info("%d SAC data successfully extracted.",
+                    len(sacfiles) - sacfiles.count(None))
 
     if with_pz:
-        for channel in channels:
-            _extract_sacpz(channel, outdir=outdir)
+        # "SAC_PZ" here is hardcoded.
+        args = [(ch, "SAC_PZ", outdir) for ch in channels]
+        pzfiles = pool.starmap(_extract_sacpz, args)
+        logger.info("%d SAC PZ files successfully extracted.",
+                    len(pzfiles) - pzfiles.count(None))
 
 
 def _get_processes(procs):
@@ -311,8 +318,8 @@ def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
             raise ValueError(msg)
         elif 'Data for channel {} not existed'.format(channel.id) in line:
             # return None if no data avaiable
-            logger.warn("Data for channel %s not existed. Skipped.",
-                        channel.id)
+            logger.warning("Data for %s.%s (%s) not exists. Skipped.",
+                           channel.name, channel.component, channel.id)
             return None
 
     filename = "{}.{}.{}".format(channel.name, channel.component, suffix)
@@ -332,7 +339,6 @@ def _find_poles(damping, freq):
 
     Parameters
     ----------
-
     damping: float
         Damping constant.
     freq: float
@@ -350,7 +356,6 @@ def _write_pz(pzfile, real, imaginary, constant):
 
     Parameters
     ----------
-
     pzfile: str
         SAC PoleZero filename.
     real: float
@@ -360,7 +365,6 @@ def _write_pz(pzfile, real, imaginary, constant):
     constant: float
         Constant in SAC PZ.
     """
-
     with open(pzfile, "w") as pz:
         pz.write("ZEROS 3\n")
         pz.write("POLES 2\n")
@@ -372,14 +376,15 @@ def _write_pz(pzfile, real, imaginary, constant):
 def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.'):
 
     if channel.unit != 'm/s':  # only works for velocity
-        print("Warning: {}.{} isn't velocity in m/s".format(channel.name,
-                                                            channel.component))
+        logger.warning("%s.%s (%s): Unit is not velocity.",
+                       channel.name, channel.component, channel.id)
 
     try:
         freq = 2.0 * math.pi / channel.period
     except ZeroDivisionError:
-        print("Warning: {}.{} Natural period = 0!".format(channel.name,
-                                                          channel.component))
+        logger.warning("%s.%s (%s): Natural period = 0. Skipped.",
+                       channel.name, channel.component, channel.id)
+        return None
 
     A0 = 2 * channel.damping
     factor = math.pow(10, channel.preamplification/20.0)

@@ -23,14 +23,15 @@ Features
 ========
 
 #. Automatically request continuous waveform data from Hi-net
-#. Convert win32 data into SAC format
-#. Extract instrumental response as SAC PZ file
+#. Convert waveform data from win32 format to SAC format
+#. Extract instrumental response as SAC polezero file
 
 A simple example
 ================
 
-It's simple to request a continuous waveform data from Hi-net, convert the
-data into SAC format and extract instrumental response as SAC PZ file.
+The power of `HinetPy`_ make it simple to request continuous waveform data
+from Hi-net, convert the data into SAC format and extract instrumental
+responses as SAC polezero files.
 
 >>> from HinetPy import Client, win32
 >>> from datetime import datetime
@@ -40,18 +41,20 @@ data into SAC format and extract instrumental response as SAC PZ file.
 >>>
 >>> # Let's try to request 20 minutes data since 2010-01-01T00:00(GMT+0900) from Hi-net
 >>> starttime = datetime(2010, 1, 1, 0, 0)
+>>> # '0101' is the code of Hi-net network
 >>> data, ctable = client.get_waveform('0101', starttime, 20)
->>> # The request process takes several minutes due to the unfriendly design of Hi-net
+>>> # The request and downloading process will take several minutes
+>>> # waiting data request ...
+>>> # waiting data downloading ...
 >>> ls  # the downloaded data and corresponding channel table
 0101_201001010000_20.cnt 0101_20100101.ch
 >>>
->>> # Let's convert win32 data into SAC format
+>>> # Let's convert data from win32 format to SAC format
 >>> win32.extract_sac(data, ctable)
 >>> ls *.SAC
 N.NGUH.E.SAC  N.NGUH.U.SAC  N.NNMH.N.SAC
 N.NGUH.N.SAC  N.NNMH.E.SAC  N.NNMH.U.SAC
 ...
->>>
 >>> # Let's extract instrument response as PZ file from channel table
 >>> win32.extract_pz(ctable)
 >>> ls *.SAC_PZ
@@ -62,8 +65,9 @@ N.NGUH.N.SAC_PZ  N.NNMH.E.SAC_PZ  N.NNMH.U.SAC_PZ
 License
 =======
 
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the `MIT license`_.
 
-.. _HinetPy: https://seisman.github.io/HinetPy
+.. _HinetPy: https://github.com/seisman/HinetPy
 .. _win32tools: https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools
 .. _NIED Hi-net: http://www.hinet.bosai.go.jp/
+.. _MIT license: license.html

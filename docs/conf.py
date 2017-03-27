@@ -7,6 +7,7 @@
 #
 import os
 import sys
+import HinetPy
 sys.path.insert(0, os.path.abspath('..'))
 
 # -- General configuration ------------------------------------------------
@@ -50,16 +51,16 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'HinetPy'
-copyright = '2014-2017, Dongdong Tian'
-author = 'Dongdong Tian'
+project = HinetPy.__title__
+copyright = HinetPy.__copyright__
+author = HinetPy.__author__
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = '0.3.3'
+version = HinetPy.__version__
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -99,7 +100,7 @@ extensions.append("guzzle_sphinx_theme")
 # documentation.
 #
 html_theme_options = {
-    'project_nav_name': project,
+    'project_nav_name': "{} v{}".format(project, version),
     # Allow the project link to be overriden to a custom URL.
     "projectlink": "https://seisman.github.io/HinetPy",
 }

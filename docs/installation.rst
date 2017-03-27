@@ -66,3 +66,10 @@ or::
     git clone https://github.com/seisman/HinetPy
     cd HinetPy
     python setup.py install
+
+Uninstall
+---------
+
+If you want to uninstall HinetPy, just run::
+
+    pip uninstall HinetPy

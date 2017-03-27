@@ -12,11 +12,8 @@ branches:
   - /^feature-.*$/
 
 install:
-  - pip install -r requirements.txt
-  - pip install guzzle_sphinx_theme
-  - pip install codecov coverage pytest-cov
   # -e is important for coverage report
-  - pip install -e .
+  - pip install -e .[dev]
   # install win32tools
   - python -c "from HinetPy import Client; Client('${HINET_USERNAME}', '${HINET_PASSWORD}')._get_win32tools()"
   - tar -xvf win32tools.tar.gz
