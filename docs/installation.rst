@@ -1,10 +1,7 @@
 Installation
 ============
 
-Python3
--------
-
-HinetPy need Pyhon 3.4 or above. If you're new to Python, I strongly recommend installing the `Anaconda`_.
+HinetPy needs Pyhon 3.4 or above. If you're new to Python, I strongly recommend installing the `Anaconda`_.
 
 .. _Anaconda: https://www.continuum.io/downloads
 
@@ -12,22 +9,33 @@ HinetPy need Pyhon 3.4 or above. If you're new to Python, I strongly recommend i
 
    There is no plan to support Python 2.7.
 
-Third-party modules
--------------------
+HinetPy
+-------
 
-HinetPy is dependent on `requests <http://docs.python-requests.org>`_.
-Simply run::
+To install the latest **release/stable** version::
 
-    $ pip install requests
+    pip install HinetPy
 
-to install it.
+To install the latest **developing/unstable** version::
+
+    pip install git+https://github.com/seisman/HinetPy.git
+
+or::
+
+    git clone https://github.com/seisman/HinetPy
+    cd HinetPy
+    python setup.py install
+
+If you want to uninstall HinetPy, just run::
+
+    pip uninstall HinetPy
 
 win32tools
 ----------
 
 `win32tools`_ is a collection of tools provided by `NIED Hi-net`_ to process
 win32 format data. HinetPy needs ``catwin32`` and ``win2sac_32``. Make sure
-that ``catwin32`` and ``win2sac_32`` is in your PATH.
+that ``catwin32`` and ``win2sac_32`` are in your PATH.
 
 ::
 
@@ -50,26 +58,3 @@ to ``#include <stdlib.h>``.
 .. _NIED Hi-net: http://www.hinet.bosai.go.jp/
 .. _win32tools: https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools
 
-HinetPy
--------
-
-To install the latest **release** version::
-
-    pip install HinetPy
-
-To install the latest **developing** version::
-
-    pip install git+https://github.com/seisman/HinetPy.git
-
-or::
-
-    git clone https://github.com/seisman/HinetPy
-    cd HinetPy
-    python setup.py install
-
-Uninstall
----------
-
-If you want to uninstall HinetPy, just run::
-
-    pip uninstall HinetPy

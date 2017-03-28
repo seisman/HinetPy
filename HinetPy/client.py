@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-'''This module contains Hi-net Client class.'''
 
 import os
 import re
@@ -41,7 +40,7 @@ class Client(object):
     # ETAG for v160422
     _ETAG = "16cd-537f317987000"
 
-    def __init__(self, user=None, password=None, timeout=120, retries=3,
+    def __init__(self, user=None, password=None, timeout=60, retries=3,
                  sleep_time_in_seconds=5, max_sleep_count=30):
         """Hi-net web service client.
 
@@ -63,13 +62,12 @@ class Client(object):
         Examples
         --------
 
-        >>> from HinetPy import Client               # doctest: +SKIP
-        >>> client = Client("username", "password")  # doctest: +SKIP
+        >>> from HinetPy import Client
+        >>> client = Client("username", "password")
 
         Notes
         -----
-
-        Hi-net server ususally spend 10 seconds to 1 minute on data preparation
+        Hi-net server ususally spends 10 seconds to 1 minute on data preparation
         after receiving a data request. During the data preparation, users are
         **NOT** allowed to request another data. So users have to wait until
         the data is ready.
@@ -101,9 +99,9 @@ class Client(object):
         Examples
         --------
 
-        >>> from HinetPy import Client            # doctest: +SKIP
-        >>> client = Client()                     # doctest: +SKIP
-        >>> client.login("username", "password")  # doctest: +SKIP
+        >>> from HinetPy import Client
+        >>> client = Client()
+        >>> client.login("username", "password")
         """
         self.user = user
         self.password = password
@@ -121,13 +119,12 @@ class Client(object):
         if inout == 'out':
             msg = "Unauthorized. Check your username and password!"
             raise requests.ConnectionError(msg)
-
-        logger.debug("Logging into Hi-net server.")
+        logger.info("Initialize a Hi-net client.")
 
     def doctor(self):
         """ Doctor does some checks.
 
-        >>> client.doctor()  # doctest: +SKIP
+        >>> client.doctor()
         [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.3).
         [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
         [2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
@@ -139,7 +136,7 @@ class Client(object):
           (see :meth:`~HinetPy.client.Client.check_package_release`)
         - if Hi-net web service is updated
           (see :meth:`~HinetPy.client.Client.check_service_update`)
-        - if catwin32 and win2sac_32 from win32tools in PATH
+        - if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH
           (see :meth:`~HinetPy.client.Client.check_cmd_exists`)
         """
         self.check_package_release()
@@ -331,13 +328,12 @@ class Client(object):
 
         >>> from datetime import datetime
         >>> starttime = datetime(2010, 1, 1, 0, 0)
-        >>> client.get_waveform('0101', starttime, 10)  # doctest: +SKIP
+        >>> client.get_waveform('0101', starttime, 10)
         ('0101_201001010000_10.cnt', '0101_20100101.ch')
 
         Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:
 
-        >>> client.get_waveform('0103', starttime, 1440,  # doctest: +SKIP
-        ...                      max_span=25)
+        >>> client.get_waveform('0103', starttime, 1440, max_span=25)
         ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
         Notes
@@ -559,7 +555,7 @@ class Client(object):
     def get_station_list(self, code=None):
         """Get a station list of Hi-net and F-net.
 
-        >>> client.get_station_list()  # doctest: +ELLIPSIS
+        >>> client.get_station_list()
         network station longtitude latitude
         0101 N.WNNH 141.8850 45.4883
         0101 N.SFNH 142.1185 45.3346
@@ -672,7 +668,7 @@ class Client(object):
     def check_service_update(self):
         """Check if Hi-net service is updated.
 
-        >>> client.check_service_update()  # doctest: +SKIP
+        >>> client.check_service_update()
         [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
         """
         r = self.session.get(self._CONT + '/js/cont.js')
@@ -682,13 +678,13 @@ class Client(object):
             return False
         else:
             logger.warning("Hi-net web service is updated."
-                           "This module may FAIL!")
+                           "HinetPy may FAIL!")
             return True
 
     def check_package_release(self):
-        """Check whether this module has a new release.
+        """Check whether HinetPy has a new release.
 
-        >>> client.check_package_release()  # doctest: +SKIP
+        >>> client.check_package_release()
         [2017-01-01 00:00:00] INFO: You're using the latest release (v0.3.3).
         """
         from HinetPy import __version__, __title__
@@ -706,13 +702,13 @@ class Client(object):
                            __title__, latest_release, url)
             return True
         else:
-            logger.info("You're using the latest version (v%s)." % __version__)
+            logger.info("You're using the latest version (v%s).",  __version__)
             return False
 
     def check_cmd_exists(self):
         """Check if ``catwin32`` and ``win2sac_32`` from win32tools in PATH.
 
-        >>> client.check_cmd_exists()  # doctest: +SKIP
+        >>> client.check_cmd_exists()
         [2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
         [2017-01-01 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
 
@@ -724,24 +720,21 @@ class Client(object):
         """
         import shutil
 
-        catwin32 = shutil.which('catwin32')
-        if catwin32:
-            logger.info("catwin32: %s.", catwin32)
-        else:
-            logger.error("catwin32 not found in PATH.")
+        error = 0
+        for cmd in ('catwin32', 'win2sac_32'):
+            fullpath = shutil.which(cmd)
+            if fullpath:
+                logger.info("%s: %s.", cmd, fullpath)
+            else:
+                logger.error("%s: not found in PATH.", cmd)
+                error += 1
 
-        win2sac_32 = shutil.which('win2sac_32')
-        if win2sac_32:
-            logger.info("win2sac_32: %s.", win2sac_32)
-        else:
-            logger.error("win2sac_32 not found in PATH.")
-
-        return True if catwin32 and win2sac_32 else False
+        return False if error else True
 
     def help(self, code=None):
         """List information of networks.
 
-        >>> client.help()  # doctest: +ELLIPSIS
+        >>> client.help()
         0101   : NIED Hi-net
         0103   : NIED F-net (broadband)
         0103A  : NIED F-net (strong motion)
@@ -812,8 +805,3 @@ def split_integer(m, n):
     for i in range(m % count):
         chunks[i] += 1
     return chunks
-
-if __name__ == '__main__':
-    import doctest
-    client = Client("username", "password")
-    doctest.testmod()

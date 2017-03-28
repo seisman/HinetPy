@@ -1,7 +1,7 @@
 First Try
 =========
 
-For new users of Hi-net, I highly recommand you to request and download
+For new users of Hi-net data, I highly recommand you to request and download
 waveform data from Hi-net website and try to process the data with win32tools.
 Do all the things **manually** at least one time, make sure that you understand
 the whole procedures and the unfriendness and limitations of Hi-net website.
@@ -11,8 +11,8 @@ Now let's begin our first tour.
 Start python
 ------------
 
-Run python (if you have ipython installed, run ipython), and make sure you're
-using Python 3.4 or above::
+Run python (or ipython if you have it), and make sure you're using
+Python 3.4 or above::
 
     $ python
     Python 3.5.3 |Anaconda custom (64-bit)| (default, Feb 22 2017, 21:13:27)

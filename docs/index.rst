@@ -13,4 +13,4 @@ HinetPy - A Hi-net Client powered by Python
    changelog
    license
 
-.. automodule:: HinetPy
+.. include:: ../README.rst

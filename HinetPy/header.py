@@ -5,7 +5,7 @@ from datetime import datetime
 from collections import namedtuple
 
 Network = namedtuple('Network', "name, channels, starttime, url")
-""" Namedtuple of network.
+""" An object containing information of a network.
 
 .. py:attribute:: name
 
@@ -23,8 +23,8 @@ Network = namedtuple('Network', "name, channels, starttime, url")
 
    Network homepage.
 
-Namedtuple ``NETWORK`` contains information of all networks available
-from Hi-net website.
+``NETWORK`` is a dict of :class:`~HinetPy.header.Network`, containing
+information of all networks available from Hi-net website.
 
 >>> from HinetPy.header import NETWORK
 >>> for code in NETWORK.keys():

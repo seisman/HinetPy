@@ -19,12 +19,15 @@
 `HinetPy`_ is a Python package aiming to automate and simplify tedious data
 request, downloading and format conversion tasks related to `NIED Hi-net`_.
 
-Features
-========
+`Source Code <https://github.com/seisman/HinetPy>`_ | `Documentation <https://seisman.github.io/HinetPy>`_ | `NIED Hi-net`_
 
-#. Automatically request continuous waveform data from Hi-net
-#. Convert waveform data from win32 format to SAC format
-#. Extract instrumental response as SAC polezero file
+Feature Support
+===============
+
+- Request continuous waveform data from Hi-net
+- Convert waveform data from win32 format to SAC format
+- Extract instrumental response as SAC polezero file
+- Multithreads downloading and conversion to speedup
 
 A simple example
 ================
@@ -61,6 +64,7 @@ N.NGUH.N.SAC  N.NNMH.E.SAC  N.NNMH.U.SAC
 N.NGUH.E.SAC_PZ  N.NGUH.U.SAC_PZ  N.NNMH.N.SAC_PZ
 N.NGUH.N.SAC_PZ  N.NNMH.E.SAC_PZ  N.NNMH.U.SAC_PZ
 ...
+
 
 License
 =======

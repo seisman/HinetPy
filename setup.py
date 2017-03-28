@@ -20,15 +20,26 @@ with open('HinetPy/__init__.py', 'r') as fd:
 setup(
     name='HinetPy',
     version=version,
-
     description='A NIED Hi-net web service client '
                 'and win32 tools for seismologists.',
     long_description=long_description,
-
     url='https://github.com/seisman/HinetPy',
-
     author='Dongdong Tian',
     author_email='seisman.info@gmail.com',
+    keywords='NIED Hi-net related tasks',
+    license='MIT',
+
+    packages=['HinetPy'],
+    install_requires=['requests'],
+    extras_require={
+        'dev': [
+            "guzzle_sphinx_theme",
+            "codecov",
+            "coverage",
+            "pytest-cov",
+            "twine",
+        ]
+    },
 
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -44,17 +55,4 @@ setup(
         'Topic :: Scientific/Engineering :: Physics',
         'Topic :: Utilities',
     ],
-    keywords='NIED Hi-net related tasks',
-    packages=['HinetPy'],
-    license='MIT',
-    install_requires=['requests'],
-    extras_require={
-        'dev': [
-            "guzzle_sphinx_theme",
-            "codecov",
-            "coverage",
-            "pytest-cov",
-            "twine",
-        ]
-    },
 )

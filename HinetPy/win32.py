@@ -26,7 +26,6 @@ class Channel(object):
 
         Parameters
         ----------
-
         id: str
             Channel ID.
         name: str
@@ -241,7 +240,6 @@ def _filter_channels(channels,
 
     Parameters
     ----------
-
     channels: :class:`~HinetPy.win32.Channel`
         Channels to be filtered.
     filter_by_id: list of str or wildcard
@@ -374,7 +372,6 @@ def _write_pz(pzfile, real, imaginary, constant):
 
 
 def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.'):
-
     if channel.unit != 'm/s':  # only works for velocity
         logger.warning("%s.%s (%s): Unit is not velocity.",
                        channel.name, channel.component, channel.id)
