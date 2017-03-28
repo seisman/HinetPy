@@ -295,7 +295,7 @@ class Client(object):
         Parameters
         ----------
         code: str
-            Network code. See :meth:`~HinetPy.client.Client.help` for details.
+            Network code. See :meth:`~HinetPy.client.Client.info` for details.
         starttime: :py:class:`datetime.datetime`
             Starttime of data request.
         span: int
@@ -731,10 +731,10 @@ class Client(object):
 
         return False if error else True
 
-    def help(self, code=None):
+    def info(self, code=None):
         """List information of networks.
 
-        >>> client.help()
+        >>> client.info()
         0101   : NIED Hi-net
         0103   : NIED F-net (broadband)
         0103A  : NIED F-net (strong motion)
@@ -743,7 +743,7 @@ class Client(object):
         0703   : Aomori Prefectural Government
         0705   : Shizuoka Prefectural Government
         0801   : ADEP
-        >>> client.help('0101')
+        >>> client.info('0101')
         == Information of Network 0101 ==
         Name: NIED Hi-net
         Starttime: 20040401
@@ -751,7 +751,6 @@ class Client(object):
 
         Parameters
         ----------
-
         code: None or str
             Network code.
         """

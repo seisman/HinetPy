@@ -202,9 +202,9 @@ class TestClientOthersClass:
         client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
         assert client.get_allowed_span('0101') == 60
 
-    def test_help(self, client):
-        client.help()
-        client.help('0101')
+    def test_info(self, client):
+        client.info()
+        client.info('0101')
 
     def test_string(self, client):
         print(client)

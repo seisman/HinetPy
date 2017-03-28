@@ -54,9 +54,9 @@ Network Codes
 Hi-net website provide seismic waveform data from several organizations and
 networks, e.g. Hi-net, F-net and V-net. Each network has a unique network code.
 In order to request waveform data from specified network, you need to know
-the network code. See :meth:`~HinetPy.client.Client.help` for details.
+the network code. See :meth:`~HinetPy.client.Client.info` for details.
 
->>> client.help()
+>>> client.info()
 0101   : NIED Hi-net
 0103   : NIED F-net (broadband)
 0103A  : NIED F-net (strong motion)
@@ -68,7 +68,7 @@ the network code. See :meth:`~HinetPy.client.Client.help` for details.
 0703   : Aomori Prefectural Government
 0705   : Shizuoka Prefectural Government
 0801   : ADEP
->>> client.help('0101')  # get more information about NIED Hi-net (0101)
+>>> client.info('0101')  # get more information about NIED Hi-net (0101)
 == Information of Network 0101 ==
 Name: NIED Hi-net
 Homepage: http://www.hinet.bosai.go.jp/

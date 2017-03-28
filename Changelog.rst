@@ -6,6 +6,7 @@ Changelog
  - ``win32.extract_sac``: support multiple processes to speedup, and no longer
    return values
  - ``Client.get_waveform``: support multi-threads to speedup
+ - Change ``Client.help()`` to ``Client.info()``
 
 0.3.3 (2017-03-17):
  - Change ``network`` to ``NETWORK`` in ``header.py``
