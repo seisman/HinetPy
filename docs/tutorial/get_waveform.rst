@@ -10,7 +10,7 @@ This tutorial shows how to request waveform data from Hi-net in different ways.
 
 .. note::
 
-   All time are in JST time (GMT+0900).
+   All times in HinetPy and Hi-net website are in JST time (GMT+0900).
 
 Simple way
 ----------
@@ -34,7 +34,7 @@ Now we get:
 
 .. note::
 
-   Hi-net set three limitations for data request:
+   Hi-net sets three limitations for data request:
 
    1. Record_Length <= 60 min
    2. Number_of_channels * Record_Length <= 12000 min

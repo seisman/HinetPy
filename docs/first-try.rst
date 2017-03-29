@@ -11,7 +11,7 @@ Now let's begin our first tour.
 Start python
 ------------
 
-Run python (or ipython if you have it), and make sure you're using
+Run ``python`` (or ``ipython`` if you have it), and make sure you're using
 Python 3.4 or above::
 
     $ python
@@ -95,8 +95,8 @@ network station longtitude latitude
 ...
 
 Hi-net/F-net has a lot of stations. If you only need a few of them, you can
-select the stations you want. Hi-net website provide a web interface to do
-that, which is prefered for most cases. If you want to dynamically select
+select the stations you want. Hi-net website also provide a web interface to
+do that, which is prefered for most cases. If you want to dynamically select
 stations in your script, you can try
 :meth:`~HinetPy.client.Client.select_staions`.
 

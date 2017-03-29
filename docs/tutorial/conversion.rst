@@ -34,9 +34,11 @@ They accept a list of string or a string contains wildcard.
 Extract PZ
 ----------
 
-.. note::
+.. warning::
 
-   Hi-net only.
+   This feature works for Hi-net only.
+
+   F-net data users can get RESP files from `NIED F-net`_.
 
 :meth:`~HinetPy.win32.extract_pz` can convert Hi-net channel table to SAC PZ
 format. Its usage is very similar to :meth:`~HinetPy.win32.extract_sac`.
@@ -65,3 +67,5 @@ They accept a list of string or a string contains wildcard.
 
    1. `Response of Observation Equipment <https://hinetwww11.bosai.go.jp/auth/seed/?LANG=en>`_
    2. `Hi-net FAQ Q08 <http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08>`_
+
+.. _NIED F-net: http://www.fnet.bosai.go.jp/top.php

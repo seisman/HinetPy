@@ -41,6 +41,13 @@ outdir
     maximum number of data points. Defaults to ``2000000``. If you data has
     more data points, you must increase this value.
 
+Examples
+--------
+
+::
+
+    win2sac_32 2000082404000101VM.cnt 4c55,4c65 SAC DATA -e > junk.log
+
 Notes
 -----
 
@@ -52,6 +59,21 @@ The default filename format is ``STATION.COMPONENT.EXTENSION``
 
 Channel number file format
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. danger::
+
+   Using this feature may result in data loss, as ``win2sac_32`` will exit
+   if data of any channel doesn't exist in the win32 file.
+
+   If you still want to use this fearture, you can modify Line 386 of
+   ``s4win2sacm.c`` from::
+
+        fprintf(stderr, "Data for channel %x not existed\n", sysch);
+        iRet = 1;
+
+   to::
+
+        fprintf(stderr, "Data for channel %x not existed\n", sysch);
 
 You can save all channel numbers you want to extract into one file.
 
@@ -95,10 +117,21 @@ The component information is written to SAC header variables ``CPMAZ`` and
 - E/Y: CMPAZ = 90.0, CMPINC = 90.0
 - Other: CMPAZ = 0.0, CMPINC = 0.0
 
-Please note that the azimuth of sensor is inaccurate. See https://hinetwww11.bosai.go.jp/auth/direc/?LANG=en for details.
+.. note::
+
+   Azimuths of sensors are **NOT** accurate.
+
+   See https://hinetwww11.bosai.go.jp/auth/direc/?LANG=en for details.
 
 Output Unit
 ~~~~~~~~~~~
+
+.. important::
+
+   The SAC files extracted by ``win2sac_32`` are always in physical quality,
+   not in digital counts.
+
+   Be caution if absolute amplitude is important for your research.
 
 The raw data saved in win32 format is in digital counts. When extracting data
 from win32 format, ``win2sac_32`` always convert digital counts to the
@@ -106,10 +139,3 @@ corresponding physical quantity, e.g. velocity. And there is no option to
 avoid this conversion.
 
 The output SAC files are in ``nm/s``, ``nm/s/s`` or ``micro radian``.
-
-Examples
---------
-
-::
-
-    win2sac_32 2000082404000101VM.cnt 4c55,4c65 SAC DATA -e > junk.log

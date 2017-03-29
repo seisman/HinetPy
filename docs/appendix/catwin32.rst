@@ -27,7 +27,7 @@ Two ways to solve this issue:
 
 The first way is safer, but it costs too much time. The second way is prefered.
 You can use ``sorted(glob.glob("*.cnt"))`` in Python if the win32 files are
-named with time.
+named according to time.
 
 Examples
 --------
