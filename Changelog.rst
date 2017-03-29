@@ -7,6 +7,7 @@ Changelog
    return values
  - ``Client.get_waveform``: support multi-threads to speedup
  - Change ``Client.help()`` to ``Client.info()``
+ - ``Client.get_waveform`` now can automatically set ``max_span``
 
 0.3.3 (2017-03-17):
  - Change ``network`` to ``NETWORK`` in ``header.py``

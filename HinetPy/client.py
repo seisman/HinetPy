@@ -67,10 +67,10 @@ class Client(object):
 
         Notes
         -----
-        Hi-net server ususally spends 10 seconds to 1 minute on data preparation
-        after receiving a data request. During the data preparation, users are
-        **NOT** allowed to request another data. So users have to wait until
-        the data is ready.
+        Hi-net server ususally spends 10 seconds to 1 minute on data
+        preparation after receiving a data request. During the data
+        preparation, users are **NOT** allowed to request another data.
+        So users have to wait until the data is ready.
 
         HinetPy checks data status every ``sleep_time_in_seconds`` seconds
         until the data is ready. If HinetPy checks the data status for more
@@ -85,6 +85,9 @@ class Client(object):
         self.max_sleep_count = max_sleep_count
         if user and password:
             self.login(user, password)
+        # variables for internal use
+        self._code = None
+        self._max_span = 0
 
     def login(self, user, password):
         """Login in Hi-net server.
@@ -119,7 +122,6 @@ class Client(object):
         if inout == 'out':
             msg = "Unauthorized. Check your username and password!"
             raise requests.ConnectionError(msg)
-        logger.info("Initialize a Hi-net client.")
 
     def doctor(self):
         """ Doctor does some checks.
@@ -143,18 +145,14 @@ class Client(object):
         self.check_service_update()
         self.check_cmd_exists()
 
-    def _request_waveform(self, org, net, volc, starttime, span):
+    def _request_waveform(self, code, starttime, span):
         '''
         Request waveform.
 
         Parameters
         ----------
-        org: str
-            Orgnization code.
-        net: str
+        code: str
             Network code.
-        volc: str
-            Volcano code if avaiable.
         starttime: :py:class:`datetime.datetime`
             Starttime of data request.
         span: int
@@ -165,7 +163,7 @@ class Client(object):
         id: str
             ID of requested data. None if request fails.
         '''
-
+        org, net, volc = self._parse_code(code)
         payload = {
             'org1':  org,
             'org2':  net,
@@ -206,22 +204,17 @@ class Client(object):
                         msg = "If you see this, " \
                               "please report an issue on GitHub!"
                         logger.error(msg)
-                        break
+                        break  # break to else clause
                     elif opt == '4':  # something wrong, retry
                         logger.error("Error in data status.")
-                        break
+                        break  # break to else clause
                 else:   # wait too long time
                     return None
             except Exception:
                 continue
         else:
-            msg = "Data request fails after {} retries".format(self.retries)
+            msg = "Data request fails after {} retries.".format(self.retries)
             logger.error(msg)
-            msg = "Possible causes:\n" \
-                  "1. max_span too large, call get_allowed_span" \
-                  " and choose a proper value.\n" \
-                  "2. runing two requests simultaneously."
-            print(msg)
             return None
 
     def _download_waveform(self, id):
@@ -287,7 +280,7 @@ class Client(object):
         return org, net, volc
 
     def get_waveform(self, code, starttime, span,
-                     max_span=5, data=None, ctable=None, outdir=None,
+                     max_span=None, data=None, ctable=None, outdir=None,
                      threads=3):
         '''
         Get waveform from Hi-net server.
@@ -301,7 +294,8 @@ class Client(object):
         span: int
             Time span in minutes.
         max_span: int
-            Maximum time span for sub-requests.
+            Maximum time span for sub-requests. Defaults to be determined
+            automatically.
         data: str
             Filename of downloaded win32 data.
             Default format: CODE_YYYYmmddHHMM_SPAN.cnt
@@ -364,31 +358,31 @@ class Client(object):
         5. extract all zip files and merge into one win32 format data
         6. cleanup
         '''
-        org, net, volc = self._parse_code(code)
+        # 1. check span:
+        #    max limits is determined by the max number of data points
+        #    allowed in code s4win2sacm.c
+        if not isinstance(span, int):
+            raise TypeError("span must be integer.")
+        if not 1 <= span <= (2**31 - 1)/6000:
+            raise ValueError("Span is NOT in the allowed range [1, 357913]")
 
-        # 1. check starttime and endtime
-        # TODO: correct starttime and endtime if not in allowed range
+        # 2. check starttime and endtime
         time0 = NETWORK[code].starttime
         # time1 = UTCTime + JST(GMT+0900) - 2 hour delay
         time1 = datetime.utcnow() + timedelta(hours=9) + timedelta(hours=-2)
         endtime = starttime + timedelta(minutes=span)
-        if not time0 <= starttime <= time1 or not time0 <= endtime <= time1:
-            raise ValueError("Not within network service period.")
-
-        # 2. check span:
-        #    max limits is determined by the max number of data points
-        #    allowed in code s4win2sacm.c
-        if not isinstance(span, int):
-            raise TypeError("span must be integer")
-        if not 1 <= span <= (2**31 - 1)/6000:
-            raise ValueError("Span is NOT in the allowed range [1, 357913]")
-
-        # 3. check max_span
-        #    Don't call self.get_allowed_span to avoid too much time cost
-        if not 1 <= max_span <= 60:
-            msg = "max_span not in allowed range." + \
-                  "call Client.get_allowed_span() for help."
+        if not time0 <= starttime < endtime <= time1:
+            msg = "Data not avaible in the time period." + \
+                  "call Client.info({}) for help.".format(code)
             raise ValueError(msg)
+
+        # 3. set max_span
+        if self._code != code:  # update default max_span
+            self._code = code
+            self._max_span = self._get_allowed_span(code)
+        if not (max_span and 1 <= max_span <= 60):
+            max_span = self._max_span
+            logger.info("Max span is set to %d", max_span)
 
         # 4. prepare requests
         spans = split_integer(span, max_span)
@@ -401,28 +395,28 @@ class Client(object):
         cnts = []
         ch_euc = set()
         logger.info("%s ~%s", starttime.strftime("%Y-%m-%d %H:%M"), span)
-        for j in range(0, count, 100):
+        # 5. request and download
+        for j in range(0, count, 100):  # to break the limitation of 150
             ids = []
+            # 5.1. request <=100 data
             for i in range(j, min(j+100, count)):
-                # 5. requests
                 logger.info("[%s/%d] => %s ~%d",
                             str(i+1).zfill(len(str(count))),
                             count,
                             starttimes[i].strftime("%Y-%m-%d %H:%M"),
                             spans[i])
-                id = self._request_waveform(org, net, volc,
-                                            starttimes[i], spans[i])
+                id = self._request_waveform(code, starttimes[i], spans[i])
                 ids.append(id)
 
-                # 6. checks
-                if len(ids) == 0:
-                    logger.error("Error in data requesting, exiting now.")
-                    return
-                if not all(ids):  # check if all ids are not None
-                    logger.error("Fail to request some data. Skipped.")
-                    return None, None
+            # 5.2. check ids
+            if not ids:
+                logger.error("No data requested succesuflly. Skipped.")
+                return None, None
+            if not all(ids):  # check if all ids are not None
+                logger.error("Fail to request some data. Skipped.")
+                return None, None
 
-            # 7. parallel downloading
+            # 5.3. parallel downloading
             with ThreadPool(min(threads, len(ids))) as p:
                 rvalue = p.map(self._download_waveform, ids)
             for value in rvalue:
@@ -574,7 +568,7 @@ class Client(object):
             if not code or network == code:
                 print(network, station, longtitude, latitude)
 
-    def get_allowed_span(self, code):
+    def _get_allowed_span(self, code):
         """Get allowed max span for each network.
 
         Hi-net set two limitations of data file size:
@@ -582,7 +576,7 @@ class Client(object):
         #. Number_of_channels * record_length(min.) <= 12000 min
         #. record_length <= 60min
 
-        >>> client.get_allowed_span('0201')
+        >>> client._get_allowed_span('0201')
         60
 
         Parameters
@@ -624,8 +618,7 @@ class Client(object):
             raise ValueError("Can only query stations of Hi-net/F-net")
 
         r = self.session.get(self._STATION, timeout=self.timeout)
-        counts = len(re.findall(pattern, r.text))
-        return counts
+        return len(re.findall(pattern, r.text))
 
     def select_stations(self, code, stations=None):
         """Select Hi-net/F-net stations
@@ -652,15 +645,9 @@ class Client(object):
         0
 
         """
-
-        if stations:
-            stcds = ':'.join(stations)
-        else:
-            stcds = None
-
         payload = {
             'net': code,
-            'stcds': stcds,
+            'stcds': ':'.join(stations) if stations else None,
             'mode': '1',
         }
         self.session.post(self._SELECT, data=payload, timeout=self.timeout)
@@ -702,7 +689,7 @@ class Client(object):
                            __title__, latest_release, url)
             return True
         else:
-            logger.info("You're using the latest version (v%s).",  __version__)
+            logger.info("You're using the latest version (v%s).", __version__)
             return False
 
     def check_cmd_exists(self):
@@ -734,6 +721,14 @@ class Client(object):
     def info(self, code=None):
         """List information of networks.
 
+        Parameters
+        ----------
+        code: None or str
+            Network code.
+
+        Examples
+        --------
+
         >>> client.info()
         0101   : NIED Hi-net
         0103   : NIED F-net (broadband)
@@ -748,11 +743,6 @@ class Client(object):
         Name: NIED Hi-net
         Starttime: 20040401
         No. of channels: 2336
-
-        Parameters
-        ----------
-        code: None or str
-            Network code.
         """
         if code:
             net = NETWORK[code]
@@ -767,13 +757,18 @@ class Client(object):
                 print("{:7s}: {}".format(code, NETWORK[code].name))
 
     def _get_win32tools(self):
-        """Download win32 tools"""
+        """Download win32 tools."""
         d = self.session.get(self._WIN32TOOLS, stream=True)
-        with open("win32tools.tar.gz", "wb") as fd:
+        if d.status_code != 200:
+            logger.error("Error in downloading win32tools.")
+            return None
+
+        filename = "win32tools.tar.gz"
+        with open(filename, "wb") as fd:
             for chunk in d.iter_content(chunk_size=1024):
                 if chunk:  # filter out keep-alive new chunks
                     fd.write(chunk)
-        return "win32tools.tar.gz"
+        return filename
 
     def __str__(self):
         string = "<== Hi-net web service client ==>\n"
