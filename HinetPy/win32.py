@@ -76,11 +76,12 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     ctable: str
         Channel table file.
     suffix: str
-        SAC suffix.
+        Suffix of output SAC files. Defaults to ``SAC``.
     outdir: str
-        Output directory.
+        Output directory. Defaults to current directory.
     pmax: int
-        Maximum number of data points.
+        Maximum number of data points. Defaults to 8640000. If the input data
+        is longer than one day, you have to to increase ``pmax``.
     filter_by_id: list of str or wildcard
         Filter channels by ID.
     filter_by_name: list of str or wildcard
@@ -108,6 +109,9 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
     ...             filter_by_name="N.NA*", filter_by_channel='[NE]')
     """
+    if not (data and ctable):
+        logger.info("No data and ctable found. Skipped.")
+        return
 
     channels = _get_channels(ctable)
     logger.info("%d channels found in %s.", len(channels), ctable)
@@ -167,9 +171,9 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
     ctable: str
         Channel table file.
     suffix: str
-        SAC suffix.
+        Suffix of SAC PZ files. Defaults to ``SAC_PZ``.
     outdir: str
-        Output directory.
+        Output directory. Defaults to current directory.
     filter_by_id: list of str or wildcard
         Filter channels by ID.
     filter_by_name: list of str or wildcard
@@ -190,6 +194,10 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
     >>> extract_pz("0101_20100101.ch",
     ...            filter_by_name="N.NA*", filter_by_channel='[NE]')
     """
+    if not ctable:
+        logger.error("No ctable found. Skipped.")
+        return
+
     channels = _get_channels(ctable)
     if filter_by_chid or filter_by_name or filter_by_component:
         channels = _filter_channels(channels,
@@ -211,7 +219,6 @@ def _get_channels(ctable):
     ctable: str
         Channle table file.
     """
-
     channels = []
     with open(ctable, "r") as f:
         for line in f:
@@ -236,7 +243,7 @@ def _filter_channels(channels,
                      filter_by_id=None,
                      filter_by_name=None,
                      filter_by_component=None):
-    """Filter channels by id, name, and/or component.
+    """Filter channels by id, name and/or component.
 
     Parameters
     ----------
@@ -429,16 +436,14 @@ def merge(datas, total_data, force_sort=False):
 
     >>> merge("20130404*.cnt", "final.cnt")
     """
-    if os.path.dirname(total_data):
-        os.makedirs(os.path.dirname(total_data), exist_ok=True)
-
-    cmd = ['catwin32', '-o', total_data]
-    if force_sort:  # add -s option to force sort
-        cmd.append('-s')
-
     if isinstance(datas, str):  # wildcard support
         datas = sorted(glob.glob(datas))
 
-    subprocess.call(cmd + datas,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL)
+    if os.path.dirname(total_data):
+        os.makedirs(os.path.dirname(total_data), exist_ok=True)
+
+    cmd = ['catwin32', '-o', total_data] + datas
+    if force_sort:  # add -s option to force sort
+        cmd.append('-s')
+
+    subprocess.call(cmd, stdout=DEVNULL, stderr=DEVNULL)
