@@ -62,6 +62,16 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         os.remove(ctable)
 
+    def test_get_waveform_starttime_in_string(self, client):
+        data, ctable = client.get_waveform('0101', '2010-01-01T00:00', 9)
+
+        assert data == '0101_201001010000_9.cnt'
+        assert os.path.exists(data)
+        os.remove(data)
+        assert ctable == '0101_20100101.ch'
+        assert os.path.exists(ctable)
+        os.remove(ctable)
+
     def test_get_waveform_custom_name_1(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
         data, ctable = client.get_waveform('0101', starttime, 1,
