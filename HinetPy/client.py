@@ -489,7 +489,7 @@ class Client(object):
 
         Parameters
         ----------
-        startdate: :py:class:`datetime.date`
+        startdate: :py:class:`datetime.date` or :py:class:`datetime.datetime`
             Start date to request.
         span: int
             Data length in days.
@@ -520,7 +520,7 @@ class Client(object):
 
         Parameters
         ----------
-        startdate: :py:class:`datetime.date`
+        startdate: :py:class:`datetime.date` or :py:class:`datetime.datetime`
             Start date to request.
         span: int
             Data length in days.

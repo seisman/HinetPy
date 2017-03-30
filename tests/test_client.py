@@ -166,6 +166,13 @@ class TestGetCatalogClass:
         assert os.path.exists(data)
         os.remove(data)
 
+    def test_get_arrivaltime_use_datetime(self, client):
+        startdate = datetime(2010, 1, 1)
+        data = client.get_arrivaltime(startdate, 5)
+        assert data == 'measure_20100101_5.txt'
+        assert os.path.exists(data)
+        os.remove(data)
+
     def test_get_focalmechanism_1(self, client):
         startdate = date(2010, 1, 1)
         data = client.get_focalmechanism(startdate, 5)
@@ -180,10 +187,18 @@ class TestGetCatalogClass:
         assert os.path.exists(data)
         os.remove(data)
 
+    def test_get_focalmachanism_use_datetime(self, client):
+        startdate = datetime(2010, 1, 1)
+        data = client.get_focalmechanism(startdate, 5, filename="focal.txt")
+        assert data == "focal.txt"
+        assert os.path.exists(data)
+        os.remove(data)
+
     def test_get_catalog_wrong_span(self, client):
         startdate = date(2010, 1, 1)
         with pytest.raises(ValueError):
             data = client.get_arrivaltime(startdate, 10)
+
 
 
 class TestClientOthersClass:
