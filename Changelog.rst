@@ -8,6 +8,7 @@ Changelog
  - ``Client.get_waveform``: support multi-threads to speedup
  - Change ``Client.help()`` to ``Client.info()``
  - ``Client.get_waveform`` now can automatically set ``max_span``
+ - ``Client.get_*`` now support startime in different string formats
 
 0.3.3 (2017-03-17):
  - Change ``network`` to ``NETWORK`` in ``header.py``
