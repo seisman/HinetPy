@@ -289,7 +289,7 @@ class Client(object):
         ----------
         code: str
             Network code. See :meth:`~HinetPy.client.Client.info` for details.
-        starttime: :py:class:`datetime.datetime`
+        starttime: :py:class:`datetime.datetime` or str
             Starttime of data request.
         span: int
             Time span in minutes.
@@ -317,13 +317,22 @@ class Client(object):
 
         Examples
         --------
+        Request 6 minutes data since 2010-01-01T05:35 (GMT+0900) from Hi-net.
 
-        Request 10 minutes data since 2010-01-01T00:00 (GMT+0900) from Hi-net.
+        >>> client.get_waveform('0101', '201001010535', 6)
+        ('0101_201001010535_6.cnt', '0101_20100101.ch')
+
+        Several other string formats of ``starttime`` are also supported:
+
+        >>> client.get_waveform('0101', '2010-01-01 05:35', 6)
+        >>> client.get_waveform('0101', '2010-01-01T05:35', 6)
+
+        ``starttime`` can be given as :py:class:`datetime.datetime`:
 
         >>> from datetime import datetime
-        >>> starttime = datetime(2010, 1, 1, 0, 0)
-        >>> client.get_waveform('0101', starttime, 10)
-        ('0101_201001010000_10.cnt', '0101_20100101.ch')
+        >>> starttime = datetime(2010, 1, 1, 5, 35)
+        >>> client.get_waveform('0101', starttime, 6)
+        ('0101_201001010535_6.cnt', '0101_20100101.ch')
 
         Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:
 
@@ -370,6 +379,8 @@ class Client(object):
         time0 = NETWORK[code].starttime
         # time1 = UTCTime + JST(GMT+0900) - 2 hour delay
         time1 = datetime.utcnow() + timedelta(hours=9) + timedelta(hours=-2)
+        if not isinstance(starttime, datetime):
+            starttime = _string2datetime(starttime)
         endtime = starttime + timedelta(minutes=span)
         if not time0 <= starttime < endtime <= time1:
             msg = "Data not avaible in the time period. " + \
