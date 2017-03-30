@@ -42,6 +42,10 @@ class TestClientOthersClass:
         client.get_station_list()
 
     def test_string2datetime(self):
+        dt = datetime(2010, 2, 3)
+        assert dt == _string2datetime("20100203")
+        assert dt == _string2datetime("2010-02-03")
+
         dt = datetime(2001, 2, 3, 4, 5)
         assert dt == _string2datetime("200102030405")
         assert dt == _string2datetime("2001-02-03T04:05")

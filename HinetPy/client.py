@@ -811,12 +811,16 @@ def _string2datetime(value):
     parts = value.split(' ')
     strfmt = "%Y%m%d%H%M%S"
     if len(parts) == 1:
-        if len(value) == 12:
+        if len(value) == 8:
+            strfmt = "%Y%m%d"
+        elif len(value) == 12:
             strfmt = "%Y%m%d%H%M"
         elif len(value) == 14:
             strfmt = "%Y%m%d%H%M%S"
         elif len(value) > 14:
             strfmt = "%Y%m%d%H%M%S.%f"
+    elif len(parts) == 3:
+        strfmt = "%Y %m %d"
     elif len(parts) == 5:
         strfmt = "%Y %m %d %H %M"
     elif len(parts) == 6:
