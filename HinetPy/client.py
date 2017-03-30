@@ -372,8 +372,8 @@ class Client(object):
         time1 = datetime.utcnow() + timedelta(hours=9) + timedelta(hours=-2)
         endtime = starttime + timedelta(minutes=span)
         if not time0 <= starttime < endtime <= time1:
-            msg = "Data not avaible in the time period." + \
-                  "call Client.info({}) for help.".format(code)
+            msg = "Data not avaible in the time period. " + \
+                  "Call Client.info('{}') for help.".format(code)
             raise ValueError(msg)
 
         # 3. set max_span
@@ -382,7 +382,6 @@ class Client(object):
             self._max_span = self._get_allowed_span(code)
         if not (max_span and 1 <= max_span <= 60):
             max_span = self._max_span
-            logger.info("Max span is set to %d", max_span)
 
         # 4. prepare requests
         spans = split_integer(span, max_span)
