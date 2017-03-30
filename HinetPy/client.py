@@ -798,3 +798,30 @@ def split_integer(m, n):
     for i in range(m % count):
         chunks[i] += 1
     return chunks
+
+def _string2datetime(value):
+    """Convert String to datetime."""
+
+    value = value.replace('T', ' ')
+    value = value.replace('-', ' ')
+    value = value.replace(':', ' ')
+    value = value.replace(',', ' ')
+    value = value.replace('_', ' ')
+
+    parts = value.split(' ')
+    if len(parts) == 1:
+        if len(value) == 12:
+            return datetime.strptime(value, "%Y%m%d%H%M")
+        elif len(value) == 14:
+            return datetime.strptime(value, "%Y%m%d%H%M%S")
+        elif len(value) > 14:
+            return datetime.strptime(value, "%Y%m%d%H%M%S.%f")
+    elif len(parts) == 5:
+        return datetime.strptime(value, "%Y %m %d %H %M")
+    elif len(parts) == 6:
+        if '.' in value:
+            return datetime.strptime(value, "%Y %m %d %H %M %S.%f")
+        else:
+            return datetime.strptime(value, "%Y %m %d %H %M %S")
+    else:
+        raise ValueError("Wrong datetime format.")

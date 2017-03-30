@@ -9,6 +9,7 @@ import pytest
 import requests
 
 from HinetPy import Client
+from HinetPy.client import _string2datetime
 
 username = "test_username"
 password = "test_password"
@@ -218,3 +219,18 @@ class TestClientOthersClass:
         with pytest.raises(ValueError):
             client.get_selected_stations('0501')
 
+    def test_string2datetime(self):
+        dt = datetime(2001, 2, 3, 4, 5)
+        assert dt == _string2datetime("200102030405")
+        assert dt == _string2datetime("2001-02-03T04:05")
+        assert dt == _string2datetime("2001-02-03 04:05")
+
+        dt = datetime(2001, 2, 3, 4, 5, 6)
+        assert dt == _string2datetime("20010203040506")
+        assert dt == _string2datetime("2001-02-03T04:05:06")
+        assert dt == _string2datetime("2001-02-03 04:05:06")
+
+        dt = datetime(2001, 2, 3, 4, 5, 6, 789000)
+        assert dt == _string2datetime("20010203040506.789")
+        assert dt == _string2datetime("2001-02-03T04:05:06.789")
+        assert dt == _string2datetime("2001-02-03 04:05:06.789")
