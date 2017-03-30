@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3.4:
+0.4.0 (2017-04-01):
  - ``win32.extract_sac``: skip if data not exists
  - ``win32.extract_sac``: support multiple processes to speedup, and no longer
    return values
