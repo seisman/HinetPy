@@ -182,6 +182,12 @@ class TestGetCatalogClass:
         assert os.path.exists(data)
         os.remove(data)
 
+    def test_get_arrivaltime_startdate_in_string(self, client):
+        data = client.get_arrivaltime('20100101', 5)
+        assert data == 'measure_20100101_5.txt'
+        assert os.path.exists(data)
+        os.remove(data)
+
     def test_get_focalmechanism_1(self, client):
         startdate = date(2010, 1, 1)
         data = client.get_focalmechanism(startdate, 5)

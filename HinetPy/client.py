@@ -7,7 +7,7 @@ import math
 import logging
 import zipfile
 from io import BytesIO
-from datetime import datetime, timedelta
+from datetime import datetime, date, timedelta
 from multiprocessing.pool import ThreadPool
 
 import requests
@@ -475,6 +475,10 @@ class Client(object):
     def _get_catalog(self, datatype, startdate, span, filename=None, os="DOS"):
         """Request JMA catalog."""
 
+        if not (isinstance(startdate, datetime) or
+                isinstance(startdate, date)):
+            startdate = _string2datetime(startdate)
+
         if int(span) not in range(1, 8):
             raise ValueError("span is not digit or not in [1, 7].")
 
@@ -500,7 +504,7 @@ class Client(object):
 
         Parameters
         ----------
-        startdate: :py:class:`datetime.date` or :py:class:`datetime.datetime`
+        startdate: str, :py:class:`datetime.date`, :py:class:`datetime.datetime`
             Start date to request.
         span: int
             Data length in days.
@@ -531,7 +535,7 @@ class Client(object):
 
         Parameters
         ----------
-        startdate: :py:class:`datetime.date` or :py:class:`datetime.datetime`
+        startdate: str, :py:class:`datetime.date`, :py:class:`datetime.datetime`
             Start date to request.
         span: int
             Data length in days.
@@ -809,6 +813,7 @@ def split_integer(m, n):
     for i in range(m % count):
         chunks[i] += 1
     return chunks
+
 
 def _string2datetime(value):
     """Convert String to datetime."""
