@@ -379,22 +379,25 @@ def _write_pz(pzfile, real, imaginary, constant):
 
 
 def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.'):
-    if channel.unit != 'm/s':  # only works for velocity
+    # Hi-net use moving coil velocity type seismometer.
+    if channel.unit != 'm/s':
         logger.warning("%s.%s (%s): Unit is not velocity.",
                        channel.name, channel.component, channel.id)
 
+    # calculate poles
     try:
         freq = 2.0 * math.pi / channel.period
     except ZeroDivisionError:
         logger.warning("%s.%s (%s): Natural period = 0. Skipped.",
                        channel.name, channel.component, channel.id)
         return None
+    real, imaginary = _find_poles(channel.damping, freq)
 
+    # calculate sensitivity and constant
     A0 = 2 * channel.damping
     factor = math.pow(10, channel.preamplification/20.0)
-    constant = channel.gain * factor / channel.lsb_value * A0
-
-    real, imaginary = _find_poles(channel.damping, freq)
+    sensitivity = channel.gain * factor / channel.lsb_value
+    constant = A0 * sensitivity
 
     pzfile = "{}.{}".format(channel.name, channel.component)
     if suffix:
