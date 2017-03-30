@@ -9,7 +9,6 @@ import pytest
 import requests
 
 from HinetPy import Client
-from HinetPy.client import _string2datetime
 
 username = "test_username"
 password = "test_password"
@@ -202,14 +201,6 @@ class TestGetCatalogClass:
 
 
 class TestClientOthersClass:
-    def test_parse_code(self, client):
-        assert client._parse_code('0101') == ('01', '01', None)
-        assert client._parse_code('0103A') == ('01', '03A', None)
-        assert client._parse_code('010503') == ('01', '05', '010503')
-        assert client._parse_code('030201') == ('03', '02', '030201')
-
-        with pytest.raises(ValueError):
-            client._parse_code('01013')
 
     def test_get_allowed_span(self, client):
         assert client._get_allowed_span('0401') == 60
@@ -218,34 +209,9 @@ class TestClientOthersClass:
         client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
         assert client._get_allowed_span('0101') == 60
 
-    def test_info(self, client):
-        client.info()
-        client.info('0101')
-
-    def test_string(self, client):
-        print(client)
-
-    def test_get_station_list(self, client):
-        client.get_station_list()
-
     def test_get_selected_stations(self, client):
         client.get_selected_stations('0101')
         client.get_selected_stations('0103')
         with pytest.raises(ValueError):
             client.get_selected_stations('0501')
 
-    def test_string2datetime(self):
-        dt = datetime(2001, 2, 3, 4, 5)
-        assert dt == _string2datetime("200102030405")
-        assert dt == _string2datetime("2001-02-03T04:05")
-        assert dt == _string2datetime("2001-02-03 04:05")
-
-        dt = datetime(2001, 2, 3, 4, 5, 6)
-        assert dt == _string2datetime("20010203040506")
-        assert dt == _string2datetime("2001-02-03T04:05:06")
-        assert dt == _string2datetime("2001-02-03 04:05:06")
-
-        dt = datetime(2001, 2, 3, 4, 5, 6, 789000)
-        assert dt == _string2datetime("20010203040506.789")
-        assert dt == _string2datetime("2001-02-03T04:05:06.789")
-        assert dt == _string2datetime("2001-02-03 04:05:06.789")
