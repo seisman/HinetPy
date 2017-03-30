@@ -8,6 +8,7 @@ HinetPy - A Hi-net Client powered by Python
    installation
    first-try
    tutorial
+   examples
    api
    appendix
    changelog

@@ -1,0 +1,5 @@
+#EventID | Time | Latitude | Longitude | Depth/km | Author | Catalog | Contributor | ContributorID | MagType | Magnitude | MagAuthor | EventLocationName
+9993759|2017-01-22T04:30:22|-6.2145|155.1442|135.0|pt,us,at|NEIC PDE|us|us10007uph,pt17022050,at00ok5z6p|mww|7.9|us|SOLOMON ISLANDS
+9993037|2017-01-19T23:04:21|-10.3433|161.318|36.0|pt,us,at|NEIC PDE|us|us10007u7n,at00ok1ura,pt17019050|mww|6.5|us|SOLOMON ISLANDS
+9953968|2017-01-10T06:13:47|4.4634|122.575|612.71|at,us|NEIC PDE|us|us10007s9c,at00ojjvz0|Mww|7.3|us|CELEBES SEA
+9951821|2017-01-03T21:52:30|-19.3542|176.058|12.0|at,us,pt|NEIC PDE|us|us10007pj6,at00oj84rf,pt17003051|Mww|6.9|us|SOUTH OF FIJI ISLANDS
