@@ -56,3 +56,6 @@ class TestClientOthersClass:
         assert dt == _string2datetime("20010203040506.789")
         assert dt == _string2datetime("2001-02-03T04:05:06.789")
         assert dt == _string2datetime("2001-02-03 04:05:06.789")
+
+        with pytest.raises(ValueError):
+            _string2datetime("2001023040506")

@@ -809,19 +809,20 @@ def _string2datetime(value):
     value = value.replace('_', ' ')
 
     parts = value.split(' ')
+    strfmt = "%Y%m%d%H%M%S"
     if len(parts) == 1:
         if len(value) == 12:
-            return datetime.strptime(value, "%Y%m%d%H%M")
+            strfmt = "%Y%m%d%H%M"
         elif len(value) == 14:
-            return datetime.strptime(value, "%Y%m%d%H%M%S")
+            strfmt = "%Y%m%d%H%M%S"
         elif len(value) > 14:
-            return datetime.strptime(value, "%Y%m%d%H%M%S.%f")
+            strfmt = "%Y%m%d%H%M%S.%f"
     elif len(parts) == 5:
-        return datetime.strptime(value, "%Y %m %d %H %M")
+        strfmt = "%Y %m %d %H %M"
     elif len(parts) == 6:
         if '.' in value:
-            return datetime.strptime(value, "%Y %m %d %H %M %S.%f")
+            strfmt = "%Y %m %d %H %M %S.%f"
         else:
-            return datetime.strptime(value, "%Y %m %d %H %M %S")
-    else:
-        raise ValueError("Wrong datetime format.")
+            strfmt = "%Y %m %d %H %M %S"
+
+    return datetime.strptime(value, strfmt)
