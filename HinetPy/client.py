@@ -217,7 +217,7 @@ class Client(object):
             logger.error(msg)
             return None
 
-    def _download_waveform(self, id):
+    def _download_waveform(self, job):
         '''
         Download waveform.
 
@@ -239,7 +239,7 @@ class Client(object):
         dlclient = Client(self.user, self.password)
         for _ in range(self.retries):
             try:
-                r = dlclient.session.post(self._DOWNLOAD, data={'id': id},
+                r = dlclient.session.post(self._DOWNLOAD, data={'id': job.id},
                                           stream=True, timeout=self.timeout)
 
                 cnts = []
@@ -394,18 +394,14 @@ class Client(object):
         if not (max_span and 1 <= max_span <= 60):
             max_span = self._max_span
 
-        # 4. prepare requests
-        spans = split_integer(span, max_span)
-        count = len(spans)
-        starttimes = [starttime]
-        for i in range(1, count):
-            dt = starttimes[i-1] + timedelta(minutes=spans[i-1])
-            starttimes.append(dt)
+        # 4. prepare jobs
+        jobs = prepare_jobs(starttime, span, max_span)
 
         cnts = []
         ch_euc = set()
         logger.info("%s ~%s", starttime.strftime("%Y-%m-%d %H:%M"), span)
         # 5. request and download
+        count = len(jobs)
         for j in range(0, count, 100):  # to break the limitation of 150
             ids = []
             # 5.1. request <=100 data
@@ -413,22 +409,23 @@ class Client(object):
                 logger.info("[%s/%d] => %s ~%d",
                             str(i+1).zfill(len(str(count))),
                             count,
-                            starttimes[i].strftime("%Y-%m-%d %H:%M"),
-                            spans[i])
-                id = self._request_waveform(code, starttimes[i], spans[i])
-                ids.append(id)
+                            jobs[i].starttime.strftime("%Y-%m-%d %H:%M"),
+                            jobs[i].span)
+                jobs[i].id = self._request_waveform(code, jobs[i].starttime,
+                                                   jobs[i].span)
 
             # 5.2. check ids
-            if not ids:
+            if not [job.id for job in jobs]:
                 logger.error("No data requested succesuflly. Skipped.")
                 return None, None
-            if not all(ids):  # check if all ids are not None
+            # check if all ids are not None
+            if not all([job.id for job in jobs]):
                 logger.error("Fail to request some data. Skipped.")
                 return None, None
 
             # 5.3. parallel downloading
-            with ThreadPool(min(threads, len(ids))) as p:
-                rvalue = p.map(self._download_waveform, ids)
+            with ThreadPool(min(threads, len(jobs))) as p:
+                rvalue = p.map(self._download_waveform, jobs)
             for value in rvalue:
                 cnts.extend(value[0])
                 ch_euc.add(value[1])
@@ -815,6 +812,15 @@ def split_integer(m, n):
     return chunks
 
 
+def prepare_jobs(starttime, span, max_span):
+    spans = split_integer(span, max_span)
+    jobs = [_Job(starttime=starttime, span=spans[0])]
+    for i in range(1, len(spans)):
+        dt = jobs[i-1].starttime + timedelta(minutes=spans[i-1])
+        jobs.append(_Job(dt, spans[i]))
+    return jobs
+
+
 def _string2datetime(value):
     """Convert String to datetime."""
 
@@ -846,3 +852,11 @@ def _string2datetime(value):
             strfmt = "%Y %m %d %H %M %S"
 
     return datetime.strptime(value, strfmt)
+
+
+class _Job(object):
+    '''Job class for internal use.'''
+    def __init__(self, starttime, span, id=None):
+        self.starttime = starttime
+        self.span = span
+        self.id = id
