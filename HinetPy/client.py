@@ -5,8 +5,8 @@ import re
 import time
 import math
 import logging
+import tempfile
 import zipfile
-from io import BytesIO
 from datetime import datetime, date, timedelta
 from multiprocessing.pool import ThreadPool
 
@@ -242,16 +242,24 @@ class Client(object):
                 r = dlclient.session.post(self._DOWNLOAD, data={'id': job.id},
                                           stream=True, timeout=self.timeout)
 
-                cnts = []
-                ctable = None
-                with zipfile.ZipFile(BytesIO(r.content)) as fz:
-                    for filename in fz.namelist():
-                        if filename.endswith(".cnt"):
-                            cnts.append(filename)
-                        elif filename.endswith(".euc.ch"):
-                            ctable = filename
-                    fz.extractall(members=cnts+[ctable])
-                return cnts, ctable
+                with tempfile.NamedTemporaryFile(delete=False) as ft:
+                    # save to temporary file
+                    for chunk in r.iter_content(chunk_size=1024):
+                        if chunk:  # filter out keep-alive new chunks
+                            ft.write(chunk)
+                    ft.flush()
+
+                    # unzip temporary file
+                    cnts = []
+                    ctable = None
+                    with zipfile.ZipFile(ft.name) as fz:
+                        for filename in fz.namelist():
+                            if filename.endswith(".cnt"):
+                                cnts.append(filename)
+                            elif filename.endswith(".euc.ch"):
+                                ctable = filename
+                        fz.extractall(members=cnts+[ctable])
+                    return cnts, ctable
             except Exception:
                 continue
         else:
@@ -403,7 +411,6 @@ class Client(object):
         # 5. request and download
         count = len(jobs)
         for j in range(0, count, 100):  # to break the limitation of 150
-            ids = []
             # 5.1. request <=100 data
             for i in range(j, min(j+100, count)):
                 logger.info("[%s/%d] => %s ~%d",
@@ -412,7 +419,7 @@ class Client(object):
                             jobs[i].starttime.strftime("%Y-%m-%d %H:%M"),
                             jobs[i].span)
                 jobs[i].id = self._request_waveform(code, jobs[i].starttime,
-                                                   jobs[i].span)
+                                                    jobs[i].span)
 
             # 5.2. check ids
             if not [job.id for job in jobs]:
