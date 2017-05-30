@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import csv
 from datetime import datetime, timedelta
 
@@ -14,6 +15,10 @@ with open("events.csv") as csvfile:
         origin = datetime.strptime(row['Time'], "%Y-%m-%dT%H:%M:%S")
         starttime = origin + timedelta(hours=9)  # deal with TimeZone issue
         outdir = origin.strftime("%Y%m%d%H%M")
+
+        # skip if outdir already exists to avoid overwrite
+        if os.path.exits(ourdir):
+            continue
 
         data, ctable = client.get_waveform('0101', starttime, 20, outdir=outdir)
         win32.extract_sac(data, ctable, outdir=outdir, with_pz=True)
