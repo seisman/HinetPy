@@ -107,7 +107,7 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     Extract only specified channels:
 
     >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
-    ...             filter_by_name="N.NA*", filter_by_channel='[NE]')
+    ...             filter_by_name="N.NA*", filter_by_component='[NE]')
     """
     if not (data and ctable):
         logger.info("No data and ctable found. Skipped.")
@@ -192,7 +192,7 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
     Extract only specified channels:
 
     >>> extract_pz("0101_20100101.ch",
-    ...            filter_by_name="N.NA*", filter_by_channel='[NE]')
+    ...            filter_by_name="N.NA*", filter_by_component='[NE]')
     """
     if not ctable:
         logger.error("No ctable found. Skipped.")
