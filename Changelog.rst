@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.4.2 (2017-06-18):
+ - Fix a bug with requests>=2.17
+
 0.4.1 (2017-06-18):
  - remove tempfile after downloading.
 
