@@ -8,13 +8,13 @@
     :target: https://github.com/seisman/HinetPy/releases
 
 .. image:: https://img.shields.io/pypi/v/HinetPy.svg
-    :target: https://pypi.python.org/pypi/HinetPy/
+    :target: https://pypi.org/project/HinetPy/
+
+.. image:: https://img.shields.io/pypi/pyversions/HinetPy.svg
+    :target: https://pypi.org/project/HinetPy/
 
 .. image:: https://img.shields.io/github/license/seisman/HinetPy.svg
     :target: https://github.com/seisman/HinetPy/blob/master/LICENSE
-
-.. image:: https://img.shields.io/pypi/pyversions/HinetPy.svg
-    :target: https://pypi.python.org/pypi/HinetPy/
 
 `HinetPy`_ is a Python package aiming to automate and simplify tedious data
 request, downloading and format conversion tasks related to `NIED Hi-net`_.
