@@ -242,7 +242,7 @@ class Client(object):
                 r = dlclient.session.post(self._DOWNLOAD, data={'id': job.id},
                                           stream=True, timeout=self.timeout)
 
-                with tempfile.NamedTemporaryFile(delete=False) as ft:
+                with tempfile.NamedTemporaryFile() as ft:
                     # save to temporary file
                     for chunk in r.iter_content(chunk_size=1024):
                         if chunk:  # filter out keep-alive new chunks
