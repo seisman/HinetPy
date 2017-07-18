@@ -25,17 +25,17 @@ logger = logging.getLogger(__name__)
 
 class Client(object):
     # Hi-net related URLs
-    _HINET = 'http://www.hinet.bosai.go.jp'
-    _AUTH = 'https://hinetwww11.bosai.go.jp/auth'
-    _JMA = _AUTH + '/JMA/dlDialogue.php'
-    _CONT = _AUTH + '/download/cont'
-    _STATUS = _CONT + '/cont_status.php'
-    _SELECT = _CONT + '/select_confirm.php'
-    _STATION = _CONT + '/select_info.php'
-    _REQUEST = _CONT + '/cont_request.php'
-    _DOWNLOAD = _CONT + '/cont_download.php'
-    _STATION_INFO = _HINET + '/st_info/detail/dlDialogue.php?f=CSV'
-    _WIN32TOOLS = _AUTH + '/manual/dlDialogue.php?r=win32tools'
+    _HINET = 'http://www.hinet.bosai.go.jp/'
+    _AUTH = 'https://hinetwww11.bosai.go.jp/auth/'
+    _JMA = _AUTH + 'JMA/dlDialogue.php'
+    _CONT = _AUTH + 'download/cont/'
+    _STATUS = _CONT + 'cont_status.php'
+    _SELECT = _CONT + 'select_confirm.php'
+    _STATION = _CONT + 'select_info.php'
+    _REQUEST = _CONT + 'cont_request.php'
+    _DOWNLOAD = _CONT + 'cont_download.php'
+    _STATION_INFO = _HINET + 'st_info/detail/dlDialogue.php?f=CSV'
+    _WIN32TOOLS = _AUTH + 'manual/dlDialogue.php?r=win32tools'
 
     # ETAG for v160422
     _ETAG = "16cd-537f317987000"
