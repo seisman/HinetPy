@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Copyright 2014-2017 Dongdong Tian
+# This file is distributed under the same license as the HinetPy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: HinetPy 0.4.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-22 12:20+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: ../../tutorial/conversion.rst:2
+msgid "Data conversion"
+msgstr "数据转换"
+
+#: ../../tutorial/conversion.rst:4
+msgid ""
+"Hi-net provide waveform data in win32 format and instrument response in "
+"channel table. :mod:`~HinetPy.win32` can convert them into SAC and SACPZ "
+"format."
+msgstr ""
+"Hi-net提供了win32格式的波形数据和通道表形式的仪器响应。"
+" :mod:`~HinetPy.win32` 可以将其转换为SAC和SAC零极点格式。"
+
+#: ../../tutorial/conversion.rst:12
+msgid "Extract Waveform Data"
+msgstr "提取波形数据"
+
+#: ../../tutorial/conversion.rst:14
+msgid "Extract waveform data of all channels as SAC format."
+msgstr "提取所有通道的数据数据并保存为SAC格式。"
+
+#: ../../tutorial/conversion.rst:18
+msgid ""
+"The SAC files has a default filename ``STATION.COMPONENT.SAC`` (e.g. "
+"``N.NABC.U.SAC``). You can specify another SAC suffix and a different "
+"output directory."
+msgstr ""
+"SAC文件的默认文件名格式为 ``STATION.COMPONENT.SAC`` （例如 ``N.NABC.U.SAC`` ）。"
+"你可以指定其他SAC文件后缀和输出目录。"
+
+#: ../../tutorial/conversion.rst:23 ../../tutorial/conversion.rst:55
+msgid ""
+"If you want to extract only a small subset of channels, you can use "
+"``filter_by_id``, ``filter_by_name`` and/or ``filter_by_component`` to "
+"filter the channels. They accept a list of string or a string contains "
+"wildcard."
+msgstr ""
+"如果你只想提取一部分通道的波形数据，你可以使用"
+" ``filter_by_id`` 、 ``filter_by_name`` 和/或 ``filter_by_component`` "
+"以筛选需要的通道。这些参数都可以接受字符串列表或者包含通配符的字符串。"
+
+#: ../../tutorial/conversion.rst:35
+msgid "Extract PZ"
+msgstr "提取零极点文件"
+
+#: ../../tutorial/conversion.rst:39
+msgid "This feature works for Hi-net only."
+msgstr "此功能仅对Hi-net有效。"
+
+#: ../../tutorial/conversion.rst:41
+msgid "F-net data users can get RESP files from `NIED F-net`_."
+msgstr "F-net数据用户可以从 `NIED F-net`_ 获取RESP仪器响应文件。"
+
+#: ../../tutorial/conversion.rst:43
+msgid ""
+":meth:`~HinetPy.win32.extract_pz` can convert Hi-net channel table to SAC"
+" PZ format. Its usage is very similar to "
+":meth:`~HinetPy.win32.extract_sac`."
+msgstr ""
+":meth:`~HinetPy.win32.extract_pz` 可以将Hi-net通道表仪器响应转换为SAC零极点格式。"
+"其用法类似域 :meth:`~HinetPy.win32.extract_sac` 。"
+
+#: ../../tutorial/conversion.rst:46
+msgid "Extract information of all channels as SACPZ file:"
+msgstr "提取所有通道的仪器响应并保存为SACPZ文件："
+
+#: ../../tutorial/conversion.rst:50
+msgid ""
+"The SACPZ file has a default name ``STATION.COMPONENT.SAC_PZ`` (e.g. "
+"``N.NABC.U.SAC_PZ``). You can specify another SACPZ suffix and a "
+"different output directory."
+msgstr ""
+"SACPZ文件的默认文件名格式为 ``STATION.COMPONENT.SAC_PZ`` （例如 ``N.NABC.U.SAC_PZ`` ）。"
+"你可以指定其他SACPZ文件后缀和输出目录。"
+
+#: ../../tutorial/conversion.rst:68
+msgid ""
+"`Response of Observation Equipment "
+"<https://hinetwww11.bosai.go.jp/auth/seed/?LANG=en>`_"
+msgstr ""
+
+#: ../../tutorial/conversion.rst:69
+msgid "`Hi-net FAQ Q08 <http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08>`_"
+msgstr ""
+

@@ -1,0 +1,365 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Copyright 2014-2017 Dongdong Tian
+# This file is distributed under the same license as the HinetPy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: HinetPy 0.4.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-22 21:56+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: ../../api/HinetPy.client.rst:2
+msgid "HinetPy.client module"
+msgstr "HinetPy.client 模块"
+
+#: HinetPy.client.Client:1 of
+msgid "Hi-net web service client."
+msgstr "Hi-net 网络服务客户端。"
+
+#: HinetPy.client.Client HinetPy.client.Client.get_arrivaltime
+#: HinetPy.client.Client.get_focalmechanism
+#: HinetPy.client.Client.get_selected_stations
+#: HinetPy.client.Client.get_waveform HinetPy.client.Client.info
+#: HinetPy.client.Client.login HinetPy.client.Client.select_stations of
+msgid "Parameters"
+msgstr "参数"
+
+#: HinetPy.client.Client:3 HinetPy.client.Client.login:3 of
+msgid "Username of Hi-net account."
+msgstr "Hi-net账户用户名。"
+
+#: HinetPy.client.Client:5 HinetPy.client.Client.login:5 of
+msgid "Password of Hi-net account."
+msgstr "Hi-net账户密码。"
+
+#: HinetPy.client.Client:7 of
+msgid "How long to wait for the server to send data before giving up."
+msgstr "等待服务器响应多久才放弃。"
+
+#: HinetPy.client.Client:9 of
+msgid "How many times to retry if request fails."
+msgstr "请求失败时重新尝试多少次。"
+
+#: HinetPy.client.Client:11 HinetPy.client.Client:13 of
+msgid "See notes below."
+msgstr "见下面的注解。"
+
+#: HinetPy.client.Client:16 HinetPy.client.Client.get_arrivaltime:15
+#: HinetPy.client.Client.get_focalmechanism:15
+#: HinetPy.client.Client.get_waveform:27 HinetPy.client.Client.info:6
+#: HinetPy.client.Client.login:8 HinetPy.client.Client.select_stations:8 of
+msgid "Examples"
+msgstr "示例"
+
+#: HinetPy.client.Client:21 HinetPy.client.Client.get_waveform:51 of
+msgid "Notes"
+msgstr "注解"
+
+#: HinetPy.client.Client:23 of
+msgid ""
+"Hi-net server ususally spends 10 seconds to 1 minute on data preparation "
+"after receiving a data request. During the data preparation, users are "
+"**NOT** allowed to request another data. So users have to wait until the "
+"data is ready."
+msgstr "Hi-net服务器在接收到数据请求后通常需要花10秒到1分钟时间来准备数据。在数据准备期间，禁止用户再次请求数据。因而用户必须等待直到数据准备完成。"
+
+#: HinetPy.client.Client:28 of
+msgid ""
+"HinetPy checks data status every ``sleep_time_in_seconds`` seconds until "
+"the data is ready. If HinetPy checks the data status for more than "
+"``max_sleep_count`` times, it possibly indicates something wrong happend "
+"with this data. Then, HinetPy will retry to request this data ``retries``"
+" times. Ususally, you don't need to modify these settings unless you know"
+" what you're doing."
+msgstr ""
+"HinetPy每隔 ``sleep_time_in_seconds`` 秒检查一次数据状态直到数据准备完成。如果HinetPy检查数据状态 "
+"``max_sleep_count`` 次而数据还未准备号，这可能意味着此次数据申请出错了。然后，HinetPy会重新尝试申请这个数据 "
+"``retries`` 次。通常，你不需要修改这些设置，除非你知道自己在做什么。"
+
+#: HinetPy.client.Client.login:1 of
+msgid "Login in Hi-net server."
+msgstr "登陆Hi-net服务器。"
+
+#: HinetPy.client.Client.doctor:1 of
+msgid "Doctor does some checks."
+msgstr "做检查。"
+
+#: HinetPy.client.Client.doctor:9 of
+msgid "**Checklist**"
+msgstr "**检查清单**"
+
+#: HinetPy.client.Client.doctor:11 of
+msgid ""
+"if HinetPy has a new release (see "
+":meth:`~HinetPy.client.Client.check_package_release`)"
+msgstr "HinetPy是否发布了新版本（见 :meth:`~HinetPy.client.Client.check_package_release` ）"
+
+#: HinetPy.client.Client.doctor:13 of
+msgid ""
+"if Hi-net web service is updated (see "
+":meth:`~HinetPy.client.Client.check_service_update`)"
+msgstr "Hi-net网站是否有更新（见 :meth:`~HinetPy.client.Client.check_service_update` ）"
+
+#: HinetPy.client.Client.doctor:15 of
+msgid ""
+"if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH (see "
+":meth:`~HinetPy.client.Client.check_cmd_exists`)"
+msgstr ""
+"``catwin32`` 和 ``win2sac_32`` 是否在PATH中（见 "
+":meth:`~HinetPy.client.Client.check_cmd_exists` ）"
+
+#: HinetPy.client.Client.get_waveform:1 of
+msgid "Get waveform from Hi-net server."
+msgstr "从Hi-net服务器获取波形。"
+
+#: HinetPy.client.Client.get_waveform:3 of
+msgid "Network code. See :meth:`~HinetPy.client.Client.info` for details."
+msgstr "台网代码。见 :meth:`~HinetPy.client.Client.info` 。"
+
+#: HinetPy.client.Client.get_waveform:5 of
+msgid "Starttime of data request."
+msgstr "数据请求的开始时间。"
+
+#: HinetPy.client.Client.get_waveform:7 of
+msgid "Time span in minutes."
+msgstr "数据的时间长度，单位为分钟。"
+
+#: HinetPy.client.Client.get_waveform:9 of
+msgid ""
+"Maximum time span for sub-requests. Defaults to be determined "
+"automatically."
+msgstr "子请求的最大时间长度。默认会自动决定。"
+
+#: HinetPy.client.Client.get_waveform:12 of
+msgid ""
+"Filename of downloaded win32 data. Default format: "
+"CODE_YYYYmmddHHMM_SPAN.cnt"
+msgstr "下载的win32数据的文件名。默认格式： ``CODE_YYYYmmddHHMM_SPAN.cnt``"
+
+#: HinetPy.client.Client.get_waveform:15 of
+msgid ""
+"Filename of downloaded channel table file. Default format: "
+"CODE_YYYYmmdd.ch"
+msgstr "下载的通道表文件名。默认格式为 ``CODE_YYYYmmdd.ch``"
+
+#: HinetPy.client.Client.get_waveform:18 of
+msgid ""
+"Save win32 and channel table data to specified directory. Default is "
+"current directory."
+msgstr "将win32和通道表数据保存到指定目录中。默认为当前目录。"
+
+#: HinetPy.client.Client.get_waveform:21 of
+msgid "How many threads used to speedup data downloading."
+msgstr "用多少个线程以加速下载。"
+
+#: HinetPy.client.Client.get_arrivaltime
+#: HinetPy.client.Client.get_focalmechanism
+#: HinetPy.client.Client.get_selected_stations
+#: HinetPy.client.Client.get_waveform of
+msgid "Returns"
+msgstr ""
+
+#: HinetPy.client.Client.get_waveform:24 of
+msgid ""
+"* **data** (*str*) -- Filename of downloaded win32 data. * **ctable** "
+"(*str*) -- Filename of downloaded win32 data."
+msgstr ""
+
+#: HinetPy.client.Client.get_waveform:24 of
+msgid "**data** (*str*) -- Filename of downloaded win32 data."
+msgstr "**data** (*str*) -- 下载得到的win32数据的文件名。"
+
+#: HinetPy.client.Client.get_waveform:25 of
+msgid "**ctable** (*str*) -- Filename of downloaded channel table file."
+msgstr "**ctable** (*str*) -- 下载的通道表文件的文件名。"
+
+#: HinetPy.client.Client.get_waveform:29 of
+msgid "Request 6 minutes data since 2010-01-01T05:35 (GMT+0900) from Hi-net."
+msgstr "从Hi-net请求2010-01-01T05:35 (GMT+0900)开始的6分钟数据。"
+
+#: HinetPy.client.Client.get_waveform:34 of
+msgid "Several other string formats of ``starttime`` are also supported:"
+msgstr "``starttime`` 也支持其他常见的格式："
+
+#: HinetPy.client.Client.get_waveform:39 of
+msgid "``starttime`` can be given as :py:class:`datetime.datetime`:"
+msgstr "``starttime`` 也可以用 :py:class:`datetime.datetime` 指定："
+
+#: HinetPy.client.Client.get_waveform:46 of
+msgid "Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:"
+msgstr "从F-net申请2010-01-01T00:00 (GMT+0900)全天的数据："
+
+#: HinetPy.client.Client.get_waveform:53 of
+msgid "**TimeZone**"
+msgstr "**时区**"
+
+#: HinetPy.client.Client.get_waveform:55 of
+msgid "All times in HinetPy are in JST (GMT+0900)."
+msgstr "HinetPy中的所有时间都是日本标准时间（GMT+0900）。"
+
+#: HinetPy.client.Client.get_waveform:57 of
+msgid "**max_span**"
+msgstr ""
+
+#: HinetPy.client.Client.get_waveform:59 of
+msgid "Hi-net set three limitations of each data request:"
+msgstr "Hi-net对每次数据请求设置了3个限制："
+
+#: HinetPy.client.Client.get_waveform:61 of
+msgid "Record_Length <= 60 min"
+msgstr "数据长度不大于60分钟"
+
+#: HinetPy.client.Client.get_waveform:62 of
+msgid "Number_of_channels * Record_Length <= 12000 min"
+msgstr "通道数*数据长度不得大于12000分钟"
+
+#: HinetPy.client.Client.get_waveform:63 of
+msgid "Only the latest 150 requested data are kept"
+msgstr "仅保留最近150次请求的数据"
+
+#: HinetPy.client.Client.get_waveform:65 of
+msgid ""
+"For example, Hi-net network has about 24000 channels. Acoording to "
+"limitation 2, the record length should be no more than 5 minutes in each "
+"data request. HinetPy \"break\" the limitation by splitting a long data "
+"request into several short sub-requsts."
+msgstr ""
+"例如，Hi-"
+"net台网有大约24000个通道。根据第2条限制，单次请求的通道长度不得大于5分钟。HinetPy通过将一个长的数据请求分割成多个短的子请求来打破这一限制。"
+
+#: HinetPy.client.Client.get_waveform:70 of
+msgid "**Workflow**"
+msgstr "**工作流程**"
+
+#: HinetPy.client.Client.get_waveform:72 of
+msgid "do several checks"
+msgstr "做一些检查"
+
+#: HinetPy.client.Client.get_waveform:73 of
+msgid "split a long request into several short sub-requests"
+msgstr "将长数据请求分割成多个短的数据子请求"
+
+#: HinetPy.client.Client.get_waveform:74 of
+msgid "loop over all sub-requests and return data id to download"
+msgstr "对所有子请求进行循环并返回要下载的数据ID"
+
+#: HinetPy.client.Client.get_waveform:75 of
+msgid "download all data based on data id"
+msgstr "基于数据ID下载所有数据"
+
+#: HinetPy.client.Client.get_waveform:76 of
+msgid "extract all zip files and merge into one win32 format data"
+msgstr "解压下载得到的所有ZIP文件并合并到一个win32格式的文件"
+
+#: HinetPy.client.Client.get_waveform:77 of
+msgid "cleanup"
+msgstr "清理工作"
+
+#: HinetPy.client.Client.get_arrivaltime:1 of
+msgid "Get JMA arrival time data from Hi-net."
+msgstr "从Hi-net获取JMA走时数据"
+
+#: HinetPy.client.Client.get_arrivaltime:3
+#: HinetPy.client.Client.get_focalmechanism:3 of
+msgid "Start date to request."
+msgstr "请求数据的开始时间。"
+
+#: HinetPy.client.Client.get_arrivaltime:5
+#: HinetPy.client.Client.get_focalmechanism:5 of
+msgid "Data length in days."
+msgstr "数据长度，单位为天。"
+
+#: HinetPy.client.Client.get_arrivaltime:7
+#: HinetPy.client.Client.get_focalmechanism:7 of
+msgid "File format. \"DOS\" or \"UNIX\"."
+msgstr "文件格式。\"DOS\" 或 \"UNIX\"。"
+
+#: HinetPy.client.Client.get_arrivaltime:9
+#: HinetPy.client.Client.get_focalmechanism:9 of
+msgid "Filename to save."
+msgstr "要保存的文件名。"
+
+#: HinetPy.client.Client.get_arrivaltime:12
+#: HinetPy.client.Client.get_focalmechanism:12 of
+msgid "**filename** -- Filename saved."
+msgstr "**filename** -- 要保存的文件名。"
+
+#: HinetPy.client.Client.get_arrivaltime
+#: HinetPy.client.Client.get_focalmechanism
+#: HinetPy.client.Client.get_selected_stations of
+msgid "Return type"
+msgstr ""
+
+#: HinetPy.client.Client.get_focalmechanism:1 of
+msgid "Get JMA focal mechanism data from Hi-net."
+msgstr "从Hi-net获取JMA震源机制解数据。"
+
+#: HinetPy.client.Client.get_station_list:1 of
+msgid "Get a station list of Hi-net and F-net."
+msgstr "获取Hi-net和F-net的台站列表。"
+
+#: HinetPy.client.Client.get_selected_stations:1 of
+msgid "Query numbers of Hi-net/F-net stations selected for requesting data."
+msgstr "查询选定的Hi-net/F-net的台站数目。"
+
+#: HinetPy.client.Client.get_selected_stations:3 HinetPy.client.Client.info:3
+#: HinetPy.client.Client.select_stations:3 of
+msgid "Network code."
+msgstr "台网代码。"
+
+#: HinetPy.client.Client.get_selected_stations:6 of
+msgid "**no_of_stations** -- Number of selected stations."
+msgstr "**no_of_stations** -- 选中的台站数目。"
+
+#: HinetPy.client.Client.select_stations:1 of
+msgid "Select Hi-net/F-net stations"
+msgstr "选择Hi-net/F-net台站"
+
+#: HinetPy.client.Client.select_stations:5 of
+msgid "Stations to select."
+msgstr "要选择的台站。"
+
+#: HinetPy.client.Client.select_stations:10 of
+msgid "Select only two stations:"
+msgstr "只选择两个台站："
+
+#: HinetPy.client.Client.select_stations:16 of
+msgid "Select all Hi-net stations:"
+msgstr "选择Hi-net的全部台站："
+
+#: HinetPy.client.Client.check_service_update:1 of
+msgid "Check if Hi-net service is updated."
+msgstr "检查Hi-net网站是否被更新。"
+
+#: HinetPy.client.Client.check_package_release:1 of
+msgid "Check whether HinetPy has a new release."
+msgstr "检查HinetPy是否有发布新版本。"
+
+#: HinetPy.client.Client.check_cmd_exists:1 of
+msgid "Check if ``catwin32`` and ``win2sac_32`` from win32tools in PATH."
+msgstr "检查 ``catwin32`` 和 ``win2sac_32`` 是否在PATH中。"
+
+#: HinetPy.client.Client.check_cmd_exists:7 of
+#, fuzzy
+msgid ""
+"The client will report errors if ``catwin32`` and/or ``win2sac_32`` are "
+"NOT in PATH. In this case, please download win32tools from "
+"`Hi-net <http://www.hinet.bosai.go.jp/>`_ and make sure both binary files are in "
+"your PATH."
+msgstr ""
+"若 ``catwin32`` 和/或 ``win2sac_32`` 不在PATH中则会报错。这种情况下请从 "
+"`Hi-net <http://www.hinet.bosai.go.jp/>`_ 下载win32tools并确保两个二进制文件都在PATH中。"
+
+#: HinetPy.client.Client.info:1 of
+msgid "List information of networks."
+msgstr "列出台网信息。"
+

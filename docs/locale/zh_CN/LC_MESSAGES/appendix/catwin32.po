@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Copyright 2014-2017 Dongdong Tian
+# This file is distributed under the same license as the HinetPy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: HinetPy 0.4.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-22 12:20+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: ../../appendix/catwin32.rst:2
+msgid "catwin32"
+msgstr ""
+
+#: ../../appendix/catwin32.rst:4
+msgid "Merger of two or more data sets saved in WIN32 format."
+msgstr "合并两个或多个WIN32格式的数据。"
+
+#: ../../appendix/catwin32.rst:7
+msgid "Usage"
+msgstr "用法"
+
+#: ../../appendix/catwin32.rst:17
+msgid ""
+"By default, ``catwin32`` will merge all input win32 files into one output"
+" win32 file, following the order they appear in arguments list. If the "
+"input files in arguments list is not sorted by date and ``-s`` option is "
+"not used, ``win2sac_32`` will fail to convert the output win32 format to "
+"SAC format, resulting an error ``The time is not sort.``"
+msgstr ""
+"默认情况下， ``catwin32`` 会将所有输入的win32文件按照它们在参数列表中出现的"
+"顺序合并到输出的win32文件中。如果参数列表中输入文件不是按照日期排序且没有使用"
+" ``-s`` 选项，则 ``win2sac_32`` 无法将输出的win32格式转换为SAC格式，并报错"
+" ``The time is not sort.``。"
+
+#: ../../appendix/catwin32.rst:23
+msgid "Two ways to solve this issue:"
+msgstr "两个解决此问题的方法："
+
+#: ../../appendix/catwin32.rst:25
+msgid "use ``-s`` option"
+msgstr "使用 ``-s`` 选项"
+
+#: ../../appendix/catwin32.rst:26
+msgid "make sure all the win32 files in arguments list are sorted by date"
+msgstr "确保参数列表中所有win32文件是按照日期排序的"
+
+#: ../../appendix/catwin32.rst:28
+msgid ""
+"The first way is safer, but it costs too much time. The second way is "
+"prefered. You can use ``sorted(glob.glob(\"*.cnt\"))`` in Python if the "
+"win32 files are named according to time."
+msgstr "第一种方法更安全但更耗时，因而倾向于采用第二种方式。"
+"如果win32文件是按照日期命名的，则在Python里可以使用 ``sorted(glob.glob(\"*.cnt\"))`` "
+"以保证输入文件是按照时间先后排序的。"
+
+#: ../../appendix/catwin32.rst:33
+msgid "Examples"
+msgstr "示例"
+
+#: ../../appendix/catwin32.rst:35
+msgid "Merge all win32 files matching ``20100101*.cnt`` into one win32 file::"
+msgstr "将所有文件名满足 ``20100101*.cnt`` 的文件合并到一个文件中::"
+
+#: ../../appendix/catwin32.rst:39
+msgid ""
+"Merge several win32 files into one win32 file, sorted by date and channal"
+" number::"
+msgstr "将多个win32文件合并到一个win32文件中，并强制按日期和通道号排序::"
+

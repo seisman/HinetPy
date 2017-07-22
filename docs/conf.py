@@ -114,3 +114,7 @@ suppress_warnings = ['image.nonlocal_uri']
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/3/': None}
+
+# Chinese translation
+locale_dirs = ['locale/']   #path is example but recommended.
+gettext_compact = False     #optional.

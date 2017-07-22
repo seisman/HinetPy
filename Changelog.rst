@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.4.3:
+ - Add Chinese documentation
+
 0.4.2 (2017-06-18):
  - Fix a bug with requests>=2.17
 

@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Copyright 2014-2017 Dongdong Tian
+# This file is distributed under the same license as the HinetPy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: HinetPy 0.4.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-22 12:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: ../../installation.rst:2
+msgid "Installation"
+msgstr "安装"
+
+#: ../../installation.rst:4
+msgid ""
+"HinetPy needs Pyhon 3.4 or above. If you're new to Python, I strongly "
+"recommend installing the `Anaconda`_."
+msgstr "HinetPy需要Python版本大于等于3.4。"
+"如果你是Python新手，强烈建议安装 `Anaconda`_."
+
+#: ../../installation.rst:10
+msgid "There is no plan to support Python 2.7."
+msgstr "没有支持Python 2.7的计划！"
+
+#: ../../installation.rst:13
+msgid "HinetPy"
+msgstr ""
+
+#: ../../installation.rst:15
+msgid "To install the latest **release/stable** version::"
+msgstr "安装最新的 **发布版/稳定版**::"
+
+#: ../../installation.rst:19
+msgid "To install the latest **developing/unstable** version::"
+msgstr "安装最新的 **开发版/不稳定版**::"
+
+#: ../../installation.rst:23
+msgid "or::"
+msgstr "或者::"
+
+#: ../../installation.rst:29
+msgid "If you want to uninstall HinetPy, just run::"
+msgstr "如果想要卸载 HinetPy，直接执行::"
+
+#: ../../installation.rst:34
+msgid "win32tools"
+msgstr ""
+
+#: ../../installation.rst:36
+msgid ""
+"`win32tools`_ is a collection of tools provided by `NIED Hi-net`_ to "
+"process win32 format data. HinetPy needs ``catwin32`` and ``win2sac_32``."
+" Make sure that ``catwin32`` and ``win2sac_32`` are in your PATH."
+msgstr ""
+"`win32tools`_ 是 `NIED Hi-net`_ 提供的用于处理win32格式数据的一系列工具。"
+"HinetPy 需要其中的 ``catwin32`` 和 ``win2sac_32`` 。"
+"请确保 ``catwin32`` 和 ``win2sac_32`` 在你的PATH中。"
+
+#: ../../installation.rst:47
+msgid "For macOS users, if you fail with an fatal error as below::"
+msgstr "对于 macOS 用户，如果你因为遇到如下致命错误而失败::"
+
+#: ../../installation.rst:55
+msgid ""
+"Just edit line 3 of ``win2sac.src/s4read_data.c``, and change ``#include "
+"<malloc.h>`` to ``#include <stdlib.h>``."
+msgstr ""
+"编辑 ``win2sac.src/s4read_data.c`` 第三行，将 ``#include <malloc.h>`` 修改为 ``#include <stdlib.h>`` 。"
+
