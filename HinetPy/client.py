@@ -321,7 +321,7 @@ class Client(object):
         data: str
             Filename of downloaded win32 data.
         ctable: str
-            Filename of downloaded win32 data.
+            Filename of downloaded channel table file.
 
         Examples
         --------
@@ -718,10 +718,9 @@ class Client(object):
         [2017-01-01 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
 
         The client will report errors if ``catwin32`` and/or ``win2sac_32``
-        are NOT in PATH. In this case, please download win32tools from Hi-net_
+        are NOT in PATH. In this case, please download win32tools from
+        `Hi-net <http://www.hinet.bosai.go.jp/>`_
         and make sure both binary files are in your PATH.
-
-        .. _Hi-net: http://www.hinet.bosai.go.jp/
         """
         import shutil
 

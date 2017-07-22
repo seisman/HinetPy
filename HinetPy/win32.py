@@ -43,7 +43,7 @@ class Channel(object):
         damping: float
             Damping constant of the sensor.
         period: float
-            Natural period of the seismometer.abs
+            Natural period of the seismometer.
         preamplification:
             Preamplification.
         lsb_value:
