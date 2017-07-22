@@ -17,7 +17,7 @@ Below is an example of one channel in channel table file::
 - [8]: Sensor sensitivity (V/unit of input, where unit of input is provided in column [9])
 - [9]: Unit of input. Use MKS system: "m" for displacement, "m/s" for velocity, and "m/s/s" for acceleration.
 - [10]: Natural period of the seismometer (s)
-- [11]: Dumping constant of the sensor
+- [11]: Damping constant of the sensor
 - [12]: Amplification factor applied to sensor output prior to A/D conversion (dB)
 - [13]: Quantization width in A/D conversion (V), a.k.a. LSB value
 - [14]: Station latitude (degrees). A positive value indicates North latitude.

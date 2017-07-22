@@ -98,7 +98,7 @@ Hi-net/F-net has a lot of stations. If you only need a few of them, you can
 select the stations you want. Hi-net website also provide a web interface to
 do that, which is prefered for most cases. If you want to dynamically select
 stations in your script, you can try
-:meth:`~HinetPy.client.Client.select_staions`.
+:meth:`~HinetPy.client.Client.select_stations`.
 
 >>> # select only two stations of Hi-net
 >>> client.select_stations('0101', ['N.AAKH', 'N.ABNH'])

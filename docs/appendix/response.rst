@@ -19,7 +19,7 @@ its transfer function in the Laplace domain is given as:
 where,
 
 - :math:`G`: gain factor, given as column [8] in ``V/unit_of_input``
-- :math:`h`: dampling constant, given as column [11]
+- :math:`h`: damping constant, given as column [11]
 - :math:`w`: natural angular frequency, given as column [10]
 
 Roots of the numerator and the denominator correspond to the
