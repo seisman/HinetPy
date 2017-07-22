@@ -19,7 +19,12 @@
 `HinetPy`_ is a Python package aiming to automate and simplify tedious data
 request, downloading and format conversion tasks related to `NIED Hi-net`_.
 
-`Source Code <https://github.com/seisman/HinetPy>`_ | `Documentation <https://seisman.github.io/HinetPy>`_ | `NIED Hi-net`_
+`NIED Hi-net`_ | `Source Code`_ | `Documentation`_ | `中文文档`_
+
+.. _NIED Hi-net: http://www.hinet.bosai.go.jp/
+.. _Source Code: https://github.com/seisman/HinetPy
+.. _Documentation: https://seisman.github.io/HinetPy
+.. _中文文档: https://seisman.github.io/HinetPy/zh_CN/
 
 Feature Support
 ===============
@@ -71,5 +76,4 @@ This project is licensed under the terms of the `MIT license`_.
 
 .. _HinetPy: https://github.com/seisman/HinetPy
 .. _win32tools: https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools
-.. _NIED Hi-net: http://www.hinet.bosai.go.jp/
 .. _MIT license: license.html

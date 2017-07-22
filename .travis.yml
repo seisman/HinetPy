@@ -30,7 +30,7 @@ script:
   - codecov
 
 after_success:
-  - cd docs && make html && cd ..
+  - bash ci/build-docs.sh
 
 deploy:
   provider: pages
