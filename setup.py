@@ -38,6 +38,7 @@ setup(
             "coverage",
             "pytest-cov",
             "twine",
+            "sphinx-intl",
         ]
     },
 
