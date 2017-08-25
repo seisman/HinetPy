@@ -1,33 +1,50 @@
 language: python
-python:
-  - '3.4'
-  - '3.5'
-  - '3.6'
+
+matrix:
+  include:
+    - python: 3.4
+      env:
+        - BUILD_DOCS=false
+        - MAKE_TESTS=true
+    - python: 3.5
+      env:
+        - BUILD_DOCS=false
+        - MAKE_TESTS=true
+    - python: 3.6
+      env:
+        - BUILD_DOCS=true
+        - MAKE_TESTS=true
 
 branches:
   only:
-  - master
-  - dev
-  - /^fix-.*$/
-  - /^feature-.*$/
+    - master
+    - dev
+    - /^fix-.*$/
+    - /^feature-.*$/
+    # Regex to build tagged commits with version numbers
+    - /\d+\.\d+(\.\d+)?(\S*)?$/
+
+before_install:
+  # determine whether to skip build_docs or make_tests based on commit message
+  - if [[ $TRAVIS_COMMIT_MESSAGE =~ '[skip docs]' ]]; then export BUILD_DOCS=false; fi
+  - if [[ $TRAVIS_COMMIT_MESSAGE =~ '[skip tests]' ]]; then export MAKE_TESTS=false; fi
 
 install:
   # -e is important for coverage report
   - pip install -e .[dev]
   # install win32tools
-  - bash ci/install-win32tools.sh
-  - export PATH=${PATH}:${PWD}/win32tools/bin
-
-before_script:
-  - sed -i "s/test_username/${HINET_USERNAME}/" tests/test_*.py
-  - sed -i "s/test_password/${HINET_PASSWORD}/" tests/test_*.py
+  - if [ "$MAKE_TESTS" == "true" ]; then
+      bash ci/install-win32tools.sh;
+      export PATH=${PATH}:${PWD}/win32tools/bin;
+      sed -i "s/test_username/${HINET_USERNAME}/" tests/test_*.py;
+      sed -i "s/test_password/${HINET_PASSWORD}/" tests/test_*.py;
+    fi
 
 script:
-  - py.test --cov-report term-missing --cov=HinetPy -vs tests/
-  - codecov
+  - if [ "$MAKE_TESTS" == "true" ]; then make test coverage; fi
 
 after_success:
-  - bash ci/build-docs.sh
+  - if [ "$BUILD_DOCS" == "true" ]; then make doc; fi
 
 deploy:
   provider: pages
