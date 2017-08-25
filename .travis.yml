@@ -54,3 +54,4 @@ deploy:
   on:
     branch: master
     python: '3.6'
+    condition: '$BUILD_DOCS == "true"'
