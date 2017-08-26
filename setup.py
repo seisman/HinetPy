@@ -3,7 +3,7 @@
 import re
 from os import path
 from codecs import open
-from setuptools import setup
+from setuptools import setup, find_packages
 
 here = path.abspath(path.dirname(__file__))
 
@@ -29,7 +29,10 @@ setup(
     keywords='NIED Hi-net related tasks',
     license='MIT',
 
-    packages=['HinetPy'],
+    packages=find_packages(exclude=['docs', 'ci']),
+    package_data={
+        'HinetPy.tests': ['data/*'],
+    },
     install_requires=['requests'],
     extras_require={
         'dev': [
