@@ -5,7 +5,7 @@ coverage:
 	codecov
 
 doc:
-	bash ci/build-docs.sh
+	make -C docs docs
 
 publish:
 	python setup.py sdist
