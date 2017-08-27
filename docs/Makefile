@@ -19,8 +19,7 @@ help:
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-translation:
-	make gettext
+translation: gettext
 	sphinx-intl update -p _build/gettext -l zh_CN
 
 docs:
