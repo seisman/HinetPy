@@ -391,7 +391,7 @@ class Client(object):
             starttime = _string2datetime(starttime)
         endtime = starttime + timedelta(minutes=span)
         if not time0 <= starttime < endtime <= time1:
-            msg = "Data not avaible in the time period. " + \
+            msg = "Data not available in the time period. " + \
                   "Call Client.info('{}') for help.".format(code)
             raise ValueError(msg)
 
