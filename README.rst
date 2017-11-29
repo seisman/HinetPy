@@ -71,6 +71,13 @@ N.NGUH.E.SAC_PZ  N.NGUH.U.SAC_PZ  N.NNMH.N.SAC_PZ
 N.NGUH.N.SAC_PZ  N.NNMH.E.SAC_PZ  N.NNMH.U.SAC_PZ
 ...
 
+Citation
+========
+
+If you find this package useful, please consider citing via:
+
+    Dongdong Tian. (2017, November 29). seisman/HinetPy: 0.4.4 (Version 0.4.4). Zenodo. http://doi.org/10.5281/zenodo.1068346
+
 
 License
 =======
