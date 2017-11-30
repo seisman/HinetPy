@@ -8,68 +8,80 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-22 14:26+0800\n"
+"POT-Creation-Date: 2017-11-30 15:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.4.0\n"
+"Generated-By: Babel 2.5.0\n"
 
 #: ../../index.rst:2
 msgid "HinetPy - A Hi-net Client powered by Python"
 msgstr "HinetPy——基于Python的Hi-net数据申请客户端"
 
-#: ../../../README.rst:19
+#: ../../../README.rst:22
 msgid ""
 "`HinetPy`_ is a Python package aiming to automate and simplify tedious "
 "data request, downloading and format conversion tasks related to `NIED "
 "Hi-net`_."
 msgstr "`HinetPy`_ 是一个Python模块，致力于自动化和简化与 `NIED Hi-net`_ 相关的繁琐的数据申请、下载和格式转换工作。"
 
-#: ../../../README.rst:22
+#: ../../../README.rst:25
 msgid "`NIED Hi-net`_ | `Source Code`_ | `Documentation`_ | `中文文档`_"
 msgstr ""
 
-#: ../../../README.rst:30
+#: ../../../README.rst:33
 msgid "Feature Support"
 msgstr "功能"
 
-#: ../../../README.rst:32
+#: ../../../README.rst:35
 msgid "Request continuous waveform data from Hi-net"
 msgstr "从Hi-net申请连续波形数据"
 
-#: ../../../README.rst:33
+#: ../../../README.rst:36
 msgid "Convert waveform data from win32 format to SAC format"
 msgstr "将波形数据从win32格式转换为SAC格式"
 
-#: ../../../README.rst:34
+#: ../../../README.rst:37
 msgid "Extract instrumental response as SAC polezero file"
 msgstr "提取仪器响应信息并保存为SAC零极点文件"
 
-#: ../../../README.rst:35
+#: ../../../README.rst:38
 msgid "Multithreads downloading and conversion to speedup"
 msgstr "多线程并行下载和转换以加快速度"
 
-#: ../../../README.rst:38
+#: ../../../README.rst:41
 msgid "A simple example"
 msgstr "一个简单的示例"
 
-#: ../../../README.rst:40
+#: ../../../README.rst:43
 msgid ""
 "The power of `HinetPy`_ make it simple to request continuous waveform "
 "data from Hi-net, convert the data into SAC format and extract "
 "instrumental responses as SAC polezero files."
-msgstr ""
-"`HinetPy`_ 功能强大，使得从Hi-net申请连续数据、将数据转换为SAC格式、提取仪器"
-"响应文件并保存为SAC零极点文件变得很简单。"
+msgstr "`HinetPy`_ 功能强大，使得从Hi-net申请连续数据、将数据转换为SAC格式、提取仪器响应文件并保存为SAC零极点文件变得很简单。"
 
-#: ../../../README.rst:73
+#: ../../../README.rst:75
+msgid "Citation"
+msgstr "引用"
+
+#: ../../../README.rst:77
+msgid "If you find this package useful, please consider citing via:"
+msgstr "如果你觉得这个软件包很有用，请考虑在文章中作如下引用："
+
+#: ../../../README.rst:79
+msgid ""
+"Dongdong Tian. (2017, November 29). seisman/HinetPy: 0.4.4 (Version "
+"0.4.4). Zenodo. http://doi.org/10.5281/zenodo.1068346"
+msgstr ""
+
+#: ../../../README.rst:83
 msgid "License"
 msgstr "许可协议"
 
-#: ../../../README.rst:75
+#: ../../../README.rst:85
 msgid "This project is licensed under the terms of the `MIT license`_."
 msgstr "本项目使用 `MIT license`_ 许可协议。"
 
