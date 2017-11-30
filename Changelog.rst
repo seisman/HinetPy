@@ -1,7 +1,10 @@
 Changelog
 =========
 
-0.4.3:
+0.4.4 (2017-11-30):
+ - Fix a technical issue related to packaging
+
+0.4.3 (2017-11-30):
  - Add Chinese documentation
 
 0.4.2 (2017-06-18):
