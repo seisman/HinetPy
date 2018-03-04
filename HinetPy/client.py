@@ -638,7 +638,10 @@ class Client(object):
         r = self.session.get(self._STATION, timeout=self.timeout)
         return len(re.findall(pattern, r.text))
 
-    def select_stations(self, code, stations=None):
+    def select_stations(self, code, stations=None, minlatitude=None,
+                        maxlatitude=None, minlongitude=None, maxlongitude=None,
+                        latitude=None, longitude=None, minradius=None,
+                        maxradius=None):
         """Select Hi-net/F-net stations
 
         Parameters
@@ -647,6 +650,27 @@ class Client(object):
             Network code.
         stations: str or list
             Stations to select.
+        minlatitude: float
+            Limit to stations with a latitude larger than the specified minimum.
+        maxlatitude: float
+            Limit to stations with a latitude smaller than the specified minimum.
+        minlongitude: float
+            Limit to stations with a longtitude larger than the specified minimum.
+        maxlongitude: float
+            Limit to stations with a longtitude smaller than the specified minimum.
+        latitude: float
+            Specify the latitude to be used for a radius search.
+        longitude: float
+            Specify the longitude to be used for a radius search.
+        minradius: float
+            Limit to stations within the specified minimum number of degrees
+            from the geographic point defined by the latitude and longitude
+            parameters.
+        maxradius: float
+            Limit to stations within the specified maxradius number of degrees
+            from the geographic point defined by the latitude and longitude
+            parameters.
+
 
         Examples
         --------
@@ -656,6 +680,16 @@ class Client(object):
         >>> client.get_selected_stations('0101')
         2
 
+        Select stations in a box region:
+
+        >>> client.select_stations('0101', minlatitude=40, maxlatitude=50,
+        ...                        minlongitude=140, maxlongitude=150)
+
+        Select stations in a circular region:
+
+        >>> client.select_stations('0101', latitude=30, longitude139,
+        ...                        minradius=0, maxradius=2)
+
         Select all Hi-net stations:
 
         >>> client.select_stations('0101')
@@ -663,9 +697,39 @@ class Client(object):
         0
 
         """
+        if stations == None:
+            stations = []
+        stations_selected = stations
+
+        # get station list from Hi-net server
+        stations_at_server = self.get_station_list()
+
+        # select stations in a box region
+        if minlatitude or maxlatitude or minlongitude or maxlongitude:
+            for station in stations_at_server:
+                if station.code != code:
+                    continue
+                if _point_inside_box(station.latitude, station.longtitude,
+                                     latitude=latitude, longtitude=longitude,
+                                     minradius=minradius, maxradius=maxradius):
+                    stations_selected.append(station.name)
+
+        print(stations_selected)
+        # select stations in a circular region
+        if (latitude and longitude) and (minradius or maxradius):
+            for station in stations_at_server:
+                if station.code != code:
+                    continue
+                if _point_inside_circular(station.latitude, station.longtitude,
+                                          latitude, longitude,
+                                          minradius=minradius,
+                                          maxradius=maxradius):
+                    stations_selected.append(station.name)
+        print(stations_selected)
+        print(':'.join(stations_selected))
         payload = {
             'net': code,
-            'stcds': ':'.join(stations) if stations else None,
+            'stcds': ':'.join(stations_selected) if stations_selected else None,
             'mode': '1',
         }
         self.session.post(self._SELECT, data=payload, timeout=self.timeout)
@@ -858,6 +922,59 @@ def _string2datetime(value):
             strfmt = "%Y %m %d %H %M %S"
 
     return datetime.strptime(value, strfmt)
+
+def _point_inside_box(latitude, longtitude, minlatitude=None,
+                      maxlatitude=None, minlongitude=None,
+                      maxlongitude=None):
+    """
+    Check if a point inside a box.
+
+    >>> _point_inside_box(40, 130)
+    True
+    >>> _point_inside_box(40, 130, 0, 50, 100, 150)
+    True
+    >>> _point_inside_box(40, 130, 0, 30, 100, 150)
+    False
+    >>> _point_inside_box(40, 130, None, 50, 100, None)
+    True
+    """
+    if minlatitude and latitude < minlatitude:
+        return False
+    if maxlatitude and latitude > maxlatitude:
+        return False
+    if minlongitude and longtitude < minlongitude:
+        return False
+    if maxlongitude and longtitude > maxlongitude:
+        return False
+    return True
+
+
+def _haversine(lat1, lon1, lat2, lon2):
+    """
+    Calculate the great circle distance between two points
+    on the earth (specified in decimal degrees).
+
+    https://stackoverflow.com/a/4913653/7770208
+    """
+    # convert decimal degrees to radians
+    lon1, lat1, lon2, lat2 = map(math.radians, [lon1, lat1, lon2, lat2])
+
+    # haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+    c = 2 * math.asin(math.sqrt(a))
+    #r = 6371 # Radius of earth in kilometers.
+    return c * 180.0 / math.pi
+
+
+def _point_inside_circular(lat1, lon1, lat2, lon2, minradius=None, maxradius=None):
+    radius = _haversine(lat1, lon1, lat2, lon2)
+    if minradius and radius < minradius:
+        return False
+    if maxradius and radius > maxradius:
+        return False
+    return True
 
 
 class _Job(object):

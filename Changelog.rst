@@ -3,6 +3,7 @@ Changelog
 
 0.4.5:
  - ``get_station_list``: return a list of stations
+ - ``select_stations``: support selecting stations in a box or circular region
 
 0.4.4 (2017-11-30):
  - Fix a technical issue related to packaging

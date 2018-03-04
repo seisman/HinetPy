@@ -101,7 +101,15 @@ do that, which is prefered for most cases. If you want to dynamically select
 stations in your script, you can try
 :meth:`~HinetPy.client.Client.select_stations`.
 
->>> # select only two stations of Hi-net
+>>> # select only two stations of Hi-net if you know the station names
 >>> client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
+>>>
+>>> # select Hi-net stations in a box region
+>>> client.select_stations('0101', minlatitude=36, maxlatitude=50,
+...                        minlongitude=140, maxlongitude=150)
+>>>
+>>> # select Hi-net stations in a circular region
+>>> client.select_stations('0101', latitude=36, longitude=139,
+...                        minradius=0, maxradius=3)
 >>> # select all Hi-net stations
 >>> client.select_stations('0101')
