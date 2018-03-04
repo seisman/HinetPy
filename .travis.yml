@@ -31,6 +31,7 @@ before_install:
 
 install:
   # -e is important for coverage report
+  - pip install sphinx==1.6.7 # the theme not working with sphinx 1.7.0
   - pip install -e .[dev]
   # install win32tools
   - if [ "$MAKE_TESTS" == "true" ]; then
