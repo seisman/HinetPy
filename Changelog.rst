@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.4.5:
+ - ``get_station_list``: return a list of stations
+
 0.4.4 (2017-11-30):
  - Fix a technical issue related to packaging
 

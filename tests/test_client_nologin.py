@@ -39,7 +39,9 @@ class TestClientOthersClass:
         print(client)
 
     def test_get_station_list(self, client):
-        client.get_station_list()
+        stations = client.get_station_list()
+        assert type(stations) == list
+        assert len(stations) >= 700
 
     def test_string2datetime(self):
         dt = datetime(2010, 2, 3)

@@ -567,24 +567,24 @@ class Client(object):
     def get_station_list(self, code=None):
         """Get a station list of Hi-net and F-net.
 
-        >>> client.get_station_list()
-        network station longtitude latitude
-        0101 N.WNNH 141.8850 45.4883
-        0101 N.SFNH 142.1185 45.3346
+        >>> stations = client.get_station_list()
+        >>> for station in stations:
+        ...     print(station)
+        0101 N.WNNH 45.4883 141.885 -159.06
+        0101 N.SFNH 45.3346 142.1185 -81.6
         ...
         """
         # no need to login
-        r = requests.get(self._STATION_INFO)
-        lines = r.iter_lines()
+        lines = requests.get(self._STATION_INFO).iter_lines()
         next(lines)  # skip csv header
-        print("network station longtitude latitude")
+        stations = []
         for line in lines:
             items = line.decode('shift_jis').split(",")
-            network = "{}{}".format(items[0].strip("'"), items[1].strip("'"))
-            station = items[2]
-            latitude, longtitude = items[7], items[8]
-            if not code or network == code:
-                print(network, station, longtitude, latitude)
+            code = "{}{}".format(items[0].strip("'"), items[1].strip("'"))
+            name = items[2]
+            latitude, longtitude, elevation = items[7], items[8], items[12]
+            stations.append(Station(code, name, latitude, longtitude, elevation))
+        return stations
 
     def _get_allowed_span(self, code):
         """Get allowed max span for each network.
@@ -866,3 +866,20 @@ class _Job(object):
         self.starttime = starttime
         self.span = span
         self.id = id
+
+
+class Station(object):
+    """
+    Class for Stations.
+    """
+    def __init__(self, code, name, latitude, longtitude, elevation):
+        self.code = code
+        self.name = name
+        self.latitude = float(latitude)
+        self.longtitude = float(longtitude)
+        self.elevation = float(elevation)
+
+    def __str__(self):
+        string = "{} {} {} {} {}".format(self.code, self.name, self.latitude,
+                                         self.longtitude, self.elevation)
+        return string

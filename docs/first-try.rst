@@ -85,13 +85,14 @@ If you want, you can have a quick view of stations of Hi-net and F-net
 (Only these two networks are supported).
 See :meth:`~HinetPy.client.Client.get_station_list` for details.
 
->>> client.get_station_list()
-network station longtitude latitude
-0101 N.WNNH 141.8850 45.4883
-0101 N.SFNH 142.1185 45.3346
-0101 N.WNWH 141.6334 45.2531
-0101 N.WNEH 141.8806 45.2303
-0101 N.SFSH 142.2254 45.2163
+>>> stations = client.get_station_list()
+>>> for station in stations:
+...     print(station)
+0101 N.WNNH 45.4883 141.885 -159.06
+0101 N.SFNH 45.3346 142.1185 -81.6
+0101 N.WNWH 45.2531 141.6334 -130.6
+0101 N.WNEH 45.2303 141.8806 -174.6
+0101 N.SFSH 45.2163 142.2254 -96.6
 ...
 
 Hi-net/F-net has a lot of stations. If you only need a few of them, you can
