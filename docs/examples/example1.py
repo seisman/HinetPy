@@ -17,7 +17,7 @@ with open("events.csv") as csvfile:
         outdir = origin.strftime("%Y%m%d%H%M")
 
         # skip if outdir already exists to avoid overwrite
-        if os.path.exits(ourdir):
+        if os.path.exists(outdir):
             continue
 
         data, ctable = client.get_waveform('0101', starttime, 20, outdir=outdir)
