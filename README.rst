@@ -33,6 +33,7 @@ Feature Support
 ===============
 
 - Request continuous waveform data from Hi-net
+- Select Hi-net/F-net stations inside a box or circular region
 - Convert waveform data from win32 format to SAC format
 - Extract instrumental response as SAC polezero file
 - Multithreads downloading and conversion to speedup
@@ -40,7 +41,7 @@ Feature Support
 A simple example
 ================
 
-The power of `HinetPy`_ make it simple to request continuous waveform data
+The power of `HinetPy`_ makes it simple to request continuous waveform data
 from Hi-net, convert the data into SAC format and extract instrumental
 responses as SAC polezero files.
 
@@ -52,7 +53,7 @@ responses as SAC polezero files.
 >>> # Let's try to request 20 minutes data since 2010-01-01T00:00(GMT+0900) from Hi-net
 >>> # '0101' is the code of Hi-net network
 >>> data, ctable = client.get_waveform('0101', '201001010000', 20)
->>> # The request and downloading process will take several minutes
+>>> # The request and downloading process usually takes several minutes
 >>> # waiting data request ...
 >>> # waiting data downloading ...
 >>> ls  # the downloaded data and corresponding channel table
@@ -60,13 +61,12 @@ responses as SAC polezero files.
 >>>
 >>> # Let's convert data from win32 format to SAC format
 >>> win32.extract_sac(data, ctable)
->>> ls *.SAC
+>>> # Let's extract instrument response as PZ file from channel table
+>>> win32.extract_pz(ctable)
+>>> ls
 N.NGUH.E.SAC  N.NGUH.U.SAC  N.NNMH.N.SAC
 N.NGUH.N.SAC  N.NNMH.E.SAC  N.NNMH.U.SAC
 ...
->>> # Let's extract instrument response as PZ file from channel table
->>> win32.extract_pz(ctable)
->>> ls *.SAC_PZ
 N.NGUH.E.SAC_PZ  N.NGUH.U.SAC_PZ  N.NNMH.N.SAC_PZ
 N.NGUH.N.SAC_PZ  N.NNMH.E.SAC_PZ  N.NNMH.U.SAC_PZ
 ...
@@ -76,8 +76,8 @@ Citation
 
 If you find this package useful, please consider citing via:
 
-    Dongdong Tian. (2017, November 29). seisman/HinetPy: 0.4.4 (Version 0.4.4). Zenodo. http://doi.org/10.5281/zenodo.1068346
-
+.. image:: https://zenodo.org/badge/23509035.svg
+    :target: https://zenodo.org/badge/latestdoi/23509035
 
 License
 =======
@@ -85,5 +85,4 @@ License
 This project is licensed under the terms of the `MIT license`_.
 
 .. _HinetPy: https://github.com/seisman/HinetPy
-.. _win32tools: https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools
 .. _MIT license: license.html
