@@ -291,7 +291,7 @@ class Client(object):
 
     def get_waveform(self, code, starttime, span,
                      max_span=None, data=None, ctable=None, outdir=None,
-                     threads=3):
+                     threads=3, cleanup=True):
         '''
         Get waveform from Hi-net server.
 
@@ -317,6 +317,8 @@ class Client(object):
             Default is current directory.
         threads: int
             How many threads used to speedup data downloading.
+        cleanup: bool
+            Clean up one-minute cnt files after merging.
 
         Returns
         -------
@@ -473,8 +475,9 @@ class Client(object):
         os.rename(ch_euc, ctable)
 
         # 4. cleanup
-        for cnt in cnts:
-            os.remove(cnt)
+        if cleanup:
+            for cnt in cnts:
+                os.remove(cnt)
 
         return data, ctable
 
