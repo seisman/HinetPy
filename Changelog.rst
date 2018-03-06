@@ -2,8 +2,8 @@ Changelog
 =========
 
 0.4.5:
- - ``get_station_list``: return a list of stations
- - ``select_stations``: support selecting stations in a box or circular region
+ - ``get_station_list()``: return a list of stations
+ - ``select_stations()``: support selecting stations in a box or circular region
 
 0.4.4 (2017-11-30):
  - Fix a technical issue related to packaging
@@ -18,18 +18,18 @@ Changelog
  - remove tempfile after downloading.
 
 0.4.0 (2017-04-01):
- - ``win32.extract_sac``: skip if data not exists
- - ``win32.extract_sac``: support multiple processes to speedup, and no longer
-   return values
- - ``Client.get_waveform``: support multi-threads to speedup
+ - ``win32.extract_sac()``: skip if data not exists
+ - ``win32.extract_sac()``: support multiple processes to speedup, and
+   no longer return values
+ - ``Client.get_waveform()``: support multi-threads to speedup
  - Change ``Client.help()`` to ``Client.info()``
- - ``Client.get_waveform`` now can automatically set ``max_span``
- - ``Client.get_*`` now support startime in different string formats
+ - ``Client.get_waveform()`` now can automatically set ``max_span``
+ - ``Client.get_*()`` now support startime in different string formats
 
 0.3.3 (2017-03-17):
  - Change ``network`` to ``NETWORK`` in ``header.py``
- - Add wildcard support to ``win32.merge``
- - Change ``Client.check_module_release`` to ``Client.check_package_release``
+ - Add wildcard support to ``win32.merge()``
+ - Change ``Client.check_module_release()`` to ``Client.check_package_release()``
  - Support output filename with deep directory
  - Always sort cnt files to avoid merge error
  - Set ``pmax`` to 8640000 by default
