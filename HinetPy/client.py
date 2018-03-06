@@ -14,6 +14,8 @@ import requests
 
 from HinetPy.win32 import merge
 from HinetPy.header import NETWORK
+from HinetPy.utils import point_inside_box, point_inside_circular,
+    split_integer, string2datetime
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
@@ -388,7 +390,7 @@ class Client(object):
         # time1 = UTCTime + JST(GMT+0900) - 2 hour delay
         time1 = datetime.utcnow() + timedelta(hours=9) + timedelta(hours=-2)
         if not isinstance(starttime, datetime):
-            starttime = _string2datetime(starttime)
+            starttime = string2datetime(starttime)
         endtime = starttime + timedelta(minutes=span)
         if not time0 <= starttime < endtime <= time1:
             msg = "Data not available in the time period. " + \
@@ -697,7 +699,7 @@ class Client(object):
         0
 
         """
-        if stations == None:
+        if stations is None:
             stations = []
         stations_selected = stations
 
@@ -709,24 +711,21 @@ class Client(object):
             for station in stations_at_server:
                 if station.code != code:
                     continue
-                if _point_inside_box(station.latitude, station.longtitude,
-                                     latitude=latitude, longtitude=longitude,
-                                     minradius=minradius, maxradius=maxradius):
+                if point_inside_box(station.latitude, station.longtitude,
+                                    latitude=latitude, longtitude=longitude,
+                                    minradius=minradius, maxradius=maxradius):
                     stations_selected.append(station.name)
 
-        print(stations_selected)
         # select stations in a circular region
         if (latitude and longitude) and (minradius or maxradius):
             for station in stations_at_server:
                 if station.code != code:
                     continue
-                if _point_inside_circular(station.latitude, station.longtitude,
-                                          latitude, longitude,
-                                          minradius=minradius,
-                                          maxradius=maxradius):
+                if point_inside_circular(station.latitude, station.longtitude,
+                                         latitude, longitude,
+                                         minradius=minradius,
+                                         maxradius=maxradius):
                     stations_selected.append(station.name)
-        print(stations_selected)
-        print(':'.join(stations_selected))
         payload = {
             'net': code,
             'stcds': ':'.join(stations_selected) if stations_selected else None,
@@ -866,22 +865,6 @@ class Client(object):
         return string
 
 
-def split_integer(m, n):
-    '''
-    Split an integer into evenly sized chunks
-
-    >>> split_integer(12, 3)
-    [3, 3, 3, 3]
-    >>> split_integer(15, 4)
-    [4, 4, 4, 3]
-    '''
-    count = math.ceil(m / n)
-    chunks = [m//count for i in range(count)]
-    for i in range(m % count):
-        chunks[i] += 1
-    return chunks
-
-
 def prepare_jobs(starttime, span, max_span):
     spans = split_integer(span, max_span)
     jobs = [_Job(starttime=starttime, span=spans[0])]
@@ -889,92 +872,6 @@ def prepare_jobs(starttime, span, max_span):
         dt = jobs[i-1].starttime + timedelta(minutes=spans[i-1])
         jobs.append(_Job(dt, spans[i]))
     return jobs
-
-
-def _string2datetime(value):
-    """Convert String to datetime."""
-
-    value = value.replace('T', ' ')
-    value = value.replace('-', ' ')
-    value = value.replace(':', ' ')
-    value = value.replace(',', ' ')
-    value = value.replace('_', ' ')
-
-    parts = value.split(' ')
-    strfmt = "%Y%m%d%H%M%S"
-    if len(parts) == 1:
-        if len(value) == 8:
-            strfmt = "%Y%m%d"
-        elif len(value) == 12:
-            strfmt = "%Y%m%d%H%M"
-        elif len(value) == 14:
-            strfmt = "%Y%m%d%H%M%S"
-        elif len(value) > 14:
-            strfmt = "%Y%m%d%H%M%S.%f"
-    elif len(parts) == 3:
-        strfmt = "%Y %m %d"
-    elif len(parts) == 5:
-        strfmt = "%Y %m %d %H %M"
-    elif len(parts) == 6:
-        if '.' in value:
-            strfmt = "%Y %m %d %H %M %S.%f"
-        else:
-            strfmt = "%Y %m %d %H %M %S"
-
-    return datetime.strptime(value, strfmt)
-
-def _point_inside_box(latitude, longtitude, minlatitude=None,
-                      maxlatitude=None, minlongitude=None,
-                      maxlongitude=None):
-    """
-    Check if a point inside a box.
-
-    >>> _point_inside_box(40, 130)
-    True
-    >>> _point_inside_box(40, 130, 0, 50, 100, 150)
-    True
-    >>> _point_inside_box(40, 130, 0, 30, 100, 150)
-    False
-    >>> _point_inside_box(40, 130, None, 50, 100, None)
-    True
-    """
-    if minlatitude and latitude < minlatitude:
-        return False
-    if maxlatitude and latitude > maxlatitude:
-        return False
-    if minlongitude and longtitude < minlongitude:
-        return False
-    if maxlongitude and longtitude > maxlongitude:
-        return False
-    return True
-
-
-def _haversine(lat1, lon1, lat2, lon2):
-    """
-    Calculate the great circle distance between two points
-    on the earth (specified in decimal degrees).
-
-    https://stackoverflow.com/a/4913653/7770208
-    """
-    # convert decimal degrees to radians
-    lon1, lat1, lon2, lat2 = map(math.radians, [lon1, lat1, lon2, lat2])
-
-    # haversine formula
-    dlon = lon2 - lon1
-    dlat = lat2 - lat1
-    a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
-    c = 2 * math.asin(math.sqrt(a))
-    #r = 6371 # Radius of earth in kilometers.
-    return c * 180.0 / math.pi
-
-
-def _point_inside_circular(lat1, lon1, lat2, lon2, minradius=None, maxradius=None):
-    radius = _haversine(lat1, lon1, lat2, lon2)
-    if minradius and radius < minradius:
-        return False
-    if maxradius and radius > maxradius:
-        return False
-    return True
 
 
 class _Job(object):
