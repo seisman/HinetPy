@@ -23,7 +23,7 @@ __author__ = 'Dongdong Tian'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014-2017 Dongdong Tian'
 
-from HinetPy.client import Client
-from HinetPy.header import NETWORK
+from .client import Client
+from .header import NETWORK
 
 __all__ = ["Client", "NETWORK", "win32"]

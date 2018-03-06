@@ -12,10 +12,10 @@ from multiprocessing.pool import ThreadPool
 
 import requests
 
-from HinetPy.win32 import merge
-from HinetPy.header import NETWORK
-from HinetPy.utils import point_inside_box, point_inside_circular,
-    split_integer, string2datetime
+from .win32 import merge
+from .header import NETWORK
+from .utils import point_inside_box, point_inside_circular, split_integer, \
+        string2datetime
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
