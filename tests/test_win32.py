@@ -5,12 +5,28 @@ import glob
 import filecmp
 import shutil
 from multiprocessing import cpu_count
+
+import pytest
+
 from HinetPy import win32
+
+username = "test_username"
+password = "test_password"
 
 pwd = os.path.dirname(__file__)
 path = os.path.join(pwd, 'data')
-data = os.path.join(path, "0101_2017031100_2.cnt")
-ctable = os.path.join(path, "0101_20170311.ch")
+data = os.path.join(path, "0101_201701010000_3.cnt")
+ctable = os.path.join(path, "0101_20170101.ch")
+
+@pytest.fixture(scope="module", autouse=True)
+def get_test_data():
+    from HinetPy import Client
+    client = Client(username, password)
+    client.select_stations('0101', ['N.NGUH', 'N.NNMH'])
+    client.get_waveform('0101', '2017-01-01T00:00', 3, outdir=path,
+                        cleanup=False)
+    for file in glob.glob("20170101000?0101VM.cnt"):
+        os.rename(file, os.path.join(path, file))
 
 
 class TestWin32ExtractSACClass:

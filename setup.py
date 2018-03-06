@@ -30,9 +30,6 @@ setup(
     license='MIT',
 
     packages=find_packages(exclude=['docs', 'ci']),
-    package_data={
-        'HinetPy.tests': ['data/*'],
-    },
     install_requires=['requests'],
     extras_require={
         'dev': [
