@@ -21,7 +21,6 @@ __title__ = 'HinetPy'
 __version__ = '0.4.4'
 __author__ = 'Dongdong Tian'
 __license__ = 'MIT'
-__copyright__ = 'Copyright 2014-2017 Dongdong Tian'
 
 from .client import Client
 from .header import NETWORK

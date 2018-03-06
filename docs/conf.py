@@ -8,6 +8,7 @@
 import os
 import sys
 import HinetPy
+import datetime
 sys.path.insert(0, os.path.abspath('..'))
 
 # -- General configuration ------------------------------------------------
@@ -51,9 +52,10 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
+year = datetime.date.today().year
 project = HinetPy.__title__
-copyright = HinetPy.__copyright__
 author = HinetPy.__author__
+copyright = '2014-{}, {}'.format(year, author)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
