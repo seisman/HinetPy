@@ -441,6 +441,8 @@ def merge(datas, total_data, force_sort=False):
     """
     if isinstance(datas, str):  # wildcard support
         datas = sorted(glob.glob(datas))
+        if not datas:
+            raise FileNotFoundError("Files to be merged not found.\n")
 
     if os.path.dirname(total_data):
         os.makedirs(os.path.dirname(total_data), exist_ok=True)
