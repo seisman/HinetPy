@@ -10,7 +10,7 @@ import pytest
 import requests
 
 from HinetPy import Client
-from HinetPy.client import _string2datetime
+from HinetPy.utils import string2datetime
 
 
 # http://docs.pytest.org/en/latest/fixture.html
