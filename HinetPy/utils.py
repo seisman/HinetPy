@@ -2,8 +2,10 @@
 Utility functions.
 '''
 import math
+from datetime import datetime
 
-def split_integer(m, n):
+
+def split_integer(number, maxn):
     '''
     Split an integer into evenly sized chunks
 
@@ -12,9 +14,9 @@ def split_integer(m, n):
     >>> split_integer(15, 4)
     [4, 4, 4, 3]
     '''
-    count = math.ceil(m / n)
-    chunks = [m//count for i in range(count)]
-    for i in range(m % count):
+    count = math.ceil(number / maxn)
+    chunks = [number//count for i in range(count)]
+    for i in range(number % count):
         chunks[i] += 1
     return chunks
 
@@ -25,13 +27,13 @@ def point_inside_box(latitude, longtitude, minlatitude=None,
     """
     Check if a point inside a box region.
 
-    >>> _point_inside_box(40, 130)
+    >>> point_inside_box(40, 130)
     True
-    >>> _point_inside_box(40, 130, 0, 50, 100, 150)
+    >>> point_inside_box(40, 130, 0, 50, 100, 150)
     True
-    >>> _point_inside_box(40, 130, 0, 30, 100, 150)
+    >>> point_inside_box(40, 130, 0, 30, 100, 150)
     False
-    >>> _point_inside_box(40, 130, None, 50, 100, None)
+    >>> point_inside_box(40, 130, None, 50, 100, None)
     True
     """
     if minlatitude and latitude < minlatitude:
@@ -48,9 +50,14 @@ def point_inside_box(latitude, longtitude, minlatitude=None,
 def haversine(lat1, lon1, lat2, lon2):
     """
     Calculate the great circle distance between two points
-    on the earth (specified in decimal degrees).
+    on the earth (specified in decimal degrees) using haversine formula.
 
-    https://stackoverflow.com/a/4913653/7770208
+    see https://stackoverflow.com/a/4913653/7770208
+
+    >>> haversine(40, 130, 50, 140)
+    12.224069629545902
+    >>> haversine(-20, 50, 30, 70)
+    53.57930271469817
     """
     # convert decimal degrees to radians
     lon1, lat1, lon2, lat2 = map(math.radians, [lon1, lat1, lon2, lat2])
@@ -60,7 +67,6 @@ def haversine(lat1, lon1, lat2, lon2):
     dlat = lat2 - lat1
     a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
     c = 2 * math.asin(math.sqrt(a))
-    # r = 6371 # Radius of earth in kilometers.
     return c * 180.0 / math.pi
 
 
@@ -68,6 +74,9 @@ def point_inside_circular(lat1, lon1, lat2, lon2, minradius=None,
                           maxradius=None):
     """
     Check if a point inside a circular region.
+
+    >>> point_inside_circular(30, 50, 30, 52, 0, 5)
+    True
     """
     radius = haversine(lat1, lon1, lat2, lon2)
     if minradius and radius < minradius:
@@ -76,8 +85,15 @@ def point_inside_circular(lat1, lon1, lat2, lon2, minradius=None,
         return False
     return True
 
+
 def string2datetime(value):
-    """Convert String to datetime."""
+    """Convert String to datetime.
+
+    >>> string2datetime('201001010000')
+    datetime.datetime(2010, 1, 1, 0, 0)
+    >>> string2datetime('2010-01-01T03:45')
+    datetime.datetime(2010, 1, 1, 3, 45)
+    """
 
     value = value.replace('T', ' ')
     value = value.replace('-', ' ')
