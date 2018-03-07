@@ -30,7 +30,24 @@ class TestUtilsClass:
         assert not point_inside_circular(30, 50, 30, 60, 0, 5)
 
     def test_string2datetime(self):
-        assert string2datetime('20100101') == datetime(2010, 1, 1, 0, 0)
-        assert string2datetime('201001010234') == datetime(2010, 1, 1, 2, 34)
-        assert string2datetime('2010-01-01') == datetime(2010, 1, 1, 0, 0)
-        assert string2datetime('2010-01-01T02:34') == datetime(2010, 1, 1, 2, 34)
+        dt = datetime(2010, 2, 3)
+        assert dt == string2datetime("20100203")
+        assert dt == string2datetime("2010-02-03")
+
+        dt = datetime(2001, 2, 3, 4, 5)
+        assert dt == string2datetime("200102030405")
+        assert dt == string2datetime("2001-02-03T04:05")
+        assert dt == string2datetime("2001-02-03 04:05")
+
+        dt = datetime(2001, 2, 3, 4, 5, 6)
+        assert dt == string2datetime("20010203040506")
+        assert dt == string2datetime("2001-02-03T04:05:06")
+        assert dt == string2datetime("2001-02-03 04:05:06")
+
+        dt = datetime(2001, 2, 3, 4, 5, 6, 789000)
+        assert dt == string2datetime("20010203040506.789")
+        assert dt == string2datetime("2001-02-03T04:05:06.789")
+        assert dt == string2datetime("2001-02-03 04:05:06.789")
+
+        with pytest.raises(ValueError):
+            string2datetime("2001023040506")
