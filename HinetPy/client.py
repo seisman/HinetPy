@@ -486,7 +486,7 @@ class Client(object):
 
         if not (isinstance(startdate, datetime) or
                 isinstance(startdate, date)):
-            startdate = _string2datetime(startdate)
+            startdate = string2datetime(startdate)
 
         if int(span) not in range(1, 8):
             raise ValueError("span is not digit or not in [1, 7].")
