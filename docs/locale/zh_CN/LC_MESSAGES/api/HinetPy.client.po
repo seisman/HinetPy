@@ -3,19 +3,18 @@
 # This file is distributed under the same license as the HinetPy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-30 15:17+0800\n"
+"POT-Creation-Date: 2018-03-07 14:08+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.0\n"
+"Generated-By: Babel 2.5.3\n"
 
 #: ../../api/HinetPy.client.rst:2
 msgid "HinetPy.client module"
@@ -55,12 +54,12 @@ msgstr "见下面的注解。"
 
 #: HinetPy.client.Client:16 HinetPy.client.Client.get_arrivaltime:15
 #: HinetPy.client.Client.get_focalmechanism:15
-#: HinetPy.client.Client.get_waveform:27 HinetPy.client.Client.info:6
-#: HinetPy.client.Client.login:8 HinetPy.client.Client.select_stations:8 of
+#: HinetPy.client.Client.get_waveform:29 HinetPy.client.Client.info:6
+#: HinetPy.client.Client.login:8 HinetPy.client.Client.select_stations:28 of
 msgid "Examples"
 msgstr "示例"
 
-#: HinetPy.client.Client:21 HinetPy.client.Client.get_waveform:51 of
+#: HinetPy.client.Client:21 HinetPy.client.Client.get_waveform:53 of
 msgid "Notes"
 msgstr "注解"
 
@@ -161,6 +160,10 @@ msgstr "将win32和通道表数据保存到指定目录中。默认为当前目�
 msgid "How many threads used to speedup data downloading."
 msgstr "用多少个线程以加速下载。"
 
+#: HinetPy.client.Client.get_waveform:23 of
+msgid "Clean up one-minute cnt files after merging."
+msgstr "在合并文件之后清理1分钟长度的cnt文件。"
+
 #: HinetPy.client.Client.get_arrivaltime
 #: HinetPy.client.Client.get_focalmechanism
 #: HinetPy.client.Client.get_selected_stations
@@ -168,66 +171,59 @@ msgstr "用多少个线程以加速下载。"
 msgid "Returns"
 msgstr ""
 
-#: HinetPy.client.Client.get_waveform:24 of
-msgid "* **data** (*str*) -- Filename of downloaded win32 data. *"
-msgstr "* **data** (*str*) -- 下载得到的win32数据的文件名。 *"
-
-msgid "**ctable** (*str*) -- Filename of downloaded channel table file."
-msgstr "**ctable** (*str*) -- 下载的通道表文件的文件名。"
-
-#: HinetPy.client.Client.get_waveform:24 of
+#: HinetPy.client.Client.get_waveform:26 of
 msgid "**data** (*str*) -- Filename of downloaded win32 data."
 msgstr "**data** (*str*) -- 下载得到的win32数据的文件名。"
 
-#: HinetPy.client.Client.get_waveform:25 of
+#: HinetPy.client.Client.get_waveform:27 of
 msgid "**ctable** (*str*) -- Filename of downloaded channel table file."
 msgstr "**ctable** (*str*) -- 下载的通道表文件的文件名。"
 
-#: HinetPy.client.Client.get_waveform:29 of
+#: HinetPy.client.Client.get_waveform:31 of
 msgid "Request 6 minutes data since 2010-01-01T05:35 (GMT+0900) from Hi-net."
 msgstr "从Hi-net请求2010-01-01T05:35 (GMT+0900)开始的6分钟数据。"
 
-#: HinetPy.client.Client.get_waveform:34 of
+#: HinetPy.client.Client.get_waveform:36 of
 msgid "Several other string formats of ``starttime`` are also supported:"
 msgstr "``starttime`` 也支持其他常见的格式："
 
-#: HinetPy.client.Client.get_waveform:39 of
+#: HinetPy.client.Client.get_waveform:41 of
 msgid "``starttime`` can be given as :py:class:`datetime.datetime`:"
 msgstr "``starttime`` 也可以用 :py:class:`datetime.datetime` 指定："
 
-#: HinetPy.client.Client.get_waveform:46 of
+#: HinetPy.client.Client.get_waveform:48 of
 msgid "Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:"
 msgstr "从F-net申请2010-01-01T00:00 (GMT+0900)全天的数据："
 
-#: HinetPy.client.Client.get_waveform:53 of
+#: HinetPy.client.Client.get_waveform:55 of
 msgid "**TimeZone**"
 msgstr "**时区**"
 
-#: HinetPy.client.Client.get_waveform:55 of
+#: HinetPy.client.Client.get_waveform:57 of
 msgid "All times in HinetPy are in JST (GMT+0900)."
 msgstr "HinetPy中的所有时间都是日本标准时间（GMT+0900）。"
 
-#: HinetPy.client.Client.get_waveform:57 of
+#: HinetPy.client.Client.get_waveform:59 of
 msgid "**max_span**"
 msgstr ""
 
-#: HinetPy.client.Client.get_waveform:59 of
+#: HinetPy.client.Client.get_waveform:61 of
 msgid "Hi-net set three limitations of each data request:"
 msgstr "Hi-net对每次数据请求设置了3个限制："
 
-#: HinetPy.client.Client.get_waveform:61 of
+#: HinetPy.client.Client.get_waveform:63 of
 msgid "Record_Length <= 60 min"
 msgstr "数据长度不大于60分钟"
 
-#: HinetPy.client.Client.get_waveform:62 of
+#: HinetPy.client.Client.get_waveform:64 of
 msgid "Number_of_channels * Record_Length <= 12000 min"
 msgstr "通道数*数据长度不得大于12000分钟"
 
-#: HinetPy.client.Client.get_waveform:63 of
+#: HinetPy.client.Client.get_waveform:65 of
 msgid "Only the latest 150 requested data are kept"
 msgstr "仅保留最近150次请求的数据"
 
-#: HinetPy.client.Client.get_waveform:65 of
+#: HinetPy.client.Client.get_waveform:67 of
 msgid ""
 "For example, Hi-net network has about 24000 channels. Acoording to "
 "limitation 2, the record length should be no more than 5 minutes in each "
@@ -237,31 +233,31 @@ msgstr ""
 "例如，Hi-"
 "net台网有大约24000个通道。根据第2条限制，单次请求的通道长度不得大于5分钟。HinetPy通过将一个长的数据请求分割成多个短的子请求来打破这一限制。"
 
-#: HinetPy.client.Client.get_waveform:70 of
+#: HinetPy.client.Client.get_waveform:72 of
 msgid "**Workflow**"
 msgstr "**工作流程**"
 
-#: HinetPy.client.Client.get_waveform:72 of
+#: HinetPy.client.Client.get_waveform:74 of
 msgid "do several checks"
 msgstr "做一些检查"
 
-#: HinetPy.client.Client.get_waveform:73 of
+#: HinetPy.client.Client.get_waveform:75 of
 msgid "split a long request into several short sub-requests"
 msgstr "将长数据请求分割成多个短的数据子请求"
 
-#: HinetPy.client.Client.get_waveform:74 of
+#: HinetPy.client.Client.get_waveform:76 of
 msgid "loop over all sub-requests and return data id to download"
 msgstr "对所有子请求进行循环并返回要下载的数据ID"
 
-#: HinetPy.client.Client.get_waveform:75 of
+#: HinetPy.client.Client.get_waveform:77 of
 msgid "download all data based on data id"
 msgstr "基于数据ID下载所有数据"
 
-#: HinetPy.client.Client.get_waveform:76 of
+#: HinetPy.client.Client.get_waveform:78 of
 msgid "extract all zip files and merge into one win32 format data"
 msgstr "解压下载得到的所有ZIP文件并合并到一个win32格式的文件"
 
-#: HinetPy.client.Client.get_waveform:77 of
+#: HinetPy.client.Client.get_waveform:79 of
 msgid "cleanup"
 msgstr "清理工作"
 
@@ -329,11 +325,55 @@ msgstr "选择Hi-net/F-net台站"
 msgid "Stations to select."
 msgstr "要选择的台站。"
 
-#: HinetPy.client.Client.select_stations:10 of
+#: HinetPy.client.Client.select_stations:7 of
+msgid "Limit to stations with a latitude larger than the specified minimum."
+msgstr ""
+
+#: HinetPy.client.Client.select_stations:9 of
+msgid "Limit to stations with a latitude smaller than the specified minimum."
+msgstr ""
+
+#: HinetPy.client.Client.select_stations:11 of
+msgid "Limit to stations with a longtitude larger than the specified minimum."
+msgstr ""
+
+#: HinetPy.client.Client.select_stations:13 of
+msgid "Limit to stations with a longtitude smaller than the specified minimum."
+msgstr ""
+
+#: HinetPy.client.Client.select_stations:15 of
+msgid "Specify the latitude to be used for a radius search."
+msgstr ""
+
+#: HinetPy.client.Client.select_stations:17 of
+msgid "Specify the longitude to be used for a radius search."
+msgstr ""
+
+#: HinetPy.client.Client.select_stations:19 of
+msgid ""
+"Limit to stations within the specified minimum number of degrees from the"
+" geographic point defined by the latitude and longitude parameters."
+msgstr ""
+
+#: HinetPy.client.Client.select_stations:23 of
+msgid ""
+"Limit to stations within the specified maxradius number of degrees from "
+"the geographic point defined by the latitude and longitude parameters."
+msgstr ""
+
+#: HinetPy.client.Client.select_stations:30 of
 msgid "Select only two stations:"
 msgstr "只选择两个台站："
 
-#: HinetPy.client.Client.select_stations:16 of
+#: HinetPy.client.Client.select_stations:36 of
+msgid "Select stations in a box region:"
+msgstr ""
+
+#: HinetPy.client.Client.select_stations:41 of
+msgid "Select stations in a circular region:"
+msgstr ""
+
+#: HinetPy.client.Client.select_stations:46 of
 msgid "Select all Hi-net stations:"
 msgstr "选择Hi-net的全部台站："
 
@@ -350,7 +390,6 @@ msgid "Check if ``catwin32`` and ``win2sac_32`` from win32tools in PATH."
 msgstr "检查 ``catwin32`` 和 ``win2sac_32`` 是否在PATH中。"
 
 #: HinetPy.client.Client.check_cmd_exists:7 of
-#, fuzzy
 msgid ""
 "The client will report errors if ``catwin32`` and/or ``win2sac_32`` are "
 "NOT in PATH. In this case, please download win32tools from `Hi-net "
@@ -363,4 +402,7 @@ msgstr ""
 #: HinetPy.client.Client.info:1 of
 msgid "List information of networks."
 msgstr "列出台网信息。"
+
+#~ msgid "* **data** (*str*) -- Filename of downloaded win32 data. *"
+#~ msgstr "* **data** (*str*) -- 下载得到的win32数据的文件名。 *"
 
