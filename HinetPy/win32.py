@@ -125,20 +125,20 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
 
-    pool = Pool(processes=_get_processes(processes))
-    with tempfile.NamedTemporaryFile() as ft:
-        _write_winprm(ctable, ft.name)
-        args = [(data, ch, suffix, outdir, ft.name, pmax) for ch in channels]
-        sacfiles = pool.starmap(_extract_channel, args)
-        logger.info("%d SAC data successfully extracted.",
-                    len(sacfiles) - sacfiles.count(None))
+    with Pool(processes=_get_processes(processes)) as pool:
+        with tempfile.NamedTemporaryFile() as ft:
+            _write_winprm(ctable, ft.name)
+            args = [(data, ch, suffix, outdir, ft.name, pmax) for ch in channels]
+            sacfiles = pool.starmap(_extract_channel, args)
+            logger.info("%d SAC data successfully extracted.",
+                        len(sacfiles) - sacfiles.count(None))
 
-    if with_pz:
-        # "SAC_PZ" here is hardcoded.
-        args = [(ch, "SAC_PZ", outdir) for ch in channels]
-        pzfiles = pool.starmap(_extract_sacpz, args)
-        logger.info("%d SAC PZ files successfully extracted.",
-                    len(pzfiles) - pzfiles.count(None))
+        if with_pz:
+            # "SAC_PZ" here is hardcoded.
+            args = [(ch, "SAC_PZ", outdir) for ch in channels]
+            pzfiles = pool.starmap(_extract_sacpz, args)
+            logger.info("%d SAC PZ files successfully extracted.",
+                        len(pzfiles) - pzfiles.count(None))
 
 
 def _get_processes(procs):
