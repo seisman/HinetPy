@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.4.6 (2018-03-20):
+ - Fix ``Too many open files`` (#6)
+
 0.4.5 (2018-03-07):
  - ``get_station_list()``: return a list of stations
  - ``select_stations()``: support selecting stations in a box or circular region
