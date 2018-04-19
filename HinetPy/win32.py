@@ -110,7 +110,8 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     ...             filter_by_name="N.NA*", filter_by_component='[NE]')
     """
     if not (data and ctable):
-        logger.info("No data and ctable found. Skipped.")
+        msg = "data or ctable is `None'. Data requests may fail. Skipped."
+        logger.error(msg)
         return
 
     channels = _get_channels(ctable)
@@ -195,7 +196,7 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
     ...            filter_by_name="N.NA*", filter_by_component='[NE]')
     """
     if not ctable:
-        logger.error("No ctable found. Skipped.")
+        logger.error("ctable is `None'. Data requests may fail. Skipped.")
         return
 
     channels = _get_channels(ctable)
