@@ -42,7 +42,7 @@ that ``catwin32`` and ``win2sac_32`` are in your PATH.
     tar -xvf win32tools.tar.gz
     cd win32tools/
     make
-    cp catwin32.src/catwin32 win2sac.src/win2sac $HOME/bin/
+    cp catwin32.src/catwin32 win2sac.src/win2sac_32 $HOME/bin/
 
 For macOS users, if you fail with an fatal error as below::
 
