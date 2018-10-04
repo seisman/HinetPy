@@ -40,7 +40,7 @@ class Client(object):
     _WIN32TOOLS = _AUTH + 'manual/dlDialogue.php?r=win32tools'
 
     # ETAG for v160422
-    _ETAG = "16cd-537f317987000"
+    _ETAG = "1b61-5774e12e97f00"
 
     def __init__(self, user=None, password=None, timeout=60, retries=3,
                  sleep_time_in_seconds=5, max_sleep_count=30):
@@ -749,7 +749,7 @@ class Client(object):
             return False
         else:
             logger.warning("Hi-net web service is updated."
-                           "HinetPy may FAIL!")
+                           " HinetPy may FAIL!")
             return True
 
     def check_package_release(self):
