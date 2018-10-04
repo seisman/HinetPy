@@ -390,6 +390,9 @@ class Client(object):
             raise ValueError("Span is NOT in the allowed range [1, 357913]")
 
         # 2. check starttime and endtime
+        if code not in NETWORK.keys():
+            raise ValueError("{}: Incorrect network code.".format(code))
+
         time0 = NETWORK[code].starttime
         # time1 = UTCTime + JST(GMT+0900) - 2 hour delay
         time1 = datetime.utcnow() + timedelta(hours=9) + timedelta(hours=-2)
