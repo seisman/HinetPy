@@ -2,9 +2,8 @@ Changelog
 =========
 
 0.4.8:
- - ``get_station_list()``: 
-   - must specify a network code
-   - support S-net and MeSO-net  
+ - ``get_station_list()``: must specify a network code; support S-net and MeSO-net.
+ - ``select_stations()``: support S-net and MeSO-net
 
 0.4.7 (2018-10-04):
  - Support S-net and MeSO-net (#9 and #10)

@@ -622,7 +622,7 @@ class Client(object):
     def _get_allowed_span(self, code):
         """Get allowed max span for each network.
 
-        Hi-net set two limitations of data file size:
+        Hi-net server sets two limitations of data file size:
 
         #. Number_of_channels * record_length(min.) <= 12000 min
         #. record_length <= 60min
@@ -648,7 +648,12 @@ class Client(object):
         return min(int(12000/channels), 60)
 
     def get_selected_stations(self, code):
-        """Query numbers of Hi-net/F-net stations selected for requesting data.
+        """Query the number of stations selected for requesting data.
+
+        Supported networks:
+
+        - Hi-net (0101)
+        - F-net (0103, 0103A)
 
         Parameters
         ----------
@@ -675,7 +680,14 @@ class Client(object):
                         maxlatitude=None, minlongitude=None, maxlongitude=None,
                         latitude=None, longitude=None, minradius=None,
                         maxradius=None):
-        """Select Hi-net/F-net stations
+        """Select stations of a network.
+
+        Supported networks:
+
+        - Hi-net (0101)
+        - F-net (0103, 0103A)
+        - S-net (0120, 0120A)
+        - MeSO-net (0131)
 
         Parameters
         ----------
@@ -686,11 +698,11 @@ class Client(object):
         minlatitude: float
             Limit to stations with a latitude larger than the specified minimum.
         maxlatitude: float
-            Limit to stations with a latitude smaller than the specified minimum.
+            Limit to stations with a latitude smaller than the specified maximum.
         minlongitude: float
             Limit to stations with a longtitude larger than the specified minimum.
         maxlongitude: float
-            Limit to stations with a longtitude smaller than the specified minimum.
+            Limit to stations with a longtitude smaller than the specified maximum.
         latitude: float
             Specify the latitude to be used for a radius search.
         longitude: float
@@ -700,14 +712,13 @@ class Client(object):
             from the geographic point defined by the latitude and longitude
             parameters.
         maxradius: float
-            Limit to stations within the specified maxradius number of degrees
+            Limit to stations within the specified maximum number of degrees
             from the geographic point defined by the latitude and longitude
             parameters.
 
-
         Examples
         --------
-        Select only two stations:
+        Select only two stations of Hi-net:
 
         >>> client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
         >>> client.get_selected_stations('0101')

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-04 12:45-0400\n"
+"POT-Creation-Date: 2018-10-04 13:11-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgstr "见下面的注解。"
 #: HinetPy.client.Client:16 HinetPy.client.Client.get_arrivaltime:15
 #: HinetPy.client.Client.get_focalmechanism:15
 #: HinetPy.client.Client.get_waveform:29 HinetPy.client.Client.info:6
-#: HinetPy.client.Client.login:8 HinetPy.client.Client.select_stations:28 of
+#: HinetPy.client.Client.login:8 HinetPy.client.Client.select_stations:35 of
 msgid "Examples"
 msgstr "示例"
 
@@ -304,96 +304,104 @@ msgstr "从Hi-net获取JMA震源机制解数据。"
 msgid "Get station list of a network."
 msgstr "获取某个台网的台站列表。"
 
-#: HinetPy.client.Client.get_station_list:3 of
+#: HinetPy.client.Client.get_selected_stations:3
+#: HinetPy.client.Client.get_station_list:3
+#: HinetPy.client.Client.select_stations:3 of
 msgid "Supported networks:"
 msgstr "支持的台网:"
 
-#: HinetPy.client.Client.get_station_list:5 of
+#: HinetPy.client.Client.get_selected_stations:5
+#: HinetPy.client.Client.get_station_list:5
+#: HinetPy.client.Client.select_stations:5 of
 msgid "Hi-net (0101)"
 msgstr ""
 
-#: HinetPy.client.Client.get_station_list:6 of
+#: HinetPy.client.Client.get_selected_stations:6
+#: HinetPy.client.Client.get_station_list:6
+#: HinetPy.client.Client.select_stations:6 of
 msgid "F-net (0103, 0103A)"
 msgstr ""
 
-#: HinetPy.client.Client.get_station_list:7 of
+#: HinetPy.client.Client.get_station_list:7
+#: HinetPy.client.Client.select_stations:7 of
 msgid "S-net (0120, 0120A)"
 msgstr ""
 
-#: HinetPy.client.Client.get_station_list:8 of
+#: HinetPy.client.Client.get_station_list:8
+#: HinetPy.client.Client.select_stations:8 of
 msgid "MeSO-net (0131)"
 msgstr ""
 
 #: HinetPy.client.Client.get_selected_stations:1 of
-msgid "Query numbers of Hi-net/F-net stations selected for requesting data."
-msgstr "查询选定的Hi-net/F-net的台站数目。"
+msgid "Query the number of stations selected for requesting data."
+msgstr "查询选中的台站数目。"
 
-#: HinetPy.client.Client.get_selected_stations:3 HinetPy.client.Client.info:3
-#: HinetPy.client.Client.select_stations:3 of
+#: HinetPy.client.Client.get_selected_stations:8 HinetPy.client.Client.info:3
+#: HinetPy.client.Client.select_stations:10 of
 msgid "Network code."
 msgstr "台网代码。"
 
-#: HinetPy.client.Client.get_selected_stations:6 of
+#: HinetPy.client.Client.get_selected_stations:11 of
 msgid "**no_of_stations** -- Number of selected stations."
 msgstr "**no_of_stations** -- 选中的台站数目。"
 
 #: HinetPy.client.Client.select_stations:1 of
-msgid "Select Hi-net/F-net stations"
-msgstr "选择Hi-net/F-net台站"
+msgid "Select stations of a network."
+msgstr "获取某个台网的台站列表。"
 
-#: HinetPy.client.Client.select_stations:5 of
+#: HinetPy.client.Client.select_stations:12 of
 msgid "Stations to select."
 msgstr "要选择的台站。"
 
-#: HinetPy.client.Client.select_stations:7 of
+#: HinetPy.client.Client.select_stations:14 of
 msgid "Limit to stations with a latitude larger than the specified minimum."
 msgstr ""
 
-#: HinetPy.client.Client.select_stations:9 of
-msgid "Limit to stations with a latitude smaller than the specified minimum."
+#: HinetPy.client.Client.select_stations:16 of
+msgid "Limit to stations with a latitude smaller than the specified maximum."
 msgstr ""
 
-#: HinetPy.client.Client.select_stations:11 of
+#: HinetPy.client.Client.select_stations:18 of
 msgid "Limit to stations with a longtitude larger than the specified minimum."
 msgstr ""
 
-#: HinetPy.client.Client.select_stations:13 of
-msgid "Limit to stations with a longtitude smaller than the specified minimum."
+#: HinetPy.client.Client.select_stations:20 of
+msgid "Limit to stations with a longtitude smaller than the specified maximum."
 msgstr ""
 
-#: HinetPy.client.Client.select_stations:15 of
+#: HinetPy.client.Client.select_stations:22 of
 msgid "Specify the latitude to be used for a radius search."
 msgstr ""
 
-#: HinetPy.client.Client.select_stations:17 of
+#: HinetPy.client.Client.select_stations:24 of
 msgid "Specify the longitude to be used for a radius search."
 msgstr ""
 
-#: HinetPy.client.Client.select_stations:19 of
+#: HinetPy.client.Client.select_stations:26 of
 msgid ""
 "Limit to stations within the specified minimum number of degrees from the"
 " geographic point defined by the latitude and longitude parameters."
 msgstr ""
 
-#: HinetPy.client.Client.select_stations:23 of
-msgid ""
-"Limit to stations within the specified maxradius number of degrees from "
-"the geographic point defined by the latitude and longitude parameters."
-msgstr ""
-
 #: HinetPy.client.Client.select_stations:30 of
-msgid "Select only two stations:"
-msgstr "只选择两个台站："
+msgid ""
+"Limit to stations within the specified maximum number of degrees from the"
+" geographic point defined by the latitude and longitude parameters."
+msgstr ""
 
-#: HinetPy.client.Client.select_stations:36 of
+#: HinetPy.client.Client.select_stations:37 of
+msgid "Select only two stations of Hi-net:"
+msgstr "只选择Hi-net的两个台站："
+
+#: HinetPy.client.Client.select_stations:43 of
 msgid "Select stations in a box region:"
-msgstr ""
+msgstr "选择矩形框内的台站:"
 
-#: HinetPy.client.Client.select_stations:41 of
+#: HinetPy.client.Client.select_stations:48 of
 msgid "Select stations in a circular region:"
-msgstr ""
+msgstr "选择环形区域内的台站:"
 
-#: HinetPy.client.Client.select_stations:46 of
+#: HinetPy.client.Client.select_stations:53 of
 msgid "Select all Hi-net stations:"
 msgstr "选择Hi-net的全部台站："
 
@@ -422,3 +430,17 @@ msgstr ""
 #: HinetPy.client.Client.info:1 of
 msgid "List information of networks."
 msgstr "列出台网信息。"
+
+#~ msgid "Limit to stations with a latitude smaller than the specified minimum."
+#~ msgstr ""
+
+#~ msgid "Limit to stations with a longtitude smaller than the specified minimum."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Limit to stations within the specified"
+#~ " maxradius number of degrees from the"
+#~ " geographic point defined by the "
+#~ "latitude and longitude parameters."
+#~ msgstr ""
+
