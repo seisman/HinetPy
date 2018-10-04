@@ -569,23 +569,29 @@ class Client(object):
         """
         return self._get_catalog("focal", startdate, span, filename, os)
 
-    def get_station_list(self, code=None):
-        """Get a station list of Hi-net and F-net.
+    def get_station_list(self, code):
+        """Get station list of a network.
 
-        >>> stations = client.get_station_list()
+        Supported networks:
+        - Hi-net (0101)
+        - F-net (0103, 0103A)
+
+        >>> stations = client.get_station_list('0101')
         >>> for station in stations:
         ...     print(station)
         0101 N.WNNH 45.4883 141.885 -159.06
         0101 N.SFNH 45.3346 142.1185 -81.6
         ...
         """
-        # no need to login
+        if code == '0103A':
+            code = '0103'
         lines = requests.get(self._STATION_INFO).iter_lines()
         next(lines)  # skip csv header
         stations = []
         for line in lines:
             items = line.decode('shift_jis').split(",")
-            code = "{}{}".format(items[0].strip("'"), items[1].strip("'"))
+            if items[0].strip("'") + items[1].strip("'") != code:
+                continue
             name = items[2]
             latitude, longtitude, elevation = items[7], items[8], items[12]
             stations.append(Station(code, name, latitude, longtitude, elevation))
@@ -707,7 +713,7 @@ class Client(object):
         stations_selected = stations
 
         # get station list from Hi-net server
-        stations_at_server = self.get_station_list()
+        stations_at_server = self.get_station_list(code)
 
         # select stations in a box region
         if minlatitude or maxlatitude or minlongitude or maxlongitude:

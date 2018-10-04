@@ -85,7 +85,7 @@ If you want, you can have a quick view of stations of Hi-net and F-net
 (Only these two networks are supported).
 See :meth:`~HinetPy.client.Client.get_station_list` for details.
 
->>> stations = client.get_station_list()
+>>> stations = client.get_station_list('0101')
 >>> for station in stations:
 ...     print(station)
 0101 N.WNNH 45.4883 141.885 -159.06

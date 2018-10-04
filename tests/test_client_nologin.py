@@ -39,6 +39,6 @@ class TestClientOthersClass:
         print(client)
 
     def test_get_station_list(self, client):
-        stations = client.get_station_list()
+        stations = client.get_station_list('0101')
         assert type(stations) == list
         assert len(stations) >= 700
