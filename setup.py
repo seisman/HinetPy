@@ -26,7 +26,7 @@ setup(
     url='https://github.com/seisman/HinetPy',
     author='Dongdong Tian',
     author_email='seisman.info@gmail.com',
-    keywords='NIED Hi-net related tasks',
+    keywords='Seismology, NIED, Hi-net, Waveform',
     license='MIT',
 
     packages=find_packages(exclude=['docs', 'ci']),
