@@ -2,7 +2,7 @@ Data conversion
 ===============
 
 Hi-net provide waveform data in win32 format and instrument response in channel
-table. :mod:`~HinetPy.win32` can convert them into SAC and SACPZ format.
+table. :mod:`~HinetPy.win32` can convert them into SAC and SAC polezero formats.
 
 >>> from HinetPy import win32
 >>> data = "0101_201001010000_20.cnt"
