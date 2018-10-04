@@ -46,6 +46,16 @@ NETWORK['0103A'] = Network(name='NIED F-net (strong motion)',
                            starttime=datetime(2004, 4, 1, 0, 0),
                            url="http://www.fnet.bosai.go.jp/")
 
+NETWORK['0120'] = Network(name='NIED S-net (speed motion)',
+                          channels=450*2, # 450 velocity + 450 acceralation
+                          starttime=datetime(2016, 8, 15, 0, 0),
+                          url="http://www.fnet.bosai.go.jp/")
+
+NETWORK['0120A'] = Network(name='NIED S-net (acceleration)',
+                           channels=450*2,  # 450 velocity + 450 acceralation
+                           starttime=datetime(2016, 8, 15, 0, 0),
+                           url="http://www.fnet.bosai.go.jp/")
+
 NETWORK['0201'] = Network(name='Hokkaido University',
                           channels=183,
                           starttime=datetime(2004, 4, 1, 0, 0),
