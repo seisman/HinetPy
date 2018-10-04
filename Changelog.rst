@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.4.7 (2018-10-04):
+ - Support S-net and MeSO-net (#9 and #10)
+ - Fix an issue when channel table contains blank lines 
+
 0.4.6 (2018-03-20):
  - Fix ``Too many open files`` (#6)
 
