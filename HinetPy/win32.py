@@ -143,7 +143,7 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
 
 
 def _get_processes(procs):
-    """Choose the best processes."""
+    """Choose the best number of processes."""
     cpus = cpu_count()
     if cpus == 1:
         return cpus
@@ -223,7 +223,8 @@ def _get_channels(ctable):
     channels = []
     with open(ctable, "r") as f:
         for line in f:
-            if line.strip().startswith("#"):  # skip comment line
+            # skip blank lines and comment lines
+            if not line.strip() or line.strip().startswith("#"):
                 continue
             items = line.split()
             channels.append(Channel(id=items[0],
