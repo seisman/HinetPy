@@ -56,6 +56,11 @@ NETWORK['0120A'] = Network(name='NIED S-net (acceleration)',
                            starttime=datetime(2016, 8, 15, 0, 0),
                            url="http://www.fnet.bosai.go.jp/")
 
+NETWORK['0131'] = Network(name='NIED MeSO-net',
+                          channels=900,
+                          starttime=datetime(2017, 4, 1, 0, 0),
+                          url="http://www.fnet.bosai.go.jp/")
+
 NETWORK['0201'] = Network(name='Hokkaido University',
                           channels=183,
                           starttime=datetime(2004, 4, 1, 0, 0),
