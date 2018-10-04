@@ -126,7 +126,7 @@ class TestWin32ExtractPZClass:
                        'N.NGUH.N.SAC_PZ',
                        'N.NGUH.E.SAC_PZ']
         pz = os.listdir(outdir)
-        assert pz == pz_to_check
+        assert sorted(pz) == sorted(pz_to_check)
         shutil.rmtree(outdir)
 
     def test_extract_pz_2(self):
@@ -139,7 +139,7 @@ class TestWin32ExtractPZClass:
                        'N.NGUH.N.SACPZ',
                        'N.NGUH.E.SACPZ']
         pz = os.listdir(outdir)
-        assert pz == pz_to_check
+        assert sorted(pz) == sorted(pz_to_check)
         shutil.rmtree(outdir)
 
     def test_extract_pz_3(self):
@@ -148,7 +148,7 @@ class TestWin32ExtractPZClass:
         pz_to_check = ['N.NNMH.U.SAC_PZ',
                        'N.NGUH.U.SAC_PZ']
         pz = os.listdir(outdir)
-        assert pz == pz_to_check
+        assert sorted(pz) == sorted(pz_to_check)
         shutil.rmtree(outdir)
 
 
