@@ -200,4 +200,3 @@ class TestWin32OthersClass:
         cpus = cpu_count()
         assert win32._get_processes(0) == cpus - 1
         assert win32._get_processes(-5) == cpus - 1
-        assert win32._get_processes(2) == 2
