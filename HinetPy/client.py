@@ -36,6 +36,8 @@ class Client(object):
     _STATION = _CONT + 'select_info.php'
     _REQUEST = _CONT + 'cont_request.php'
     _DOWNLOAD = _CONT + 'cont_download.php'
+    _SNET_STATION_INFO = _CONT + 'st_snet_json.php'
+    _MESONET_STATION_INFO = _CONT + 'st_mesonet_json.php'
     _STATION_INFO = _HINET + 'st_info/detail/dlDialogue.php?f=CSV'
     _WIN32TOOLS = _AUTH + 'manual/dlDialogue.php?r=win32tools'
 
@@ -573,8 +575,11 @@ class Client(object):
         """Get station list of a network.
 
         Supported networks:
+
         - Hi-net (0101)
         - F-net (0103, 0103A)
+        - S-net (0120, 0120A)
+        - MeSO-net (0131)
 
         >>> stations = client.get_station_list('0101')
         >>> for station in stations:
@@ -583,18 +588,35 @@ class Client(object):
         0101 N.SFNH 45.3346 142.1185 -81.6
         ...
         """
-        if code == '0103A':
-            code = '0103'
-        lines = requests.get(self._STATION_INFO).iter_lines()
-        next(lines)  # skip csv header
         stations = []
-        for line in lines:
-            items = line.decode('shift_jis').split(",")
-            if items[0].strip("'") + items[1].strip("'") != code:
-                continue
-            name = items[2]
-            latitude, longtitude, elevation = items[7], items[8], items[12]
-            stations.append(Station(code, name, latitude, longtitude, elevation))
+        # remove trailing 'A' in network code
+        code = code[:4]
+        if code in ['0101', '0103', '0103A']:  # Hinet and Fnet
+            lines = requests.get(self._STATION_INFO).iter_lines()
+            next(lines)  # skip csv header
+
+            for line in lines:
+                items = line.decode('shift_jis').split(",")
+                if items[0].strip("'") + items[1].strip("'") != code:
+                    continue
+                name = items[2]
+                latitude, longitude, elevation = items[7], items[8], items[12]
+                stations.append(Station(code, name, latitude, longitude, elevation))
+        elif code in ['0120', '0120A', '0131']:  # S-net and MeSO-net
+            import json
+            if code in ['0120', '0120A']:
+                json_text = self.session.get(self._SNET_STATION_INFO).text.lstrip('var snet_station = [').rstrip('];')
+            else:
+                json_text = self.session.get(self._MESONET_STATION_INFO).text.lstrip('var mesonet_station = [').rstrip('];')
+            for station in json.loads(json_text)['features']:
+                code = station['properties']['id']
+                name = station['properties']['station_cd']
+                latitude = station['properties']['latitude']
+                longitude = station['properties']['longitude']
+                elevation = station['properties']['sensor_height']
+                stations.append(Station(code, name, latitude, longitude, elevation))
+        else:
+            raise ValueError("Only support Hi-net, F-net, S-net and MeSO-net.")
         return stations
 
     def _get_allowed_span(self, code):

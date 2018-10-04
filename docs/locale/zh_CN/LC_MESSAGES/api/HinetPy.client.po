@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 23:46-0400\n"
+"POT-Creation-Date: 2018-10-04 12:45-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,8 +301,28 @@ msgid "Get JMA focal mechanism data from Hi-net."
 msgstr "从Hi-net获取JMA震源机制解数据。"
 
 #: HinetPy.client.Client.get_station_list:1 of
-msgid "Get a station list of Hi-net and F-net."
-msgstr "获取Hi-net和F-net的台站列表。"
+msgid "Get station list of a network."
+msgstr "获取某个台网的台站列表。"
+
+#: HinetPy.client.Client.get_station_list:3 of
+msgid "Supported networks:"
+msgstr "支持的台网:"
+
+#: HinetPy.client.Client.get_station_list:5 of
+msgid "Hi-net (0101)"
+msgstr ""
+
+#: HinetPy.client.Client.get_station_list:6 of
+msgid "F-net (0103, 0103A)"
+msgstr ""
+
+#: HinetPy.client.Client.get_station_list:7 of
+msgid "S-net (0120, 0120A)"
+msgstr ""
+
+#: HinetPy.client.Client.get_station_list:8 of
+msgid "MeSO-net (0131)"
+msgstr ""
 
 #: HinetPy.client.Client.get_selected_stations:1 of
 msgid "Query numbers of Hi-net/F-net stations selected for requesting data."
@@ -402,7 +422,3 @@ msgstr ""
 #: HinetPy.client.Client.info:1 of
 msgid "List information of networks."
 msgstr "列出台网信息。"
-
-#~ msgid "* **data** (*str*) -- Filename of downloaded win32 data. *"
-#~ msgstr "* **data** (*str*) -- 下载得到的win32数据的文件名。 *"
-
