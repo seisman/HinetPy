@@ -95,6 +95,12 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
         Number of parallel processes to speed up data extraction.
         Use all processes by default.
 
+    Note
+    ----
+
+    ``win2sac`` removes sensitivity from waveform, then multiply by 1.0e9.
+    Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.
+
     Examples
     --------
     >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch")
@@ -154,7 +160,7 @@ def _get_processes(procs):
             return procs
 
 
-def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
+def extract_pz(ctable, suffix='SAC_PZ', outdir='.', keep_sensitivity=False,
                filter_by_chid=None,
                filter_by_name=None,
                filter_by_component=None):
@@ -175,6 +181,9 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
         Suffix of SAC PZ files. Defaults to ``SAC_PZ``.
     outdir: str
         Output directory. Defaults to current directory.
+    keep_sensivity: bool
+        win2sac has removed sensivity from waveform data. So the generated
+        polezero file should not keep sensitivity.
     filter_by_id: list of str or wildcard
         Filter channels by ID.
     filter_by_name: list of str or wildcard
@@ -209,7 +218,8 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.',
         os.makedirs(outdir, exist_ok=True)
 
     for channel in channels:
-        _extract_sacpz(channel, suffix=suffix, outdir=outdir)
+        _extract_sacpz(channel, suffix=suffix, outdir=outdir,
+                       keep_sensitivity=keep_sensitivity)
 
 
 def _get_channels(ctable):
@@ -341,21 +351,39 @@ def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
             return filename
 
 
-def _find_poles(damping, freq):
-    """Find roots of equation s^2+2hws+w^2=0
+def _channel2pz(channel, keep_sensitivity=False):
+    """Convert channel information to SAC polezero file.
 
-    Parameters
-    ----------
-    damping: float
-        Damping constant.
-    freq: float
-        Angular frequency.
+    Transfer function = s^2 / (s^2+2hws+w^2).
     """
+    # Hi-net use moving coil velocity type seismometer.
+    if channel.unit != 'm/s':
+        logger.warning("%s.%s (%s): Unit is not velocity.",
+                       channel.name, channel.component, channel.id)
 
-    real = -damping*freq
-    imaginary = freq * math.sqrt(1 - damping*damping)
+    try:
+        freq = 2.0 * math.pi / channel.period
+    except ZeroDivisionError:
+        logger.warning("%s.%s (%s): Natural period = 0. Skipped.",
+                       channel.name, channel.component, channel.id)
+        return None, None, None
 
-    return real, imaginary
+    # calculate poles, find roots of equation s^2+2hws+w^2=0
+    real = -channel.damping * freq
+    imaginary = freq * math.sqrt(1 - channel.damping**2)
+
+    # calculate constant
+    fn = 20  # alaways assume normalization frequency is 20 Hz
+    s = complex(0, 2 * math.pi * fn)
+
+    A0 = abs((s**2 + 2 * channel.damping * freq * s + freq**2) / s**2)
+    if keep_sensitivity:
+        factor = math.pow(10, channel.preamplification/20.0)
+        constant = A0 * channel.gain * factor / channel.lsb_value
+    else:
+        constant = A0
+
+    return real, imaginary, constant
 
 
 def _write_pz(pzfile, real, imaginary, constant):
@@ -380,26 +408,10 @@ def _write_pz(pzfile, real, imaginary, constant):
         pz.write("CONSTANT {:e}\n".format(constant))
 
 
-def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.'):
-    # Hi-net use moving coil velocity type seismometer.
-    if channel.unit != 'm/s':
-        logger.warning("%s.%s (%s): Unit is not velocity.",
-                       channel.name, channel.component, channel.id)
-
-    # calculate poles
-    try:
-        freq = 2.0 * math.pi / channel.period
-    except ZeroDivisionError:
-        logger.warning("%s.%s (%s): Natural period = 0. Skipped.",
-                       channel.name, channel.component, channel.id)
+def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.', keep_sensitivity=False):
+    real, imaginary, constant = _channel2pz(channel, keep_sensitivity=keep_sensitivity)
+    if not real:  # something wrong with channel information, skipped
         return None
-    real, imaginary = _find_poles(channel.damping, freq)
-
-    # calculate sensitivity and constant
-    A0 = 2 * channel.damping
-    factor = math.pow(10, channel.preamplification/20.0)
-    sensitivity = channel.gain * factor / channel.lsb_value
-    constant = A0 * sensitivity
 
     pzfile = "{}.{}".format(channel.name, channel.component)
     if suffix:
