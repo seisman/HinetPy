@@ -51,6 +51,23 @@ Examples
 Notes
 -----
 
+Output Unit
+~~~~~~~~~~~
+
+.. important::
+
+   The SAC files extracted by ``win2sac_32`` are always in physical quality,
+   not in digital counts.
+
+   Be caution if absolute amplitude is important for your research.
+
+The raw data saved in win32 format is in digital counts. When extracting data
+from win32 format, ``win2sac_32`` always convert digital counts to the
+corresponding physical quantity, e.g. velocity, and multiply by 1.0e9 
+to convert unit from meter to nanometer.
+
+The output SAC files are in ``nm/s``, ``nm/s/s`` or ``micro radian``.
+
 Filename Format
 ~~~~~~~~~~~~~~~
 
@@ -123,19 +140,3 @@ The component information is written to SAC header variables ``CPMAZ`` and
 
    See https://hinetwww11.bosai.go.jp/auth/direc/?LANG=en for details.
 
-Output Unit
-~~~~~~~~~~~
-
-.. important::
-
-   The SAC files extracted by ``win2sac_32`` are always in physical quality,
-   not in digital counts.
-
-   Be caution if absolute amplitude is important for your research.
-
-The raw data saved in win32 format is in digital counts. When extracting data
-from win32 format, ``win2sac_32`` always convert digital counts to the
-corresponding physical quantity, e.g. velocity. And there is no option to
-avoid this conversion.
-
-The output SAC files are in ``nm/s``, ``nm/s/s`` or ``micro radian``.

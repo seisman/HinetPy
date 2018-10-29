@@ -25,10 +25,11 @@ where,
 Roots of the numerator and the denominator correspond to the
 zeros and the poles, respectively, and the A0 normalization factor
 is the inverse of the absolute value of the
-above equation except G at the normalization frequency.
+above equation except G at the normalization frequency (:math:`f_n`).
+The normalization frequency of Hi-net seismometer is always 20 Hz.
 
-It's easy to know that the response has two poles and two zeros.
-And A0 is equal to 2*[11].
+It's easy to know that the instrumental response has two poles and two zeros.
+It's also easy to calculate A0, with :math:`s=i*2*\pi*f_n`.
 
 Preamplification
 ----------------
@@ -52,7 +53,8 @@ The gain in this stage is given by :math:`\frac{1}{[13]}`, in ``counts/V``.
 Digital Stage
 -------------
 
-The gain in this stage is 1, according to the RESP file provided on Hi-net website.
+The gain in this stage is 1.0, according to the three RESP files provided 
+on Hi-net website.
 
 Summary
 -------
@@ -63,11 +65,20 @@ The total sensitivity is:
 
     G = \frac{[8]*10^{\frac{[12]}{20}}}{[13]}
 
-The ``CONSTANT`` in SAC PZ file is:
+The ``CONSTANT`` in SAC PZ file should be:
 
 .. math::
 
-    CONSTANT = A0 * G = 2 * [11] * \frac{[8]*10^{\frac{[12]}{20}}}{[13]}
+    CONSTANT = A0 * G = A0 * \frac{[8]*10^{\frac{[12]}{20}}}{[13]}
+
+.. important::
+
+    HinetPy uses win2sac_32 to do the conversion from win32 to SAC format.
+    win2sac_32 always remoev total sensitivity (G) from waveform and multiply
+    by 1.0e9 to convert unit from meter to nanometer.
+
+    Thus, the extracted SAC files are velocity in nm/s or acceleration in nm/s/s.
+    The total sensivitity G is also discarded when generating PZ files.
 
 Q&A
 ---

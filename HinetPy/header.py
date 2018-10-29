@@ -58,13 +58,13 @@ NETWORK["0103A"] = Network(
 )
 NETWORK["0120"] = Network(
     name="NIED S-net (speed motion)",
-    channels=450 * 2,  # 450 velocity + 450 acceralation
+    channels=450 * 2,  # 450 velocity + 450 acceleration
     starttime=datetime(2016, 8, 15, 0, 0),
     url=URL_Hinet,
 )
 NETWORK["0120A"] = Network(
     name="NIED S-net (acceleration)",
-    channels=450 * 2,  # 450 velocity + 450 acceralation
+    channels=450 * 2,  # 450 velocity + 450 acceleration
     starttime=datetime(2016, 8, 15, 0, 0),
     url=URL_Hinet,
 )

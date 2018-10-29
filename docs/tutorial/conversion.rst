@@ -15,7 +15,13 @@ Extract waveform data of all channels as SAC format.
 
 >>> win32.extract_sac(data, ctable)
 
-The SAC files has a default filename ``STATION.COMPONENT.SAC`` (e.g. ``N.NABC.U.SAC``).
+.. note::
+
+    The SAC files are NOT in digital counts. 
+    ``win2sac_32`` removes sensitivity from waveforms and multipy by 1.0e9.
+    Thus, the SAC files are velocity in nm/s or accelaration in nm/s/s.
+
+The SAC files have a default filename ``STATION.COMPONENT.SAC`` (e.g. ``N.NABC.U.SAC``).
 You can specify another SAC suffix and a different output directory.
 
 >>> win32.extract_sac(data, ctable, suffix="", outdir="SAC")
