@@ -111,7 +111,10 @@ class Client(object):
         >>> client.login("username", "password")
         """
         self.user = user
-        self.password = password
+        # Hinet automatically trims password with >12 characters
+        if len(password) > 12:
+            logger.warning("Password with more than 12 characters may FAIL!")
+        self.password = password[0:12]
         self.session = requests.Session()
         auth = {
             'auth_un': self.user,
