@@ -3,8 +3,8 @@
 HinetPy
 =======
 
-HinetPy is a Hi-net client, written in Python, for seismologists, to request
-and process seismic waveform data from Hi-net website.
+HinetPy is a Python package to request and process seismic waveform data 
+from Hi-net website.
 
 Basis usage:
 

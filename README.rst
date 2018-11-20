@@ -19,7 +19,7 @@
 .. image:: https://zenodo.org/badge/23509035.svg
     :target: https://zenodo.org/badge/latestdoi/23509035
 
-`HinetPy`_ is a Python package aiming to automate and simplify tedious data
+`HinetPy`_ is a Python package to automate and simplify tedious data
 request, downloading and format conversion tasks related to `NIED Hi-net`_.
 
 `NIED Hi-net`_ | `Source Code`_ | `Documentation`_ | `中文文档`_

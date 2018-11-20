@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Client related header information."""
+"""Basic information of networks."""
 
 from datetime import datetime
 from collections import namedtuple
