@@ -168,7 +168,7 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.', keep_sensitivity=False,
 
     .. warning::
 
-       Only works for Hi-net network.
+       Only works for instrumental responses of Hi-net network.
 
        RESP files of F-net network can be downloaded from
        `F-net website <http://www.fnet.bosai.go.jp/st_info/response.php?LANG=en>`_.
@@ -182,8 +182,9 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.', keep_sensitivity=False,
     outdir: str
         Output directory. Defaults to current directory.
     keep_sensivity: bool
-        win2sac has removed sensivity from waveform data. So the generated
-        polezero file should not keep sensitivity.
+        win2sac automatically removes sensivity from waveform data
+        during win32 format to SAC format conversion.
+        So the generated polezero file should omit the sensitivity.
     filter_by_id: list of str or wildcard
         Filter channels by ID.
     filter_by_name: list of str or wildcard
@@ -295,7 +296,7 @@ def _filter_channels(channels,
 
 def _write_winprm(ctable, prmfile="win.prm"):
     """
-    Four line parameters file
+    Four line parameters file.
     """
 
     with open(prmfile, "w") as f:

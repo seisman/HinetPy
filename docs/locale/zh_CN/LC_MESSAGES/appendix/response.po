@@ -3,19 +3,18 @@
 # This file is distributed under the same license as the HinetPy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-22 12:20+0800\n"
+"POT-Creation-Date: 2018-11-21 16:38-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.4.0\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: ../../appendix/response.rst:2
 msgid "Instrumental Response"
@@ -39,6 +38,10 @@ msgid ""
 "transfer function in the Laplace domain is given as:"
 msgstr "Hi-net使用的是Moving coil velocity type地震仪，其transfer function在Laplace域表示为:"
 
+#: ../../appendix/response.rst:15
+msgid "\\frac{Gs^2}{s^2 + 2hws + w^2}"
+msgstr ""
+
 #: ../../appendix/response.rst:19
 msgid "where,"
 msgstr "其中，"
@@ -60,131 +63,158 @@ msgid ""
 "Roots of the numerator and the denominator correspond to the zeros and "
 "the poles, respectively, and the A0 normalization factor is the inverse "
 "of the absolute value of the above equation except G at the normalization"
-" frequency."
-msgstr ""
-"分子和分母的根分别对应于零点和极点。A0归一化因子是上面方程在归一化"
-"频率处的绝对值的倒数。"
+" frequency (:math:`f_n`). The normalization frequency of Hi-net "
+"seismometer is always 20 Hz."
+msgstr "分子和分母的根分别对应于零点和极点。A0归一化因子是上面方程在归一化频率处的绝对值的倒数。Hi-net地震仪的归一化频率总是20 Hz。"
 
-#: ../../appendix/response.rst:30
+#: ../../appendix/response.rst:31
 msgid ""
-"It's easy to know that the response has two poles and two zeros. And A0 "
-"is equal to 2*[11]."
-msgstr "易知，仪器响应有两个极点和零点，且 A0 等于 2*第11列。"
+"It's easy to know that the instrumental response has two poles and two "
+"zeros. It's also easy to calculate A0, with :math:`s=i*2*\\pi*f_n`."
+msgstr "易知，仪器响应有两个极点和零点，将 :math:`s=i*2*\\pi*f_n` 带入可算出 A0。"
 
-#: ../../appendix/response.rst:34
+#: ../../appendix/response.rst:35
 msgid "Preamplification"
 msgstr "放大系数"
 
-#: ../../appendix/response.rst:36
+#: ../../appendix/response.rst:37
 msgid ""
 "The sensor ouput is amplified prior to A/D conversion. The amplification "
 "factor is determined by column [12] in dB."
 msgstr "传感器的输出在A/D转换之前会进一步放大，归一化因子由第12列（单位dB）决定。"
 
-#: ../../appendix/response.rst:39
+#: ../../appendix/response.rst:40
 msgid "According to the definition of decibel of field quantities:"
 msgstr "根据场物理量的分贝的定义："
 
-#: ../../appendix/response.rst:45
+#: ../../appendix/response.rst:42
+msgid "L_{F}=20\\log _{10}\\left({\\frac {F}{F_{0}}}\\right)\\!~\\mathrm {dB} ."
+msgstr ""
+
+#: ../../appendix/response.rst:46
 msgid "Thus, the \"sensitivity\" in this stage is :math:`10^{\\frac{[12]}{20}}` ."
 msgstr "因而，这一阶段的敏感度是 :math:`10^{\\frac{[12]}{20}}` 。"
 
-#: ../../appendix/response.rst:48
+#: ../../appendix/response.rst:49
 msgid "Analog-Digital Conversion"
 msgstr "模拟-数字转换"
 
-#: ../../appendix/response.rst:50
+#: ../../appendix/response.rst:51
 msgid ""
 "The gain in this stage is given by :math:`\\frac{1}{[13]}`, in "
 "``counts/V``."
 msgstr "这一阶段的增益是 :math:`\\frac{1}{[13]}` ，单位是 ``counts/V`` 。"
 
-#: ../../appendix/response.rst:53
+#: ../../appendix/response.rst:54
 msgid "Digital Stage"
 msgstr "数字阶段"
 
-#: ../../appendix/response.rst:55
+#: ../../appendix/response.rst:56
 msgid ""
-"The gain in this stage is 1, according to the RESP file provided on Hi-"
-"net website."
+"The gain in this stage is 1.0, according to the three RESP files provided"
+" on Hi-net website."
 msgstr "根据Hi-net网站提供的RESP文件可知，这一阶段的增益总是1。"
 
-#: ../../appendix/response.rst:58
+#: ../../appendix/response.rst:60
 msgid "Summary"
 msgstr "总结"
 
-#: ../../appendix/response.rst:60
+#: ../../appendix/response.rst:62
 msgid "The total sensitivity is:"
 msgstr "总的敏感度为："
 
-#: ../../appendix/response.rst:66
-msgid "The ``CONSTANT`` in SAC PZ file is:"
-msgstr "SAC零极点文件中 ``CONSTANT`` 为："
+#: ../../appendix/response.rst:64
+msgid "G = \\frac{[8]*10^{\\frac{[12]}{20}}}{[13]}"
+msgstr ""
 
-#: ../../appendix/response.rst:73
+#: ../../appendix/response.rst:68
+msgid "The ``CONSTANT`` in SAC PZ file should be:"
+msgstr "SAC PZ文件中的 ``CONSTANT`` 应该为："
+
+#: ../../appendix/response.rst:70
+msgid "CONSTANT = A0 * G = A0 * \\frac{[8]*10^{\\frac{[12]}{20}}}{[13]}"
+msgstr ""
+
+#: ../../appendix/response.rst:76
+#, fuzzy
+msgid ""
+"HinetPy uses win2sac_32 to do the conversion from win32 to SAC format. "
+"win2sac_32 always remove total sensitivity (G) from waveform and multiply"
+" by 1.0e9 to convert unit from meter to nanometer."
+msgstr ""
+"HinetPy 使用 win2sac_32 将win32格式转换为SAC格式。win2sac_32 总是从波形中去除灵敏度 "
+"(G)，并乘以1.0e9将单位从米变成纳米。"
+
+#: ../../appendix/response.rst:80
+msgid ""
+"Thus, the extracted SAC files are velocity in nm/s or acceleration in "
+"nm/s/s. The total sensivitity G is also omitted when generating PZ files."
+msgstr "因而，提取得到的SAC文件时以 nm/s 为单位的速度或以 nm/s/s 为单位的加速度。总灵敏度 G 也在生成PZ文件时被省去。"
+
+#: ../../appendix/response.rst:84
 msgid "Q&A"
 msgstr ""
 
-#: ../../appendix/response.rst:75
+#: ../../appendix/response.rst:86
 msgid "My question:"
 msgstr "我的问题"
 
-#: ../../appendix/response.rst:77
+#: ../../appendix/response.rst:88
 msgid "Hi,"
 msgstr ""
 
-#: ../../appendix/response.rst:79
+#: ../../appendix/response.rst:90
 msgid ""
 "I am using Hi-net data and am confused with the instrumental response "
 "even after I have looked through all pages of Hi-net website."
 msgstr ""
 
-#: ../../appendix/response.rst:82
+#: ../../appendix/response.rst:93
 msgid ""
 "In the page of 'For Registered Users' -> 'Response of Observation "
 "Equipment', only three RESP files are given. It seems that I have to "
 "rewrite a new RESP or SAC_PZ file for each channel."
 msgstr ""
 
-#: ../../appendix/response.rst:86
+#: ../../appendix/response.rst:97
 msgid ""
 "So I have to confirm that I understand details of response, which are "
 "very important for correct data processing."
 msgstr ""
 
-#: ../../appendix/response.rst:89
+#: ../../appendix/response.rst:100
 msgid "Do all channels have the same zeroes and poles?"
 msgstr ""
 
-#: ../../appendix/response.rst:90
+#: ../../appendix/response.rst:101
 msgid ""
 "At line 19, do all channels have the same A0 Normalization factor "
 "(0.999953)?"
 msgstr ""
 
-#: ../../appendix/response.rst:91
+#: ../../appendix/response.rst:102
 msgid ""
 "In the FAQ Q08, one equation is given to convert the A/D value from an "
 "WIN32 file to the corresponding physical quantity. It is"
 msgstr ""
 
-#: ../../appendix/response.rst:94
+#: ../../appendix/response.rst:105
 msgid "v = I * [13] / ([8] * 10 ^ ([12] / 20 ) )"
 msgstr ""
 
-#: ../../appendix/response.rst:96
+#: ../../appendix/response.rst:107
 msgid "If I want to generate a SAC PZ file, the CONSTANT will be"
 msgstr ""
 
-#: ../../appendix/response.rst:98
+#: ../../appendix/response.rst:109
 msgid "CONSTANT = [8]*10^([12]/20) / [13] * A0 ?"
 msgstr ""
 
-#: ../../appendix/response.rst:100
+#: ../../appendix/response.rst:111
 msgid "Answer from Hi-net:"
 msgstr "Hi-net的答案："
 
-#: ../../appendix/response.rst:102
+#: ../../appendix/response.rst:113
 msgid ""
 "In the \"Response of Observation Equipment\" page, sample RESP files are "
 "provided and you need to modify them according to your purposes, as you "
@@ -196,11 +226,11 @@ msgid ""
 "Laplace domain is given as:"
 msgstr ""
 
-#: ../../appendix/response.rst:111
+#: ../../appendix/response.rst:122
 msgid "Gs^2/(s^2 + 2hws + w^2)"
 msgstr ""
 
-#: ../../appendix/response.rst:113
+#: ../../appendix/response.rst:124
 msgid ""
 "where G, h and w are the gain factor, the damping constant, and the "
 "natural angular frequency, respectively. Roots of the numerator and the "
@@ -210,13 +240,13 @@ msgid ""
 "about this type of seismometer is available in many literature, such as,"
 msgstr ""
 
-#: ../../appendix/response.rst:121
+#: ../../appendix/response.rst:132
 msgid ""
 "Scherbaum, F., Of Poles and Zeros: Fundamentals of Digital Seismology, "
 "Kluwer Academic Publishers, 1996. #see chapter 4"
 msgstr ""
 
-#: ../../appendix/response.rst:125
+#: ../../appendix/response.rst:136
 msgid ""
 "The gain factor, the damping constant, and the natural period are "
 "provided in the channels table file as explained in the Q&A08. Note that "
@@ -224,29 +254,29 @@ msgid ""
 "http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08"
 msgstr ""
 
-#: ../../appendix/response.rst:130
+#: ../../appendix/response.rst:141
 msgid ""
 "Please read the SEED manual about further details and SAC manual about "
 "SAC PZ file."
 msgstr ""
 
-#: ../../appendix/response.rst:133
+#: ../../appendix/response.rst:144
 msgid "SEED: http://www.fdsn.org/publications.htm"
 msgstr ""
 
-#: ../../appendix/response.rst:134
+#: ../../appendix/response.rst:145
 msgid "SAC: http://www.iris.edu/files/sac-manual/"
 msgstr ""
 
-#: ../../appendix/response.rst:136
+#: ../../appendix/response.rst:147
 msgid "Sincerely,"
 msgstr ""
 
-#: ../../appendix/response.rst:140
+#: ../../appendix/response.rst:151
 msgid "`Hi-net FAQ 08 <http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08>`_"
 msgstr ""
 
-#: ../../appendix/response.rst:141
+#: ../../appendix/response.rst:152
 msgid ""
 "`Response of Observation Equipment "
 "<https://hinetwww11.bosai.go.jp/auth/seed/?LANG=en>`_"

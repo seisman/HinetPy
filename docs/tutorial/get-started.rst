@@ -1,12 +1,12 @@
-First Try
-=========
+Get Started
+===========
 
 For new users of Hi-net data, I highly recommand you to request and download
-waveform data from Hi-net website and try to process the data with win32tools.
+waveform data from Hi-net website and try to process the data using win32tools.
 Do all the things **manually** at least one time, make sure that you understand
 the whole procedures and the unfriendness and limitations of Hi-net website.
 
-Now let's begin our first tour.
+Now let's get started.
 
 Start python
 ------------
@@ -30,7 +30,7 @@ methods to help you get waveform data.
 
 .. note::
 
-   You need a Hi-net account to have access to Hi-net waveform data.
+   You need a Hi-net account to access Hi-net waveform data.
 
 Do checks
 ---------
@@ -77,6 +77,12 @@ No. of channels: 2336
 
 Now we know Hi-net starts from 2004-04-01 and has a total number of
 2336 channels (about 780 stations).
+
+.. note::
+
+   Users are highly recommended to use `FnetPy <https://github.com/seisman/FnetPy>`_
+   if they need F-net data, since HinetPy cannot deal with F-net instrumental
+   responses correctly.
 
 Stations
 --------

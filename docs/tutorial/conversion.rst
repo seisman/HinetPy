@@ -1,7 +1,7 @@
 Data conversion
 ===============
 
-Hi-net provide waveform data in win32 format and instrument response in channel
+Hi-net provide waveform data in win32 format and instrument responses in a channel
 table. :mod:`~HinetPy.win32` can convert them into SAC and SAC polezero formats.
 
 >>> from HinetPy import win32
@@ -15,11 +15,13 @@ Extract waveform data of all channels as SAC format.
 
 >>> win32.extract_sac(data, ctable)
 
-.. note::
+.. important::
 
-    The SAC files are NOT in digital counts. 
-    ``win2sac_32`` removes sensitivity from waveforms and multipy by 1.0e9.
-    Thus, the SAC files are velocity in nm/s or accelaration in nm/s/s.
+    The SAC files converted from win32 format are **NOT** in digital counts!!!
+
+    ``win2sac_32`` automatically removes sensitivity from waveforms and 
+    multipy by 1.0e9. Thus, the SAC files are velocity in nm/s or 
+    accelaration in nm/s/s.
 
 The SAC files have a default filename ``STATION.COMPONENT.SAC`` (e.g. ``N.NABC.U.SAC``).
 You can specify another SAC suffix and a different output directory.
@@ -40,14 +42,16 @@ They accept a list of string or a string contains wildcard.
 Extract PZ
 ----------
 
+:meth:`~HinetPy.win32.extract_pz` can convert instrumental responses 
+from Hi-net's channel table to SAC PZ format.
+
 .. warning::
 
-   This feature works for Hi-net only.
+    This function works for Hi-net network only. 
 
-   F-net data users can get RESP files from `NIED F-net`_.
-
-:meth:`~HinetPy.win32.extract_pz` can convert Hi-net channel table to SAC PZ
-format. Its usage is very similar to :meth:`~HinetPy.win32.extract_sac`.
+    F-net data users are highly recommended to use `FnetPy <https://github.com/seisman/FnetPy>`_
+    to request waveform data in SEED format and extract instrumental responses
+    in RESP or PZ format from SEED files.
 
 Extract information of all channels as SACPZ file:
 

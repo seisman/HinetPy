@@ -6,7 +6,6 @@ HinetPy - A Hi-net Client powered by Python
    :hidden:
 
    installation
-   first-try
    tutorial
    examples
    api

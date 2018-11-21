@@ -17,11 +17,11 @@ Network = namedtuple("Network", "name, channels, starttime, url")
 
 .. py:attribute:: starttime
 
-   Start time (in JST time) when waveform data is avaiable.
+   Start time (JST: UTC+0900) when waveform data is avaiable.
 
 .. py:attribute:: url
 
-   Network homepage.
+   Homepage of the network.
 
 ``NETWORK`` is a dict of :class:`~HinetPy.header.Network`, containing
 information of all networks available from Hi-net website.
@@ -29,11 +29,19 @@ information of all networks available from Hi-net website.
 >>> from HinetPy.header import NETWORK
 >>> for code in NETWORK.keys():
 ...     print(code, NETWORK[code].name)
+0101 NIED Hi-net
+0103 NIED F-net (broadband)
+0103A NIED F-net (strong motion)
+0120 NIED S-net (speed motion)
+0120A NIED S-net (acceleration)
+0131 NIED MeSO-net
+0201 Hokkaido University
+...
 """
 
-URL_Hinet = "http://www.hinet.bosai.go.jp/"
-URL_Fnet = "http://www.fnet.bosai.go.jp/"
-URL_Vnet = "http://www.vnet.bosai.go.jp/"
+URL_Hinet = "http://www.hinet.bosai.go.jp"
+URL_Fnet = "http://www.fnet.bosai.go.jp"
+URL_Vnet = "http://www.vnet.bosai.go.jp"
 URL_JMA = "http://www.jma.go.jp/jma/indexe.html"
 
 NETWORK = {}

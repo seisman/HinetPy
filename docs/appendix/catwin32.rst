@@ -25,9 +25,9 @@ Two ways to solve this issue:
 1. use ``-s`` option
 2. make sure all the win32 files in arguments list are sorted by date
 
-The first way is safer, but it costs too much time. The second way is prefered.
+The first way is safer, but time-consuming. The second way is prefered.
 You can use ``sorted(glob.glob("*.cnt"))`` in Python if the win32 files are
-named according to time.
+named by time.
 
 Examples
 --------

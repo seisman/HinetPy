@@ -1,0 +1,136 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Copyright 2014-2017 Dongdong Tian
+# This file is distributed under the same license as the HinetPy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: HinetPy 0.4.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-21 16:10-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../tutorial/get-started.rst:2
+msgid "Get Started"
+msgstr "入门"
+
+#: ../../tutorial/get-started.rst:4
+msgid ""
+"For new users of Hi-net data, I highly recommand you to request and "
+"download waveform data from Hi-net website and try to process the data "
+"using win32tools. Do all the things **manually** at least one time, make "
+"sure that you understand the whole procedures and the unfriendness and "
+"limitations of Hi-net website."
+msgstr ""
+"对于Hi-net数据的新用户，强烈建议你至少一次手动从Hi-net申请并下载数据并尝试使用 win32tools 处理数据，以确保你理解Hi-"
+"net数据申请、下载、处理的整个流程，并了解Hi-net网站设计的不友好和诸多限制。"
+
+#: ../../tutorial/get-started.rst:9
+msgid "Now let's get started."
+msgstr "现在开始吧。"
+
+#: ../../tutorial/get-started.rst:12
+msgid "Start python"
+msgstr "启动Python"
+
+#: ../../tutorial/get-started.rst:14
+msgid ""
+"Run ``python`` (or ``ipython`` if you have it), and make sure you're "
+"using Python 3.4 or above::"
+msgstr "在终端中运行 ``python`` （或 ``ipython`` ），并确保你所使用的Python版本大于等于3.4::"
+
+#: ../../tutorial/get-started.rst:23
+msgid "Create a Client"
+msgstr "创建一个客户端"
+
+#: ../../tutorial/get-started.rst:25
+msgid ""
+"HinetPy provide a :class:`~HinetPy.client.Client` class, which provide "
+"several methods to help you get waveform data."
+msgstr "HinetPy 中的类 :class:`~HinetPy.client.Client` 提供了多个方法帮助你获取波形数据。"
+
+#: ../../tutorial/get-started.rst:33
+msgid "You need a Hi-net account to access Hi-net waveform data."
+msgstr "你需要一个Hi-net账户以获取Hi-net台网的波形数据。"
+
+#: ../../tutorial/get-started.rst:36
+msgid "Do checks"
+msgstr "做一些检查"
+
+#: ../../tutorial/get-started.rst:38
+msgid ""
+"Let our :meth:`~HinetPy.client.Client.doctor` checks if everything goes "
+"right:"
+msgstr "用 :meth:`~HinetPy.client.Client.doctor` 检查是否一切正常："
+
+#: ../../tutorial/get-started.rst:46
+msgid ""
+"Congratulations! You're using the latest version of HinetPy, and the Hi-"
+"net web service is NOT updated since the release of HinetPy, which means "
+"HinetPy is still working. And you have ``catwin32`` and ``win2sac_32`` in"
+" your PATH. Everything seems OK."
+msgstr ""
+"恭喜你！你正在使用HinetPy的最新版本，且Hi-"
+"net网站在这个版本HinetPy发布之后没有再更新，这意味着HinetPy依然可以正常工作。并且，``catwin32`` 和 "
+"``win2sac_32`` 在你的PATH中。一切看起来都正常。"
+
+#: ../../tutorial/get-started.rst:52
+msgid "Network Codes"
+msgstr "台网代码"
+
+#: ../../tutorial/get-started.rst:54
+msgid ""
+"Hi-net website provide seismic waveform data from several organizations "
+"and networks, e.g. Hi-net, F-net and V-net. Each network has a unique "
+"network code. In order to request waveform data from specified network, "
+"you need to know the network code. See "
+":meth:`~HinetPy.client.Client.info` for details."
+msgstr ""
+"Hi-net网站提供了来自于多个组织或台网的地震波形数据，比如Hi-net、F-net和V-"
+"net。每个台网有唯一的台网代码。为了申请指定台网的波形数据，你必须首先知道台网代码。使用 "
+":meth:`~HinetPy.client.Client.info` 以了解更多信息。"
+
+#: ../../tutorial/get-started.rst:78
+msgid ""
+"Now we know Hi-net starts from 2004-04-01 and has a total number of 2336 "
+"channels (about 780 stations)."
+msgstr "现在我们知道Hi-net开始于2004-04-01，总共有2336个通道（约780个台站）。"
+
+#: ../../tutorial/get-started.rst:83
+msgid ""
+"Users are highly recommended to use `FnetPy "
+"<https://github.com/seisman/FnetPy>`_ if they need F-net data, since "
+"HinetPy cannot deal with F-net instrumental responses correctly."
+msgstr "强烈建议Fnet用户使用 `FnetPy <https://github.com/seisman/FnetPy>`_ "
+"获取Fnet数据，因而HinetPy无法正确处理F-net的仪器响应。"
+
+#: ../../tutorial/get-started.rst:88
+msgid "Stations"
+msgstr "台站"
+
+#: ../../tutorial/get-started.rst:90
+msgid ""
+"If you want, you can have a quick view of stations of Hi-net and F-net "
+"(Only these two networks are supported). See "
+":meth:`~HinetPy.client.Client.get_station_list` for details."
+msgstr ""
+"你可以调用 :meth:`~HinetPy.client.Client.get_station_list` 以查看Hi-net和F-"
+"net台网的台站信息（目前仅支持查看这两个台网的台站信息）。"
+
+#: ../../tutorial/get-started.rst:104
+msgid ""
+"Hi-net/F-net has a lot of stations. If you only need a few of them, you "
+"can select the stations you want. Hi-net website also provide a web "
+"interface to do that, which is prefered for most cases. If you want to "
+"dynamically select stations in your script, you can try "
+":meth:`~HinetPy.client.Client.select_stations`."
+msgstr ""
+"Hi-net/F-net有很多台。如果你只需要申请其中某些台站的数据，你可以选择你需要的台站。Hi-"
+"net网站提供了一个网页界面以筛选台站，通常建议值接使用这一网页界面。如果你想要在申请的过程中动态选择台站，你可以使用 "
+":meth:`~HinetPy.client.Client.select_stations` 。"

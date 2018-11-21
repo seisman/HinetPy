@@ -3,11 +3,7 @@ Installation
 
 HinetPy needs Pyhon 3.4 or above. If you're new to Python, I strongly recommend installing the `Anaconda`_.
 
-.. _Anaconda: https://www.continuum.io/downloads
-
-.. note::
-
-   There is no plan to support Python 2.7.
+.. _Anaconda: https://www.anaconda.com/download/
 
 HinetPy
 -------
@@ -37,7 +33,7 @@ win32tools
 win32 format data. HinetPy needs ``catwin32`` and ``win2sac_32``. Make sure
 that ``catwin32`` and ``win2sac_32`` are in your PATH.
 
-::
+Steps to install win32tools::
 
     tar -xvf win32tools.tar.gz
     cd win32tools/
@@ -52,8 +48,8 @@ For macOS users, if you fail with an fatal error as below::
     1 error generated.
     make[1]: *** [s4read_data.o] Error 1
 
-Just edit line 3 of ``win2sac.src/s4read_data.c``, and change ``#include <malloc.h>``
-to ``#include <stdlib.h>``.
+You need change ``#include <malloc.h>`` to ``#include <stdlib.h>`` at 
+line 3 of ``win2sac.src/s4read_data.c``.
 
 .. _NIED Hi-net: http://www.hinet.bosai.go.jp/
 .. _win32tools: https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools

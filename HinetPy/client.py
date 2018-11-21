@@ -63,25 +63,26 @@ class Client(object):
         max_sleep_count: int
             See notes below.
 
+        Notes
+        -----
+        Hi-net server ususally spends 10 seconds to 1 minute on data
+        preparation after receiving a data request. During the data
+        preparation, users are **NOT** allowed to post another data request.
+        So users have to wait until the data is ready.
+
+        HinetPy checks data status every ``sleep_time_in_seconds`` seconds
+        until the data is ready. If HinetPy checks the data status for more
+        than ``max_sleep_count * sleep_time_in_seconds`` seconds, 
+        it possibly indicates something wrong happend with this data request. 
+        Then, HinetPy will retry to request this data ``retries`` times. 
+        Ususally, you don't need to modify these settings 
+        unless you know what you're doing.
+
         Examples
         --------
 
         >>> from HinetPy import Client
         >>> client = Client("username", "password")
-
-        Notes
-        -----
-        Hi-net server ususally spends 10 seconds to 1 minute on data
-        preparation after receiving a data request. During the data
-        preparation, users are **NOT** allowed to request another data.
-        So users have to wait until the data is ready.
-
-        HinetPy checks data status every ``sleep_time_in_seconds`` seconds
-        until the data is ready. If HinetPy checks the data status for more
-        than ``max_sleep_count`` times, it possibly indicates something wrong
-        happend with this data. Then, HinetPy will retry to request this data
-        ``retries`` times. Ususally, you don't need to modify these settings
-        unless you know what you're doing.
         """
         self.timeout = timeout
         self.retries = retries
@@ -332,6 +333,35 @@ class Client(object):
         ctable: str
             Filename of downloaded channel table file.
 
+        Notes
+        -----
+        **TimeZone**
+
+        All times in HinetPy are in JST (GMT+0900).
+
+        **max_span**
+
+        Hi-net server sets three limitations of each data request:
+
+        1. Record_Length <= 60 min
+        2. Number_of_channels * Record_Length <= 12000 min
+        3. Only the latest 150 requested data are kept
+
+        For example, Hi-net network has about 24000 channels. Acoording to
+        limitation 2, the record length should be no more than 5 minutes
+        in each data request. HinetPy "break through" the limitation by 
+        splitting a long-duration data request into several short-duration 
+        sub-requsts.
+
+        **Workflow**
+
+        1. do several checks
+        2. split a long-duration request into several short-duration sub-requests
+        3. loop over all sub-requests and return data id to download
+        4. download all data based on data id
+        5. extract all zip files and merge into one win32 format data
+        6. cleanup
+
         Examples
         --------
         Request 6 minutes data since 2010-01-01T05:35 (GMT+0900) from Hi-net.
@@ -356,33 +386,6 @@ class Client(object):
         >>> client.get_waveform('0103', starttime, 1440, max_span=25)
         ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
-        Notes
-        -----
-        **TimeZone**
-
-        All times in HinetPy are in JST (GMT+0900).
-
-        **max_span**
-
-        Hi-net set three limitations of each data request:
-
-        1. Record_Length <= 60 min
-        2. Number_of_channels * Record_Length <= 12000 min
-        3. Only the latest 150 requested data are kept
-
-        For example, Hi-net network has about 24000 channels. Acoording to
-        limitation 2, the record length should be no more than 5 minutes
-        in each data request. HinetPy "break" the limitation by splitting
-        a long data request into several short sub-requsts.
-
-        **Workflow**
-
-        1. do several checks
-        2. split a long request into several short sub-requests
-        3. loop over all sub-requests and return data id to download
-        4. download all data based on data id
-        5. extract all zip files and merge into one win32 format data
-        6. cleanup
         '''
         # 1. check span:
         #    max limits is determined by the max number of data points

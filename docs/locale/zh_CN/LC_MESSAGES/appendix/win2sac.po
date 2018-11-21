@@ -3,19 +3,18 @@
 # This file is distributed under the same license as the HinetPy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-22 14:11+0800\n"
+"POT-Creation-Date: 2018-11-21 16:01-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.4.0\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: ../../appendix/win2sac.rst:2
 msgid "win2sac"
@@ -146,34 +145,43 @@ msgid "Notes"
 msgstr "注解"
 
 #: ../../appendix/win2sac.rst:55
+msgid "Output Unit"
+msgstr "输出的单位"
+
+#: ../../appendix/win2sac.rst:59
+msgid ""
+"The SAC files extracted by ``win2sac_32`` are always in physical quality,"
+" not in digital counts."
+msgstr "``win2sac_32`` 提取的SAC文件总是真实的物理量，而不是digital counts。"
+
+#: ../../appendix/win2sac.rst:62
+msgid ""
+"The raw data saved in win32 format is in digital counts. When extracting "
+"data from win32 format, ``win2sac_32`` always convert digital counts to "
+"the corresponding physical quantity by remove sensitivity from waveform "
+"data, and multiply by 1.0e9 to convert unit from meter to nanometer."
+msgstr ""
+"win32格式中保存的原始数据是digital counts。当从win32格式中提取数据时， ``win2sac_32`` "
+"总是从波形中去除灵敏度以将digital counts转换为对应的物理量，并乘以1.0e9将单位从"
+"米转换为纳米。"
+
+#: ../../appendix/win2sac.rst:67
+msgid "The output SAC files are in ``nm/s``, ``nm/s/s`` or ``micro radian``."
+msgstr "输出的SAC文件的单位是 ``nm/s`` 、 ``nm/s/s`` 或 ``micro radian``"
+
+#: ../../appendix/win2sac.rst:70
 msgid "Filename Format"
 msgstr "文件名格式"
 
-#: ../../appendix/win2sac.rst:57
+#: ../../appendix/win2sac.rst:72
 msgid ""
 "The default filename format is ``STATION.COMPONENT.EXTENSION`` (e.g. "
 "``N.NABC.U.SAC``). You can only modify the extensions."
 msgstr "默认的文件名格式是 ``STATION.COMPONENT.EXTENSION`` （如 ``N.NABC.U.SAC`` ）。你可以修改此后缀名。"
 
-#: ../../appendix/win2sac.rst:61
+#: ../../appendix/win2sac.rst:76
 msgid "Channel number file format"
 msgstr "通道号文件格式"
-
-#: ../../appendix/win2sac.rst:65
-msgid ""
-"Using this feature may result in data loss, as ``win2sac_32`` will exit "
-"if data of any channel doesn't exist in the win32 file."
-msgstr "使用这一特性可能会造成数据损失。因为 ``win2sac_32`` 程序在某个通道的数据不存在时会自动退出。"
-
-#: ../../appendix/win2sac.rst:68
-msgid ""
-"If you still want to use this fearture, you can modify Line 386 of "
-"``s4win2sacm.c`` from::"
-msgstr "如果你依然想要使用这一特性，你需要将 ``s4win2sacm.c`` 的386行从::"
-
-#: ../../appendix/win2sac.rst:74
-msgid "to::"
-msgstr "修改为::"
 
 #: ../../appendix/win2sac.rst:78
 msgid "You can save all channel numbers you want to extract into one file."
@@ -199,90 +207,77 @@ msgstr "每行最多不超过2000字符"
 msgid "Below is an example::"
 msgstr "下面是一个示例::"
 
-#: ../../appendix/win2sac.rst:92
+#: ../../appendix/win2sac.rst:93
+msgid ""
+"Using this feature may result in data loss, as ``win2sac_32`` will exit "
+"if data of any channel doesn't exist in the win32 file."
+msgstr "使用这一特性可能会造成数据损失。因为 ``win2sac_32`` 程序在某个通道的数据不存在时会自动退出。"
+
+#: ../../appendix/win2sac.rst:96
+msgid ""
+"If you still want to use this fearture, you can modify Line 386 of "
+"``s4win2sacm.c`` from::"
+msgstr "如果你依然想要使用这一特性，你需要将 ``s4win2sacm.c`` 的386行从::"
+
+#: ../../appendix/win2sac.rst:102
+msgid "to::"
+msgstr "修改为::"
+
+#: ../../appendix/win2sac.rst:107
 msgid "Paramerter file"
 msgstr "参数文件"
 
-#: ../../appendix/win2sac.rst:94
+#: ../../appendix/win2sac.rst:109
 msgid ""
 "win32 system need a parameter file to run. This parameter file has many "
 "lines. However, ``win2sac_32`` only uses the 2nd and 4th lines, and "
 "ignores all other lines."
 msgstr "win32系统需要一个参数文件才能执行。这个参数文件有很多行。然而， ``win2sac_32`` 只使用了第2和第4行并忽略其它行。"
 
-#: ../../appendix/win2sac.rst:97
+#: ../../appendix/win2sac.rst:112
 msgid "An example of a four line parameter file::"
 msgstr "四行的参数文件的示例::"
 
-#: ../../appendix/win2sac.rst:104
+#: ../../appendix/win2sac.rst:119
 msgid ""
 "The 2nd line is the name of channle table file. ``win2sac_32`` need to "
 "read this file to extract waveform of specified channels."
 msgstr "第二行是通道表文件名。 ``win2sac_32`` 需要读取该文件以提取指定通道的波形。"
 
-#: ../../appendix/win2sac.rst:107
+#: ../../appendix/win2sac.rst:122
 msgid "The 4th line is the path of pick files. It's useless for most cases."
 msgstr "第四行是震相拾取文件的路径。大多数情况下都没有用。"
 
-#: ../../appendix/win2sac.rst:110
+#: ../../appendix/win2sac.rst:125
 msgid "Component"
 msgstr "分量"
 
-#: ../../appendix/win2sac.rst:112
+#: ../../appendix/win2sac.rst:127
 msgid ""
 "The component information is written to SAC header variables ``CPMAZ`` "
 "and ``CMPINC``."
 msgstr "分量信息会被写到SAC头段变量 ``CMPAZ`` 和 ``CMPINC`` 中。"
 
-#: ../../appendix/win2sac.rst:115
+#: ../../appendix/win2sac.rst:130
 msgid "U/Z: CMPAZ = 0.0, CMPINC = 0.0"
 msgstr ""
 
-#: ../../appendix/win2sac.rst:116
+#: ../../appendix/win2sac.rst:131
 msgid "N/X: CMPAZ = 0.0, CMPINC = 90.0"
 msgstr ""
 
-#: ../../appendix/win2sac.rst:117
+#: ../../appendix/win2sac.rst:132
 msgid "E/Y: CMPAZ = 90.0, CMPINC = 90.0"
 msgstr ""
 
-#: ../../appendix/win2sac.rst:118
+#: ../../appendix/win2sac.rst:133
 msgid "Other: CMPAZ = 0.0, CMPINC = 0.0"
 msgstr ""
 
-#: ../../appendix/win2sac.rst:122
+#: ../../appendix/win2sac.rst:137
 msgid "Azimuths of sensors are **NOT** accurate."
 msgstr "传感器的方位角是 **不** 精确的。"
 
-#: ../../appendix/win2sac.rst:124
+#: ../../appendix/win2sac.rst:139
 msgid "See https://hinetwww11.bosai.go.jp/auth/direc/?LANG=en for details."
 msgstr "详情参考 https://hinetwww11.bosai.go.jp/auth/direc/?LANG 。"
-
-#: ../../appendix/win2sac.rst:127
-msgid "Output Unit"
-msgstr "输出的单位"
-
-#: ../../appendix/win2sac.rst:131
-msgid ""
-"The SAC files extracted by ``win2sac_32`` are always in physical quality,"
-" not in digital counts."
-msgstr "``win2sac_32`` 提取的SAC文件总是真实的物理量，而不是digital counts。"
-
-#: ../../appendix/win2sac.rst:134
-msgid "Be caution if absolute amplitude is important for your research."
-msgstr "如果绝对振幅对于你的研究很重要一定要小心。"
-
-#: ../../appendix/win2sac.rst:136
-msgid ""
-"The raw data saved in win32 format is in digital counts. When extracting "
-"data from win32 format, ``win2sac_32`` always convert digital counts to "
-"the corresponding physical quantity, e.g. velocity. And there is no "
-"option to avoid this conversion."
-msgstr ""
-"win32格式中保存的原始数据是digital counts。当从win32格式中提取数据时， ``win2sac_32`` 总是将digital"
-" counts转换为对应的物理量，如速度，并且没有选项可以避免这一转换。"
-
-#: ../../appendix/win2sac.rst:141
-msgid "The output SAC files are in ``nm/s``, ``nm/s/s`` or ``micro radian``."
-msgstr "输出的SAC文件的单位是 ``nm/s`` 、 ``nm/s/s`` 或 ``micro radian``"
-

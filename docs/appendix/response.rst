@@ -74,11 +74,11 @@ The ``CONSTANT`` in SAC PZ file should be:
 .. important::
 
     HinetPy uses win2sac_32 to do the conversion from win32 to SAC format.
-    win2sac_32 always remoev total sensitivity (G) from waveform and multiply
+    win2sac_32 always remove total sensitivity (G) from waveform and multiply
     by 1.0e9 to convert unit from meter to nanometer.
 
     Thus, the extracted SAC files are velocity in nm/s or acceleration in nm/s/s.
-    The total sensivitity G is also discarded when generating PZ files.
+    The total sensivitity G is also omitted when generating PZ files.
 
 Q&A
 ---

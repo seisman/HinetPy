@@ -1,8 +1,9 @@
 Changelog
 =========
 
-0.5.0:
- - Fix issues of wrong CONSTANT in SAC polezero file.
+0.5.0 (2018-11-21):
+ - Fix issues of wrong CONSTANT in SAC polezero file (#8). 
+ - Fix login failure issue with password longer than 12 characters (#13).
 
 0.4.8 (2018-10-04):
  - ``get_station_list()``: must specify a network code; support S-net and MeSO-net.

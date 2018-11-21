@@ -59,12 +59,10 @@ Output Unit
    The SAC files extracted by ``win2sac_32`` are always in physical quality,
    not in digital counts.
 
-   Be caution if absolute amplitude is important for your research.
-
 The raw data saved in win32 format is in digital counts. When extracting data
 from win32 format, ``win2sac_32`` always convert digital counts to the
-corresponding physical quantity, e.g. velocity, and multiply by 1.0e9 
-to convert unit from meter to nanometer.
+corresponding physical quantity by remove sensitivity from waveform data, 
+and multiply by 1.0e9 to convert unit from meter to nanometer.
 
 The output SAC files are in ``nm/s``, ``nm/s/s`` or ``micro radian``.
 
@@ -76,6 +74,19 @@ The default filename format is ``STATION.COMPONENT.EXTENSION``
 
 Channel number file format
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can save all channel numbers you want to extract into one file.
+
+#. line starts with ``#`` is comment line and skipped
+#. blank lines are skipped
+#. channel numbers can be separated by spaces, tabs, or commas
+#. each line can contain no more than 2000 characters
+
+Below is an example::
+
+    6034,6035
+    # 6036 # this line is ignored
+    6038 6039
 
 .. danger::
 
@@ -91,19 +102,6 @@ Channel number file format
    to::
 
         fprintf(stderr, "Data for channel %x not existed\n", sysch);
-
-You can save all channel numbers you want to extract into one file.
-
-#. line starts with ``#`` is comment line and skipped
-#. blank lines are skipped
-#. channel numbers can be separated by spaces, tabs, or commas
-#. each line can contain no more than 2000 characters
-
-Below is an example::
-
-    6034,6035
-    # 6036 # this line is ignored
-    6038 6039
 
 Paramerter file
 ~~~~~~~~~~~~~~~
