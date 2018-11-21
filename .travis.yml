@@ -12,6 +12,10 @@ matrix:
         - MAKE_TESTS=true
     - python: 3.6
       env:
+        - BUILD_DOCS=false
+        - MAKE_TESTS=true
+    - python: 3.7
+      env:
         - BUILD_DOCS=true
         - MAKE_TESTS=true
 
@@ -54,5 +58,5 @@ deploy:
   local_dir: docs/_build/html
   on:
     branch: master
-    python: '3.6'
+    python: '3.7'
     condition: '$BUILD_DOCS == "true"'
