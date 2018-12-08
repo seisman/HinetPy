@@ -1,8 +1,11 @@
 Changelog
 =========
 
+0.5.1 (2018-12-08):
+ - Fix typo from longtitude to longitude.
+
 0.5.0 (2018-11-21):
- - Fix issues of wrong CONSTANT in SAC polezero file (#8). 
+ - Fix issues of wrong CONSTANT in SAC polezero file (#8).
  - Fix login failure issue with password longer than 12 characters (#13).
 
 0.4.8 (2018-10-04):
@@ -11,7 +14,7 @@ Changelog
 
 0.4.7 (2018-10-04):
  - Support S-net and MeSO-net (#9 and #10)
- - Fix an issue when channel table contains blank lines 
+ - Fix an issue when channel table contains blank lines
 
 0.4.6 (2018-03-20):
  - Fix ``Too many open files`` (#6)
