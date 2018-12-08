@@ -72,10 +72,10 @@ class Client(object):
 
         HinetPy checks data status every ``sleep_time_in_seconds`` seconds
         until the data is ready. If HinetPy checks the data status for more
-        than ``max_sleep_count * sleep_time_in_seconds`` seconds, 
-        it possibly indicates something wrong happend with this data request. 
-        Then, HinetPy will retry to request this data ``retries`` times. 
-        Ususally, you don't need to modify these settings 
+        than ``max_sleep_count * sleep_time_in_seconds`` seconds,
+        it possibly indicates something wrong happend with this data request.
+        Then, HinetPy will retry to request this data ``retries`` times.
+        Ususally, you don't need to modify these settings
         unless you know what you're doing.
 
         Examples
@@ -349,8 +349,8 @@ class Client(object):
 
         For example, Hi-net network has about 24000 channels. Acoording to
         limitation 2, the record length should be no more than 5 minutes
-        in each data request. HinetPy "break through" the limitation by 
-        splitting a long-duration data request into several short-duration 
+        in each data request. HinetPy "break through" the limitation by
+        splitting a long-duration data request into several short-duration
         sub-requsts.
 
         **Workflow**
@@ -709,9 +709,9 @@ class Client(object):
         maxlatitude: float
             Limit to stations with a latitude smaller than the specified maximum.
         minlongitude: float
-            Limit to stations with a longtitude larger than the specified minimum.
+            Limit to stations with a longitude larger than the specified minimum.
         maxlongitude: float
-            Limit to stations with a longtitude smaller than the specified maximum.
+            Limit to stations with a longitude smaller than the specified maximum.
         latitude: float
             Specify the latitude to be used for a radius search.
         longitude: float
@@ -762,8 +762,8 @@ class Client(object):
             for station in stations_at_server:
                 if station.code != code:
                     continue
-                if point_inside_box(station.latitude, station.longtitude,
-                                    latitude=latitude, longtitude=longitude,
+                if point_inside_box(station.latitude, station.longitude,
+                                    latitude=latitude, longitude=longitude,
                                     minradius=minradius, maxradius=maxradius):
                     stations_selected.append(station.name)
 
@@ -772,7 +772,7 @@ class Client(object):
             for station in stations_at_server:
                 if station.code != code:
                     continue
-                if point_inside_circular(station.latitude, station.longtitude,
+                if point_inside_circular(station.latitude, station.longitude,
                                          latitude, longitude,
                                          minradius=minradius,
                                          maxradius=maxradius):
@@ -937,14 +937,14 @@ class Station(object):
     """
     Class for Stations.
     """
-    def __init__(self, code, name, latitude, longtitude, elevation):
+    def __init__(self, code, name, latitude, longitude, elevation):
         self.code = code
         self.name = name
         self.latitude = float(latitude)
-        self.longtitude = float(longtitude)
+        self.longitude = float(longitude)
         self.elevation = float(elevation)
 
     def __str__(self):
         string = "{} {} {} {} {}".format(self.code, self.name, self.latitude,
-                                         self.longtitude, self.elevation)
+                                         self.longitude, self.elevation)
         return string

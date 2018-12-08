@@ -23,7 +23,7 @@ def split_integer(number, maxn):
 
 def point_inside_box(
     latitude,
-    longtitude,
+    longitude,
     minlatitude=None,
     maxlatitude=None,
     minlongitude=None,
@@ -45,9 +45,9 @@ def point_inside_box(
         return False
     if maxlatitude and latitude > maxlatitude:
         return False
-    if minlongitude and longtitude < minlongitude:
+    if minlongitude and longitude < minlongitude:
         return False
-    if maxlongitude and longtitude > maxlongitude:
+    if maxlongitude and longitude > maxlongitude:
         return False
     return True
 

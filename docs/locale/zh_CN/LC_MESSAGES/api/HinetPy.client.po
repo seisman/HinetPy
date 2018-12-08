@@ -370,11 +370,11 @@ msgid "Limit to stations with a latitude smaller than the specified maximum."
 msgstr "限制台站纬度小于指定值。"
 
 #: HinetPy.client.Client.select_stations:18 of
-msgid "Limit to stations with a longtitude larger than the specified minimum."
+msgid "Limit to stations with a longitude larger than the specified minimum."
 msgstr "限制台站经度大于指定值。"
 
 #: HinetPy.client.Client.select_stations:20 of
-msgid "Limit to stations with a longtitude smaller than the specified maximum."
+msgid "Limit to stations with a longitude smaller than the specified maximum."
 msgstr "限制台站经度小于指定值。"
 
 #: HinetPy.client.Client.select_stations:22 of
