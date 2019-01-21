@@ -136,7 +136,6 @@ msgid "CONSTANT = A0 * G = A0 * \\frac{[8]*10^{\\frac{[12]}{20}}}{[13]}"
 msgstr ""
 
 #: ../../appendix/response.rst:76
-#, fuzzy
 msgid ""
 "HinetPy uses win2sac_32 to do the conversion from win32 to SAC format. "
 "win2sac_32 always remove total sensitivity (G) from waveform and multiply"
