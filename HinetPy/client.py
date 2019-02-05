@@ -25,21 +25,35 @@ logging.basicConfig(level=logging.INFO,
 logger = logging.getLogger(__name__)
 
 
-class Client(object):
-    # Hi-net related URLs
+class Client():
+    # Hinet website
     _HINET = 'http://www.hinet.bosai.go.jp/'
+    # Authorization page
     _AUTH = 'https://hinetwww11.bosai.go.jp/auth/'
-    _JMA = _AUTH + 'JMA/dlDialogue.php'
-    _CONT = _AUTH + 'download/cont/'
-    _STATUS = _CONT + 'cont_status.php'
-    _SELECT = _CONT + 'select_confirm.php'
-    _STATION = _CONT + 'select_info.php'
-    _REQUEST = _CONT + 'cont_request.php'
-    _DOWNLOAD = _CONT + 'cont_download.php'
-    _SNET_STATION_INFO = _CONT + 'st_snet_json.php'
-    _MESONET_STATION_INFO = _CONT + 'st_mesonet_json.php'
-    _STATION_INFO = _HINET + 'st_info/detail/dlDialogue.php?f=CSV'
+    # Download win32tools
     _WIN32TOOLS = _AUTH + 'manual/dlDialogue.php?r=win32tools'
+
+    # Catalog
+    _JMA = _AUTH + 'JMA/dlDialogue.php'
+
+    # Continuous wavefroms
+    _CONT = _AUTH + 'download/cont/'
+    _CONT_STATUS = _CONT + 'cont_status.php'
+    _CONT_REQUEST = _CONT + 'cont_request.php'
+    _CONT_DOWNLOAD = _CONT + 'cont_download.php'
+
+    # Station information
+    _STATION_INFO = _HINET + 'st_info/detail/dlDialogue.php?f=CSV'
+    _CONT_SELECT = _CONT + 'select_confirm.php'
+    _STATION = _CONT + 'select_info.php'
+    _MESONET_STATION_INFO = _CONT + 'st_mesonet_json.php'
+    _SNET_STATION_INFO = _CONT + 'st_snet_json.php'
+
+    # Event waveforms
+    _EVENT = _AUTH + 'download/event/'
+    _EVENT_STATUS = _EVENT + 'event_status.php'
+    _EVENT_REQUEST = _EVENT + 'event_request.php'
+    _EVENT_DOWNLOAD = _EVENT + 'event_download.php'
 
     # ETAG for v160422
     _ETAG = "1b61-5774e12e97f00"
@@ -153,9 +167,14 @@ class Client(object):
         self.check_service_update()
         self.check_cmd_exists()
 
-    def _request_waveform(self, code, starttime, span):
+    ###########################################################################
+    #                                                                         #
+    # Methods for requesting continuous waveforms.                            #
+    #                                                                         #
+    ###########################################################################
+    def _request_cont_waveform(self, code, starttime, span):
         '''
-        Request waveform.
+        Request continuous waveform.
 
         Parameters
         ----------
@@ -171,7 +190,7 @@ class Client(object):
         id: str
             ID of requested data. None if request fails.
         '''
-        org, net, volc = self._parse_code(code)
+        org, net, volc = _parse_code(code)
         payload = {
             'org1':  org,
             'org2':  net,
@@ -192,7 +211,7 @@ class Client(object):
             try:
                 # the timestamp determine the unique id
                 payload['rn'] = str(int(datetime.now().timestamp()))
-                r = self.session.post(self._REQUEST, params=payload,
+                r = self.session.post(self._CONT_REQUEST, params=payload,
                                       timeout=self.timeout)
                 # assume the first one on status page is the one
                 id = re.search(r'<td class="bgcolist2">(?P<ID>\d{10})</td>',
@@ -201,7 +220,7 @@ class Client(object):
                                r'<td class="bgcolist2">' + id + r'</td>')
                 # wait until data is ready
                 for _i in range(self.max_sleep_count):
-                    status = self.session.post(self._STATUS,
+                    status = self.session.post(self._CONT_STATUS,
                                                timeout=self.timeout)
                     opt = p.search(status.text).group('OPT')
                     if opt == '1':  # still preparing data
@@ -225,9 +244,9 @@ class Client(object):
             logger.error(msg)
             return None
 
-    def _download_waveform(self, job):
+    def _download_cont_waveform(self, job):
         '''
-        Download waveform.
+        Download continuous waveform.
 
         Parameters
         ----------
@@ -247,7 +266,7 @@ class Client(object):
         dlclient = Client(self.user, self.password)
         for _ in range(self.retries):
             try:
-                r = dlclient.session.post(self._DOWNLOAD, data={'id': job.id},
+                r = dlclient.session.post(self._CONT_DOWNLOAD, data={'id': job.id},
                                           stream=True, timeout=self.timeout)
 
                 with tempfile.NamedTemporaryFile() as ft:
@@ -275,31 +294,11 @@ class Client(object):
             logger.error(msg)
             return None, None
 
-    def _parse_code(self, code):
-        """Parse network code.
-
-        >>> client._parse_code('0101')
-        ('01', '01', None)
-        >>> client._parse_code('0103A')
-        ('01', '03A', None)
-        >>> client._parse_code('010501')
-        ('01', '05', '010501')
-        """
-        if code not in NETWORK.keys():
-            msg = "{}: Incorrect network code.".format(code)
-            raise ValueError(msg)
-        elif code.startswith('0105') or code.startswith('0302'):
-            org, net, volc = code[0:2], code[2:4], code
-        else:
-            org, net, volc = code[0:2], code[2:], None
-
-        return org, net, volc
-
     def get_waveform(self, code, starttime, span,
                      max_span=None, data=None, ctable=None, outdir=None,
                      threads=3, cleanup=True):
         '''
-        Get waveform from Hi-net server.
+        Get continuous waveform from Hi-net server.
 
         Parameters
         ----------
@@ -433,8 +432,8 @@ class Client(object):
                             count,
                             jobs[i].starttime.strftime("%Y-%m-%d %H:%M"),
                             jobs[i].span)
-                jobs[i].id = self._request_waveform(code, jobs[i].starttime,
-                                                    jobs[i].span)
+                jobs[i].id = self._request_cont_waveform(code, jobs[i].starttime,
+                                                         jobs[i].span)
 
             # 5.2. check ids
             if not [job.id for job in jobs]:
@@ -447,7 +446,7 @@ class Client(object):
 
             # 5.3. parallel downloading
             with ThreadPool(min(threads, len(jobs))) as p:
-                rvalue = p.map(self._download_waveform, jobs)
+                rvalue = p.map(self._download_cont_waveform, jobs)
             for value in rvalue:
                 cnts.extend(value[0])
                 ch_euc.add(value[1])
@@ -492,6 +491,278 @@ class Client(object):
 
         return data, ctable
 
+    ###########################################################################
+    #                                                                         #
+    # Methods for requesting event waveforms.                                 #
+    #                                                                         #
+    ###########################################################################
+    def _search_event_by_day(self, year, month, day, region="00",
+                             magmin=3.0, magmax=9.9,
+                             include_unknown_mag=True):
+        '''
+        Search events catalog of one day.
+
+        Parameters
+        ----------
+
+        region : str
+            Limit events in specified region. Allowed values are:
+
+            - ``00``: Whole Japan
+            - ``01``: Hokkaido Region
+            - ``02``: Tohoku Region
+            - ``03``: Kanto Region
+            - ``04``: Chubu Region
+            - ``05``: Kinki Region
+            - ``06``: Chugoku/Shikoku Region
+            - ``07``: Kyushu Region
+            - ``08``: Others
+
+        include_unknown_mag: bool
+            Include/exclude undetermined magnitude events.
+        '''
+        payload = {
+            'year': year,
+            'month': "{:02d}".format(month),
+            'day': "{:02d}".format(day),
+            'region': region,
+            'mags': magmin,
+            'mage': magmax,
+            'undet': 0 if include_unknown_mag else 1,
+            'sort': 0,  # always sort by origin time in ascending order
+            'arc': 'ZIP',  # meaningless arguement in this request
+            'go': 1,
+            'LANG': 'en'
+        }
+        r = self.session.post(self._EVENT, data=payload, timeout=self.timeout)
+        events = []
+        for result in re.findall('openRequest((.+))', r.text):
+            items = [item.strip("'") for item in result.split(',')]
+            events.append(Event(items[0], *items[3:10]))
+        return events
+
+    def _request_event_waveform(self, event, format="ZIP"):
+        '''
+        Request event waveform.
+
+        Parameters
+        ----------
+
+        event: HinetPy.client.Event
+            Event to be requested.
+        format: str
+            Format of requested waveform package.
+        '''
+        payload = {
+            'evid': event.evid,
+            'origin_jst': event.origin,
+            'hypo_latitude': event.latitude,
+            'hypo_logitude': event.longitude,  # logitude is Hinet's typo
+            'hypo_depth': event.depth,
+            'mg': '' if event.magnitude == '#' else event.magnitude,
+            'hypo_name': event.name,
+            'hypo_name_eng': event.name_en,
+            'arc': format,
+            'encoding': 'D',
+            'lang': 'en',
+            'rn': str(int(datetime.now().timestamp())),
+        }
+
+        # retry if request fails else return id
+        for _ in range(self.retries):
+            try:
+                r = self.session.post(self._EVENT_REQUEST, data=payload, timeout=self.timeout)
+                # assume the first one on status page is the one
+                id = re.search(r'<td class="bgevlist2">(?P<ID>\d{10})</td>',
+                               r.text).group('ID')
+                p = re.compile(r'<tr class="bglist(?P<OPT>\d)">' +
+                               r'<td class="bgevlist2">' + id + r'</td>')
+                # wait until data is ready
+                for _i in range(self.max_sleep_count):
+                    status = self.session.post(self._EVENT_STATUS,
+                                               timeout=self.timeout)
+                    opt = p.search(status.text).group('OPT')
+                    if opt == '1':  # still preparing data
+                        time.sleep(self.sleep_time_in_seconds)
+                    elif opt == '2':  # data is available
+                        return id
+                    elif opt == '3':  # ?
+                        msg = "If you see this, " \
+                              "please report an issue on GitHub!"
+                        logger.error(msg)
+                        break  # break to else clause
+                    elif opt == '4':  # something wrong, retry
+                        logger.error("Error in data status.")
+                        break  # break to else clause
+                else:   # wait too long time
+                    return None
+            except Exception:
+                continue
+        else:
+            msg = "Data request fails after {} retries.".format(self.retries)
+            logger.error(msg)
+            return None
+
+    def _download_event_waveform(self, id):
+        '''
+        Download event waveform.
+
+        Parameters
+        ----------
+        id: str
+            Request ID.
+        '''
+
+        payload = {
+            'id': id,
+            'encode': 'D',
+            'LANG': 'en'
+        }
+
+        dlclient = Client(self.user, self.password)
+        for _ in range(self.retries):
+            try:
+                r = dlclient.session.get(self._EVENT_DOWNLOAD, params=payload,
+                                         stream=True, timeout=self.timeout)
+                fname = r.headers['Content-Disposition'].split('=')[1].strip('"')
+                outdir = '_'.join(fname.split('_')[0:2])
+
+                with tempfile.NamedTemporaryFile() as ft:
+                    # save to temporary file
+                    for chunk in r.iter_content(chunk_size=1024):
+                        if chunk:  # filter out keep-alive new chunks
+                            ft.write(chunk)
+                    ft.flush()
+
+                    # unzip temporary file
+                    with zipfile.ZipFile(ft.name) as fz:
+                        fz.extractall(path=outdir)
+                    return outdir
+            except Exception:
+                continue
+        else:
+            msg = "Data download fails after {} retries".format(self.retries)
+            logger.error(msg)
+            return None
+
+    def get_event_waveform(self, starttime, endtime,
+                           region="00",
+                           minmagnitude=3.0, maxmagnitude=9.9,
+                           include_unknown_mag=True,
+                           mindepth=None, maxdepth=None,
+                           minlatitude=None, maxlatitude=None,
+                           minlongitude=None, maxlongitude=None,
+                           latitude=None, longitude=None,
+                           minradius=None, maxradius=None):
+        '''Get event waveform data.
+
+        Parameters
+        ----------
+        starttime: :py:class:`datetime.datetime` or str
+            Starttime of events.
+        endtime: :py:class:`datetime.datetime` or str
+            Endtime of events.
+        region : str
+            Limit events in specified region. Allowed values are:
+
+            - ``00``: Whole Japan
+            - ``01``: Hokkaido Region
+            - ``02``: Tohoku Region
+            - ``03``: Kanto Region
+            - ``04``: Chubu Region
+            - ``05``: Kinki Region
+            - ``06``: Chugoku/Shikoku Region
+            - ``07``: Kyushu Region
+            - ``08``: Others
+        minmagnitude: float
+            Limit to events with a magnitude larger than speicified minimum.
+        maxmagnitude: float
+            Limit to events with a magnitude smaller than speicified maximum.
+        include_unknown_mag: bool
+            Include/exclude undetermined magnitude events.
+        minlatitude: float
+            Limit to events with a latitude larger than the specified minimum.
+        maxlatitude: float
+            Limit to events with a latitude smaller than the specified maximum.
+        minlongitude: float
+            Limit to events with a longitude larger than the specified minimum.
+        maxlongitude: float
+            Limit to events with a longitude smaller than the specified maximum.
+        latitude: float
+            Specify the latitude to be used for a radius search.
+        longitude: float
+            Specify the longitude to be used for a radius search.
+        minradius: float
+            Limit to events within the specified minimum number of degrees
+            from the geographic point defined by the latitude and longitude
+            parameters.
+        maxradius: float
+            Limit to events within the specified maximum number of degrees
+            from the geographic point defined by the latitude and longitude
+            parameters.
+        '''
+        starttime = string2datetime(starttime)
+        endtime = string2datetime(endtime)
+
+        # get event list
+        events = []
+        days = (endtime.date() - starttime.date()).days
+        for i in range(0, days + 1):
+            event_date = starttime.date() + timedelta(days=i)
+            events.extend(self._search_event_by_day(event_date.year,
+                                                    event_date.month,
+                                                    event_date.day,
+                                                    region=region,
+                                                    magmin=minmagnitude,
+                                                    magmax=maxmagnitude,
+                                                    include_unknown_mag=True))
+
+        # select events
+        selected_events = []
+        for event in events:
+            # select events based on origin time
+            if not starttime <= event.origin <= endtime:
+                continue
+            # select events based on magnitude
+            if not minmagnitude <= event.magnitude <= maxmagnitude:
+                continue
+            # select events based on depth
+            if mindepth and event.depth < mindepth:
+                continue
+            if maxdepth and event.depth > maxdepth:
+                continue
+
+            # select events in a box region
+            if minlatitude or maxlatitude or minlongitude or maxlongitude:
+                if not point_inside_box(event.latitude, event.longitude,
+                                        latitude=latitude, longitude=longitude,
+                                        minradius=minradius, maxradius=maxradius):
+                    continue
+
+            # select events in a circular region
+            if (latitude and longitude) and (minradius or maxradius):
+                if not point_inside_circular(event.latitude, event.longitude,
+                                             latitude, longitude,
+                                             minradius=minradius,
+                                             maxradius=maxradius):
+                    continue
+            selected_events.append(event)
+
+        logger.info("EVENT WAVEFORM DOWNLOADER:")
+        logger.info("{:d} events to download.".format(len(selected_events)))
+        for i in range(len(selected_events)):
+            logger.info("{}".format(selected_events[i]))
+
+        for event in selected_events:
+            id = self._request_event_waveform(event)
+            dirname = self._download_event_waveform(id)
+            logger.info("{} {}".format(event, dirname))
+
+    ###########################################################################
+    #                                                                         #
+    # Methods for get catalogs                                                #
+    #                                                                         #
+    ###########################################################################
     def _get_catalog(self, datatype, startdate, span, filename=None, os="DOS"):
         """Request JMA catalog."""
 
@@ -785,7 +1056,7 @@ class Client(object):
             'stcds': ':'.join(stations_selected) if stations_selected else None,
             'mode': '1',
         }
-        self.session.post(self._SELECT, data=payload, timeout=self.timeout)
+        self.session.post(self._CONT_SELECT, data=payload, timeout=self.timeout)
 
     def check_service_update(self):
         """Check if Hi-net service is updated.
@@ -951,3 +1222,53 @@ class Station(object):
         string = "{} {} {} {} {}".format(self.code, self.name, self.latitude,
                                          self.longitude, self.elevation)
         return string
+
+
+class Event(object):
+    """
+    Event class for requesting event waveforms.
+    """
+    def __init__(self, evid, origin, latitude, longitude, depth, magnitude,
+                 name, name_en):
+        self.evid = evid
+        self.origin = datetime.strptime(origin, "%Y/%m/%d %H:%M:%S.%f")
+        if latitude[-1] == 'N':
+            self.latitude = float(latitude[:-1])
+        else:
+            self.latitude = -float(latitude[:-1])
+
+        if longitude[-1] == 'E':
+            self.longitude = float(longitude[:-1])
+        else:
+            self.longitude = -float(longitude[:-1])
+
+        self.depth = float(depth.strip('km'))
+        self.magnitude = float(magnitude)
+        self.name = name
+        self.name_en = name_en
+
+    def __str__(self):
+        string = "{} {} {} {} {}".format(self.origin, self.latitude, self.longitude,
+                                         self.depth, self.magnitude)
+        return string
+
+
+def _parse_code(code):
+    """Parse network code.
+
+    >>> client._parse_code('0101')
+    ('01', '01', None)
+    >>> client._parse_code('0103A')
+    ('01', '03A', None)
+    >>> client._parse_code('010501')
+    ('01', '05', '010501')
+    """
+    if code not in NETWORK.keys():
+        msg = "{}: Incorrect network code.".format(code)
+        raise ValueError(msg)
+    elif code.startswith('0105') or code.startswith('0302'):
+        org, net, volc = code[0:2], code[2:4], code
+    else:
+        org, net, volc = code[0:2], code[2:], None
+
+    return org, net, volc
