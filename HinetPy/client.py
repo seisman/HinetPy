@@ -762,9 +762,12 @@ class Client(object):
             for station in stations_at_server:
                 if station.code != code:
                     continue
-                if point_inside_box(station.latitude, station.longitude,
-                                    latitude=latitude, longitude=longitude,
-                                    minradius=minradius, maxradius=maxradius):
+                if point_inside_box(station.latitude,
+                                    station.longitude,
+                                    minlatitude=minlatitude,
+                                    maxlatitude=maxlatitude,
+                                    minlongitude=minlongitude,
+                                    maxlongitude=maxlongitude):
                     stations_selected.append(station.name)
 
         # select stations in a circular region
