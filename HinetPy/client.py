@@ -135,10 +135,10 @@ class Client(object):
         """ Doctor does some checks.
 
         >>> client.doctor()
-        [2017-01-01 00:00:00] INFO: You're using the latest release (v0.5.0).
-        [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
-        [2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
-        [2017-01-01 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
+        [2019-02-19 00:00:00] INFO: You're using the latest release (v0.5.2).
+        [2019-02-19 00:00:00] INFO: Hi-net web service is NOT updated.
+        [2019-02-19 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
+        [2019-02-19 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
 
         **Checklist**
 
@@ -807,7 +807,7 @@ class Client(object):
         """Check whether HinetPy has a new release.
 
         >>> client.check_package_release()
-        [2017-01-01 00:00:00] INFO: You're using the latest release (v0.5.0).
+        [2019-02-19 00:00:00] INFO: You're using the latest release (v0.5.2).
         """
         from HinetPy import __version__, __title__
         from distutils.version import StrictVersion
