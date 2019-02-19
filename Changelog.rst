@@ -2,7 +2,7 @@ Changelog
 =========
 
 0.6.0 (under development):
- - Support request event waveform data
+ - Support request event waveform data (#16).
 
 0.5.2 (2019-02-19):
  - Fix selecting stations in a rectangular region (#17).
