@@ -30,7 +30,7 @@ class TestClientOthersClass:
         assert _parse_code('030201') == ('03', '02', '030201')
 
         with pytest.raises(ValueError):
-            client._parse_code('01013')
+            _parse_code('01013')
 
     def test_info(self, client):
         client.info()
