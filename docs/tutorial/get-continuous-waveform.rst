@@ -1,8 +1,8 @@
-Get waveform
-============
+Get continuous waveform
+=======================
 
 This tutorial shows how to use :meth:`~HinetPy.client.Client.get_waveform`
-to request waveform data from Hi-net in different ways.
+to request continuous waveform data from Hi-net in different ways.
 
 .. note::
 

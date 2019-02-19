@@ -536,7 +536,7 @@ class Client():
         }
         r = self.session.post(self._EVENT, data=payload, timeout=self.timeout)
         events = []
-        for result in re.findall('openRequest((.+))', r.text):
+        for result in re.findall("openRequest\((.+)\)", r.text):
             items = [item.strip("'") for item in result.split(',')]
             events.append(Event(items[0], *items[3:10]))
         return events
