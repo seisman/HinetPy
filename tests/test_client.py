@@ -214,6 +214,11 @@ class TestGetCatalogClass:
         with pytest.raises(ValueError):
             data = client.get_arrivaltime(startdate, 10)
 
+    def test_get_event_waveform(self, client):
+        self.client.get_event_waveform('201001010000', '201001020000',
+                                       minmagnitude=5.0, maxmagnitude=5.5,
+                                       mindepth=0, maxdepth=70)
+        assert os.path.exists("D20100101000189_20/D20100101000189_20.evt")
 
 
 class TestClientOthersClass:

@@ -10,6 +10,7 @@ import pytest
 import requests
 
 from HinetPy import Client
+from HinetPy.client import _parse_code
 from HinetPy.utils import string2datetime
 
 
@@ -23,10 +24,10 @@ def client():
 
 class TestClientOthersClass:
     def test_parse_code(self, client):
-        assert client._parse_code('0101') == ('01', '01', None)
-        assert client._parse_code('0103A') == ('01', '03A', None)
-        assert client._parse_code('010503') == ('01', '05', '010503')
-        assert client._parse_code('030201') == ('03', '02', '030201')
+        assert _parse_code('0101') == ('01', '01', None)
+        assert _parse_code('0103A') == ('01', '03A', None)
+        assert _parse_code('010503') == ('01', '05', '010503')
+        assert _parse_code('030201') == ('03', '02', '030201')
 
         with pytest.raises(ValueError):
             client._parse_code('01013')

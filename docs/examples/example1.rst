@@ -1,5 +1,5 @@
-Request waveform data from CSV catalog
---------------------------------------
+Request continuous waveform data from CSV catalog
+-------------------------------------------------
 
 This example shows how to request waveform data based on a catalog in CSV format.
 

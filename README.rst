@@ -33,6 +33,7 @@ Feature Support
 ===============
 
 - Request continuous waveform data from Hi-net
+- Request event waveform data from Hi-net
 - Select Hi-net/F-net stations inside a box or circular region
 - Convert waveform data from win32 format to SAC format
 - Extract instrumental response as SAC polezero file

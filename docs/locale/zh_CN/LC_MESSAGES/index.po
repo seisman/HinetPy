@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-21 16:01-0500\n"
+"POT-Creation-Date: 2019-02-19 17:30-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,79 +20,69 @@ msgstr ""
 msgid "HinetPy - A Hi-net Client powered by Python"
 msgstr "HinetPy——基于Python的Hi-net数据申请客户端"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:22
-#: <included from
+#: ../../../README.rst:22
 msgid ""
 "`HinetPy`_ is a Python package to automate and simplify tedious data "
 "request, downloading and format conversion tasks related to `NIED Hi-"
 "net`_."
 msgstr "`HinetPy`_ 是一个Python模块，致力于自动化和简化与 `NIED Hi-net`_ 相关的繁琐的数据申请、下载和格式转换工作。"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:25
-#: <included from
+#: ../../../README.rst:25
 msgid "`NIED Hi-net`_ | `Source Code`_ | `Documentation`_ | `中文文档`_"
 msgstr "`NIED Hi-net`_ | `源代码`_ | `Documentation`_ | `中文文档`_"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:33
-#: <included from
+#: ../../../README.rst:33
 msgid "Feature Support"
 msgstr "功能"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:35
-#: <included from
+#: ../../../README.rst:35
 msgid "Request continuous waveform data from Hi-net"
 msgstr "从Hi-net申请连续波形数据"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:36
-#: <included from
+#: ../../../README.rst:36
+msgid "Request event waveform data from Hi-net"
+msgstr "从Hi-net申请事件波形数据"
+
+#: ../../../README.rst:37
 msgid "Select Hi-net/F-net stations inside a box or circular region"
 msgstr "选择一个矩形或环形区域内的Hi-net/F-net台站"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:37
-#: <included from
+#: ../../../README.rst:38
 msgid "Convert waveform data from win32 format to SAC format"
 msgstr "将波形数据从win32格式转换为SAC格式"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:38
-#: <included from
+#: ../../../README.rst:39
 msgid "Extract instrumental response as SAC polezero file"
 msgstr "提取仪器响应信息并保存为SAC零极点文件"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:39
-#: <included from
+#: ../../../README.rst:40
 msgid "Multithreads downloading and conversion to speedup"
 msgstr "多线程并行下载和转换以加快速度"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:42
-#: <included from
+#: ../../../README.rst:43
 msgid "A simple example"
 msgstr "一个简单的示例"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:44
-#: <included from
+#: ../../../README.rst:45
 msgid ""
 "The power of `HinetPy`_ makes it simple to request continuous waveform "
 "data from Hi-net, convert the data into SAC format and extract "
 "instrumental responses as SAC polezero files."
 msgstr "`HinetPy`_ 功能强大，使得从Hi-net申请连续数据、将数据转换为SAC格式、提取仪器响应文件并保存为SAC零极点文件变得很简单。"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:75
-#: <included from
+#: ../../../README.rst:76
 msgid "Citation"
 msgstr "引用"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:77
-#: <included from
+#: ../../../README.rst:78
 msgid "If you find this package useful, please consider citing via:"
 msgstr "如果你觉得这个软件包很有用，请考虑在文章中通过如下方式引用："
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:83
-#: <included from
+#: ../../../README.rst:84
 msgid "License"
 msgstr "许可协议"
 
-#: ../../../README.rst /Users/seisman/Scripts/HinetPy/docs/index.rst>:85
-#: <included from
+#: ../../../README.rst:86
 msgid "This project is licensed under the terms of the `MIT license`_."
 msgstr "本项目使用 `MIT license`_ 许可协议。"
 
