@@ -151,16 +151,16 @@ msgid ""
 msgstr "``win32.extract_sac()``: 支持多进程以加速，不再返回值"
 
 #: ../../../Changelog.rst:48
-msgid "``Client.get_waveform()``: support multi-threads to speedup"
-msgstr "``Client.get_waveform()`` 支持多线程以加速"
+msgid "``Client.get_continuous_waveform()``: support multi-threads to speedup"
+msgstr "``Client.get_continuous_waveform()`` 支持多线程以加速"
 
 #: ../../../Changelog.rst:49
 msgid "Change ``Client.help()`` to ``Client.info()``"
 msgstr "将 ``Client.help()`` 修改为 ``Client.info()``"
 
 #: ../../../Changelog.rst:50
-msgid "``Client.get_waveform()`` now can automatically set ``max_span``"
-msgstr "``Client.get_waveform()`` 现已可以自动设置 ``max_span``"
+msgid "``Client.get_continuous_waveform()`` now can automatically set ``max_span``"
+msgstr "``Client.get_continuous_waveform()`` 现已可以自动设置 ``max_span``"
 
 #: ../../../Changelog.rst:51
 msgid "``Client.get_*()`` now support startime in different string formats"

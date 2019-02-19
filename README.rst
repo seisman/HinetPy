@@ -53,7 +53,7 @@ responses as SAC polezero files.
 >>>
 >>> # Let's try to request 20 minutes data since 2010-01-01T00:00(GMT+0900) from Hi-net
 >>> # '0101' is the code of Hi-net network
->>> data, ctable = client.get_waveform('0101', '201001010000', 20)
+>>> data, ctable = client.get_continuous_waveform('0101', '201001010000', 20)
 >>> # The request and downloading process usually takes several minutes
 >>> # waiting data request ...
 >>> # waiting data downloading ...

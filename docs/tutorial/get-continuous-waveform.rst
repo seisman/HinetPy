@@ -1,7 +1,7 @@
 Get continuous waveform
 =======================
 
-This tutorial shows how to use :meth:`~HinetPy.client.Client.get_waveform`
+This tutorial shows how to use :meth:`~HinetPy.client.Client.get_continuous_waveform`
 to request continuous waveform data from Hi-net in different ways.
 
 .. note::
@@ -15,7 +15,7 @@ Request 20 minutes data since 2010-01-01T00:00 (GMT+0900) from Hi-net network:
 
 >>> from HinetPy import Client
 >>> client = Client("username", "password")
->>> data, ctable = client.get_waveform('0101', '201001010000', 20)
+>>> data, ctable = client.get_continuous_waveform('0101', '201001010000', 20)
 [2017-03-11 17:46:20] INFO: 2010-01-01 00:00 ~20
 [2017-03-11 17:46:20] INFO: [1/4] => 2010-01-01 00:00 ~5
 [2017-03-11 17:46:41] INFO: [2/4] => 2010-01-01 00:05 ~5
@@ -24,18 +24,18 @@ Request 20 minutes data since 2010-01-01T00:00 (GMT+0900) from Hi-net network:
 >>> ls
 0101_201001010000_20.cnt 0101_20100101.ch
 
-:meth:`~HinetPy.client.Client.get_waveform` also supports ``starttime``
+:meth:`~HinetPy.client.Client.get_continuous_waveform` also supports ``starttime``
 in other common used formats:
 
->>> data, ctable = client.get_waveform('0101', '2010-01-01T00:00', 20)
->>> data, ctable = client.get_waveform('0101', '2010-01-01 00:00', 20)
+>>> data, ctable = client.get_continuous_waveform('0101', '2010-01-01T00:00', 20)
+>>> data, ctable = client.get_continuous_waveform('0101', '2010-01-01 00:00', 20)
 
 and :py:class:`datetime.datetime` to allow users manipulate datetimes in a
 more flexible way.
 
 >>> from datetime import datetime
 >>> starttime = datetime(2010, 1, 1, 0, 0)  # JST time
->>> data, ctable = client.get_waveform('0101', starttime, 20)
+>>> data, ctable = client.get_continuous_waveform('0101', starttime, 20)
 
 Now we get:
 
@@ -65,7 +65,7 @@ directory.
 >>> from datetime import datetime
 >>> client = Client("username", "password")
 >>> starttime = datetime(2010, 1, 1, 0, 0)  # JST time
->>> data, ctable = client.get_waveform('0101', starttime, 20,
+>>> data, ctable = client.get_continuous_waveform('0101', starttime, 20,
 ...                                    data="201001010000.cnt"
 ...                                    ctable='0101.ch',
 ...                                    outdir='201001010000')

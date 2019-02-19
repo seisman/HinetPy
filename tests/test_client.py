@@ -51,9 +51,9 @@ class TestClientCheckClass:
 
 
 class TestGetwaveformClass:
-    def test_get_waveform_1(self, client):
+    def test_get_continuous_waveform_1(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
-        data, ctable = client.get_waveform('0101', starttime, 9)
+        data, ctable = client.get_continuous_waveform('0101', starttime, 9)
 
         assert data == '0101_201001010000_9.cnt'
         assert os.path.exists(data)
@@ -62,8 +62,8 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         os.remove(ctable)
 
-    def test_get_waveform_starttime_in_string(self, client):
-        data, ctable = client.get_waveform('0101', '2010-01-01T00:00', 9)
+    def test_get_continuous_waveform_starttime_in_string(self, client):
+        data, ctable = client.get_continuous_waveform('0101', '2010-01-01T00:00', 9)
 
         assert data == '0101_201001010000_9.cnt'
         assert os.path.exists(data)
@@ -72,9 +72,9 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         os.remove(ctable)
 
-    def test_get_waveform_custom_name_1(self, client):
+    def test_get_continuous_waveform_custom_name_1(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
-        data, ctable = client.get_waveform('0101', starttime, 1,
+        data, ctable = client.get_continuous_waveform('0101', starttime, 1,
                                            data="customname1.cnt",
                                            ctable="customname1.ch")
 
@@ -85,9 +85,9 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         os.remove(ctable)
 
-    def test_get_waveform_custom_name_2(self, client):
+    def test_get_continuous_waveform_custom_name_2(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
-        data, ctable = client.get_waveform('0101', starttime, 1,
+        data, ctable = client.get_continuous_waveform('0101', starttime, 1,
                                            data="customname2/customname2.cnt",
                                            ctable="customname2/customname2.ch")
 
@@ -97,9 +97,9 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         shutil.rmtree("customname2")
 
-    def test_get_waveform_custom_name_3(self, client):
+    def test_get_continuous_waveform_custom_name_3(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
-        data, ctable = client.get_waveform('0101', starttime, 1,
+        data, ctable = client.get_continuous_waveform('0101', starttime, 1,
                                            outdir="customname3")
 
         assert data == "customname3/0101_201001010000_1.cnt"
@@ -108,9 +108,9 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         shutil.rmtree("customname3")
 
-    def test_get_waveform_custom_name_4(self, client):
+    def test_get_continuous_waveform_custom_name_4(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
-        data, ctable = client.get_waveform('0101', starttime, 1,
+        data, ctable = client.get_continuous_waveform('0101', starttime, 1,
                                            data="customname4-cnt/test.cnt",
                                            ctable="customname4-ch/test.ch",
                                            outdir="customname4-data")
@@ -124,29 +124,29 @@ class TestGetwaveformClass:
 
 
 class TestGetwaveformSpanClass:
-    def test_get_waveform_wrong_span_1(self, client):
+    def test_get_continuous_waveform_wrong_span_1(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
-            client.get_waveform('0101', starttime, 0)
+            client.get_continuous_waveform('0101', starttime, 0)
 
-    def test_get_waveform_wrong_span_2(self, client):
+    def test_get_continuous_waveform_wrong_span_2(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
-            client.get_waveform('0101', starttime, -4)
+            client.get_continuous_waveform('0101', starttime, -4)
 
-    def test_get_waveform_wrong_span_3(self, client):
+    def test_get_continuous_waveform_wrong_span_3(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(TypeError):
-            client.get_waveform('0101', starttime, 2.5)
+            client.get_continuous_waveform('0101', starttime, 2.5)
 
-    def test_get_waveform_span_larger_than_int(self, client):
+    def test_get_continuous_waveform_span_larger_than_int(self, client):
         starttime = datetime(2005, 1, 1, 0, 0)
         with pytest.raises(ValueError):
-            client.get_waveform('0101', starttime, 400000)
+            client.get_continuous_waveform('0101', starttime, 400000)
 
-    def test_get_waveform_larger_max_span(self, client):
+    def test_get_continuous_waveform_larger_max_span(self, client):
         starttime = datetime(2010, 1, 1, 0, 0)
-        data, ctable = client.get_waveform('0101', starttime, 10, max_span=65)
+        data, ctable = client.get_continuous_waveform('0101', starttime, 10, max_span=65)
         assert data == '0101_201001010000_10.cnt'
         assert os.path.exists(data)
         os.remove(data)
@@ -154,10 +154,10 @@ class TestGetwaveformSpanClass:
         assert os.path.exists(ctable)
         os.remove(ctable)
 
-    def test_get_waveform_wrong_starttime(self, client):
+    def test_get_continuous_waveform_wrong_starttime(self, client):
         starttime = datetime(2001, 1, 1, 0, 0)
         with pytest.raises(ValueError):
-            client.get_waveform('0101', starttime, 1)
+            client.get_continuous_waveform('0101', starttime, 1)
 
 
 class TestGetCatalogClass:

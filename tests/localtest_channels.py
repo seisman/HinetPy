@@ -17,7 +17,7 @@ difference = {}
 # always set one day before today as starttime
 starttime = datetime.today() - timedelta(days=1)
 for code in sorted(NETWORK.keys()):
-    win32, chfile = client.get_waveform(code, starttime, 1)
+    win32, chfile = client.get_continuous_waveform(code, starttime, 1)
     count = len(_get_channels(chfile))
 
     if count > NETWORK[code].channels:  # more

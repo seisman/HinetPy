@@ -20,5 +20,5 @@ with open("events.csv") as csvfile:
         if os.path.exists(outdir):
             continue
 
-        data, ctable = client.get_waveform('0101', starttime, 20, outdir=outdir)
+        data, ctable = client.get_continuous_waveform('0101', starttime, 20, outdir=outdir)
         win32.extract_sac(data, ctable, outdir=outdir, with_pz=True)

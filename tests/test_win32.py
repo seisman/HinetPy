@@ -23,7 +23,7 @@ def get_test_data():
     from HinetPy import Client
     client = Client(username, password)
     client.select_stations('0101', ['N.NGUH', 'N.NNMH'])
-    client.get_waveform('0101', '2017-01-01T00:00', 3, outdir=path,
+    client.get_continuous_waveform('0101', '2017-01-01T00:00', 3, outdir=path,
                         cleanup=False)
     for file in glob.glob("20170101000?0101VM.cnt"):
         os.rename(file, os.path.join(path, file))

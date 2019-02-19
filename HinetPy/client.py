@@ -294,9 +294,9 @@ class Client():
             logger.error(msg)
             return None, None
 
-    def get_waveform(self, code, starttime, span,
-                     max_span=None, data=None, ctable=None, outdir=None,
-                     threads=3, cleanup=True):
+    def get_continuous_waveform(self, code, starttime, span,
+                                max_span=None, data=None, ctable=None,
+                                outdir=None, threads=3, cleanup=True):
         '''
         Get continuous waveform from Hi-net server.
 
@@ -365,24 +365,24 @@ class Client():
         --------
         Request 6 minutes data since 2010-01-01T05:35 (GMT+0900) from Hi-net.
 
-        >>> client.get_waveform('0101', '201001010535', 6)
+        >>> client.get_continuous_waveform('0101', '201001010535', 6)
         ('0101_201001010535_6.cnt', '0101_20100101.ch')
 
         Several other string formats of ``starttime`` are also supported:
 
-        >>> client.get_waveform('0101', '2010-01-01 05:35', 6)
-        >>> client.get_waveform('0101', '2010-01-01T05:35', 6)
+        >>> client.get_continuous_waveform('0101', '2010-01-01 05:35', 6)
+        >>> client.get_continuous_waveform('0101', '2010-01-01T05:35', 6)
 
         ``starttime`` can be given as :py:class:`datetime.datetime`:
 
         >>> from datetime import datetime
         >>> starttime = datetime(2010, 1, 1, 5, 35)
-        >>> client.get_waveform('0101', starttime, 6)
+        >>> client.get_continuous_waveform('0101', starttime, 6)
         ('0101_201001010535_6.cnt', '0101_20100101.ch')
 
         Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:
 
-        >>> client.get_waveform('0103', starttime, 1440, max_span=25)
+        >>> client.get_continuous_waveform('0103', starttime, 1440, max_span=25)
         ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
         '''
@@ -490,6 +490,9 @@ class Client():
                 os.remove(cnt)
 
         return data, ctable
+
+    # alias of get_continuous_waveform to keep back-compatibility
+    get_waveform = get_continuous_waveform
 
     ###########################################################################
     #                                                                         #

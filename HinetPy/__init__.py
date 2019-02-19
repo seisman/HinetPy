@@ -12,7 +12,7 @@ Basis usage:
 >>> from datetime import datetime
 >>> client = Client("username", "password")
 >>> starttime = datetime(2010, 1, 1, 0, 0)
->>> data, ctable = client.get_waveform('0101', starttime, 20)
+>>> data, ctable = client.get_continuous_waveform('0101', starttime, 20)
 >>> win32.extract_sac(data, ctable)
 >>> win32.extract_pz(ctable)
 """

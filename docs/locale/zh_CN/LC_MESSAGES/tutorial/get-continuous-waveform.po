@@ -23,9 +23,9 @@ msgstr "获取连续波形数据"
 #: ../../tutorial/get-continuous-waveform.rst:4
 msgid ""
 "This tutorial shows how to use "
-":meth:`~HinetPy.client.Client.get_waveform` to request continuous "
+":meth:`~HinetPy.client.Client.get_continuous_waveform` to request continuous "
 "waveform data from Hi-net in different ways."
-msgstr "本教程将展示如何通过 :meth:`~HinetPy.client.Client.get_waveform` 用多种方式从Hi-net申请连续波形数据。"
+msgstr "本教程将展示如何通过 :meth:`~HinetPy.client.Client.get_continuous_waveform` 用多种方式从Hi-net申请连续波形数据。"
 
 #: ../../tutorial/get-continuous-waveform.rst:9
 msgid "All times in HinetPy and Hi-net website are in JST time (GMT+0900)."
@@ -43,9 +43,9 @@ msgstr "申请Hi-net台网从2010-01-01T00:00 (GMT+0900)开始的20分钟的数�
 
 #: ../../tutorial/get-continuous-waveform.rst:27
 msgid ""
-":meth:`~HinetPy.client.Client.get_waveform` also supports ``starttime`` "
+":meth:`~HinetPy.client.Client.get_continuous_waveform` also supports ``starttime`` "
 "in other common used formats:"
-msgstr ":meth:`~HinetPy.client.Client.get_waveform` 中 ``starttime`` 还可以用其他常见格式："
+msgstr ":meth:`~HinetPy.client.Client.get_continuous_waveform` 中 ``starttime`` 还可以用其他常见格式："
 
 #: ../../tutorial/get-continuous-waveform.rst:33
 msgid ""

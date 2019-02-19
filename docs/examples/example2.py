@@ -24,5 +24,5 @@ for event in catalog:  # loop over events
     if os.path.exits(ourdir):
         continue
 
-    data, ctable = client.get_waveform('0101', starttime, 20, outdir=outdir)
+    data, ctable = client.get_continuous_waveform('0101', starttime, 20, outdir=outdir)
     win32.extract_sac(data, ctable, outdir=outdir, with_pz=True)
