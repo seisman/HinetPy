@@ -19,4 +19,4 @@ You can also limit events to a specified region by three ways:
 - specify a box region
 - specify a circular region
 
-See :meth:`~HinetPy.client.Client.get_waveform` for more available options.
+See :meth:`~HinetPy.client.Client.get_event_waveform` for more available options.

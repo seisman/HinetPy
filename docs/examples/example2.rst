@@ -1,5 +1,5 @@
-Request waveform data from obspy Catalog
-----------------------------------------
+Request continous waveform data from obspy Catalog
+--------------------------------------------------
 
 .. literalinclude:: example2.py
    :language: python

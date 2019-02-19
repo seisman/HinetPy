@@ -662,7 +662,7 @@ class Client():
             Starttime of events.
         endtime: :py:class:`datetime.datetime` or str
             Endtime of events.
-        region : str
+        region: str
             Limit events in specified region. Allowed values are:
 
             - ``00``: Whole Japan

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-21 16:38-0500\n"
+"POT-Creation-Date: 2019-02-19 17:44-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,7 @@ msgid "Hi-net web service client."
 msgstr "Hi-net 网络服务客户端。"
 
 #: HinetPy.client.Client HinetPy.client.Client.get_arrivaltime
+#: HinetPy.client.Client.get_event_waveform
 #: HinetPy.client.Client.get_focalmechanism
 #: HinetPy.client.Client.get_selected_stations
 #: HinetPy.client.Client.get_waveform HinetPy.client.Client.info
@@ -118,8 +119,8 @@ msgstr ""
 ":meth:`~HinetPy.client.Client.check_cmd_exists` ）"
 
 #: HinetPy.client.Client.get_waveform:1 of
-msgid "Get waveform from Hi-net server."
-msgstr "从Hi-net服务器获取波形。"
+msgid "Get continuous waveform from Hi-net server."
+msgstr "从Hi-net服务器获取连续波形。"
 
 #: HinetPy.client.Client.get_waveform:3 of
 msgid "Network code. See :meth:`~HinetPy.client.Client.info` for details."
@@ -171,13 +172,6 @@ msgstr "在合并文件之后清理1分钟长度的cnt文件。"
 #: HinetPy.client.Client.get_waveform of
 msgid "Returns"
 msgstr ""
-
-#: HinetPy.client.Client.get_waveform:26 of
-#, fuzzy
-msgid ""
-"* **data** (*str*) -- Filename of downloaded win32 data. * **ctable** "
-"(*str*) -- Filename of downloaded channel table file."
-msgstr "**ctable** (*str*) -- 下载的通道表文件的文件名。"
 
 #: HinetPy.client.Client.get_waveform:26 of
 msgid "**data** (*str*) -- Filename of downloaded win32 data."
@@ -268,6 +262,116 @@ msgstr "``starttime`` 也可以用 :py:class:`datetime.datetime` 指定："
 #: HinetPy.client.Client.get_waveform:77 of
 msgid "Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:"
 msgstr "从F-net申请2010-01-01T00:00 (GMT+0900)全天的数据："
+
+#: HinetPy.client.Client.get_event_waveform:1 of
+msgid "Get event waveform data."
+msgstr "获取事件波形数据。"
+
+#: HinetPy.client.Client.get_event_waveform:3 of
+msgid "Starttime of events."
+msgstr "事件的开始事件。"
+
+#: HinetPy.client.Client.get_event_waveform:5 of
+msgid "Endtime of events."
+msgstr "事件的结束事件。"
+
+#: HinetPy.client.Client.get_event_waveform:7 of
+msgid ""
+"Limit events in specified region. Allowed values are:  - ``00``: Whole "
+"Japan - ``01``: Hokkaido Region - ``02``: Tohoku Region - ``03``: Kanto "
+"Region - ``04``: Chubu Region - ``05``: Kinki Region - ``06``: "
+"Chugoku/Shikoku Region - ``07``: Kyushu Region - ``08``: Others"
+msgstr ""
+
+#: HinetPy.client.Client.get_event_waveform:7 of
+msgid "Limit events in specified region. Allowed values are:"
+msgstr "限制事件在指定的区域内。可选值包括："
+
+#: HinetPy.client.Client.get_event_waveform:9 of
+msgid "``00``: Whole Japan"
+msgstr ""
+
+#: HinetPy.client.Client.get_event_waveform:10 of
+msgid "``01``: Hokkaido Region"
+msgstr ""
+
+#: HinetPy.client.Client.get_event_waveform:11 of
+msgid "``02``: Tohoku Region"
+msgstr ""
+
+#: HinetPy.client.Client.get_event_waveform:12 of
+msgid "``03``: Kanto Region"
+msgstr ""
+
+#: HinetPy.client.Client.get_event_waveform:13 of
+msgid "``04``: Chubu Region"
+msgstr ""
+
+#: HinetPy.client.Client.get_event_waveform:14 of
+msgid "``05``: Kinki Region"
+msgstr ""
+
+#: HinetPy.client.Client.get_event_waveform:15 of
+msgid "``06``: Chugoku/Shikoku Region"
+msgstr ""
+
+#: HinetPy.client.Client.get_event_waveform:16 of
+msgid "``07``: Kyushu Region"
+msgstr ""
+
+#: HinetPy.client.Client.get_event_waveform:17 of
+msgid "``08``: Others"
+msgstr ""
+
+#: HinetPy.client.Client.get_event_waveform:19 of
+msgid "Limit to events with a magnitude larger than speicified minimum."
+msgstr "限制事件震级大于指定值。"
+
+#: HinetPy.client.Client.get_event_waveform:21 of
+msgid "Limit to events with a magnitude smaller than speicified maximum."
+msgstr "限制事件震级小于指定值。"
+
+#: HinetPy.client.Client.get_event_waveform:23 of
+msgid "Include/exclude undetermined magnitude events."
+msgstr "包括/排除未定震级的时间。"
+
+#: HinetPy.client.Client.get_event_waveform:25 of
+msgid "Limit to events with a latitude larger than the specified minimum."
+msgstr "限制台站纬度大于指定值。"
+
+#: HinetPy.client.Client.get_event_waveform:27 of
+msgid "Limit to events with a latitude smaller than the specified maximum."
+msgstr "限制台站纬度小于指定值。"
+
+#: HinetPy.client.Client.get_event_waveform:29 of
+msgid "Limit to events with a longitude larger than the specified minimum."
+msgstr "限制台站经度大于指定值。"
+
+#: HinetPy.client.Client.get_event_waveform:31 of
+msgid "Limit to events with a longitude smaller than the specified maximum."
+msgstr "限制台站经度小于指定值。"
+
+#: HinetPy.client.Client.get_event_waveform:33
+#: HinetPy.client.Client.select_stations:22 of
+msgid "Specify the latitude to be used for a radius search."
+msgstr "指定用于半径搜索的纬度。"
+
+#: HinetPy.client.Client.get_event_waveform:35
+#: HinetPy.client.Client.select_stations:24 of
+msgid "Specify the longitude to be used for a radius search."
+msgstr "指定用于半径搜索的经度。"
+
+#: HinetPy.client.Client.get_event_waveform:37 of
+msgid ""
+"Limit to events within the specified minimum number of degrees from the "
+"geographic point defined by the latitude and longitude parameters."
+msgstr "指定环形搜索区域的最小半径。"
+
+#: HinetPy.client.Client.get_event_waveform:41 of
+msgid ""
+"Limit to events within the specified maximum number of degrees from the "
+"geographic point defined by the latitude and longitude parameters."
+msgstr "指定环形搜索区域的最大半径。"
 
 #: HinetPy.client.Client.get_arrivaltime:1 of
 msgid "Get JMA arrival time data from Hi-net."
@@ -376,14 +480,6 @@ msgstr "限制台站经度大于指定值。"
 #: HinetPy.client.Client.select_stations:20 of
 msgid "Limit to stations with a longitude smaller than the specified maximum."
 msgstr "限制台站经度小于指定值。"
-
-#: HinetPy.client.Client.select_stations:22 of
-msgid "Specify the latitude to be used for a radius search."
-msgstr "指定用于半径搜索的纬度。"
-
-#: HinetPy.client.Client.select_stations:24 of
-msgid "Specify the longitude to be used for a radius search."
-msgstr "指定用于半径搜索的经度。"
 
 #: HinetPy.client.Client.select_stations:26 of
 msgid ""
