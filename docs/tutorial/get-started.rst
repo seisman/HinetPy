@@ -38,10 +38,10 @@ Do checks
 Let our :meth:`~HinetPy.client.Client.doctor` checks if everything goes right:
 
 >>> client.doctor()
-[2017-03-11 16:11:47] INFO: You're using the latest release (v0.5.0).
-[2017-03-11 16:11:46] INFO: Hi-net web service is NOT updated.
-[2017-03-11 16:11:47] INFO: catwin32: /home/user/bin/catwin32.
-[2017-03-11 16:11:47] INFO: win2sac_32: /home/user/bin/win2sac_32.
+[2019-02-19 16:11:47] INFO: You're using the latest release (v0.5.2).
+[2019-02-19 16:11:46] INFO: Hi-net web service is NOT updated.
+[2019-02-19 16:11:47] INFO: catwin32: /home/user/bin/catwin32.
+[2019-02-19 16:11:47] INFO: win2sac_32: /home/user/bin/win2sac_32.
 
 Congratulations! You're using the latest version of HinetPy, and the Hi-net
 web service is NOT updated since the release of HinetPy, which means HinetPy

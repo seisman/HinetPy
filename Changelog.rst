@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.5.2 (2019-02-19):
+ - Fix selecting stations in a rectangular region (#17).
+
 0.5.1 (2018-12-08):
  - Fix typo from longtitude to longitude.
 
