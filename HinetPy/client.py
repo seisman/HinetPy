@@ -753,8 +753,10 @@ class Client():
             # select events in a box region
             if minlatitude or maxlatitude or minlongitude or maxlongitude:
                 if not point_inside_box(event.latitude, event.longitude,
-                                        latitude=latitude, longitude=longitude,
-                                        minradius=minradius, maxradius=maxradius):
+                                        minlatitude=minlatitude,
+                                        maxlatitude=maxlatitude,
+                                        minlongitude=minlongitude,
+                                        maxlongitude=maxlongitude):
                     continue
 
             # select events in a circular region
