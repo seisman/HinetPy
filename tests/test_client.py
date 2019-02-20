@@ -49,6 +49,9 @@ class TestClientCheckClass:
     def test_check_cmd_exists(self, client):
         assert client.check_cmd_exists()
 
+    def test_docter(self, client):
+        client.doctor()
+
 
 class TestGetwaveformClass:
     def test_get_continuous_waveform_1(self, client):
@@ -121,6 +124,10 @@ class TestGetwaveformClass:
         assert os.path.exists(ctable)
         shutil.rmtree("customname4-cnt")
         shutil.rmtree("customname4-ch")
+
+    def test_get_waveform_alias(self, client):
+        starttime = datetime(2010, 1, 1, 0, 0)
+        data, ctable = client.get_waveform('0101', starttime, 1)
 
 
 class TestGetwaveformSpanClass:
@@ -216,9 +223,15 @@ class TestGetCatalogClass:
 
     def test_get_event_waveform(self, client):
         client.get_event_waveform('201001010000', '201001020000',
-                                  minmagnitude=5.0, maxmagnitude=5.5,
-                                  mindepth=0, maxdepth=70)
+                                  minmagnitude=3.5, maxmagnitude=5.5,
+                                  mindepth=0, maxdepth=70,
+                                  minlatitude=40.0,
+                                  minlongitude=140.0,
+                                  latitude=46.49,
+                                  longitude=151.97,
+                                  maxradius=1.0)
         assert os.path.exists("D20100101000189_20/D20100101000189_20.evt")
+        shutil.rmtree("D20100101000189_20")
 
 
 class TestClientOthersClass:
@@ -236,3 +249,6 @@ class TestClientOthersClass:
         with pytest.raises(ValueError):
             client.get_selected_stations('0501')
 
+    def test_get_win32tools(self, client):
+        assert client._get_win32tools() == "win32tools.tar.gz"
+        os.remove("win32tools.tar.gz")

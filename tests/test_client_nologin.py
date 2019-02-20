@@ -43,3 +43,11 @@ class TestClientOthersClass:
         stations = client.get_station_list('0101')
         assert type(stations) == list
         assert len(stations) >= 700
+
+        stations = client.get_station_list('0120')
+        assert type(stations) == list
+        assert len(stations) >= 120
+
+        stations = client.get_station_list('0131')
+        assert type(stations) == list
+        assert len(stations) >= 250
