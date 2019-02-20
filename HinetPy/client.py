@@ -491,8 +491,23 @@ class Client():
 
         return data, ctable
 
-    # alias of get_continuous_waveform to keep back-compatibility
-    get_waveform = get_continuous_waveform
+    def get_waveform(self, code, starttime, span,
+                     max_span=None, data=None, ctable=None,
+                     outdir=None, threads=3, cleanup=True):
+        """
+        .. versionchanged:: 0.6.0
+
+            Deprecated.
+
+            :meth:`~HinetPy.client.Client.get_waveform` has been renamed to
+            :meth:`~HinetPy.client.Client.get_continuous_waveform`.
+        """
+        logger.warn("The get_waveform() function is deprecated. Please "
+                    "use get_continuous_waveform().")
+        return self.get_continuous_waveform(code, starttime, span,
+                                            max_span=max_span, data=data,
+                                            ctable=ctable, outdir=outdir,
+                                            threads=threads, cleanup=cleanup)
 
     ###########################################################################
     #                                                                         #

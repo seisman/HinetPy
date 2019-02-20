@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-19 18:26-0500\n"
+"POT-Creation-Date: 2019-02-19 23:37-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,8 +28,7 @@ msgstr "Hi-net 网络服务客户端。"
 #: HinetPy.client.Client.get_continuous_waveform
 #: HinetPy.client.Client.get_event_waveform
 #: HinetPy.client.Client.get_focalmechanism
-#: HinetPy.client.Client.get_selected_stations
-#: HinetPy.client.Client.get_waveform HinetPy.client.Client.info
+#: HinetPy.client.Client.get_selected_stations HinetPy.client.Client.info
 #: HinetPy.client.Client.login HinetPy.client.Client.select_stations of
 msgid "Parameters"
 msgstr "参数"
@@ -54,8 +53,7 @@ msgstr "请求失败时重新尝试多少次。"
 msgid "See notes below."
 msgstr "见下面的注解。"
 
-#: HinetPy.client.Client:16 HinetPy.client.Client.get_continuous_waveform:29
-#: HinetPy.client.Client.get_waveform:29 of
+#: HinetPy.client.Client:16 HinetPy.client.Client.get_continuous_waveform:29 of
 msgid "Notes"
 msgstr "注解"
 
@@ -83,8 +81,7 @@ msgstr ""
 
 #: HinetPy.client.Client:31 HinetPy.client.Client.get_arrivaltime:15
 #: HinetPy.client.Client.get_continuous_waveform:58
-#: HinetPy.client.Client.get_focalmechanism:15
-#: HinetPy.client.Client.get_waveform:58 HinetPy.client.Client.info:6
+#: HinetPy.client.Client.get_focalmechanism:15 HinetPy.client.Client.info:6
 #: HinetPy.client.Client.login:8 HinetPy.client.Client.select_stations:35 of
 msgid "Examples"
 msgstr "示例"
@@ -121,119 +118,98 @@ msgstr ""
 "``catwin32`` 和 ``win2sac_32`` 是否在PATH中（见 "
 ":meth:`~HinetPy.client.Client.check_cmd_exists` ）"
 
-#: HinetPy.client.Client.get_continuous_waveform:1
-#: HinetPy.client.Client.get_waveform:1 of
+#: HinetPy.client.Client.get_continuous_waveform:1 of
 msgid "Get continuous waveform from Hi-net server."
 msgstr "从Hi-net服务器获取连续波形。"
 
-#: HinetPy.client.Client.get_continuous_waveform:3
-#: HinetPy.client.Client.get_waveform:3 of
+#: HinetPy.client.Client.get_continuous_waveform:3 of
 msgid "Network code. See :meth:`~HinetPy.client.Client.info` for details."
 msgstr "台网代码。见 :meth:`~HinetPy.client.Client.info` 。"
 
-#: HinetPy.client.Client.get_continuous_waveform:5
-#: HinetPy.client.Client.get_waveform:5 of
+#: HinetPy.client.Client.get_continuous_waveform:5 of
 msgid "Starttime of data request."
 msgstr "数据请求的开始时间。"
 
-#: HinetPy.client.Client.get_continuous_waveform:7
-#: HinetPy.client.Client.get_waveform:7 of
+#: HinetPy.client.Client.get_continuous_waveform:7 of
 msgid "Time span in minutes."
 msgstr "数据的时间长度，单位为分钟。"
 
-#: HinetPy.client.Client.get_continuous_waveform:9
-#: HinetPy.client.Client.get_waveform:9 of
+#: HinetPy.client.Client.get_continuous_waveform:9 of
 msgid ""
 "Maximum time span for sub-requests. Defaults to be determined "
 "automatically."
 msgstr "子请求的最大时间长度。默认会自动决定。"
 
-#: HinetPy.client.Client.get_continuous_waveform:12
-#: HinetPy.client.Client.get_waveform:12 of
+#: HinetPy.client.Client.get_continuous_waveform:12 of
 msgid ""
 "Filename of downloaded win32 data. Default format: "
 "CODE_YYYYmmddHHMM_SPAN.cnt"
 msgstr "下载的win32数据的文件名。默认格式： ``CODE_YYYYmmddHHMM_SPAN.cnt``"
 
-#: HinetPy.client.Client.get_continuous_waveform:15
-#: HinetPy.client.Client.get_waveform:15 of
+#: HinetPy.client.Client.get_continuous_waveform:15 of
 msgid ""
 "Filename of downloaded channel table file. Default format: "
 "CODE_YYYYmmdd.ch"
 msgstr "下载的通道表文件名。默认格式为 ``CODE_YYYYmmdd.ch``"
 
-#: HinetPy.client.Client.get_continuous_waveform:18
-#: HinetPy.client.Client.get_waveform:18 of
+#: HinetPy.client.Client.get_continuous_waveform:18 of
 msgid ""
 "Save win32 and channel table data to specified directory. Default is "
 "current directory."
 msgstr "将win32和通道表数据保存到指定目录中。默认为当前目录。"
 
-#: HinetPy.client.Client.get_continuous_waveform:21
-#: HinetPy.client.Client.get_waveform:21 of
+#: HinetPy.client.Client.get_continuous_waveform:21 of
 msgid "How many threads used to speedup data downloading."
 msgstr "用多少个线程以加速下载。"
 
-#: HinetPy.client.Client.get_continuous_waveform:23
-#: HinetPy.client.Client.get_waveform:23 of
+#: HinetPy.client.Client.get_continuous_waveform:23 of
 msgid "Clean up one-minute cnt files after merging."
 msgstr "在合并文件之后清理1分钟长度的cnt文件。"
 
 #: HinetPy.client.Client.get_arrivaltime
 #: HinetPy.client.Client.get_continuous_waveform
 #: HinetPy.client.Client.get_focalmechanism
-#: HinetPy.client.Client.get_selected_stations
-#: HinetPy.client.Client.get_waveform of
+#: HinetPy.client.Client.get_selected_stations of
 msgid "Returns"
 msgstr ""
 
-#: HinetPy.client.Client.get_continuous_waveform:26
-#: HinetPy.client.Client.get_waveform:26 of
+#: HinetPy.client.Client.get_continuous_waveform:26 of
 msgid "**data** (*str*) -- Filename of downloaded win32 data."
 msgstr "**data** (*str*) -- 下载得到的win32数据的文件名。"
 
-#: HinetPy.client.Client.get_continuous_waveform:27
-#: HinetPy.client.Client.get_waveform:27 of
+#: HinetPy.client.Client.get_continuous_waveform:27 of
 msgid "**ctable** (*str*) -- Filename of downloaded channel table file."
 msgstr "**ctable** (*str*) -- 下载的通道表文件的文件名。"
 
-#: HinetPy.client.Client.get_continuous_waveform:31
-#: HinetPy.client.Client.get_waveform:31 of
+#: HinetPy.client.Client.get_continuous_waveform:31 of
 msgid "**TimeZone**"
 msgstr "**时区**"
 
-#: HinetPy.client.Client.get_continuous_waveform:33
-#: HinetPy.client.Client.get_waveform:33 of
+#: HinetPy.client.Client.get_continuous_waveform:33 of
 msgid "All times in HinetPy are in JST (GMT+0900)."
 msgstr "HinetPy中的所有时间都是日本标准时间（GMT+0900）。"
 
-#: HinetPy.client.Client.get_continuous_waveform:35
-#: HinetPy.client.Client.get_waveform:35 of
+#: HinetPy.client.Client.get_continuous_waveform:35 of
 msgid "**max_span**"
 msgstr ""
 
-#: HinetPy.client.Client.get_continuous_waveform:37
-#: HinetPy.client.Client.get_waveform:37 of
+#: HinetPy.client.Client.get_continuous_waveform:37 of
 msgid "Hi-net server sets three limitations of each data request:"
 msgstr "Hi-net对每次数据请求设置了3个限制："
 
-#: HinetPy.client.Client.get_continuous_waveform:39
-#: HinetPy.client.Client.get_waveform:39 of
+#: HinetPy.client.Client.get_continuous_waveform:39 of
 msgid "Record_Length <= 60 min"
 msgstr "数据长度不大于60分钟"
 
-#: HinetPy.client.Client.get_continuous_waveform:40
-#: HinetPy.client.Client.get_waveform:40 of
+#: HinetPy.client.Client.get_continuous_waveform:40 of
 msgid "Number_of_channels * Record_Length <= 12000 min"
 msgstr "通道数*数据长度不得大于12000分钟"
 
-#: HinetPy.client.Client.get_continuous_waveform:41
-#: HinetPy.client.Client.get_waveform:41 of
+#: HinetPy.client.Client.get_continuous_waveform:41 of
 msgid "Only the latest 150 requested data are kept"
 msgstr "仅保留最近150次请求的数据"
 
-#: HinetPy.client.Client.get_continuous_waveform:43
-#: HinetPy.client.Client.get_waveform:43 of
+#: HinetPy.client.Client.get_continuous_waveform:43 of
 msgid ""
 "For example, Hi-net network has about 24000 channels. Acoording to "
 "limitation 2, the record length should be no more than 5 minutes in each "
@@ -243,60 +219,61 @@ msgstr ""
 "例如，Hi-"
 "net台网有大约24000个通道。根据第2条限制，单次请求的通道长度不得大于5分钟。HinetPy通过将一个长的数据请求分割成多个短的子请求来打破这一限制。"
 
-#: HinetPy.client.Client.get_continuous_waveform:49
-#: HinetPy.client.Client.get_waveform:49 of
+#: HinetPy.client.Client.get_continuous_waveform:49 of
 msgid "**Workflow**"
 msgstr "**工作流程**"
 
-#: HinetPy.client.Client.get_continuous_waveform:51
-#: HinetPy.client.Client.get_waveform:51 of
+#: HinetPy.client.Client.get_continuous_waveform:51 of
 msgid "do several checks"
 msgstr "做一些检查"
 
-#: HinetPy.client.Client.get_continuous_waveform:52
-#: HinetPy.client.Client.get_waveform:52 of
+#: HinetPy.client.Client.get_continuous_waveform:52 of
 msgid "split a long-duration request into several short-duration sub-requests"
 msgstr "将长数据请求分割成多个短的数据子请求"
 
-#: HinetPy.client.Client.get_continuous_waveform:53
-#: HinetPy.client.Client.get_waveform:53 of
+#: HinetPy.client.Client.get_continuous_waveform:53 of
 msgid "loop over all sub-requests and return data id to download"
 msgstr "对所有子请求进行循环并返回要下载的数据ID"
 
-#: HinetPy.client.Client.get_continuous_waveform:54
-#: HinetPy.client.Client.get_waveform:54 of
+#: HinetPy.client.Client.get_continuous_waveform:54 of
 msgid "download all data based on data id"
 msgstr "基于数据ID下载所有数据"
 
-#: HinetPy.client.Client.get_continuous_waveform:55
-#: HinetPy.client.Client.get_waveform:55 of
+#: HinetPy.client.Client.get_continuous_waveform:55 of
 msgid "extract all zip files and merge into one win32 format data"
 msgstr "解压下载得到的所有ZIP文件并合并到一个win32格式的文件"
 
-#: HinetPy.client.Client.get_continuous_waveform:56
-#: HinetPy.client.Client.get_waveform:56 of
+#: HinetPy.client.Client.get_continuous_waveform:56 of
 msgid "cleanup"
 msgstr "清理工作"
 
-#: HinetPy.client.Client.get_continuous_waveform:60
-#: HinetPy.client.Client.get_waveform:60 of
+#: HinetPy.client.Client.get_continuous_waveform:60 of
 msgid "Request 6 minutes data since 2010-01-01T05:35 (GMT+0900) from Hi-net."
 msgstr "从Hi-net请求2010-01-01T05:35 (GMT+0900)开始的6分钟数据。"
 
-#: HinetPy.client.Client.get_continuous_waveform:65
-#: HinetPy.client.Client.get_waveform:65 of
+#: HinetPy.client.Client.get_continuous_waveform:65 of
 msgid "Several other string formats of ``starttime`` are also supported:"
 msgstr "``starttime`` 也支持其他常见的格式："
 
-#: HinetPy.client.Client.get_continuous_waveform:70
-#: HinetPy.client.Client.get_waveform:70 of
+#: HinetPy.client.Client.get_continuous_waveform:70 of
 msgid "``starttime`` can be given as :py:class:`datetime.datetime`:"
 msgstr "``starttime`` 也可以用 :py:class:`datetime.datetime` 指定："
 
-#: HinetPy.client.Client.get_continuous_waveform:77
-#: HinetPy.client.Client.get_waveform:77 of
+#: HinetPy.client.Client.get_continuous_waveform:77 of
 msgid "Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:"
 msgstr "从F-net申请2010-01-01T00:00 (GMT+0900)全天的数据："
+
+#: HinetPy.client.Client.get_waveform:3 of
+msgid "Deprecated."
+msgstr "已废弃。"
+
+#: HinetPy.client.Client.get_waveform:5 of
+msgid ""
+":meth:`~HinetPy.client.Client.get_waveform` has been renamed to "
+":meth:`~HinetPy.client.Client.get_continuous_waveform`."
+msgstr ""
+":meth:`~HinetPy.client.Client.get_waveform` 已改名为"
+":meth:`~HinetPy.client.Client.get_continuous_waveform`."
 
 #: HinetPy.client.Client.get_event_waveform:1 of
 msgid "Get event waveform data."
@@ -569,4 +546,3 @@ msgstr ""
 #: HinetPy.client.Client.info:1 of
 msgid "List information of networks."
 msgstr "列出台网信息。"
-
