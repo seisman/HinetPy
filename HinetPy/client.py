@@ -905,9 +905,9 @@ class Client():
         elif code in ['0120', '0120A', '0131']:  # S-net and MeSO-net
             import json
             if code in ['0120', '0120A']:
-                json_text = self.session.get(self._SNET_STATION_INFO).text.lstrip('var snet_station = [').rstrip('];')
+                json_text = requests.get(self._SNET_STATION_INFO).text.lstrip('var snet_station = [').rstrip('];')
             else:
-                json_text = self.session.get(self._MESONET_STATION_INFO).text.lstrip('var mesonet_station = [').rstrip('];')
+                json_text = requests.get(self._MESONET_STATION_INFO).text.lstrip('var mesonet_station = [').rstrip('];')
             for station in json.loads(json_text)['features']:
                 code = station['properties']['id']
                 name = station['properties']['station_cd']
