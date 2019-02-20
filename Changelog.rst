@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6.0 (under development):
+0.6.0 (2019-02-19):
  - Support request event waveform data (#16).
  - ``get_waveform()`` is renamed to ``get_continuos_waveform()``.
 

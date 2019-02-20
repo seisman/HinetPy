@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: HinetPy 0.5.2\n"
+"Project-Id-Version: HinetPy 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-19 18:26-0500\n"
+"POT-Creation-Date: 2019-02-19 22:44-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgid "Changelog"
 msgstr "修订历史"
 
 #: ../../../Changelog.rst:6
-msgid "0.6.0 (under development):"
+msgid "0.6.0 (2019-02-19):"
 msgstr ""
 
 #: ../../../Changelog.rst:5
@@ -271,4 +271,3 @@ msgstr "``rdhinet.py``: 将WIN32格式转换为SAC格式"
 #: ../../../Changelog.rst:82
 msgid "``ch2pz.py``: extract SAC PZ files from Hi-net channel table files"
 msgstr "``ch2pz.py``: 从Hi-net通道表文件中提取SAC零极点文件"
-
