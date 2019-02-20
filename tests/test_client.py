@@ -234,6 +234,22 @@ class TestGetCatalogClass:
         shutil.rmtree("D20100101000189_20")
 
 
+class TestClientGetStationList:
+
+    def test_get_station_list(self, client):
+        stations = client.get_station_list('0101')
+        assert type(stations) == list
+        assert len(stations) >= 700
+
+        stations = client.get_station_list('0120')
+        assert type(stations) == list
+        assert len(stations) >= 120
+
+        stations = client.get_station_list('0131')
+        assert type(stations) == list
+        assert len(stations) >= 250
+
+
 class TestClientOthersClass:
 
     def test_get_allowed_span(self, client):
