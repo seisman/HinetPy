@@ -698,6 +698,10 @@ class Client():
             Limit to events with a magnitude smaller than speicified maximum.
         include_unknown_mag: bool
             Include/exclude undetermined magnitude events.
+        mindepth: float
+            Limit to events deeper than the specified minimum.
+        maxdepth: float
+            Limit to events shallower than the specified maximum.
         minlatitude: float
             Limit to events with a latitude larger than the specified minimum.
         maxlatitude: float

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-19 23:37-0500\n"
+"POT-Creation-Date: 2019-02-28 14:38-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -272,8 +272,8 @@ msgid ""
 ":meth:`~HinetPy.client.Client.get_waveform` has been renamed to "
 ":meth:`~HinetPy.client.Client.get_continuous_waveform`."
 msgstr ""
-":meth:`~HinetPy.client.Client.get_waveform` 已改名为"
-":meth:`~HinetPy.client.Client.get_continuous_waveform`."
+":meth:`~HinetPy.client.Client.get_waveform` "
+"已改名为 :meth:`~HinetPy.client.Client.get_continuous_waveform`."
 
 #: HinetPy.client.Client.get_event_waveform:1 of
 msgid "Get event waveform data."
@@ -348,38 +348,46 @@ msgid "Include/exclude undetermined magnitude events."
 msgstr "包括/排除未定震级的时间。"
 
 #: HinetPy.client.Client.get_event_waveform:25 of
+msgid "Limit to events deeper than the specified minimum."
+msgstr "限制事件深度大于指定值。"
+
+#: HinetPy.client.Client.get_event_waveform:27 of
+msgid "Limit to events shallower than the specified maximum."
+msgstr "限制事件深度小于指定值。"
+
+#: HinetPy.client.Client.get_event_waveform:29 of
 msgid "Limit to events with a latitude larger than the specified minimum."
 msgstr "限制台站纬度大于指定值。"
 
-#: HinetPy.client.Client.get_event_waveform:27 of
+#: HinetPy.client.Client.get_event_waveform:31 of
 msgid "Limit to events with a latitude smaller than the specified maximum."
 msgstr "限制台站纬度小于指定值。"
 
-#: HinetPy.client.Client.get_event_waveform:29 of
+#: HinetPy.client.Client.get_event_waveform:33 of
 msgid "Limit to events with a longitude larger than the specified minimum."
 msgstr "限制台站经度大于指定值。"
 
-#: HinetPy.client.Client.get_event_waveform:31 of
+#: HinetPy.client.Client.get_event_waveform:35 of
 msgid "Limit to events with a longitude smaller than the specified maximum."
 msgstr "限制台站经度小于指定值。"
 
-#: HinetPy.client.Client.get_event_waveform:33
+#: HinetPy.client.Client.get_event_waveform:37
 #: HinetPy.client.Client.select_stations:22 of
 msgid "Specify the latitude to be used for a radius search."
 msgstr "指定用于半径搜索的纬度。"
 
-#: HinetPy.client.Client.get_event_waveform:35
+#: HinetPy.client.Client.get_event_waveform:39
 #: HinetPy.client.Client.select_stations:24 of
 msgid "Specify the longitude to be used for a radius search."
 msgstr "指定用于半径搜索的经度。"
 
-#: HinetPy.client.Client.get_event_waveform:37 of
+#: HinetPy.client.Client.get_event_waveform:41 of
 msgid ""
 "Limit to events within the specified minimum number of degrees from the "
 "geographic point defined by the latitude and longitude parameters."
 msgstr "指定环形搜索区域的最小半径。"
 
-#: HinetPy.client.Client.get_event_waveform:41 of
+#: HinetPy.client.Client.get_event_waveform:45 of
 msgid ""
 "Limit to events within the specified maximum number of degrees from the "
 "geographic point defined by the latitude and longitude parameters."
@@ -546,3 +554,4 @@ msgstr ""
 #: HinetPy.client.Client.info:1 of
 msgid "List information of networks."
 msgstr "列出台网信息。"
+
