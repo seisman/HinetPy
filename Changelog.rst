@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.6.2 (2019-05-06):
+ - Fix download focal mechanism catalog issue (#18).
+
 0.6.1 (2019-02-20):
  - Fix selecting events in a rectangular region.
 
