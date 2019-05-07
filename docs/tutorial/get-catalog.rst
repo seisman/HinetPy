@@ -23,4 +23,4 @@ Hi-net provide JMA focal mechanism catalog for downloading.
 >>> client = Client("username", "password")
 >>> startdate = datetime(2010, 1, 1)
 >>> client.get_focalmechanism(startdate, 5)
-'focal_20100101_5.txt'
+'mecha_20100101_5.txt'

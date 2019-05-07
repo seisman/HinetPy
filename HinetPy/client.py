@@ -873,7 +873,7 @@ class Client():
         >>> client.get_focalmechanism(startdate, 5, filename="focal.txt")
         'focal.txt'
         """
-        return self._get_catalog("focal", startdate, span, filename, os)
+        return self._get_catalog("mecha", startdate, span, filename, os)
 
     def get_station_list(self, code):
         """Get station list of a network.

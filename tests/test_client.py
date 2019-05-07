@@ -198,7 +198,7 @@ class TestGetCatalogClass:
     def test_get_focalmechanism_1(self, client):
         startdate = date(2010, 1, 1)
         data = client.get_focalmechanism(startdate, 5)
-        assert data == 'focal_20100101_5.txt'
+        assert data == 'mecha_20100101_5.txt'
         assert os.path.exists(data)
         os.remove(data)
 
