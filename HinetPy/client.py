@@ -15,7 +15,7 @@ import requests
 from .win32 import merge
 from .header import NETWORK
 from .utils import point_inside_box, point_inside_circular, split_integer, \
-        string2datetime
+        to_datetime
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
@@ -401,8 +401,7 @@ class Client():
         time0 = NETWORK[code].starttime
         # time1 = UTCTime + JST(GMT+0900) - 2 hour delay
         time1 = datetime.utcnow() + timedelta(hours=9) + timedelta(hours=-2)
-        if not isinstance(starttime, datetime):
-            starttime = string2datetime(starttime)
+        starttime = to_datetime(starttime)
         endtime = starttime + timedelta(minutes=span)
         if not time0 <= starttime < endtime <= time1:
             msg = "Data not available in the time period. " + \
@@ -502,8 +501,8 @@ class Client():
             :meth:`~HinetPy.client.Client.get_waveform` has been renamed to
             :meth:`~HinetPy.client.Client.get_continuous_waveform`.
         """
-        logger.warn("The get_waveform() function is deprecated. Please "
-                    "use get_continuous_waveform().")
+        logger.warning("The get_waveform() function is deprecated. Please "
+                       "use get_continuous_waveform().")
         return self.get_continuous_waveform(code, starttime, span,
                                             max_span=max_span, data=data,
                                             ctable=ctable, outdir=outdir,
@@ -723,8 +722,8 @@ class Client():
             from the geographic point defined by the latitude and longitude
             parameters.
         '''
-        starttime = string2datetime(starttime)
-        endtime = string2datetime(endtime)
+        starttime = to_datetime(starttime)
+        endtime = to_datetime(endtime)
 
         # get event list
         events = []
@@ -790,10 +789,7 @@ class Client():
     def _get_catalog(self, datatype, startdate, span, filename=None, os="DOS"):
         """Request JMA catalog."""
 
-        if not (isinstance(startdate, datetime) or
-                isinstance(startdate, date)):
-            startdate = string2datetime(startdate)
-
+        startdate = to_datetime(startdate)
         if int(span) not in range(1, 8):
             raise ValueError("span is not digit or not in [1, 7].")
 

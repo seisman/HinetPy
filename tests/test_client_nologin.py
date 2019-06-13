@@ -11,7 +11,7 @@ import requests
 
 from HinetPy import Client
 from HinetPy.client import _parse_code
-from HinetPy.utils import string2datetime
+from HinetPy.utils import to_datetime
 
 
 # http://docs.pytest.org/en/latest/fixture.html

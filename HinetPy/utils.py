@@ -2,7 +2,7 @@
 Utility functions used by HinetPy.
 """
 import math
-from datetime import datetime
+from datetime import datetime, date
 
 
 def split_integer(number, maxn):
@@ -93,18 +93,23 @@ def point_inside_circular(lat1, lon1, lat2, lon2, minradius=None, maxradius=None
     return True
 
 
-def string2datetime(value):
-    """Convert string to datetime.
+def to_datetime(value):
+    """Convert to datetime in a hard way.
 
-    >>> string2datetime('201001010000')
+    >>> to_datetime('201001010000')
     datetime.datetime(2010, 1, 1, 0, 0)
-    >>> string2datetime('2010-01-01T03:45')
+    >>> to_datetime('2010-01-01T03:45')
     datetime.datetime(2010, 1, 1, 3, 45)
     """
 
+    # is datetime
     if isinstance(value, datetime):
         return value
+    # is date
+    elif isinstance(value, date):
+        return datetime.combine(value, datetime.min.time())
 
+    # is a string
     value = value.replace("T", " ")
     value = value.replace("-", " ")
     value = value.replace(":", " ")
