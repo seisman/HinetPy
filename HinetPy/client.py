@@ -896,16 +896,12 @@ class Client():
         # remove trailing 'A' in network code
         code = code[:4]
         if code in ['0101', '0103', '0103A']:  # Hinet and Fnet
-            lines = requests.get(self._STATION_INFO).iter_lines()
-            next(lines)  # skip csv header
-
-            for line in lines:
-                items = line.decode('shift_jis').split(",")
-                if items[0].strip("'") + items[1].strip("'") != code:
+            import csv
+            lines = requests.get(self._STATION_INFO).content.decode('utf-8').splitlines()
+            for row in csv.DictReader(lines, delimiter=','):
+                if row['organization_id'].strip("'") + row['network_id'].strip("'") != code:
                     continue
-                name = items[2]
-                latitude, longitude, elevation = items[7], items[8], items[12]
-                stations.append(Station(code, name, latitude, longitude, elevation))
+                stations.append(Station(code, row['station_cd'], row['latitude'], row['longitude'], row['height(m)']))
         elif code in ['0120', '0120A', '0131']:  # S-net and MeSO-net
             import json
             if code in ['0120', '0120A']:
@@ -1035,7 +1031,7 @@ class Client():
 
         Select stations in a circular region:
 
-        >>> client.select_stations('0101', latitude=30, longitude139,
+        >>> client.select_stations('0101', latitude=30, longitude=139,
         ...                        minradius=0, maxradius=2)
 
         Select all Hi-net stations:
