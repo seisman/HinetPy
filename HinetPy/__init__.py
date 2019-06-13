@@ -18,7 +18,7 @@ Basis usage:
 """
 
 __title__ = "HinetPy"
-__version__ = "0.6.2"
+__version__ = "0.6.3"
 __author__ = "Dongdong Tian"
 __license__ = "MIT"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-06 22:38-0400\n"
+"POT-Creation-Date: 2019-06-13 11:56-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,271 +20,283 @@ msgstr ""
 msgid "Changelog"
 msgstr "修订历史"
 
+#: ../../../Changelog.rst:6
+msgid "0.6.3 (2019-06-13):"
+msgstr ""
+
 #: ../../../Changelog.rst:5
+msgid "Fix ``select_stations()`` (#19)"
+msgstr "修复 ``select_stations()`` (#19)"
+
+#: ../../../Changelog.rst:6
+msgid "Rename ``string2datetime()`` to ``to_datetime()``"
+msgstr "重命名 ``string2datetime()`` 为 ``to_datetime()``"
+
+#: ../../../Changelog.rst:9
 msgid "0.6.2 (2019-05-06):"
 msgstr ""
 
-#: ../../../Changelog.rst:5
+#: ../../../Changelog.rst:9
 msgid "Fix download focal mechanism catalog issue (#18)."
 msgstr "修复下载震源机制解目录出错的问题 (#18)"
 
-#: ../../../Changelog.rst:8
+#: ../../../Changelog.rst:12
 msgid "0.6.1 (2019-02-20):"
 msgstr ""
 
-#: ../../../Changelog.rst:8
+#: ../../../Changelog.rst:12
 msgid "Fix selecting events in a rectangular region."
 msgstr "修复了选择矩形区域内事件的bug "
 
-#: ../../../Changelog.rst:12
+#: ../../../Changelog.rst:16
 msgid "0.6.0 (2019-02-19):"
 msgstr ""
 
-#: ../../../Changelog.rst:11
+#: ../../../Changelog.rst:15
 msgid "Support request event waveform data (#16)."
 msgstr "支持申请事件波形数据 (#16)."
 
-#: ../../../Changelog.rst:12
+#: ../../../Changelog.rst:16
 msgid "``get_waveform()`` is renamed to ``get_continuos_waveform()``."
 msgstr ""
 
-#: ../../../Changelog.rst:15
+#: ../../../Changelog.rst:19
 msgid "0.5.2 (2019-02-19):"
 msgstr ""
 
-#: ../../../Changelog.rst:15
+#: ../../../Changelog.rst:19
 msgid "Fix selecting stations in a rectangular region (#17)."
 msgstr "修复了选择矩形区域内台站时的bug (#17) "
 
-#: ../../../Changelog.rst:18
+#: ../../../Changelog.rst:22
 msgid "0.5.1 (2018-12-08):"
 msgstr ""
 
-#: ../../../Changelog.rst:18
+#: ../../../Changelog.rst:22
 msgid "Fix typo from longtitude to longitude."
 msgstr "修复了longitude的typo。"
 
-#: ../../../Changelog.rst:22
+#: ../../../Changelog.rst:26
 msgid "0.5.0 (2018-11-21):"
 msgstr ""
 
-#: ../../../Changelog.rst:21
+#: ../../../Changelog.rst:25
 msgid "Fix issues of wrong CONSTANT in SAC polezero file (#8)."
 msgstr "修复SAC零极点文件中的错误CONSTANT (#8)"
 
-#: ../../../Changelog.rst:22
+#: ../../../Changelog.rst:26
 msgid "Fix login failure issue with password longer than 12 characters (#13)."
 msgstr "修复密码长度超过12字符时登录失败的问题 (#13)"
 
-#: ../../../Changelog.rst:26
+#: ../../../Changelog.rst:30
 msgid "0.4.8 (2018-10-04):"
 msgstr ""
 
-#: ../../../Changelog.rst:25
+#: ../../../Changelog.rst:29
 msgid ""
 "``get_station_list()``: must specify a network code; support S-net and "
 "MeSO-net."
 msgstr "``get_station_list()``: 必须指定台网名；支持S-net和MeSO-net"
 
-#: ../../../Changelog.rst:26
+#: ../../../Changelog.rst:30
 msgid "``select_stations()``: support S-net and MeSO-net"
 msgstr "``select_stations()``: 支持 S-net 和 MeSO-net "
 
-#: ../../../Changelog.rst:30
+#: ../../../Changelog.rst:34
 msgid "0.4.7 (2018-10-04):"
 msgstr ""
 
-#: ../../../Changelog.rst:29
+#: ../../../Changelog.rst:33
 msgid "Support S-net and MeSO-net (#9 and #10)"
 msgstr "支持 S-net 和 MeSO-net (#9 和 #10)"
 
-#: ../../../Changelog.rst:30
+#: ../../../Changelog.rst:34
 msgid "Fix an issue when channel table contains blank lines"
 msgstr "修复channel table中包含空白行时的错误"
 
-#: ../../../Changelog.rst:33
+#: ../../../Changelog.rst:37
 msgid "0.4.6 (2018-03-20):"
 msgstr ""
 
-#: ../../../Changelog.rst:33
+#: ../../../Changelog.rst:37
 msgid "Fix ``Too many open files`` (#6)"
 msgstr "修复 ``Too many open files`` (#6)"
 
-#: ../../../Changelog.rst:37
+#: ../../../Changelog.rst:41
 msgid "0.4.5 (2018-03-07):"
 msgstr ""
 
-#: ../../../Changelog.rst:36
+#: ../../../Changelog.rst:40
 msgid "``get_station_list()``: return a list of stations"
 msgstr "``get_station_list()``: 返回台站列表"
 
-#: ../../../Changelog.rst:37
+#: ../../../Changelog.rst:41
 msgid ""
 "``select_stations()``: support selecting stations in a box or circular "
 "region"
 msgstr "``select_stations()``: 支持选择一个矩形或环形区域内的台站 "
 
-#: ../../../Changelog.rst:40
+#: ../../../Changelog.rst:44
 msgid "0.4.4 (2017-11-30):"
 msgstr ""
 
-#: ../../../Changelog.rst:40
+#: ../../../Changelog.rst:44
 msgid "Fix a technical issue related to packaging"
 msgstr "修复打包相关的技术问题"
 
-#: ../../../Changelog.rst:43
+#: ../../../Changelog.rst:47
 msgid "0.4.3 (2017-11-30):"
 msgstr ""
 
-#: ../../../Changelog.rst:43
+#: ../../../Changelog.rst:47
 msgid "Add Chinese documentation"
 msgstr "增加中文文档"
 
-#: ../../../Changelog.rst:46
+#: ../../../Changelog.rst:50
 msgid "0.4.2 (2017-06-18):"
 msgstr ""
 
-#: ../../../Changelog.rst:46
+#: ../../../Changelog.rst:50
 msgid "Fix a bug with requests>=2.17"
 msgstr "修复requests>=2.17时无法登陆的bug"
 
-#: ../../../Changelog.rst:49
+#: ../../../Changelog.rst:53
 msgid "0.4.1 (2017-06-18):"
 msgstr ""
 
-#: ../../../Changelog.rst:49
+#: ../../../Changelog.rst:53
 msgid "remove tempfile after downloading."
 msgstr "删除临时文件以避免用尽临时目录的全部磁盘空间"
 
-#: ../../../Changelog.rst:58
+#: ../../../Changelog.rst:62
 msgid "0.4.0 (2017-04-01):"
 msgstr ""
 
-#: ../../../Changelog.rst:52
+#: ../../../Changelog.rst:56
 msgid "``win32.extract_sac()``: skip if data not exists"
 msgstr "``win32.extract_sac()``: 若数据不存在则跳过"
 
-#: ../../../Changelog.rst:53
+#: ../../../Changelog.rst:57
 msgid ""
 "``win32.extract_sac()``: support multiple processes to speedup, and no "
 "longer return values"
 msgstr "``win32.extract_sac()``: 支持多进程以加速，不再返回值"
 
-#: ../../../Changelog.rst:55
+#: ../../../Changelog.rst:59
 #, fuzzy
 msgid "``Client.get_waveform()``: support multi-threads to speedup"
 msgstr "``Client.get_continuous_waveform()`` 支持多线程以加速"
 
-#: ../../../Changelog.rst:56
+#: ../../../Changelog.rst:60
 msgid "Change ``Client.help()`` to ``Client.info()``"
 msgstr "将 ``Client.help()`` 修改为 ``Client.info()``"
 
-#: ../../../Changelog.rst:57
+#: ../../../Changelog.rst:61
 #, fuzzy
 msgid "``Client.get_waveform()`` now can automatically set ``max_span``"
 msgstr "``Client.get_continuous_waveform()`` 现已可以自动设置 ``max_span``"
 
-#: ../../../Changelog.rst:58
+#: ../../../Changelog.rst:62
 msgid "``Client.get_*()`` now support startime in different string formats"
 msgstr "``Client.get_*()`` 的 starttime 支持多种不同的字符串格式"
 
-#: ../../../Changelog.rst:67
+#: ../../../Changelog.rst:71
 msgid "0.3.3 (2017-03-17):"
 msgstr ""
 
-#: ../../../Changelog.rst:61
+#: ../../../Changelog.rst:65
 msgid "Change ``network`` to ``NETWORK`` in ``header.py``"
 msgstr "将 ``header.py`` 中 ``network`` 修改为 ``NETWORK``"
 
-#: ../../../Changelog.rst:62
+#: ../../../Changelog.rst:66
 msgid "Add wildcard support to ``win32.merge()``"
 msgstr "``win32.merg()`` 支持通配符"
 
-#: ../../../Changelog.rst:63
+#: ../../../Changelog.rst:67
 msgid ""
 "Change ``Client.check_module_release()`` to "
 "``Client.check_package_release()``"
 msgstr "修改 ``Client.check_module_release()`` 为 ``Client.check_package_release()``"
 
-#: ../../../Changelog.rst:64
+#: ../../../Changelog.rst:68
 msgid "Support output filename with deep directory"
 msgstr "支持输出文件名中包含更深的目录结构"
 
-#: ../../../Changelog.rst:65
+#: ../../../Changelog.rst:69
 msgid "Always sort cnt files to avoid merge error"
 msgstr "总是排序cnt文件以避免合并错误"
 
-#: ../../../Changelog.rst:66
+#: ../../../Changelog.rst:70
 msgid "Set ``pmax`` to 8640000 by default"
 msgstr "设置 ``pmax`` 默认值为8640000"
 
-#: ../../../Changelog.rst:67
+#: ../../../Changelog.rst:71
 msgid "Fix typos"
 msgstr "修复typos"
 
-#: ../../../Changelog.rst:70
+#: ../../../Changelog.rst:74
 msgid "0.3.2 (2017-03-12):"
 msgstr ""
 
-#: ../../../Changelog.rst:70
+#: ../../../Changelog.rst:74
 msgid "Fix another technical issue related to pypi"
 msgstr "修复另一个pypi相关的技术问题"
 
-#: ../../../Changelog.rst:73
+#: ../../../Changelog.rst:77
 msgid "0.3.1 (2017-03-12):"
 msgstr ""
 
-#: ../../../Changelog.rst:73
+#: ../../../Changelog.rst:77
 msgid "Fix a technical issue related to pypi"
 msgstr "修复pypi相关的技术问题"
 
-#: ../../../Changelog.rst:76
+#: ../../../Changelog.rst:80
 msgid "0.3.0 (2017-03-12):"
 msgstr ""
 
-#: ../../../Changelog.rst:76
+#: ../../../Changelog.rst:80
 msgid "Rewritten as a Python package"
 msgstr "重写成一个Python包"
 
-#: ../../../Changelog.rst:79
+#: ../../../Changelog.rst:83
 msgid "0.2.0 (2016-08-24):"
 msgstr ""
 
-#: ../../../Changelog.rst:79
+#: ../../../Changelog.rst:83
 msgid "Some small fixes and improvements"
 msgstr "小修正和提高"
 
-#: ../../../Changelog.rst:88
+#: ../../../Changelog.rst:92
 msgid "0.1.0 (2016-08-04):"
 msgstr ""
 
-#: ../../../Changelog.rst:82
+#: ../../../Changelog.rst:86
 msgid "First public release"
 msgstr "首个公开版本"
 
-#: ../../../Changelog.rst:83
+#: ../../../Changelog.rst:87
 msgid "``HinetDoctor.py``: check dependencies"
 msgstr "``HinetDoctor.py``: 检查依赖"
 
-#: ../../../Changelog.rst:84
+#: ../../../Changelog.rst:88
 msgid "``HinetContRequest.py``: request continuous data from Hi-net"
 msgstr "``HinetContRequest.py``: 从Hi-net申请连续数据"
 
-#: ../../../Changelog.rst:85
+#: ../../../Changelog.rst:89
 msgid ""
 "``StationSelector.py``: select Hi-net/F-net stations before requesting "
 "data"
 msgstr "``StationSelector.py``: 在申请数据前选择Hi-net/F-net台站"
 
-#: ../../../Changelog.rst:86
+#: ../../../Changelog.rst:90
 msgid "``HinetJMARequest.py``: request JMA catalogs from Hi-net website"
 msgstr "``HinetJMARequest.py``: 从Hi-net申请JMA目录"
 
-#: ../../../Changelog.rst:87
+#: ../../../Changelog.rst:91
 msgid "``rdhinet.py``: convert WIN32 format to SAC format"
 msgstr "``rdhinet.py``: 将WIN32格式转换为SAC格式"
 
-#: ../../../Changelog.rst:88
+#: ../../../Changelog.rst:92
 msgid "``ch2pz.py``: extract SAC PZ files from Hi-net channel table files"
 msgstr "``ch2pz.py``: 从Hi-net通道表文件中提取SAC零极点文件"
 

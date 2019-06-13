@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.6.3 (2019-06-13):
+ - Fix ``select_stations()`` (#19)
+ - Rename ``string2datetime()`` to ``to_datetime()``
+
 0.6.2 (2019-05-06):
  - Fix download focal mechanism catalog issue (#18).
 

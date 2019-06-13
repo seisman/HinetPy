@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-21 16:01-0500\n"
+"POT-Creation-Date: 2019-06-13 11:56-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr "见 https://stackoverflow.com/a/4913653/7770208"
 msgid "Check if a point inside a circular region."
 msgstr "检查点是否在环形区域内。"
 
-#: HinetPy.utils.string2datetime:1 of
-msgid "Convert string to datetime."
-msgstr "将字符串转换为 datetime."
+#: HinetPy.utils.to_datetime:1 of
+msgid "Convert to datetime in a hard way."
+msgstr "将输入转换为 datetime."
 
