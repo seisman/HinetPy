@@ -102,6 +102,9 @@ def string2datetime(value):
     datetime.datetime(2010, 1, 1, 3, 45)
     """
 
+    if isinstance(value, datetime):
+        return value
+
     value = value.replace("T", " ")
     value = value.replace("-", " ")
     value = value.replace(":", " ")
