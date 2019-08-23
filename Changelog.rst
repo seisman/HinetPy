@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.6.4 (2019-08-23):
+ - Capture exception caused by incorrect channel information (#22)
+
 0.6.3 (2019-06-13):
  - Fix ``select_stations()`` (#19)
  - Rename ``string2datetime()`` to ``to_datetime()``
