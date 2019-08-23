@@ -238,17 +238,23 @@ def _get_channels(ctable):
             if not line.strip() or line.strip().startswith("#"):
                 continue
             items = line.split()
-            channels.append(Channel(id=items[0],
-                                    name=items[3],
-                                    component=items[4],
-                                    latitude=float(items[13]),
-                                    longitude=float(items[14]),
-                                    unit=items[8],
-                                    gain=float(items[7]),
-                                    damping=float(items[10]),
-                                    period=float(items[9]),
-                                    preamplification=float(items[11]),
-                                    lsb_value=float(items[12])))
+            try:
+                channel = Channel(id=items[0],
+                                  name=items[3],
+                                  component=items[4],
+                                  latitude=float(items[13]),
+                                  longitude=float(items[14]),
+                                  unit=items[8],
+                                  gain=float(items[7]),
+                                  damping=float(items[10]),
+                                  period=float(items[9]),
+                                  preamplification=float(items[11]),
+                                  lsb_value=float(items[12]))
+                channels.append(channel)
+            except ValueError as e:
+                logger.warning("Error in parsing channel information for %s.%s (%s). Skipped.", 
+                               items[3], items[4], items[0])
+                logger.warning("Original error message: %s", e)
     return channels
 
 
