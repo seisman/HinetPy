@@ -252,7 +252,7 @@ def _get_channels(ctable):
                                   lsb_value=float(items[12]))
                 channels.append(channel)
             except ValueError as e:
-                logger.warning("Error in parsing channel information for %s.%s (%s). Skipped.", 
+                logger.warning("Error in parsing channel information for %s.%s (%s). Skipped.",
                                items[3], items[4], items[0])
                 logger.warning("Original error message: %s", e)
     return channels
@@ -417,7 +417,7 @@ def _write_pz(pzfile, real, imaginary, constant):
 
 def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.', keep_sensitivity=False):
     real, imaginary, constant = _channel2pz(channel, keep_sensitivity=keep_sensitivity)
-    if not real:  # something wrong with channel information, skipped
+    if real == None or imaginary == None or constant == None:  # something wrong with channel information, skipped
         return None
 
     pzfile = "{}.{}".format(channel.name, channel.component)
