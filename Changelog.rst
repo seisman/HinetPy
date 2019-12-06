@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.6.5 (2019-12-06):
+ - Fix PZ files if dampling constant is zero (#24)
+
 0.6.4 (2019-08-23):
  - Capture exception caused by incorrect channel information (#22)
 
