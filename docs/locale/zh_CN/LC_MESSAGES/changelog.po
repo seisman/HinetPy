@@ -73,7 +73,7 @@ msgid "Support request event waveform data (#16)."
 msgstr "支持申请事件波形数据 (#16)."
 
 #: ../../../Changelog.rst:22
-msgid "``get_waveform()`` is renamed to ``get_continuos_waveform()``."
+msgid "``get_waveform()`` is renamed to ``get_continuous_waveform()``."
 msgstr ""
 
 #: ../../../Changelog.rst:25

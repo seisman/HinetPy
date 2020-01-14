@@ -19,7 +19,7 @@ Changelog
 
 0.6.0 (2019-02-19):
  - Support request event waveform data (#16).
- - ``get_waveform()`` is renamed to ``get_continuos_waveform()``.
+ - ``get_waveform()`` is renamed to ``get_continuous_waveform()``.
 
 0.5.2 (2019-02-19):
  - Fix selecting stations in a rectangular region (#17).
