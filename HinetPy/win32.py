@@ -212,8 +212,8 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.', keep_sensitivity=False,
     channels = _get_channels(ctable)
     if filter_by_chid or filter_by_name or filter_by_component:
         channels = _filter_channels(channels,
-                                    filter_by_name,
                                     filter_by_chid,
+                                    filter_by_name,
                                     filter_by_component)
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
