@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.6.6 (2020-03-02):
+ - win32.extract_pz cannot filter channels by ID and name (#27)
+
 0.6.5 (2019-12-06):
  - Fix PZ files if dampling constant is zero (#24)
 
