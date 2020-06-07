@@ -1,5 +1,12 @@
+# Build, pacakge, test, and clean
+
+help:
+	@echo "Commands:"
+	@echo ""
+	@echo "  test    run the test suite and report coverage"
+
 test:
-	py.test --cov-report term-missing --cov=HinetPy -vs tests/
+	pytest --cov-report=term-missing --cov-report=xml --cov=HinetPy -vs tests/
 
 coverage:
 	codecov
@@ -15,4 +22,4 @@ publish:
 
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
-	rm -rvf build dist MANIFEST *.egg-info __pycache__ .coverage .cache
+	rm -rvf build dist MANIFEST *.egg-info __pycache__ .coverage .cache coverage.xml
