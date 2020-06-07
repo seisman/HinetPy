@@ -128,6 +128,7 @@
 <h1>根据obspy Catalog申请连续波形数据<a class="headerlink" href="#request-continous-waveform-data-from-obspy-catalog" title="永久链接至标题">¶</a></h1>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
 
@@ -136,11 +137,12 @@
 <span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">win32</span>
 
 
-<span class="n">fdsnclient</span> <span class="o">=</span> <span class="n">fdsnClient</span><span class="p">(</span><span class="s1">&#39;IRIS&#39;</span><span class="p">)</span>
+<span class="n">fdsnclient</span> <span class="o">=</span> <span class="n">fdsnClient</span><span class="p">(</span><span class="s2">&quot;IRIS&quot;</span><span class="p">)</span>
 <span class="n">starttime</span> <span class="o">=</span> <span class="n">UTCDateTime</span><span class="p">(</span><span class="s2">&quot;2005-01-01&quot;</span><span class="p">)</span>
 <span class="n">endtime</span> <span class="o">=</span> <span class="n">UTCDateTime</span><span class="p">(</span><span class="s2">&quot;2005-01-03&quot;</span><span class="p">)</span>
-<span class="n">catalog</span> <span class="o">=</span> <span class="n">fdsnclient</span><span class="o">.</span><span class="n">get_events</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="n">starttime</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="n">endtime</span><span class="p">,</span>
-                                <span class="n">minmagnitude</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">catalog</span><span class="o">=</span><span class="s2">&quot;ISC&quot;</span><span class="p">)</span>
+<span class="n">catalog</span> <span class="o">=</span> <span class="n">fdsnclient</span><span class="o">.</span><span class="n">get_events</span><span class="p">(</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">starttime</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="n">endtime</span><span class="p">,</span> <span class="n">minmagnitude</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">catalog</span><span class="o">=</span><span class="s2">&quot;ISC&quot;</span>
+<span class="p">)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">catalog</span><span class="p">:</span>  <span class="c1"># loop over events</span>
@@ -149,10 +151,10 @@
     <span class="n">outdir</span> <span class="o">=</span> <span class="n">origin</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">%H%M&quot;</span><span class="p">)</span>
 
     <span class="c1"># skip if outdir already exists to avoid overwrite</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exits</span><span class="p">(</span><span class="n">ourdir</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exits</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span>
         <span class="k">continue</span>
 
-    <span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">)</span>
     <span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">,</span> <span class="n">with_pz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>

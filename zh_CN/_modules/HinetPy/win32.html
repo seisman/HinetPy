@@ -126,17 +126,25 @@
 
 <span class="c1"># Setup the logger</span>
 <span class="n">FORMAT</span> <span class="o">=</span> <span class="s2">&quot;[</span><span class="si">%(asctime)s</span><span class="s2">] </span><span class="si">%(levelname)s</span><span class="s2">: </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
-                    <span class="nb">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">,</span>
-                    <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Channel"><a class="viewcode-back" href="../../api/HinetPy.win32.html#HinetPy.win32.Channel">[文档]</a><span class="k">class</span> <span class="nc">Channel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">latitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">gain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">damping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">preamplification</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">lsb_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">component</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">latitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">longitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">damping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">preamplification</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">lsb_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Class for channel.</span>
 
 <span class="sd">        Parameters</span>
@@ -177,11 +185,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">lsb_value</span> <span class="o">=</span> <span class="n">lsb_value</span></div>
 
 
-<div class="viewcode-block" id="extract_sac"><a class="viewcode-back" href="../../api/HinetPy.win32.html#HinetPy.win32.extract_sac">[文档]</a><span class="k">def</span> <span class="nf">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SAC&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">pmax</span><span class="o">=</span><span class="mi">8640000</span><span class="p">,</span>
-                <span class="n">filter_by_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">filter_by_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">filter_by_component</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">with_pz</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">processes</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="extract_sac"><a class="viewcode-back" href="../../api/HinetPy.win32.html#HinetPy.win32.extract_sac">[文档]</a><span class="k">def</span> <span class="nf">extract_sac</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">,</span>
+    <span class="n">ctable</span><span class="p">,</span>
+    <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SAC&quot;</span><span class="p">,</span>
+    <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
+    <span class="n">pmax</span><span class="o">=</span><span class="mi">8640000</span><span class="p">,</span>
+    <span class="n">filter_by_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">filter_by_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">filter_by_component</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">with_pz</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">processes</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Extract data as SAC format files.</span>
 
 <span class="sd">    Parameters</span>
@@ -238,10 +253,9 @@
     <span class="n">channels</span> <span class="o">=</span> <span class="n">_get_channels</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> channels found in </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">),</span> <span class="n">ctable</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">filter_by_id</span> <span class="ow">or</span> <span class="n">filter_by_name</span> <span class="ow">or</span> <span class="n">filter_by_component</span><span class="p">:</span>
-        <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter_channels</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span>
-                                    <span class="n">filter_by_id</span><span class="p">,</span>
-                                    <span class="n">filter_by_name</span><span class="p">,</span>
-                                    <span class="n">filter_by_component</span><span class="p">)</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter_channels</span><span class="p">(</span>
+            <span class="n">channels</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="p">,</span> <span class="n">filter_by_component</span>
+        <span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> channels to be extracted.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span>
@@ -252,15 +266,19 @@
             <span class="n">_write_winprm</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">ft</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="n">args</span> <span class="o">=</span> <span class="p">[(</span><span class="n">data</span><span class="p">,</span> <span class="n">ch</span><span class="p">,</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">ft</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">pmax</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">]</span>
             <span class="n">sacfiles</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span><span class="n">_extract_channel</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> SAC data successfully extracted.&quot;</span><span class="p">,</span>
-                        <span class="nb">len</span><span class="p">(</span><span class="n">sacfiles</span><span class="p">)</span> <span class="o">-</span> <span class="n">sacfiles</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> SAC data successfully extracted.&quot;</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">sacfiles</span><span class="p">)</span> <span class="o">-</span> <span class="n">sacfiles</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span>
+            <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">with_pz</span><span class="p">:</span>
             <span class="c1"># &quot;SAC_PZ&quot; here is hardcoded.</span>
             <span class="n">args</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ch</span><span class="p">,</span> <span class="s2">&quot;SAC_PZ&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">]</span>
             <span class="n">pzfiles</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span><span class="n">_extract_sacpz</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> SAC PZ files successfully extracted.&quot;</span><span class="p">,</span>
-                        <span class="nb">len</span><span class="p">(</span><span class="n">pzfiles</span><span class="p">)</span> <span class="o">-</span> <span class="n">pzfiles</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span></div>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> SAC PZ files successfully extracted.&quot;</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">pzfiles</span><span class="p">)</span> <span class="o">-</span> <span class="n">pzfiles</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span>
+            <span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_get_processes</span><span class="p">(</span><span class="n">procs</span><span class="p">):</span>
@@ -275,10 +293,15 @@
             <span class="k">return</span> <span class="n">procs</span>
 
 
-<div class="viewcode-block" id="extract_pz"><a class="viewcode-back" href="../../api/HinetPy.win32.html#HinetPy.win32.extract_pz">[文档]</a><span class="k">def</span> <span class="nf">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;SAC_PZ&#39;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">keep_sensitivity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-               <span class="n">filter_by_chid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="n">filter_by_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="n">filter_by_component</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="extract_pz"><a class="viewcode-back" href="../../api/HinetPy.win32.html#HinetPy.win32.extract_pz">[文档]</a><span class="k">def</span> <span class="nf">extract_pz</span><span class="p">(</span>
+    <span class="n">ctable</span><span class="p">,</span>
+    <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SAC_PZ&quot;</span><span class="p">,</span>
+    <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
+    <span class="n">keep_sensitivity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">filter_by_chid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">filter_by_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">filter_by_component</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Extract instrumental response in SAC PZ format from channel table.</span>
 
 <span class="sd">    .. warning::</span>
@@ -326,16 +349,16 @@
 
     <span class="n">channels</span> <span class="o">=</span> <span class="n">_get_channels</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">filter_by_chid</span> <span class="ow">or</span> <span class="n">filter_by_name</span> <span class="ow">or</span> <span class="n">filter_by_component</span><span class="p">:</span>
-        <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter_channels</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span>
-                                    <span class="n">filter_by_chid</span><span class="p">,</span>
-                                    <span class="n">filter_by_name</span><span class="p">,</span>
-                                    <span class="n">filter_by_component</span><span class="p">)</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter_channels</span><span class="p">(</span>
+            <span class="n">channels</span><span class="p">,</span> <span class="n">filter_by_chid</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="p">,</span> <span class="n">filter_by_component</span>
+        <span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
-        <span class="n">_extract_sacpz</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="n">suffix</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">,</span>
-                       <span class="n">keep_sensitivity</span><span class="o">=</span><span class="n">keep_sensitivity</span><span class="p">)</span></div>
+        <span class="n">_extract_sacpz</span><span class="p">(</span>
+            <span class="n">channel</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="n">suffix</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">,</span> <span class="n">keep_sensitivity</span><span class="o">=</span><span class="n">keep_sensitivity</span>
+        <span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_get_channels</span><span class="p">(</span><span class="n">ctable</span><span class="p">):</span>
@@ -354,29 +377,34 @@
                 <span class="k">continue</span>
             <span class="n">items</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">channel</span> <span class="o">=</span> <span class="n">Channel</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                  <span class="n">name</span><span class="o">=</span><span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
-                                  <span class="n">component</span><span class="o">=</span><span class="n">items</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
-                                  <span class="n">latitude</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">13</span><span class="p">]),</span>
-                                  <span class="n">longitude</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">14</span><span class="p">]),</span>
-                                  <span class="n">unit</span><span class="o">=</span><span class="n">items</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
-                                  <span class="n">gain</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">7</span><span class="p">]),</span>
-                                  <span class="n">damping</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">10</span><span class="p">]),</span>
-                                  <span class="n">period</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">9</span><span class="p">]),</span>
-                                  <span class="n">preamplification</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">11</span><span class="p">]),</span>
-                                  <span class="n">lsb_value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">12</span><span class="p">]))</span>
+                <span class="n">channel</span> <span class="o">=</span> <span class="n">Channel</span><span class="p">(</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                    <span class="n">component</span><span class="o">=</span><span class="n">items</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                    <span class="n">latitude</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">13</span><span class="p">]),</span>
+                    <span class="n">longitude</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">14</span><span class="p">]),</span>
+                    <span class="n">unit</span><span class="o">=</span><span class="n">items</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                    <span class="n">gain</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">7</span><span class="p">]),</span>
+                    <span class="n">damping</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">10</span><span class="p">]),</span>
+                    <span class="n">period</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">9</span><span class="p">]),</span>
+                    <span class="n">preamplification</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">11</span><span class="p">]),</span>
+                    <span class="n">lsb_value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">12</span><span class="p">]),</span>
+                <span class="p">)</span>
                 <span class="n">channels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Error in parsing channel information for </span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">). Skipped.&quot;</span><span class="p">,</span>
-                               <span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in parsing channel information for </span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">). Skipped.&quot;</span><span class="p">,</span>
+                    <span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                    <span class="n">items</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                    <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="p">)</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Original error message: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">channels</span>
 
 
-<span class="k">def</span> <span class="nf">_filter_channels</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span>
-                     <span class="n">filter_by_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">filter_by_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">filter_by_component</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_filter_channels</span><span class="p">(</span>
+    <span class="n">channels</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Filter channels by id, name and/or component.</span>
 
 <span class="sd">    Parameters</span>
@@ -406,11 +434,11 @@
         <span class="k">return</span> <span class="n">filtered_channels</span>
 
     <span class="k">if</span> <span class="n">filter_by_id</span><span class="p">:</span>
-        <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="p">)</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">filter_by_name</span><span class="p">:</span>
-        <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="p">)</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">filter_by_component</span><span class="p">:</span>
-        <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="s1">&#39;component&#39;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="p">)</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="s2">&quot;component&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">channels</span>
 
@@ -425,8 +453,9 @@
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_extract_channel</span><span class="p">(</span><span class="n">winfile</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SAC&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
-                     <span class="n">prmfile</span><span class="o">=</span><span class="s2">&quot;win.prm&quot;</span><span class="p">,</span> <span class="n">pmax</span><span class="o">=</span><span class="mi">8640000</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_extract_channel</span><span class="p">(</span>
+    <span class="n">winfile</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SAC&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">prmfile</span><span class="o">=</span><span class="s2">&quot;win.prm&quot;</span><span class="p">,</span> <span class="n">pmax</span><span class="o">=</span><span class="mi">8640000</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Extract one channel data from win32 file.</span>
 
 <span class="sd">    Parameters</span>
@@ -445,28 +474,39 @@
 <span class="sd">        Maximum number of data points.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;win2sac_32&#39;</span><span class="p">,</span> <span class="n">winfile</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span>
-           <span class="s1">&#39;-e&#39;</span><span class="p">,</span> <span class="s1">&#39;-p&#39;</span><span class="o">+</span><span class="n">prmfile</span><span class="p">,</span> <span class="s1">&#39;-m&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">pmax</span><span class="p">)]</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;win2sac_32&quot;</span><span class="p">,</span>
+        <span class="n">winfile</span><span class="p">,</span>
+        <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="n">suffix</span><span class="p">,</span>
+        <span class="n">outdir</span><span class="p">,</span>
+        <span class="s2">&quot;-e&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-p&quot;</span> <span class="o">+</span> <span class="n">prmfile</span><span class="p">,</span>
+        <span class="s2">&quot;-m&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pmax</span><span class="p">),</span>
+    <span class="p">]</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">DEVNULL</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
 
     <span class="c1"># check stderr output</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
-        <span class="k">if</span> <span class="s1">&#39;The number of points is maximum over&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The number of data points is over maximum. &quot;</span> \
-                  <span class="s2">&quot;Try to increase pmax.&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;The number of points is maximum over&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The number of data points is over maximum. &quot;</span> <span class="s2">&quot;Try to increase pmax.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="s1">&#39;Data for channel </span><span class="si">{}</span><span class="s1"> not existed&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="s2">&quot;Data for channel </span><span class="si">{}</span><span class="s2"> not existed&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
             <span class="c1"># return None if no data avaiable</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Data for </span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">) not exists. Skipped.&quot;</span><span class="p">,</span>
-                           <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;Data for </span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">) not exists. Skipped.&quot;</span><span class="p">,</span>
+                <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span>
+                <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span>
 
     <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">outdir</span> <span class="o">!=</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">outdir</span> <span class="o">!=</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>  <span class="c1"># some channels have no data</span>
-        <span class="k">if</span> <span class="n">suffix</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>  <span class="c1"># remove extra dot if suffix is empty</span>
+        <span class="k">if</span> <span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>  <span class="c1"># remove extra dot if suffix is empty</span>
             <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
             <span class="k">return</span> <span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -479,28 +519,36 @@
 <span class="sd">    Transfer function = s^2 / (s^2+2hws+w^2).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Hi-net use moving coil velocity type seismometer.</span>
-    <span class="k">if</span> <span class="n">channel</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="s1">&#39;m/s&#39;</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">): Unit is not velocity.&quot;</span><span class="p">,</span>
-                       <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">channel</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="s2">&quot;m/s&quot;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">): Unit is not velocity.&quot;</span><span class="p">,</span>
+            <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span>
+            <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">freq</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">channel</span><span class="o">.</span><span class="n">period</span>
     <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">): Natural period = 0. Skipped.&quot;</span><span class="p">,</span>
-                       <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">): Natural period = 0. Skipped.&quot;</span><span class="p">,</span>
+            <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span>
+            <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
     <span class="c1"># calculate poles, find roots of equation s^2+2hws+w^2=0</span>
     <span class="n">real</span> <span class="o">=</span> <span class="o">-</span><span class="n">channel</span><span class="o">.</span><span class="n">damping</span> <span class="o">*</span> <span class="n">freq</span>
-    <span class="n">imaginary</span> <span class="o">=</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">channel</span><span class="o">.</span><span class="n">damping</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">imaginary</span> <span class="o">=</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">channel</span><span class="o">.</span><span class="n">damping</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 
     <span class="c1"># calculate constant</span>
     <span class="n">fn</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># alaways assume normalization frequency is 20 Hz</span>
     <span class="n">s</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">fn</span><span class="p">)</span>
 
-    <span class="n">A0</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">channel</span><span class="o">.</span><span class="n">damping</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span> <span class="n">freq</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">A0</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">s</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">channel</span><span class="o">.</span><span class="n">damping</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span> <span class="n">freq</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">s</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">keep_sensitivity</span><span class="p">:</span>
-        <span class="n">factor</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">preamplification</span><span class="o">/</span><span class="mf">20.0</span><span class="p">)</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">preamplification</span> <span class="o">/</span> <span class="mf">20.0</span><span class="p">)</span>
         <span class="n">constant</span> <span class="o">=</span> <span class="n">A0</span> <span class="o">*</span> <span class="n">channel</span><span class="o">.</span><span class="n">gain</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">/</span> <span class="n">channel</span><span class="o">.</span><span class="n">lsb_value</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">constant</span> <span class="o">=</span> <span class="n">A0</span>
@@ -530,14 +578,16 @@
         <span class="n">pz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;CONSTANT </span><span class="si">{:e}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">constant</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">_extract_sacpz</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;SAC_PZ&#39;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">keep_sensitivity</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_extract_sacpz</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SAC_PZ&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">keep_sensitivity</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">real</span><span class="p">,</span> <span class="n">imaginary</span><span class="p">,</span> <span class="n">constant</span> <span class="o">=</span> <span class="n">_channel2pz</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">keep_sensitivity</span><span class="o">=</span><span class="n">keep_sensitivity</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">real</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">imaginary</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">constant</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># something wrong with channel information, skipped</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">real</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">imaginary</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">constant</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="p">):</span>  <span class="c1"># something wrong with channel information, skipped</span>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="n">pzfile</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">suffix</span><span class="p">:</span>
-        <span class="n">pzfile</span> <span class="o">+=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">suffix</span>
+        <span class="n">pzfile</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">suffix</span>
     <span class="n">pzfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">pzfile</span><span class="p">)</span>
     <span class="n">_write_pz</span><span class="p">(</span><span class="n">pzfile</span><span class="p">,</span> <span class="n">real</span><span class="p">,</span> <span class="n">imaginary</span><span class="p">,</span> <span class="n">constant</span><span class="p">)</span>
 
@@ -583,9 +633,9 @@
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">total_data</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">total_data</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;catwin32&#39;</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">total_data</span><span class="p">]</span> <span class="o">+</span> <span class="n">datas</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;catwin32&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">total_data</span><span class="p">]</span> <span class="o">+</span> <span class="n">datas</span>
     <span class="k">if</span> <span class="n">force_sort</span><span class="p">:</span>  <span class="c1"># add -s option to force sort</span>
-        <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">)</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-s&quot;</span><span class="p">)</span>
 
     <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">DEVNULL</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">DEVNULL</span><span class="p">)</span></div>
 </pre></div>
