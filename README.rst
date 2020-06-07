@@ -1,5 +1,5 @@
-.. image:: https://img.shields.io/travis/seisman/HinetPy/master.svg
-    :target: https://travis-ci.org/seisman/HinetPy
+.. image:: https://github.com/seisman/HinetPy/workflows/HinetPy%20Tests/badge.svg
+    :target: https://github.com/seisman/HinetPy/actions
 
 .. image:: https://codecov.io/gh/seisman/HinetPy/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/seisman/HinetPy

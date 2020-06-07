@@ -1,0 +1,9 @@
+# for testing
+pytest
+pytest-cov
+coverage
+codecov
+# for documentation
+sphinx==1.6.7
+sphinx-intl
+guzzle_sphinx_theme
