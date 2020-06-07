@@ -1,0 +1,309 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>win2sac &#8212; HinetPy 0.6.6 documentation</title>
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Channel Table file" href="channeltable.html" />
+    <link rel="prev" title="catwin32" href="catwin32.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="channeltable.html" title="Channel Table file"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="catwin32.html" title="catwin32"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../appendix.html" accesskey="U">Appendix</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../appendix.html">Appendix</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="catwin32.html">catwin32</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">win2sac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channeltable.html">Channel Table file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="response.html">Instrumental Response</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="../appendix.html">Appendix</a></li>
+              
+              <li>win2sac</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="win2sac">
+<h1>win2sac<a class="headerlink" href="#win2sac" title="Permalink to this headline">¶</a></h1>
+<p>Data converter from WIN32 format to SAC format. It also supports BINARY/ASCII
+outputs.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">win2sac_32</span> <span class="n">winfile</span> <span class="n">ch_no</span> <span class="n">sacfile</span> <span class="p">[</span><span class="n">outdir</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span><span class="p">(</span><span class="n">prmfile</span><span class="p">)]</span>
+           <span class="p">[</span><span class="o">-</span><span class="n">Y</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span><span class="p">[</span><span class="n">BIN</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">ASC</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span><span class="p">(</span><span class="n">RATIO</span><span class="p">)]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span><span class="p">(</span><span class="n">PMAX</span><span class="p">)]</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>winfile:</dt>
+<dd><strong>one</strong> win32 file to be converted.</dd>
+<dt>ch_no:</dt>
+<dd><p class="first">channle numbers to be extracted. It can be:</p>
+<ul class="last simple">
+<li>a channel number (e.g. <code class="docutils literal"><span class="pre">3345</span></code>)</li>
+<li>a list of channel numbers, separated by commas (e.g. <code class="docutils literal"><span class="pre">3345,3f65,4f75</span></code>)</li>
+<li>a file contains channel numbers, see details below</li>
+</ul>
+</dd>
+<dt>sacfile</dt>
+<dd>extension of output SAC files</dd>
+<dt>outdir</dt>
+<dd>output directory. Default is current directory if not specified
+or is <code class="docutils literal"><span class="pre">-</span></code>. The output directory must exist.</dd>
+<dt><code class="docutils literal"><span class="pre">-p(prmfile)</span></code>:</dt>
+<dd>specify paramerter file. Default name is <code class="docutils literal"><span class="pre">win.prm</span></code>. See details below.</dd>
+<dt><code class="docutils literal"><span class="pre">-Y</span></code></dt>
+<dd>use wild channel code. organization id + network id + channle id.</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code></dt>
+<dd>specify SAC/BIN output to use endian of current machine. Defaults to use big endian.</dd>
+<dt><code class="docutils literal"><span class="pre">-b[BIN]</span></code></dt>
+<dd>extension of BIN format. Defaults to <code class="docutils literal"><span class="pre">bin</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">-a[ASC]</span></code></dt>
+<dd>extension of ASC format. Defaults to <code class="docutils literal"><span class="pre">asc</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">-r(RATIO)</span></code></dt>
+<dd>the ratio to multiply for BIN/ASC format. Defaults to 1.0.</dd>
+<dt><code class="docutils literal"><span class="pre">-m(PMAX)</span></code></dt>
+<dd>maximum number of data points. Defaults to <code class="docutils literal"><span class="pre">2000000</span></code>. If you data has
+more data points, you must increase this value.</dd>
+</dl>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">win2sac_32</span> <span class="mi">2000082404000101</span><span class="n">VM</span><span class="o">.</span><span class="n">cnt</span> <span class="mi">4</span><span class="n">c55</span><span class="p">,</span><span class="mi">4</span><span class="n">c65</span> <span class="n">SAC</span> <span class="n">DATA</span> <span class="o">-</span><span class="n">e</span> <span class="o">&gt;</span> <span class="n">junk</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="output-unit">
+<h3>Output Unit<a class="headerlink" href="#output-unit" title="Permalink to this headline">¶</a></h3>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">The SAC files extracted by <code class="docutils literal"><span class="pre">win2sac_32</span></code> are always in physical quality,
+not in digital counts.</p>
+</div>
+<p>The raw data saved in win32 format is in digital counts. When extracting data
+from win32 format, <code class="docutils literal"><span class="pre">win2sac_32</span></code> always convert digital counts to the
+corresponding physical quantity by remove sensitivity from waveform data,
+and multiply by 1.0e9 to convert unit from meter to nanometer.</p>
+<p>The output SAC files are in <code class="docutils literal"><span class="pre">nm/s</span></code>, <code class="docutils literal"><span class="pre">nm/s/s</span></code> or <code class="docutils literal"><span class="pre">micro</span> <span class="pre">radian</span></code>.</p>
+</div>
+<div class="section" id="filename-format">
+<h3>Filename Format<a class="headerlink" href="#filename-format" title="Permalink to this headline">¶</a></h3>
+<p>The default filename format is <code class="docutils literal"><span class="pre">STATION.COMPONENT.EXTENSION</span></code>
+(e.g. <code class="docutils literal"><span class="pre">N.NABC.U.SAC</span></code>). You can only modify the extensions.</p>
+</div>
+<div class="section" id="channel-number-file-format">
+<h3>Channel number file format<a class="headerlink" href="#channel-number-file-format" title="Permalink to this headline">¶</a></h3>
+<p>You can save all channel numbers you want to extract into one file.</p>
+<ol class="arabic simple">
+<li>line starts with <code class="docutils literal"><span class="pre">#</span></code> is comment line and skipped</li>
+<li>blank lines are skipped</li>
+<li>channel numbers can be separated by spaces, tabs, or commas</li>
+<li>each line can contain no more than 2000 characters</li>
+</ol>
+<p>Below is an example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">6034</span><span class="p">,</span><span class="mi">6035</span>
+<span class="c1"># 6036 # this line is ignored</span>
+<span class="mi">6038</span> <span class="mi">6039</span>
+</pre></div>
+</div>
+<div class="admonition danger">
+<p class="first admonition-title">Danger</p>
+<p>Using this feature may result in data loss, as <code class="docutils literal"><span class="pre">win2sac_32</span></code> will exit
+if data of any channel doesn’t exist in the win32 file.</p>
+<p>If you still want to use this fearture, you can modify Line 386 of
+<code class="docutils literal"><span class="pre">s4win2sacm.c</span></code> from:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s2">&quot;Data for channel </span><span class="si">%x</span><span class="s2"> not existed</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sysch</span><span class="p">);</span>
+<span class="n">iRet</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>to:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s2">&quot;Data for channel </span><span class="si">%x</span><span class="s2"> not existed</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sysch</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="paramerter-file">
+<h3>Paramerter file<a class="headerlink" href="#paramerter-file" title="Permalink to this headline">¶</a></h3>
+<p>win32 system need a parameter file to run. This parameter file has many lines.
+However, <code class="docutils literal"><span class="pre">win2sac_32</span></code> only uses the 2nd and 4th lines, and ignores all other lines.</p>
+<p>An example of a four line parameter file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">.</span>
+<span class="mf">0101_20100101.</span><span class="n">ch</span>
+<span class="o">.</span>
+<span class="o">.</span>
+</pre></div>
+</div>
+<p>The 2nd line is the name of channle table file. <code class="docutils literal"><span class="pre">win2sac_32</span></code> need to read
+this file to extract waveform of specified channels.</p>
+<p>The 4th line is the path of pick files. It’s useless for most cases.</p>
+</div>
+<div class="section" id="component">
+<h3>Component<a class="headerlink" href="#component" title="Permalink to this headline">¶</a></h3>
+<p>The component information is written to SAC header variables <code class="docutils literal"><span class="pre">CPMAZ</span></code> and
+<code class="docutils literal"><span class="pre">CMPINC</span></code>.</p>
+<ul class="simple">
+<li>U/Z: CMPAZ = 0.0, CMPINC = 0.0</li>
+<li>N/X: CMPAZ = 0.0, CMPINC = 90.0</li>
+<li>E/Y: CMPAZ = 90.0, CMPINC = 90.0</li>
+<li>Other: CMPAZ = 0.0, CMPINC = 0.0</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Azimuths of sensors are <strong>NOT</strong> accurate.</p>
+<p class="last">See <a class="reference external" href="https://hinetwww11.bosai.go.jp/auth/direc/?LANG=en">https://hinetwww11.bosai.go.jp/auth/direc/?LANG=en</a> for details.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="catwin32.html" title="previous chapter (use the left arrow)">catwin32</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="channeltable.html" title="next chapter (use the right arrow)">Channel Table file</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="channeltable.html" title="Channel Table file"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="catwin32.html" title="catwin32"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../appendix.html" >Appendix</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

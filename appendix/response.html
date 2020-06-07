@@ -1,0 +1,309 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Instrumental Response &#8212; HinetPy 0.6.6 documentation</title>
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Changelog" href="../changelog.html" />
+    <link rel="prev" title="Channel Table file" href="channeltable.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../changelog.html" title="Changelog"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="channeltable.html" title="Channel Table file"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../appendix.html" accesskey="U">Appendix</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../appendix.html">Appendix</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="catwin32.html">catwin32</a></li>
+<li class="toctree-l2"><a class="reference internal" href="win2sac.html">win2sac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channeltable.html">Channel Table file</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Instrumental Response</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="../appendix.html">Appendix</a></li>
+              
+              <li>Instrumental Response</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="instrumental-response">
+<h1>Instrumental Response<a class="headerlink" href="#instrumental-response" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="input">
+<h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
+<p>The unit of Hi-net input is determined by column [9], ususally <code class="docutils literal"><span class="pre">m/s</span></code>.</p>
+</div>
+<div class="section" id="analog-stage">
+<h2>Analog Stage<a class="headerlink" href="#analog-stage" title="Permalink to this headline">¶</a></h2>
+<p>The moving coil velocity type seismometer is used in Hi-net and
+its transfer function in the Laplace domain is given as:</p>
+<div class="math">
+\[\frac{Gs^2}{s^2 + 2hws + w^2}\]</div>
+<p>where,</p>
+<ul class="simple">
+<li><span class="math">\(G\)</span>: gain factor, given as column [8] in <code class="docutils literal"><span class="pre">V/unit_of_input</span></code></li>
+<li><span class="math">\(h\)</span>: damping constant, given as column [11]</li>
+<li><span class="math">\(w\)</span>: natural angular frequency, given as column [10]</li>
+</ul>
+<p>Roots of the numerator and the denominator correspond to the
+zeros and the poles, respectively, and the A0 normalization factor
+is the inverse of the absolute value of the
+above equation except G at the normalization frequency (<span class="math">\(f_n\)</span>).
+The normalization frequency of Hi-net seismometer is always 20 Hz.</p>
+<p>It’s easy to know that the instrumental response has two poles and two zeros.
+It’s also easy to calculate A0, with <span class="math">\(s=i*2*\pi*f_n\)</span>.</p>
+</div>
+<div class="section" id="preamplification">
+<h2>Preamplification<a class="headerlink" href="#preamplification" title="Permalink to this headline">¶</a></h2>
+<p>The sensor ouput is amplified prior to A/D conversion.
+The amplification factor is determined by column [12] in dB.</p>
+<p>According to the definition of decibel of field quantities:</p>
+<div class="math">
+\[L_{F}=20\log _{10}\left({\frac {F}{F_{0}}}\right)\!~\mathrm {dB} .\]</div>
+<p>Thus, the “sensitivity” in this stage is <span class="math">\(10^{\frac{[12]}{20}}\)</span> .</p>
+</div>
+<div class="section" id="analog-digital-conversion">
+<h2>Analog-Digital Conversion<a class="headerlink" href="#analog-digital-conversion" title="Permalink to this headline">¶</a></h2>
+<p>The gain in this stage is given by <span class="math">\(\frac{1}{[13]}\)</span>, in <code class="docutils literal"><span class="pre">counts/V</span></code>.</p>
+</div>
+<div class="section" id="digital-stage">
+<h2>Digital Stage<a class="headerlink" href="#digital-stage" title="Permalink to this headline">¶</a></h2>
+<p>The gain in this stage is 1.0, according to the three RESP files provided
+on Hi-net website.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>The total sensitivity is:</p>
+<div class="math">
+\[G = \frac{[8]*10^{\frac{[12]}{20}}}{[13]}\]</div>
+<p>The <code class="docutils literal"><span class="pre">CONSTANT</span></code> in SAC PZ file should be:</p>
+<div class="math">
+\[CONSTANT = A0 * G = A0 * \frac{[8]*10^{\frac{[12]}{20}}}{[13]}\]</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>HinetPy uses win2sac_32 to do the conversion from win32 to SAC format.
+win2sac_32 always remove total sensitivity (G) from waveform and multiply
+by 1.0e9 to convert unit from meter to nanometer.</p>
+<p class="last">Thus, the extracted SAC files are velocity in nm/s or acceleration in nm/s/s.
+The total sensivitity G is also omitted when generating PZ files.</p>
+</div>
+</div>
+<div class="section" id="q-a">
+<h2>Q&amp;A<a class="headerlink" href="#q-a" title="Permalink to this headline">¶</a></h2>
+<p>My question:</p>
+<blockquote>
+<div><p>Hi,</p>
+<p>I am using Hi-net data and am confused with the instrumental response
+even after I have looked through all pages of Hi-net website.</p>
+<p>In the page of ‘For Registered Users’ -&gt; ‘Response of Observation Equipment’,
+only three RESP files are given. It seems that I have to rewrite a new RESP
+or SAC_PZ file for each channel.</p>
+<p>So I have to confirm that I understand details of response, which are very
+important for correct data processing.</p>
+<ol class="arabic">
+<li><p class="first">Do all channels have the same zeroes and poles?</p>
+</li>
+<li><p class="first">At line 19, do all channels have the same A0 Normalization factor (0.999953)?</p>
+</li>
+<li><p class="first">In the FAQ Q08, one equation is given to convert the A/D value from an WIN32
+file to the corresponding physical quantity. It is</p>
+<blockquote>
+<div><p>v = I * [13] / ([8] * 10 ^ ([12] / 20 ) )</p>
+</div></blockquote>
+<p>If I want to generate a SAC PZ file, the CONSTANT will be</p>
+<blockquote>
+<div><p>CONSTANT = [8]*10^([12]/20) / [13] * A0 ?</p>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p>Answer from Hi-net:</p>
+<blockquote>
+<div><p>In the “Response of Observation Equipment” page, sample RESP files are
+provided and you need to modify them according to your purposes, as you
+wrote. The explanation in this page assumes that the parameters of the
+seismometer other than the gain factor do not change. Strictly speaking,
+the zeros, the poles, and the A0 normalization factor can change
+depending on the parameters of the seismometer. The moving coil velocity
+type seismometer is used in Hi-net and its transfer function in the
+Laplace domain is given as:</p>
+<blockquote>
+<div>Gs^2/(s^2 + 2hws + w^2)</div></blockquote>
+<p>where G, h and w are the gain factor, the damping constant, and the
+natural angular frequency, respectively. Roots of the numerator and the
+denominator correspond to the zeros and the poles, respectively, and the
+A0 normalization factor is the inverse of the absolute value of the
+above equation except G at the normalization frequency. Detailed
+explanation about this type of seismometer is available in many
+literature, such as,</p>
+<p>Scherbaum, F., Of Poles and Zeros: Fundamentals of Digital Seismology,
+Kluwer Academic Publishers, 1996.
+#see chapter 4</p>
+<p>The gain factor, the damping constant, and the natural period are
+provided in the channels table file as explained in the Q&amp;A08.
+Note that the gain factor is measured at its natural frequency.
+<a class="reference external" href="http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08">http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08</a></p>
+<p>Please read the SEED manual about further details and SAC manual about
+SAC PZ file.</p>
+<ul class="simple">
+<li>SEED: <a class="reference external" href="http://www.fdsn.org/publications.htm">http://www.fdsn.org/publications.htm</a></li>
+<li>SAC: <a class="reference external" href="http://www.iris.edu/files/sac-manual/">http://www.iris.edu/files/sac-manual/</a></li>
+</ul>
+<p>Sincerely,</p>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><a class="reference external" href="http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08">Hi-net FAQ 08</a></li>
+<li><a class="reference external" href="https://hinetwww11.bosai.go.jp/auth/seed/?LANG=en">Response of Observation Equipment</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="channeltable.html" title="previous chapter (use the left arrow)">Channel Table file</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="../changelog.html" title="next chapter (use the right arrow)">Changelog</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../changelog.html" title="Changelog"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="channeltable.html" title="Channel Table file"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../appendix.html" >Appendix</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

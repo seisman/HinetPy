@@ -1,0 +1,299 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>仪器响应 &#8212; HinetPy 0.6.6 文档</title>
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="修订历史" href="../changelog.html" />
+    <link rel="prev" title="通道表文件" href="channeltable.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="../changelog.html" title="修订历史"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="channeltable.html" title="通道表文件"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../appendix.html" accesskey="U">附录</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>內容目录</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">示例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API参考</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../appendix.html">附录</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="catwin32.html">catwin32</a></li>
+<li class="toctree-l2"><a class="reference internal" href="win2sac.html">win2sac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channeltable.html">通道表文件</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">仪器响应</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">修订历史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="../appendix.html">附录</a></li>
+              
+              <li>仪器响应</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="instrumental-response">
+<h1>仪器响应<a class="headerlink" href="#instrumental-response" title="永久链接至标题">¶</a></h1>
+<div class="section" id="input">
+<h2>输入<a class="headerlink" href="#input" title="永久链接至标题">¶</a></h2>
+<p>Hi-net输入的单位由第9列决定，通常单位是 <code class="docutils literal"><span class="pre">m/s</span></code> 。</p>
+</div>
+<div class="section" id="analog-stage">
+<h2>数字阶段<a class="headerlink" href="#analog-stage" title="永久链接至标题">¶</a></h2>
+<p>Hi-net使用的是Moving coil velocity type地震仪，其transfer function在Laplace域表示为:</p>
+<div class="math">
+\[\frac{Gs^2}{s^2 + 2hws + w^2}\]</div>
+<p>其中，</p>
+<ul class="simple">
+<li><span class="math">\(G\)</span>: 增益因子，在第8列给出，单位为 <code class="docutils literal"><span class="pre">V/unit_of_input</span></code></li>
+<li><span class="math">\(h\)</span>: 阻尼常数，在第11列给出</li>
+<li><span class="math">\(w\)</span>: 自然角频率，在第10列给出</li>
+</ul>
+<p>分子和分母的根分别对应于零点和极点。A0归一化因子是上面方程在归一化频率处的绝对值的倒数。Hi-net地震仪的归一化频率总是20 Hz。</p>
+<p>易知，仪器响应有两个极点和零点，将 <span class="math">\(s=i*2*\pi*f_n\)</span> 带入可算出 A0。</p>
+</div>
+<div class="section" id="preamplification">
+<h2>放大系数<a class="headerlink" href="#preamplification" title="永久链接至标题">¶</a></h2>
+<p>传感器的输出在A/D转换之前会进一步放大，归一化因子由第12列（单位dB）决定。</p>
+<p>根据场物理量的分贝的定义：</p>
+<div class="math">
+\[L_{F}=20\log _{10}\left({\frac {F}{F_{0}}}\right)\!~\mathrm {dB} .\]</div>
+<p>因而，这一阶段的敏感度是 <span class="math">\(10^{\frac{[12]}{20}}\)</span> 。</p>
+</div>
+<div class="section" id="analog-digital-conversion">
+<h2>模拟-数字转换<a class="headerlink" href="#analog-digital-conversion" title="永久链接至标题">¶</a></h2>
+<p>这一阶段的增益是 <span class="math">\(\frac{1}{[13]}\)</span> ，单位是 <code class="docutils literal"><span class="pre">counts/V</span></code> 。</p>
+</div>
+<div class="section" id="digital-stage">
+<h2>数字阶段<a class="headerlink" href="#digital-stage" title="永久链接至标题">¶</a></h2>
+<p>根据Hi-net网站提供的RESP文件可知，这一阶段的增益总是1。</p>
+</div>
+<div class="section" id="summary">
+<h2>总结<a class="headerlink" href="#summary" title="永久链接至标题">¶</a></h2>
+<p>总的敏感度为：</p>
+<div class="math">
+\[G = \frac{[8]*10^{\frac{[12]}{20}}}{[13]}\]</div>
+<p>SAC PZ文件中的 <code class="docutils literal"><span class="pre">CONSTANT</span></code> 应该为：</p>
+<div class="math">
+\[CONSTANT = A0 * G = A0 * \frac{[8]*10^{\frac{[12]}{20}}}{[13]}\]</div>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p>HinetPy 使用 win2sac_32 将win32格式转换为SAC格式。win2sac_32 总是从波形中去除灵敏度 (G)，并乘以1.0e9将单位从米变成纳米。</p>
+<p class="last">因而，提取得到的SAC文件时以 nm/s 为单位的速度或以 nm/s/s 为单位的加速度。总灵敏度 G 也在生成PZ文件时被省去。</p>
+</div>
+</div>
+<div class="section" id="q-a">
+<h2>Q&amp;A<a class="headerlink" href="#q-a" title="永久链接至标题">¶</a></h2>
+<p>我的问题</p>
+<blockquote>
+<div><p>Hi,</p>
+<p>I am using Hi-net data and am confused with the instrumental response
+even after I have looked through all pages of Hi-net website.</p>
+<p>In the page of ‘For Registered Users’ -&gt; ‘Response of Observation Equipment’,
+only three RESP files are given. It seems that I have to rewrite a new RESP
+or SAC_PZ file for each channel.</p>
+<p>So I have to confirm that I understand details of response, which are very
+important for correct data processing.</p>
+<ol class="arabic">
+<li><p class="first">Do all channels have the same zeroes and poles?</p>
+</li>
+<li><p class="first">At line 19, do all channels have the same A0 Normalization factor (0.999953)?</p>
+</li>
+<li><p class="first">In the FAQ Q08, one equation is given to convert the A/D value from an WIN32
+file to the corresponding physical quantity. It is</p>
+<blockquote>
+<div><p>v = I * [13] / ([8] * 10 ^ ([12] / 20 ) )</p>
+</div></blockquote>
+<p>If I want to generate a SAC PZ file, the CONSTANT will be</p>
+<blockquote>
+<div><p>CONSTANT = [8]*10^([12]/20) / [13] * A0 ?</p>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p>Hi-net的答案：</p>
+<blockquote>
+<div><p>In the “Response of Observation Equipment” page, sample RESP files are
+provided and you need to modify them according to your purposes, as you
+wrote. The explanation in this page assumes that the parameters of the
+seismometer other than the gain factor do not change. Strictly speaking,
+the zeros, the poles, and the A0 normalization factor can change
+depending on the parameters of the seismometer. The moving coil velocity
+type seismometer is used in Hi-net and its transfer function in the
+Laplace domain is given as:</p>
+<blockquote>
+<div>Gs^2/(s^2 + 2hws + w^2)</div></blockquote>
+<p>where G, h and w are the gain factor, the damping constant, and the
+natural angular frequency, respectively. Roots of the numerator and the
+denominator correspond to the zeros and the poles, respectively, and the
+A0 normalization factor is the inverse of the absolute value of the
+above equation except G at the normalization frequency. Detailed
+explanation about this type of seismometer is available in many
+literature, such as,</p>
+<p>Scherbaum, F., Of Poles and Zeros: Fundamentals of Digital Seismology,
+Kluwer Academic Publishers, 1996.
+#see chapter 4</p>
+<p>The gain factor, the damping constant, and the natural period are
+provided in the channels table file as explained in the Q&amp;A08.
+Note that the gain factor is measured at its natural frequency.
+<a class="reference external" href="http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08">http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08</a></p>
+<p>Please read the SEED manual about further details and SAC manual about
+SAC PZ file.</p>
+<ul class="simple">
+<li>SEED: <a class="reference external" href="http://www.fdsn.org/publications.htm">http://www.fdsn.org/publications.htm</a></li>
+<li>SAC: <a class="reference external" href="http://www.iris.edu/files/sac-manual/">http://www.iris.edu/files/sac-manual/</a></li>
+</ul>
+<p>Sincerely,</p>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="first admonition-title">参见</p>
+<ul class="last simple">
+<li><a class="reference external" href="http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08">Hi-net FAQ 08</a></li>
+<li><a class="reference external" href="https://hinetwww11.bosai.go.jp/auth/seed/?LANG=en">Response of Observation Equipment</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="channeltable.html" title="上一章 (use the left arrow)">通道表文件</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="../changelog.html" title="下一章 (use the right arrow)">修订历史</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="../changelog.html" title="修订历史"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="channeltable.html" title="通道表文件"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../appendix.html" >附录</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

@@ -1,0 +1,341 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>HinetPy.win32 module &#8212; HinetPy 0.6.6 documentation</title>
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HinetPy.header module" href="HinetPy.header.html" />
+    <link rel="prev" title="HinetPy.client module" href="HinetPy.client.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.header.html" title="HinetPy.header module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.client.html" title="HinetPy.client module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API Reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.client.html">HinetPy.client module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HinetPy.win32 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.header.html">HinetPy.header module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.utils.html">HinetPy.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="../api.html">API Reference</a></li>
+              
+              <li>HinetPy.win32 module</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="module-HinetPy.win32">
+<span id="hinetpy-win32-module"></span><h1>HinetPy.win32 module<a class="headerlink" href="#module-HinetPy.win32" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="HinetPy.win32.Channel">
+<em class="property">class </em><code class="descclassname">HinetPy.win32.</code><code class="descname">Channel</code><span class="sig-paren">(</span><em>id=None</em>, <em>name=None</em>, <em>component=None</em>, <em>latitude=None</em>, <em>longitude=None</em>, <em>unit=None</em>, <em>gain=None</em>, <em>damping=None</em>, <em>period=None</em>, <em>preamplification=None</em>, <em>lsb_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#Channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.win32.Channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for channel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Channel ID.</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Station Name.</li>
+<li><strong>component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Channel component name (<code class="docutils literal"><span class="pre">U|N|E</span></code>).</li>
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Station latitude.</li>
+<li><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Station longitude.</li>
+<li><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Unit of data (<code class="docutils literal"><span class="pre">m</span></code>, <code class="docutils literal"><span class="pre">m/s</span></code>, <code class="docutils literal"><span class="pre">m/s/s</span></code>, <code class="docutils literal"><span class="pre">rad</span></code>).</li>
+<li><strong>gain</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Sensor sensitivity.</li>
+<li><strong>damping</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Damping constant of the sensor.</li>
+<li><strong>period</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Natural period of the seismometer.</li>
+<li><strong>preamplification</strong> – Preamplification.</li>
+<li><strong>lsb_value</strong> – LSB value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="HinetPy.win32.extract_sac">
+<code class="descclassname">HinetPy.win32.</code><code class="descname">extract_sac</code><span class="sig-paren">(</span><em>data</em>, <em>ctable</em>, <em>suffix='SAC'</em>, <em>outdir='.'</em>, <em>pmax=8640000</em>, <em>filter_by_id=None</em>, <em>filter_by_name=None</em>, <em>filter_by_component=None</em>, <em>with_pz=False</em>, <em>processes=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#extract_sac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.win32.extract_sac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract data as SAC format files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – win32 file to be processed.</li>
+<li><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Channel table file.</li>
+<li><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Suffix of output SAC files. Defaults to <code class="docutils literal"><span class="pre">SAC</span></code>.</li>
+<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Output directory. Defaults to current directory.</li>
+<li><strong>pmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Maximum number of data points. Defaults to 8640000. If the input data
+is longer than one day, you have to to increase <code class="docutils literal"><span class="pre">pmax</span></code>.</li>
+<li><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by ID.</li>
+<li><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by name.</li>
+<li><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by component.</li>
+<li><strong>with_pz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Extract PZ files at the same time.
+PZ file has default suffix <code class="docutils literal"><span class="pre">.SAC_PZ</span></code>.</li>
+<li><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of parallel processes to speed up data extraction.
+Use all processes by default.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">win2sac</span></code> removes sensitivity from waveform, then multiply by 1.0e9.
+Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.</p>
+</div>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span><span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Extract all channel with specified SAC suffix and output directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span><span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Extract only specified channels:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span><span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;[NE]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="HinetPy.win32.extract_pz">
+<code class="descclassname">HinetPy.win32.</code><code class="descname">extract_pz</code><span class="sig-paren">(</span><em>ctable</em>, <em>suffix='SAC_PZ'</em>, <em>outdir='.'</em>, <em>keep_sensitivity=False</em>, <em>filter_by_chid=None</em>, <em>filter_by_name=None</em>, <em>filter_by_component=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#extract_pz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.win32.extract_pz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract instrumental response in SAC PZ format from channel table.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Only works for instrumental responses of Hi-net network.</p>
+<p class="last">RESP files of F-net network can be downloaded from
+<a class="reference external" href="http://www.fnet.bosai.go.jp/st_info/response.php?LANG=en">F-net website</a>.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Channel table file.</li>
+<li><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Suffix of SAC PZ files. Defaults to <code class="docutils literal"><span class="pre">SAC_PZ</span></code>.</li>
+<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Output directory. Defaults to current directory.</li>
+<li><strong>keep_sensivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – win2sac automatically removes sensivity from waveform data
+during win32 format to SAC format conversion.
+So the generated polezero file should omit the sensitivity.</li>
+<li><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by ID.</li>
+<li><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by name.</li>
+<li><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by component.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Extract all channel with specified suffix and output directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Extract only specified channels:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;[NE]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="HinetPy.win32.merge">
+<code class="descclassname">HinetPy.win32.</code><code class="descname">merge</code><span class="sig-paren">(</span><em>datas</em>, <em>total_data</em>, <em>force_sort=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.win32.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge several win32 files to one win32 file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>datas</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Win32 files to be merged.</li>
+<li><strong>total_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Filename of ouput win32 file.</li>
+<li><strong>force_sort</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Sort all win32 files by date.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<p>If win32 files are named by starttime (e.g. <code class="docutils literal"><span class="pre">201304040203.cnt</span></code>), sorting
+win32 files in list by name/time is prefered:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">datas</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;20130404*.cnt&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">datas</span><span class="p">,</span> <span class="s2">&quot;outdir/final.cnt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If win32 files are named randomly, you should set <code class="docutils literal"><span class="pre">force_sort</span></code> to
+<code class="docutils literal"><span class="pre">True</span></code> to force <code class="docutils literal"><span class="pre">catwin32</span></code> to sort all data by time.
+However, it’s time consuming. Do NOT use it unless necessary:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">datas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;001.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;002.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;003.cnt&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">datas</span><span class="p">,</span> <span class="s2">&quot;final.cnt&quot;</span><span class="p">,</span> <span class="n">force_sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also use wildcard to specify the win32 files to be merged.</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="s2">&quot;20130404*.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;final.cnt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="HinetPy.client.html" title="previous chapter (use the left arrow)">HinetPy.client module</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="HinetPy.header.html" title="next chapter (use the right arrow)">HinetPy.header module</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.header.html" title="HinetPy.header module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.client.html" title="HinetPy.client module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API Reference</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

@@ -1,0 +1,297 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>win2sac &#8212; HinetPy 0.6.6 文档</title>
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="通道表文件" href="channeltable.html" />
+    <link rel="prev" title="catwin32" href="catwin32.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="channeltable.html" title="通道表文件"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="catwin32.html" title="catwin32"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../appendix.html" accesskey="U">附录</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>內容目录</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">示例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API参考</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../appendix.html">附录</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="catwin32.html">catwin32</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">win2sac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channeltable.html">通道表文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="response.html">仪器响应</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">修订历史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="../appendix.html">附录</a></li>
+              
+              <li>win2sac</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="win2sac">
+<h1>win2sac<a class="headerlink" href="#win2sac" title="永久链接至标题">¶</a></h1>
+<p>将WIN32格式转换为SAC格式，也支持BINARY/ASCII格式。</p>
+<div class="section" id="usage">
+<h2>用法<a class="headerlink" href="#usage" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">win2sac_32</span> <span class="n">winfile</span> <span class="n">ch_no</span> <span class="n">sacfile</span> <span class="p">[</span><span class="n">outdir</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span><span class="p">(</span><span class="n">prmfile</span><span class="p">)]</span>
+           <span class="p">[</span><span class="o">-</span><span class="n">Y</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span><span class="p">[</span><span class="n">BIN</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">ASC</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span><span class="p">(</span><span class="n">RATIO</span><span class="p">)]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span><span class="p">(</span><span class="n">PMAX</span><span class="p">)]</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>winfile:</dt>
+<dd><strong>一个</strong> 要转换的win32文件。</dd>
+<dt>ch_no:</dt>
+<dd><p class="first">要提取的通道号。可以是如下形式：</p>
+<ul class="last simple">
+<li>一个通道号（如 <code class="docutils literal"><span class="pre">3345</span></code> ）</li>
+<li>多个用逗号分隔的通道号（如 <code class="docutils literal"><span class="pre">3345,3f65,4f75</span></code> ）</li>
+<li>一个包含通道号的文件，详情见下面的介绍。</li>
+</ul>
+</dd>
+<dt>sacfile</dt>
+<dd>输出的SAC文件的后缀</dd>
+<dt>outdir</dt>
+<dd>输出目录名。若未指定或值为 <code class="docutils literal"><span class="pre">-</span></code> 则默认为当前目录。输出目录必须存在。</dd>
+<dt><code class="docutils literal"><span class="pre">-p(prmfile)</span></code>:</dt>
+<dd>指定参数文件。默认文件名是 <code class="docutils literal"><span class="pre">win.prm</span></code> 。详情见下面的介绍。</dd>
+<dt><code class="docutils literal"><span class="pre">-Y</span></code></dt>
+<dd>使用宽通道码。组织ID + 台网ID + 通道ID。</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code></dt>
+<dd>指定SAC/BIN输出时所使用的字节序。默认使用大字节序。</dd>
+<dt><code class="docutils literal"><span class="pre">-b[BIN]</span></code></dt>
+<dd>BIN格式文件的后缀。默认值为 <code class="docutils literal"><span class="pre">bin</span></code> 。</dd>
+<dt><code class="docutils literal"><span class="pre">-a[ASC]</span></code></dt>
+<dd>ASC格式文件的后缀。默认值为 <code class="docutils literal"><span class="pre">asc</span></code> 。</dd>
+<dt><code class="docutils literal"><span class="pre">-r(RATIO)</span></code></dt>
+<dd>以BIN/ASC格式输出时要乘以的比例。默认值为1.0。</dd>
+<dt><code class="docutils literal"><span class="pre">-m(PMAX)</span></code></dt>
+<dd>数据点的最大数目。默认值为 <code class="docutils literal"><span class="pre">2000000</span></code> 。如果你的数据有更多的点数，必须增加该值。</dd>
+</dl>
+</div>
+<div class="section" id="examples">
+<h2>示例<a class="headerlink" href="#examples" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">win2sac_32</span> <span class="mi">2000082404000101</span><span class="n">VM</span><span class="o">.</span><span class="n">cnt</span> <span class="mi">4</span><span class="n">c55</span><span class="p">,</span><span class="mi">4</span><span class="n">c65</span> <span class="n">SAC</span> <span class="n">DATA</span> <span class="o">-</span><span class="n">e</span> <span class="o">&gt;</span> <span class="n">junk</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notes">
+<h2>注解<a class="headerlink" href="#notes" title="永久链接至标题">¶</a></h2>
+<div class="section" id="output-unit">
+<h3>输出的单位<a class="headerlink" href="#output-unit" title="永久链接至标题">¶</a></h3>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last"><code class="docutils literal"><span class="pre">win2sac_32</span></code> 提取的SAC文件总是真实的物理量，而不是digital counts。</p>
+</div>
+<p>win32格式中保存的原始数据是digital counts。当从win32格式中提取数据时， <code class="docutils literal"><span class="pre">win2sac_32</span></code> 总是从波形中去除灵敏度以将digital counts转换为对应的物理量，并乘以1.0e9将单位从米转换为纳米。</p>
+<p>输出的SAC文件的单位是 <code class="docutils literal"><span class="pre">nm/s</span></code> 、 <code class="docutils literal"><span class="pre">nm/s/s</span></code> 或 <code class="docutils literal"><span class="pre">micro</span> <span class="pre">radian</span></code></p>
+</div>
+<div class="section" id="filename-format">
+<h3>文件名格式<a class="headerlink" href="#filename-format" title="永久链接至标题">¶</a></h3>
+<p>默认的文件名格式是 <code class="docutils literal"><span class="pre">STATION.COMPONENT.EXTENSION</span></code> （如 <code class="docutils literal"><span class="pre">N.NABC.U.SAC</span></code> ）。你可以修改此后缀名。</p>
+</div>
+<div class="section" id="channel-number-file-format">
+<h3>通道号文件格式<a class="headerlink" href="#channel-number-file-format" title="永久链接至标题">¶</a></h3>
+<p>你可以将所有你要提取数据的通道号保存到一个文件中。</p>
+<ol class="arabic simple">
+<li>以 <code class="docutils literal"><span class="pre">#</span></code> 开头的行为注释行会被跳过</li>
+<li>空行会被跳过</li>
+<li>通道号可以用空格、制表符或逗号分隔</li>
+<li>每行最多不超过2000字符</li>
+</ol>
+<p>下面是一个示例:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">6034</span><span class="p">,</span><span class="mi">6035</span>
+<span class="c1"># 6036 # this line is ignored</span>
+<span class="mi">6038</span> <span class="mi">6039</span>
+</pre></div>
+</div>
+<div class="admonition danger">
+<p class="first admonition-title">危险</p>
+<p>使用这一特性可能会造成数据损失。因为 <code class="docutils literal"><span class="pre">win2sac_32</span></code> 程序在某个通道的数据不存在时会自动退出。</p>
+<p>如果你依然想要使用这一特性，你需要将 <code class="docutils literal"><span class="pre">s4win2sacm.c</span></code> 的386行从:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s2">&quot;Data for channel </span><span class="si">%x</span><span class="s2"> not existed</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sysch</span><span class="p">);</span>
+<span class="n">iRet</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>修改为:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s2">&quot;Data for channel </span><span class="si">%x</span><span class="s2"> not existed</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sysch</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="paramerter-file">
+<h3>参数文件<a class="headerlink" href="#paramerter-file" title="永久链接至标题">¶</a></h3>
+<p>win32系统需要一个参数文件才能执行。这个参数文件有很多行。然而， <code class="docutils literal"><span class="pre">win2sac_32</span></code> 只使用了第2和第4行并忽略其它行。</p>
+<p>四行的参数文件的示例:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">.</span>
+<span class="mf">0101_20100101.</span><span class="n">ch</span>
+<span class="o">.</span>
+<span class="o">.</span>
+</pre></div>
+</div>
+<p>第二行是通道表文件名。 <code class="docutils literal"><span class="pre">win2sac_32</span></code> 需要读取该文件以提取指定通道的波形。</p>
+<p>第四行是震相拾取文件的路径。大多数情况下都没有用。</p>
+</div>
+<div class="section" id="component">
+<h3>分量<a class="headerlink" href="#component" title="永久链接至标题">¶</a></h3>
+<p>分量信息会被写到SAC头段变量 <code class="docutils literal"><span class="pre">CMPAZ</span></code> 和 <code class="docutils literal"><span class="pre">CMPINC</span></code> 中。</p>
+<ul class="simple">
+<li>U/Z: CMPAZ = 0.0, CMPINC = 0.0</li>
+<li>N/X: CMPAZ = 0.0, CMPINC = 90.0</li>
+<li>E/Y: CMPAZ = 90.0, CMPINC = 90.0</li>
+<li>Other: CMPAZ = 0.0, CMPINC = 0.0</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>传感器的方位角是 <strong>不</strong> 精确的。</p>
+<p class="last">详情参考 <a class="reference external" href="https://hinetwww11.bosai.go.jp/auth/direc/?LANG">https://hinetwww11.bosai.go.jp/auth/direc/?LANG</a> 。</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="catwin32.html" title="上一章 (use the left arrow)">catwin32</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="channeltable.html" title="下一章 (use the right arrow)">通道表文件</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="channeltable.html" title="通道表文件"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="catwin32.html" title="catwin32"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../appendix.html" >附录</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

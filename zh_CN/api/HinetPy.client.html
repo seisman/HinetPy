@@ -1,0 +1,636 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>HinetPy.client 模块 &#8212; HinetPy 0.6.6 文档</title>
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="HinetPy.win32 模块" href="HinetPy.win32.html" />
+    <link rel="prev" title="API参考" href="../api.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.win32.html" title="HinetPy.win32 模块"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="../api.html" title="API参考"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API参考</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>內容目录</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">示例</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API参考</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HinetPy.client 模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.win32.html">HinetPy.win32 模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.header.html">HinetPy.header模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.utils.html">HinetPy.utils 模块</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix.html">附录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">修订历史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="../api.html">API参考</a></li>
+              
+              <li>HinetPy.client 模块</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="module-HinetPy.client">
+<span id="hinetpy-client-module"></span><h1>HinetPy.client 模块<a class="headerlink" href="#module-HinetPy.client" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="HinetPy.client.Client">
+<em class="property">class </em><code class="descclassname">HinetPy.client.</code><code class="descname">Client</code><span class="sig-paren">(</span><em>user=None</em>, <em>password=None</em>, <em>timeout=60</em>, <em>retries=3</em>, <em>sleep_time_in_seconds=5</em>, <em>max_sleep_count=30</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client" title="永久链接至目标">¶</a></dt>
+<dd><p>Hi-net 网络服务客户端。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – Hi-net账户用户名。</li>
+<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – Hi-net账户密码。</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 等待服务器响应多久才放弃。</li>
+<li><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a>) – 请求失败时重新尝试多少次。</li>
+<li><strong>sleep_time_in_seconds</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 见下面的注解。</li>
+<li><strong>max_sleep_count</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a>) – 见下面的注解。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-notes admonition">
+<p class="first admonition-title">注解</p>
+<p>Hi-net服务器在接收到数据请求后通常需要花10秒到1分钟时间来准备数据。在数据准备期间，禁止用户再次请求数据。因而用户必须等待直到数据准备完成。</p>
+<p class="last">HinetPy每隔 <code class="docutils literal"><span class="pre">sleep_time_in_seconds</span></code> 秒检查一次数据状态直到数据准备完成。如果HinetPy检查数据状态 <code class="docutils literal"><span class="pre">max_sleep_count</span> <span class="pre">*</span> <span class="pre">sleep_time_in_seconds</span></code> 秒而数据还未准备好，这可能意味着此次数据申请出错了。然后，HinetPy会重新尝试申请这个数据 <code class="docutils literal"><span class="pre">retries</span></code> 次。通常，你不需要修改这些设置，除非你知道自己在做什么。</p>
+</div>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">示例</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<dl class="method">
+<dt id="HinetPy.client.Client.login">
+<code class="descname">login</code><span class="sig-paren">(</span><em>user</em>, <em>password</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.login"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.login" title="永久链接至目标">¶</a></dt>
+<dd><p>登陆Hi-net服务器。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – Hi-net账户用户名。</li>
+<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – Hi-net账户密码。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">示例</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.doctor">
+<code class="descname">doctor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.doctor"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.doctor" title="永久链接至目标">¶</a></dt>
+<dd><p>做检查。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">doctor</span><span class="p">()</span>
+<span class="go">[2019-12-06 00:00:00] INFO: You&#39;re using the latest release (v0.6.5).</span>
+<span class="go">[2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.</span>
+<span class="go">[2019-12-06 00:00:00] INFO: catwin32: /home/user/bin/catwin32.</span>
+<span class="go">[2019-12-06 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
+</pre></div>
+</div>
+<p><strong>检查清单</strong></p>
+<ul class="simple">
+<li>HinetPy是否发布了新版本（见 <a class="reference internal" href="#HinetPy.client.Client.check_package_release" title="HinetPy.client.Client.check_package_release"><code class="xref py py-meth docutils literal"><span class="pre">check_package_release()</span></code></a> ）</li>
+<li>Hi-net网站是否有更新（见 <a class="reference internal" href="#HinetPy.client.Client.check_service_update" title="HinetPy.client.Client.check_service_update"><code class="xref py py-meth docutils literal"><span class="pre">check_service_update()</span></code></a> ）</li>
+<li><code class="docutils literal"><span class="pre">catwin32</span></code> 和 <code class="docutils literal"><span class="pre">win2sac_32</span></code> 是否在PATH中（见 <a class="reference internal" href="#HinetPy.client.Client.check_cmd_exists" title="HinetPy.client.Client.check_cmd_exists"><code class="xref py py-meth docutils literal"><span class="pre">check_cmd_exists()</span></code></a> ）</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_continuous_waveform">
+<code class="descname">get_continuous_waveform</code><span class="sig-paren">(</span><em>code</em>, <em>starttime</em>, <em>span</em>, <em>max_span=None</em>, <em>data=None</em>, <em>ctable=None</em>, <em>outdir=None</em>, <em>threads=3</em>, <em>cleanup=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_continuous_waveform"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_continuous_waveform" title="永久链接至目标">¶</a></dt>
+<dd><p>从Hi-net服务器获取连续波形。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
+<li><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 台网代码。见 <a class="reference internal" href="#HinetPy.client.Client.info" title="HinetPy.client.Client.info"><code class="xref py py-meth docutils literal"><span class="pre">info()</span></code></a> 。</li>
+<li><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> or str) – 数据请求的开始时间。</li>
+<li><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a>) – 数据的时间长度，单位为分钟。</li>
+<li><strong>max_span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a>) – 子请求的最大时间长度。默认会自动决定。</li>
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 下载的win32数据的文件名。默认格式： <code class="docutils literal"><span class="pre">CODE_YYYYmmddHHMM_SPAN.cnt</span></code></li>
+<li><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 下载的通道表文件名。默认格式为 <code class="docutils literal"><span class="pre">CODE_YYYYmmdd.ch</span></code></li>
+<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 将win32和通道表数据保存到指定目录中。默认为当前目录。</li>
+<li><strong>threads</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a>) – 用多少个线程以加速下载。</li>
+<li><strong>cleanup</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.8)"><em>bool</em></a>) – 在合并文件之后清理1分钟长度的cnt文件。</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>data</strong> (<em>str</em>) – 下载得到的win32数据的文件名。</li>
+<li><strong>ctable</strong> (<em>str</em>) – 下载的通道表文件的文件名。</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-notes admonition">
+<p class="first admonition-title">注解</p>
+<p><strong>时区</strong></p>
+<p>HinetPy中的所有时间都是日本标准时间（GMT+0900）。</p>
+<p><strong>max_span</strong></p>
+<p>Hi-net对每次数据请求设置了3个限制：</p>
+<ol class="arabic simple">
+<li>数据长度不大于60分钟</li>
+<li>通道数*数据长度不得大于12000分钟</li>
+<li>仅保留最近150次请求的数据</li>
+</ol>
+<p>例如，Hi-net台网有大约24000个通道。根据第2条限制，单次请求的通道长度不得大于5分钟。HinetPy通过将一个长的数据请求分割成多个短的子请求来打破这一限制。</p>
+<p><strong>工作流程</strong></p>
+<ol class="last arabic simple">
+<li>做一些检查</li>
+<li>将长数据请求分割成多个短的数据子请求</li>
+<li>对所有子请求进行循环并返回要下载的数据ID</li>
+<li>基于数据ID下载所有数据</li>
+<li>解压下载得到的所有ZIP文件并合并到一个win32格式的文件</li>
+<li>清理工作</li>
+</ol>
+</div>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">示例</p>
+<p>从Hi-net请求2010-01-01T05:35 (GMT+0900)开始的6分钟数据。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;201001010535&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(&#39;0101_201001010535_6.cnt&#39;, &#39;0101_20100101.ch&#39;)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">starttime</span></code> 也支持其他常见的格式：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-01-01 05:35&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-01-01T05:35&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">starttime</span></code> 也可以用 <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> 指定：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(&#39;0101_201001010535_6.cnt&#39;, &#39;0101_20100101.ch&#39;)</span>
+</pre></div>
+</div>
+<p>从F-net申请2010-01-01T00:00 (GMT+0900)全天的数据：</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0103&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">1440</span><span class="p">,</span> <span class="n">max_span</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="go">(&#39;0103_201001010000_1440.cnt&#39;, &#39;0103_20100101.ch&#39;)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_waveform">
+<code class="descname">get_waveform</code><span class="sig-paren">(</span><em>code</em>, <em>starttime</em>, <em>span</em>, <em>max_span=None</em>, <em>data=None</em>, <em>ctable=None</em>, <em>outdir=None</em>, <em>threads=3</em>, <em>cleanup=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_waveform"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_waveform" title="永久链接至目标">¶</a></dt>
+<dd><div class="versionchanged">
+<p><span class="versionmodified">在 0.6.0 版更改: </span>已废弃。</p>
+<p><a class="reference internal" href="#HinetPy.client.Client.get_waveform" title="HinetPy.client.Client.get_waveform"><code class="xref py py-meth docutils literal"><span class="pre">get_waveform()</span></code></a> 已改名为 <a class="reference internal" href="#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal"><span class="pre">get_continuous_waveform()</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_event_waveform">
+<code class="descname">get_event_waveform</code><span class="sig-paren">(</span><em>starttime</em>, <em>endtime</em>, <em>region='00'</em>, <em>minmagnitude=3.0</em>, <em>maxmagnitude=9.9</em>, <em>include_unknown_mag=True</em>, <em>mindepth=None</em>, <em>maxdepth=None</em>, <em>minlatitude=None</em>, <em>maxlatitude=None</em>, <em>minlongitude=None</em>, <em>maxlongitude=None</em>, <em>latitude=None</em>, <em>longitude=None</em>, <em>minradius=None</em>, <em>maxradius=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_event_waveform"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_event_waveform" title="永久链接至目标">¶</a></dt>
+<dd><p>获取事件波形数据。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> or str) – 事件的开始事件。</li>
+<li><strong>endtime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> or str) – 事件的结束事件。</li>
+<li><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – <p>限制事件在指定的区域内。可选值包括：</p>
+<ul>
+<li><code class="docutils literal"><span class="pre">00</span></code>: Whole Japan</li>
+<li><code class="docutils literal"><span class="pre">01</span></code>: Hokkaido Region</li>
+<li><code class="docutils literal"><span class="pre">02</span></code>: Tohoku Region</li>
+<li><code class="docutils literal"><span class="pre">03</span></code>: Kanto Region</li>
+<li><code class="docutils literal"><span class="pre">04</span></code>: Chubu Region</li>
+<li><code class="docutils literal"><span class="pre">05</span></code>: Kinki Region</li>
+<li><code class="docutils literal"><span class="pre">06</span></code>: Chugoku/Shikoku Region</li>
+<li><code class="docutils literal"><span class="pre">07</span></code>: Kyushu Region</li>
+<li><code class="docutils literal"><span class="pre">08</span></code>: Others</li>
+</ul>
+</li>
+<li><strong>minmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制事件震级大于指定值。</li>
+<li><strong>maxmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制事件震级小于指定值。</li>
+<li><strong>include_unknown_mag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.8)"><em>bool</em></a>) – 包括/排除未定震级的时间。</li>
+<li><strong>mindepth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制事件深度大于指定值。</li>
+<li><strong>maxdepth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制事件深度小于指定值。</li>
+<li><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制台站纬度大于指定值。</li>
+<li><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制台站纬度小于指定值。</li>
+<li><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制台站经度大于指定值。</li>
+<li><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制台站经度小于指定值。</li>
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 指定用于半径搜索的纬度。</li>
+<li><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 指定用于半径搜索的经度。</li>
+<li><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 指定环形搜索区域的最小半径。</li>
+<li><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 指定环形搜索区域的最大半径。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_arrivaltime">
+<code class="descname">get_arrivaltime</code><span class="sig-paren">(</span><em>startdate</em>, <em>span</em>, <em>filename=None</em>, <em>os='DOS'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_arrivaltime"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_arrivaltime" title="永久链接至目标">¶</a></dt>
+<dd><p>从Hi-net获取JMA走时数据</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
+<li><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(在 Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a>) – 请求数据的开始时间。</li>
+<li><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a>) – 数据长度，单位为天。</li>
+<li><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 文件格式。”DOS” 或 “UNIX”。</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 要保存的文件名。</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first"><strong>filename</strong> – 要保存的文件名。</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">示例</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">startdate</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">&#39;measure_20100101_5.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;arrivaltime.txt&quot;</span><span class="p">)</span>
+<span class="go">&#39;arrivaltime.txt&#39;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_focalmechanism">
+<code class="descname">get_focalmechanism</code><span class="sig-paren">(</span><em>startdate</em>, <em>span</em>, <em>filename=None</em>, <em>os='DOS'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_focalmechanism"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_focalmechanism" title="永久链接至目标">¶</a></dt>
+<dd><p>从Hi-net获取JMA震源机制解数据。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
+<li><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(在 Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a>) – 请求数据的开始时间。</li>
+<li><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a>) – 数据长度，单位为天。</li>
+<li><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 文件格式。”DOS” 或 “UNIX”。</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 要保存的文件名。</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first"><strong>filename</strong> – 要保存的文件名。</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">示例</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">startdate</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_focalmechanism</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">&#39;focal_20100101_5.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_focalmechanism</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;focal.txt&quot;</span><span class="p">)</span>
+<span class="go">&#39;focal.txt&#39;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_station_list">
+<code class="descname">get_station_list</code><span class="sig-paren">(</span><em>code</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_station_list"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_station_list" title="永久链接至目标">¶</a></dt>
+<dd><p>获取某个台网的台站列表。</p>
+<p>支持的台网:</p>
+<ul class="simple">
+<li>Hi-net (0101)</li>
+<li>F-net (0103, 0103A)</li>
+<li>S-net (0120, 0120A)</li>
+<li>MeSO-net (0131)</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
+<span class="go">0101 N.WNNH 45.4883 141.885 -159.06</span>
+<span class="go">0101 N.SFNH 45.3346 142.1185 -81.6</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_selected_stations">
+<code class="descname">get_selected_stations</code><span class="sig-paren">(</span><em>code</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_selected_stations"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_selected_stations" title="永久链接至目标">¶</a></dt>
+<dd><p>查询选中的台站数目。</p>
+<p>支持的台网:</p>
+<ul class="simple">
+<li>Hi-net (0101)</li>
+<li>F-net (0103, 0103A)</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 台网代码。</td>
+</tr>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><strong>no_of_stations</strong> – 选中的台站数目。</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.select_stations">
+<code class="descname">select_stations</code><span class="sig-paren">(</span><em>code</em>, <em>stations=None</em>, <em>minlatitude=None</em>, <em>maxlatitude=None</em>, <em>minlongitude=None</em>, <em>maxlongitude=None</em>, <em>latitude=None</em>, <em>longitude=None</em>, <em>minradius=None</em>, <em>maxradius=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.select_stations"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.select_stations" title="永久链接至目标">¶</a></dt>
+<dd><p>获取某个台网的台站列表。</p>
+<p>支持的台网:</p>
+<ul class="simple">
+<li>Hi-net (0101)</li>
+<li>F-net (0103, 0103A)</li>
+<li>S-net (0120, 0120A)</li>
+<li>MeSO-net (0131)</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 台网代码。</li>
+<li><strong>stations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(在 Python v3.8)"><em>list</em></a>) – 要选择的台站。</li>
+<li><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制台站纬度大于指定值。</li>
+<li><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制台站纬度小于指定值。</li>
+<li><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制台站经度大于指定值。</li>
+<li><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 限制台站经度小于指定值。</li>
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 指定用于半径搜索的纬度。</li>
+<li><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 指定用于半径搜索的经度。</li>
+<li><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – Limit to stations within the specified minimum number of degrees
+from the geographic point defined by the latitude and longitude
+parameters.</li>
+<li><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – Limit to stations within the specified maximum number of degrees
+from the geographic point defined by the latitude and longitude
+parameters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">示例</p>
+<p>只选择Hi-net的两个台站：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;N.AAKH&#39;</span><span class="p">,</span> <span class="s1">&#39;N.ABNH&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>选择矩形框内的台站:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">minlatitude</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">maxlatitude</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">minlongitude</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">maxlongitude</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>选择环形区域内的台站:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mi">139</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">minradius</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxradius</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>选择Hi-net的全部台站：</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.check_service_update">
+<code class="descname">check_service_update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.check_service_update"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.check_service_update" title="永久链接至目标">¶</a></dt>
+<dd><p>检查Hi-net网站是否被更新。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_service_update</span><span class="p">()</span>
+<span class="go">[2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.check_package_release">
+<code class="descname">check_package_release</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.check_package_release"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.check_package_release" title="永久链接至目标">¶</a></dt>
+<dd><p>检查HinetPy是否有发布新版本。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_package_release</span><span class="p">()</span>
+<span class="go">[2019-12-06 00:00:00] INFO: You&#39;re using the latest release (v0.6.5).</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.check_cmd_exists">
+<code class="descname">check_cmd_exists</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.check_cmd_exists"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.check_cmd_exists" title="永久链接至目标">¶</a></dt>
+<dd><p>检查 <code class="docutils literal"><span class="pre">catwin32</span></code> 和 <code class="docutils literal"><span class="pre">win2sac_32</span></code> 是否在PATH中。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_cmd_exists</span><span class="p">()</span>
+<span class="go">[2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.</span>
+<span class="go">[2017-01-01 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
+</pre></div>
+</div>
+<p>若 <code class="docutils literal"><span class="pre">catwin32</span></code> 和/或 <code class="docutils literal"><span class="pre">win2sac_32</span></code> 不在PATH中则会报错。这种情况下请从 <a class="reference external" href="http://www.hinet.bosai.go.jp/">Hi-net</a> 下载win32tools并确保两个二进制文件都在PATH中。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.info">
+<code class="descname">info</code><span class="sig-paren">(</span><em>code=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.info"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.client.Client.info" title="永久链接至目标">¶</a></dt>
+<dd><p>列出台网信息。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(在 Python v3.8)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 台网代码。</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">示例</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="go">0101   : NIED Hi-net</span>
+<span class="go">0103   : NIED F-net (broadband)</span>
+<span class="go">0103A  : NIED F-net (strong motion)</span>
+<span class="go">010501 : NIED V-net (Tokachidake)</span>
+<span class="gp">...</span>
+<span class="go">0703   : Aomori Prefectural Government</span>
+<span class="go">0705   : Shizuoka Prefectural Government</span>
+<span class="go">0801   : ADEP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="go">== Information of Network 0101 ==</span>
+<span class="go">Name: NIED Hi-net</span>
+<span class="go">Starttime: 20040401</span>
+<span class="go">No. of channels: 2336</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="../api.html" title="上一章 (use the left arrow)">API参考</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="HinetPy.win32.html" title="下一章 (use the right arrow)">HinetPy.win32 模块</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.win32.html" title="HinetPy.win32 模块"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="../api.html" title="API参考"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API参考</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

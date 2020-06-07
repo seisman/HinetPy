@@ -1,0 +1,739 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>HinetPy.header &#8212; HinetPy 0.6.6 文档</title>
+    <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">模块代码</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>內容目录</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">示例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API参考</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendix.html">附录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">修订历史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">许可协议</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../../index.html">Docs</a></li>
+              
+                <li><a href="../index.html">模块代码</a></li>
+              
+              <li>HinetPy.header</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <h1>HinetPy.header 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Basic information of networks.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="n">Network</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Network&quot;</span><span class="p">,</span> <span class="s2">&quot;name, channels, starttime, url&quot;</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot; An object containing information of a network.</span>
+
+<span class="sd">.. py:attribute:: name</span>
+
+<span class="sd">   Network name.</span>
+
+<span class="sd">.. py:attribute:: channels</span>
+
+<span class="sd">   Number of channels the network has.</span>
+
+<span class="sd">.. py:attribute:: starttime</span>
+
+<span class="sd">   Start time (JST: UTC+0900) when waveform data is avaiable.</span>
+
+<span class="sd">.. py:attribute:: url</span>
+
+<span class="sd">   Homepage of the network.</span>
+
+<span class="sd">``NETWORK`` is a dict of :class:`~HinetPy.header.Network`, containing</span>
+<span class="sd">information of all networks available from Hi-net website.</span>
+
+<span class="sd">&gt;&gt;&gt; from HinetPy.header import NETWORK</span>
+<span class="sd">&gt;&gt;&gt; for code in NETWORK.keys():</span>
+<span class="sd">...     print(code, NETWORK[code].name)</span>
+<span class="sd">0101 NIED Hi-net</span>
+<span class="sd">0103 NIED F-net (broadband)</span>
+<span class="sd">0103A NIED F-net (strong motion)</span>
+<span class="sd">0120 NIED S-net (speed motion)</span>
+<span class="sd">0120A NIED S-net (acceleration)</span>
+<span class="sd">0131 NIED MeSO-net</span>
+<span class="sd">0201 Hokkaido University</span>
+<span class="sd">...</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">URL_Hinet</span> <span class="o">=</span> <span class="s2">&quot;http://www.hinet.bosai.go.jp&quot;</span>
+<span class="n">URL_Fnet</span> <span class="o">=</span> <span class="s2">&quot;http://www.fnet.bosai.go.jp&quot;</span>
+<span class="n">URL_Vnet</span> <span class="o">=</span> <span class="s2">&quot;http://www.vnet.bosai.go.jp&quot;</span>
+<span class="n">URL_JMA</span> <span class="o">=</span> <span class="s2">&quot;http://www.jma.go.jp/jma/indexe.html&quot;</span>
+
+<span class="n">NETWORK</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0101&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED Hi-net&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">2336</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Hinet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0103&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED F-net (broadband)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">438</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Fnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0103A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED F-net (strong motion)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">438</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Fnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0120&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED S-net (speed motion)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">450</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># 450 velocity + 450 acceleration</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Hinet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0120A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED S-net (acceleration)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">450</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># 450 velocity + 450 acceleration</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Hinet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0131&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED MeSO-net&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Hinet</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0201&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Hokkaido University&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">183</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.sci.hokudai.ac.jp/isv/english/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0202&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Tohoku University&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">157</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.aob.geophys.tohoku.ac.jp/aob-e/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0203&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Tokyo University&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">301</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.eri.u-tokyo.ac.jp/eng/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0204&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Kyoto University&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">196</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.dpri.kyoto-u.ac.jp/en/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0205&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Kyushu University&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">73</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.sevo.kyushu-u.ac.jp/index-e.html&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0206&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Hirosaki University&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://hrsryu.geo.hirosaki-u.ac.jp/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0207&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Nagoya University&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.seis.nagoya-u.ac.jp/index_e/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0208&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Kochi University&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www-en.kochi-u.ac.jp/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0209&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Kagoshima University&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://leopard.sci.kagoshima-u.ac.jp/noev/English/home.htm&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0301&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;JMA Seismometer Network&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">869</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0401&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;JAMSTEC Realtime Data &quot;</span> <span class="s2">&quot;from the Deep Sea Floor Observatory&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">73</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.jamstec.go.jp/e/index.html&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0402&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED DONET1 (broadband)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">132</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Hinet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0402N&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;JAMSTEC NIED DONET1 (broadband)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">132</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Hinet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0402A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED DONET1 (strong motion)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">132</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Hinet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0402AN&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;JAMSTEC NIED DONET1 (broadband)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">132</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Hinet</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0501&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;AIST&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">81</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.aist.go.jp/index_en.html&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0601&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;GSI&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.gsi.go.jp/ENGLISH/index.html&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0701&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Tokyo Metropolitan Government&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">54</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.metro.tokyo.jp/ENGLISH/index.htm&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0702&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Hot Spring Research Institute &quot;</span> <span class="s2">&quot;of Kanagawa Prefecture&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.onken.odawara.kanagawa.jp/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0703&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Aomori Prefectural Government&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.pref.aomori.lg.jp/foreigners/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0705&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Shizuoka Prefectural Government&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.pref.shizuoka.jp/a_foreign/english/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;0801&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ADEP&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">606</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.adep.or.jp/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010501&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Tokachidake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010502&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Tarumaesan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010503&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Usuzan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010504&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Hokkaido-Komagatake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010505&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Iwatesan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010506&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Nasudake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010507&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Asamayama)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010508&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Kusatsu-Shiranesan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010509&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Fujisan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">57</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010510&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Miyakejima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010511&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Izu-Oshima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">39</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010512&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Asosan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">44</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010513&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Unzendake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;010514&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NIED V-net (Kirishimayama)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_Vnet</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">JMA_VNET</span> <span class="o">=</span> <span class="s2">&quot;JMA Volcanic Seismometer Network &quot;</span>
+
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030201&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Atosanupuri)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030202&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Meakandake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030203&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Taisetsuzan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030204&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Tokachidake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030205&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Tarumaesan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030206&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Kuttara)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030207&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Usuzan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030208&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Hokkaido-Komagatake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030209&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Esan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030210&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Iwakisan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030211&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Akita-Yakeyama)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030212&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Iwatesan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030213&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Akita-Komagatake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030214&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Chokaisan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030215&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Kurikomayama)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030216&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Zaozan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030217&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Azumayama)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030218&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Adatarayama)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030219&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Bandaisan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030220&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Nasudake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030221&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Nikko-Shiranesan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030222&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Kusatsu-Shiranesan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030223&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Asamayama)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030224&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Niigata-Yakeyama)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030225&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Yakedake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030226&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Norikuradake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030227&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Ontakesan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030228&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Hakusan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030229&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Fujisan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030230&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Hakoneyama)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030231&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Izu-Tobu Volcanoes)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030232&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Izu-Oshima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030233&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Niijima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030234&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Kozushima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030235&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Miyakejima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030236&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Hachijojima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030237&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Aogashima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030238&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Tsurumidake and Garandake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030239&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Kujusan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030240&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Asosan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030241&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Unzendake)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030242&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Kirishimayama)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030243&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Sakurajima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030244&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Satsuma-Iojima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030245&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Kuchinoerabujima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030246&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Suwanosejima)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">NETWORK</span><span class="p">[</span><span class="s2">&quot;030247&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">JMA_VNET</span> <span class="o">+</span> <span class="s2">&quot;(Hakkodasan)&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+    <span class="n">starttime</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">URL_JMA</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+          </div>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >模块代码</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

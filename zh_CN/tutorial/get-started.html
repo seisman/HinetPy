@@ -1,0 +1,276 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>入门 &#8212; HinetPy 0.6.6 文档</title>
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="获取连续波形数据" href="get-continuous-waveform.html" />
+    <link rel="prev" title="教程" href="../tutorial.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="get-continuous-waveform.html" title="获取连续波形数据"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="../tutorial.html" title="教程"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../tutorial.html" accesskey="U">教程</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>內容目录</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">教程</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-continuous-waveform.html">获取连续波形数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-event-waveform.html">获取事件波形</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion.html">数据转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-catalog.html">获取目录</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">示例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API参考</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix.html">附录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">修订历史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="../tutorial.html">教程</a></li>
+              
+              <li>入门</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="get-started">
+<h1>入门<a class="headerlink" href="#get-started" title="永久链接至标题">¶</a></h1>
+<p>对于Hi-net数据的新用户，强烈建议你至少一次手动从Hi-net申请并下载数据并尝试使用 win32tools 处理数据，以确保你理解Hi-net数据申请、下载、处理的整个流程，并了解Hi-net网站设计的不友好和诸多限制。</p>
+<p>现在开始吧。</p>
+<div class="section" id="start-python">
+<h2>启动Python<a class="headerlink" href="#start-python" title="永久链接至标题">¶</a></h2>
+<p>在终端中运行 <code class="docutils literal"><span class="pre">python</span></code> （或 <code class="docutils literal"><span class="pre">ipython</span></code> ），并确保你所使用的Python版本大于等于3.4:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python
+Python 3.5.3 |Anaconda custom (64-bit)| (default, Feb 22 2017, 21:13:27)
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-client">
+<h2>创建一个客户端<a class="headerlink" href="#create-a-client" title="永久链接至标题">¶</a></h2>
+<p>HinetPy 中的类 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client" title="HinetPy.client.Client"><code class="xref py py-class docutils literal"><span class="pre">Client</span></code></a> 提供了多个方法帮助你获取波形数据。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>  <span class="c1"># use your own account.</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">你需要一个Hi-net账户以获取Hi-net台网的波形数据。</p>
+</div>
+</div>
+<div class="section" id="do-checks">
+<h2>做一些检查<a class="headerlink" href="#do-checks" title="永久链接至标题">¶</a></h2>
+<p>用 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.doctor" title="HinetPy.client.Client.doctor"><code class="xref py py-meth docutils literal"><span class="pre">doctor()</span></code></a> 检查是否一切正常：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">doctor</span><span class="p">()</span>
+<span class="go">[2019-06-14 16:11:47] INFO: You&#39;re using the latest release (v0.6.3).</span>
+<span class="go">[2019-06-14 16:11:46] INFO: Hi-net web service is NOT updated.</span>
+<span class="go">[2019-06-14 16:11:47] INFO: catwin32: /home/user/bin/catwin32.</span>
+<span class="go">[2019-06-14 16:11:47] INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
+</pre></div>
+</div>
+<p>恭喜你！你正在使用HinetPy的最新版本，且Hi-net网站在这个版本HinetPy发布之后没有再更新，这意味着HinetPy依然可以正常工作。并且，<code class="docutils literal"><span class="pre">catwin32</span></code> 和 <code class="docutils literal"><span class="pre">win2sac_32</span></code> 在你的PATH中。一切看起来都正常。</p>
+</div>
+<div class="section" id="network-codes">
+<h2>台网代码<a class="headerlink" href="#network-codes" title="永久链接至标题">¶</a></h2>
+<p>Hi-net网站提供了来自于多个组织或台网的地震波形数据，比如Hi-net、F-net和V-net。每个台网有唯一的台网代码。为了申请指定台网的波形数据，你必须首先知道台网代码。使用 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.info" title="HinetPy.client.Client.info"><code class="xref py py-meth docutils literal"><span class="pre">info()</span></code></a> 以了解更多信息。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="go">0101   : NIED Hi-net</span>
+<span class="go">0103   : NIED F-net (broadband)</span>
+<span class="go">0103A  : NIED F-net (strong motion)</span>
+<span class="go">010501 : NIED V-net (Tokachidake)</span>
+<span class="go">010502 : NIED V-net (Tarumaesan)</span>
+<span class="gp">...</span>
+<span class="go">0701   : Tokyo Metropolitan Government</span>
+<span class="go">0702   : Hot Spring Research Institute of Kanagawa Prefecture</span>
+<span class="go">0703   : Aomori Prefectural Government</span>
+<span class="go">0705   : Shizuoka Prefectural Government</span>
+<span class="go">0801   : ADEP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>  <span class="c1"># get more information about NIED Hi-net (0101)</span>
+<span class="go">== Information of Network 0101 ==</span>
+<span class="go">Name: NIED Hi-net</span>
+<span class="go">Homepage: http://www.hinet.bosai.go.jp/</span>
+<span class="go">Starttime: 20040401</span>
+<span class="go">No. of channels: 2336</span>
+</pre></div>
+</div>
+<p>现在我们知道Hi-net开始于2004-04-01，总共有2336个通道（约780个台站）。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">强烈建议Fnet用户使用 <a class="reference external" href="https://github.com/seisman/FnetPy">FnetPy</a> 获取Fnet数据，因而HinetPy无法正确处理F-net的仪器响应。</p>
+</div>
+</div>
+<div class="section" id="stations">
+<h2>台站<a class="headerlink" href="#stations" title="永久链接至标题">¶</a></h2>
+<p>你可以调用 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_station_list" title="HinetPy.client.Client.get_station_list"><code class="xref py py-meth docutils literal"><span class="pre">get_station_list()</span></code></a> 以查看Hi-net和F-net台网的台站信息（目前仅支持查看这两个台网的台站信息）。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
+<span class="go">0101 N.WNNH 45.4883 141.885 -159.06</span>
+<span class="go">0101 N.SFNH 45.3346 142.1185 -81.6</span>
+<span class="go">0101 N.WNWH 45.2531 141.6334 -130.6</span>
+<span class="go">0101 N.WNEH 45.2303 141.8806 -174.6</span>
+<span class="go">0101 N.SFSH 45.2163 142.2254 -96.6</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<p>Hi-net/F-net有很多台。如果你只需要申请其中某些台站的数据，你可以选择你需要的台站。Hi-net网站提供了一个网页界面以筛选台站，通常建议值接使用这一网页界面。如果你想要在申请的过程中动态选择台站，你可以使用 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.select_stations" title="HinetPy.client.Client.select_stations"><code class="xref py py-meth docutils literal"><span class="pre">select_stations()</span></code></a> 。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># select only two stations of Hi-net if you know the station names</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;N.AAKH&#39;</span><span class="p">,</span> <span class="s1">&#39;N.ABNH&#39;</span><span class="p">])</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># select Hi-net stations in a box region</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">minlatitude</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">maxlatitude</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">minlongitude</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">maxlongitude</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># select Hi-net stations in a circular region</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mi">139</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">minradius</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxradius</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># select all Hi-net stations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="../tutorial.html" title="上一章 (use the left arrow)">教程</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="get-continuous-waveform.html" title="下一章 (use the right arrow)">获取连续波形数据</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="get-continuous-waveform.html" title="获取连续波形数据"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="../tutorial.html" title="教程"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../tutorial.html" >教程</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

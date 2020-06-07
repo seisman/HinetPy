@@ -1,0 +1,332 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>HinetPy.win32 模块 &#8212; HinetPy 0.6.6 文档</title>
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="HinetPy.header模块" href="HinetPy.header.html" />
+    <link rel="prev" title="HinetPy.client 模块" href="HinetPy.client.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.header.html" title="HinetPy.header模块"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.client.html" title="HinetPy.client 模块"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API参考</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>內容目录</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">示例</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API参考</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.client.html">HinetPy.client 模块</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HinetPy.win32 模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.header.html">HinetPy.header模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.utils.html">HinetPy.utils 模块</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix.html">附录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">修订历史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="../api.html">API参考</a></li>
+              
+              <li>HinetPy.win32 模块</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="module-HinetPy.win32">
+<span id="hinetpy-win32-module"></span><h1>HinetPy.win32 模块<a class="headerlink" href="#module-HinetPy.win32" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="HinetPy.win32.Channel">
+<em class="property">class </em><code class="descclassname">HinetPy.win32.</code><code class="descname">Channel</code><span class="sig-paren">(</span><em>id=None</em>, <em>name=None</em>, <em>component=None</em>, <em>latitude=None</em>, <em>longitude=None</em>, <em>unit=None</em>, <em>gain=None</em>, <em>damping=None</em>, <em>period=None</em>, <em>preamplification=None</em>, <em>lsb_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#Channel"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.win32.Channel" title="永久链接至目标">¶</a></dt>
+<dd><p>通道类。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 通道ID。</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 台站名。</li>
+<li><strong>component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 通道分量（ <code class="docutils literal"><span class="pre">U|N|E</span></code> ）。</li>
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 台站纬度。</li>
+<li><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 台站经度。</li>
+<li><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 数据的单位（ <code class="docutils literal"><span class="pre">m</span></code> 、 <code class="docutils literal"><span class="pre">m/s</span></code> 、 <code class="docutils literal"><span class="pre">m/s/s</span></code> 、 <code class="docutils literal"><span class="pre">rad</span></code> ）。</li>
+<li><strong>gain</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 传感器敏感度。</li>
+<li><strong>damping</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 传感器阻尼常数。</li>
+<li><strong>period</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(在 Python v3.8)"><em>float</em></a>) – 地震仪的自然周期。</li>
+<li><strong>preamplification</strong> – 预放大因子。</li>
+<li><strong>lsb_value</strong> – LSB值。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="HinetPy.win32.extract_sac">
+<code class="descclassname">HinetPy.win32.</code><code class="descname">extract_sac</code><span class="sig-paren">(</span><em>data</em>, <em>ctable</em>, <em>suffix='SAC'</em>, <em>outdir='.'</em>, <em>pmax=8640000</em>, <em>filter_by_id=None</em>, <em>filter_by_name=None</em>, <em>filter_by_component=None</em>, <em>with_pz=False</em>, <em>processes=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#extract_sac"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.win32.extract_sac" title="永久链接至目标">¶</a></dt>
+<dd><p>提取数据并以SAC格式保存。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 要处理的win32文件。</li>
+<li><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 通道表文件。</li>
+<li><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 输出SAC文件的后缀。默认值为 <code class="docutils literal"><span class="pre">SAC</span></code> 。</li>
+<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 输出目录。默认输出到当前目录。</li>
+<li><strong>pmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a>) – 允许的最大数据点数。默认值为 8640000。若输出数据长度超过一天，你可以自行增加 <code class="docutils literal"><span class="pre">pmax</span></code> 的值。</li>
+<li><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按ID筛选通道。</li>
+<li><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照台站名筛选通道。</li>
+<li><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照分量筛选通道。</li>
+<li><strong>with_pz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.8)"><em>bool</em></a>) – 同时提取SAC零极点文件。默认后缀为 <code class="docutils literal"><span class="pre">.SAC_PZ</span></code> 。</li>
+<li><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.8)"><em>int</em></a>) – 数据提取过程中所使用的并行进程数目。默认使用所有进程。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last"><code class="docutils literal"><span class="pre">win2sac</span></code> 从波形中去除了灵敏度，并将数据乘以1.0e9。因而提取出的SAC文件的以 nm/s 为单位的速度或以 nm/s/s 为单位的加速度。</p>
+</div>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">示例</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span><span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>提取所有通道的数据，并指定SAC文件后缀和输出目录：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span><span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>只提取指定通道：</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span><span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;[NE]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="HinetPy.win32.extract_pz">
+<code class="descclassname">HinetPy.win32.</code><code class="descname">extract_pz</code><span class="sig-paren">(</span><em>ctable</em>, <em>suffix='SAC_PZ'</em>, <em>outdir='.'</em>, <em>keep_sensitivity=False</em>, <em>filter_by_chid=None</em>, <em>filter_by_name=None</em>, <em>filter_by_component=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#extract_pz"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.win32.extract_pz" title="永久链接至目标">¶</a></dt>
+<dd><p>从通道表中提取仪器响应信息并保存为SAC零极点文件。</p>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p>仅对Hi-net台网的仪器响应有效。</p>
+<p class="last">F-net的RESP仪器响应文件可以从 <a class="reference external" href="http://www.fnet.bosai.go.jp/st_info/response.php?LANG=en">F-net网站</a> 下载。</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 通道表文件。</li>
+<li><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – SAC零极点文件后缀，默认为 <code class="docutils literal"><span class="pre">SAC_PZ</span></code> 。</li>
+<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 输出目录。默认输出到当前目录。</li>
+<li><strong>keep_sensivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.8)"><em>bool</em></a>) – win2sac在将win32格式转换为SAC格式时，自动从波形数据中去除了灵敏度。因而生成的零极点文件中省去了灵敏度。</li>
+<li><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按ID筛选通道。</li>
+<li><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照台站名筛选通道。</li>
+<li><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照分量筛选通道。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">示例</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>提取所有通道并指定SAC零极点文件后缀和输出目录：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>只提取指定通道：</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;[NE]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="HinetPy.win32.merge">
+<code class="descclassname">HinetPy.win32.</code><code class="descname">merge</code><span class="sig-paren">(</span><em>datas</em>, <em>total_data</em>, <em>force_sort=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#merge"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#HinetPy.win32.merge" title="永久链接至目标">¶</a></dt>
+<dd><p>将多个win32文件合并为一个win32文件。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>datas</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 要合并的win32文件。</li>
+<li><strong>total_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.8)"><em>str</em></a>) – 输出的win32文件的文件名。</li>
+<li><strong>force_sort</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.8)"><em>bool</em></a>) – 强制将所有win32文件按照日期排序。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">示例</p>
+<p>若win32数据文件是按照数据开始时间命名的（如 <code class="docutils literal"><span class="pre">201304040203.cnt</span></code> ），则建议将win32文件按照文件名排序：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">datas</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;20130404*.cnt&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">datas</span><span class="p">,</span> <span class="s2">&quot;outdir/final.cnt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>若win32文件随机命名，你需要设置 <code class="docutils literal"><span class="pre">force_sort=True</span></code> 以强制 <code class="docutils literal"><span class="pre">catwin32</span></code> 将所有输入数据按照日期排序。然而，这一过程很耗时。除非必要，请勿使用这一选项：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">datas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;001.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;002.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;003.cnt&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">datas</span><span class="p">,</span> <span class="s2">&quot;final.cnt&quot;</span><span class="p">,</span> <span class="n">force_sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>你可以使用通配符指定要合并的win32文件。</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="s2">&quot;20130404*.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;final.cnt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="HinetPy.client.html" title="上一章 (use the left arrow)">HinetPy.client 模块</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="HinetPy.header.html" title="下一章 (use the right arrow)">HinetPy.header模块</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.header.html" title="HinetPy.header模块"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.client.html" title="HinetPy.client 模块"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API参考</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

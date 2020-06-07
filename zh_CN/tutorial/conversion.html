@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>数据转换 &#8212; HinetPy 0.6.6 文档</title>
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="获取目录" href="get-catalog.html" />
+    <link rel="prev" title="获取事件波形" href="get-event-waveform.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="get-catalog.html" title="获取目录"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="get-event-waveform.html" title="获取事件波形"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../tutorial.html" accesskey="U">教程</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>內容目录</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">教程</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="get-started.html">入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-continuous-waveform.html">获取连续波形数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-event-waveform.html">获取事件波形</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">数据转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-catalog.html">获取目录</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">示例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API参考</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix.html">附录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">修订历史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="../tutorial.html">教程</a></li>
+              
+              <li>数据转换</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="data-conversion">
+<h1>数据转换<a class="headerlink" href="#data-conversion" title="永久链接至标题">¶</a></h1>
+<p>Hi-net提供了win32格式的波形数据和通道表形式的仪器响应。 <a class="reference internal" href="../api/HinetPy.win32.html#module-HinetPy.win32" title="HinetPy.win32"><code class="xref py py-mod docutils literal"><span class="pre">win32</span></code></a> 可以将其转换为SAC和SAC零极点格式。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">win32</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;0101_201001010000_20.cnt&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctable</span> <span class="o">=</span> <span class="s2">&quot;0101_20100101.ch&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="extract-waveform-data">
+<h2>提取波形数据<a class="headerlink" href="#extract-waveform-data" title="永久链接至标题">¶</a></h2>
+<p>提取所有通道的数据数据并保存为SAC格式。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p>从win32格式转换得到的SAC文件的单位不是digital counts！！！</p>
+<p class="last"><code class="docutils literal"><span class="pre">win2sac_32</span></code> 会自动从波形中去除灵敏度，并乘以1.0e9。因而，SAC文件是以 nm/s 为单位的速度或以 nm/s/s 为单位的加速度。</p>
+</div>
+<p>SAC文件的默认文件名格式为 <code class="docutils literal"><span class="pre">STATION.COMPONENT.SAC</span></code> （例如 <code class="docutils literal"><span class="pre">N.NABC.U.SAC</span></code> ）。你可以指定其他SAC文件后缀和输出目录。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;SAC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>如果你只想提取一部分通道的波形数据，你可以使用 <code class="docutils literal"><span class="pre">filter_by_id</span></code> 、 <code class="docutils literal"><span class="pre">filter_by_name</span></code> 和/或 <code class="docutils literal"><span class="pre">filter_by_component</span></code> 以筛选需要的通道。这些参数都可以接受字符串列表或者包含通配符的字符串。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract 3 channles by id</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;3e83&#39;</span><span class="p">,</span> <span class="s1">&#39;3e84&#39;</span><span class="p">,</span> <span class="s1">&#39;3e85&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match &#39;N.NA*&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s1">&#39;N.NA*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract vertical(U) component channels whose name match &#39;N.NA*&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s1">&#39;N.NA*&#39;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;U&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extract-pz">
+<h2>提取零极点文件<a class="headerlink" href="#extract-pz" title="永久链接至标题">¶</a></h2>
+<p><a class="reference internal" href="../api/HinetPy.win32.html#HinetPy.win32.extract_pz" title="HinetPy.win32.extract_pz"><code class="xref py py-meth docutils literal"><span class="pre">extract_pz()</span></code></a> 可以将仪器响应从Hi-net的通道表格式转换为SAC PZ格式。</p>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p>此功能仅对Hi-net台网有效。</p>
+<p class="last">强烈建议F-net数据用户使用 <a class="reference external" href="http://github.com/seisman/FnetPy">FnetPy</a> 从Fnet网站申请SEED格式的数据，并从SEED文件中提取RESP或PZ格式的仪器响应。</p>
+</div>
+<p>提取所有通道的仪器响应并保存为SACPZ文件：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>SACPZ文件的默认文件名格式为 <code class="docutils literal"><span class="pre">STATION.COMPONENT.SAC_PZ</span></code> （例如 <code class="docutils literal"><span class="pre">N.NABC.U.SAC_PZ</span></code> ）。你可以指定其他SACPZ文件后缀和输出目录。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SACPZ&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;PZ/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>如果你只想提取一部分通道的波形数据，你可以使用 <code class="docutils literal"><span class="pre">filter_by_id</span></code> 、 <code class="docutils literal"><span class="pre">filter_by_name</span></code> 和/或 <code class="docutils literal"><span class="pre">filter_by_component</span></code> 以筛选需要的通道。这些参数都可以接受字符串列表或者包含通配符的字符串。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract 3 channles by id</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;3e83&#39;</span><span class="p">,</span> <span class="s1">&#39;3e84&#39;</span><span class="p">,</span> <span class="s1">&#39;3e85&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match &#39;N.NA*&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s1">&#39;N.NA*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract vertical(U) component channels whose name match &#39;N.NA*&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s1">&#39;N.NA*&#39;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;U&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">参见</p>
+<ol class="last arabic simple">
+<li><a class="reference external" href="https://hinetwww11.bosai.go.jp/auth/seed/?LANG=en">Response of Observation Equipment</a></li>
+<li><a class="reference external" href="http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08">Hi-net FAQ Q08</a></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="get-event-waveform.html" title="上一章 (use the left arrow)">获取事件波形</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="get-catalog.html" title="下一章 (use the right arrow)">获取目录</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="get-catalog.html" title="获取目录"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="get-event-waveform.html" title="获取事件波形"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../tutorial.html" >教程</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

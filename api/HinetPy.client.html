@@ -1,0 +1,663 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>HinetPy.client module &#8212; HinetPy 0.6.6 documentation</title>
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HinetPy.win32 module" href="HinetPy.win32.html" />
+    <link rel="prev" title="API Reference" href="../api.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.win32.html" title="HinetPy.win32 module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../api.html" title="API Reference"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API Reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HinetPy.client module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.win32.html">HinetPy.win32 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.header.html">HinetPy.header module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.utils.html">HinetPy.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="../api.html">API Reference</a></li>
+              
+              <li>HinetPy.client module</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="module-HinetPy.client">
+<span id="hinetpy-client-module"></span><h1>HinetPy.client module<a class="headerlink" href="#module-HinetPy.client" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="HinetPy.client.Client">
+<em class="property">class </em><code class="descclassname">HinetPy.client.</code><code class="descname">Client</code><span class="sig-paren">(</span><em>user=None</em>, <em>password=None</em>, <em>timeout=60</em>, <em>retries=3</em>, <em>sleep_time_in_seconds=5</em>, <em>max_sleep_count=30</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hi-net web service client.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Username of Hi-net account.</li>
+<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Password of Hi-net account.</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – How long to wait for the server to send data before giving up.</li>
+<li><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – How many times to retry if request fails.</li>
+<li><strong>sleep_time_in_seconds</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – See notes below.</li>
+<li><strong>max_sleep_count</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – See notes below.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-notes admonition">
+<p class="first admonition-title">Notes</p>
+<p>Hi-net server ususally spends 10 seconds to 1 minute on data
+preparation after receiving a data request. During the data
+preparation, users are <strong>NOT</strong> allowed to post another data request.
+So users have to wait until the data is ready.</p>
+<p class="last">HinetPy checks data status every <code class="docutils literal"><span class="pre">sleep_time_in_seconds</span></code> seconds
+until the data is ready. If HinetPy checks the data status for more
+than <code class="docutils literal"><span class="pre">max_sleep_count</span> <span class="pre">*</span> <span class="pre">sleep_time_in_seconds</span></code> seconds,
+it possibly indicates something wrong happend with this data request.
+Then, HinetPy will retry to request this data <code class="docutils literal"><span class="pre">retries</span></code> times.
+Ususally, you don’t need to modify these settings
+unless you know what you’re doing.</p>
+</div>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<dl class="method">
+<dt id="HinetPy.client.Client.login">
+<code class="descname">login</code><span class="sig-paren">(</span><em>user</em>, <em>password</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login in Hi-net server.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Username of Hi-net account.</li>
+<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Password of Hi-net account.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.doctor">
+<code class="descname">doctor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.doctor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.doctor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Doctor does some checks.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">doctor</span><span class="p">()</span>
+<span class="go">[2019-12-06 00:00:00] INFO: You&#39;re using the latest release (v0.6.5).</span>
+<span class="go">[2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.</span>
+<span class="go">[2019-12-06 00:00:00] INFO: catwin32: /home/user/bin/catwin32.</span>
+<span class="go">[2019-12-06 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
+</pre></div>
+</div>
+<p><strong>Checklist</strong></p>
+<ul class="simple">
+<li>if HinetPy has a new release
+(see <a class="reference internal" href="#HinetPy.client.Client.check_package_release" title="HinetPy.client.Client.check_package_release"><code class="xref py py-meth docutils literal"><span class="pre">check_package_release()</span></code></a>)</li>
+<li>if Hi-net web service is updated
+(see <a class="reference internal" href="#HinetPy.client.Client.check_service_update" title="HinetPy.client.Client.check_service_update"><code class="xref py py-meth docutils literal"><span class="pre">check_service_update()</span></code></a>)</li>
+<li>if <code class="docutils literal"><span class="pre">catwin32</span></code> and <code class="docutils literal"><span class="pre">win2sac_32</span></code> from win32tools are in PATH
+(see <a class="reference internal" href="#HinetPy.client.Client.check_cmd_exists" title="HinetPy.client.Client.check_cmd_exists"><code class="xref py py-meth docutils literal"><span class="pre">check_cmd_exists()</span></code></a>)</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_continuous_waveform">
+<code class="descname">get_continuous_waveform</code><span class="sig-paren">(</span><em>code</em>, <em>starttime</em>, <em>span</em>, <em>max_span=None</em>, <em>data=None</em>, <em>ctable=None</em>, <em>outdir=None</em>, <em>threads=3</em>, <em>cleanup=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_continuous_waveform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_continuous_waveform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get continuous waveform from Hi-net server.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Network code. See <a class="reference internal" href="#HinetPy.client.Client.info" title="HinetPy.client.Client.info"><code class="xref py py-meth docutils literal"><span class="pre">info()</span></code></a> for details.</li>
+<li><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> or str) – Starttime of data request.</li>
+<li><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Time span in minutes.</li>
+<li><strong>max_span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Maximum time span for sub-requests. Defaults to be determined
+automatically.</li>
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Filename of downloaded win32 data.
+Default format: CODE_YYYYmmddHHMM_SPAN.cnt</li>
+<li><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Filename of downloaded channel table file.
+Default format: CODE_YYYYmmdd.ch</li>
+<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Save win32 and channel table data to specified directory.
+Default is current directory.</li>
+<li><strong>threads</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – How many threads used to speedup data downloading.</li>
+<li><strong>cleanup</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Clean up one-minute cnt files after merging.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>data</strong> (<em>str</em>) – Filename of downloaded win32 data.</li>
+<li><strong>ctable</strong> (<em>str</em>) – Filename of downloaded channel table file.</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-notes admonition">
+<p class="first admonition-title">Notes</p>
+<p><strong>TimeZone</strong></p>
+<p>All times in HinetPy are in JST (GMT+0900).</p>
+<p><strong>max_span</strong></p>
+<p>Hi-net server sets three limitations of each data request:</p>
+<ol class="arabic simple">
+<li>Record_Length &lt;= 60 min</li>
+<li>Number_of_channels * Record_Length &lt;= 12000 min</li>
+<li>Only the latest 150 requested data are kept</li>
+</ol>
+<p>For example, Hi-net network has about 24000 channels. Acoording to
+limitation 2, the record length should be no more than 5 minutes
+in each data request. HinetPy “break through” the limitation by
+splitting a long-duration data request into several short-duration
+sub-requsts.</p>
+<p><strong>Workflow</strong></p>
+<ol class="last arabic simple">
+<li>do several checks</li>
+<li>split a long-duration request into several short-duration sub-requests</li>
+<li>loop over all sub-requests and return data id to download</li>
+<li>download all data based on data id</li>
+<li>extract all zip files and merge into one win32 format data</li>
+<li>cleanup</li>
+</ol>
+</div>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<p>Request 6 minutes data since 2010-01-01T05:35 (GMT+0900) from Hi-net.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;201001010535&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(&#39;0101_201001010535_6.cnt&#39;, &#39;0101_20100101.ch&#39;)</span>
+</pre></div>
+</div>
+<p>Several other string formats of <code class="docutils literal"><span class="pre">starttime</span></code> are also supported:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-01-01 05:35&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-01-01T05:35&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">starttime</span></code> can be given as <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(&#39;0101_201001010535_6.cnt&#39;, &#39;0101_20100101.ch&#39;)</span>
+</pre></div>
+</div>
+<p>Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0103&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">1440</span><span class="p">,</span> <span class="n">max_span</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="go">(&#39;0103_201001010000_1440.cnt&#39;, &#39;0103_20100101.ch&#39;)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_waveform">
+<code class="descname">get_waveform</code><span class="sig-paren">(</span><em>code</em>, <em>starttime</em>, <em>span</em>, <em>max_span=None</em>, <em>data=None</em>, <em>ctable=None</em>, <em>outdir=None</em>, <em>threads=3</em>, <em>cleanup=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_waveform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_waveform" title="Permalink to this definition">¶</a></dt>
+<dd><div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.6.0: </span>Deprecated.</p>
+<p><a class="reference internal" href="#HinetPy.client.Client.get_waveform" title="HinetPy.client.Client.get_waveform"><code class="xref py py-meth docutils literal"><span class="pre">get_waveform()</span></code></a> has been renamed to
+<a class="reference internal" href="#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal"><span class="pre">get_continuous_waveform()</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_event_waveform">
+<code class="descname">get_event_waveform</code><span class="sig-paren">(</span><em>starttime</em>, <em>endtime</em>, <em>region='00'</em>, <em>minmagnitude=3.0</em>, <em>maxmagnitude=9.9</em>, <em>include_unknown_mag=True</em>, <em>mindepth=None</em>, <em>maxdepth=None</em>, <em>minlatitude=None</em>, <em>maxlatitude=None</em>, <em>minlongitude=None</em>, <em>maxlongitude=None</em>, <em>latitude=None</em>, <em>longitude=None</em>, <em>minradius=None</em>, <em>maxradius=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_event_waveform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_event_waveform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get event waveform data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> or str) – Starttime of events.</li>
+<li><strong>endtime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> or str) – Endtime of events.</li>
+<li><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Limit events in specified region. Allowed values are:</p>
+<ul>
+<li><code class="docutils literal"><span class="pre">00</span></code>: Whole Japan</li>
+<li><code class="docutils literal"><span class="pre">01</span></code>: Hokkaido Region</li>
+<li><code class="docutils literal"><span class="pre">02</span></code>: Tohoku Region</li>
+<li><code class="docutils literal"><span class="pre">03</span></code>: Kanto Region</li>
+<li><code class="docutils literal"><span class="pre">04</span></code>: Chubu Region</li>
+<li><code class="docutils literal"><span class="pre">05</span></code>: Kinki Region</li>
+<li><code class="docutils literal"><span class="pre">06</span></code>: Chugoku/Shikoku Region</li>
+<li><code class="docutils literal"><span class="pre">07</span></code>: Kyushu Region</li>
+<li><code class="docutils literal"><span class="pre">08</span></code>: Others</li>
+</ul>
+</li>
+<li><strong>minmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to events with a magnitude larger than speicified minimum.</li>
+<li><strong>maxmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to events with a magnitude smaller than speicified maximum.</li>
+<li><strong>include_unknown_mag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Include/exclude undetermined magnitude events.</li>
+<li><strong>mindepth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to events deeper than the specified minimum.</li>
+<li><strong>maxdepth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to events shallower than the specified maximum.</li>
+<li><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to events with a latitude larger than the specified minimum.</li>
+<li><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to events with a latitude smaller than the specified maximum.</li>
+<li><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to events with a longitude larger than the specified minimum.</li>
+<li><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to events with a longitude smaller than the specified maximum.</li>
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Specify the latitude to be used for a radius search.</li>
+<li><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Specify the longitude to be used for a radius search.</li>
+<li><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to events within the specified minimum number of degrees
+from the geographic point defined by the latitude and longitude
+parameters.</li>
+<li><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to events within the specified maximum number of degrees
+from the geographic point defined by the latitude and longitude
+parameters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_arrivaltime">
+<code class="descname">get_arrivaltime</code><span class="sig-paren">(</span><em>startdate</em>, <em>span</em>, <em>filename=None</em>, <em>os='DOS'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_arrivaltime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_arrivaltime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get JMA arrival time data from Hi-net.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a>) – Start date to request.</li>
+<li><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Data length in days.</li>
+<li><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – File format. “DOS” or “UNIX”.</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Filename to save.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>filename</strong> – Filename saved.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">startdate</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">&#39;measure_20100101_5.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;arrivaltime.txt&quot;</span><span class="p">)</span>
+<span class="go">&#39;arrivaltime.txt&#39;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_focalmechanism">
+<code class="descname">get_focalmechanism</code><span class="sig-paren">(</span><em>startdate</em>, <em>span</em>, <em>filename=None</em>, <em>os='DOS'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_focalmechanism"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_focalmechanism" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get JMA focal mechanism data from Hi-net.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.8)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a>) – Start date to request.</li>
+<li><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Data length in days.</li>
+<li><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – File format. “DOS” or “UNIX”.</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Filename to save.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>filename</strong> – Filename saved.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">startdate</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_focalmechanism</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">&#39;focal_20100101_5.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_focalmechanism</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;focal.txt&quot;</span><span class="p">)</span>
+<span class="go">&#39;focal.txt&#39;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_station_list">
+<code class="descname">get_station_list</code><span class="sig-paren">(</span><em>code</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_station_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_station_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get station list of a network.</p>
+<p>Supported networks:</p>
+<ul class="simple">
+<li>Hi-net (0101)</li>
+<li>F-net (0103, 0103A)</li>
+<li>S-net (0120, 0120A)</li>
+<li>MeSO-net (0131)</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
+<span class="go">0101 N.WNNH 45.4883 141.885 -159.06</span>
+<span class="go">0101 N.SFNH 45.3346 142.1185 -81.6</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.get_selected_stations">
+<code class="descname">get_selected_stations</code><span class="sig-paren">(</span><em>code</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.get_selected_stations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.get_selected_stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query the number of stations selected for requesting data.</p>
+<p>Supported networks:</p>
+<ul class="simple">
+<li>Hi-net (0101)</li>
+<li>F-net (0103, 0103A)</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Network code.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>no_of_stations</strong> – Number of selected stations.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.select_stations">
+<code class="descname">select_stations</code><span class="sig-paren">(</span><em>code</em>, <em>stations=None</em>, <em>minlatitude=None</em>, <em>maxlatitude=None</em>, <em>minlongitude=None</em>, <em>maxlongitude=None</em>, <em>latitude=None</em>, <em>longitude=None</em>, <em>minradius=None</em>, <em>maxradius=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.select_stations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.select_stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select stations of a network.</p>
+<p>Supported networks:</p>
+<ul class="simple">
+<li>Hi-net (0101)</li>
+<li>F-net (0103, 0103A)</li>
+<li>S-net (0120, 0120A)</li>
+<li>MeSO-net (0131)</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Network code.</li>
+<li><strong>stations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – Stations to select.</li>
+<li><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to stations with a latitude larger than the specified minimum.</li>
+<li><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to stations with a latitude smaller than the specified maximum.</li>
+<li><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to stations with a longitude larger than the specified minimum.</li>
+<li><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to stations with a longitude smaller than the specified maximum.</li>
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Specify the latitude to be used for a radius search.</li>
+<li><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Specify the longitude to be used for a radius search.</li>
+<li><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to stations within the specified minimum number of degrees
+from the geographic point defined by the latitude and longitude
+parameters.</li>
+<li><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Limit to stations within the specified maximum number of degrees
+from the geographic point defined by the latitude and longitude
+parameters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<p>Select only two stations of Hi-net:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;N.AAKH&#39;</span><span class="p">,</span> <span class="s1">&#39;N.ABNH&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>Select stations in a box region:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">minlatitude</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">maxlatitude</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">minlongitude</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">maxlongitude</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Select stations in a circular region:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mi">139</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">minradius</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxradius</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Select all Hi-net stations:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.check_service_update">
+<code class="descname">check_service_update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.check_service_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.check_service_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if Hi-net service is updated.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_service_update</span><span class="p">()</span>
+<span class="go">[2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.check_package_release">
+<code class="descname">check_package_release</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.check_package_release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.check_package_release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether HinetPy has a new release.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_package_release</span><span class="p">()</span>
+<span class="go">[2019-12-06 00:00:00] INFO: You&#39;re using the latest release (v0.6.5).</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.check_cmd_exists">
+<code class="descname">check_cmd_exists</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.check_cmd_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.check_cmd_exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal"><span class="pre">catwin32</span></code> and <code class="docutils literal"><span class="pre">win2sac_32</span></code> from win32tools in PATH.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_cmd_exists</span><span class="p">()</span>
+<span class="go">[2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.</span>
+<span class="go">[2017-01-01 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
+</pre></div>
+</div>
+<p>The client will report errors if <code class="docutils literal"><span class="pre">catwin32</span></code> and/or <code class="docutils literal"><span class="pre">win2sac_32</span></code>
+are NOT in PATH. In this case, please download win32tools from
+<a class="reference external" href="http://www.hinet.bosai.go.jp/">Hi-net</a>
+and make sure both binary files are in your PATH.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="HinetPy.client.Client.info">
+<code class="descname">info</code><span class="sig-paren">(</span><em>code=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/client.html#Client.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.client.Client.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>List information of networks.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Network code.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="go">0101   : NIED Hi-net</span>
+<span class="go">0103   : NIED F-net (broadband)</span>
+<span class="go">0103A  : NIED F-net (strong motion)</span>
+<span class="go">010501 : NIED V-net (Tokachidake)</span>
+<span class="gp">...</span>
+<span class="go">0703   : Aomori Prefectural Government</span>
+<span class="go">0705   : Shizuoka Prefectural Government</span>
+<span class="go">0801   : ADEP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="go">== Information of Network 0101 ==</span>
+<span class="go">Name: NIED Hi-net</span>
+<span class="go">Starttime: 20040401</span>
+<span class="go">No. of channels: 2336</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="../api.html" title="previous chapter (use the left arrow)">API Reference</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="HinetPy.win32.html" title="next chapter (use the right arrow)">HinetPy.win32 module</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="HinetPy.win32.html" title="HinetPy.win32 module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../api.html" title="API Reference"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API Reference</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

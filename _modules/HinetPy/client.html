@@ -1,0 +1,1435 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>HinetPy.client &#8212; HinetPy 0.6.6 documentation</title>
+    <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.6.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">HinetPy 0.6.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../../index.html" class="text-logo">HinetPy v0.6.6</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../../index.html">Docs</a></li>
+              
+                <li><a href="../index.html">Module code</a></li>
+              
+              <li>HinetPy.client</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <h1>Source code for HinetPy.client</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">multiprocessing.pool</span> <span class="kn">import</span> <span class="n">ThreadPool</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">.win32</span> <span class="kn">import</span> <span class="n">merge</span>
+<span class="kn">from</span> <span class="nn">.header</span> <span class="kn">import</span> <span class="n">NETWORK</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">point_inside_box</span><span class="p">,</span> <span class="n">point_inside_circular</span><span class="p">,</span> <span class="n">split_integer</span><span class="p">,</span> \
+        <span class="n">to_datetime</span>
+
+<span class="c1"># Setup the logger</span>
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s2">&quot;[</span><span class="si">%(asctime)s</span><span class="s2">] </span><span class="si">%(levelname)s</span><span class="s2">: </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+                    <span class="nb">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">,</span>
+                    <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Client"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client">[docs]</a><span class="k">class</span> <span class="nc">Client</span><span class="p">():</span>
+    <span class="c1"># Hinet website</span>
+    <span class="n">_HINET</span> <span class="o">=</span> <span class="s1">&#39;http://www.hinet.bosai.go.jp/&#39;</span>
+    <span class="c1"># Authorization page</span>
+    <span class="n">_AUTH</span> <span class="o">=</span> <span class="s1">&#39;https://hinetwww11.bosai.go.jp/auth/&#39;</span>
+    <span class="c1"># Download win32tools</span>
+    <span class="n">_WIN32TOOLS</span> <span class="o">=</span> <span class="n">_AUTH</span> <span class="o">+</span> <span class="s1">&#39;manual/dlDialogue.php?r=win32tools&#39;</span>
+
+    <span class="c1"># Catalog</span>
+    <span class="n">_JMA</span> <span class="o">=</span> <span class="n">_AUTH</span> <span class="o">+</span> <span class="s1">&#39;JMA/dlDialogue.php&#39;</span>
+
+    <span class="c1"># Continuous wavefroms</span>
+    <span class="n">_CONT</span> <span class="o">=</span> <span class="n">_AUTH</span> <span class="o">+</span> <span class="s1">&#39;download/cont/&#39;</span>
+    <span class="n">_CONT_STATUS</span> <span class="o">=</span> <span class="n">_CONT</span> <span class="o">+</span> <span class="s1">&#39;cont_status.php&#39;</span>
+    <span class="n">_CONT_REQUEST</span> <span class="o">=</span> <span class="n">_CONT</span> <span class="o">+</span> <span class="s1">&#39;cont_request.php&#39;</span>
+    <span class="n">_CONT_DOWNLOAD</span> <span class="o">=</span> <span class="n">_CONT</span> <span class="o">+</span> <span class="s1">&#39;cont_download.php&#39;</span>
+
+    <span class="c1"># Station information</span>
+    <span class="n">_STATION_INFO</span> <span class="o">=</span> <span class="n">_HINET</span> <span class="o">+</span> <span class="s1">&#39;st_info/detail/dlDialogue.php?f=CSV&#39;</span>
+    <span class="n">_CONT_SELECT</span> <span class="o">=</span> <span class="n">_CONT</span> <span class="o">+</span> <span class="s1">&#39;select_confirm.php&#39;</span>
+    <span class="n">_STATION</span> <span class="o">=</span> <span class="n">_CONT</span> <span class="o">+</span> <span class="s1">&#39;select_info.php&#39;</span>
+    <span class="n">_MESONET_STATION_INFO</span> <span class="o">=</span> <span class="n">_CONT</span> <span class="o">+</span> <span class="s1">&#39;st_mesonet_json.php&#39;</span>
+    <span class="n">_SNET_STATION_INFO</span> <span class="o">=</span> <span class="n">_CONT</span> <span class="o">+</span> <span class="s1">&#39;st_snet_json.php&#39;</span>
+
+    <span class="c1"># Event waveforms</span>
+    <span class="n">_EVENT</span> <span class="o">=</span> <span class="n">_AUTH</span> <span class="o">+</span> <span class="s1">&#39;download/event/&#39;</span>
+    <span class="n">_EVENT_STATUS</span> <span class="o">=</span> <span class="n">_EVENT</span> <span class="o">+</span> <span class="s1">&#39;event_status.php&#39;</span>
+    <span class="n">_EVENT_REQUEST</span> <span class="o">=</span> <span class="n">_EVENT</span> <span class="o">+</span> <span class="s1">&#39;event_request.php&#39;</span>
+    <span class="n">_EVENT_DOWNLOAD</span> <span class="o">=</span> <span class="n">_EVENT</span> <span class="o">+</span> <span class="s1">&#39;event_download.php&#39;</span>
+
+    <span class="c1"># ETAG for v160422</span>
+    <span class="n">_ETAG</span> <span class="o">=</span> <span class="s2">&quot;1b61-5774e12e97f00&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                 <span class="n">sleep_time_in_seconds</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_sleep_count</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Hi-net web service client.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        user: str</span>
+<span class="sd">            Username of Hi-net account.</span>
+<span class="sd">        password: str</span>
+<span class="sd">            Password of Hi-net account.</span>
+<span class="sd">        timeout: int or float</span>
+<span class="sd">            How long to wait for the server to send data before giving up.</span>
+<span class="sd">        retries: int</span>
+<span class="sd">            How many times to retry if request fails.</span>
+<span class="sd">        sleep_time_in_seconds: int or float</span>
+<span class="sd">            See notes below.</span>
+<span class="sd">        max_sleep_count: int</span>
+<span class="sd">            See notes below.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Hi-net server ususally spends 10 seconds to 1 minute on data</span>
+<span class="sd">        preparation after receiving a data request. During the data</span>
+<span class="sd">        preparation, users are **NOT** allowed to post another data request.</span>
+<span class="sd">        So users have to wait until the data is ready.</span>
+
+<span class="sd">        HinetPy checks data status every ``sleep_time_in_seconds`` seconds</span>
+<span class="sd">        until the data is ready. If HinetPy checks the data status for more</span>
+<span class="sd">        than ``max_sleep_count * sleep_time_in_seconds`` seconds,</span>
+<span class="sd">        it possibly indicates something wrong happend with this data request.</span>
+<span class="sd">        Then, HinetPy will retry to request this data ``retries`` times.</span>
+<span class="sd">        Ususally, you don&#39;t need to modify these settings</span>
+<span class="sd">        unless you know what you&#39;re doing.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        &gt;&gt;&gt; from HinetPy import Client</span>
+<span class="sd">        &gt;&gt;&gt; client = Client(&quot;username&quot;, &quot;password&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">retries</span> <span class="o">=</span> <span class="n">retries</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sleep_time_in_seconds</span> <span class="o">=</span> <span class="n">sleep_time_in_seconds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_sleep_count</span> <span class="o">=</span> <span class="n">max_sleep_count</span>
+        <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">password</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+        <span class="c1"># variables for internal use</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_code</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_span</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="Client.login"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.login">[docs]</a>    <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Login in Hi-net server.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        user: str</span>
+<span class="sd">            Username of Hi-net account.</span>
+<span class="sd">        password: str</span>
+<span class="sd">            Password of Hi-net account.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        &gt;&gt;&gt; from HinetPy import Client</span>
+<span class="sd">        &gt;&gt;&gt; client = Client()</span>
+<span class="sd">        &gt;&gt;&gt; client.login(&quot;username&quot;, &quot;password&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
+        <span class="c1"># Hinet automatically trims password with &gt;12 characters</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Password with more than 12 characters may FAIL!&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+        <span class="n">auth</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;auth_un&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+            <span class="s1">&#39;auth_pw&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_AUTH</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>  <span class="c1"># get cookie</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_AUTH</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+
+        <span class="c1"># Hi-net server return 200 even when unauthorized,</span>
+        <span class="c1"># thus I have to check the webpage content</span>
+        <span class="n">inout</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;auth_log(?P&lt;LOG&gt;.*)\.png&#39;</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;LOG&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">inout</span> <span class="o">==</span> <span class="s1">&#39;out&#39;</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Unauthorized. Check your username and password!&quot;</span>
+            <span class="k">raise</span> <span class="n">requests</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Client.doctor"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.doctor">[docs]</a>    <span class="k">def</span> <span class="nf">doctor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Doctor does some checks.</span>
+
+<span class="sd">        &gt;&gt;&gt; client.doctor()</span>
+<span class="sd">        [2019-12-06 00:00:00] INFO: You&#39;re using the latest release (v0.6.5).</span>
+<span class="sd">        [2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.</span>
+<span class="sd">        [2019-12-06 00:00:00] INFO: catwin32: /home/user/bin/catwin32.</span>
+<span class="sd">        [2019-12-06 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
+
+<span class="sd">        **Checklist**</span>
+
+<span class="sd">        - if HinetPy has a new release</span>
+<span class="sd">          (see :meth:`~HinetPy.client.Client.check_package_release`)</span>
+<span class="sd">        - if Hi-net web service is updated</span>
+<span class="sd">          (see :meth:`~HinetPy.client.Client.check_service_update`)</span>
+<span class="sd">        - if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH</span>
+<span class="sd">          (see :meth:`~HinetPy.client.Client.check_cmd_exists`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_package_release</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_service_update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_cmd_exists</span><span class="p">()</span></div>
+
+    <span class="c1">###########################################################################</span>
+    <span class="c1">#                                                                         #</span>
+    <span class="c1"># Methods for requesting continuous waveforms.                            #</span>
+    <span class="c1">#                                                                         #</span>
+    <span class="c1">###########################################################################</span>
+    <span class="k">def</span> <span class="nf">_request_cont_waveform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="n">span</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Request continuous waveform.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Network code.</span>
+<span class="sd">        starttime: :py:class:`datetime.datetime`</span>
+<span class="sd">            Starttime of data request.</span>
+<span class="sd">        span: int</span>
+<span class="sd">            Time span in minutes.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        id: str</span>
+<span class="sd">            ID of requested data. None if request fails.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">org</span><span class="p">,</span> <span class="n">net</span><span class="p">,</span> <span class="n">volc</span> <span class="o">=</span> <span class="n">_parse_code</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;org1&#39;</span><span class="p">:</span>  <span class="n">org</span><span class="p">,</span>
+            <span class="s1">&#39;org2&#39;</span><span class="p">:</span>  <span class="n">net</span><span class="p">,</span>
+            <span class="s1">&#39;volc&#39;</span><span class="p">:</span>  <span class="n">volc</span><span class="p">,</span>
+            <span class="s1">&#39;year&#39;</span><span class="p">:</span>  <span class="n">starttime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y&quot;</span><span class="p">),</span>
+            <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="n">starttime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m&quot;</span><span class="p">),</span>
+            <span class="s1">&#39;day&#39;</span><span class="p">:</span>   <span class="n">starttime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span>
+            <span class="s1">&#39;hour&#39;</span><span class="p">:</span>  <span class="n">starttime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H&quot;</span><span class="p">),</span>
+            <span class="s1">&#39;min&#39;</span><span class="p">:</span>   <span class="n">starttime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%M&quot;</span><span class="p">),</span>
+            <span class="s1">&#39;span&#39;</span><span class="p">:</span>  <span class="nb">str</span><span class="p">(</span><span class="n">span</span><span class="p">),</span>
+            <span class="s1">&#39;arc&#39;</span><span class="p">:</span>   <span class="s1">&#39;ZIP&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;size&#39;</span><span class="p">:</span>  <span class="s1">&#39;93680&#39;</span><span class="p">,</span>  <span class="c1"># the actual size doesn&#39;t matter</span>
+            <span class="s1">&#39;LANG&#39;</span><span class="p">:</span>  <span class="s1">&#39;en&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># retry if request fails else return id</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retries</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># the timestamp determine the unique id</span>
+                <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;rn&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()))</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONT_REQUEST</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span>
+                                      <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+                <span class="c1"># assume the first one on status page is the one</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;td class=&quot;bgcolist2&quot;&gt;(?P&lt;ID&gt;\d</span><span class="si">{10}</span><span class="s1">)&lt;/td&gt;&#39;</span><span class="p">,</span>
+                               <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;ID&#39;</span><span class="p">)</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;tr class=&quot;bglist(?P&lt;OPT&gt;\d)&quot;&gt;&#39;</span> <span class="o">+</span>
+                               <span class="sa">r</span><span class="s1">&#39;&lt;td class=&quot;bgcolist2&quot;&gt;&#39;</span> <span class="o">+</span> <span class="nb">id</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;&lt;/td&gt;&#39;</span><span class="p">)</span>
+                <span class="c1"># wait until data is ready</span>
+                <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_sleep_count</span><span class="p">):</span>
+                    <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONT_STATUS</span><span class="p">,</span>
+                                               <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+                    <span class="n">opt</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;OPT&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>  <span class="c1"># still preparing data</span>
+                        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sleep_time_in_seconds</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>  <span class="c1"># data is available</span>
+                        <span class="k">return</span> <span class="nb">id</span>
+                    <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span>  <span class="c1"># ?</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;If you see this, &quot;</span> \
+                              <span class="s2">&quot;please report an issue on GitHub!&quot;</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                        <span class="k">break</span>  <span class="c1"># break to else clause</span>
+                    <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span>  <span class="c1"># something wrong, retry</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error in data status.&quot;</span><span class="p">)</span>
+                        <span class="k">break</span>  <span class="c1"># break to else clause</span>
+                <span class="k">else</span><span class="p">:</span>   <span class="c1"># wait too long time</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Data request fails after </span><span class="si">{}</span><span class="s2"> retries.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retries</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_download_cont_waveform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Download continuous waveform.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id: str</span>
+<span class="sd">            Data id to be downloaded.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        cnts: list of str</span>
+<span class="sd">            Filename of one-minute win32 data.</span>
+<span class="sd">        ctable: str</span>
+<span class="sd">            Filename of channle table.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># session cannot be shared between threads, so always initialize</span>
+        <span class="c1"># a new client for downloading.</span>
+        <span class="c1"># Maybe there is other trick way?</span>
+        <span class="n">dlclient</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retries</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">dlclient</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONT_DOWNLOAD</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">job</span><span class="o">.</span><span class="n">id</span><span class="p">},</span>
+                                          <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+
+                <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span> <span class="k">as</span> <span class="n">ft</span><span class="p">:</span>
+                    <span class="c1"># save to temporary file</span>
+                    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>  <span class="c1"># filter out keep-alive new chunks</span>
+                            <span class="n">ft</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+                    <span class="n">ft</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+                    <span class="c1"># unzip temporary file</span>
+                    <span class="n">cnts</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">ctable</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">ft</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">fz</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">fz</span><span class="o">.</span><span class="n">namelist</span><span class="p">():</span>
+                            <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.cnt&quot;</span><span class="p">):</span>
+                                <span class="n">cnts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                            <span class="k">elif</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.euc.ch&quot;</span><span class="p">):</span>
+                                <span class="n">ctable</span> <span class="o">=</span> <span class="n">filename</span>
+                        <span class="n">fz</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">members</span><span class="o">=</span><span class="n">cnts</span><span class="o">+</span><span class="p">[</span><span class="n">ctable</span><span class="p">])</span>
+                    <span class="k">return</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">ctable</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Data download fails after </span><span class="si">{}</span><span class="s2"> retries&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retries</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Client.get_continuous_waveform"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform">[docs]</a>    <span class="k">def</span> <span class="nf">get_continuous_waveform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span>
+                                <span class="n">max_span</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ctable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">outdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threads</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get continuous waveform from Hi-net server.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Network code. See :meth:`~HinetPy.client.Client.info` for details.</span>
+<span class="sd">        starttime: :py:class:`datetime.datetime` or str</span>
+<span class="sd">            Starttime of data request.</span>
+<span class="sd">        span: int</span>
+<span class="sd">            Time span in minutes.</span>
+<span class="sd">        max_span: int</span>
+<span class="sd">            Maximum time span for sub-requests. Defaults to be determined</span>
+<span class="sd">            automatically.</span>
+<span class="sd">        data: str</span>
+<span class="sd">            Filename of downloaded win32 data.</span>
+<span class="sd">            Default format: CODE_YYYYmmddHHMM_SPAN.cnt</span>
+<span class="sd">        ctable: str</span>
+<span class="sd">            Filename of downloaded channel table file.</span>
+<span class="sd">            Default format: CODE_YYYYmmdd.ch</span>
+<span class="sd">        outdir: str</span>
+<span class="sd">            Save win32 and channel table data to specified directory.</span>
+<span class="sd">            Default is current directory.</span>
+<span class="sd">        threads: int</span>
+<span class="sd">            How many threads used to speedup data downloading.</span>
+<span class="sd">        cleanup: bool</span>
+<span class="sd">            Clean up one-minute cnt files after merging.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        data: str</span>
+<span class="sd">            Filename of downloaded win32 data.</span>
+<span class="sd">        ctable: str</span>
+<span class="sd">            Filename of downloaded channel table file.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        **TimeZone**</span>
+
+<span class="sd">        All times in HinetPy are in JST (GMT+0900).</span>
+
+<span class="sd">        **max_span**</span>
+
+<span class="sd">        Hi-net server sets three limitations of each data request:</span>
+
+<span class="sd">        1. Record_Length &lt;= 60 min</span>
+<span class="sd">        2. Number_of_channels * Record_Length &lt;= 12000 min</span>
+<span class="sd">        3. Only the latest 150 requested data are kept</span>
+
+<span class="sd">        For example, Hi-net network has about 24000 channels. Acoording to</span>
+<span class="sd">        limitation 2, the record length should be no more than 5 minutes</span>
+<span class="sd">        in each data request. HinetPy &quot;break through&quot; the limitation by</span>
+<span class="sd">        splitting a long-duration data request into several short-duration</span>
+<span class="sd">        sub-requsts.</span>
+
+<span class="sd">        **Workflow**</span>
+
+<span class="sd">        1. do several checks</span>
+<span class="sd">        2. split a long-duration request into several short-duration sub-requests</span>
+<span class="sd">        3. loop over all sub-requests and return data id to download</span>
+<span class="sd">        4. download all data based on data id</span>
+<span class="sd">        5. extract all zip files and merge into one win32 format data</span>
+<span class="sd">        6. cleanup</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        Request 6 minutes data since 2010-01-01T05:35 (GMT+0900) from Hi-net.</span>
+
+<span class="sd">        &gt;&gt;&gt; client.get_continuous_waveform(&#39;0101&#39;, &#39;201001010535&#39;, 6)</span>
+<span class="sd">        (&#39;0101_201001010535_6.cnt&#39;, &#39;0101_20100101.ch&#39;)</span>
+
+<span class="sd">        Several other string formats of ``starttime`` are also supported:</span>
+
+<span class="sd">        &gt;&gt;&gt; client.get_continuous_waveform(&#39;0101&#39;, &#39;2010-01-01 05:35&#39;, 6)</span>
+<span class="sd">        &gt;&gt;&gt; client.get_continuous_waveform(&#39;0101&#39;, &#39;2010-01-01T05:35&#39;, 6)</span>
+
+<span class="sd">        ``starttime`` can be given as :py:class:`datetime.datetime`:</span>
+
+<span class="sd">        &gt;&gt;&gt; from datetime import datetime</span>
+<span class="sd">        &gt;&gt;&gt; starttime = datetime(2010, 1, 1, 5, 35)</span>
+<span class="sd">        &gt;&gt;&gt; client.get_continuous_waveform(&#39;0101&#39;, starttime, 6)</span>
+<span class="sd">        (&#39;0101_201001010535_6.cnt&#39;, &#39;0101_20100101.ch&#39;)</span>
+
+<span class="sd">        Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:</span>
+
+<span class="sd">        &gt;&gt;&gt; client.get_continuous_waveform(&#39;0103&#39;, starttime, 1440, max_span=25)</span>
+<span class="sd">        (&#39;0103_201001010000_1440.cnt&#39;, &#39;0103_20100101.ch&#39;)</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># 1. check span:</span>
+        <span class="c1">#    max limits is determined by the max number of data points</span>
+        <span class="c1">#    allowed in code s4win2sacm.c</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">span</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;span must be integer.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">span</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">31</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">6000</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Span is NOT in the allowed range [1, 357913]&quot;</span><span class="p">)</span>
+
+        <span class="c1"># 2. check starttime and endtime</span>
+        <span class="k">if</span> <span class="n">code</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">NETWORK</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: Incorrect network code.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">))</span>
+
+        <span class="n">time0</span> <span class="o">=</span> <span class="n">NETWORK</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">starttime</span>
+        <span class="c1"># time1 = UTCTime + JST(GMT+0900) - 2 hour delay</span>
+        <span class="n">time1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">starttime</span> <span class="o">=</span> <span class="n">to_datetime</span><span class="p">(</span><span class="n">starttime</span><span class="p">)</span>
+        <span class="n">endtime</span> <span class="o">=</span> <span class="n">starttime</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="n">span</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">time0</span> <span class="o">&lt;=</span> <span class="n">starttime</span> <span class="o">&lt;</span> <span class="n">endtime</span> <span class="o">&lt;=</span> <span class="n">time1</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Data not available in the time period. &quot;</span> <span class="o">+</span> \
+                  <span class="s2">&quot;Call Client.info(&#39;</span><span class="si">{}</span><span class="s2">&#39;) for help.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="c1"># 3. set max_span</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_code</span> <span class="o">!=</span> <span class="n">code</span><span class="p">:</span>  <span class="c1"># update default max_span</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_code</span> <span class="o">=</span> <span class="n">code</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_max_span</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_allowed_span</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">max_span</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">max_span</span> <span class="o">&lt;=</span> <span class="mi">60</span><span class="p">):</span>
+            <span class="n">max_span</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_span</span>
+
+        <span class="c1"># 4. prepare jobs</span>
+        <span class="n">jobs</span> <span class="o">=</span> <span class="n">prepare_jobs</span><span class="p">(</span><span class="n">starttime</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span> <span class="n">max_span</span><span class="p">)</span>
+
+        <span class="n">cnts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">ch_euc</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> ~</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">starttime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">),</span> <span class="n">span</span><span class="p">)</span>
+        <span class="c1"># 5. request and download</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>  <span class="c1"># to break the limitation of 150</span>
+            <span class="c1"># 5.1. request &lt;=100 data</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">100</span><span class="p">,</span> <span class="n">count</span><span class="p">)):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">%s</span><span class="s2">/</span><span class="si">%d</span><span class="s2">] =&gt; </span><span class="si">%s</span><span class="s2"> ~</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">))),</span>
+                            <span class="n">count</span><span class="p">,</span>
+                            <span class="n">jobs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">starttime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">),</span>
+                            <span class="n">jobs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">span</span><span class="p">)</span>
+                <span class="n">jobs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_cont_waveform</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">jobs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">starttime</span><span class="p">,</span>
+                                                         <span class="n">jobs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">span</span><span class="p">)</span>
+
+            <span class="c1"># 5.2. check ids</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">[</span><span class="n">job</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">]:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;No data requested succesuflly. Skipped.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+            <span class="c1"># check if all ids are not None</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">job</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">]):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Fail to request some data. Skipped.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+            <span class="c1"># 5.3. parallel downloading</span>
+            <span class="k">with</span> <span class="n">ThreadPool</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">threads</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">jobs</span><span class="p">)))</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
+                <span class="n">rvalue</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_download_cont_waveform</span><span class="p">,</span> <span class="n">jobs</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">rvalue</span><span class="p">:</span>
+                <span class="n">cnts</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">ch_euc</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># post processes</span>
+        <span class="c1"># 1. always sort cnts by name/time to avoid use -s option of catwin32</span>
+        <span class="n">cnts</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cnts</span><span class="p">)</span>
+        <span class="c1">#    always use the first ctable</span>
+        <span class="n">ch_euc</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">ch_euc</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># 2. merge all cnt files</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">_</span><span class="si">{:d}</span><span class="s2">.cnt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">,</span>
+                                           <span class="n">starttime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">%H%M&quot;</span><span class="p">),</span>
+                                           <span class="n">span</span><span class="p">)</span>
+        <span class="n">dirname</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">outdir</span><span class="p">:</span>
+            <span class="n">dirname</span> <span class="o">=</span> <span class="n">outdir</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">merge</span><span class="p">(</span><span class="n">cnts</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># 3. rename channeltable file</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ctable</span><span class="p">:</span>
+            <span class="n">ctable</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">.ch&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">starttime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">))</span>
+
+        <span class="n">dirname</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">ctable</span><span class="p">):</span>
+            <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">outdir</span><span class="p">:</span>
+            <span class="n">dirname</span> <span class="o">=</span> <span class="n">outdir</span>
+            <span class="n">ctable</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">ctable</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dirname</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dirname</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">ch_euc</span><span class="p">,</span> <span class="n">ctable</span><span class="p">)</span>
+
+        <span class="c1"># 4. cleanup</span>
+        <span class="k">if</span> <span class="n">cleanup</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">cnts</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">ctable</span></div>
+
+<div class="viewcode-block" id="Client.get_waveform"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.get_waveform">[docs]</a>    <span class="k">def</span> <span class="nf">get_waveform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span>
+                     <span class="n">max_span</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ctable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">outdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threads</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. versionchanged:: 0.6.0</span>
+
+<span class="sd">            Deprecated.</span>
+
+<span class="sd">            :meth:`~HinetPy.client.Client.get_waveform` has been renamed to</span>
+<span class="sd">            :meth:`~HinetPy.client.Client.get_continuous_waveform`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;The get_waveform() function is deprecated. Please &quot;</span>
+                       <span class="s2">&quot;use get_continuous_waveform().&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span>
+                                            <span class="n">max_span</span><span class="o">=</span><span class="n">max_span</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                                            <span class="n">ctable</span><span class="o">=</span><span class="n">ctable</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">,</span>
+                                            <span class="n">threads</span><span class="o">=</span><span class="n">threads</span><span class="p">,</span> <span class="n">cleanup</span><span class="o">=</span><span class="n">cleanup</span><span class="p">)</span></div>
+
+    <span class="c1">###########################################################################</span>
+    <span class="c1">#                                                                         #</span>
+    <span class="c1"># Methods for requesting event waveforms.                                 #</span>
+    <span class="c1">#                                                                         #</span>
+    <span class="c1">###########################################################################</span>
+    <span class="k">def</span> <span class="nf">_search_event_by_day</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;00&quot;</span><span class="p">,</span>
+                             <span class="n">magmin</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">magmax</span><span class="o">=</span><span class="mf">9.9</span><span class="p">,</span>
+                             <span class="n">include_unknown_mag</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Search events catalog of one day.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        region : str</span>
+<span class="sd">            Limit events in specified region. Allowed values are:</span>
+
+<span class="sd">            - ``00``: Whole Japan</span>
+<span class="sd">            - ``01``: Hokkaido Region</span>
+<span class="sd">            - ``02``: Tohoku Region</span>
+<span class="sd">            - ``03``: Kanto Region</span>
+<span class="sd">            - ``04``: Chubu Region</span>
+<span class="sd">            - ``05``: Kinki Region</span>
+<span class="sd">            - ``06``: Chugoku/Shikoku Region</span>
+<span class="sd">            - ``07``: Kyushu Region</span>
+<span class="sd">            - ``08``: Others</span>
+
+<span class="sd">        include_unknown_mag: bool</span>
+<span class="sd">            Include/exclude undetermined magnitude events.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="n">year</span><span class="p">,</span>
+            <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:02d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">month</span><span class="p">),</span>
+            <span class="s1">&#39;day&#39;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:02d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">day</span><span class="p">),</span>
+            <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">region</span><span class="p">,</span>
+            <span class="s1">&#39;mags&#39;</span><span class="p">:</span> <span class="n">magmin</span><span class="p">,</span>
+            <span class="s1">&#39;mage&#39;</span><span class="p">:</span> <span class="n">magmax</span><span class="p">,</span>
+            <span class="s1">&#39;undet&#39;</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">include_unknown_mag</span> <span class="k">else</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;sort&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1"># always sort by origin time in ascending order</span>
+            <span class="s1">&#39;arc&#39;</span><span class="p">:</span> <span class="s1">&#39;ZIP&#39;</span><span class="p">,</span>  <span class="c1"># meaningless arguement in this request</span>
+            <span class="s1">&#39;go&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;LANG&#39;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span>
+        <span class="p">}</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_EVENT</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;openRequest\((.+)\)&quot;</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">):</span>
+            <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)]</span>
+            <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Event</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">10</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">events</span>
+
+    <span class="k">def</span> <span class="nf">_request_event_waveform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;ZIP&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Request event waveform.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        event: HinetPy.client.Event</span>
+<span class="sd">            Event to be requested.</span>
+<span class="sd">        format: str</span>
+<span class="sd">            Format of requested waveform package.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;evid&#39;</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">evid</span><span class="p">,</span>
+            <span class="s1">&#39;origin_jst&#39;</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">origin</span><span class="p">,</span>
+            <span class="s1">&#39;hypo_latitude&#39;</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+            <span class="s1">&#39;hypo_logitude&#39;</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>  <span class="c1"># logitude is Hinet&#39;s typo</span>
+            <span class="s1">&#39;hypo_depth&#39;</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">depth</span><span class="p">,</span>
+            <span class="s1">&#39;mg&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span> <span class="k">else</span> <span class="n">event</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span>
+            <span class="s1">&#39;hypo_name&#39;</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;hypo_name_eng&#39;</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">name_en</span><span class="p">,</span>
+            <span class="s1">&#39;arc&#39;</span><span class="p">:</span> <span class="nb">format</span><span class="p">,</span>
+            <span class="s1">&#39;encoding&#39;</span><span class="p">:</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;lang&#39;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rn&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">())),</span>
+        <span class="p">}</span>
+
+        <span class="c1"># retry if request fails else return id</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retries</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_EVENT_REQUEST</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+                <span class="c1"># assume the first one on status page is the one</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;td class=&quot;bgevlist2&quot;&gt;(?P&lt;ID&gt;\d</span><span class="si">{10}</span><span class="s1">)&lt;/td&gt;&#39;</span><span class="p">,</span>
+                               <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;ID&#39;</span><span class="p">)</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;tr class=&quot;bglist(?P&lt;OPT&gt;\d)&quot;&gt;&#39;</span> <span class="o">+</span>
+                               <span class="sa">r</span><span class="s1">&#39;&lt;td class=&quot;bgevlist2&quot;&gt;&#39;</span> <span class="o">+</span> <span class="nb">id</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;&lt;/td&gt;&#39;</span><span class="p">)</span>
+                <span class="c1"># wait until data is ready</span>
+                <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_sleep_count</span><span class="p">):</span>
+                    <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_EVENT_STATUS</span><span class="p">,</span>
+                                               <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+                    <span class="n">opt</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;OPT&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>  <span class="c1"># still preparing data</span>
+                        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sleep_time_in_seconds</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>  <span class="c1"># data is available</span>
+                        <span class="k">return</span> <span class="nb">id</span>
+                    <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span>  <span class="c1"># ?</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;If you see this, &quot;</span> \
+                              <span class="s2">&quot;please report an issue on GitHub!&quot;</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                        <span class="k">break</span>  <span class="c1"># break to else clause</span>
+                    <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span>  <span class="c1"># something wrong, retry</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error in data status.&quot;</span><span class="p">)</span>
+                        <span class="k">break</span>  <span class="c1"># break to else clause</span>
+                <span class="k">else</span><span class="p">:</span>   <span class="c1"># wait too long time</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Data request fails after </span><span class="si">{}</span><span class="s2"> retries.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retries</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_download_event_waveform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Download event waveform.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id: str</span>
+<span class="sd">            Request ID.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+            <span class="s1">&#39;encode&#39;</span><span class="p">:</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;LANG&#39;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span>
+        <span class="p">}</span>
+
+        <span class="n">dlclient</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retries</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">dlclient</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_EVENT_DOWNLOAD</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span>
+                                         <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+                <span class="n">fname</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+                <span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fname</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+
+                <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span> <span class="k">as</span> <span class="n">ft</span><span class="p">:</span>
+                    <span class="c1"># save to temporary file</span>
+                    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>  <span class="c1"># filter out keep-alive new chunks</span>
+                            <span class="n">ft</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+                    <span class="n">ft</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+                    <span class="c1"># unzip temporary file</span>
+                    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">ft</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">fz</span><span class="p">:</span>
+                        <span class="n">fz</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">outdir</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">outdir</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Data download fails after </span><span class="si">{}</span><span class="s2"> retries&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retries</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Client.get_event_waveform"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.get_event_waveform">[docs]</a>    <span class="k">def</span> <span class="nf">get_event_waveform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="n">endtime</span><span class="p">,</span>
+                           <span class="n">region</span><span class="o">=</span><span class="s2">&quot;00&quot;</span><span class="p">,</span>
+                           <span class="n">minmagnitude</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">maxmagnitude</span><span class="o">=</span><span class="mf">9.9</span><span class="p">,</span>
+                           <span class="n">include_unknown_mag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                           <span class="n">mindepth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxdepth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">minlatitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxlatitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">minlongitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxlongitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">latitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">minradius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxradius</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Get event waveform data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        starttime: :py:class:`datetime.datetime` or str</span>
+<span class="sd">            Starttime of events.</span>
+<span class="sd">        endtime: :py:class:`datetime.datetime` or str</span>
+<span class="sd">            Endtime of events.</span>
+<span class="sd">        region: str</span>
+<span class="sd">            Limit events in specified region. Allowed values are:</span>
+
+<span class="sd">            - ``00``: Whole Japan</span>
+<span class="sd">            - ``01``: Hokkaido Region</span>
+<span class="sd">            - ``02``: Tohoku Region</span>
+<span class="sd">            - ``03``: Kanto Region</span>
+<span class="sd">            - ``04``: Chubu Region</span>
+<span class="sd">            - ``05``: Kinki Region</span>
+<span class="sd">            - ``06``: Chugoku/Shikoku Region</span>
+<span class="sd">            - ``07``: Kyushu Region</span>
+<span class="sd">            - ``08``: Others</span>
+<span class="sd">        minmagnitude: float</span>
+<span class="sd">            Limit to events with a magnitude larger than speicified minimum.</span>
+<span class="sd">        maxmagnitude: float</span>
+<span class="sd">            Limit to events with a magnitude smaller than speicified maximum.</span>
+<span class="sd">        include_unknown_mag: bool</span>
+<span class="sd">            Include/exclude undetermined magnitude events.</span>
+<span class="sd">        mindepth: float</span>
+<span class="sd">            Limit to events deeper than the specified minimum.</span>
+<span class="sd">        maxdepth: float</span>
+<span class="sd">            Limit to events shallower than the specified maximum.</span>
+<span class="sd">        minlatitude: float</span>
+<span class="sd">            Limit to events with a latitude larger than the specified minimum.</span>
+<span class="sd">        maxlatitude: float</span>
+<span class="sd">            Limit to events with a latitude smaller than the specified maximum.</span>
+<span class="sd">        minlongitude: float</span>
+<span class="sd">            Limit to events with a longitude larger than the specified minimum.</span>
+<span class="sd">        maxlongitude: float</span>
+<span class="sd">            Limit to events with a longitude smaller than the specified maximum.</span>
+<span class="sd">        latitude: float</span>
+<span class="sd">            Specify the latitude to be used for a radius search.</span>
+<span class="sd">        longitude: float</span>
+<span class="sd">            Specify the longitude to be used for a radius search.</span>
+<span class="sd">        minradius: float</span>
+<span class="sd">            Limit to events within the specified minimum number of degrees</span>
+<span class="sd">            from the geographic point defined by the latitude and longitude</span>
+<span class="sd">            parameters.</span>
+<span class="sd">        maxradius: float</span>
+<span class="sd">            Limit to events within the specified maximum number of degrees</span>
+<span class="sd">            from the geographic point defined by the latitude and longitude</span>
+<span class="sd">            parameters.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">starttime</span> <span class="o">=</span> <span class="n">to_datetime</span><span class="p">(</span><span class="n">starttime</span><span class="p">)</span>
+        <span class="n">endtime</span> <span class="o">=</span> <span class="n">to_datetime</span><span class="p">(</span><span class="n">endtime</span><span class="p">)</span>
+
+        <span class="c1"># get event list</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">days</span> <span class="o">=</span> <span class="p">(</span><span class="n">endtime</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">-</span> <span class="n">starttime</span><span class="o">.</span><span class="n">date</span><span class="p">())</span><span class="o">.</span><span class="n">days</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">days</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">event_date</span> <span class="o">=</span> <span class="n">starttime</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">events</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_search_event_by_day</span><span class="p">(</span><span class="n">event_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+                                                    <span class="n">event_date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+                                                    <span class="n">event_date</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+                                                    <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span>
+                                                    <span class="n">magmin</span><span class="o">=</span><span class="n">minmagnitude</span><span class="p">,</span>
+                                                    <span class="n">magmax</span><span class="o">=</span><span class="n">maxmagnitude</span><span class="p">,</span>
+                                                    <span class="n">include_unknown_mag</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+        <span class="c1"># select events</span>
+        <span class="n">selected_events</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+            <span class="c1"># select events based on origin time</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">starttime</span> <span class="o">&lt;=</span> <span class="n">event</span><span class="o">.</span><span class="n">origin</span> <span class="o">&lt;=</span> <span class="n">endtime</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="c1"># select events based on magnitude</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">minmagnitude</span> <span class="o">&lt;=</span> <span class="n">event</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">&lt;=</span> <span class="n">maxmagnitude</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="c1"># select events based on depth</span>
+            <span class="k">if</span> <span class="n">mindepth</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">depth</span> <span class="o">&lt;</span> <span class="n">mindepth</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">maxdepth</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">depth</span> <span class="o">&gt;</span> <span class="n">maxdepth</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># select events in a box region</span>
+            <span class="k">if</span> <span class="n">minlatitude</span> <span class="ow">or</span> <span class="n">maxlatitude</span> <span class="ow">or</span> <span class="n">minlongitude</span> <span class="ow">or</span> <span class="n">maxlongitude</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">point_inside_box</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+                                        <span class="n">minlatitude</span><span class="o">=</span><span class="n">minlatitude</span><span class="p">,</span>
+                                        <span class="n">maxlatitude</span><span class="o">=</span><span class="n">maxlatitude</span><span class="p">,</span>
+                                        <span class="n">minlongitude</span><span class="o">=</span><span class="n">minlongitude</span><span class="p">,</span>
+                                        <span class="n">maxlongitude</span><span class="o">=</span><span class="n">maxlongitude</span><span class="p">):</span>
+                    <span class="k">continue</span>
+
+            <span class="c1"># select events in a circular region</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">latitude</span> <span class="ow">and</span> <span class="n">longitude</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">minradius</span> <span class="ow">or</span> <span class="n">maxradius</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">point_inside_circular</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+                                             <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span>
+                                             <span class="n">minradius</span><span class="o">=</span><span class="n">minradius</span><span class="p">,</span>
+                                             <span class="n">maxradius</span><span class="o">=</span><span class="n">maxradius</span><span class="p">):</span>
+                    <span class="k">continue</span>
+            <span class="n">selected_events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EVENT WAVEFORM DOWNLOADER:&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:d}</span><span class="s2"> events to download.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_events</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_events</span><span class="p">)):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selected_events</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">selected_events</span><span class="p">:</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_event_waveform</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+            <span class="n">dirname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_download_event_waveform</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">dirname</span><span class="p">))</span></div>
+
+    <span class="c1">###########################################################################</span>
+    <span class="c1">#                                                                         #</span>
+    <span class="c1"># Methods for get catalogs                                                #</span>
+    <span class="c1">#                                                                         #</span>
+    <span class="c1">###########################################################################</span>
+    <span class="k">def</span> <span class="nf">_get_catalog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">startdate</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s2">&quot;DOS&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Request JMA catalog.&quot;&quot;&quot;</span>
+
+        <span class="n">startdate</span> <span class="o">=</span> <span class="n">to_datetime</span><span class="p">(</span><span class="n">startdate</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">span</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;span is not digit or not in [1, 7].&quot;</span><span class="p">)</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">datatype</span><span class="p">,</span>
+            <span class="s1">&#39;rtm&#39;</span><span class="p">:</span> <span class="n">startdate</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span>
+            <span class="s1">&#39;span&#39;</span><span class="p">:</span> <span class="n">span</span><span class="p">,</span>
+            <span class="s1">&#39;os&#39;</span><span class="p">:</span> <span class="n">os</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_JMA</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">datatype</span><span class="p">,</span>
+                                             <span class="n">startdate</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span>
+                                             <span class="n">span</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>  <span class="c1"># filter out keep-alive new chunks</span>
+                    <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filename</span>
+
+<div class="viewcode-block" id="Client.get_arrivaltime"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.get_arrivaltime">[docs]</a>    <span class="k">def</span> <span class="nf">get_arrivaltime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">startdate</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s2">&quot;DOS&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get JMA arrival time data from Hi-net.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        startdate: str, :py:class:`datetime.date`, :py:class:`datetime.datetime`</span>
+<span class="sd">            Start date to request.</span>
+<span class="sd">        span: int</span>
+<span class="sd">            Data length in days.</span>
+<span class="sd">        os: str</span>
+<span class="sd">            File format. &quot;DOS&quot; or &quot;UNIX&quot;.</span>
+<span class="sd">        filename: str</span>
+<span class="sd">            Filename to save.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filename: str</span>
+<span class="sd">            Filename saved.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        &gt;&gt;&gt; from datetime import date</span>
+<span class="sd">        &gt;&gt;&gt; startdate = date(2010, 1, 1)</span>
+<span class="sd">        &gt;&gt;&gt; client.get_arrivaltime(startdate, 5)</span>
+<span class="sd">        &#39;measure_20100101_5.txt&#39;</span>
+<span class="sd">        &gt;&gt;&gt; client.get_arrivaltime(startdate, 5, filename=&quot;arrivaltime.txt&quot;)</span>
+<span class="sd">        &#39;arrivaltime.txt&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_catalog</span><span class="p">(</span><span class="s2">&quot;measure&quot;</span><span class="p">,</span> <span class="n">startdate</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">os</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Client.get_focalmechanism"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.get_focalmechanism">[docs]</a>    <span class="k">def</span> <span class="nf">get_focalmechanism</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">startdate</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s2">&quot;DOS&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get JMA focal mechanism data from Hi-net.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        startdate: str, :py:class:`datetime.date`, :py:class:`datetime.datetime`</span>
+<span class="sd">            Start date to request.</span>
+<span class="sd">        span: int</span>
+<span class="sd">            Data length in days.</span>
+<span class="sd">        os: str</span>
+<span class="sd">            File format. &quot;DOS&quot; or &quot;UNIX&quot;.</span>
+<span class="sd">        filename: str</span>
+<span class="sd">            Filename to save.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filename: str</span>
+<span class="sd">            Filename saved.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from datetime import date</span>
+<span class="sd">        &gt;&gt;&gt; startdate = date(2010, 1, 1)</span>
+<span class="sd">        &gt;&gt;&gt; client.get_focalmechanism(startdate, 5)</span>
+<span class="sd">        &#39;focal_20100101_5.txt&#39;</span>
+<span class="sd">        &gt;&gt;&gt; client.get_focalmechanism(startdate, 5, filename=&quot;focal.txt&quot;)</span>
+<span class="sd">        &#39;focal.txt&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_catalog</span><span class="p">(</span><span class="s2">&quot;mecha&quot;</span><span class="p">,</span> <span class="n">startdate</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">os</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Client.get_station_list"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.get_station_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_station_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get station list of a network.</span>
+
+<span class="sd">        Supported networks:</span>
+
+<span class="sd">        - Hi-net (0101)</span>
+<span class="sd">        - F-net (0103, 0103A)</span>
+<span class="sd">        - S-net (0120, 0120A)</span>
+<span class="sd">        - MeSO-net (0131)</span>
+
+<span class="sd">        &gt;&gt;&gt; stations = client.get_station_list(&#39;0101&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; for station in stations:</span>
+<span class="sd">        ...     print(station)</span>
+<span class="sd">        0101 N.WNNH 45.4883 141.885 -159.06</span>
+<span class="sd">        0101 N.SFNH 45.3346 142.1185 -81.6</span>
+<span class="sd">        ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># remove trailing &#39;A&#39; in network code</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="n">code</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">code</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;0103&#39;</span><span class="p">,</span> <span class="s1">&#39;0103A&#39;</span><span class="p">]:</span>  <span class="c1"># Hinet and Fnet</span>
+            <span class="kn">import</span> <span class="nn">csv</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_STATION_INFO</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;organization_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;network_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">code</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">stations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Station</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;station_cd&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;height(m)&#39;</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="n">code</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0120&#39;</span><span class="p">,</span> <span class="s1">&#39;0120A&#39;</span><span class="p">,</span> <span class="s1">&#39;0131&#39;</span><span class="p">]:</span>  <span class="c1"># S-net and MeSO-net</span>
+            <span class="kn">import</span> <span class="nn">json</span>
+            <span class="k">if</span> <span class="n">code</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0120&#39;</span><span class="p">,</span> <span class="s1">&#39;0120A&#39;</span><span class="p">]:</span>
+                <span class="n">json_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_SNET_STATION_INFO</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;var snet_station = [&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;];&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">json_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_MESONET_STATION_INFO</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;var mesonet_station = [&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;];&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_text</span><span class="p">)[</span><span class="s1">&#39;features&#39;</span><span class="p">]:</span>
+                <span class="n">code</span> <span class="o">=</span> <span class="n">station</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">station</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;station_cd&#39;</span><span class="p">]</span>
+                <span class="n">latitude</span> <span class="o">=</span> <span class="n">station</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;latitude&#39;</span><span class="p">]</span>
+                <span class="n">longitude</span> <span class="o">=</span> <span class="n">station</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;longitude&#39;</span><span class="p">]</span>
+                <span class="n">elevation</span> <span class="o">=</span> <span class="n">station</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;sensor_height&#39;</span><span class="p">]</span>
+                <span class="n">stations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Station</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">elevation</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only support Hi-net, F-net, S-net and MeSO-net.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">stations</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_allowed_span</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get allowed max span for each network.</span>
+
+<span class="sd">        Hi-net server sets two limitations of data file size:</span>
+
+<span class="sd">        #. Number_of_channels * record_length(min.) &lt;= 12000 min</span>
+<span class="sd">        #. record_length &lt;= 60min</span>
+
+<span class="sd">        &gt;&gt;&gt; client._get_allowed_span(&#39;0201&#39;)</span>
+<span class="sd">        60</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Network code.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        max_span: int</span>
+<span class="sd">            Maximum allowed span in mimutes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">NETWORK</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">channels</span>
+        <span class="k">if</span> <span class="n">code</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;0103&#39;</span><span class="p">,</span> <span class="s1">&#39;0103A&#39;</span><span class="p">):</span>
+            <span class="n">stations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">stations</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">channels</span> <span class="o">=</span> <span class="n">stations</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">12000</span><span class="o">/</span><span class="n">channels</span><span class="p">),</span> <span class="mi">60</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Client.get_selected_stations"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.get_selected_stations">[docs]</a>    <span class="k">def</span> <span class="nf">get_selected_stations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Query the number of stations selected for requesting data.</span>
+
+<span class="sd">        Supported networks:</span>
+
+<span class="sd">        - Hi-net (0101)</span>
+<span class="sd">        - F-net (0103, 0103A)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Network code.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        no_of_stations: int</span>
+<span class="sd">            Number of selected stations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">code</span> <span class="o">==</span> <span class="s1">&#39;0101&#39;</span><span class="p">:</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;&lt;td class=&quot;td1&quot;&gt;(?P&lt;CHN&gt;N\..</span><span class="si">{3}</span><span class="s1">H)&lt;\/td&gt;&#39;</span>
+        <span class="k">elif</span> <span class="n">code</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;0103&#39;</span><span class="p">,</span> <span class="s1">&#39;0103A&#39;</span><span class="p">):</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;&lt;td class=&quot;td1&quot;&gt;(?P&lt;CHN&gt;N\..</span><span class="si">{3}</span><span class="s1">F)&lt;\/td&gt;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can only query stations of Hi-net/F-net&quot;</span><span class="p">)</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_STATION</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Client.select_stations"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.select_stations">[docs]</a>    <span class="k">def</span> <span class="nf">select_stations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">stations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">minlatitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">maxlatitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">minlongitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxlongitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">latitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">minradius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">maxradius</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Select stations of a network.</span>
+
+<span class="sd">        Supported networks:</span>
+
+<span class="sd">        - Hi-net (0101)</span>
+<span class="sd">        - F-net (0103, 0103A)</span>
+<span class="sd">        - S-net (0120, 0120A)</span>
+<span class="sd">        - MeSO-net (0131)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Network code.</span>
+<span class="sd">        stations: str or list</span>
+<span class="sd">            Stations to select.</span>
+<span class="sd">        minlatitude: float</span>
+<span class="sd">            Limit to stations with a latitude larger than the specified minimum.</span>
+<span class="sd">        maxlatitude: float</span>
+<span class="sd">            Limit to stations with a latitude smaller than the specified maximum.</span>
+<span class="sd">        minlongitude: float</span>
+<span class="sd">            Limit to stations with a longitude larger than the specified minimum.</span>
+<span class="sd">        maxlongitude: float</span>
+<span class="sd">            Limit to stations with a longitude smaller than the specified maximum.</span>
+<span class="sd">        latitude: float</span>
+<span class="sd">            Specify the latitude to be used for a radius search.</span>
+<span class="sd">        longitude: float</span>
+<span class="sd">            Specify the longitude to be used for a radius search.</span>
+<span class="sd">        minradius: float</span>
+<span class="sd">            Limit to stations within the specified minimum number of degrees</span>
+<span class="sd">            from the geographic point defined by the latitude and longitude</span>
+<span class="sd">            parameters.</span>
+<span class="sd">        maxradius: float</span>
+<span class="sd">            Limit to stations within the specified maximum number of degrees</span>
+<span class="sd">            from the geographic point defined by the latitude and longitude</span>
+<span class="sd">            parameters.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        Select only two stations of Hi-net:</span>
+
+<span class="sd">        &gt;&gt;&gt; client.select_stations(&#39;0101&#39;, [&#39;N.AAKH&#39;, &#39;N.ABNH&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; client.get_selected_stations(&#39;0101&#39;)</span>
+<span class="sd">        2</span>
+
+<span class="sd">        Select stations in a box region:</span>
+
+<span class="sd">        &gt;&gt;&gt; client.select_stations(&#39;0101&#39;, minlatitude=40, maxlatitude=50,</span>
+<span class="sd">        ...                        minlongitude=140, maxlongitude=150)</span>
+
+<span class="sd">        Select stations in a circular region:</span>
+
+<span class="sd">        &gt;&gt;&gt; client.select_stations(&#39;0101&#39;, latitude=30, longitude=139,</span>
+<span class="sd">        ...                        minradius=0, maxradius=2)</span>
+
+<span class="sd">        Select all Hi-net stations:</span>
+
+<span class="sd">        &gt;&gt;&gt; client.select_stations(&#39;0101&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; client.get_selected_stations(&#39;0101&#39;)</span>
+<span class="sd">        0</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">stations</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">stations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">stations_selected</span> <span class="o">=</span> <span class="n">stations</span>
+
+        <span class="c1"># get station list from Hi-net server</span>
+        <span class="n">stations_at_server</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+
+        <span class="c1"># select stations in a box region</span>
+        <span class="k">if</span> <span class="n">minlatitude</span> <span class="ow">or</span> <span class="n">maxlatitude</span> <span class="ow">or</span> <span class="n">minlongitude</span> <span class="ow">or</span> <span class="n">maxlongitude</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations_at_server</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">station</span><span class="o">.</span><span class="n">code</span> <span class="o">!=</span> <span class="n">code</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">point_inside_box</span><span class="p">(</span><span class="n">station</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+                                    <span class="n">station</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+                                    <span class="n">minlatitude</span><span class="o">=</span><span class="n">minlatitude</span><span class="p">,</span>
+                                    <span class="n">maxlatitude</span><span class="o">=</span><span class="n">maxlatitude</span><span class="p">,</span>
+                                    <span class="n">minlongitude</span><span class="o">=</span><span class="n">minlongitude</span><span class="p">,</span>
+                                    <span class="n">maxlongitude</span><span class="o">=</span><span class="n">maxlongitude</span><span class="p">):</span>
+                    <span class="n">stations_selected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">station</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># select stations in a circular region</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">latitude</span> <span class="ow">and</span> <span class="n">longitude</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">minradius</span> <span class="ow">or</span> <span class="n">maxradius</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations_at_server</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">station</span><span class="o">.</span><span class="n">code</span> <span class="o">!=</span> <span class="n">code</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">point_inside_circular</span><span class="p">(</span><span class="n">station</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">station</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+                                         <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span>
+                                         <span class="n">minradius</span><span class="o">=</span><span class="n">minradius</span><span class="p">,</span>
+                                         <span class="n">maxradius</span><span class="o">=</span><span class="n">maxradius</span><span class="p">):</span>
+                    <span class="n">stations_selected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">station</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;net&#39;</span><span class="p">:</span> <span class="n">code</span><span class="p">,</span>
+            <span class="s1">&#39;stcds&#39;</span><span class="p">:</span> <span class="s1">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stations_selected</span><span class="p">)</span> <span class="k">if</span> <span class="n">stations_selected</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONT_SELECT</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Client.check_service_update"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.check_service_update">[docs]</a>    <span class="k">def</span> <span class="nf">check_service_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if Hi-net service is updated.</span>
+
+<span class="sd">        &gt;&gt;&gt; client.check_service_update()</span>
+<span class="sd">        [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONT</span> <span class="o">+</span> <span class="s1">&#39;/js/cont.js&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;ETag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ETAG</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Hi-net web service is NOT updated.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Hi-net web service is updated.&quot;</span>
+                           <span class="s2">&quot; HinetPy may FAIL!&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Client.check_package_release"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.check_package_release">[docs]</a>    <span class="k">def</span> <span class="nf">check_package_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check whether HinetPy has a new release.</span>
+
+<span class="sd">        &gt;&gt;&gt; client.check_package_release()</span>
+<span class="sd">        [2019-12-06 00:00:00] INFO: You&#39;re using the latest release (v0.6.5).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">__version__</span><span class="p">,</span> <span class="n">__title__</span>
+        <span class="kn">from</span> <span class="nn">distutils.version</span> <span class="kn">import</span> <span class="n">StrictVersion</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://pypi.python.org/pypi/</span><span class="si">{}</span><span class="s2">/json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">__title__</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Error in connecting PyPI. Skipped.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">latest_release</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;info&#39;</span><span class="p">][</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">StrictVersion</span><span class="p">(</span><span class="n">latest_release</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">StrictVersion</span><span class="p">(</span><span class="n">__version__</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> v</span><span class="si">%s</span><span class="s2"> is released. See </span><span class="si">%s</span><span class="s2"> for details.&quot;</span><span class="p">,</span>
+                           <span class="n">__title__</span><span class="p">,</span> <span class="n">latest_release</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;You&#39;re using the latest version (v</span><span class="si">%s</span><span class="s2">).&quot;</span><span class="p">,</span> <span class="n">__version__</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Client.check_cmd_exists"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.check_cmd_exists">[docs]</a>    <span class="k">def</span> <span class="nf">check_cmd_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if ``catwin32`` and ``win2sac_32`` from win32tools in PATH.</span>
+
+<span class="sd">        &gt;&gt;&gt; client.check_cmd_exists()</span>
+<span class="sd">        [2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.</span>
+<span class="sd">        [2017-01-01 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
+
+<span class="sd">        The client will report errors if ``catwin32`` and/or ``win2sac_32``</span>
+<span class="sd">        are NOT in PATH. In this case, please download win32tools from</span>
+<span class="sd">        `Hi-net &lt;http://www.hinet.bosai.go.jp/&gt;`_</span>
+<span class="sd">        and make sure both binary files are in your PATH.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">shutil</span>
+
+        <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;catwin32&#39;</span><span class="p">,</span> <span class="s1">&#39;win2sac_32&#39;</span><span class="p">):</span>
+            <span class="n">fullpath</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fullpath</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: not found in PATH.&quot;</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+                <span class="n">error</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="kc">False</span> <span class="k">if</span> <span class="n">error</span> <span class="k">else</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Client.info"><a class="viewcode-back" href="../../api/HinetPy.client.html#HinetPy.client.Client.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;List information of networks.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: None or str</span>
+<span class="sd">            Network code.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        &gt;&gt;&gt; client.info()</span>
+<span class="sd">        0101   : NIED Hi-net</span>
+<span class="sd">        0103   : NIED F-net (broadband)</span>
+<span class="sd">        0103A  : NIED F-net (strong motion)</span>
+<span class="sd">        010501 : NIED V-net (Tokachidake)</span>
+<span class="sd">        ...</span>
+<span class="sd">        0703   : Aomori Prefectural Government</span>
+<span class="sd">        0705   : Shizuoka Prefectural Government</span>
+<span class="sd">        0801   : ADEP</span>
+<span class="sd">        &gt;&gt;&gt; client.info(&#39;0101&#39;)</span>
+<span class="sd">        == Information of Network 0101 ==</span>
+<span class="sd">        Name: NIED Hi-net</span>
+<span class="sd">        Starttime: 20040401</span>
+<span class="sd">        No. of channels: 2336</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">code</span><span class="p">:</span>
+            <span class="n">net</span> <span class="o">=</span> <span class="n">NETWORK</span><span class="p">[</span><span class="n">code</span><span class="p">]</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="s2">&quot;== Information of Network </span><span class="si">{}</span><span class="s2"> ==</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+            <span class="n">info</span> <span class="o">+=</span> <span class="s2">&quot;Name: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">info</span> <span class="o">+=</span> <span class="s2">&quot;Homepage: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+            <span class="n">info</span> <span class="o">+=</span> <span class="s2">&quot;Starttime: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">starttime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">))</span>
+            <span class="n">info</span> <span class="o">+=</span> <span class="s2">&quot;No. of channels: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">channels</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">NETWORK</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:7s}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">NETWORK</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_win32tools</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Download win32 tools.&quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_WIN32TOOLS</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error in downloading win32tools.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;win32tools.tar.gz&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>  <span class="c1"># filter out keep-alive new chunks</span>
+                    <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filename</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;&lt;== Hi-net web service client ==&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{:22s}</span><span class="s2">: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_HINET</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="s2">&quot;timeout&quot;</span><span class="p">,</span> <span class="s2">&quot;retries&quot;</span><span class="p">,</span> <span class="s2">&quot;debug&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;max_sleep_count&quot;</span><span class="p">,</span> <span class="s2">&quot;sleep_time_in_seconds&quot;</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;password&quot;</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{:22s}</span><span class="s2">: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="k">return</span> <span class="n">string</span></div>
+
+
+<span class="k">def</span> <span class="nf">prepare_jobs</span><span class="p">(</span><span class="n">starttime</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span> <span class="n">max_span</span><span class="p">):</span>
+    <span class="n">spans</span> <span class="o">=</span> <span class="n">split_integer</span><span class="p">(</span><span class="n">span</span><span class="p">,</span> <span class="n">max_span</span><span class="p">)</span>
+    <span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">_Job</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="n">starttime</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="n">spans</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">spans</span><span class="p">)):</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">jobs</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">starttime</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="n">spans</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_Job</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">spans</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">jobs</span>
+
+
+<span class="k">class</span> <span class="nc">_Job</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Job class for internal use.&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">starttime</span> <span class="o">=</span> <span class="n">starttime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">span</span> <span class="o">=</span> <span class="n">span</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+
+
+<span class="k">class</span> <span class="nc">Station</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class for Stations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">elevation</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">code</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">elevation</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elevation</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+                                         <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">elevation</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">string</span>
+
+
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Event class for requesting event waveforms.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evid</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">magnitude</span><span class="p">,</span>
+                 <span class="n">name</span><span class="p">,</span> <span class="n">name_en</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evid</span> <span class="o">=</span> <span class="n">evid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">origin</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">latitude</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">latitude</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">latitude</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">longitude</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">longitude</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">longitude</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">depth</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">depth</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;km&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">magnitude</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name_en</span> <span class="o">=</span> <span class="n">name_en</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">origin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+                                         <span class="bp">self</span><span class="o">.</span><span class="n">depth</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnitude</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">string</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_code</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse network code.</span>
+
+<span class="sd">    &gt;&gt;&gt; client._parse_code(&#39;0101&#39;)</span>
+<span class="sd">    (&#39;01&#39;, &#39;01&#39;, None)</span>
+<span class="sd">    &gt;&gt;&gt; client._parse_code(&#39;0103A&#39;)</span>
+<span class="sd">    (&#39;01&#39;, &#39;03A&#39;, None)</span>
+<span class="sd">    &gt;&gt;&gt; client._parse_code(&#39;010501&#39;)</span>
+<span class="sd">    (&#39;01&#39;, &#39;05&#39;, &#39;010501&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">code</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">NETWORK</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: Incorrect network code.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">code</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;0105&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">code</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;0302&#39;</span><span class="p">):</span>
+        <span class="n">org</span><span class="p">,</span> <span class="n">net</span><span class="p">,</span> <span class="n">volc</span> <span class="o">=</span> <span class="n">code</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">code</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="n">code</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">org</span><span class="p">,</span> <span class="n">net</span><span class="p">,</span> <span class="n">volc</span> <span class="o">=</span> <span class="n">code</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">code</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">org</span><span class="p">,</span> <span class="n">net</span><span class="p">,</span> <span class="n">volc</span>
+</pre></div>
+
+          </div>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">HinetPy 0.6.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>
