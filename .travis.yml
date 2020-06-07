@@ -5,9 +5,6 @@ dist: xenial
 matrix:
   include:
     - python: 3.7
-      env:
-        - BUILD_DOCS=true
-        - MAKE_TESTS=false
 
 branches:
   only:
@@ -17,11 +14,6 @@ branches:
     - /^feature-.*$/
     # Regex to build tagged commits with version numbers
     - /\d+\.\d+(\.\d+)?(\S*)?$/
-
-before_install:
-  # determine whether to skip build_docs or make_tests based on commit message
-  - if [[ $TRAVIS_COMMIT_MESSAGE =~ '[skip docs]' ]]; then export BUILD_DOCS=false; fi
-  - if [[ $TRAVIS_COMMIT_MESSAGE =~ '[skip tests]' ]]; then export MAKE_TESTS=false; fi
 
 install:
   # -e is important for coverage report
@@ -35,11 +27,8 @@ install:
       sed -i "s/test_password/${HINET_PASSWORD}/" tests/test_*.py;
     fi
 
-script:
-  - if [ "$MAKE_TESTS" == "true" ]; then make test coverage; fi
-
 after_success:
-  - if [ "$BUILD_DOCS" == "true" ]; then make doc; fi
+  - make doc
 
 deploy:
   provider: pages
