@@ -11,17 +11,25 @@ from fnmatch import fnmatch
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
-logging.basicConfig(level=logging.INFO,
-                    format=FORMAT,
-                    datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)
 
 
 class Channel(object):
-    def __init__(self, id=None, name=None, component=None,
-                 latitude=None, longitude=None, unit=None,
-                 gain=None, damping=None, period=None, preamplification=None,
-                 lsb_value=None):
+    def __init__(
+        self,
+        id=None,
+        name=None,
+        component=None,
+        latitude=None,
+        longitude=None,
+        unit=None,
+        gain=None,
+        damping=None,
+        period=None,
+        preamplification=None,
+        lsb_value=None,
+    ):
         """ Class for channel.
 
         Parameters
@@ -62,11 +70,18 @@ class Channel(object):
         self.lsb_value = lsb_value
 
 
-def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
-                filter_by_id=None,
-                filter_by_name=None,
-                filter_by_component=None,
-                with_pz=False, processes=0):
+def extract_sac(
+    data,
+    ctable,
+    suffix="SAC",
+    outdir=".",
+    pmax=8640000,
+    filter_by_id=None,
+    filter_by_name=None,
+    filter_by_component=None,
+    with_pz=False,
+    processes=0,
+):
     """Extract data as SAC format files.
 
     Parameters
@@ -123,10 +138,9 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
     channels = _get_channels(ctable)
     logger.info("%d channels found in %s.", len(channels), ctable)
     if filter_by_id or filter_by_name or filter_by_component:
-        channels = _filter_channels(channels,
-                                    filter_by_id,
-                                    filter_by_name,
-                                    filter_by_component)
+        channels = _filter_channels(
+            channels, filter_by_id, filter_by_name, filter_by_component
+        )
     logger.info("%d channels to be extracted.", len(channels))
 
     if not os.path.exists(outdir):
@@ -137,15 +151,19 @@ def extract_sac(data, ctable, suffix="SAC", outdir=".", pmax=8640000,
             _write_winprm(ctable, ft.name)
             args = [(data, ch, suffix, outdir, ft.name, pmax) for ch in channels]
             sacfiles = pool.starmap(_extract_channel, args)
-            logger.info("%d SAC data successfully extracted.",
-                        len(sacfiles) - sacfiles.count(None))
+            logger.info(
+                "%d SAC data successfully extracted.",
+                len(sacfiles) - sacfiles.count(None),
+            )
 
         if with_pz:
             # "SAC_PZ" here is hardcoded.
             args = [(ch, "SAC_PZ", outdir) for ch in channels]
             pzfiles = pool.starmap(_extract_sacpz, args)
-            logger.info("%d SAC PZ files successfully extracted.",
-                        len(pzfiles) - pzfiles.count(None))
+            logger.info(
+                "%d SAC PZ files successfully extracted.",
+                len(pzfiles) - pzfiles.count(None),
+            )
 
 
 def _get_processes(procs):
@@ -160,10 +178,15 @@ def _get_processes(procs):
             return procs
 
 
-def extract_pz(ctable, suffix='SAC_PZ', outdir='.', keep_sensitivity=False,
-               filter_by_chid=None,
-               filter_by_name=None,
-               filter_by_component=None):
+def extract_pz(
+    ctable,
+    suffix="SAC_PZ",
+    outdir=".",
+    keep_sensitivity=False,
+    filter_by_chid=None,
+    filter_by_name=None,
+    filter_by_component=None,
+):
     """Extract instrumental response in SAC PZ format from channel table.
 
     .. warning::
@@ -211,16 +234,16 @@ def extract_pz(ctable, suffix='SAC_PZ', outdir='.', keep_sensitivity=False,
 
     channels = _get_channels(ctable)
     if filter_by_chid or filter_by_name or filter_by_component:
-        channels = _filter_channels(channels,
-                                    filter_by_chid,
-                                    filter_by_name,
-                                    filter_by_component)
+        channels = _filter_channels(
+            channels, filter_by_chid, filter_by_name, filter_by_component
+        )
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
 
     for channel in channels:
-        _extract_sacpz(channel, suffix=suffix, outdir=outdir,
-                       keep_sensitivity=keep_sensitivity)
+        _extract_sacpz(
+            channel, suffix=suffix, outdir=outdir, keep_sensitivity=keep_sensitivity
+        )
 
 
 def _get_channels(ctable):
@@ -239,29 +262,34 @@ def _get_channels(ctable):
                 continue
             items = line.split()
             try:
-                channel = Channel(id=items[0],
-                                  name=items[3],
-                                  component=items[4],
-                                  latitude=float(items[13]),
-                                  longitude=float(items[14]),
-                                  unit=items[8],
-                                  gain=float(items[7]),
-                                  damping=float(items[10]),
-                                  period=float(items[9]),
-                                  preamplification=float(items[11]),
-                                  lsb_value=float(items[12]))
+                channel = Channel(
+                    id=items[0],
+                    name=items[3],
+                    component=items[4],
+                    latitude=float(items[13]),
+                    longitude=float(items[14]),
+                    unit=items[8],
+                    gain=float(items[7]),
+                    damping=float(items[10]),
+                    period=float(items[9]),
+                    preamplification=float(items[11]),
+                    lsb_value=float(items[12]),
+                )
                 channels.append(channel)
             except ValueError as e:
-                logger.warning("Error in parsing channel information for %s.%s (%s). Skipped.",
-                               items[3], items[4], items[0])
+                logger.warning(
+                    "Error in parsing channel information for %s.%s (%s). Skipped.",
+                    items[3],
+                    items[4],
+                    items[0],
+                )
                 logger.warning("Original error message: %s", e)
     return channels
 
 
-def _filter_channels(channels,
-                     filter_by_id=None,
-                     filter_by_name=None,
-                     filter_by_component=None):
+def _filter_channels(
+    channels, filter_by_id=None, filter_by_name=None, filter_by_component=None
+):
     """Filter channels by id, name and/or component.
 
     Parameters
@@ -291,11 +319,11 @@ def _filter_channels(channels,
         return filtered_channels
 
     if filter_by_id:
-        channels = _filter(channels, 'id', filter_by_id)
+        channels = _filter(channels, "id", filter_by_id)
     if filter_by_name:
-        channels = _filter(channels, 'name', filter_by_name)
+        channels = _filter(channels, "name", filter_by_name)
     if filter_by_component:
-        channels = _filter(channels, 'component', filter_by_component)
+        channels = _filter(channels, "component", filter_by_component)
 
     return channels
 
@@ -310,8 +338,9 @@ def _write_winprm(ctable, prmfile="win.prm"):
         f.write(msg)
 
 
-def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
-                     prmfile="win.prm", pmax=8640000):
+def _extract_channel(
+    winfile, channel, suffix="SAC", outdir=".", prmfile="win.prm", pmax=8640000
+):
     """Extract one channel data from win32 file.
 
     Parameters
@@ -330,28 +359,39 @@ def _extract_channel(winfile, channel, suffix="SAC", outdir=".",
         Maximum number of data points.
     """
 
-    cmd = ['win2sac_32', winfile, channel.id, suffix, outdir,
-           '-e', '-p'+prmfile, '-m'+str(pmax)]
+    cmd = [
+        "win2sac_32",
+        winfile,
+        channel.id,
+        suffix,
+        outdir,
+        "-e",
+        "-p" + prmfile,
+        "-m" + str(pmax),
+    ]
     p = Popen(cmd, stdout=DEVNULL, stderr=PIPE)
 
     # check stderr output
     for line in p.stderr.read().decode().split("\n"):
-        if 'The number of points is maximum over' in line:
-            msg = "The number of data points is over maximum. " \
-                  "Try to increase pmax."
+        if "The number of points is maximum over" in line:
+            msg = "The number of data points is over maximum. " "Try to increase pmax."
             raise ValueError(msg)
-        elif 'Data for channel {} not existed'.format(channel.id) in line:
+        elif "Data for channel {} not existed".format(channel.id) in line:
             # return None if no data avaiable
-            logger.warning("Data for %s.%s (%s) not exists. Skipped.",
-                           channel.name, channel.component, channel.id)
+            logger.warning(
+                "Data for %s.%s (%s) not exists. Skipped.",
+                channel.name,
+                channel.component,
+                channel.id,
+            )
             return None
 
     filename = "{}.{}.{}".format(channel.name, channel.component, suffix)
-    if outdir != '.':
+    if outdir != ".":
         filename = os.path.join(outdir, filename)
 
     if os.path.exists(filename):  # some channels have no data
-        if suffix == '':  # remove extra dot if suffix is empty
+        if suffix == "":  # remove extra dot if suffix is empty
             os.rename(filename, filename[:-1])
             return filename[:-1]
         else:
@@ -364,28 +404,36 @@ def _channel2pz(channel, keep_sensitivity=False):
     Transfer function = s^2 / (s^2+2hws+w^2).
     """
     # Hi-net use moving coil velocity type seismometer.
-    if channel.unit != 'm/s':
-        logger.warning("%s.%s (%s): Unit is not velocity.",
-                       channel.name, channel.component, channel.id)
+    if channel.unit != "m/s":
+        logger.warning(
+            "%s.%s (%s): Unit is not velocity.",
+            channel.name,
+            channel.component,
+            channel.id,
+        )
 
     try:
         freq = 2.0 * math.pi / channel.period
     except ZeroDivisionError:
-        logger.warning("%s.%s (%s): Natural period = 0. Skipped.",
-                       channel.name, channel.component, channel.id)
+        logger.warning(
+            "%s.%s (%s): Natural period = 0. Skipped.",
+            channel.name,
+            channel.component,
+            channel.id,
+        )
         return None, None, None
 
     # calculate poles, find roots of equation s^2+2hws+w^2=0
     real = -channel.damping * freq
-    imaginary = freq * math.sqrt(1 - channel.damping**2)
+    imaginary = freq * math.sqrt(1 - channel.damping ** 2)
 
     # calculate constant
     fn = 20  # alaways assume normalization frequency is 20 Hz
     s = complex(0, 2 * math.pi * fn)
 
-    A0 = abs((s**2 + 2 * channel.damping * freq * s + freq**2) / s**2)
+    A0 = abs((s ** 2 + 2 * channel.damping * freq * s + freq ** 2) / s ** 2)
     if keep_sensitivity:
-        factor = math.pow(10, channel.preamplification/20.0)
+        factor = math.pow(10, channel.preamplification / 20.0)
         constant = A0 * channel.gain * factor / channel.lsb_value
     else:
         constant = A0
@@ -415,14 +463,16 @@ def _write_pz(pzfile, real, imaginary, constant):
         pz.write("CONSTANT {:e}\n".format(constant))
 
 
-def _extract_sacpz(channel, suffix='SAC_PZ', outdir='.', keep_sensitivity=False):
+def _extract_sacpz(channel, suffix="SAC_PZ", outdir=".", keep_sensitivity=False):
     real, imaginary, constant = _channel2pz(channel, keep_sensitivity=keep_sensitivity)
-    if real == None or imaginary == None or constant == None:  # something wrong with channel information, skipped
+    if (
+        real is None or imaginary is None or constant is None
+    ):  # something wrong with channel information, skipped
         return None
 
     pzfile = "{}.{}".format(channel.name, channel.component)
     if suffix:
-        pzfile += '.' + suffix
+        pzfile += "." + suffix
     pzfile = os.path.join(outdir, pzfile)
     _write_pz(pzfile, real, imaginary, constant)
 
@@ -468,8 +518,8 @@ def merge(datas, total_data, force_sort=False):
     if os.path.dirname(total_data):
         os.makedirs(os.path.dirname(total_data), exist_ok=True)
 
-    cmd = ['catwin32', '-o', total_data] + datas
+    cmd = ["catwin32", "-o", total_data] + datas
     if force_sort:  # add -s option to force sort
-        cmd.append('-s')
+        cmd.append("-s")
 
     subprocess.call(cmd, stdout=DEVNULL, stderr=DEVNULL)

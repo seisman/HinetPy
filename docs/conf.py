@@ -9,53 +9,57 @@ import os
 import sys
 import HinetPy
 import datetime
-sys.path.insert(0, os.path.abspath('..'))
+import guzzle_sphinx_theme
+
+
+sys.path.insert(0, os.path.abspath(".."))
 
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-needs_sphinx = '1.3'
+needs_sphinx = "1.3"
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.mathjax',
-    ]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.coverage",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.githubpages",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.mathjax",
+]
 
 # autodoc options
-autodoc_member_order = 'bysource'
-autoclass_content = 'both'
+autodoc_member_order = "bysource"
+autoclass_content = "both"
 napoleon_numpy_docstring = True
 napoleon_use_admonition_for_notes = True
 napoleon_use_admonition_for_examples = True
 napoleon_use_admonition_for_references = True
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 # General information about the project.
 year = datetime.date.today().year
 project = HinetPy.__title__
 author = HinetPy.__author__
-copyright = '2014-{}, {}'.format(year, author)
+copyright = "2014-{}, {}".format(year, author)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -76,10 +80,10 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
@@ -90,19 +94,18 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-import guzzle_sphinx_theme
 html_theme_path = guzzle_sphinx_theme.html_theme_path()
-html_theme = 'guzzle_sphinx_theme'
+html_theme = "guzzle_sphinx_theme"
 # Register the theme as an extension to generate a sitemap.xml
 extensions.append("guzzle_sphinx_theme")
-#html_theme = 'alabaster'
+# html_theme = 'alabaster'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 html_theme_options = {
-    'project_nav_name': "{} v{}".format(project, version),
+    "project_nav_name": "{} v{}".format(project, version),
     # Allow the project link to be overriden to a custom URL.
     "projectlink": "https://seisman.github.io/HinetPy",
 }
@@ -112,11 +115,11 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 # html_static_path = ['_static']
 
-suppress_warnings = ['image.nonlocal_uri']
+suppress_warnings = ["image.nonlocal_uri"]
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/3/': None}
+intersphinx_mapping = {"https://docs.python.org/3/": None}
 
 # Chinese translation
-locale_dirs = ['locale/']   #path is example but recommended.
-gettext_compact = False     #optional.
+locale_dirs = ["locale/"]  # path is example but recommended.
+gettext_compact = False  # optional.

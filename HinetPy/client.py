@@ -3,63 +3,66 @@
 import os
 import re
 import time
-import math
 import logging
 import tempfile
 import zipfile
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 from multiprocessing.pool import ThreadPool
 
 import requests
 
 from .win32 import merge
 from .header import NETWORK
-from .utils import point_inside_box, point_inside_circular, split_integer, \
-        to_datetime
+from .utils import point_inside_box, point_inside_circular, split_integer, to_datetime
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
-logging.basicConfig(level=logging.INFO,
-                    format=FORMAT,
-                    datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)
 
 
-class Client():
+class Client:
     # Hinet website
-    _HINET = 'http://www.hinet.bosai.go.jp/'
+    _HINET = "http://www.hinet.bosai.go.jp/"
     # Authorization page
-    _AUTH = 'https://hinetwww11.bosai.go.jp/auth/'
+    _AUTH = "https://hinetwww11.bosai.go.jp/auth/"
     # Download win32tools
-    _WIN32TOOLS = _AUTH + 'manual/dlDialogue.php?r=win32tools'
+    _WIN32TOOLS = _AUTH + "manual/dlDialogue.php?r=win32tools"
 
     # Catalog
-    _JMA = _AUTH + 'JMA/dlDialogue.php'
+    _JMA = _AUTH + "JMA/dlDialogue.php"
 
     # Continuous wavefroms
-    _CONT = _AUTH + 'download/cont/'
-    _CONT_STATUS = _CONT + 'cont_status.php'
-    _CONT_REQUEST = _CONT + 'cont_request.php'
-    _CONT_DOWNLOAD = _CONT + 'cont_download.php'
+    _CONT = _AUTH + "download/cont/"
+    _CONT_STATUS = _CONT + "cont_status.php"
+    _CONT_REQUEST = _CONT + "cont_request.php"
+    _CONT_DOWNLOAD = _CONT + "cont_download.php"
 
     # Station information
-    _STATION_INFO = _HINET + 'st_info/detail/dlDialogue.php?f=CSV'
-    _CONT_SELECT = _CONT + 'select_confirm.php'
-    _STATION = _CONT + 'select_info.php'
-    _MESONET_STATION_INFO = _CONT + 'st_mesonet_json.php'
-    _SNET_STATION_INFO = _CONT + 'st_snet_json.php'
+    _STATION_INFO = _HINET + "st_info/detail/dlDialogue.php?f=CSV"
+    _CONT_SELECT = _CONT + "select_confirm.php"
+    _STATION = _CONT + "select_info.php"
+    _MESONET_STATION_INFO = _CONT + "st_mesonet_json.php"
+    _SNET_STATION_INFO = _CONT + "st_snet_json.php"
 
     # Event waveforms
-    _EVENT = _AUTH + 'download/event/'
-    _EVENT_STATUS = _EVENT + 'event_status.php'
-    _EVENT_REQUEST = _EVENT + 'event_request.php'
-    _EVENT_DOWNLOAD = _EVENT + 'event_download.php'
+    _EVENT = _AUTH + "download/event/"
+    _EVENT_STATUS = _EVENT + "event_status.php"
+    _EVENT_REQUEST = _EVENT + "event_request.php"
+    _EVENT_DOWNLOAD = _EVENT + "event_download.php"
 
     # ETAG for v160422
     _ETAG = "1b61-5774e12e97f00"
 
-    def __init__(self, user=None, password=None, timeout=60, retries=3,
-                 sleep_time_in_seconds=5, max_sleep_count=30):
+    def __init__(
+        self,
+        user=None,
+        password=None,
+        timeout=60,
+        retries=3,
+        sleep_time_in_seconds=5,
+        max_sleep_count=30,
+    ):
         """Hi-net web service client.
 
         Parameters
@@ -132,16 +135,16 @@ class Client():
         self.password = password[0:12]
         self.session = requests.Session()
         auth = {
-            'auth_un': self.user,
-            'auth_pw': self.password,
+            "auth_un": self.user,
+            "auth_pw": self.password,
         }
         self.session.get(self._AUTH, timeout=self.timeout)  # get cookie
         r = self.session.post(self._AUTH, data=auth, timeout=self.timeout)
 
         # Hi-net server return 200 even when unauthorized,
         # thus I have to check the webpage content
-        inout = re.search(r'auth_log(?P<LOG>.*)\.png', r.text).group('LOG')
-        if inout == 'out':
+        inout = re.search(r"auth_log(?P<LOG>.*)\.png", r.text).group("LOG")
+        if inout == "out":
             msg = "Unauthorized. Check your username and password!"
             raise requests.ConnectionError(msg)
 
@@ -173,7 +176,7 @@ class Client():
     #                                                                         #
     ###########################################################################
     def _request_cont_waveform(self, code, starttime, span):
-        '''
+        """
         Request continuous waveform.
 
         Parameters
@@ -189,53 +192,57 @@ class Client():
         -------
         id: str
             ID of requested data. None if request fails.
-        '''
+        """
         org, net, volc = _parse_code(code)
         payload = {
-            'org1':  org,
-            'org2':  net,
-            'volc':  volc,
-            'year':  starttime.strftime("%Y"),
-            'month': starttime.strftime("%m"),
-            'day':   starttime.strftime("%d"),
-            'hour':  starttime.strftime("%H"),
-            'min':   starttime.strftime("%M"),
-            'span':  str(span),
-            'arc':   'ZIP',
-            'size':  '93680',  # the actual size doesn't matter
-            'LANG':  'en',
+            "org1": org,
+            "org2": net,
+            "volc": volc,
+            "year": starttime.strftime("%Y"),
+            "month": starttime.strftime("%m"),
+            "day": starttime.strftime("%d"),
+            "hour": starttime.strftime("%H"),
+            "min": starttime.strftime("%M"),
+            "span": str(span),
+            "arc": "ZIP",
+            "size": "93680",  # the actual size doesn't matter
+            "LANG": "en",
         }
 
         # retry if request fails else return id
         for _ in range(self.retries):
             try:
                 # the timestamp determine the unique id
-                payload['rn'] = str(int(datetime.now().timestamp()))
-                r = self.session.post(self._CONT_REQUEST, params=payload,
-                                      timeout=self.timeout)
+                payload["rn"] = str(int(datetime.now().timestamp()))
+                r = self.session.post(
+                    self._CONT_REQUEST, params=payload, timeout=self.timeout
+                )
                 # assume the first one on status page is the one
-                id = re.search(r'<td class="bgcolist2">(?P<ID>\d{10})</td>',
-                               r.text).group('ID')
-                p = re.compile(r'<tr class="bglist(?P<OPT>\d)">' +
-                               r'<td class="bgcolist2">' + id + r'</td>')
+                id = re.search(
+                    r'<td class="bgcolist2">(?P<ID>\d{10})</td>', r.text
+                ).group("ID")
+                p = re.compile(
+                    r'<tr class="bglist(?P<OPT>\d)">'
+                    + r'<td class="bgcolist2">'
+                    + id
+                    + r"</td>"
+                )
                 # wait until data is ready
                 for _i in range(self.max_sleep_count):
-                    status = self.session.post(self._CONT_STATUS,
-                                               timeout=self.timeout)
-                    opt = p.search(status.text).group('OPT')
-                    if opt == '1':  # still preparing data
+                    status = self.session.post(self._CONT_STATUS, timeout=self.timeout)
+                    opt = p.search(status.text).group("OPT")
+                    if opt == "1":  # still preparing data
                         time.sleep(self.sleep_time_in_seconds)
-                    elif opt == '2':  # data is available
+                    elif opt == "2":  # data is available
                         return id
-                    elif opt == '3':  # ?
-                        msg = "If you see this, " \
-                              "please report an issue on GitHub!"
+                    elif opt == "3":  # ?
+                        msg = "If you see this, " "please report an issue on GitHub!"
                         logger.error(msg)
                         break  # break to else clause
-                    elif opt == '4':  # something wrong, retry
+                    elif opt == "4":  # something wrong, retry
                         logger.error("Error in data status.")
                         break  # break to else clause
-                else:   # wait too long time
+                else:  # wait too long time
                     return None
             except Exception:
                 continue
@@ -245,7 +252,7 @@ class Client():
             return None
 
     def _download_cont_waveform(self, job):
-        '''
+        """
         Download continuous waveform.
 
         Parameters
@@ -259,15 +266,19 @@ class Client():
             Filename of one-minute win32 data.
         ctable: str
             Filename of channle table.
-        '''
+        """
         # session cannot be shared between threads, so always initialize
         # a new client for downloading.
         # Maybe there is other trick way?
         dlclient = Client(self.user, self.password)
         for _ in range(self.retries):
             try:
-                r = dlclient.session.post(self._CONT_DOWNLOAD, data={'id': job.id},
-                                          stream=True, timeout=self.timeout)
+                r = dlclient.session.post(
+                    self._CONT_DOWNLOAD,
+                    data={"id": job.id},
+                    stream=True,
+                    timeout=self.timeout,
+                )
 
                 with tempfile.NamedTemporaryFile() as ft:
                     # save to temporary file
@@ -285,7 +296,7 @@ class Client():
                                 cnts.append(filename)
                             elif filename.endswith(".euc.ch"):
                                 ctable = filename
-                        fz.extractall(members=cnts+[ctable])
+                        fz.extractall(members=cnts + [ctable])
                     return cnts, ctable
             except Exception:
                 continue
@@ -294,10 +305,19 @@ class Client():
             logger.error(msg)
             return None, None
 
-    def get_continuous_waveform(self, code, starttime, span,
-                                max_span=None, data=None, ctable=None,
-                                outdir=None, threads=3, cleanup=True):
-        '''
+    def get_continuous_waveform(
+        self,
+        code,
+        starttime,
+        span,
+        max_span=None,
+        data=None,
+        ctable=None,
+        outdir=None,
+        threads=3,
+        cleanup=True,
+    ):
+        """
         Get continuous waveform from Hi-net server.
 
         Parameters
@@ -385,13 +405,13 @@ class Client():
         >>> client.get_continuous_waveform('0103', starttime, 1440, max_span=25)
         ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
-        '''
+        """
         # 1. check span:
         #    max limits is determined by the max number of data points
         #    allowed in code s4win2sacm.c
         if not isinstance(span, int):
             raise TypeError("span must be integer.")
-        if not 1 <= span <= (2**31 - 1)/6000:
+        if not 1 <= span <= (2 ** 31 - 1) / 6000:
             raise ValueError("Span is NOT in the allowed range [1, 357913]")
 
         # 2. check starttime and endtime
@@ -404,8 +424,10 @@ class Client():
         starttime = to_datetime(starttime)
         endtime = starttime + timedelta(minutes=span)
         if not time0 <= starttime < endtime <= time1:
-            msg = "Data not available in the time period. " + \
-                  "Call Client.info('{}') for help.".format(code)
+            msg = (
+                "Data not available in the time period. "
+                + "Call Client.info('{}') for help.".format(code)
+            )
             raise ValueError(msg)
 
         # 3. set max_span
@@ -425,14 +447,17 @@ class Client():
         count = len(jobs)
         for j in range(0, count, 100):  # to break the limitation of 150
             # 5.1. request <=100 data
-            for i in range(j, min(j+100, count)):
-                logger.info("[%s/%d] => %s ~%d",
-                            str(i+1).zfill(len(str(count))),
-                            count,
-                            jobs[i].starttime.strftime("%Y-%m-%d %H:%M"),
-                            jobs[i].span)
-                jobs[i].id = self._request_cont_waveform(code, jobs[i].starttime,
-                                                         jobs[i].span)
+            for i in range(j, min(j + 100, count)):
+                logger.info(
+                    "[%s/%d] => %s ~%d",
+                    str(i + 1).zfill(len(str(count))),
+                    count,
+                    jobs[i].starttime.strftime("%Y-%m-%d %H:%M"),
+                    jobs[i].span,
+                )
+                jobs[i].id = self._request_cont_waveform(
+                    code, jobs[i].starttime, jobs[i].span
+                )
 
             # 5.2. check ids
             if not [job.id for job in jobs]:
@@ -458,9 +483,7 @@ class Client():
 
         # 2. merge all cnt files
         if not data:
-            data = "{}_{}_{:d}.cnt".format(code,
-                                           starttime.strftime("%Y%m%d%H%M"),
-                                           span)
+            data = "{}_{}_{:d}.cnt".format(code, starttime.strftime("%Y%m%d%H%M"), span)
         dirname = None
         if os.path.dirname(data):
             dirname = os.path.dirname(data)
@@ -490,9 +513,18 @@ class Client():
 
         return data, ctable
 
-    def get_waveform(self, code, starttime, span,
-                     max_span=None, data=None, ctable=None,
-                     outdir=None, threads=3, cleanup=True):
+    def get_waveform(
+        self,
+        code,
+        starttime,
+        span,
+        max_span=None,
+        data=None,
+        ctable=None,
+        outdir=None,
+        threads=3,
+        cleanup=True,
+    ):
         """
         .. versionchanged:: 0.6.0
 
@@ -501,22 +533,38 @@ class Client():
             :meth:`~HinetPy.client.Client.get_waveform` has been renamed to
             :meth:`~HinetPy.client.Client.get_continuous_waveform`.
         """
-        logger.warning("The get_waveform() function is deprecated. Please "
-                       "use get_continuous_waveform().")
-        return self.get_continuous_waveform(code, starttime, span,
-                                            max_span=max_span, data=data,
-                                            ctable=ctable, outdir=outdir,
-                                            threads=threads, cleanup=cleanup)
+        logger.warning(
+            "The get_waveform() function is deprecated. Please "
+            "use get_continuous_waveform()."
+        )
+        return self.get_continuous_waveform(
+            code,
+            starttime,
+            span,
+            max_span=max_span,
+            data=data,
+            ctable=ctable,
+            outdir=outdir,
+            threads=threads,
+            cleanup=cleanup,
+        )
 
     ###########################################################################
     #                                                                         #
     # Methods for requesting event waveforms.                                 #
     #                                                                         #
     ###########################################################################
-    def _search_event_by_day(self, year, month, day, region="00",
-                             magmin=3.0, magmax=9.9,
-                             include_unknown_mag=True):
-        '''
+    def _search_event_by_day(
+        self,
+        year,
+        month,
+        day,
+        region="00",
+        magmin=3.0,
+        magmax=9.9,
+        include_unknown_mag=True,
+    ):
+        """
         Search events catalog of one day.
 
         Parameters
@@ -537,29 +585,29 @@ class Client():
 
         include_unknown_mag: bool
             Include/exclude undetermined magnitude events.
-        '''
+        """
         payload = {
-            'year': year,
-            'month': "{:02d}".format(month),
-            'day': "{:02d}".format(day),
-            'region': region,
-            'mags': magmin,
-            'mage': magmax,
-            'undet': 0 if include_unknown_mag else 1,
-            'sort': 0,  # always sort by origin time in ascending order
-            'arc': 'ZIP',  # meaningless arguement in this request
-            'go': 1,
-            'LANG': 'en'
+            "year": year,
+            "month": "{:02d}".format(month),
+            "day": "{:02d}".format(day),
+            "region": region,
+            "mags": magmin,
+            "mage": magmax,
+            "undet": 0 if include_unknown_mag else 1,
+            "sort": 0,  # always sort by origin time in ascending order
+            "arc": "ZIP",  # meaningless arguement in this request
+            "go": 1,
+            "LANG": "en",
         }
         r = self.session.post(self._EVENT, data=payload, timeout=self.timeout)
         events = []
-        for result in re.findall("openRequest\((.+)\)", r.text):
-            items = [item.strip("'") for item in result.split(',')]
+        for result in re.findall("openRequest\((.+)\)", r.text):  # noqa: W605
+            items = [item.strip("'") for item in result.split(",")]
             events.append(Event(items[0], *items[3:10]))
         return events
 
     def _request_event_waveform(self, event, format="ZIP"):
-        '''
+        """
         Request event waveform.
 
         Parameters
@@ -569,49 +617,54 @@ class Client():
             Event to be requested.
         format: str
             Format of requested waveform package.
-        '''
+        """
         payload = {
-            'evid': event.evid,
-            'origin_jst': event.origin,
-            'hypo_latitude': event.latitude,
-            'hypo_logitude': event.longitude,  # logitude is Hinet's typo
-            'hypo_depth': event.depth,
-            'mg': '' if event.magnitude == '#' else event.magnitude,
-            'hypo_name': event.name,
-            'hypo_name_eng': event.name_en,
-            'arc': format,
-            'encoding': 'D',
-            'lang': 'en',
-            'rn': str(int(datetime.now().timestamp())),
+            "evid": event.evid,
+            "origin_jst": event.origin,
+            "hypo_latitude": event.latitude,
+            "hypo_logitude": event.longitude,  # logitude is Hinet's typo
+            "hypo_depth": event.depth,
+            "mg": "" if event.magnitude == "#" else event.magnitude,
+            "hypo_name": event.name,
+            "hypo_name_eng": event.name_en,
+            "arc": format,
+            "encoding": "D",
+            "lang": "en",
+            "rn": str(int(datetime.now().timestamp())),
         }
 
         # retry if request fails else return id
         for _ in range(self.retries):
             try:
-                r = self.session.post(self._EVENT_REQUEST, data=payload, timeout=self.timeout)
+                r = self.session.post(
+                    self._EVENT_REQUEST, data=payload, timeout=self.timeout
+                )
                 # assume the first one on status page is the one
-                id = re.search(r'<td class="bgevlist2">(?P<ID>\d{10})</td>',
-                               r.text).group('ID')
-                p = re.compile(r'<tr class="bglist(?P<OPT>\d)">' +
-                               r'<td class="bgevlist2">' + id + r'</td>')
+                id = re.search(
+                    r'<td class="bgevlist2">(?P<ID>\d{10})</td>', r.text
+                ).group("ID")
+                p = re.compile(
+                    r'<tr class="bglist(?P<OPT>\d)">'
+                    + r'<td class="bgevlist2">'
+                    + id
+                    + r"</td>"
+                )
                 # wait until data is ready
                 for _i in range(self.max_sleep_count):
-                    status = self.session.post(self._EVENT_STATUS,
-                                               timeout=self.timeout)
-                    opt = p.search(status.text).group('OPT')
-                    if opt == '1':  # still preparing data
+                    status = self.session.post(self._EVENT_STATUS, timeout=self.timeout)
+                    opt = p.search(status.text).group("OPT")
+                    if opt == "1":  # still preparing data
                         time.sleep(self.sleep_time_in_seconds)
-                    elif opt == '2':  # data is available
+                    elif opt == "2":  # data is available
                         return id
-                    elif opt == '3':  # ?
-                        msg = "If you see this, " \
-                              "please report an issue on GitHub!"
+                    elif opt == "3":  # ?
+                        msg = "If you see this, " "please report an issue on GitHub!"
                         logger.error(msg)
                         break  # break to else clause
-                    elif opt == '4':  # something wrong, retry
+                    elif opt == "4":  # something wrong, retry
                         logger.error("Error in data status.")
                         break  # break to else clause
-                else:   # wait too long time
+                else:  # wait too long time
                     return None
             except Exception:
                 continue
@@ -621,28 +674,28 @@ class Client():
             return None
 
     def _download_event_waveform(self, id):
-        '''
+        """
         Download event waveform.
 
         Parameters
         ----------
         id: str
             Request ID.
-        '''
+        """
 
-        payload = {
-            'id': id,
-            'encode': 'D',
-            'LANG': 'en'
-        }
+        payload = {"id": id, "encode": "D", "LANG": "en"}
 
         dlclient = Client(self.user, self.password)
         for _ in range(self.retries):
             try:
-                r = dlclient.session.get(self._EVENT_DOWNLOAD, params=payload,
-                                         stream=True, timeout=self.timeout)
-                fname = r.headers['Content-Disposition'].split('=')[1].strip('"')
-                outdir = '_'.join(fname.split('_')[0:2])
+                r = dlclient.session.get(
+                    self._EVENT_DOWNLOAD,
+                    params=payload,
+                    stream=True,
+                    timeout=self.timeout,
+                )
+                fname = r.headers["Content-Disposition"].split("=")[1].strip('"')
+                outdir = "_".join(fname.split("_")[0:2])
 
                 with tempfile.NamedTemporaryFile() as ft:
                     # save to temporary file
@@ -662,16 +715,26 @@ class Client():
             logger.error(msg)
             return None
 
-    def get_event_waveform(self, starttime, endtime,
-                           region="00",
-                           minmagnitude=3.0, maxmagnitude=9.9,
-                           include_unknown_mag=True,
-                           mindepth=None, maxdepth=None,
-                           minlatitude=None, maxlatitude=None,
-                           minlongitude=None, maxlongitude=None,
-                           latitude=None, longitude=None,
-                           minradius=None, maxradius=None):
-        '''Get event waveform data.
+    def get_event_waveform(
+        self,
+        starttime,
+        endtime,
+        region="00",
+        minmagnitude=3.0,
+        maxmagnitude=9.9,
+        include_unknown_mag=True,
+        mindepth=None,
+        maxdepth=None,
+        minlatitude=None,
+        maxlatitude=None,
+        minlongitude=None,
+        maxlongitude=None,
+        latitude=None,
+        longitude=None,
+        minradius=None,
+        maxradius=None,
+    ):
+        """Get event waveform data.
 
         Parameters
         ----------
@@ -721,7 +784,7 @@ class Client():
             Limit to events within the specified maximum number of degrees
             from the geographic point defined by the latitude and longitude
             parameters.
-        '''
+        """
         starttime = to_datetime(starttime)
         endtime = to_datetime(endtime)
 
@@ -730,13 +793,17 @@ class Client():
         days = (endtime.date() - starttime.date()).days
         for i in range(0, days + 1):
             event_date = starttime.date() + timedelta(days=i)
-            events.extend(self._search_event_by_day(event_date.year,
-                                                    event_date.month,
-                                                    event_date.day,
-                                                    region=region,
-                                                    magmin=minmagnitude,
-                                                    magmax=maxmagnitude,
-                                                    include_unknown_mag=True))
+            events.extend(
+                self._search_event_by_day(
+                    event_date.year,
+                    event_date.month,
+                    event_date.day,
+                    region=region,
+                    magmin=minmagnitude,
+                    magmax=maxmagnitude,
+                    include_unknown_mag=True,
+                )
+            )
 
         # select events
         selected_events = []
@@ -755,19 +822,26 @@ class Client():
 
             # select events in a box region
             if minlatitude or maxlatitude or minlongitude or maxlongitude:
-                if not point_inside_box(event.latitude, event.longitude,
-                                        minlatitude=minlatitude,
-                                        maxlatitude=maxlatitude,
-                                        minlongitude=minlongitude,
-                                        maxlongitude=maxlongitude):
+                if not point_inside_box(
+                    event.latitude,
+                    event.longitude,
+                    minlatitude=minlatitude,
+                    maxlatitude=maxlatitude,
+                    minlongitude=minlongitude,
+                    maxlongitude=maxlongitude,
+                ):
                     continue
 
             # select events in a circular region
             if (latitude and longitude) and (minradius or maxradius):
-                if not point_inside_circular(event.latitude, event.longitude,
-                                             latitude, longitude,
-                                             minradius=minradius,
-                                             maxradius=maxradius):
+                if not point_inside_circular(
+                    event.latitude,
+                    event.longitude,
+                    latitude,
+                    longitude,
+                    minradius=minradius,
+                    maxradius=maxradius,
+                ):
                     continue
             selected_events.append(event)
 
@@ -794,16 +868,16 @@ class Client():
             raise ValueError("span is not digit or not in [1, 7].")
 
         params = {
-            'data': datatype,
-            'rtm': startdate.strftime("%Y%m%d"),
-            'span': span,
-            'os': os[0],
+            "data": datatype,
+            "rtm": startdate.strftime("%Y%m%d"),
+            "span": span,
+            "os": os[0],
         }
         d = self.session.post(self._JMA, params=params, stream=True)
         if not filename:
-            filename = "{}_{}_{}.txt".format(datatype,
-                                             startdate.strftime("%Y%m%d"),
-                                             span)
+            filename = "{}_{}_{}.txt".format(
+                datatype, startdate.strftime("%Y%m%d"), span
+            )
         with open(filename, "wb") as fd:
             for chunk in d.iter_content(chunk_size=1024):
                 if chunk:  # filter out keep-alive new chunks
@@ -891,25 +965,48 @@ class Client():
         stations = []
         # remove trailing 'A' in network code
         code = code[:4]
-        if code in ['0101', '0103', '0103A']:  # Hinet and Fnet
+        if code in ["0101", "0103", "0103A"]:  # Hinet and Fnet
             import csv
-            lines = requests.get(self._STATION_INFO).content.decode('utf-8').splitlines()
-            for row in csv.DictReader(lines, delimiter=','):
-                if row['organization_id'].strip("'") + row['network_id'].strip("'") != code:
+
+            lines = (
+                requests.get(self._STATION_INFO).content.decode("utf-8").splitlines()
+            )
+            for row in csv.DictReader(lines, delimiter=","):
+                if (
+                    row["organization_id"].strip("'") + row["network_id"].strip("'")
+                    != code
+                ):
                     continue
-                stations.append(Station(code, row['station_cd'], row['latitude'], row['longitude'], row['height(m)']))
-        elif code in ['0120', '0120A', '0131']:  # S-net and MeSO-net
+                stations.append(
+                    Station(
+                        code,
+                        row["station_cd"],
+                        row["latitude"],
+                        row["longitude"],
+                        row["height(m)"],
+                    )
+                )
+        elif code in ["0120", "0120A", "0131"]:  # S-net and MeSO-net
             import json
-            if code in ['0120', '0120A']:
-                json_text = self.session.get(self._SNET_STATION_INFO).text.lstrip('var snet_station = [').rstrip('];')
+
+            if code in ["0120", "0120A"]:
+                json_text = (
+                    self.session.get(self._SNET_STATION_INFO)
+                    .text.lstrip("var snet_station = [")
+                    .rstrip("];")
+                )
             else:
-                json_text = self.session.get(self._MESONET_STATION_INFO).text.lstrip('var mesonet_station = [').rstrip('];')
-            for station in json.loads(json_text)['features']:
-                code = station['properties']['id']
-                name = station['properties']['station_cd']
-                latitude = station['properties']['latitude']
-                longitude = station['properties']['longitude']
-                elevation = station['properties']['sensor_height']
+                json_text = (
+                    self.session.get(self._MESONET_STATION_INFO)
+                    .text.lstrip("var mesonet_station = [")
+                    .rstrip("];")
+                )
+            for station in json.loads(json_text)["features"]:
+                code = station["properties"]["id"]
+                name = station["properties"]["station_cd"]
+                latitude = station["properties"]["latitude"]
+                longitude = station["properties"]["longitude"]
+                elevation = station["properties"]["sensor_height"]
                 stations.append(Station(code, name, latitude, longitude, elevation))
         else:
             raise ValueError("Only support Hi-net, F-net, S-net and MeSO-net.")
@@ -937,11 +1034,11 @@ class Client():
             Maximum allowed span in mimutes.
         """
         channels = NETWORK[code].channels
-        if code in ('0101', '0103', '0103A'):
+        if code in ("0101", "0103", "0103A"):
             stations = self.get_selected_stations(code)
             if stations != 0:
                 channels = stations * 3
-        return min(int(12000/channels), 60)
+        return min(int(12000 / channels), 60)
 
     def get_selected_stations(self, code):
         """Query the number of stations selected for requesting data.
@@ -962,9 +1059,9 @@ class Client():
             Number of selected stations.
         """
 
-        if code == '0101':
+        if code == "0101":
             pattern = r'<td class="td1">(?P<CHN>N\..{3}H)<\/td>'
-        elif code in ('0103', '0103A'):
+        elif code in ("0103", "0103A"):
             pattern = r'<td class="td1">(?P<CHN>N\..{3}F)<\/td>'
         else:
             raise ValueError("Can only query stations of Hi-net/F-net")
@@ -972,10 +1069,19 @@ class Client():
         r = self.session.get(self._STATION, timeout=self.timeout)
         return len(re.findall(pattern, r.text))
 
-    def select_stations(self, code, stations=None, minlatitude=None,
-                        maxlatitude=None, minlongitude=None, maxlongitude=None,
-                        latitude=None, longitude=None, minradius=None,
-                        maxradius=None):
+    def select_stations(
+        self,
+        code,
+        stations=None,
+        minlatitude=None,
+        maxlatitude=None,
+        minlongitude=None,
+        maxlongitude=None,
+        latitude=None,
+        longitude=None,
+        minradius=None,
+        maxradius=None,
+    ):
         """Select stations of a network.
 
         Supported networks:
@@ -1049,12 +1155,14 @@ class Client():
             for station in stations_at_server:
                 if station.code != code:
                     continue
-                if point_inside_box(station.latitude,
-                                    station.longitude,
-                                    minlatitude=minlatitude,
-                                    maxlatitude=maxlatitude,
-                                    minlongitude=minlongitude,
-                                    maxlongitude=maxlongitude):
+                if point_inside_box(
+                    station.latitude,
+                    station.longitude,
+                    minlatitude=minlatitude,
+                    maxlatitude=maxlatitude,
+                    minlongitude=minlongitude,
+                    maxlongitude=maxlongitude,
+                ):
                     stations_selected.append(station.name)
 
         # select stations in a circular region
@@ -1062,15 +1170,19 @@ class Client():
             for station in stations_at_server:
                 if station.code != code:
                     continue
-                if point_inside_circular(station.latitude, station.longitude,
-                                         latitude, longitude,
-                                         minradius=minradius,
-                                         maxradius=maxradius):
+                if point_inside_circular(
+                    station.latitude,
+                    station.longitude,
+                    latitude,
+                    longitude,
+                    minradius=minradius,
+                    maxradius=maxradius,
+                ):
                     stations_selected.append(station.name)
         payload = {
-            'net': code,
-            'stcds': ':'.join(stations_selected) if stations_selected else None,
-            'mode': '1',
+            "net": code,
+            "stcds": ":".join(stations_selected) if stations_selected else None,
+            "mode": "1",
         }
         self.session.post(self._CONT_SELECT, data=payload, timeout=self.timeout)
 
@@ -1080,14 +1192,13 @@ class Client():
         >>> client.check_service_update()
         [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
         """
-        r = self.session.get(self._CONT + '/js/cont.js')
+        r = self.session.get(self._CONT + "/js/cont.js")
 
-        if r.headers['ETag'].strip('"') == self._ETAG:
+        if r.headers["ETag"].strip('"') == self._ETAG:
             logger.info("Hi-net web service is NOT updated.")
             return False
         else:
-            logger.warning("Hi-net web service is updated."
-                           " HinetPy may FAIL!")
+            logger.warning("Hi-net web service is updated." " HinetPy may FAIL!")
             return True
 
     def check_package_release(self):
@@ -1104,11 +1215,15 @@ class Client():
         if r.status_code != 200:
             logger.warning("Error in connecting PyPI. Skipped.")
             return False
-        latest_release = r.json()['info']['version']
+        latest_release = r.json()["info"]["version"]
 
         if StrictVersion(latest_release) > StrictVersion(__version__):
-            logger.warning("%s v%s is released. See %s for details.",
-                           __title__, latest_release, url)
+            logger.warning(
+                "%s v%s is released. See %s for details.",
+                __title__,
+                latest_release,
+                url,
+            )
             return True
         else:
             logger.info("You're using the latest version (v%s).", __version__)
@@ -1129,7 +1244,7 @@ class Client():
         import shutil
 
         error = 0
-        for cmd in ('catwin32', 'win2sac_32'):
+        for cmd in ("catwin32", "win2sac_32"):
             fullpath = shutil.which(cmd)
             if fullpath:
                 logger.info("%s: %s.", cmd, fullpath)
@@ -1194,8 +1309,15 @@ class Client():
     def __str__(self):
         string = "<== Hi-net web service client ==>\n"
         string += "{:22s}: {}\n".format("url", self._HINET)
-        for key in ("user", "password", "timeout", "retries", "debug",
-                    "max_sleep_count", "sleep_time_in_seconds"):
+        for key in (
+            "user",
+            "password",
+            "timeout",
+            "retries",
+            "debug",
+            "max_sleep_count",
+            "sleep_time_in_seconds",
+        ):
             try:
                 value = getattr(self, key)
                 if key == "password":
@@ -1210,13 +1332,14 @@ def prepare_jobs(starttime, span, max_span):
     spans = split_integer(span, max_span)
     jobs = [_Job(starttime=starttime, span=spans[0])]
     for i in range(1, len(spans)):
-        dt = jobs[i-1].starttime + timedelta(minutes=spans[i-1])
+        dt = jobs[i - 1].starttime + timedelta(minutes=spans[i - 1])
         jobs.append(_Job(dt, spans[i]))
     return jobs
 
 
 class _Job(object):
-    '''Job class for internal use.'''
+    """Job class for internal use."""
+
     def __init__(self, starttime, span, id=None):
         self.starttime = starttime
         self.span = span
@@ -1227,6 +1350,7 @@ class Station(object):
     """
     Class for Stations.
     """
+
     def __init__(self, code, name, latitude, longitude, elevation):
         self.code = code
         self.name = name
@@ -1235,8 +1359,9 @@ class Station(object):
         self.elevation = float(elevation)
 
     def __str__(self):
-        string = "{} {} {} {} {}".format(self.code, self.name, self.latitude,
-                                         self.longitude, self.elevation)
+        string = "{} {} {} {} {}".format(
+            self.code, self.name, self.latitude, self.longitude, self.elevation
+        )
         return string
 
 
@@ -1244,28 +1369,31 @@ class Event(object):
     """
     Event class for requesting event waveforms.
     """
-    def __init__(self, evid, origin, latitude, longitude, depth, magnitude,
-                 name, name_en):
+
+    def __init__(
+        self, evid, origin, latitude, longitude, depth, magnitude, name, name_en
+    ):
         self.evid = evid
         self.origin = datetime.strptime(origin, "%Y/%m/%d %H:%M:%S.%f")
-        if latitude[-1] == 'N':
+        if latitude[-1] == "N":
             self.latitude = float(latitude[:-1])
         else:
             self.latitude = -float(latitude[:-1])
 
-        if longitude[-1] == 'E':
+        if longitude[-1] == "E":
             self.longitude = float(longitude[:-1])
         else:
             self.longitude = -float(longitude[:-1])
 
-        self.depth = float(depth.strip('km'))
+        self.depth = float(depth.strip("km"))
         self.magnitude = float(magnitude)
         self.name = name
         self.name_en = name_en
 
     def __str__(self):
-        string = "{} {} {} {} {}".format(self.origin, self.latitude, self.longitude,
-                                         self.depth, self.magnitude)
+        string = "{} {} {} {} {}".format(
+            self.origin, self.latitude, self.longitude, self.depth, self.magnitude
+        )
         return string
 
 
@@ -1282,7 +1410,7 @@ def _parse_code(code):
     if code not in NETWORK.keys():
         msg = "{}: Incorrect network code.".format(code)
         raise ValueError(msg)
-    elif code.startswith('0105') or code.startswith('0302'):
+    elif code.startswith("0105") or code.startswith("0302"):
         org, net, volc = code[0:2], code[2:4], code
     else:
         org, net, volc = code[0:2], code[2:], None

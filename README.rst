@@ -16,6 +16,9 @@
 .. image:: https://img.shields.io/github/license/seisman/HinetPy.svg
     :target: https://github.com/seisman/HinetPy/blob/master/LICENSE
 
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+
 .. image:: https://zenodo.org/badge/23509035.svg
     :target: https://zenodo.org/badge/latestdoi/23509035
 

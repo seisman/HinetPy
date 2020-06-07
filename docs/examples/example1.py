@@ -12,7 +12,7 @@ with open("events.csv") as csvfile:
     reader = csv.DictReader(csvfile, delimiter="|")
     reader.fieldnames = [field.strip() for field in reader.fieldnames]
     for row in reader:  # loop over events
-        origin = datetime.strptime(row['Time'], "%Y-%m-%dT%H:%M:%S")
+        origin = datetime.strptime(row["Time"], "%Y-%m-%dT%H:%M:%S")
         starttime = origin + timedelta(hours=9)  # deal with TimeZone issue
         outdir = origin.strftime("%Y%m%d%H%M")
 
@@ -20,5 +20,7 @@ with open("events.csv") as csvfile:
         if os.path.exists(outdir):
             continue
 
-        data, ctable = client.get_continuous_waveform('0101', starttime, 20, outdir=outdir)
+        data, ctable = client.get_continuous_waveform(
+            "0101", starttime, 20, outdir=outdir
+        )
         win32.extract_sac(data, ctable, outdir=outdir, with_pz=True)

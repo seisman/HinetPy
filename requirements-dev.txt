@@ -3,6 +3,9 @@ pytest
 pytest-cov
 coverage
 codecov
+# for code style
+black
+flake8
 # for documentation
 sphinx==1.6.7
 sphinx-intl

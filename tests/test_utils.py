@@ -4,8 +4,14 @@
 from datetime import datetime, date
 import pytest
 
-from HinetPy.utils import split_integer, point_inside_box, haversine, \
-        point_inside_circular, to_datetime
+from HinetPy.utils import (
+    split_integer,
+    point_inside_box,
+    haversine,
+    point_inside_circular,
+    to_datetime,
+)
+
 
 class TestUtilsClass:
     def test_split_integer(self):

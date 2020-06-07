@@ -3,16 +3,22 @@
 help:
 	@echo "Commands:"
 	@echo ""
-	@echo "  test    run the test suite and report coverage"
+	@echo "  test       run the test suite and report coverage"
+	@echo "  format     run black to automatically format the code"
+	@echo "  check      run code style and quality checks (black and flake8)"
 
 test:
 	pytest --cov-report=term-missing --cov-report=xml --cov=HinetPy -vs tests/
 
-coverage:
-	codecov
-
 doc:
 	make -C docs docs
+
+format:
+	black .
+
+check:
+	black --check .
+	flake8 .
 
 publish:
 	python setup.py sdist

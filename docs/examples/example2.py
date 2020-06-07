@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 
 from datetime import timedelta
 
@@ -8,11 +9,12 @@ from obspy import UTCDateTime
 from HinetPy import Client, win32
 
 
-fdsnclient = fdsnClient('IRIS')
+fdsnclient = fdsnClient("IRIS")
 starttime = UTCDateTime("2005-01-01")
 endtime = UTCDateTime("2005-01-03")
-catalog = fdsnclient.get_events(starttime=starttime, endtime=endtime,
-                                minmagnitude=6, catalog="ISC")
+catalog = fdsnclient.get_events(
+    starttime=starttime, endtime=endtime, minmagnitude=6, catalog="ISC"
+)
 
 client = Client("username", "password")
 for event in catalog:  # loop over events
@@ -21,8 +23,8 @@ for event in catalog:  # loop over events
     outdir = origin.strftime("%Y%m%d%H%M")
 
     # skip if outdir already exists to avoid overwrite
-    if os.path.exits(ourdir):
+    if os.path.exits(outdir):
         continue
 
-    data, ctable = client.get_continuous_waveform('0101', starttime, 20, outdir=outdir)
+    data, ctable = client.get_continuous_waveform("0101", starttime, 20, outdir=outdir)
     win32.extract_sac(data, ctable, outdir=outdir, with_pz=True)
