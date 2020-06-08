@@ -26,7 +26,7 @@ Network = namedtuple("Network", "name, channels, starttime, url")
 ``NETWORK`` is a dict of :class:`~HinetPy.header.Network`, containing
 information of all networks available from Hi-net website.
 
->>> from HinetPy.header import NETWORK
+>>> from HinetPy import NETWORK
 >>> for code in NETWORK.keys():
 ...     print(code, NETWORK[code].name)
 0101 NIED Hi-net
@@ -39,10 +39,12 @@ information of all networks available from Hi-net website.
 ...
 """
 
-URL_Hinet = "http://www.hinet.bosai.go.jp"
-URL_Fnet = "http://www.fnet.bosai.go.jp"
-URL_Vnet = "http://www.vnet.bosai.go.jp"
-URL_JMA = "http://www.jma.go.jp/jma/indexe.html"
+URL = {
+    "Hinet": "http://www.hinet.bosai.go.jp",
+    "Fnet": "http://www.fnet.bosai.go.jp",
+    "Vnet": "http://www.vnet.bosai.go.jp",
+    "JMA": "http://www.jma.go.jp/jma/indexe.html",
+}
 
 NETWORK = {}
 
@@ -50,37 +52,37 @@ NETWORK["0101"] = Network(
     name="NIED Hi-net",
     channels=2336,
     starttime=datetime(2004, 4, 1, 0, 0),
-    url=URL_Hinet,
+    url=URL["Hinet"],
 )
 NETWORK["0103"] = Network(
     name="NIED F-net (broadband)",
     channels=438,
     starttime=datetime(2004, 4, 1, 0, 0),
-    url=URL_Fnet,
+    url=URL["Fnet"],
 )
 NETWORK["0103A"] = Network(
     name="NIED F-net (strong motion)",
     channels=438,
     starttime=datetime(2004, 4, 1, 0, 0),
-    url=URL_Fnet,
+    url=URL["Fnet"],
 )
 NETWORK["0120"] = Network(
     name="NIED S-net (speed motion)",
     channels=450 * 2,  # 450 velocity + 450 acceleration
     starttime=datetime(2016, 8, 15, 0, 0),
-    url=URL_Hinet,
+    url=URL["Hinet"],
 )
 NETWORK["0120A"] = Network(
     name="NIED S-net (acceleration)",
     channels=450 * 2,  # 450 velocity + 450 acceleration
     starttime=datetime(2016, 8, 15, 0, 0),
-    url=URL_Hinet,
+    url=URL["Hinet"],
 )
 NETWORK["0131"] = Network(
     name="NIED MeSO-net",
     channels=900,
     starttime=datetime(2017, 4, 1, 0, 0),
-    url=URL_Hinet,
+    url=URL["Hinet"],
 )
 
 NETWORK["0201"] = Network(
@@ -142,7 +144,7 @@ NETWORK["0301"] = Network(
     name="JMA Seismometer Network",
     channels=869,
     starttime=datetime(2004, 4, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 
 NETWORK["0401"] = Network(
@@ -155,25 +157,25 @@ NETWORK["0402"] = Network(
     name="NIED DONET1 (broadband)",
     channels=132,
     starttime=datetime(2014, 10, 1, 0, 0),
-    url=URL_Hinet,
+    url=URL["Hinet"],
 )
 NETWORK["0402N"] = Network(
     name="JAMSTEC NIED DONET1 (broadband)",
     channels=132,
     starttime=datetime(2014, 10, 1, 0, 0),
-    url=URL_Hinet,
+    url=URL["Hinet"],
 )
 NETWORK["0402A"] = Network(
     name="NIED DONET1 (strong motion)",
     channels=132,
     starttime=datetime(2014, 10, 1, 0, 0),
-    url=URL_Hinet,
+    url=URL["Hinet"],
 )
 NETWORK["0402AN"] = Network(
     name="JAMSTEC NIED DONET1 (broadband)",
     channels=132,
     starttime=datetime(2014, 10, 1, 0, 0),
-    url=URL_Hinet,
+    url=URL["Hinet"],
 )
 
 NETWORK["0501"] = Network(
@@ -226,85 +228,85 @@ NETWORK["010501"] = Network(
     name="NIED V-net (Tokachidake)",
     channels=33,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010502"] = Network(
     name="NIED V-net (Tarumaesan)",
     channels=33,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010503"] = Network(
     name="NIED V-net (Usuzan)",
     channels=33,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010504"] = Network(
     name="NIED V-net (Hokkaido-Komagatake)",
     channels=33,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010505"] = Network(
     name="NIED V-net (Iwatesan)",
     channels=33,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010506"] = Network(
     name="NIED V-net (Nasudake)",
     channels=9,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010507"] = Network(
     name="NIED V-net (Asamayama)",
     channels=33,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010508"] = Network(
     name="NIED V-net (Kusatsu-Shiranesan)",
     channels=33,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010509"] = Network(
     name="NIED V-net (Fujisan)",
     channels=57,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010510"] = Network(
     name="NIED V-net (Miyakejima)",
     channels=40,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010511"] = Network(
     name="NIED V-net (Izu-Oshima)",
     channels=39,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010512"] = Network(
     name="NIED V-net (Asosan)",
     channels=44,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010513"] = Network(
     name="NIED V-net (Unzendake)",
     channels=33,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 NETWORK["010514"] = Network(
     name="NIED V-net (Kirishimayama)",
     channels=22,
     starttime=datetime(2010, 4, 1, 0, 0),
-    url=URL_Vnet,
+    url=URL["Vnet"],
 )
 
 JMA_VNET = "JMA Volcanic Seismometer Network "
@@ -313,281 +315,281 @@ NETWORK["030201"] = Network(
     name=JMA_VNET + "(Atosanupuri)",
     channels=7,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030202"] = Network(
     name=JMA_VNET + "(Meakandake)",
     channels=16,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030203"] = Network(
     name=JMA_VNET + "(Taisetsuzan)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030204"] = Network(
     name=JMA_VNET + "(Tokachidake)",
     channels=23,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030205"] = Network(
     name=JMA_VNET + "(Tarumaesan)",
     channels=18,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030206"] = Network(
     name=JMA_VNET + "(Kuttara)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030207"] = Network(
     name=JMA_VNET + "(Usuzan)",
     channels=15,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030208"] = Network(
     name=JMA_VNET + "(Hokkaido-Komagatake)",
     channels=20,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030209"] = Network(
     name=JMA_VNET + "(Esan)",
     channels=7,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030210"] = Network(
     name=JMA_VNET + "(Iwakisan)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030211"] = Network(
     name=JMA_VNET + "(Akita-Yakeyama)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030212"] = Network(
     name=JMA_VNET + "(Iwatesan)",
     channels=10,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030213"] = Network(
     name=JMA_VNET + "(Akita-Komagatake)",
     channels=7,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030214"] = Network(
     name=JMA_VNET + "(Chokaisan)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030215"] = Network(
     name=JMA_VNET + "(Kurikomayama)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030216"] = Network(
     name=JMA_VNET + "(Zaozan)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030217"] = Network(
     name=JMA_VNET + "(Azumayama)",
     channels=17,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030218"] = Network(
     name=JMA_VNET + "(Adatarayama)",
     channels=8,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030219"] = Network(
     name=JMA_VNET + "(Bandaisan)",
     channels=11,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030220"] = Network(
     name=JMA_VNET + "(Nasudake)",
     channels=8,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030221"] = Network(
     name=JMA_VNET + "(Nikko-Shiranesan)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030222"] = Network(
     name=JMA_VNET + "(Kusatsu-Shiranesan)",
     channels=8,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030223"] = Network(
     name=JMA_VNET + "(Asamayama)",
     channels=24,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030224"] = Network(
     name=JMA_VNET + "(Niigata-Yakeyama)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030225"] = Network(
     name=JMA_VNET + "(Yakedake)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030226"] = Network(
     name=JMA_VNET + "(Norikuradake)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030227"] = Network(
     name=JMA_VNET + "(Ontakesan)",
     channels=8,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030228"] = Network(
     name=JMA_VNET + "(Hakusan)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030229"] = Network(
     name=JMA_VNET + "(Fujisan)",
     channels=18,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030230"] = Network(
     name=JMA_VNET + "(Hakoneyama)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030231"] = Network(
     name=JMA_VNET + "(Izu-Tobu Volcanoes)",
     channels=11,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030232"] = Network(
     name=JMA_VNET + "(Izu-Oshima)",
     channels=16,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030233"] = Network(
     name=JMA_VNET + "(Niijima)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030234"] = Network(
     name=JMA_VNET + "(Kozushima)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030235"] = Network(
     name=JMA_VNET + "(Miyakejima)",
     channels=14,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030236"] = Network(
     name=JMA_VNET + "(Hachijojima)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030237"] = Network(
     name=JMA_VNET + "(Aogashima)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030238"] = Network(
     name=JMA_VNET + "(Tsurumidake and Garandake)",
     channels=7,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030239"] = Network(
     name=JMA_VNET + "(Kujusan)",
     channels=4,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030240"] = Network(
     name=JMA_VNET + "(Asosan)",
     channels=18,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030241"] = Network(
     name=JMA_VNET + "(Unzendake)",
     channels=10,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030242"] = Network(
     name=JMA_VNET + "(Kirishimayama)",
     channels=19,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030243"] = Network(
     name=JMA_VNET + "(Sakurajima)",
     channels=25,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030244"] = Network(
     name=JMA_VNET + "(Satsuma-Iojima)",
     channels=7,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030245"] = Network(
     name=JMA_VNET + "(Kuchinoerabujima)",
     channels=13,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030246"] = Network(
     name=JMA_VNET + "(Suwanosejima)",
     channels=6,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
 NETWORK["030247"] = Network(
     name=JMA_VNET + "(Hakkodasan)",
     channels=9,
     starttime=datetime(2010, 12, 1, 0, 0),
-    url=URL_JMA,
+    url=URL["JMA"],
 )
