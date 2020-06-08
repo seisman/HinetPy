@@ -245,17 +245,16 @@
 <span class="sd">    ...             filter_by_name=&quot;N.NA*&quot;, filter_by_component=&#39;[NE]&#39;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">data</span> <span class="ow">and</span> <span class="n">ctable</span><span class="p">):</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;data or ctable is `None&#39;. Data requests may fail. Skipped.&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;data or ctable is `None&#39;. Data requests may fail. Skipped.&quot;</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="n">channels</span> <span class="o">=</span> <span class="n">_get_channels</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> channels found in </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">),</span> <span class="n">ctable</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span><span class="si">}</span><span class="s2"> channels found in </span><span class="si">{</span><span class="n">ctable</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">filter_by_id</span> <span class="ow">or</span> <span class="n">filter_by_name</span> <span class="ow">or</span> <span class="n">filter_by_component</span><span class="p">:</span>
         <span class="n">channels</span> <span class="o">=</span> <span class="n">_filter_channels</span><span class="p">(</span>
             <span class="n">channels</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="p">,</span> <span class="n">filter_by_component</span>
         <span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> channels to be extracted.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span><span class="si">}</span><span class="s2"> channels to be extracted.&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -266,8 +265,9 @@
             <span class="n">args</span> <span class="o">=</span> <span class="p">[(</span><span class="n">data</span><span class="p">,</span> <span class="n">ch</span><span class="p">,</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">ft</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">pmax</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">]</span>
             <span class="n">sacfiles</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span><span class="n">_extract_channel</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> SAC data successfully extracted.&quot;</span><span class="p">,</span>
-                <span class="nb">len</span><span class="p">(</span><span class="n">sacfiles</span><span class="p">)</span> <span class="o">-</span> <span class="n">sacfiles</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span>
+                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> SAC data successfully extracted.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="n">sacfiles</span><span class="p">)</span> <span class="o">-</span> <span class="n">sacfiles</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                <span class="p">)</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">with_pz</span><span class="p">:</span>
@@ -275,8 +275,9 @@
             <span class="n">args</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ch</span><span class="p">,</span> <span class="s2">&quot;SAC_PZ&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">]</span>
             <span class="n">pzfiles</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span><span class="n">_extract_sacpz</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> SAC PZ files successfully extracted.&quot;</span><span class="p">,</span>
-                <span class="nb">len</span><span class="p">(</span><span class="n">pzfiles</span><span class="p">)</span> <span class="o">-</span> <span class="n">pzfiles</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span>
+                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> SAC PZ files successfully extracted.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="n">pzfiles</span><span class="p">)</span> <span class="o">-</span> <span class="n">pzfiles</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                <span class="p">)</span>
             <span class="p">)</span></div>
 
 
@@ -488,19 +489,17 @@
     <span class="c1"># check stderr output</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="s2">&quot;The number of points is maximum over&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The number of data points is over maximum. &quot;</span> <span class="s2">&quot;Try to increase pmax.&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The number of data points is over maximum. Try to increase pmax.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="s2">&quot;Data for channel </span><span class="si">{}</span><span class="s2"> not existed&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="sa">f</span><span class="s2">&quot;Data for channel </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> not existed&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
             <span class="c1"># return None if no data avaiable</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                <span class="s2">&quot;Data for </span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">) not exists. Skipped.&quot;</span><span class="p">,</span>
-                <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span>
-                <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Data for </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">) &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;not exists. Skipped.&quot;</span>
             <span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">if</span> <span class="n">outdir</span> <span class="o">!=</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
@@ -520,20 +519,15 @@
     <span class="c1"># Hi-net use moving coil velocity type seismometer.</span>
     <span class="k">if</span> <span class="n">channel</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="s2">&quot;m/s&quot;</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">): Unit is not velocity.&quot;</span><span class="p">,</span>
-            <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-            <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span>
-            <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">): Unit is not velocity.&quot;</span>
         <span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">freq</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">channel</span><span class="o">.</span><span class="n">period</span>
     <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">): Natural period = 0. Skipped.&quot;</span><span class="p">,</span>
-            <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-            <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">,</span>
-            <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">): &quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;Natural period = 0. Skipped.&quot;</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
@@ -572,9 +566,9 @@
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pzfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">pz</span><span class="p">:</span>
         <span class="n">pz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;ZEROS 3</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">pz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;POLES 2</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">pz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:9.6f}</span><span class="s2"> </span><span class="si">{:9.6f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">imaginary</span><span class="p">))</span>
-        <span class="n">pz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:9.6f}</span><span class="s2"> </span><span class="si">{:9.6f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="o">-</span><span class="n">imaginary</span><span class="p">))</span>
-        <span class="n">pz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;CONSTANT </span><span class="si">{:e}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">constant</span><span class="p">))</span>
+        <span class="n">pz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">real</span><span class="si">:</span><span class="s2">9.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">imaginary</span><span class="si">:</span><span class="s2">9.6f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">real</span><span class="si">:</span><span class="s2">9.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="o">-</span><span class="n">imaginary</span><span class="si">:</span><span class="s2">9.6f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CONSTANT </span><span class="si">{</span><span class="n">constant</span><span class="si">:</span><span class="s2">e</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_extract_sacpz</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SAC_PZ&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">keep_sensitivity</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -584,7 +578,7 @@
     <span class="p">):</span>  <span class="c1"># something wrong with channel information, skipped</span>
         <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="n">pzfile</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="p">)</span>
+    <span class="n">pzfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">component</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">if</span> <span class="n">suffix</span><span class="p">:</span>
         <span class="n">pzfile</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">suffix</span>
     <span class="n">pzfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">pzfile</span><span class="p">)</span>

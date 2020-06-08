@@ -155,6 +155,52 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="HinetPy.win32.extract_pz">
+<code class="descclassname">HinetPy.win32.</code><code class="descname">extract_pz</code><span class="sig-paren">(</span><em>ctable</em>, <em>suffix='SAC_PZ'</em>, <em>outdir='.'</em>, <em>keep_sensitivity=False</em>, <em>filter_by_chid=None</em>, <em>filter_by_name=None</em>, <em>filter_by_component=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#extract_pz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.win32.extract_pz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract instrumental response in SAC PZ format from channel table.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Only works for instrumental responses of Hi-net network.</p>
+<p class="last">RESP files of F-net network can be downloaded from
+<a class="reference external" href="http://www.fnet.bosai.go.jp/st_info/response.php?LANG=en">F-net website</a>.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Channel table file.</li>
+<li><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Suffix of SAC PZ files. Defaults to <code class="docutils literal"><span class="pre">SAC_PZ</span></code>.</li>
+<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Output directory. Defaults to current directory.</li>
+<li><strong>keep_sensivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – win2sac automatically removes sensivity from waveform data
+during win32 format to SAC format conversion.
+So the generated polezero file should omit the sensitivity.</li>
+<li><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by ID.</li>
+<li><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by name.</li>
+<li><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by component.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Extract all channel with specified suffix and output directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Extract only specified channels:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;[NE]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="HinetPy.win32.extract_sac">
 <code class="descclassname">HinetPy.win32.</code><code class="descname">extract_sac</code><span class="sig-paren">(</span><em>data</em>, <em>ctable</em>, <em>suffix='SAC'</em>, <em>outdir='.'</em>, <em>pmax=8640000</em>, <em>filter_by_id=None</em>, <em>filter_by_name=None</em>, <em>filter_by_component=None</em>, <em>with_pz=False</em>, <em>processes=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#extract_sac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.win32.extract_sac" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract data as SAC format files.</p>
@@ -199,52 +245,6 @@ Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.</p
 <p>Extract only specified channels:</p>
 <div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span><span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;[NE]&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="HinetPy.win32.extract_pz">
-<code class="descclassname">HinetPy.win32.</code><code class="descname">extract_pz</code><span class="sig-paren">(</span><em>ctable</em>, <em>suffix='SAC_PZ'</em>, <em>outdir='.'</em>, <em>keep_sensitivity=False</em>, <em>filter_by_chid=None</em>, <em>filter_by_name=None</em>, <em>filter_by_component=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/win32.html#extract_pz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.win32.extract_pz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extract instrumental response in SAC PZ format from channel table.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p>Only works for instrumental responses of Hi-net network.</p>
-<p class="last">RESP files of F-net network can be downloaded from
-<a class="reference external" href="http://www.fnet.bosai.go.jp/st_info/response.php?LANG=en">F-net website</a>.</p>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Channel table file.</li>
-<li><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Suffix of SAC PZ files. Defaults to <code class="docutils literal"><span class="pre">SAC_PZ</span></code>.</li>
-<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Output directory. Defaults to current directory.</li>
-<li><strong>keep_sensivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – win2sac automatically removes sensivity from waveform data
-during win32 format to SAC format conversion.
-So the generated polezero file should omit the sensitivity.</li>
-<li><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by ID.</li>
-<li><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by name.</li>
-<li><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by component.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition-examples admonition">
-<p class="first admonition-title">Examples</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Extract all channel with specified suffix and output directory:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Extract only specified channels:</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;[NE]&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

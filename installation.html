@@ -34,7 +34,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tutorial" href="tutorial.html" />
-    <link rel="prev" title="HinetPy - A Hi-net Client powered by Python" href="index.html" />
+    <link rel="prev" title="HinetPy - A NIED Hi-net Client for seismologists" href="index.html" />
   
    
 
@@ -53,7 +53,7 @@
           <a href="tutorial.html" title="Tutorial"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="HinetPy - A Hi-net Client powered by Python"
+          <a href="index.html" title="HinetPy - A NIED Hi-net Client for seismologists"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">HinetPy 0+unknown documentation</a> &#187;</li> 
       </ul>
@@ -77,7 +77,7 @@
     
       <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#hinetpy">HinetPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-hinetpy">Install HinetPy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#win32tools">win32tools</a></li>
 </ul>
 </li>
@@ -122,14 +122,15 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>HinetPy needs Pyhon 3.4 or above. If you’re new to Python, I strongly recommend installing the <a class="reference external" href="https://www.anaconda.com/download/">Anaconda</a>.</p>
-<div class="section" id="hinetpy">
-<h2>HinetPy<a class="headerlink" href="#hinetpy" title="Permalink to this headline">¶</a></h2>
-<p>To install the latest <strong>release/stable</strong> version:</p>
+<p>HinetPy needs Pyhon 3.6 or above. If you’re new to Python, I strongly recommend
+installing the <a class="reference external" href="https://www.anaconda.com/download/">Anaconda</a> Python distribution.</p>
+<div class="section" id="install-hinetpy">
+<h2>Install HinetPy<a class="headerlink" href="#install-hinetpy" title="Permalink to this headline">¶</a></h2>
+<p>To install the latest <strong>release/stable</strong> version from PyPI:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">HinetPy</span>
 </pre></div>
 </div>
-<p>To install the latest <strong>developing/unstable</strong> version:</p>
+<p>To install the <strong>developing/unstable</strong> version:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">seisman</span><span class="o">/</span><span class="n">HinetPy</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
@@ -147,9 +148,10 @@
 <div class="section" id="win32tools">
 <h2>win32tools<a class="headerlink" href="#win32tools" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools">win32tools</a> is a collection of tools provided by <a class="reference external" href="http://www.hinet.bosai.go.jp/">NIED Hi-net</a> to process
-win32 format data. HinetPy needs <code class="docutils literal"><span class="pre">catwin32</span></code> and <code class="docutils literal"><span class="pre">win2sac_32</span></code>. Make sure
-that <code class="docutils literal"><span class="pre">catwin32</span></code> and <code class="docutils literal"><span class="pre">win2sac_32</span></code> are in your PATH.</p>
-<p>Steps to install win32tools:</p>
+win32 format data. HinetPy needs the <code class="docutils literal"><span class="pre">catwin32</span></code> and <code class="docutils literal"><span class="pre">win2sac_32</span></code> commands
+to process the win32 data.
+Make sure that <code class="docutils literal"><span class="pre">catwin32</span></code> and <code class="docutils literal"><span class="pre">win2sac_32</span></code> are in your PATH.</p>
+<p>To install win32tools:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>tar -xvf win32tools.tar.gz
 cd win32tools/
 make
@@ -175,7 +177,7 @@ line 3 of <code class="docutils literal"><span class="pre">win2sac.src/s4read_da
   <div class="footer-relations">
     
       <div class="pull-left">
-        <a class="btn btn-default" href="index.html" title="previous chapter (use the left arrow)">HinetPy - A Hi-net Client powered by Python</a>
+        <a class="btn btn-default" href="index.html" title="previous chapter (use the left arrow)">HinetPy - A NIED Hi-net Client for seismologists</a>
       </div>
     
       <div class="pull-right">
@@ -200,7 +202,7 @@ line 3 of <code class="docutils literal"><span class="pre">win2sac.src/s4read_da
           <a href="tutorial.html" title="Tutorial"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="HinetPy - A Hi-net Client powered by Python"
+          <a href="index.html" title="HinetPy - A NIED Hi-net Client for seismologists"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">HinetPy 0+unknown documentation</a> &#187;</li> 
       </ul>

@@ -1,5 +1,5 @@
-HinetPy - A Hi-net Client powered by Python
-===========================================
+HinetPy - A NIED Hi-net Client for seismologists
+================================================
 
 .. toctree::
    :maxdepth: 1

@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>修订历史 &#8212; HinetPy 0+unknown 文档</title>
+    <title>Changelog &#8212; HinetPy 0+unknown 文档</title>
     <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -82,7 +82,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples.html">示例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API参考</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">附录</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">修订历史</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">许可协议</a></li>
 </ul>
 
@@ -111,14 +111,14 @@
             <ol class="breadcrumb">
               <li><a href="index.html">Docs</a></li>
               
-              <li>修订历史</li>
+              <li>Changelog</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
   <div class="section" id="changelog">
-<h1>修订历史<a class="headerlink" href="#changelog" title="永久链接至标题">¶</a></h1>
+<h1>Changelog<a class="headerlink" href="#changelog" title="永久链接至标题">¶</a></h1>
 <dl class="docutils">
 <dt>0.6.6 (2020-03-02):</dt>
 <dd><ul class="first last simple">
@@ -132,140 +132,141 @@
 </dd>
 <dt>0.6.4 (2019-08-23):</dt>
 <dd><ul class="first last simple">
-<li>修复channel信息错误导致的报错 (#22)</li>
+<li>Capture exception caused by incorrect channel information (#22)</li>
 </ul>
 </dd>
 <dt>0.6.3 (2019-06-13):</dt>
 <dd><ul class="first last simple">
-<li>修复 <code class="docutils literal"><span class="pre">select_stations()</span></code> (#19)</li>
-<li>重命名 <code class="docutils literal"><span class="pre">string2datetime()</span></code> 为 <code class="docutils literal"><span class="pre">to_datetime()</span></code></li>
+<li>Fix <code class="docutils literal"><span class="pre">select_stations()</span></code> (#19)</li>
+<li>Rename <code class="docutils literal"><span class="pre">string2datetime()</span></code> to <code class="docutils literal"><span class="pre">to_datetime()</span></code></li>
 </ul>
 </dd>
 <dt>0.6.2 (2019-05-06):</dt>
 <dd><ul class="first last simple">
-<li>修复下载震源机制解目录出错的问题 (#18)</li>
+<li>Fix download focal mechanism catalog issue (#18).</li>
 </ul>
 </dd>
 <dt>0.6.1 (2019-02-20):</dt>
 <dd><ul class="first last simple">
-<li>修复了选择矩形区域内事件的bug</li>
+<li>Fix selecting events in a rectangular region.</li>
 </ul>
 </dd>
 <dt>0.6.0 (2019-02-19):</dt>
 <dd><ul class="first last simple">
-<li>支持申请事件波形数据 (#16).</li>
+<li>Support request event waveform data (#16).</li>
 <li><code class="docutils literal"><span class="pre">get_waveform()</span></code> is renamed to <code class="docutils literal"><span class="pre">get_continuous_waveform()</span></code>.</li>
 </ul>
 </dd>
 <dt>0.5.2 (2019-02-19):</dt>
 <dd><ul class="first last simple">
-<li>修复了选择矩形区域内台站时的bug (#17)</li>
+<li>Fix selecting stations in a rectangular region (#17).</li>
 </ul>
 </dd>
 <dt>0.5.1 (2018-12-08):</dt>
 <dd><ul class="first last simple">
-<li>修复了longitude的typo。</li>
+<li>Fix typo from longtitude to longitude.</li>
 </ul>
 </dd>
 <dt>0.5.0 (2018-11-21):</dt>
 <dd><ul class="first last simple">
-<li>修复SAC零极点文件中的错误CONSTANT (#8)</li>
-<li>修复密码长度超过12字符时登录失败的问题 (#13)</li>
+<li>Fix issues of wrong CONSTANT in SAC polezero file (#8).</li>
+<li>Fix login failure issue with password longer than 12 characters (#13).</li>
 </ul>
 </dd>
 <dt>0.4.8 (2018-10-04):</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal"><span class="pre">get_station_list()</span></code>: 必须指定台网名；支持S-net和MeSO-net</li>
-<li><code class="docutils literal"><span class="pre">select_stations()</span></code>: 支持 S-net 和 MeSO-net</li>
+<li><code class="docutils literal"><span class="pre">get_station_list()</span></code>: must specify a network code; support S-net and MeSO-net.</li>
+<li><code class="docutils literal"><span class="pre">select_stations()</span></code>: support S-net and MeSO-net</li>
 </ul>
 </dd>
 <dt>0.4.7 (2018-10-04):</dt>
 <dd><ul class="first last simple">
-<li>支持 S-net 和 MeSO-net (#9 和 #10)</li>
-<li>修复channel table中包含空白行时的错误</li>
+<li>Support S-net and MeSO-net (#9 and #10)</li>
+<li>Fix an issue when channel table contains blank lines</li>
 </ul>
 </dd>
 <dt>0.4.6 (2018-03-20):</dt>
 <dd><ul class="first last simple">
-<li>修复 <code class="docutils literal"><span class="pre">Too</span> <span class="pre">many</span> <span class="pre">open</span> <span class="pre">files</span></code> (#6)</li>
+<li>Fix <code class="docutils literal"><span class="pre">Too</span> <span class="pre">many</span> <span class="pre">open</span> <span class="pre">files</span></code> (#6)</li>
 </ul>
 </dd>
 <dt>0.4.5 (2018-03-07):</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal"><span class="pre">get_station_list()</span></code>: 返回台站列表</li>
-<li><code class="docutils literal"><span class="pre">select_stations()</span></code>: 支持选择一个矩形或环形区域内的台站</li>
+<li><code class="docutils literal"><span class="pre">get_station_list()</span></code>: return a list of stations</li>
+<li><code class="docutils literal"><span class="pre">select_stations()</span></code>: support selecting stations in a box or circular region</li>
 </ul>
 </dd>
 <dt>0.4.4 (2017-11-30):</dt>
 <dd><ul class="first last simple">
-<li>修复打包相关的技术问题</li>
+<li>Fix a technical issue related to packaging</li>
 </ul>
 </dd>
 <dt>0.4.3 (2017-11-30):</dt>
 <dd><ul class="first last simple">
-<li>增加中文文档</li>
+<li>Add Chinese documentation</li>
 </ul>
 </dd>
 <dt>0.4.2 (2017-06-18):</dt>
 <dd><ul class="first last simple">
-<li>修复requests&gt;=2.17时无法登陆的bug</li>
+<li>Fix a bug with requests&gt;=2.17</li>
 </ul>
 </dd>
 <dt>0.4.1 (2017-06-18):</dt>
 <dd><ul class="first last simple">
-<li>删除临时文件以避免用尽临时目录的全部磁盘空间</li>
+<li>remove tempfile after downloading.</li>
 </ul>
 </dd>
 <dt>0.4.0 (2017-04-01):</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal"><span class="pre">win32.extract_sac()</span></code>: 若数据不存在则跳过</li>
-<li><code class="docutils literal"><span class="pre">win32.extract_sac()</span></code>: 支持多进程以加速，不再返回值</li>
+<li><code class="docutils literal"><span class="pre">win32.extract_sac()</span></code>: skip if data not exists</li>
+<li><code class="docutils literal"><span class="pre">win32.extract_sac()</span></code>: support multiple processes to speedup, and
+no longer return values</li>
 <li><code class="docutils literal"><span class="pre">Client.get_waveform()</span></code>: support multi-threads to speedup</li>
-<li>将 <code class="docutils literal"><span class="pre">Client.help()</span></code> 修改为 <code class="docutils literal"><span class="pre">Client.info()</span></code></li>
+<li>Change <code class="docutils literal"><span class="pre">Client.help()</span></code> to <code class="docutils literal"><span class="pre">Client.info()</span></code></li>
 <li><code class="docutils literal"><span class="pre">Client.get_waveform()</span></code> now can automatically set <code class="docutils literal"><span class="pre">max_span</span></code></li>
-<li><code class="docutils literal"><span class="pre">Client.get_*()</span></code> 的 starttime 支持多种不同的字符串格式</li>
+<li><code class="docutils literal"><span class="pre">Client.get_*()</span></code> now support startime in different string formats</li>
 </ul>
 </dd>
 <dt>0.3.3 (2017-03-17):</dt>
 <dd><ul class="first last simple">
-<li>将 <code class="docutils literal"><span class="pre">header.py</span></code> 中 <code class="docutils literal"><span class="pre">network</span></code> 修改为 <code class="docutils literal"><span class="pre">NETWORK</span></code></li>
-<li><code class="docutils literal"><span class="pre">win32.merg()</span></code> 支持通配符</li>
-<li>修改 <code class="docutils literal"><span class="pre">Client.check_module_release()</span></code> 为 <code class="docutils literal"><span class="pre">Client.check_package_release()</span></code></li>
-<li>支持输出文件名中包含更深的目录结构</li>
-<li>总是排序cnt文件以避免合并错误</li>
-<li>设置 <code class="docutils literal"><span class="pre">pmax</span></code> 默认值为8640000</li>
-<li>修复typos</li>
+<li>Change <code class="docutils literal"><span class="pre">network</span></code> to <code class="docutils literal"><span class="pre">NETWORK</span></code> in <code class="docutils literal"><span class="pre">header.py</span></code></li>
+<li>Add wildcard support to <code class="docutils literal"><span class="pre">win32.merge()</span></code></li>
+<li>Change <code class="docutils literal"><span class="pre">Client.check_module_release()</span></code> to <code class="docutils literal"><span class="pre">Client.check_package_release()</span></code></li>
+<li>Support output filename with deep directory</li>
+<li>Always sort cnt files to avoid merge error</li>
+<li>Set <code class="docutils literal"><span class="pre">pmax</span></code> to 8640000 by default</li>
+<li>Fix typos</li>
 </ul>
 </dd>
 <dt>0.3.2 (2017-03-12):</dt>
 <dd><ul class="first last simple">
-<li>修复另一个pypi相关的技术问题</li>
+<li>Fix another technical issue related to pypi</li>
 </ul>
 </dd>
 <dt>0.3.1 (2017-03-12):</dt>
 <dd><ul class="first last simple">
-<li>修复pypi相关的技术问题</li>
+<li>Fix a technical issue related to pypi</li>
 </ul>
 </dd>
 <dt>0.3.0 (2017-03-12):</dt>
 <dd><ul class="first last simple">
-<li>重写成一个Python包</li>
+<li>Rewritten as a Python package</li>
 </ul>
 </dd>
 <dt>0.2.0 (2016-08-24):</dt>
 <dd><ul class="first last simple">
-<li>小修正和提高</li>
+<li>Some small fixes and improvements</li>
 </ul>
 </dd>
 <dt>0.1.0 (2016-08-04):</dt>
 <dd><ul class="first last simple">
-<li>首个公开版本</li>
-<li><code class="docutils literal"><span class="pre">HinetDoctor.py</span></code>: 检查依赖</li>
-<li><code class="docutils literal"><span class="pre">HinetContRequest.py</span></code>: 从Hi-net申请连续数据</li>
-<li><code class="docutils literal"><span class="pre">StationSelector.py</span></code>: 在申请数据前选择Hi-net/F-net台站</li>
-<li><code class="docutils literal"><span class="pre">HinetJMARequest.py</span></code>: 从Hi-net申请JMA目录</li>
-<li><code class="docutils literal"><span class="pre">rdhinet.py</span></code>: 将WIN32格式转换为SAC格式</li>
-<li><code class="docutils literal"><span class="pre">ch2pz.py</span></code>: 从Hi-net通道表文件中提取SAC零极点文件</li>
+<li>First public release</li>
+<li><code class="docutils literal"><span class="pre">HinetDoctor.py</span></code>: check dependencies</li>
+<li><code class="docutils literal"><span class="pre">HinetContRequest.py</span></code>: request continuous data from Hi-net</li>
+<li><code class="docutils literal"><span class="pre">StationSelector.py</span></code>: select Hi-net/F-net stations before requesting data</li>
+<li><code class="docutils literal"><span class="pre">HinetJMARequest.py</span></code>: request JMA catalogs from Hi-net website</li>
+<li><code class="docutils literal"><span class="pre">rdhinet.py</span></code>: convert WIN32 format to SAC format</li>
+<li><code class="docutils literal"><span class="pre">ch2pz.py</span></code>: extract SAC PZ files from Hi-net channel table files</li>
 </ul>
 </dd>
 </dl>

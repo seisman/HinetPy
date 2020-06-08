@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>HinetPy——基于Python的Hi-net数据申请客户端 &#8212; HinetPy 0+unknown 文档</title>
+    <title>HinetPy - A NIED Hi-net Client for seismologists &#8212; HinetPy 0+unknown 文档</title>
     <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -78,7 +78,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples.html">示例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API参考</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">附录</a></li>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">修订历史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">许可协议</a></li>
 </ul>
 
@@ -107,14 +107,14 @@
             <ol class="breadcrumb">
               <li><a href="#">Docs</a></li>
               
-              <li>HinetPy——基于Python的Hi-net数据申请客户端</li>
+              <li>HinetPy - A NIED Hi-net Client for seismologists</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <div class="section" id="hinetpy-a-hi-net-client-powered-by-python">
-<h1>HinetPy——基于Python的Hi-net数据申请客户端<a class="headerlink" href="#hinetpy-a-hi-net-client-powered-by-python" title="永久链接至标题">¶</a></h1>
+  <div class="section" id="hinetpy-a-nied-hi-net-client-for-seismologists">
+<h1>HinetPy - A NIED Hi-net Client for seismologists<a class="headerlink" href="#hinetpy-a-nied-hi-net-client-for-seismologists" title="永久链接至标题">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <a class="reference external image-reference" href="https://github.com/seisman/HinetPy/actions"><img alt="https://github.com/seisman/HinetPy/workflows/CI/badge.svg" src="https://github.com/seisman/HinetPy/workflows/CI/badge.svg" /></a>
@@ -125,14 +125,14 @@
 <a class="reference external image-reference" href="https://github.com/seisman/HinetPy/blob/master/LICENSE"><img alt="https://img.shields.io/github/license/seisman/HinetPy.svg" src="https://img.shields.io/github/license/seisman/HinetPy.svg" /></a>
 <a class="reference external image-reference" href="https://github.com/psf/black"><img alt="https://img.shields.io/badge/code%20style-black-000000.svg" src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a>
 <a class="reference external image-reference" href="https://zenodo.org/badge/latestdoi/23509035"><img alt="https://zenodo.org/badge/23509035.svg" src="https://zenodo.org/badge/23509035.svg" /></a>
-<p><a class="reference external" href="https://github.com/seisman/HinetPy">HinetPy</a> 是一个Python模块，致力于自动化和简化与 <a class="reference external" href="http://www.hinet.bosai.go.jp/">NIED Hi-net</a> 相关的繁琐的数据申请、下载和格式转换工作。</p>
+<p><a class="reference external" href="https://github.com/seisman/HinetPy">HinetPy</a> is a Python package to simplify tedious data
+request, download and format conversion tasks related to <a class="reference external" href="http://www.hinet.bosai.go.jp/">NIED Hi-net</a>.</p>
 <p><a class="reference external" href="http://www.hinet.bosai.go.jp/">NIED Hi-net</a> | <a class="reference external" href="https://github.com/seisman/HinetPy">源代码</a> | <a class="reference external" href="https://seisman.github.io/HinetPy">Documentation</a> | <a class="reference external" href="https://seisman.github.io/HinetPy/zh_CN/">中文文档</a></p>
 </div>
-<div class="section" id="feature-support">
-<h1>功能<a class="headerlink" href="#feature-support" title="永久链接至标题">¶</a></h1>
+<div class="section" id="features">
+<h1>Features<a class="headerlink" href="#features" title="永久链接至标题">¶</a></h1>
 <ul class="simple">
-<li>从Hi-net申请连续波形数据</li>
-<li>从Hi-net申请事件波形数据</li>
+<li>Request continuous and event waveform data from Hi-net</li>
 <li>选择一个矩形或环形区域内的Hi-net/F-net台站</li>
 <li>将波形数据从win32格式转换为SAC格式</li>
 <li>提取仪器响应信息并保存为SAC零极点文件</li>
@@ -141,32 +141,43 @@
 </div>
 <div class="section" id="a-simple-example">
 <h1>一个简单的示例<a class="headerlink" href="#a-simple-example" title="永久链接至标题">¶</a></h1>
-<p><a class="reference external" href="https://github.com/seisman/HinetPy">HinetPy</a> 功能强大，使得从Hi-net申请连续数据、将数据转换为SAC格式、提取仪器响应文件并保存为SAC零极点文件变得很简单。</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">win32</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># You need a Hi-net account to access their data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Let&#39;s try to request 20 minutes data since 2010-01-01T00:00(GMT+0900) from Hi-net</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># &#39;0101&#39; is the code of Hi-net network</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;201001010000&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The request and downloading process usually takes several minutes</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># waiting data request ...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># waiting data downloading ...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ls</span>  <span class="c1"># the downloaded data and corresponding channel table</span>
-<span class="go">0101_201001010000_20.cnt 0101_20100101.ch</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Let&#39;s convert data from win32 format to SAC format</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Let&#39;s extract instrument response as PZ file from channel table</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ls</span>
-<span class="go">N.NGUH.E.SAC  N.NGUH.U.SAC  N.NNMH.N.SAC</span>
-<span class="go">N.NGUH.N.SAC  N.NNMH.E.SAC  N.NNMH.U.SAC</span>
-<span class="gp">...</span>
-<span class="go">N.NGUH.E.SAC_PZ  N.NGUH.U.SAC_PZ  N.NNMH.N.SAC_PZ</span>
-<span class="go">N.NGUH.N.SAC_PZ  N.NNMH.E.SAC_PZ  N.NNMH.U.SAC_PZ</span>
-<span class="gp">...</span>
+<p>Here is an example showing how to use HinetPy to request continuous waveform data
+from Hi-net, convert the data into SAC format, and extract instrumental
+responses as SAC polezero files.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">win32</span>
+
+<span class="c1"># You need a Hi-net account to access the data</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s try to request 20-minute data starting at 2010-01-01T00:00(GMT+0900)</span>
+<span class="c1"># of the Hi-net network (with an internal network code of &#39;0101&#39;)</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;201001010000&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># The request and download process usually takes a few minutes</span>
+<span class="c1"># waiting for data request ...</span>
+<span class="c1"># waiting for data download ...</span>
+
+<span class="c1"># Now you can see the data and corresponding channel table in your working directory</span>
+<span class="c1"># waveform data (in win32 format) : 0101_201001010000_20.cnt</span>
+<span class="c1"># channel table (plaintext file)  : 0101_20100101.ch</span>
+
+<span class="c1"># Let&#39;s convert data from win32 format to SAC format</span>
+<span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s extract instrument response as PZ files from the channel table file</span>
+<span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
+
+<span class="c1"># Now you can see several SAC and SAC_PZ files in your working directory</span>
+
+<span class="c1"># N.NGUH.E.SAC  N.NGUH.U.SAC  N.NNMH.N.SAC</span>
+<span class="c1"># N.NGUH.N.SAC  N.NNMH.E.SAC  N.NNMH.U.SAC</span>
+<span class="c1"># ...</span>
+<span class="c1"># N.NGUH.E.SAC_PZ  N.NGUH.U.SAC_PZ  N.NNMH.N.SAC_PZ</span>
+<span class="c1"># N.NGUH.N.SAC_PZ  N.NNMH.E.SAC_PZ  N.NNMH.U.SAC_PZ</span>
+<span class="c1"># ...</span>
 </pre></div>
 </div>
 </div>
@@ -177,7 +188,7 @@
 </div>
 <div class="section" id="license">
 <h1>许可协议<a class="headerlink" href="#license" title="永久链接至标题">¶</a></h1>
-<p>本项目使用 <a class="reference external" href="license.html">MIT license</a> 许可协议。</p>
+<p>This project is licensed under the terms of the MIT license.</p>
 </div>
 
 
