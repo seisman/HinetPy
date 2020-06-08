@@ -72,27 +72,28 @@ class Client:
         password: str
             Password of Hi-net account.
         timeout: int or float
-            How long to wait for the server to send data before giving up.
+            Time to wait for the server to send data before giving up.
         retries: int
-            How many times to retry if request fails.
+            How many times to retry if a request fails.
         sleep_time_in_seconds: int or float
-            See notes below.
+            Sleep time between each data status check. See notes below.
         max_sleep_count: int
-            See notes below.
+            Maximum number of sleeps before fail. See notes below.
 
         Notes
         -----
-        Hi-net server ususally spends 10 seconds to 1 minute on data
+        Hi-net server ususally spends 10-60 seconds on data
         preparation after receiving a data request. During the data
         preparation, users are **NOT** allowed to post another data request.
         So users have to wait until the data is ready.
 
-        HinetPy checks data status every ``sleep_time_in_seconds`` seconds
-        until the data is ready. If HinetPy checks the data status for more
-        than ``max_sleep_count * sleep_time_in_seconds`` seconds,
-        it possibly indicates something wrong happend with this data request.
-        Then, HinetPy will retry to request this data ``retries`` times.
-        Ususally, you don't need to modify these settings
+        HinetPy checks data status every ``sleep_time_in_seconds`` seconds for
+        no more than ``max_sleep_count`` times, until the data is ready.
+        If the data status is still NOT ready after
+        ``max_sleep_count * sleep_time_in_seconds`` seconds,
+        it most likely means something wrong with the data request.
+        Then, HinetPy will retry to request the data ``retries`` times.
+        Ususally, you don't need to modify these parameters
         unless you know what you're doing.
 
         Examples
@@ -129,7 +130,7 @@ class Client:
         >>> client.login("username", "password")
         """
         self.user = user
-        # Hinet automatically trims password with >12 characters
+        # Hinet automatically trims password longer than 12 characters
         if len(password) > 12:
             logger.warning("Password with more than 12 characters may FAIL!")
         self.password = password[0:12]
@@ -151,13 +152,7 @@ class Client:
     def doctor(self):
         """ Doctor does some checks.
 
-        >>> client.doctor()
-        [2019-12-06 00:00:00] INFO: You're using the latest release (v0.6.5).
-        [2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.
-        [2019-12-06 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
-        [2019-12-06 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
-
-        **Checklist**
+        :meth:`~HinetPy.client.Client.doctor` is a utility function which checks:
 
         - if HinetPy has a new release
           (see :meth:`~HinetPy.client.Client.check_package_release`)
@@ -165,6 +160,12 @@ class Client:
           (see :meth:`~HinetPy.client.Client.check_service_update`)
         - if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH
           (see :meth:`~HinetPy.client.Client.check_cmd_exists`)
+
+        >>> client.doctor()
+        [2019-12-06 00:00:00] INFO: You're using the latest release (v0.x.x).
+        [2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.
+        [2019-12-06 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
+        [2019-12-06 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
         """
         self.check_package_release()
         self.check_service_update()
@@ -191,7 +192,7 @@ class Client:
         Returns
         -------
         id: str
-            ID of requested data. None if request fails.
+            ID of the requested data. None if request fails.
         """
         org, net, volc = _parse_code(code)
         payload = {
@@ -212,12 +213,12 @@ class Client:
         # retry if request fails else return id
         for _ in range(self.retries):
             try:
-                # the timestamp determine the unique id
+                # the timestamp determines the unique id
                 payload["rn"] = str(int(datetime.now().timestamp()))
                 r = self.session.post(
                     self._CONT_REQUEST, params=payload, timeout=self.timeout
                 )
-                # assume the first one on status page is the one
+                # assume the first one on the status page is the current data
                 id = re.search(
                     r'<td class="bgcolist2">(?P<ID>\d{10})</td>', r.text
                 ).group("ID")
@@ -236,8 +237,9 @@ class Client:
                     elif opt == "2":  # data is available
                         return id
                     elif opt == "3":  # ?
-                        msg = "If you see this, " "please report an issue on GitHub!"
-                        logger.error(msg)
+                        logger.error(
+                            "If you see this, please report an issue on GitHub!"
+                        )
                         break  # break to else clause
                     elif opt == "4":  # something wrong, retry
                         logger.error("Error in data status.")
@@ -247,8 +249,7 @@ class Client:
             except Exception:
                 continue
         else:
-            msg = "Data request fails after {} retries.".format(self.retries)
-            logger.error(msg)
+            logger.error(f"Data request fails after {self.retries} retries.")
             return None
 
     def _download_cont_waveform(self, job):
@@ -263,13 +264,13 @@ class Client:
         Returns
         -------
         cnts: list of str
-            Filename of one-minute win32 data.
+            Filenames of one-minute win32 data.
         ctable: str
-            Filename of channle table.
+            Filenames of channle tables.
         """
         # session cannot be shared between threads, so always initialize
         # a new client for downloading.
-        # Maybe there is other trick way?
+        # Maybe there is other tricky way?
         dlclient = Client(self.user, self.password)
         for _ in range(self.retries):
             try:
@@ -301,8 +302,7 @@ class Client:
             except Exception:
                 continue
         else:
-            msg = "Data download fails after {} retries".format(self.retries)
-            logger.error(msg)
+            logger.error(f"Data download fails after {self.retries} retries")
             return None, None
 
     def get_continuous_waveform(
@@ -318,19 +318,19 @@ class Client:
         cleanup=True,
     ):
         """
-        Get continuous waveform from Hi-net server.
+        Get continuous waveform data from Hi-net server.
 
         Parameters
         ----------
         code: str
             Network code. See :meth:`~HinetPy.client.Client.info` for details.
         starttime: :py:class:`datetime.datetime` or str
-            Starttime of data request.
+            Starttime of a data request.
         span: int
             Time span in minutes.
         max_span: int
             Maximum time span for sub-requests. Defaults to be determined
-            automatically.
+            automatically. See notes below.
         data: str
             Filename of downloaded win32 data.
             Default format: CODE_YYYYmmddHHMM_SPAN.cnt
@@ -338,10 +338,10 @@ class Client:
             Filename of downloaded channel table file.
             Default format: CODE_YYYYmmdd.ch
         outdir: str
-            Save win32 and channel table data to specified directory.
-            Default is current directory.
+            Save win32 and channel table data to a specified directory.
+            Default is in the current directory.
         threads: int
-            How many threads used to speedup data downloading.
+            Parallel data download using more threads.
         cleanup: bool
             Clean up one-minute cnt files after merging.
 
@@ -356,11 +356,11 @@ class Client:
         -----
         **TimeZone**
 
-        All times in HinetPy are in JST (GMT+0900).
+        All times in HinetPy and in Hi-net data are in JST (UTC+0900).
 
         **max_span**
 
-        Hi-net server sets three limitations of each data request:
+        Hi-net server sets three limitations for each data request:
 
         1. Record_Length <= 60 min
         2. Number_of_channels * Record_Length <= 12000 min
@@ -368,22 +368,22 @@ class Client:
 
         For example, Hi-net network has about 24000 channels. Acoording to
         limitation 2, the record length should be no more than 5 minutes
-        in each data request. HinetPy "break through" the limitation by
+        for each data request. HinetPy "break through" the limitation by
         splitting a long-duration data request into several short-duration
         sub-requsts.
 
-        **Workflow**
+        **How it works**
 
         1. do several checks
         2. split a long-duration request into several short-duration sub-requests
-        3. loop over all sub-requests and return data id to download
-        4. download all data based on data id
-        5. extract all zip files and merge into one win32 format data
-        6. cleanup
+        3. loop over all sub-requests and return the data IDs
+        4. download all data based on the data IDs
+        5. extract all zip files and merge them into one single win32 data
+        6. clean up
 
         Examples
         --------
-        Request 6 minutes data since 2010-01-01T05:35 (GMT+0900) from Hi-net.
+        Request 6-minute data since 2010-01-01T05:35 (UTC+0900) from Hi-net.
 
         >>> client.get_continuous_waveform('0101', '201001010535', 6)
         ('0101_201001010535_6.cnt', '0101_20100101.ch')
@@ -393,21 +393,21 @@ class Client:
         >>> client.get_continuous_waveform('0101', '2010-01-01 05:35', 6)
         >>> client.get_continuous_waveform('0101', '2010-01-01T05:35', 6)
 
-        ``starttime`` can be given as :py:class:`datetime.datetime`:
+        :py:class:`datetime.datetime` is also supported:
 
         >>> from datetime import datetime
         >>> starttime = datetime(2010, 1, 1, 5, 35)
         >>> client.get_continuous_waveform('0101', starttime, 6)
         ('0101_201001010535_6.cnt', '0101_20100101.ch')
 
-        Request full-day data of 2010-01-01T00:00 (GMT+0900) of F-net:
+        Request full-day data of 2010-01-01T00:00 (UTC+0900) of F-net:
 
         >>> client.get_continuous_waveform('0103', starttime, 1440, max_span=25)
         ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
         """
         # 1. check span:
-        #    max limits is determined by the max number of data points
+        #    max limit is determined by the max number of data points
         #    allowed in code s4win2sacm.c
         if not isinstance(span, int):
             raise TypeError("span must be integer.")
@@ -416,17 +416,17 @@ class Client:
 
         # 2. check starttime and endtime
         if code not in NETWORK.keys():
-            raise ValueError("{}: Incorrect network code.".format(code))
+            raise ValueError(f"{code}: Incorrect network code.")
 
         time0 = NETWORK[code].starttime
-        # time1 = UTCTime + JST(GMT+0900) - 2 hour delay
+        # time1 = UTCTime + JST (UTC+0900) - 2 hour delay
         time1 = datetime.utcnow() + timedelta(hours=9) + timedelta(hours=-2)
         starttime = to_datetime(starttime)
         endtime = starttime + timedelta(minutes=span)
         if not time0 <= starttime < endtime <= time1:
             msg = (
                 "Data not available in the time period. "
-                + "Call Client.info('{}') for help.".format(code)
+                + f"Call Client.info('{code}') for help."
             )
             raise ValueError(msg)
 
@@ -483,7 +483,7 @@ class Client:
 
         # 2. merge all cnt files
         if not data:
-            data = "{}_{}_{:d}.cnt".format(code, starttime.strftime("%Y%m%d%H%M"), span)
+            data = f'{code}_{starttime.strftime("%Y%m%d%H%M")}_{span:d}.cnt'
         dirname = None
         if os.path.dirname(data):
             dirname = os.path.dirname(data)
@@ -494,7 +494,7 @@ class Client:
 
         # 3. rename channeltable file
         if not ctable:
-            ctable = "{}_{}.ch".format(code, starttime.strftime("%Y%m%d"))
+            ctable = f'{code}_{starttime.strftime("%Y%m%d")}.ch'
 
         dirname = None
         if os.path.dirname(ctable):
@@ -534,8 +534,8 @@ class Client:
             :meth:`~HinetPy.client.Client.get_continuous_waveform`.
         """
         logger.warning(
-            "The get_waveform() function is deprecated. Please "
-            "use get_continuous_waveform()."
+            "The get_waveform() function is deprecated. "
+            "Use get_continuous_waveform() instead."
         )
         return self.get_continuous_waveform(
             code,
@@ -565,11 +565,10 @@ class Client:
         include_unknown_mag=True,
     ):
         """
-        Search events catalog of one day.
+        Search event catalog of one day.
 
         Parameters
         ----------
-
         region : str
             Limit events in specified region. Allowed values are:
 
@@ -588,8 +587,8 @@ class Client:
         """
         payload = {
             "year": year,
-            "month": "{:02d}".format(month),
-            "day": "{:02d}".format(day),
+            "month": f"{month:02d}",
+            "day": f"{day:02d}",
             "region": region,
             "mags": magmin,
             "mage": magmax,
@@ -612,7 +611,6 @@ class Client:
 
         Parameters
         ----------
-
         event: HinetPy.client.Event
             Event to be requested.
         format: str
@@ -639,7 +637,7 @@ class Client:
                 r = self.session.post(
                     self._EVENT_REQUEST, data=payload, timeout=self.timeout
                 )
-                # assume the first one on status page is the one
+                # assume the first one on the status page is the current one
                 id = re.search(
                     r'<td class="bgevlist2">(?P<ID>\d{10})</td>', r.text
                 ).group("ID")
@@ -658,8 +656,9 @@ class Client:
                     elif opt == "2":  # data is available
                         return id
                     elif opt == "3":  # ?
-                        msg = "If you see this, " "please report an issue on GitHub!"
-                        logger.error(msg)
+                        logger.error(
+                            "If you see this, please report an issue on GitHub!"
+                        )
                         break  # break to else clause
                     elif opt == "4":  # something wrong, retry
                         logger.error("Error in data status.")
@@ -669,8 +668,7 @@ class Client:
             except Exception:
                 continue
         else:
-            msg = "Data request fails after {} retries.".format(self.retries)
-            logger.error(msg)
+            logger.error(f"Data request fails after {self.retries} retries.")
             return None
 
     def _download_event_waveform(self, id):
@@ -711,8 +709,7 @@ class Client:
             except Exception:
                 continue
         else:
-            msg = "Data download fails after {} retries".format(self.retries)
-            logger.error(msg)
+            logger.error(f"Data download fails after {self.retries} retries.")
             return None
 
     def get_event_waveform(
@@ -846,14 +843,14 @@ class Client:
             selected_events.append(event)
 
         logger.info("EVENT WAVEFORM DOWNLOADER:")
-        logger.info("{:d} events to download.".format(len(selected_events)))
+        logger.info(f"{len(selected_events):d} events to download.")
         for i in range(len(selected_events)):
-            logger.info("{}".format(selected_events[i]))
+            logger.info(f"{selected_events[i]}")
 
         for event in selected_events:
             id = self._request_event_waveform(event)
             dirname = self._download_event_waveform(id)
-            logger.info("{} {}".format(event, dirname))
+            logger.info(f"{event} {dirname}")
 
     ###########################################################################
     #                                                                         #
@@ -875,9 +872,7 @@ class Client:
         }
         d = self.session.post(self._JMA, params=params, stream=True)
         if not filename:
-            filename = "{}_{}_{}.txt".format(
-                datatype, startdate.strftime("%Y%m%d"), span
-            )
+            filename = f'{datatype}_{startdate.strftime("%Y%m%d")}_{span}.txt'
         with open(filename, "wb") as fd:
             for chunk in d.iter_content(chunk_size=1024):
                 if chunk:  # filter out keep-alive new chunks
@@ -1198,7 +1193,7 @@ class Client:
             logger.info("Hi-net web service is NOT updated.")
             return False
         else:
-            logger.warning("Hi-net web service is updated." " HinetPy may FAIL!")
+            logger.warning("Hi-net web service is updated. HinetPy may FAIL!")
             return True
 
     def check_package_release(self):
@@ -1207,10 +1202,10 @@ class Client:
         >>> client.check_package_release()
         [2019-12-06 00:00:00] INFO: You're using the latest release (v0.6.5).
         """
-        from HinetPy import __version__, __title__
+        from HinetPy import __version__
         from distutils.version import LooseVersion
 
-        url = "https://pypi.python.org/pypi/{}/json".format(__title__)
+        url = "https://pypi.python.org/pypi/HinetPy/json"
         r = requests.get(url)
         if r.status_code != 200:
             logger.warning("Error in connecting PyPI. Skipped.")
@@ -1219,14 +1214,11 @@ class Client:
 
         if LooseVersion(latest_release) > LooseVersion(__version__):
             logger.warning(
-                "%s v%s is released. See %s for details.",
-                __title__,
-                latest_release,
-                url,
+                f"HinetPy v{latest_release} is released. See {url} for details."
             )
             return True
         else:
-            logger.info("You're using the latest version (v%s).", __version__)
+            logger.info(f"You're using the latest version (v{__version__}).")
             return False
 
     def check_cmd_exists(self):
@@ -1236,8 +1228,8 @@ class Client:
         [2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
         [2017-01-01 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
 
-        The client will report errors if ``catwin32`` and/or ``win2sac_32``
-        are NOT in PATH. In this case, please download win32tools from
+        This function reports errors if ``catwin32`` and/or ``win2sac_32``
+        are NOT found in PATH. In this case, please download win32tools from
         `Hi-net <http://www.hinet.bosai.go.jp/>`_
         and make sure both binary files are in your PATH.
         """
@@ -1247,9 +1239,9 @@ class Client:
         for cmd in ("catwin32", "win2sac_32"):
             fullpath = shutil.which(cmd)
             if fullpath:
-                logger.info("%s: %s.", cmd, fullpath)
+                logger.info(f"{cmd}: {fullpath}")
             else:
-                logger.error("%s: not found in PATH.", cmd)
+                logger.error(f"{cmd}: not found in PATH.")
                 error += 1
 
         return False if error else True
@@ -1282,15 +1274,15 @@ class Client:
         """
         if code:
             net = NETWORK[code]
-            info = "== Information of Network {} ==\n".format(code)
-            info += "Name: {}\n".format(net.name)
-            info += "Homepage: {}\n".format(net.url)
-            info += "Starttime: {}\n".format(net.starttime.strftime("%Y%m%d"))
-            info += "No. of channels: {}".format(net.channels)
+            info = f"== Information of Network {code} ==\n"
+            info += f"Name: {net.name}\n"
+            info += f"Homepage: {net.url}\n"
+            info += f"Starttime: {net.starttime.strftime('%Y%m%d')}\n"
+            info += f"No. of channels: {net.channels}"
             print(info)
         else:
             for code in sorted(NETWORK.keys()):
-                print("{:7s}: {}".format(code, NETWORK[code].name))
+                print(f"{code:7s}: {NETWORK[code].name}")
 
     def _get_win32tools(self):
         """Download win32 tools."""
@@ -1308,7 +1300,7 @@ class Client:
 
     def __str__(self):
         string = "<== Hi-net web service client ==>\n"
-        string += "{:22s}: {}\n".format("url", self._HINET)
+        string += f"{'url':22s}: {self._HINET}\n"
         for key in (
             "user",
             "password",
@@ -1322,7 +1314,7 @@ class Client:
                 value = getattr(self, key)
                 if key == "password":
                     value = "*" * len(value)
-                string += "{:22s}: {}\n".format(key, value)
+                string += f"{key:22s}: {value}\n"
             except Exception:
                 continue
         return string
@@ -1408,8 +1400,7 @@ def _parse_code(code):
     ('01', '05', '010501')
     """
     if code not in NETWORK.keys():
-        msg = "{}: Incorrect network code.".format(code)
-        raise ValueError(msg)
+        raise ValueError(f"{code}: Incorrect network code.")
     elif code.startswith("0105") or code.startswith("0302"):
         org, net, volc = code[0:2], code[2:4], code
     else:

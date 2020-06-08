@@ -17,16 +17,10 @@ Basis usage:
 >>> win32.extract_pz(ctable)
 """
 
-__title__ = "HinetPy"
-__author__ = "Dongdong Tian"
-__license__ = "MIT"
-
 from .client import Client
 from .header import NETWORK
-
-__all__ = ["Client", "NETWORK", "win32"]
-
 from ._version import get_versions
 
+__all__ = ["Client", "NETWORK", "win32"]
 __version__ = get_versions()["version"]
 del get_versions

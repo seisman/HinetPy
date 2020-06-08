@@ -57,8 +57,8 @@ master_doc = "index"
 
 # General information about the project.
 year = datetime.date.today().year
-project = HinetPy.__title__
-author = HinetPy.__author__
+project = "HinetPy"
+author = "Dongdong Tian"
 copyright = "2014-{}, {}".format(year, author)
 
 # The version info for the project you're documenting, acts as replacement for

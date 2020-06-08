@@ -131,17 +131,16 @@ def extract_sac(
     ...             filter_by_name="N.NA*", filter_by_component='[NE]')
     """
     if not (data and ctable):
-        msg = "data or ctable is `None'. Data requests may fail. Skipped."
-        logger.error(msg)
+        logger.error("data or ctable is `None'. Data requests may fail. Skipped.")
         return
 
     channels = _get_channels(ctable)
-    logger.info("%d channels found in %s.", len(channels), ctable)
+    logger.info(f"{len(channels)} channels found in {ctable}.")
     if filter_by_id or filter_by_name or filter_by_component:
         channels = _filter_channels(
             channels, filter_by_id, filter_by_name, filter_by_component
         )
-    logger.info("%d channels to be extracted.", len(channels))
+    logger.info(f"{len(channels)} channels to be extracted.")
 
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
@@ -152,8 +151,9 @@ def extract_sac(
             args = [(data, ch, suffix, outdir, ft.name, pmax) for ch in channels]
             sacfiles = pool.starmap(_extract_channel, args)
             logger.info(
-                "%d SAC data successfully extracted.",
-                len(sacfiles) - sacfiles.count(None),
+                "{} SAC data successfully extracted.".format(
+                    len(sacfiles) - sacfiles.count(None)
+                )
             )
 
         if with_pz:
@@ -161,8 +161,9 @@ def extract_sac(
             args = [(ch, "SAC_PZ", outdir) for ch in channels]
             pzfiles = pool.starmap(_extract_sacpz, args)
             logger.info(
-                "%d SAC PZ files successfully extracted.",
-                len(pzfiles) - pzfiles.count(None),
+                "{} SAC PZ files successfully extracted.".format(
+                    len(pzfiles) - pzfiles.count(None)
+                )
             )
 
 
@@ -374,19 +375,17 @@ def _extract_channel(
     # check stderr output
     for line in p.stderr.read().decode().split("\n"):
         if "The number of points is maximum over" in line:
-            msg = "The number of data points is over maximum. " "Try to increase pmax."
+            msg = "The number of data points is over maximum. Try to increase pmax."
             raise ValueError(msg)
-        elif "Data for channel {} not existed".format(channel.id) in line:
+        elif f"Data for channel {channel.id} not existed" in line:
             # return None if no data avaiable
             logger.warning(
-                "Data for %s.%s (%s) not exists. Skipped.",
-                channel.name,
-                channel.component,
-                channel.id,
+                f"Data for {channel.name}.{channel.component} ({channel.id}) "
+                + "not exists. Skipped."
             )
             return None
 
-    filename = "{}.{}.{}".format(channel.name, channel.component, suffix)
+    filename = f"{channel.name}.{channel.component}.{suffix}"
     if outdir != ".":
         filename = os.path.join(outdir, filename)
 
@@ -406,20 +405,15 @@ def _channel2pz(channel, keep_sensitivity=False):
     # Hi-net use moving coil velocity type seismometer.
     if channel.unit != "m/s":
         logger.warning(
-            "%s.%s (%s): Unit is not velocity.",
-            channel.name,
-            channel.component,
-            channel.id,
+            f"{channel.name}.{channel.component} ({channel.id}): Unit is not velocity."
         )
 
     try:
         freq = 2.0 * math.pi / channel.period
     except ZeroDivisionError:
         logger.warning(
-            "%s.%s (%s): Natural period = 0. Skipped.",
-            channel.name,
-            channel.component,
-            channel.id,
+            f"{channel.name}.{channel.component} ({channel.id}): "
+            + "Natural period = 0. Skipped."
         )
         return None, None, None
 
@@ -458,9 +452,9 @@ def _write_pz(pzfile, real, imaginary, constant):
     with open(pzfile, "w") as pz:
         pz.write("ZEROS 3\n")
         pz.write("POLES 2\n")
-        pz.write("{:9.6f} {:9.6f}\n".format(real, imaginary))
-        pz.write("{:9.6f} {:9.6f}\n".format(real, -imaginary))
-        pz.write("CONSTANT {:e}\n".format(constant))
+        pz.write(f"{real:9.6f} {imaginary:9.6f}\n")
+        pz.write(f"{real:9.6f} {-imaginary:9.6f}\n")
+        pz.write(f"CONSTANT {constant:e}\n")
 
 
 def _extract_sacpz(channel, suffix="SAC_PZ", outdir=".", keep_sensitivity=False):
@@ -470,7 +464,7 @@ def _extract_sacpz(channel, suffix="SAC_PZ", outdir=".", keep_sensitivity=False)
     ):  # something wrong with channel information, skipped
         return None
 
-    pzfile = "{}.{}".format(channel.name, channel.component)
+    pzfile = f"{channel.name}.{channel.component}"
     if suffix:
         pzfile += "." + suffix
     pzfile = os.path.join(outdir, pzfile)
