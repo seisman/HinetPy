@@ -27,7 +27,7 @@ class TestUtilsClass:
         assert point_inside_box(40, 130, None, 50, 100, None)
         assert not point_inside_box(40, 130, 50, 80, 100, 150)
         assert not point_inside_box(85, 130, 50, 80, 100, 150)
-        assert not point_inside_box(40, 170, 50, 80, 100, 150)
+        assert not point_inside_box(60, 170, 50, 80, 100, 150)
 
     def test_haversine(self):
         assert pytest.approx(haversine(40, 130, 50, 140), 0.01) == 12.22
