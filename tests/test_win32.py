@@ -114,7 +114,7 @@ class TestWin32ExtractSACClass:
         shutil.rmtree(outdir)
 
     def test_extract_sac_none_input(self):
-        assert win32.extract_sac(None, None) == None
+        assert win32.extract_sac(None, None) is None
 
 
 class TestWin32ExtractPZClass:
@@ -157,7 +157,7 @@ class TestWin32ExtractPZClass:
         shutil.rmtree(outdir)
 
     def test_extract_pz_non_input(self):
-        assert win32.extract_pz(None) == None
+        assert win32.extract_pz(None) is None
 
 
 class TestWin32MergeClass:
