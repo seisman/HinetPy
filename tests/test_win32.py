@@ -113,6 +113,9 @@ class TestWin32ExtractSACClass:
         assert pz == pz_to_check
         shutil.rmtree(outdir)
 
+    def test_extract_sac_none_input(self):
+        assert win32.extract_sac(None, None) is None
+
 
 class TestWin32ExtractPZClass:
     def test_extract_pz_1(self):
@@ -152,6 +155,9 @@ class TestWin32ExtractPZClass:
         pz = os.listdir(outdir)
         assert sorted(pz) == sorted(pz_to_check)
         shutil.rmtree(outdir)
+
+    def test_extract_pz_non_input(self):
+        assert win32.extract_pz(None) is None
 
 
 class TestWin32MergeClass:
@@ -196,9 +202,16 @@ class TestWin32MergeClass:
         assert filecmp.cmp(total_data, final_to_check)
         os.unlink(total_data)
 
+    def test_merge_not_a_valid_wildcard(self):
+        datas = os.path.join(path, "not-a-valid-wildcard.cnt")
+        total_data = "test_merge_not_a_valid_wildcard.cnt"
+        with pytest.raises(FileNotFoundError):
+            win32.merge(datas, total_data)
+
 
 class TestWin32OthersClass:
     def test_get_processes(self):
         cpus = cpu_count()
         assert win32._get_processes(0) == cpus - 1
         assert win32._get_processes(-5) == cpus - 1
+        assert win32._get_processes(1) == 1
