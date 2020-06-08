@@ -1202,10 +1202,10 @@ class Client:
         >>> client.check_package_release()
         [2019-12-06 00:00:00] INFO: You're using the latest release (v0.6.5).
         """
-        from HinetPy import __version__, __title__
+        from HinetPy import __version__
         from distutils.version import LooseVersion
 
-        url = "https://pypi.python.org/pypi/{}/json".format(__title__)
+        url = "https://pypi.python.org/pypi/HinetPy/json"
         r = requests.get(url)
         if r.status_code != 200:
             logger.warning("Error in connecting PyPI. Skipped.")
