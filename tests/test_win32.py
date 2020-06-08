@@ -113,7 +113,6 @@ class TestWin32ExtractSACClass:
         assert pz == pz_to_check
         shutil.rmtree(outdir)
 
-
     def test_extract_sac_none_input(self):
         assert win32.extract_sac(None, None) == None
 
@@ -206,7 +205,7 @@ class TestWin32MergeClass:
     def test_merge_not_a_valid_wildcard(self):
         datas = os.path.join(path, "not-a-valid-wildcard.cnt")
         total_data = "test_merge_not_a_valid_wildcard.cnt"
-        with pytest.raises(FileNotFoundError)
+        with pytest.raises(FileNotFoundError):
             win32.merge(datas, total_data)
 
 
