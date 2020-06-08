@@ -1,5 +1,9 @@
 # Build, pacakge, test, and clean
 
+BLACK_FILES=HinetPy docs tests setup.py --exclude HinetPy/_version.py
+FLAKE8_FILES=HinetPy docs tests setup.py
+
+
 help:
 	@echo "Commands:"
 	@echo ""
@@ -14,11 +18,11 @@ doc:
 	make -C docs docs
 
 format:
-	black .
+	black ${BLACK_FILES}
 
 check:
-	black --check .
-	flake8 .
+	black --check ${BLACK_FILES}
+	flake8 ${FLAKE8_FILES}
 
 publish:
 	python setup.py sdist

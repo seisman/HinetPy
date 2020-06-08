@@ -18,7 +18,6 @@ Basis usage:
 """
 
 __title__ = "HinetPy"
-__version__ = "0.6.6"
 __author__ = "Dongdong Tian"
 __license__ = "MIT"
 
@@ -26,3 +25,8 @@ from .client import Client
 from .header import NETWORK
 
 __all__ = ["Client", "NETWORK", "win32"]
+
+from ._version import get_versions
+
+__version__ = get_versions()["version"]
+del get_versions

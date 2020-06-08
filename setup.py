@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import re
 from os import path
 from codecs import open
 from setuptools import setup, find_packages
+import versioneer
 
 here = path.abspath(path.dirname(__file__))
 
@@ -11,16 +11,9 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
-# get version number from __init__.py
-# https://github.com/kennethreitz/requests/blob/master/setup.py#L52
-with open("HinetPy/__init__.py", "r") as fd:
-    version = re.search(
-        r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', fd.read(), re.MULTILINE
-    ).group(1)
-
 setup(
     name="HinetPy",
-    version=version,
+    version=versioneer.get_version(),
     description="A NIED Hi-net web service client "
     "and win32 tools for seismologists.",
     long_description=long_description,
