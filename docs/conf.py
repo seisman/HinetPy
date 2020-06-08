@@ -5,14 +5,10 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import sys
 import HinetPy
 import datetime
 import guzzle_sphinx_theme
 
-
-sys.path.insert(0, os.path.abspath(".."))
 
 # -- General configuration ------------------------------------------------
 
@@ -67,6 +63,7 @@ copyright = "2014-{}, {}".format(year, author)
 #
 # The short X.Y version.
 version = HinetPy.__version__
+print(f"Building documentation version v{version}")
 # The full version, including alpha/beta/rc tags.
 release = version
 

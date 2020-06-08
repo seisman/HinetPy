@@ -16,6 +16,7 @@ with open("README.rst") as f:
     LONG_DESCRIPTION = "".join(f.readlines())
 
 VERSION = versioneer.get_version()
+CMDCLASS = versioneer.get_cmdclass()
 PACKAGES = find_packages(exclude=["docs", "tests"])
 INSTALL_REQUIRES = ["requests"]
 
@@ -48,4 +49,5 @@ setup(
     packages=PACKAGES,
     install_requires=INSTALL_REQUIRES,
     classifiers=CLASSIFIERS,
+    cmdclass=CMDCLASS,
 )
