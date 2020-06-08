@@ -26,6 +26,8 @@ class TestUtilsClass:
         assert point_inside_box(40, 130, 0, 50, 100, 150)
         assert point_inside_box(40, 130, None, 50, 100, None)
         assert not point_inside_box(40, 130, 50, 80, 100, 150)
+        assert not point_inside_box(85, 130, 50, 80, 100, 150)
+        assert not point_inside_box(40, 170, 50, 80, 100, 150)
 
     def test_haversine(self):
         assert pytest.approx(haversine(40, 130, 50, 140), 0.01) == 12.22
@@ -34,6 +36,7 @@ class TestUtilsClass:
     def test_point_inside_circular(self):
         assert point_inside_circular(30, 50, 30, 52, 0, 5)
         assert not point_inside_circular(30, 50, 30, 60, 0, 5)
+        assert not point_inside_circular(30, 50, 30, 60, 30, 50)
 
     def test_to_datetime(self):
         dt = datetime(2010, 2, 3)
