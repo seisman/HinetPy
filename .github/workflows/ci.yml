@@ -81,6 +81,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.1.0
 
+      # See https://github.com/warner/python-versioneer/issues/206
+      - name: Fetch all history for all tags and branches
+        run: git fetch --prune --unshallow
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:

@@ -1208,7 +1208,7 @@ class Client:
         [2019-12-06 00:00:00] INFO: You're using the latest release (v0.6.5).
         """
         from HinetPy import __version__, __title__
-        from distutils.version import StrictVersion
+        from distutils.version import LooseVersion
 
         url = "https://pypi.python.org/pypi/{}/json".format(__title__)
         r = requests.get(url)
@@ -1217,7 +1217,7 @@ class Client:
             return False
         latest_release = r.json()["info"]["version"]
 
-        if StrictVersion(latest_release) > StrictVersion(__version__):
+        if LooseVersion(latest_release) > LooseVersion(__version__):
             logger.warning(
                 "%s v%s is released. See %s for details.",
                 __title__,

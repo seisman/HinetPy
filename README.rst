@@ -1,4 +1,4 @@
-.. image:: https://github.com/seisman/HinetPy/workflows/HinetPy%20Tests/badge.svg
+.. image:: https://github.com/seisman/HinetPy/workflows/CI/badge.svg
     :target: https://github.com/seisman/HinetPy/actions
 
 .. image:: https://codecov.io/gh/seisman/HinetPy/branch/master/graph/badge.svg
