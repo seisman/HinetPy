@@ -109,12 +109,14 @@ jobs:
           echo "::add-path::${{ github.workspace }}/win32tools/bin"
         shell: bash
 
-      - name: Run tests
+      - name: Set Hinet username and password
         run: |
-          # Set Hinet username and password
           sed -i.bak 's/test_username/${{ secrets.HINET_USERNAME }}/; s/test_password/${{ secrets.HINET_PASSWORD }}/' tests/test_*.py
           rm tests/test_*.py.bak
-          make test
+        bash: shell
+
+      - name: Run tests
+        run: make test
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v1
