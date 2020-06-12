@@ -107,6 +107,7 @@ jobs:
           cd win32tools; make; mkdir bin; mv catwin32.src/catwin32 win2sac.src/win2sac_32 bin/; cd ..
           # Add to PATH
           echo "::add-path::${{ github.workspace }}/win32tools/bin"
+        shell: bash
 
       - name: Run tests
         run: |
