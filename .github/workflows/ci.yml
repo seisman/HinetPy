@@ -101,6 +101,8 @@ jobs:
           python -c "from HinetPy import Client; Client('${{ secrets.HINET_USERNAME }}', '${{ secrets.HINET_PASSWORD }}')._get_win32tools()"
           # Compile and install win32tools
           tar -xf win32tools.tar.gz && rm win32tools.tar.gz
+          # patch the win2sac source code on macOS
+          if [ "$RUNNER_OS" == "macOS" ]; then sed -i.bak 's/malloc.h/stdlib.h/' win32tools/win2sac.src/s4read_data.c; fi
           cd win32tools; make; mkdir bin; mv catwin32.src/catwin32 win2sac.src/win2sac_32 bin/; cd ..
           # Add to PATH
           echo "::add-path::${{ github.workspace }}/win32tools/bin"
