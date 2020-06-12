@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.6.7 (2020-06-08):
+ - Improve code styles, tests and CI.
+
 0.6.6 (2020-03-02):
  - win32.extract_pz cannot filter channels by ID and name (#27)
 
