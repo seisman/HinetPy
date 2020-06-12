@@ -116,7 +116,10 @@ jobs:
         shell: bash
 
       - name: Run tests
-        run: make test
+        run: |
+          echo $PATH
+          ls ${{ github.workspace }}/win32tools/bin/*
+          make test
         shell: bash
 
       - name: Upload coverage reports
