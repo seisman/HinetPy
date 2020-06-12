@@ -113,7 +113,7 @@ jobs:
         run: |
           sed -i.bak 's/test_username/${{ secrets.HINET_USERNAME }}/; s/test_password/${{ secrets.HINET_PASSWORD }}/' tests/test_*.py
           rm tests/test_*.py.bak
-        bash: shell
+        shell: bash
 
       - name: Run tests
         run: make test
