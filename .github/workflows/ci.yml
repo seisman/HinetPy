@@ -120,7 +120,7 @@ jobs:
         run: |
           $Env:Path
           Get-ChildItem $env:GITHUB_WORKSPACE\win32tools\bin
-          #make test
+          make test
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v1
