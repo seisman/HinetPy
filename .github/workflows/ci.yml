@@ -116,10 +116,10 @@ jobs:
           # Compile and install win32tools
           tar -xf win32tools.tar.gz && rm win32tools.tar.gz
           cd win32tools
-          cd win2sac.src; cl *.c /link /out:win2sac_32.exe; cd ..
+          cd win2sac.src; cl.exe *.c /link /out:win2sac_32.exe; cd ..
           mv catwin32.src\catwin32 bin
 
-          cd catwin32.src; cl *.c /link /out:catwin32.exe; cd ..
+          cd catwin32.src; cl.exe *.c /link /out:catwin32.exe; cd ..
           mv win2sac.src\win2sac_32 bin
           #cd win32tools; make; mkdir bin; mv catwin32.src\catwin32 bin; mv win2sac.src\win2sac_32 bin; cd ..
           # Add to PATH
