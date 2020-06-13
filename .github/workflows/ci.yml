@@ -130,7 +130,10 @@ jobs:
         run: |
           $Env:Path
           Get-ChildItem $env:GITHUB_WORKSPACE\win32tools\bin
-          make test
+          python -c "import shutil; print(shutil.which('python'))"
+          python -c "import shutil; print(shutil.which('win2sac_32'))"
+          python -c "import shutil; print(shutil.which('catwin32'))"
+          #make test
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v1
