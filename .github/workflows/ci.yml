@@ -96,7 +96,7 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
 
-      - name: Install win32tools
+      - name: Install win32tools (Linux & macOS)
         run: |
           # Download win32tools
           python -c "from HinetPy import Client; Client('${{ secrets.HINET_USERNAME }}', '${{ secrets.HINET_PASSWORD }}')._get_win32tools()"
@@ -107,8 +107,18 @@ jobs:
           cd win32tools; make; mkdir bin; mv catwin32.src/catwin32 win2sac.src/win2sac_32 bin/; cd ..
           # Add to PATH
           echo "::add-path::${{ github.workspace }}/win32tools/bin"
-          echo $PATH
-        shell: bash
+        if: runner.os != 'Windows'
+
+      - name: Install win32tools (Windows)
+        run: |
+          # Download win32tools
+          python -c "from HinetPy import Client; Client('${{ secrets.HINET_USERNAME }}', '${{ secrets.HINET_PASSWORD }}')._get_win32tools()"
+          # Compile and install win32tools
+          tar -xf win32tools.tar.gz && rm win32tools.tar.gz
+          cd win32tools; make; mkdir bin; mv catwin32.src/catwin32 win2sac.src/win2sac_32 bin/; cd ..
+          # Add to PATH
+          echo "::add-path::${{ github.workspace }}/win32tools/bin"
+        if: runner.os == 'Windows'
 
       - name: Set Hinet username and password
         run: |
