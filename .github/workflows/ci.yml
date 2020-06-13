@@ -131,8 +131,8 @@ jobs:
           $Env:Path
           Get-ChildItem $env:GITHUB_WORKSPACE\win32tools\bin
           python -c "import shutil; print(shutil.which('python'))"
-          python -c "import shutil; print(shutil.which('win2sac_32'))"
-          python -c "import shutil; print(shutil.which('catwin32'))"
+          python -c "import shutil; print(shutil.which('D:\a\HinetPy\HinetPy\win32tools\bin\win2sac_32'))"
+          python -c "import shutil; print(shutil.which('D:\a\HinetPy\HinetPy\win32tools\bin\catwin32'))"
           #make test
 
       - name: Upload coverage reports
