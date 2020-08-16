@@ -1064,6 +1064,35 @@ class Client:
         r = self.session.get(self._STATION, timeout=self.timeout)
         return len(re.findall(pattern, r.text))
 
+    def list_selected_stations(self, code):
+        """Query stations selected for requesting data.
+
+        Supported networks:
+
+        - Hi-net (0101)
+        - F-net (0103, 0103A)
+
+        Parameters
+        ----------
+        code: str
+            Network code.
+
+        Returns
+        -------
+        stations: list
+            List of selected stations.
+        """
+
+        if code == "0101":
+            pattern = r'<td class="td1">(?P<CHN>N\..{3}H)<\/td>'
+        elif code in ("0103", "0103A"):
+            pattern = r'<td class="td1">(?P<CHN>N\..{3}F)<\/td>'
+        else:
+            raise ValueError("Can only query stations of Hi-net/F-net")
+
+        r = self.session.get(self._STATION, timeout=self.timeout)
+        return re.findall(pattern, r.text)
+
     def select_stations(
         self,
         code,
