@@ -1064,7 +1064,7 @@ class Client:
         r = self.session.get(self._STATION, timeout=self.timeout)
         return len(re.findall(pattern, r.text))
 
-    def list_selected_stations(self, code):
+    def list_selected_stations(self, code, parser='lxml'):
         """Query stations selected for requesting data.
 
         Supported networks:
@@ -1076,22 +1076,39 @@ class Client:
         ----------
         code: str
             Network code.
+        parser: str
+            Parser type used in `~bs4.BeautifulSoup` 
 
         Returns
         -------
-        stations: list
-            List of selected stations.
+        stations: dict
+            Dict of selected stations with Lon/Lat data.
         """
-
+        from bs4 import BeautifulSoup
         if code == "0101":
-            pattern = r'<td class="td1">(?P<CHN>N\..{3}H)<\/td>'
+            pattern = r'N\..{3}H'
         elif code in ("0103", "0103A"):
-            pattern = r'<td class="td1">(?P<CHN>N\..{3}F)<\/td>'
+            pattern = r'N\..{3}F'
         else:
             raise ValueError("Can only query stations of Hi-net/F-net")
 
         r = self.session.get(self._STATION, timeout=self.timeout)
-        return re.findall(pattern, r.text)
+        soup = BeautifulSoup(r.text, features=parser)
+        table = soup.find("table", attrs={"class":"cont_c"})
+        stations = {}
+        for tr in table.find_all("tr"):
+            ## Split into each cell
+            tds = tr.text.split('\n')[1:-1]
+            if (tds == []):
+                continue
+            if re.match(pattern, tds[1]):  ## match station name
+                stations.update({
+                    tds[1]: {
+                        "longitude": float(tds[5].strip('E')),
+                        "latitude": float(tds[4].strip('N')),
+                    }
+                })
+        return stations
 
     def select_stations(
         self,
