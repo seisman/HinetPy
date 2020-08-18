@@ -1077,14 +1077,15 @@ class Client:
         code: str
             Network code.
         parser: str
-            Parser type used in `~bs4.BeautifulSoup` 
+            Parser type used in `~bs4.BeautifulSoup`. 
+            Default to `lxml`, but `html.parser` will be used when FeatureNotFound occurs.
 
         Returns
         -------
         stations: dict
             Dict of selected stations with Lon/Lat data.
         """
-        from bs4 import BeautifulSoup
+        from bs4 import BeautifulSoup, FeatureNotFound
         if code == "0101":
             pattern = r'N\..{3}H'
         elif code in ("0103", "0103A"):
@@ -1093,7 +1094,10 @@ class Client:
             raise ValueError("Can only query stations of Hi-net/F-net")
 
         r = self.session.get(self._STATION, timeout=self.timeout)
-        soup = BeautifulSoup(r.text, features=parser)
+        try:
+            soup = BeautifulSoup(r.text, features=parser)
+        except FeatureNotFound:
+            soup = BeautifulSoup(r.text, features='html.parser')
         table = soup.find("table", attrs={"class":"cont_c"})
         stations = {}
         for tr in table.find_all("tr"):
