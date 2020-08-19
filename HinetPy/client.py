@@ -1064,7 +1064,7 @@ class Client:
         r = self.session.get(self._STATION, timeout=self.timeout)
         return len(re.findall(pattern, r.text))
 
-    def list_selected_stations(self, code, parser='lxml'):
+    def list_selected_stations(self, code):
         """Query stations selected for requesting data.
 
         Supported networks:
@@ -1076,16 +1076,33 @@ class Client:
         ----------
         code: str
             Network code.
-        parser: str
-            Parser type used in `~bs4.BeautifulSoup`. 
-            Default to `lxml`, but `html.parser` will be used when FeatureNotFound occurs.
 
         Returns
         -------
         stations: dict
             Dict of selected stations with Lon/Lat data.
         """
-        from bs4 import BeautifulSoup, FeatureNotFound
+        
+        from html.parser import HTMLParser
+
+        class _GrepTableData(HTMLParser):
+            """Parser to obtain `<td>` contents.
+            `handle_starttag()` flags when the HTML tag matches with `td`.
+            """
+            def __init__(self):
+                super().__init__()
+                self.if_tabledata = False
+                self.tabledata = []
+
+            def handle_starttag(self, tag, attrs):
+                if re.match('^td$', tag):
+                    self.if_tabledata = True
+
+            def handle_data(self, data):
+                if self.if_tabledata:
+                    self.tabledata.append(data)
+                    self.if_tabledata = False
+        
         if code == "0101":
             pattern = r'N\..{3}H'
         elif code in ("0103", "0103A"):
@@ -1094,24 +1111,21 @@ class Client:
             raise ValueError("Can only query stations of Hi-net/F-net")
 
         r = self.session.get(self._STATION, timeout=self.timeout)
-        try:
-            soup = BeautifulSoup(r.text, features=parser)
-        except FeatureNotFound:
-            soup = BeautifulSoup(r.text, features='html.parser')
-        table = soup.find("table", attrs={"class":"cont_c"})
+        parser = _GrepTableData()
+        parser.feed(r.text)
+
         stations = {}
-        for tr in table.find_all("tr"):
-            ## Split into each cell
-            tds = tr.text.split('\n')[1:-1]
-            if (tds == []):
-                continue
-            if re.match(pattern, tds[1]):  ## match station name
+        ## Search all td tags for the target station
+        for (i,text) in enumerate(parser.tabledata):
+            ## If the target station, grep both lon and lat.
+            if re.match(pattern, text):
                 stations.update({
-                    tds[1]: {
-                        "longitude": float(tds[5].strip('E')),
-                        "latitude": float(tds[4].strip('N')),
+                    text: {
+                        "longitude": float(parser.tabledata[i+4].strip('E')), 
+                        "latitude": float(parser.tabledata[i+3].strip('N')),
                     }
                 })
+        parser.close()
         return stations
 
     def select_stations(
