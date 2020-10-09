@@ -30,7 +30,7 @@ class Channel(object):
         preamplification=None,
         lsb_value=None,
     ):
-        """ Class for channel.
+        """Class for channel.
 
         Parameters
         ----------
