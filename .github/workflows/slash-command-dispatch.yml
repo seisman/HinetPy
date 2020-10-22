@@ -1,9 +1,14 @@
+# A GitHub Action to enable "slash commands" in PR comments.
+# See https://github.com/peter-evans/slash-command-dispatch
+
 name: Slash Command Dispatch
 on:
   issue_comment:
     # Type "edited" added here for test purposes. Where possible, avoid
     # using to prevent processing unnecessary events.
-    types: [created, edited]
+    #types: [created, edited]
+    types: [created]
+
 jobs:
   slashCommandDispatch:
     runs-on: ubuntu-latest

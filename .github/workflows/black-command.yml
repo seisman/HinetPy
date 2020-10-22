@@ -1,7 +1,11 @@
+#
+# A slash command to format the codes using black
+#
 name: black-command
 on:
   repository_dispatch:
     types: [black-command]
+
 jobs:
   black:
     runs-on: ubuntu-latest
