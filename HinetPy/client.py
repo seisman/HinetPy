@@ -150,7 +150,7 @@ class Client:
             raise requests.ConnectionError(msg)
 
     def doctor(self):
-        """ Doctor does some checks.
+        """Doctor does some checks.
 
         :meth:`~HinetPy.client.Client.doctor` is a utility function which checks:
 
