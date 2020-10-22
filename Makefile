@@ -1,6 +1,6 @@
 # Build, test, docs, and clean
 
-BLACK_FILES=HinetPy docs tests setup.py --exclude HinetPy/_version.py
+BLACK_FILES=HinetPy docs tests setup.py
 FLAKE8_FILES=HinetPy docs tests setup.py
 
 

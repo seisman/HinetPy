@@ -1,2 +1,6 @@
+[tool.black]
+line-length = 88
+exclude = "HinetPy/_version.py"
+
 [tool.coverage.run]
 omit = ["HinetPy/_version.py"]
