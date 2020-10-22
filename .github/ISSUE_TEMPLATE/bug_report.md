@@ -1,24 +1,34 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Report a problem/bug to help us improve
 title: ''
 labels: ''
 assignees: ''
 
 ---
 
-**Describe the bug**
+**Description of the problem**
+
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+**Full code that generated the error**
+
+```python
+PASTE CODE HERE
 ```
-Pase the CODE to reproduce the behavior
+
+**Full error message**
+
+```
+PASTE ERROR MESSAGE HERE
 ```
 
 **Expected behavior**
+
 A clear and concise description of what you expected to happen.
 
-**System Information:**
+**System information**
+
  - OS: Windows | Linux | macOS
- - Python version:
- - HinetPy version:
+ - Python version: `python --version`
+ - HinetPy version: `python -c "import HinetPy; print(HinetPy.__version__)"`
