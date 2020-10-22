@@ -1,7 +1,7 @@
 # for testing
 pytest
 pytest-cov
-coverage
+coverage[toml]
 codecov
 # for code style
 black

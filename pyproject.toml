@@ -1,0 +1,2 @@
+[tool.coverage.run]
+omit = ["tests/*", "versioneer.py", "HinetPy/_version.py"]
