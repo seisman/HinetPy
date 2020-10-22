@@ -1,0 +1,2 @@
+[tool.coverage.run]
+omit = ["HinetPy/_version.py"]
