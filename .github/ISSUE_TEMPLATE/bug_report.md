@@ -29,6 +29,6 @@ A clear and concise description of what you expected to happen.
 
 **System information**
 
- - OS: Windows | Linux | macOS
- - Python version: `python --version`
- - HinetPy version: `python -c "import HinetPy; print(HinetPy.__version__)"`
+- OS: Windows | Linux | macOS
+- Python version: `python --version`
+- HinetPy version: `python -c "import HinetPy; print(HinetPy.__version__)"`
