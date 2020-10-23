@@ -15,7 +15,7 @@ help:
 	@echo ""
 
 test:
-	pytest --cov-report=term-missing --cov-report=xml --cov=HinetPy -vs tests/
+	pytest tests
 
 doc:
 	make -C docs docs

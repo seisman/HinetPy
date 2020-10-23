@@ -4,3 +4,7 @@ exclude = "HinetPy/_version.py"
 
 [tool.coverage.run]
 omit = ["HinetPy/_version.py"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--cov=HinetPy --cov-report=term-missing --cov-report=xml --verbose"
