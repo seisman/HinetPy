@@ -1,5 +1,5 @@
 # for testing
-pytest
+pytest>=6.0
 pytest-cov
 coverage[toml]
 codecov
