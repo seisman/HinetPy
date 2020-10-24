@@ -30,3 +30,4 @@ html-zh_CN:
 		$(SOURCEDIR) $(BUILDDIR)/html/zh_CN
 
 docs: html html-zh_CN
+	@echo "Building HTML files"
