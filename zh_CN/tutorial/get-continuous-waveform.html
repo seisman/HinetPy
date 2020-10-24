@@ -1,87 +1,102 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
   
-  <!-- Licensed under the Apache 2.0 License -->
-  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
-  <!-- Licensed under the SIL Open Font License -->
-  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
-  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>获取连续波形数据 &#8212; HinetPy 0.6.7+11.g0c235b2 文档</title>
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.6.7+11.g0c235b2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <title>获取连续波形数据 &mdash; HinetPy 0.6.7+14.gfaa27ea 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="获取事件波形" href="get-event-waveform.html" />
-    <link rel="prev" title="入门" href="get-started.html" />
-  
+    <link rel="prev" title="入门" href="get-started.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
    
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
 
-  </head>
-  <body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>导航</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="总目录"
-             accesskey="I">索引</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python 模块索引"
-             >模块</a> |</li>
-        <li class="right" >
-          <a href="get-event-waveform.html" title="获取事件波形"
-             accesskey="N">下一页</a> |</li>
-        <li class="right" >
-          <a href="get-started.html" title="入门"
-             accesskey="P">上一页</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.7+11.g0c235b2 文档</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../tutorial.html" accesskey="U">教程</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="container-wrapper">
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> HinetPy
+          
 
-      <div id="mobile-toggle">
-        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
-      </div>
-  <div id="left-column">
-    <div class="sphinxsidebar">
-        <a href="
-    ../index.html" class="text-logo">HinetPy v0.6.7+11.g0c235b2</a>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.6.7+14.gfaa27ea
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
         
-<div class="sidebar-block">
-  <div class="sidebar-wrapper">
-    <h2>內容目录</h2>
-  </div>
-  <div class="sidebar-toc">
-    
-    
-      <ul class="current">
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">教程</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="get-started.html">入门</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">获取连续波形数据</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">获取连续波形数据</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-usage">基本用法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-way">自定义</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="get-event-waveform.html">获取事件波形</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conversion.html">数据转换</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get-catalog.html">获取目录</a></li>
@@ -94,50 +109,82 @@
 <li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
 </ul>
 
-    
-  </div>
-</div>
-        
-<div class="sidebar-block">
-  <div class="sidebar-wrapper">
-    <div id="main-search">
-      <form class="form-inline" action="../search.html" method="GET" role="form">
-        <div class="input-group">
-          <input name="q" type="text" class="form-control" placeholder="Search...">
+            
+          
         </div>
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
-    </div>
-  </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HinetPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../tutorial.html">教程</a> &raquo;</li>
+        
+      <li>获取连续波形数据</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorial/get-continuous-waveform.rst.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
 </div>
-    </div>
-  </div>
-        <div id="right-column">
-          
-          <div role="navigation" aria-label="breadcrumbs navigation">
-            <ol class="breadcrumb">
-              <li><a href="../index.html">Docs</a></li>
-              
-                <li><a href="../tutorial.html">教程</a></li>
-              
-              <li>获取连续波形数据</li>
-            </ol>
-          </div>
-          
-          <div class="document clearer body">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="get-continuous-waveform">
 <h1>获取连续波形数据<a class="headerlink" href="#get-continuous-waveform" title="永久链接至标题">¶</a></h1>
-<p>本教程将展示如何通过 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal"><span class="pre">get_continuous_waveform()</span></code></a> 用多种方式从Hi-net申请连续波形数据。</p>
+<p>本教程将展示如何通过 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> 用多种方式从Hi-net申请连续波形数据。</p>
 <div class="admonition note">
-<p class="first admonition-title">注解</p>
-<p class="last">HinetPy和Hi-net网站中的所有时间都是日本标准时间（东九区，GMT+0900）。</p>
+<p class="admonition-title">注解</p>
+<p>HinetPy和Hi-net网站中的所有时间都是日本标准时间（东九区，GMT+0900）。</p>
 </div>
 <div class="section" id="basic-usage">
 <h2>基本用法<a class="headerlink" href="#basic-usage" title="永久链接至标题">¶</a></h2>
 <p>申请Hi-net台网从2010-01-01T00:00 (GMT+0900)开始的20分钟的数据：</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;201001010000&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="go">[2017-03-11 17:46:20] INFO: 2010-01-01 00:00 ~20</span>
@@ -149,37 +196,37 @@
 <span class="go">0101_201001010000_20.cnt 0101_20100101.ch</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal"><span class="pre">get_continuous_waveform()</span></code></a> 中 <code class="docutils literal"><span class="pre">starttime</span></code> 还可以用其他常见格式：</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-01-01T00:00&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<p><a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> 中 <code class="docutils literal notranslate"><span class="pre">starttime</span></code> 还可以用其他常见格式：</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-01-01T00:00&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-01-01 00:00&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>并且 <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.9)"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></a> 允许用户更灵活地操作日期和时间:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<p>并且 <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> 允许用户更灵活地操作日期和时间:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># JST time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>现在我们得到了：</p>
 <ol class="arabic simple">
-<li><code class="docutils literal"><span class="pre">0101_201001010000_20.cnt</span></code>: win32格式的波形数据，默认文件名格式为 s <code class="docutils literal"><span class="pre">CODE_YYYYmmddHHMM_LENGTH.cnt</span></code></li>
-<li><code class="docutils literal"><span class="pre">0101_20100101.ch</span></code>: ctable数据（即通道表，类似于仪器响应文件），默认文件名格式为 <code class="docutils literal"><span class="pre">CODE_YYYYmmdd.ch</span></code> 。</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0101_201001010000_20.cnt</span></code>: win32格式的波形数据，默认文件名格式为 s <code class="docutils literal notranslate"><span class="pre">CODE_YYYYmmddHHMM_LENGTH.cnt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0101_20100101.ch</span></code>: ctable数据（即通道表，类似于仪器响应文件），默认文件名格式为 <code class="docutils literal notranslate"><span class="pre">CODE_YYYYmmdd.ch</span></code> 。</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">注解</p>
+<p class="admonition-title">注解</p>
 <p>Hi-net对数据申请有三个限制：</p>
 <ol class="arabic simple">
-<li>数据记录长度不超过60分钟</li>
-<li>通道数目*数据记录长度不得大于12000分钟</li>
-<li>仅保留最近150次申请的数据</li>
+<li><p>数据记录长度不超过60分钟</p></li>
+<li><p>通道数目*数据记录长度不得大于12000分钟</p></li>
+<li><p>仅保留最近150次申请的数据</p></li>
 </ol>
-<p class="last">对于上面的示例，Hi-net有大约2350个通道，因而数据长度不得超过5分钟。一个20分钟长的数据请求需要被拆分成四个5分钟的子请求。</p>
+<p>对于上面的示例，Hi-net有大约2350个通道，因而数据长度不得超过5分钟。一个20分钟长的数据请求需要被拆分成四个5分钟的子请求。</p>
 </div>
 </div>
 <div class="section" id="custom-way">
 <h2>自定义<a class="headerlink" href="#custom-way" title="永久链接至标题">¶</a></h2>
 <p>你可以自定义数据文件和通道表的文件名，以及输出目录。</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># JST time</span>
@@ -200,50 +247,59 @@
 </div>
 
 
+           </div>
+           
           </div>
-            
-  <div class="footer-relations">
-    
-      <div class="pull-left">
-        <a class="btn btn-default" href="get-started.html" title="上一章 (use the left arrow)">入门</a>
-      </div>
-    
-      <div class="pull-right">
-        <a class="btn btn-default" href="get-event-waveform.html" title="下一章 (use the right arrow)">获取事件波形</a>
-      </div>
-    </div>
-    <div class="clearer"></div>
+          <footer>
   
-        </div>
-        <div class="clearfix"></div>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="get-event-waveform.html" class="btn btn-neutral float-right" title="获取事件波形" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="get-started.html" class="btn btn-neutral float-left" title="入门" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> 上一页</a>
+      
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>导航</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="总目录"
-             >索引</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python 模块索引"
-             >模块</a> |</li>
-        <li class="right" >
-          <a href="get-event-waveform.html" title="获取事件波形"
-             >下一页</a> |</li>
-        <li class="right" >
-          <a href="get-started.html" title="入门"
-             >上一页</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.7+11.g0c235b2 文档</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../tutorial.html" >教程</a> &#187;</li> 
-      </ul>
-    </div>
-<script type="text/javascript">
-  $("#mobile-toggle a").click(function () {
-    $("#left-column").toggle();
-  });
-</script>
-<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
-  <div class="footer">
-    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2014-2020, Dongdong Tian
+
+    </p>
   </div>
-  </body>
+    
+    
+    
+    利用 <a href="http://sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

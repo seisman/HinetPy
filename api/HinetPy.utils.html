@@ -1,82 +1,93 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
   
-  <!-- Licensed under the Apache 2.0 License -->
-  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
-  <!-- Licensed under the SIL Open Font License -->
-  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
-  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>HinetPy.utils module &#8212; HinetPy 0.6.7+11.g0c235b2 documentation</title>
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.6.7+11.g0c235b2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <title>HinetPy.utils module &mdash; HinetPy 0.6.7+14.gfaa27ea documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Appendix" href="../appendix.html" />
-    <link rel="prev" title="HinetPy.header module" href="HinetPy.header.html" />
-  
+    <link rel="prev" title="HinetPy.header module" href="HinetPy.header.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
    
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
 
-  </head>
-  <body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../appendix.html" title="Appendix"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="HinetPy.header.html" title="HinetPy.header module"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.7+11.g0c235b2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API Reference</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="container-wrapper">
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> HinetPy
+          
 
-      <div id="mobile-toggle">
-        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
-      </div>
-  <div id="left-column">
-    <div class="sphinxsidebar">
-        <a href="
-    ../index.html" class="text-logo">HinetPy v0.6.7+11.g0c235b2</a>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.6.7+14.gfaa27ea
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
         
-<div class="sidebar-block">
-  <div class="sidebar-wrapper">
-    <h2>Table Of Contents</h2>
-  </div>
-  <div class="sidebar-toc">
-    
-    
-      <ul class="current">
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
@@ -92,47 +103,79 @@
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
 </ul>
 
-    
-  </div>
-</div>
-        
-<div class="sidebar-block">
-  <div class="sidebar-wrapper">
-    <div id="main-search">
-      <form class="form-inline" action="../search.html" method="GET" role="form">
-        <div class="input-group">
-          <input name="q" type="text" class="form-control" placeholder="Search...">
+            
+          
         </div>
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
-    </div>
-  </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HinetPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../api.html">API Reference</a> &raquo;</li>
+        
+      <li>HinetPy.utils module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/HinetPy.utils.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
 </div>
-    </div>
-  </div>
-        <div id="right-column">
-          
-          <div role="navigation" aria-label="breadcrumbs navigation">
-            <ol class="breadcrumb">
-              <li><a href="../index.html">Docs</a></li>
-              
-                <li><a href="../api.html">API Reference</a></li>
-              
-              <li>HinetPy.utils module</li>
-            </ol>
-          </div>
-          
-          <div class="document clearer body">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="module-HinetPy.utils">
 <span id="hinetpy-utils-module"></span><h1>HinetPy.utils module<a class="headerlink" href="#module-HinetPy.utils" title="Permalink to this headline">¶</a></h1>
 <p>Utility functions used by HinetPy.</p>
-<dl class="function">
+<dl class="py function">
 <dt id="HinetPy.utils.split_integer">
-<code class="descclassname">HinetPy.utils.</code><code class="descname">split_integer</code><span class="sig-paren">(</span><em>number</em>, <em>maxn</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/utils.html#split_integer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.utils.split_integer" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">HinetPy.utils.</code><code class="sig-name descname">split_integer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">number</span></em>, <em class="sig-param"><span class="n">maxn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.split_integer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Split an integer into evenly sized chunks.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">split_integer</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">split_integer</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">[3, 3, 3, 3]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_integer</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">[4, 4, 4, 3]</span>
@@ -140,11 +183,11 @@
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="HinetPy.utils.point_inside_box">
-<code class="descclassname">HinetPy.utils.</code><code class="descname">point_inside_box</code><span class="sig-paren">(</span><em>latitude</em>, <em>longitude</em>, <em>minlatitude=None</em>, <em>maxlatitude=None</em>, <em>minlongitude=None</em>, <em>maxlongitude=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/utils.html#point_inside_box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.utils.point_inside_box" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">HinetPy.utils.</code><code class="sig-name descname">point_inside_box</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">latitude</span></em>, <em class="sig-param"><span class="n">longitude</span></em>, <em class="sig-param"><span class="n">minlatitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxlatitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">minlongitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxlongitude</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.point_inside_box" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a point inside a box region.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point_inside_box</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">130</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point_inside_box</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">130</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">point_inside_box</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
 <span class="go">True</span>
@@ -156,13 +199,13 @@
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="HinetPy.utils.haversine">
-<code class="descclassname">HinetPy.utils.</code><code class="descname">haversine</code><span class="sig-paren">(</span><em>lat1</em>, <em>lon1</em>, <em>lat2</em>, <em>lon2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/utils.html#haversine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.utils.haversine" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">HinetPy.utils.</code><code class="sig-name descname">haversine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat1</span></em>, <em class="sig-param"><span class="n">lon1</span></em>, <em class="sig-param"><span class="n">lat2</span></em>, <em class="sig-param"><span class="n">lon2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.haversine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the great circle distance between two points
 on the earth (specified in decimal degrees) using haversine formula.</p>
 <p>see <a class="reference external" href="https://stackoverflow.com/a/4913653/7770208">https://stackoverflow.com/a/4913653/7770208</a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">haversine</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">140</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">haversine</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">140</span><span class="p">)</span>
 <span class="go">12.224069629545902</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">haversine</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">70</span><span class="p">)</span>
 <span class="go">53.57930271469817</span>
@@ -170,21 +213,21 @@ on the earth (specified in decimal degrees) using haversine formula.</p>
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="HinetPy.utils.point_inside_circular">
-<code class="descclassname">HinetPy.utils.</code><code class="descname">point_inside_circular</code><span class="sig-paren">(</span><em>lat1</em>, <em>lon1</em>, <em>lat2</em>, <em>lon2</em>, <em>minradius=None</em>, <em>maxradius=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/utils.html#point_inside_circular"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.utils.point_inside_circular" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">HinetPy.utils.</code><code class="sig-name descname">point_inside_circular</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat1</span></em>, <em class="sig-param"><span class="n">lon1</span></em>, <em class="sig-param"><span class="n">lat2</span></em>, <em class="sig-param"><span class="n">lon2</span></em>, <em class="sig-param"><span class="n">minradius</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxradius</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.point_inside_circular" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a point inside a circular region.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point_inside_circular</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point_inside_circular</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="HinetPy.utils.to_datetime">
-<code class="descclassname">HinetPy.utils.</code><code class="descname">to_datetime</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/HinetPy/utils.html#to_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HinetPy.utils.to_datetime" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">HinetPy.utils.</code><code class="sig-name descname">to_datetime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.to_datetime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert to datetime in a hard way.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;201001010000&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;201001010000&#39;</span><span class="p">)</span>
 <span class="go">datetime.datetime(2010, 1, 1, 0, 0)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2010-01-01T03:45&#39;</span><span class="p">)</span>
 <span class="go">datetime.datetime(2010, 1, 1, 3, 45)</span>
@@ -195,50 +238,59 @@ on the earth (specified in decimal degrees) using haversine formula.</p>
 </div>
 
 
+           </div>
+           
           </div>
-            
-  <div class="footer-relations">
-    
-      <div class="pull-left">
-        <a class="btn btn-default" href="HinetPy.header.html" title="previous chapter (use the left arrow)">HinetPy.header module</a>
-      </div>
-    
-      <div class="pull-right">
-        <a class="btn btn-default" href="../appendix.html" title="next chapter (use the right arrow)">Appendix</a>
-      </div>
-    </div>
-    <div class="clearer"></div>
+          <footer>
   
-        </div>
-        <div class="clearfix"></div>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../appendix.html" class="btn btn-neutral float-right" title="Appendix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="HinetPy.header.html" class="btn btn-neutral float-left" title="HinetPy.header module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../appendix.html" title="Appendix"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="HinetPy.header.html" title="HinetPy.header module"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">HinetPy 0.6.7+11.g0c235b2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../api.html" >API Reference</a> &#187;</li> 
-      </ul>
-    </div>
-<script type="text/javascript">
-  $("#mobile-toggle a").click(function () {
-    $("#left-column").toggle();
-  });
-</script>
-<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
-  <div class="footer">
-    &copy; Copyright 2014-2020, Dongdong Tian. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2014-2020, Dongdong Tian
+
+    </p>
   </div>
-  </body>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>
