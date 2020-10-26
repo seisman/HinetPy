@@ -801,7 +801,7 @@ class Client:
                     region=region,
                     magmin=minmagnitude,
                     magmax=maxmagnitude,
-                    include_unknown_mag=True,
+                    include_unknown_mag=include_unknown_mag,
                 )
             )
 
