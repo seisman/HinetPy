@@ -2,7 +2,10 @@
 
 import os
 import re
+import csv
+import json
 import time
+import shutil
 import logging
 import tempfile
 import zipfile
@@ -961,8 +964,6 @@ class Client:
         # remove trailing 'A' in network code
         code = code[:4]
         if code in ["0101", "0103", "0103A"]:  # Hinet and Fnet
-            import csv
-
             lines = (
                 requests.get(self._STATION_INFO).content.decode("utf-8").splitlines()
             )
@@ -982,8 +983,6 @@ class Client:
                     )
                 )
         elif code in ["0120", "0120A", "0131"]:  # S-net and MeSO-net
-            import json
-
             if code in ["0120", "0120A"]:
                 json_text = (
                     self.session.get(self._SNET_STATION_INFO)
@@ -1192,9 +1191,9 @@ class Client:
         if r.headers["ETag"].strip('"') == self._ETAG:
             logger.info("Hi-net web service is NOT updated.")
             return False
-        else:
-            logger.warning("Hi-net web service is updated. HinetPy may FAIL!")
-            return True
+
+        logger.warning("Hi-net web service is updated. HinetPy may FAIL!")
+        return True
 
     def check_package_release(self):
         """Check whether HinetPy has a new release.
@@ -1217,9 +1216,9 @@ class Client:
                 f"HinetPy v{latest_release} is released. See {url} for details."
             )
             return True
-        else:
-            logger.info(f"You're using the latest version (v{__version__}).")
-            return False
+
+        logger.info(f"You're using the latest version (v{__version__}).")
+        return False
 
     def check_cmd_exists(self):
         """Check if ``catwin32`` and ``win2sac_32`` from win32tools in PATH.
@@ -1233,8 +1232,6 @@ class Client:
         `Hi-net <http://www.hinet.bosai.go.jp/>`_
         and make sure both binary files are in your PATH.
         """
-        import shutil
-
         error = 0
         for cmd in ("catwin32", "win2sac_32"):
             fullpath = shutil.which(cmd)
@@ -1329,7 +1326,7 @@ def prepare_jobs(starttime, span, max_span):
     return jobs
 
 
-class _Job(object):
+class _Job:
     """Job class for internal use."""
 
     def __init__(self, starttime, span, id=None):
@@ -1338,7 +1335,7 @@ class _Job(object):
         self.id = id
 
 
-class Station(object):
+class Station:
     """
     Class for Stations.
     """
@@ -1357,7 +1354,7 @@ class Station(object):
         return string
 
 
-class Event(object):
+class Event:
     """
     Event class for requesting event waveforms.
     """
@@ -1401,9 +1398,9 @@ def _parse_code(code):
     """
     if code not in NETWORK.keys():
         raise ValueError(f"{code}: Incorrect network code.")
-    elif code.startswith("0105") or code.startswith("0302"):
+
+    if code.startswith("0105") or code.startswith("0302"):
         org, net, volc = code[0:2], code[2:4], code
     else:
         org, net, volc = code[0:2], code[2:], None
-
     return org, net, volc

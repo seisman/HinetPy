@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+Processing data in win32 format.
+"""
 import os
 import math
 import glob
@@ -15,7 +18,9 @@ logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%
 logger = logging.getLogger(__name__)
 
 
-class Channel(object):
+class Channel:
+    """Class for channel."""
+
     def __init__(
         self,
         id=None,
@@ -30,7 +35,7 @@ class Channel(object):
         preamplification=None,
         lsb_value=None,
     ):
-        """Class for channel.
+        """Initialize a channel.
 
         Parameters
         ----------
@@ -172,11 +177,9 @@ def _get_processes(procs):
     cpus = cpu_count()
     if cpus == 1:
         return cpus
-    else:
-        if not 0 < procs < cpus:
-            return cpus - 1
-        else:
-            return procs
+    if not 0 < procs < cpus:
+        return cpus - 1
+    return procs
 
 
 def extract_pz(
@@ -377,7 +380,7 @@ def _extract_channel(
         if "The number of points is maximum over" in line:
             msg = "The number of data points is over maximum. Try to increase pmax."
             raise ValueError(msg)
-        elif f"Data for channel {channel.id} not existed" in line:
+        if f"Data for channel {channel.id} not existed" in line:
             # return None if no data avaiable
             logger.warning(
                 f"Data for {channel.name}.{channel.component} ({channel.id}) "
@@ -393,8 +396,7 @@ def _extract_channel(
         if suffix == "":  # remove extra dot if suffix is empty
             os.rename(filename, filename[:-1])
             return filename[:-1]
-        else:
-            return filename
+        return filename
 
 
 def _channel2pz(channel, keep_sensitivity=False):

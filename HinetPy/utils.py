@@ -106,7 +106,7 @@ def to_datetime(value):
     if isinstance(value, datetime):
         return value
     # is date
-    elif isinstance(value, date):
+    if isinstance(value, date):
         return datetime.combine(value, datetime.min.time())
 
     # is a string
