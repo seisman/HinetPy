@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-
+"""
+Core client for requesting Hi-net waveform data.
+"""
 import os
 import re
 import csv
@@ -11,12 +13,16 @@ import tempfile
 import zipfile
 from datetime import datetime, timedelta
 from multiprocessing.pool import ThreadPool
+from distutils.version import LooseVersion
+
 
 import requests
 
 from .win32 import merge
 from .header import NETWORK
 from .utils import point_inside_box, point_inside_circular, split_integer, to_datetime
+from ._version import get_versions
+
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
@@ -25,6 +31,10 @@ logger = logging.getLogger(__name__)
 
 
 class Client:
+    """
+    Core client for requesting Hi-net waveform data.
+    """
+
     # Hinet website
     _HINET = "http://www.hinet.bosai.go.jp/"
     # Authorization page
@@ -1201,9 +1211,6 @@ class Client:
         >>> client.check_package_release()
         [2019-12-06 00:00:00] INFO: You're using the latest release (v0.6.5).
         """
-        from HinetPy import __version__
-        from distutils.version import LooseVersion
-
         url = "https://pypi.python.org/pypi/HinetPy/json"
         r = requests.get(url)
         if r.status_code != 200:
@@ -1211,13 +1218,14 @@ class Client:
             return False
         latest_release = r.json()["info"]["version"]
 
-        if LooseVersion(latest_release) > LooseVersion(__version__):
+        current_version = get_versions()["version"]
+        if LooseVersion(latest_release) > LooseVersion(current_version):
             logger.warning(
                 f"HinetPy v{latest_release} is released. See {url} for details."
             )
             return True
 
-        logger.info(f"You're using the latest version (v{__version__}).")
+        logger.info(f"You're using the latest version (v{current_version}).")
         return False
 
     def check_cmd_exists(self):
