@@ -110,7 +110,7 @@ jobs:
           if [ "$RUNNER_OS" == "macOS" ]; then sed -i.bak 's/malloc.h/stdlib.h/' win32tools/win2sac.src/s4read_data.c; fi
           cd win32tools; make; mkdir bin; mv catwin32.src/catwin32 win2sac.src/win2sac_32 bin/; cd ..
           # Add to PATH
-          echo "::add-path::${{ github.workspace }}/win32tools/bin"
+          echo "${{ github.workspace }}/win32tools/bin" >> $GITHUB_PATH
 
       - name: Run tests
         run: |
