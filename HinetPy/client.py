@@ -1038,11 +1038,17 @@ class Client:
             Maximum allowed span in mimutes.
         """
         channels = NETWORK[code].channels
-        if code in ("0101", "0103", "0103A"):
-            stations = self.get_selected_stations(code)
-            if stations != 0:
-                channels = stations * 3
-        return min(int(12000 / channels), 60)
+        stations = self.get_selected_stations(code)
+        if stations != 0:
+            channels = stations * 3
+            
+        if code in ("0101"):
+            return min(int(12000 / channels), 60)
+        elif code in ("0103", "0103A"):
+            f_net_DL_factor = 8.8667638012
+            f_net_max_size = 55000
+            max_span = f_net_max_size / (f_net_DL_factor*channels)
+            return int(max_span)
 
     def get_selected_stations(self, code):
         """Query the number of stations selected for requesting data.
