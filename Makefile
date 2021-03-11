@@ -27,12 +27,12 @@ doc:
 format:
 	isort .
 	black .
-	black .
+	blackdoc .
 
 check:
 	isort --check .
 	black --check .
-	black --check .
+	blackdoc --check .
 	flake8 .
 
 lint:
