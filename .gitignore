@@ -7,5 +7,6 @@ HinetPy.egg-info
 htmlcov
 *.mo
 .coverage
+.coverage*
 coverage.xml
 .DS_Store
