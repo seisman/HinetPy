@@ -17,5 +17,5 @@ jobs:
         uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.PAT }}
-          commands: black
+          commands: format
           issue-type: pull-request

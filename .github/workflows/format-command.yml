@@ -1,43 +1,36 @@
 #
-# A slash command to format the codes using black
+# A slash command to format the codes
 #
-name: black-command
+name: format-command
 on:
   repository_dispatch:
-    types: [black-command]
+    types: [format-command]
 
 jobs:
   black:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the pull request branch
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.PAT }}
           repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
           ref: ${{ github.event.client_payload.pull_request.head.ref }}
 
-      # Setup Python environment
-      - uses: actions/setup-python@v1
+      - uses: actions/setup-python@v2
 
-      # Install black
-      - name: Install black
-        run: pip install black
-
-      # Execute black in check mode
-      - name: Black
-        id: black
-        run: echo ::set-output name=format::$(black --check --quiet . || echo "true")
+      - name: Install formatting tools
+        run: pip install black blackdoc isort
 
       # Execute black and commit the change to the PR branch
       - name: Commit to the PR branch
-        if: steps.black.outputs.format == 'true'
         run: |
-          black .
-          git config --global user.name 'actions-bot'
-          git config --global user.email '58130806+actions-bot@users.noreply.github.com'
-          git commit -am "[black-command] fixes"
-          git push
+          make format
+          if [[ $(git ls-files -m) ]]; then
+            git config --global user.name 'actions-bot'
+            git config --global user.email '58130806+actions-bot@users.noreply.github.com'
+            git commit -am "[black-command] fixes"
+            git push
+          fi
 
       - name: Add reaction
         uses: peter-evans/create-or-update-comment@v1
