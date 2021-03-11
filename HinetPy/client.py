@@ -1398,9 +1398,9 @@ def _parse_code(code):
     """Parse network code.
 
     >>> client._parse_code('0101')
-    ('01', '01', None)
+    ('01', '01', '0')
     >>> client._parse_code('0103A')
-    ('01', '03A', None)
+    ('01', '03A', '0')
     >>> client._parse_code('010501')
     ('01', '05', '010501')
     """
@@ -1410,5 +1410,5 @@ def _parse_code(code):
     if code.startswith("0105") or code.startswith("0302"):
         org, net, volc = code[0:2], code[2:4], code
     else:
-        org, net, volc = code[0:2], code[2:], None
+        org, net, volc = code[0:2], code[2:], "0"
     return org, net, volc
