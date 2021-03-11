@@ -1,12 +1,26 @@
-__pycache__
-build
-_build
+# Byte-compiled / optimized / DLL files
+*.py[cd]
+
+# Distribution / packaging
+build/
+dist/
+*.egg
+*.egg-info/
+.eggs/
+
+# Unit test / coverage reports
 .cache
-dist
-HinetPy.egg-info
-htmlcov
-*.mo
-.coverage
+htmlcov/
 .coverage*
 coverage.xml
+
+# Sphinx documentation
+_build/
+*.mo
+
+# Backup copies / swap files
+*~
+.*.swp
+
+# macOS
 .DS_Store
