@@ -24,3 +24,8 @@ omit = ["HinetPy/_version.py"]
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "--cov=HinetPy --cov-report=term-missing --cov-report=xml --verbose"
+
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+known_third_party = "HinetPy"

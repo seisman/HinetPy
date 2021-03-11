@@ -6,6 +6,7 @@ codecov
 # for code style
 black
 flake8
+isort
 # for documentation
 sphinx
 sphinx-intl
