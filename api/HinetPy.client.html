@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>HinetPy.client module &mdash; HinetPy 0.6.7+20.gbacbf98 documentation</title>
+  <title>HinetPy.client module &mdash; HinetPy 0.6.7+21.g0a1bdd7 documentation</title>
   
 
   
@@ -32,7 +32,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -64,7 +63,7 @@
             
             
               <div class="version">
-                0.6.7+20.gbacbf98
+                0.6.7+21.g0a1bdd7
               </div>
             
           
@@ -177,7 +176,7 @@
 <p>Core client for requesting Hi-net waveform data.</p>
 <dl class="py class">
 <dt id="HinetPy.client.Client">
-<em class="property">class </em><code class="sig-prename descclassname">HinetPy.client.</code><code class="sig-name descname">Client</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">password</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="o">=</span><span class="default_value">60</span></em>, <em class="sig-param"><span class="n">retries</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">sleep_time_in_seconds</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">max_sleep_count</span><span class="o">=</span><span class="default_value">30</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">HinetPy.client.</span></code><code class="sig-name descname"><span class="pre">Client</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_time_in_seconds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_sleep_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client" title="Permalink to this definition">¶</a></dt>
 <dd><p>Core client for requesting Hi-net waveform data.</p>
 <p>Hi-net web service client.</p>
 <dl class="field-list simple">
@@ -216,7 +215,7 @@ unless you know what you’re doing.</p>
 </div>
 <dl class="py method">
 <dt id="HinetPy.client.Client.login">
-<code class="sig-name descname">login</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em>, <em class="sig-param"><span class="n">password</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.login" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">login</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.login" title="Permalink to this definition">¶</a></dt>
 <dd><p>Login in Hi-net server.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -238,7 +237,7 @@ unless you know what you’re doing.</p>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.doctor">
-<code class="sig-name descname">doctor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.doctor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">doctor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.doctor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Doctor does some checks.</p>
 <p><a class="reference internal" href="#HinetPy.client.Client.doctor" title="HinetPy.client.Client.doctor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">doctor()</span></code></a> is a utility function which checks:</p>
 <ul class="simple">
@@ -260,7 +259,7 @@ unless you know what you’re doing.</p>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.get_continuous_waveform">
-<code class="sig-name descname">get_continuous_waveform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span></em>, <em class="sig-param"><span class="n">starttime</span></em>, <em class="sig-param"><span class="n">span</span></em>, <em class="sig-param"><span class="n">max_span</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ctable</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outdir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">threads</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">cleanup</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_continuous_waveform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_continuous_waveform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starttime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleanup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_continuous_waveform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get continuous waveform data from Hi-net server.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -343,7 +342,7 @@ sub-requsts.</p>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.get_waveform">
-<code class="sig-name descname">get_waveform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span></em>, <em class="sig-param"><span class="n">starttime</span></em>, <em class="sig-param"><span class="n">span</span></em>, <em class="sig-param"><span class="n">max_span</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ctable</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outdir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">threads</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">cleanup</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_waveform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_waveform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starttime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleanup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_waveform" title="Permalink to this definition">¶</a></dt>
 <dd><div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 0.6.0: </span>Deprecated.</p>
 <p><a class="reference internal" href="#HinetPy.client.Client.get_waveform" title="HinetPy.client.Client.get_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_waveform()</span></code></a> has been renamed to
@@ -353,7 +352,7 @@ sub-requsts.</p>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.get_event_waveform">
-<code class="sig-name descname">get_event_waveform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">starttime</span></em>, <em class="sig-param"><span class="n">endtime</span></em>, <em class="sig-param"><span class="n">region</span><span class="o">=</span><span class="default_value">'00'</span></em>, <em class="sig-param"><span class="n">minmagnitude</span><span class="o">=</span><span class="default_value">3.0</span></em>, <em class="sig-param"><span class="n">maxmagnitude</span><span class="o">=</span><span class="default_value">9.9</span></em>, <em class="sig-param"><span class="n">include_unknown_mag</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">mindepth</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxdepth</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">minlatitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxlatitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">minlongitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxlongitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">latitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">longitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">minradius</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxradius</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_event_waveform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_event_waveform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starttime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endtime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minmagnitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxmagnitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_unknown_mag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mindepth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxdepth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_event_waveform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get event waveform data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -397,7 +396,7 @@ parameters.</p></li>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.get_arrivaltime">
-<code class="sig-name descname">get_arrivaltime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">startdate</span></em>, <em class="sig-param"><span class="n">span</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">os</span><span class="o">=</span><span class="default_value">'DOS'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_arrivaltime" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_arrivaltime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startdate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DOS'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_arrivaltime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get JMA arrival time data from Hi-net.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -430,7 +429,7 @@ parameters.</p></li>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.get_focalmechanism">
-<code class="sig-name descname">get_focalmechanism</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">startdate</span></em>, <em class="sig-param"><span class="n">span</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">os</span><span class="o">=</span><span class="default_value">'DOS'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_focalmechanism" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_focalmechanism</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startdate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DOS'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_focalmechanism" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get JMA focal mechanism data from Hi-net.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -463,7 +462,7 @@ parameters.</p></li>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.get_station_list">
-<code class="sig-name descname">get_station_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_station_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_station_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_station_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get station list of a network.</p>
 <p>Supported networks:</p>
 <ul class="simple">
@@ -484,7 +483,7 @@ parameters.</p></li>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.get_selected_stations">
-<code class="sig-name descname">get_selected_stations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_selected_stations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_selected_stations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_selected_stations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the number of stations selected for requesting data.</p>
 <p>Supported networks:</p>
 <ul class="simple">
@@ -506,7 +505,7 @@ parameters.</p></li>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.select_stations">
-<code class="sig-name descname">select_stations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span></em>, <em class="sig-param"><span class="n">stations</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">minlatitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxlatitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">minlongitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxlongitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">latitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">longitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">minradius</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxradius</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.select_stations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">select_stations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.select_stations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Select stations of a network.</p>
 <p>Supported networks:</p>
 <ul class="simple">
@@ -564,7 +563,7 @@ parameters.</p></li>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.check_service_update">
-<code class="sig-name descname">check_service_update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_service_update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">check_service_update</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_service_update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if Hi-net service is updated.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_service_update</span><span class="p">()</span>
 <span class="go">[2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.</span>
@@ -574,7 +573,7 @@ parameters.</p></li>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.check_package_release">
-<code class="sig-name descname">check_package_release</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_package_release" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">check_package_release</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_package_release" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check whether HinetPy has a new release.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_package_release</span><span class="p">()</span>
 <span class="go">[2019-12-06 00:00:00] INFO: You&#39;re using the latest release (v0.6.5).</span>
@@ -584,7 +583,7 @@ parameters.</p></li>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.check_cmd_exists">
-<code class="sig-name descname">check_cmd_exists</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_cmd_exists" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">check_cmd_exists</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_cmd_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> and <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> from win32tools in PATH.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_cmd_exists</span><span class="p">()</span>
 <span class="go">[2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.</span>
@@ -599,7 +598,7 @@ and make sure both binary files are in your PATH.</p>
 
 <dl class="py method">
 <dt id="HinetPy.client.Client.info">
-<code class="sig-name descname">info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.info" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">info</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.info" title="Permalink to this definition">¶</a></dt>
 <dd><p>List information of networks.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

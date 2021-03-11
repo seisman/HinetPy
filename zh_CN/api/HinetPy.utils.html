@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>HinetPy.utils 模块 &mdash; HinetPy 0.6.7+20.gbacbf98 文档</title>
+  <title>HinetPy.utils 模块 &mdash; HinetPy 0.6.7+21.g0a1bdd7 文档</title>
   
 
   
@@ -33,7 +33,6 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -65,7 +64,7 @@
             
             
               <div class="version">
-                0.6.7+20.gbacbf98
+                0.6.7+21.g0a1bdd7
               </div>
             
           
@@ -178,7 +177,7 @@
 <p>HinetPy用到的工具函数。</p>
 <dl class="py function">
 <dt id="HinetPy.utils.split_integer">
-<code class="sig-prename descclassname">HinetPy.utils.</code><code class="sig-name descname">split_integer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">number</span></em>, <em class="sig-param"><span class="n">maxn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.split_integer" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></code><code class="sig-name descname"><span class="pre">split_integer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxn</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.split_integer" title="永久链接至目标">¶</a></dt>
 <dd><p>将一个整数分割成尽量等大小的多块</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">split_integer</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">[3, 3, 3, 3]</span>
@@ -190,7 +189,7 @@
 
 <dl class="py function">
 <dt id="HinetPy.utils.point_inside_box">
-<code class="sig-prename descclassname">HinetPy.utils.</code><code class="sig-name descname">point_inside_box</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">latitude</span></em>, <em class="sig-param"><span class="n">longitude</span></em>, <em class="sig-param"><span class="n">minlatitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxlatitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">minlongitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxlongitude</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.point_inside_box" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></code><code class="sig-name descname"><span class="pre">point_inside_box</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.point_inside_box" title="永久链接至目标">¶</a></dt>
 <dd><p>检查一个点是否在一个矩形区域内。</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point_inside_box</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">130</span><span class="p">)</span>
 <span class="go">True</span>
@@ -206,7 +205,7 @@
 
 <dl class="py function">
 <dt id="HinetPy.utils.haversine">
-<code class="sig-prename descclassname">HinetPy.utils.</code><code class="sig-name descname">haversine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat1</span></em>, <em class="sig-param"><span class="n">lon1</span></em>, <em class="sig-param"><span class="n">lat2</span></em>, <em class="sig-param"><span class="n">lon2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.haversine" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></code><code class="sig-name descname"><span class="pre">haversine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.haversine" title="永久链接至目标">¶</a></dt>
 <dd><p>使用 haversine 公式计算地球上两点之间的大圆距离。</p>
 <p>见 <a class="reference external" href="https://stackoverflow.com/a/4913653/7770208">https://stackoverflow.com/a/4913653/7770208</a></p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">haversine</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">140</span><span class="p">)</span>
@@ -219,7 +218,7 @@
 
 <dl class="py function">
 <dt id="HinetPy.utils.point_inside_circular">
-<code class="sig-prename descclassname">HinetPy.utils.</code><code class="sig-name descname">point_inside_circular</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat1</span></em>, <em class="sig-param"><span class="n">lon1</span></em>, <em class="sig-param"><span class="n">lat2</span></em>, <em class="sig-param"><span class="n">lon2</span></em>, <em class="sig-param"><span class="n">minradius</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxradius</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.point_inside_circular" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></code><code class="sig-name descname"><span class="pre">point_inside_circular</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.point_inside_circular" title="永久链接至目标">¶</a></dt>
 <dd><p>检查点是否在环形区域内。</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point_inside_circular</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">True</span>
@@ -229,7 +228,7 @@
 
 <dl class="py function">
 <dt id="HinetPy.utils.to_datetime">
-<code class="sig-prename descclassname">HinetPy.utils.</code><code class="sig-name descname">to_datetime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.to_datetime" title="永久链接至目标">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></code><code class="sig-name descname"><span class="pre">to_datetime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.to_datetime" title="永久链接至目标">¶</a></dt>
 <dd><p>将输入转换为 datetime.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;201001010000&#39;</span><span class="p">)</span>
 <span class="go">datetime.datetime(2010, 1, 1, 0, 0)</span>
