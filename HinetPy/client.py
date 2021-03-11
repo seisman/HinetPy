@@ -396,24 +396,24 @@ class Client:
         --------
         Request 6-minute data since 2010-01-01T05:35 (UTC+0900) from Hi-net.
 
-        >>> client.get_continuous_waveform('0101', '201001010535', 6)
+        >>> client.get_continuous_waveform("0101", "201001010535", 6)
         ('0101_201001010535_6.cnt', '0101_20100101.ch')
 
         Several other string formats of ``starttime`` are also supported:
 
-        >>> client.get_continuous_waveform('0101', '2010-01-01 05:35', 6)
-        >>> client.get_continuous_waveform('0101', '2010-01-01T05:35', 6)
+        >>> client.get_continuous_waveform("0101", "2010-01-01 05:35", 6)
+        >>> client.get_continuous_waveform("0101", "2010-01-01T05:35", 6)
 
         :py:class:`datetime.datetime` is also supported:
 
         >>> from datetime import datetime
         >>> starttime = datetime(2010, 1, 1, 5, 35)
-        >>> client.get_continuous_waveform('0101', starttime, 6)
+        >>> client.get_continuous_waveform("0101", starttime, 6)
         ('0101_201001010535_6.cnt', '0101_20100101.ch')
 
         Request full-day data of 2010-01-01T00:00 (UTC+0900) of F-net:
 
-        >>> client.get_continuous_waveform('0103', starttime, 1440, max_span=25)
+        >>> client.get_continuous_waveform("0103", starttime, 1440, max_span=25)
         ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
         """
@@ -961,9 +961,10 @@ class Client:
         - S-net (0120, 0120A)
         - MeSO-net (0131)
 
-        >>> stations = client.get_station_list('0101')
+        >>> stations = client.get_station_list("0101")
         >>> for station in stations:
         ...     print(station)
+        ...
         0101 N.WNNH 45.4883 141.885 -159.06
         0101 N.SFNH 45.3346 142.1185 -81.6
         ...
@@ -1022,7 +1023,7 @@ class Client:
         #. Number_of_channels * record_length(min.) <= 12000 min
         #. record_length <= 60min
 
-        >>> client._get_allowed_span('0201')
+        >>> client._get_allowed_span("0201")
         60
 
         Parameters
@@ -1124,24 +1125,30 @@ class Client:
         --------
         Select only two stations of Hi-net:
 
-        >>> client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
-        >>> client.get_selected_stations('0101')
+        >>> client.select_stations("0101", ["N.AAKH", "N.ABNH"])
+        >>> client.get_selected_stations("0101")
         2
 
         Select stations in a box region:
 
-        >>> client.select_stations('0101', minlatitude=40, maxlatitude=50,
-        ...                        minlongitude=140, maxlongitude=150)
+        >>> client.select_stations(
+        ...     "0101",
+        ...     minlatitude=40,
+        ...     maxlatitude=50,
+        ...     minlongitude=140,
+        ...     maxlongitude=150,
+        ... )
 
         Select stations in a circular region:
 
-        >>> client.select_stations('0101', latitude=30, longitude=139,
-        ...                        minradius=0, maxradius=2)
+        >>> client.select_stations(
+        ...     "0101", latitude=30, longitude=139, minradius=0, maxradius=2
+        ... )
 
         Select all Hi-net stations:
 
-        >>> client.select_stations('0101')
-        >>> client.get_selected_stations('0101')
+        >>> client.select_stations("0101")
+        >>> client.get_selected_stations("0101")
         0
 
         """
@@ -1269,7 +1276,7 @@ class Client:
         0703   : Aomori Prefectural Government
         0705   : Shizuoka Prefectural Government
         0801   : ADEP
-        >>> client.info('0101')
+        >>> client.info("0101")
         == Information of Network 0101 ==
         Name: NIED Hi-net
         Starttime: 20040401
@@ -1395,11 +1402,11 @@ class Event:
 def _parse_code(code):
     """Parse network code.
 
-    >>> client._parse_code('0101')
+    >>> client._parse_code("0101")
     ('01', '01', '0')
-    >>> client._parse_code('0103A')
+    >>> client._parse_code("0103A")
     ('01', '03A', '0')
-    >>> client._parse_code('010501')
+    >>> client._parse_code("010501")
     ('01', '05', '010501')
     """
     if code not in NETWORK.keys():

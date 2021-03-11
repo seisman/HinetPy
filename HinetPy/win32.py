@@ -127,13 +127,21 @@ def extract_sac(
 
     Extract all channel with specified SAC suffix and output directory:
 
-    >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
-    ...             suffix="", outdir="20100101000")
+    >>> extract_sac(
+    ...     "0101_201001010000_5.cnt",
+    ...     "0101_20100101.ch",
+    ...     suffix="",
+    ...     outdir="20100101000",
+    ... )
 
     Extract only specified channels:
 
-    >>> extract_sac("0101_201001010000_5.cnt", "0101_20100101.ch",
-    ...             filter_by_name="N.NA*", filter_by_component='[NE]')
+    >>> extract_sac(
+    ...     "0101_201001010000_5.cnt",
+    ...     "0101_20100101.ch",
+    ...     filter_by_name="N.NA*",
+    ...     filter_by_component="[NE]",
+    ... )
     """
     if not (data and ctable):
         logger.error("data or ctable is `None'. Data requests may fail. Skipped.")
@@ -229,8 +237,9 @@ def extract_pz(
 
     Extract only specified channels:
 
-    >>> extract_pz("0101_20100101.ch",
-    ...            filter_by_name="N.NA*", filter_by_component='[NE]')
+    >>> extract_pz(
+    ...     "0101_20100101.ch", filter_by_name="N.NA*", filter_by_component="[NE]"
+    ... )
     """
     if not ctable:
         logger.error("ctable is `None'. Data requests may fail. Skipped.")

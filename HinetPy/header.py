@@ -29,6 +29,7 @@ information of all networks available from Hi-net website.
 >>> from HinetPy import NETWORK
 >>> for code in NETWORK.keys():
 ...     print(code, NETWORK[code].name)
+...
 0101 NIED Hi-net
 0103 NIED F-net (broadband)
 0103A NIED F-net (strong motion)
