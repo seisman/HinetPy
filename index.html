@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>HinetPy - A NIED Hi-net Client for seismologists &mdash; HinetPy 0.6.7+25.gde1c48f documentation</title>
+  <title>HinetPy - A NIED Hi-net Client for seismologists &mdash; HinetPy 0.6.8+8.g7b59db9 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.6.7+25.gde1c48f
+                0.6.8+8.g7b59db9
               </div>
             
           
@@ -203,7 +203,7 @@ responses as SAC polezero files.</p>
 
 <span class="c1"># Let&#39;s try to request 20-minute data starting at 2010-01-01T00:00(GMT+0900)</span>
 <span class="c1"># of the Hi-net network (with an internal network code of &#39;0101&#39;)</span>
-<span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;201001010000&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;201001010000&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
 <span class="c1"># The request and download process usually takes a few minutes</span>
 <span class="c1"># waiting for data request ...</span>

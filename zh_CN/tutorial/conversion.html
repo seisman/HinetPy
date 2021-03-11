@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>数据转换 &mdash; HinetPy 0.6.7+25.gde1c48f 文档</title>
+  <title>数据转换 &mdash; HinetPy 0.6.8+8.g7b59db9 文档</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.6.7+25.gde1c48f
+                0.6.8+8.g7b59db9
               </div>
             
           
@@ -202,11 +202,11 @@
 </div>
 <p>如果你只想提取一部分通道的波形数据，你可以使用 <code class="docutils literal notranslate"><span class="pre">filter_by_id</span></code> 、 <code class="docutils literal notranslate"><span class="pre">filter_by_name</span></code> 和/或 <code class="docutils literal notranslate"><span class="pre">filter_by_component</span></code> 以筛选需要的通道。这些参数都可以接受字符串列表或者包含通配符的字符串。</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract 3 channles by id</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;3e83&#39;</span><span class="p">,</span> <span class="s1">&#39;3e84&#39;</span><span class="p">,</span> <span class="s1">&#39;3e85&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;3e83&quot;</span><span class="p">,</span> <span class="s2">&quot;3e84&quot;</span><span class="p">,</span> <span class="s2">&quot;3e85&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match &#39;N.NA*&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s1">&#39;N.NA*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract vertical(U) component channels whose name match &#39;N.NA*&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s1">&#39;N.NA*&#39;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;U&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -228,11 +228,11 @@
 </div>
 <p>如果你只想提取一部分通道的波形数据，你可以使用 <code class="docutils literal notranslate"><span class="pre">filter_by_id</span></code> 、 <code class="docutils literal notranslate"><span class="pre">filter_by_name</span></code> 和/或 <code class="docutils literal notranslate"><span class="pre">filter_by_component</span></code> 以筛选需要的通道。这些参数都可以接受字符串列表或者包含通配符的字符串。</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract 3 channles by id</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;3e83&#39;</span><span class="p">,</span> <span class="s1">&#39;3e84&#39;</span><span class="p">,</span> <span class="s1">&#39;3e85&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;3e83&quot;</span><span class="p">,</span> <span class="s2">&quot;3e84&quot;</span><span class="p">,</span> <span class="s2">&quot;3e85&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match &#39;N.NA*&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s1">&#39;N.NA*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract vertical(U) component channels whose name match &#39;N.NA*&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s1">&#39;N.NA*&#39;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;U&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition seealso">

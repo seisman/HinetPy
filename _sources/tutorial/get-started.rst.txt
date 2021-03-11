@@ -68,7 +68,7 @@ the network code. See :meth:`~HinetPy.client.Client.info` for details.
 0703   : Aomori Prefectural Government
 0705   : Shizuoka Prefectural Government
 0801   : ADEP
->>> client.info('0101')  # get more information about NIED Hi-net (0101)
+>>> client.info("0101")  # get more information about NIED Hi-net (0101)
 == Information of Network 0101 ==
 Name: NIED Hi-net
 Homepage: http://www.hinet.bosai.go.jp/
@@ -91,9 +91,10 @@ If you want, you can have a quick view of stations of Hi-net and F-net
 (Only these two networks are supported).
 See :meth:`~HinetPy.client.Client.get_station_list` for details.
 
->>> stations = client.get_station_list('0101')
+>>> stations = client.get_station_list("0101")
 >>> for station in stations:
 ...     print(station)
+...
 0101 N.WNNH 45.4883 141.885 -159.06
 0101 N.SFNH 45.3346 142.1185 -81.6
 0101 N.WNWH 45.2531 141.6334 -130.6
@@ -108,14 +109,14 @@ stations in your script, you can try
 :meth:`~HinetPy.client.Client.select_stations`.
 
 >>> # select only two stations of Hi-net if you know the station names
->>> client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
+>>> client.select_stations("0101", ["N.AAKH", "N.ABNH"])
 >>>
 >>> # select Hi-net stations in a box region
->>> client.select_stations('0101', minlatitude=36, maxlatitude=50,
-...                        minlongitude=140, maxlongitude=150)
+>>> client.select_stations(
+...     "0101", minlatitude=36, maxlatitude=50, minlongitude=140, maxlongitude=150
+... )
 >>>
 >>> # select Hi-net stations in a circular region
->>> client.select_stations('0101', latitude=36, longitude=139,
-...                        minradius=0, maxradius=3)
+>>> client.select_stations("0101", latitude=36, longitude=139, minradius=0, maxradius=3)
 >>> # select all Hi-net stations
->>> client.select_stations('0101')
+>>> client.select_stations("0101")

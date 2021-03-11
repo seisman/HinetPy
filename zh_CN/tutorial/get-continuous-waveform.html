@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>获取连续波形数据 &mdash; HinetPy 0.6.7+25.gde1c48f 文档</title>
+  <title>获取连续波形数据 &mdash; HinetPy 0.6.8+8.g7b59db9 文档</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.6.7+25.gde1c48f
+                0.6.8+8.g7b59db9
               </div>
             
           
@@ -189,7 +189,7 @@
 <p>申请Hi-net台网从2010-01-01T00:00 (GMT+0900)开始的20分钟的数据：</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;201001010000&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;201001010000&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="go">[2017-03-11 17:46:20] INFO: 2010-01-01 00:00 ~20</span>
 <span class="go">[2017-03-11 17:46:20] INFO: [1/4] =&gt; 2010-01-01 00:00 ~5</span>
 <span class="go">[2017-03-11 17:46:41] INFO: [2/4] =&gt; 2010-01-01 00:05 ~5</span>
@@ -200,14 +200,14 @@
 </pre></div>
 </div>
 <p><a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> 中 <code class="docutils literal notranslate"><span class="pre">starttime</span></code> 还可以用其他常见格式：</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-01-01T00:00&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-01-01 00:00&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01T00:00&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01 00:00&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>并且 <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> 允许用户更灵活地操作日期和时间:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># JST time</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>现在我们得到了：</p>
@@ -233,17 +233,21 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># JST time</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span>
-<span class="gp">... </span>                                   <span class="n">data</span><span class="o">=</span><span class="s2">&quot;201001010000.cnt&quot;</span>
-<span class="gp">... </span>                                   <span class="n">ctable</span><span class="o">=</span><span class="s1">&#39;0101.ch&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                                   <span class="n">outdir</span><span class="o">=</span><span class="s1">&#39;201001010000&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;0101&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">starttime</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="mi">20</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">data</span><span class="o">=</span><span class="s2">&quot;201001010000.cnt&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">ctable</span><span class="o">=</span><span class="s2">&quot;0101.ch&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;201001010000&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="go">[2017-03-11 17:46:20] INFO: 2010-01-01 00:00 ~20</span>
 <span class="go">[2017-03-11 17:46:20] INFO: [1/4] =&gt; 2010-01-01 00:00 ~5</span>
 <span class="go">[2017-03-11 17:46:41] INFO: [2/4] =&gt; 2010-01-01 00:05 ~5</span>
 <span class="go">[2017-03-11 17:46:50] INFO: [3/4] =&gt; 2010-01-01 00:10 ~5</span>
 <span class="go">[2017-03-11 17:47:04] INFO: [4/4] =&gt; 2010-01-01 00:15 ~5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ls</span> <span class="mi">201001010000</span><span class="o">/</span>
-<span class="go">0101.ch 201001010000.cnt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># You should see a directory &quot;201001010000&quot; with two files</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># &quot;0101.ch&quot; and &quot;201001010000.cnt&quot; inside.</span>
 </pre></div>
 </div>
 </div>

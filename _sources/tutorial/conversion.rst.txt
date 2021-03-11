@@ -33,11 +33,11 @@ If you want to extract only a small subset of channels, you can use ``filter_by_
 They accept a list of string or a string contains wildcard.
 
 >>> # extract 3 channles by id
->>> win32.extract_sac(data, ctable, filter_by_id=['3e83', '3e84', '3e85'])
+>>> win32.extract_sac(data, ctable, filter_by_id=["3e83", "3e84", "3e85"])
 >>> # extract all channels whose name match 'N.NA*'
->>> win32.extract_sac(data, ctable, filter_by_name='N.NA*')
+>>> win32.extract_sac(data, ctable, filter_by_name="N.NA*")
 >>> # extract vertical(U) component channels whose name match 'N.NA*'
->>> win32.extract_sac(data, ctable, filter_by_name='N.NA*', filter_by_component='U')
+>>> win32.extract_sac(data, ctable, filter_by_name="N.NA*", filter_by_component="U")
 
 Extract PZ
 ----------
@@ -67,11 +67,11 @@ If you want to extract only a small subset of channels, you can use ``filter_by_
 They accept a list of string or a string contains wildcard.
 
 >>> # extract 3 channles by id
->>> win32.extract_pz(ctable, filter_by_id=['3e83', '3e84', '3e85'])
+>>> win32.extract_pz(ctable, filter_by_id=["3e83", "3e84", "3e85"])
 >>> # extract all channels whose name match 'N.NA*'
->>> win32.extract_pz(ctable, filter_by_name='N.NA*')
+>>> win32.extract_pz(ctable, filter_by_name="N.NA*")
 >>> # extract vertical(U) component channels whose name match 'N.NA*'
->>> win32.extract_pz(ctable, filter_by_name='N.NA*', filter_by_component='U')
+>>> win32.extract_pz(ctable, filter_by_name="N.NA*", filter_by_component="U")
 
 .. seealso::
 

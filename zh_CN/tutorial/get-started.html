@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>入门 &mdash; HinetPy 0.6.7+25.gde1c48f 文档</title>
+  <title>入门 &mdash; HinetPy 0.6.8+8.g7b59db9 文档</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.6.7+25.gde1c48f
+                0.6.8+8.g7b59db9
               </div>
             
           
@@ -233,7 +233,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span class="go">0703   : Aomori Prefectural Government</span>
 <span class="go">0705   : Shizuoka Prefectural Government</span>
 <span class="go">0801   : ADEP</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>  <span class="c1"># get more information about NIED Hi-net (0101)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>  <span class="c1"># get more information about NIED Hi-net (0101)</span>
 <span class="go">== Information of Network 0101 ==</span>
 <span class="go">Name: NIED Hi-net</span>
 <span class="go">Homepage: http://www.hinet.bosai.go.jp/</span>
@@ -250,9 +250,10 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="stations">
 <h2>台站<a class="headerlink" href="#stations" title="永久链接至标题">¶</a></h2>
 <p>你可以调用 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_station_list" title="HinetPy.client.Client.get_station_list"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_station_list()</span></code></a> 以查看Hi-net和F-net台网的台站信息（目前仅支持查看这两个台网的台站信息）。</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
+<span class="gp">...</span>
 <span class="go">0101 N.WNNH 45.4883 141.885 -159.06</span>
 <span class="go">0101 N.SFNH 45.3346 142.1185 -81.6</span>
 <span class="go">0101 N.WNWH 45.2531 141.6334 -130.6</span>
@@ -263,17 +264,17 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 <p>Hi-net/F-net有很多台。如果你只需要申请其中某些台站的数据，你可以选择你需要的台站。Hi-net网站提供了一个网页界面以筛选台站，通常建议值接使用这一网页界面。如果你想要在申请的过程中动态选择台站，你可以使用 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.select_stations" title="HinetPy.client.Client.select_stations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">select_stations()</span></code></a> 。</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># select only two stations of Hi-net if you know the station names</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;N.AAKH&#39;</span><span class="p">,</span> <span class="s1">&#39;N.ABNH&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;N.AAKH&quot;</span><span class="p">,</span> <span class="s2">&quot;N.ABNH&quot;</span><span class="p">])</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># select Hi-net stations in a box region</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">minlatitude</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">maxlatitude</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-<span class="gp">... </span>                       <span class="n">minlongitude</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">maxlongitude</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="n">minlatitude</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">maxlatitude</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">minlongitude</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">maxlongitude</span><span class="o">=</span><span class="mi">150</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># select Hi-net stations in a circular region</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mi">139</span><span class="p">,</span>
-<span class="gp">... </span>                       <span class="n">minradius</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxradius</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mi">139</span><span class="p">,</span> <span class="n">minradius</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxradius</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># select all Hi-net stations</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

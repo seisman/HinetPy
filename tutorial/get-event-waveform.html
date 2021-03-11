@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Get Event Waveform &mdash; HinetPy 0.6.7+25.gde1c48f documentation</title>
+  <title>Get Event Waveform &mdash; HinetPy 0.6.8+8.g7b59db9 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.6.7+25.gde1c48f
+                0.6.8+8.g7b59db9
               </div>
             
           
@@ -180,9 +180,14 @@
 in a specified time range, magnitude and depth.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_event_waveform</span><span class="p">(</span><span class="s1">&#39;201001010000&#39;</span><span class="p">,</span> <span class="s1">&#39;201001020000&#39;</span><span class="p">,</span>
-<span class="go">                              minmagnitude=4.0, maxmagnitude=7.0,</span>
-<span class="go">                              mindepth=0, maxdepth=70)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_event_waveform</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;201001010000&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;201001020000&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">minmagnitude</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">maxmagnitude</span><span class="o">=</span><span class="mf">7.0</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">mindepth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">maxdepth</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You can also limit events to a specified region by three ways:</p>

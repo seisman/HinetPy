@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>HinetPy.win32 module &mdash; HinetPy 0.6.7+25.gde1c48f documentation</title>
+  <title>HinetPy.win32 module &mdash; HinetPy 0.6.8+8.g7b59db9 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.6.7+25.gde1c48f
+                0.6.8+8.g7b59db9
               </div>
             
           
@@ -232,13 +232,21 @@ Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.</p
 </pre></div>
 </div>
 <p>Extract all channel with specified SAC suffix and output directory:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span><span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Extract only specified channels:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span><span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;[NE]&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">&quot;[NE]&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -279,8 +287,9 @@ So the generated polezero file should omit the sensitivity.</p></li>
 </pre></div>
 </div>
 <p>Extract only specified channels:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s1">&#39;[NE]&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">&quot;[NE]&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
