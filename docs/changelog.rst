@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.6.8 (2021-03-11):
+  - include_unknown_mag does not work in get_event_waveform()
+  - Fail to download S-net data.
+
 0.6.7 (2020-06-08):
  - Improve code styles, tests and CI.
 
