@@ -18,8 +18,8 @@ def client():
 
 class TestClientOthersClass:
     def test_parse_code(self, client):
-        assert _parse_code("0101") == ("01", "01", None)
-        assert _parse_code("0103A") == ("01", "03A", None)
+        assert _parse_code("0101") == ("01", "01", "0")
+        assert _parse_code("0103A") == ("01", "03A", "0")
         assert _parse_code("010503") == ("01", "05", "010503")
         assert _parse_code("030201") == ("03", "02", "030201")
 
