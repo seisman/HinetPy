@@ -31,9 +31,11 @@ doc:
 format:
 	isort .
 	black .
+	black .
 
 check:
 	isort --check .
+	black --check .
 	black --check .
 	flake8 $(FLAKE8_FILES)
 

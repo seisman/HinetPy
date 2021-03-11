@@ -5,6 +5,7 @@ coverage[toml]
 codecov
 # for code style
 black
+blackdoc
 flake8
 isort
 # for documentation
