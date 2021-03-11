@@ -1,8 +1,4 @@
 # Build, test, docs, and clean
-PROJECT=HinetPy
-FLAKE8_FILES=$(PROJECT) docs tests setup.py
-LINT_FILES=$(PROJECT)
-
 help:
 	@echo "Commands:"
 	@echo ""
@@ -37,13 +33,12 @@ check:
 	isort --check .
 	black --check .
 	black --check .
-	flake8 $(FLAKE8_FILES)
+	flake8 .
 
 lint:
-	pylint $(LINT_FILES)
+	pylint HinetPy docs tests
 
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
 	find . -name "*.mo" -exec rm -v {} \;
-	rm -rvf *.egg-info build dist sdist */__pycache__ .cache .pytest_cache \
-		    .coverage* coverage.xml
+	rm -rvf *.egg-info build dist sdist */__pycache__ .cache .pytest_cache .coverage* coverage.xml
