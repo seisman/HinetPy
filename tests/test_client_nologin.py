@@ -3,7 +3,6 @@
 """Tests with a non-login client."""
 
 import pytest
-
 from HinetPy import Client
 from HinetPy.client import _parse_code
 

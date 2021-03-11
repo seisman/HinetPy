@@ -2,7 +2,7 @@
 Utility functions used by HinetPy.
 """
 import math
-from datetime import datetime, date
+from datetime import date, datetime
 
 
 def split_integer(number, maxn):

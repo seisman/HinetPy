@@ -8,7 +8,6 @@ from HinetPy import Client
 from HinetPy.header import NETWORK
 from HinetPy.win32 import _get_channels
 
-
 username = "test_username"
 password = "test_password"
 client = Client(username, password)

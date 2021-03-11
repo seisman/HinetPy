@@ -2,27 +2,25 @@
 """
 Core client for requesting Hi-net waveform data.
 """
-import os
-import re
 import csv
 import json
-import time
-import shutil
 import logging
+import os
+import re
+import shutil
 import tempfile
+import time
 import zipfile
 from datetime import datetime, timedelta
-from multiprocessing.pool import ThreadPool
 from distutils.version import LooseVersion
-
+from multiprocessing.pool import ThreadPool
 
 import requests
 
-from .win32 import merge
+from ._version import get_versions
 from .header import NETWORK
 from .utils import point_inside_box, point_inside_circular, split_integer, to_datetime
-from ._version import get_versions
-
+from .win32 import merge
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"

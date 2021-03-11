@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Basic information of networks."""
 
-from datetime import datetime
 from collections import namedtuple
+from datetime import datetime
 
 Network = namedtuple("Network", "name, channels, starttime, url")
 """ An object containing information of a network.

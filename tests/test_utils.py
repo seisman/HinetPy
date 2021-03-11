@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from datetime import datetime, date
-import pytest
+from datetime import date, datetime
 
+import pytest
 from HinetPy.utils import (
-    split_integer,
-    point_inside_box,
     haversine,
+    point_inside_box,
     point_inside_circular,
+    split_integer,
     to_datetime,
 )
 

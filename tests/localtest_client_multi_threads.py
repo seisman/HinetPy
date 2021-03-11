@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from HinetPy import Client
 from datetime import datetime
+
+from HinetPy import Client
 
 username = "username"
 password = "password"

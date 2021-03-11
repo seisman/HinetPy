@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
 import csv
+import os
 from datetime import datetime, timedelta
 
 from HinetPy import Client, win32

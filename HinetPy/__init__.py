@@ -17,9 +17,9 @@ Basis usage:
 >>> win32.extract_pz(ctable)
 """
 
+from ._version import get_versions
 from .client import Client
 from .header import NETWORK
-from ._version import get_versions
 
 __all__ = ["Client", "NETWORK", "win32"]
 __version__ = get_versions()["version"]

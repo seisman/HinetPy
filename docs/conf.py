@@ -14,8 +14,8 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 import datetime
-import HinetPy
 
+import HinetPy
 
 # -- Project information -----------------------------------------------------
 year = datetime.date.today().year

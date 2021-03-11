@@ -2,15 +2,15 @@
 """
 Processing data in win32 format.
 """
-import os
-import math
 import glob
 import logging
-import tempfile
+import math
+import os
 import subprocess
-from subprocess import Popen, DEVNULL, PIPE
-from multiprocessing import Pool, cpu_count
+import tempfile
 from fnmatch import fnmatch
+from multiprocessing import Pool, cpu_count
+from subprocess import DEVNULL, PIPE, Popen
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
