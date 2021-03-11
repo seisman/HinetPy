@@ -36,4 +36,5 @@ lint:
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
 	find . -name "*.mo" -exec rm -v {} \;
-	rm -rvf *.egg-info build dist sdist */__pycache__ .cache .pytest_cache .coverage coverage.xml
+	rm -rvf *.egg-info build dist sdist */__pycache__ .cache .pytest_cache \
+		    .coverage* coverage.xml
