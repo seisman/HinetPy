@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Core client for requesting Hi-net waveform data.
 """

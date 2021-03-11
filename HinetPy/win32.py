@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Processing data in win32 format.
 """

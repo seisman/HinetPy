@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """Check if a network has more channels"""
 
 from datetime import datetime, timedelta

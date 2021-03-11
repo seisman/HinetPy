@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Basic information of networks."""
 
 from collections import namedtuple
