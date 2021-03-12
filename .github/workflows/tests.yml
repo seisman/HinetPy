@@ -22,7 +22,7 @@ jobs:
       matrix:
         #python-version: [3.5, 3.6, 3.7, 3.8]
         #os: [ubuntu-latest, macos-latest]
-        python-version: [3.9]
+        python-version: [3.6, 3.9]
         os: [macos-latest]
 
     steps:
