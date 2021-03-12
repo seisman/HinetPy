@@ -9,6 +9,7 @@ Basis usage:
 
 >>> from HinetPy import Client, win32
 >>> from datetime import datetime
+>>> # You need to provide your Hi-net username and password here!
 >>> client = Client("username", "password")
 >>> starttime = datetime(2010, 1, 1, 0, 0)
 >>> data, ctable = client.get_continuous_waveform("0101", starttime, 20)
