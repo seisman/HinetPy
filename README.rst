@@ -1,5 +1,5 @@
-.. image:: https://github.com/seisman/HinetPy/workflows/CI/badge.svg
-    :target: https://github.com/seisman/HinetPy/actions
+.. image:: https://github.com/seisman/HinetPy/actions/workflows/tests.yml/badge.svg
+    :target: https://github.com/seisman/HinetPy/actions/workflows/tests.yml
 
 .. image:: https://codecov.io/gh/seisman/HinetPy/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/seisman/HinetPy
