@@ -60,11 +60,10 @@ jobs:
           echo "${{ github.workspace }}/win32tools/bin" >> $GITHUB_PATH
 
       - name: Run tests
-        run: |
-          # Set Hinet username and password
-          sed -i.bak 's/test_username/${{ secrets.HINET_USERNAME }}/; s/test_password/${{ secrets.HINET_PASSWORD }}/' tests/test_*.py
-          rm tests/test_*.py.bak
-          make test
+        run: make test
+        env:
+          HINET_USERNAME: ${{ secrets.HINET_USERNAME }}
+          HINET_PASSWORD: ${{ secrets.HINET_PASSWORD }}
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v1

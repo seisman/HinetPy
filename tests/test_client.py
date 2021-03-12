@@ -6,8 +6,8 @@ import pytest
 import requests
 from HinetPy import Client
 
-username = "test_username"
-password = "test_password"
+username = os.environ["HINET_USERNAME"]
+password = os.environ["HINET_PASSWORD"]
 
 
 # http://docs.pytest.org/en/latest/fixture.html
