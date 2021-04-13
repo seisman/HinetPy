@@ -23,7 +23,7 @@ jobs:
         run: git fetch --prune --unshallow
 
       - name: Set up Python 3.x
-        uses: actions/setup-python@v2.2.1
+        uses: actions/setup-python@v2.2.2
         with:
           python-version: '3.x'
 
