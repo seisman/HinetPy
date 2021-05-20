@@ -1153,7 +1153,9 @@ class Client:
         """
         stations_selected = []
 
-        if isinstance(stations, str):  # stations is a str, i.e., one station
+        if stations is None:
+            pass
+        elif isinstance(stations, str):  # stations is a str, i.e., one station
             stations_selected.append(stations)
         elif isinstance(stations, list):
             stations_selected.extend(stations)
