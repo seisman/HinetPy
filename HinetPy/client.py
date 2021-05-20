@@ -1151,9 +1151,14 @@ class Client:
         0
 
         """
-        if stations is None:
-            stations = []
-        stations_selected = stations
+        stations_selected = []
+
+        if isinstance(stations, str):  # stations is a str, i.e., one station
+            stations_selected.append(stations)
+        elif isinstance(stations, list):
+            stations_selected.extend(stations)
+        else:
+            raise ValueError("stations should be either a str or a list.")
 
         # get station list from Hi-net server
         stations_at_server = self.get_station_list(code)
