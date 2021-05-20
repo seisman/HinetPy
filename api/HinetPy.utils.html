@@ -7,12 +7,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>HinetPy.utils module &mdash; HinetPy 0.6.8+29.g8c3c96d documentation</title>
+  <title>HinetPy.utils module &mdash; HinetPy 0.6.8+30.g0a81031 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -63,7 +66,7 @@
             
             
               <div class="version">
-                0.6.8+29.g8c3c96d
+                0.6.8+30.g0a81031
               </div>
             
           
@@ -175,8 +178,8 @@
 <span id="hinetpy-utils-module"></span><h1>HinetPy.utils module<a class="headerlink" href="#module-HinetPy.utils" title="Permalink to this headline">¶</a></h1>
 <p>Utility functions used by HinetPy.</p>
 <dl class="py function">
-<dt id="HinetPy.utils.split_integer">
-<code class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></code><code class="sig-name descname"><span class="pre">split_integer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxn</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.split_integer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HinetPy.utils.split_integer">
+<span class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></span><span class="sig-name descname"><span class="pre">split_integer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxn</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.split_integer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Split an integer into evenly sized chunks.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">split_integer</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">[3, 3, 3, 3]</span>
@@ -187,8 +190,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="HinetPy.utils.point_inside_box">
-<code class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></code><code class="sig-name descname"><span class="pre">point_inside_box</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.point_inside_box" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HinetPy.utils.point_inside_box">
+<span class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></span><span class="sig-name descname"><span class="pre">point_inside_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.point_inside_box" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a point inside a box region.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point_inside_box</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">130</span><span class="p">)</span>
 <span class="go">True</span>
@@ -203,8 +206,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="HinetPy.utils.haversine">
-<code class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></code><code class="sig-name descname"><span class="pre">haversine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.haversine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HinetPy.utils.haversine">
+<span class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></span><span class="sig-name descname"><span class="pre">haversine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.haversine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the great circle distance between two points
 on the earth (specified in decimal degrees) using haversine formula.</p>
 <p>see <a class="reference external" href="https://stackoverflow.com/a/4913653/7770208">https://stackoverflow.com/a/4913653/7770208</a></p>
@@ -217,8 +220,8 @@ on the earth (specified in decimal degrees) using haversine formula.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="HinetPy.utils.point_inside_circular">
-<code class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></code><code class="sig-name descname"><span class="pre">point_inside_circular</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.point_inside_circular" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HinetPy.utils.point_inside_circular">
+<span class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></span><span class="sig-name descname"><span class="pre">point_inside_circular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.point_inside_circular" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a point inside a circular region.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point_inside_circular</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">True</span>
@@ -227,8 +230,8 @@ on the earth (specified in decimal degrees) using haversine formula.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="HinetPy.utils.to_datetime">
-<code class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></code><code class="sig-name descname"><span class="pre">to_datetime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.to_datetime" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HinetPy.utils.to_datetime">
+<span class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></span><span class="sig-name descname"><span class="pre">to_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.to_datetime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert to datetime in a hard way.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;201001010000&quot;</span><span class="p">)</span>
 <span class="go">datetime.datetime(2010, 1, 1, 0, 0)</span>
