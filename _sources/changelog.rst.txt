@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.6.9 (2021-05-20):
+  - Check invalid `stations` parameter type for `Client.select_stations()`
+
 0.6.8 (2021-03-11):
   - include_unknown_mag does not work in get_event_waveform()
   - Fail to download S-net data.
