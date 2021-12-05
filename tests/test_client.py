@@ -27,7 +27,7 @@ class TestClientLoginClass:
         Client(username, password)
 
     def test_client_init_and_login_fail(self):
-        """ Raise ConnectionError if requests fails. """
+        """Raise ConnectionError if requests fails."""
         with pytest.raises(requests.ConnectionError):
             Client("anonymous", "anonymous")
 
