@@ -15,4 +15,5 @@ coverage:
         target: 90%  # >=90% of new changes should be tested
         if_not_found: success
         if_ci_failed: failure
+
 comment: off
