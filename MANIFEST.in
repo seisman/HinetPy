@@ -1,2 +1,7 @@
-include README.rst
-include LICENSE
+prune .github*
+prune doc*
+prune tests*
+exclude .gitignore
+exclude Makefile
+exclude requirements.txt
+exclude requirements-dev.txt
