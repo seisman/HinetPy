@@ -12,14 +12,11 @@ exclude = '''
   | buck-out
   | build
   | dist
-  # The following are specific to HinetPy
-  | versioneer.py
-  | HinetPy/_version.py
 )
 '''
 
 [tool.coverage.run]
-omit = ["HinetPy/_version.py"]
+omit = []
 
 [tool.pytest.ini_options]
 minversion = "6.0"

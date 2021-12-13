@@ -1,4 +1,2 @@
 include README.rst
 include LICENSE
-include versioneer.py
-include HinetPy/_version.py
