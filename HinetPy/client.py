@@ -12,8 +12,8 @@ import time
 import zipfile
 from datetime import datetime, timedelta
 from distutils.version import LooseVersion
-from multiprocessing.pool import ThreadPool
 from html.parser import HTMLParser
+from multiprocessing.pool import ThreadPool
 
 import requests
 from pkg_resources import get_distribution
@@ -1101,22 +1101,23 @@ class Client:
 
         Examples
         --------
-        >>> stations = client.get_selected_stations('0101')
+        >>> stations = client.get_selected_stations("0101")
         >>> len(stations)
         16
         >>> for station in stations:
         ...     print(station)
+        ...
         0101 N.WNNH 45.4883 141.885 -159.06
         0101 N.SFNH 45.3346 142.1185 -81.6
         >>> names = [station.name for station in stations]
         >>> print(*names)
         N.WNNH N.SFNH ...
         """
-        
+
         if code == "0101":
-            pattern = r'N\..{3}H'
+            pattern = r"N\..{3}H"
         elif code in ("0103", "0103A"):
-            pattern = r'N\..{3}F'
+            pattern = r"N\..{3}F"
         else:
             raise ValueError("Can only query stations of Hi-net/F-net")
 
@@ -1125,16 +1126,16 @@ class Client:
         parser.feed(r.text)
 
         stations = []
-        for (i,text) in enumerate(parser.tabledata):
+        for (i, text) in enumerate(parser.tabledata):
             ## If the target station, grep both lon and lat.
             if re.match(pattern, text):
                 stations.append(
                     Station(
                         code=code,
                         name=text,
-                        latitude=float(parser.tabledata[i+3].strip('N')),
-                        longitude=float(parser.tabledata[i+4].strip('E')),
-                        elevation=float(parser.tabledata[i+5].strip('m'))
+                        latitude=float(parser.tabledata[i + 3].strip("N")),
+                        longitude=float(parser.tabledata[i + 4].strip("E")),
+                        elevation=float(parser.tabledata[i + 5].strip("m")),
                     )
                 )
         parser.close()
@@ -1193,8 +1194,8 @@ class Client:
         --------
         Select only two stations of Hi-net:
 
-        >>> client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
-        >>> client._get_selected_stations('0101')
+        >>> client.select_stations("0101", ["N.AAKH", "N.ABNH"])
+        >>> client._get_selected_stations("0101")
         2
 
         Select stations in a box region:
@@ -1215,8 +1216,8 @@ class Client:
 
         Select all Hi-net stations:
 
-        >>> client.select_stations('0101')
-        >>> client._get_selected_stations('0101')
+        >>> client.select_stations("0101")
+        >>> client._get_selected_stations("0101")
         0
 
         """
@@ -1493,17 +1494,19 @@ def _parse_code(code):
         org, net, volc = code[0:2], code[2:], "0"
     return org, net, volc
 
+
 class _GrepTableData(HTMLParser):
     """Parser to obtain `<td>` contents.
     `handle_starttag()` flags when the HTML tag matches with `td`.
     """
+
     def __init__(self):
         super().__init__()
         self.if_tabledata = False
         self.tabledata = []
 
     def handle_starttag(self, tag, attrs):
-        if re.match('^td$', tag):
+        if re.match("^td$", tag):
             self.if_tabledata = True
 
     def handle_data(self, data):
