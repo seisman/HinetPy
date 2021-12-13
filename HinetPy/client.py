@@ -1035,12 +1035,21 @@ class Client:
         max_span: int
             Maximum allowed span in mimutes.
         """
+        # hard-coded total number of channels
         channels = NETWORK[code].channels
+        # query the actual number of channels
         if code in ("0101", "0103", "0103A"):
             stations = self.get_selected_stations(code)
             if stations != 0:
                 channels = stations * 3
-        return min(int(12000 / channels), 60)
+
+        if code in ("0103", "0103A"):
+            # Maximum allowed file size is ~55 MB for F-net
+            f_net_DL_factor = 8.8667638012
+            f_net_max_size = 55000
+            return int(f_net_max_size / (f_net_DL_factor * channels))
+        else:
+            return min(int(12000 / channels), 60)
 
     def get_selected_stations(self, code):
         """Query the number of stations selected for requesting data.
