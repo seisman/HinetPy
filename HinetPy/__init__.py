@@ -18,6 +18,7 @@ Basis usage:
 """
 
 from pkg_resources import get_distribution
+
 from .client import Client
 from .header import NETWORK
 

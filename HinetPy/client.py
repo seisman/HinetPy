@@ -15,8 +15,8 @@ from distutils.version import LooseVersion
 from multiprocessing.pool import ThreadPool
 
 import requests
-
 from pkg_resources import get_distribution
+
 from .header import NETWORK
 from .utils import point_inside_box, point_inside_circular, split_integer, to_datetime
 from .win32 import merge
