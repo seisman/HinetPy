@@ -3,7 +3,7 @@ HinetPy
 =======
 
 HinetPy is a Python package to request and process seismic waveform data
-from NIED Hi-net website.
+from the NIED Hi-net website.
 
 Basis usage:
 
@@ -16,6 +16,7 @@ Basis usage:
 >>> win32.extract_sac(data, ctable)
 >>> win32.extract_pz(ctable)
 """
+# pylint: disable=invalid-name
 
 from pkg_resources import get_distribution
 
