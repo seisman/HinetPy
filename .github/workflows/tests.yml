@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v2.4.0
         with:
           # fecth all history so that setuptools-scm works
-        fetch-depth: 0
+          fetch-depth: 0
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2.3.1
