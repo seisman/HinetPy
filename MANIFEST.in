@@ -1,4 +1,7 @@
-include README.rst
-include LICENSE
-include versioneer.py
-include HinetPy/_version.py
+prune .github*
+prune doc*
+prune tests*
+exclude .gitignore
+exclude Makefile
+exclude requirements.txt
+exclude requirements-dev.txt

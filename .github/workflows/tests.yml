@@ -1,0 +1,69 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'HinetPy/**'
+      - 'tests/**'
+      - '.github/workflows/**'
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  test:
+    name: ${{ matrix.os }} - Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 1  # Hinet doesn't allow parallel data request
+      fail-fast: false
+      matrix:
+        #python-version: [3.5, 3.6, 3.7, 3.8]
+        #os: [ubuntu-latest, macos-latest]
+        python-version: [3.6, 3.9]
+        os: [macos-latest]
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+        with:
+          # fecth all history so that setuptools-scm works
+          fetch-depth: 0
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2.3.1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest>=6.0 pytest-cov coverage[toml] codecov
+          python setup.py sdist --formats=zip
+          pip install dist/*
+
+      - name: Install win32tools
+        run: |
+          # Download win32tools
+          python -c "from HinetPy import Client; Client('${{ secrets.HINET_USERNAME }}', '${{ secrets.HINET_PASSWORD }}')._get_win32tools()"
+          # Compile and install win32tools
+          tar -xf win32tools.tar.gz && rm win32tools.tar.gz
+          # patch the win2sac source code on macOS
+          if [ "$RUNNER_OS" == "macOS" ]; then sed -i.bak 's/malloc.h/stdlib.h/' win32tools/win2sac.src/s4read_data.c; fi
+          cd win32tools; make; mkdir bin; mv catwin32.src/catwin32 win2sac.src/win2sac_32 bin/; cd ..
+          # Add to PATH
+          echo "${{ github.workspace }}/win32tools/bin" >> $GITHUB_PATH
+
+      - name: Run tests
+        run: make test
+        env:
+          HINET_USERNAME: ${{ secrets.HINET_USERNAME }}
+          HINET_PASSWORD: ${{ secrets.HINET_PASSWORD }}
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v2.1.0

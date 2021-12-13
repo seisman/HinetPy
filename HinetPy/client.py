@@ -1,20 +1,26 @@
-# -*- coding: utf-8 -*-
-
+"""
+Core client for requesting Hi-net waveform data.
+"""
+import csv
+import json
+import logging
 import os
 import re
-import time
-import logging
+import shutil
 import tempfile
+import time
 import zipfile
 from datetime import datetime, timedelta
+from distutils.version import LooseVersion
 from multiprocessing.pool import ThreadPool
 from html.parser import HTMLParser
 
 import requests
+from pkg_resources import get_distribution
 
-from .win32 import merge
 from .header import NETWORK
 from .utils import point_inside_box, point_inside_circular, split_integer, to_datetime
+from .win32 import merge
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
@@ -23,6 +29,10 @@ logger = logging.getLogger(__name__)
 
 
 class Client:
+    """
+    Core client for requesting Hi-net waveform data.
+    """
+
     # Hinet website
     _HINET = "http://www.hinet.bosai.go.jp/"
     # Authorization page
@@ -151,7 +161,7 @@ class Client:
             raise requests.ConnectionError(msg)
 
     def doctor(self):
-        """ Doctor does some checks.
+        """Doctor does some checks.
 
         :meth:`~HinetPy.client.Client.doctor` is a utility function which checks:
 
@@ -386,24 +396,24 @@ class Client:
         --------
         Request 6-minute data since 2010-01-01T05:35 (UTC+0900) from Hi-net.
 
-        >>> client.get_continuous_waveform('0101', '201001010535', 6)
+        >>> client.get_continuous_waveform("0101", "201001010535", 6)
         ('0101_201001010535_6.cnt', '0101_20100101.ch')
 
         Several other string formats of ``starttime`` are also supported:
 
-        >>> client.get_continuous_waveform('0101', '2010-01-01 05:35', 6)
-        >>> client.get_continuous_waveform('0101', '2010-01-01T05:35', 6)
+        >>> client.get_continuous_waveform("0101", "2010-01-01 05:35", 6)
+        >>> client.get_continuous_waveform("0101", "2010-01-01T05:35", 6)
 
         :py:class:`datetime.datetime` is also supported:
 
         >>> from datetime import datetime
         >>> starttime = datetime(2010, 1, 1, 5, 35)
-        >>> client.get_continuous_waveform('0101', starttime, 6)
+        >>> client.get_continuous_waveform("0101", starttime, 6)
         ('0101_201001010535_6.cnt', '0101_20100101.ch')
 
         Request full-day data of 2010-01-01T00:00 (UTC+0900) of F-net:
 
-        >>> client.get_continuous_waveform('0103', starttime, 1440, max_span=25)
+        >>> client.get_continuous_waveform("0103", starttime, 1440, max_span=25)
         ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
         """
@@ -799,7 +809,7 @@ class Client:
                     region=region,
                     magmin=minmagnitude,
                     magmax=maxmagnitude,
-                    include_unknown_mag=True,
+                    include_unknown_mag=include_unknown_mag,
                 )
             )
 
@@ -951,9 +961,10 @@ class Client:
         - S-net (0120, 0120A)
         - MeSO-net (0131)
 
-        >>> stations = client.get_station_list('0101')
+        >>> stations = client.get_station_list("0101")
         >>> for station in stations:
         ...     print(station)
+        ...
         0101 N.WNNH 45.4883 141.885 -159.06
         0101 N.SFNH 45.3346 142.1185 -81.6
         ...
@@ -962,8 +973,6 @@ class Client:
         # remove trailing 'A' in network code
         code = code[:4]
         if code in ["0101", "0103", "0103A"]:  # Hinet and Fnet
-            import csv
-
             lines = (
                 requests.get(self._STATION_INFO).content.decode("utf-8").splitlines()
             )
@@ -983,8 +992,6 @@ class Client:
                     )
                 )
         elif code in ["0120", "0120A", "0131"]:  # S-net and MeSO-net
-            import json
-
             if code in ["0120", "0120A"]:
                 json_text = (
                     self.session.get(self._SNET_STATION_INFO)
@@ -1016,7 +1023,7 @@ class Client:
         #. Number_of_channels * record_length(min.) <= 12000 min
         #. record_length <= 60min
 
-        >>> client._get_allowed_span('0201')
+        >>> client._get_allowed_span("0201")
         60
 
         Parameters
@@ -1029,12 +1036,21 @@ class Client:
         max_span: int
             Maximum allowed span in mimutes.
         """
+        # hard-coded total number of channels
         channels = NETWORK[code].channels
+        # query the actual number of channels
         if code in ("0101", "0103", "0103A"):
             stations = self._get_selected_stations(code)
             if stations != 0:
                 channels = stations * 3
-        return min(int(12000 / channels), 60)
+
+        if code in ("0103", "0103A"):
+            # Maximum allowed file size is ~55 MB for F-net
+            f_net_DL_factor = 8.8667638012
+            f_net_max_size = 55000
+            return int(f_net_max_size / (f_net_DL_factor * channels))
+        else:
+            return min(int(12000 / channels), 60)
 
     def _get_selected_stations(self, code):
         """Query the number of stations selected for requesting data.
@@ -1183,13 +1199,19 @@ class Client:
 
         Select stations in a box region:
 
-        >>> client.select_stations('0101', minlatitude=40, maxlatitude=50,
-        ...                        minlongitude=140, maxlongitude=150)
+        >>> client.select_stations(
+        ...     "0101",
+        ...     minlatitude=40,
+        ...     maxlatitude=50,
+        ...     minlongitude=140,
+        ...     maxlongitude=150,
+        ... )
 
         Select stations in a circular region:
 
-        >>> client.select_stations('0101', latitude=30, longitude=139,
-        ...                        minradius=0, maxradius=2)
+        >>> client.select_stations(
+        ...     "0101", latitude=30, longitude=139, minradius=0, maxradius=2
+        ... )
 
         Select all Hi-net stations:
 
@@ -1198,9 +1220,16 @@ class Client:
         0
 
         """
+        stations_selected = []
+
         if stations is None:
-            stations = []
-        stations_selected = stations
+            pass
+        elif isinstance(stations, str):  # stations is a str, i.e., one station
+            stations_selected.append(stations)
+        elif isinstance(stations, list):
+            stations_selected.extend(stations)
+        else:
+            raise ValueError("stations should be either a str or a list.")
 
         # get station list from Hi-net server
         stations_at_server = self.get_station_list(code)
@@ -1252,9 +1281,9 @@ class Client:
         if r.headers["ETag"].strip('"') == self._ETAG:
             logger.info("Hi-net web service is NOT updated.")
             return False
-        else:
-            logger.warning("Hi-net web service is updated. HinetPy may FAIL!")
-            return True
+
+        logger.warning("Hi-net web service is updated. HinetPy may FAIL!")
+        return True
 
     def check_package_release(self):
         """Check whether HinetPy has a new release.
@@ -1262,9 +1291,6 @@ class Client:
         >>> client.check_package_release()
         [2019-12-06 00:00:00] INFO: You're using the latest release (v0.6.5).
         """
-        from HinetPy import __version__
-        from distutils.version import LooseVersion
-
         url = "https://pypi.python.org/pypi/HinetPy/json"
         r = requests.get(url)
         if r.status_code != 200:
@@ -1272,14 +1298,15 @@ class Client:
             return False
         latest_release = r.json()["info"]["version"]
 
-        if LooseVersion(latest_release) > LooseVersion(__version__):
+        current_version = f'{get_distribution("HinetPy").version}'
+        if LooseVersion(latest_release) > LooseVersion(current_version):
             logger.warning(
                 f"HinetPy v{latest_release} is released. See {url} for details."
             )
             return True
-        else:
-            logger.info(f"You're using the latest version (v{__version__}).")
-            return False
+
+        logger.info(f"You're using the latest version (v{current_version}).")
+        return False
 
     def check_cmd_exists(self):
         """Check if ``catwin32`` and ``win2sac_32`` from win32tools in PATH.
@@ -1293,8 +1320,6 @@ class Client:
         `Hi-net <http://www.hinet.bosai.go.jp/>`_
         and make sure both binary files are in your PATH.
         """
-        import shutil
-
         error = 0
         for cmd in ("catwin32", "win2sac_32"):
             fullpath = shutil.which(cmd)
@@ -1326,7 +1351,7 @@ class Client:
         0703   : Aomori Prefectural Government
         0705   : Shizuoka Prefectural Government
         0801   : ADEP
-        >>> client.info('0101')
+        >>> client.info("0101")
         == Information of Network 0101 ==
         Name: NIED Hi-net
         Starttime: 20040401
@@ -1389,7 +1414,7 @@ def prepare_jobs(starttime, span, max_span):
     return jobs
 
 
-class _Job(object):
+class _Job:
     """Job class for internal use."""
 
     def __init__(self, starttime, span, id=None):
@@ -1398,7 +1423,7 @@ class _Job(object):
         self.id = id
 
 
-class Station(object):
+class Station:
     """
     Class for Stations.
     """
@@ -1417,7 +1442,7 @@ class Station(object):
         return string
 
 
-class Event(object):
+class Event:
     """
     Event class for requesting event waveforms.
     """
@@ -1452,20 +1477,20 @@ class Event(object):
 def _parse_code(code):
     """Parse network code.
 
-    >>> client._parse_code('0101')
-    ('01', '01', None)
-    >>> client._parse_code('0103A')
-    ('01', '03A', None)
-    >>> client._parse_code('010501')
+    >>> client._parse_code("0101")
+    ('01', '01', '0')
+    >>> client._parse_code("0103A")
+    ('01', '03A', '0')
+    >>> client._parse_code("010501")
     ('01', '05', '010501')
     """
     if code not in NETWORK.keys():
         raise ValueError(f"{code}: Incorrect network code.")
-    elif code.startswith("0105") or code.startswith("0302"):
+
+    if code.startswith("0105") or code.startswith("0302"):
         org, net, volc = code[0:2], code[2:4], code
     else:
-        org, net, volc = code[0:2], code[2:], None
-
+        org, net, volc = code[0:2], code[2:], "0"
     return org, net, volc
 
 class _GrepTableData(HTMLParser):

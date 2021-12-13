@@ -1,0 +1,28 @@
+[tool.black]
+line-length = 88
+exclude = '''
+(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)
+'''
+
+[tool.coverage.run]
+omit = []
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--cov=HinetPy --cov-report=term-missing --cov-report=xml --verbose"
+
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+known_third_party = "HinetPy"

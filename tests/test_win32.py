@@ -1,17 +1,14 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-import os
-import glob
 import filecmp
+import glob
+import os
 import shutil
 from multiprocessing import cpu_count
 
 import pytest
-
 from HinetPy import win32
 
-username = "test_username"
-password = "test_password"
+username = os.environ["HINET_USERNAME"]
+password = os.environ["HINET_PASSWORD"]
 
 pwd = os.path.dirname(__file__)
 path = os.path.join(pwd, "data")

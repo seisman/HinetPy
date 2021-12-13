@@ -1,22 +1,16 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import os
 import shutil
-from datetime import datetime, date
+from datetime import date, datetime
 
 import pytest
 import requests
-
 from HinetPy import Client
 
-username = "test_username"
-password = "test_password"
+username = os.environ["HINET_USERNAME"]
+password = os.environ["HINET_PASSWORD"]
 
 
-# http://docs.pytest.org/en/latest/fixture.html
-# @pytest.fixture is better, but pytest prior 2.10 doesn't support
-@pytest.yield_fixture(scope="module")
+@pytest.fixture(scope="module")
 def client():
     client = Client(username, password)
     client.select_stations("0101", ["N.AAKH", "N.ABNH"])
@@ -31,7 +25,7 @@ class TestClientLoginClass:
         Client(username, password)
 
     def test_client_init_and_login_fail(self):
-        """ Raise ConnectionError if requests fails. """
+        """Raise ConnectionError if requests fails."""
         with pytest.raises(requests.ConnectionError):
             Client("anonymous", "anonymous")
 

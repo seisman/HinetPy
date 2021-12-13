@@ -1,16 +1,14 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """Check if a network has more channels"""
 
+import os
 from datetime import datetime, timedelta
 
 from HinetPy import Client
 from HinetPy.header import NETWORK
 from HinetPy.win32 import _get_channels
 
-
-username = "test_username"
-password = "test_password"
+username = os.environ["HINET_USERNAME"]
+password = os.environ["HINET_PASSWORD"]
 client = Client(username, password)
 
 difference = {}

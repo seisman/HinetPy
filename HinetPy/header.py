@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 """Basic information of networks."""
 
-from datetime import datetime
 from collections import namedtuple
+from datetime import datetime
 
 Network = namedtuple("Network", "name, channels, starttime, url")
 """ An object containing information of a network.
@@ -29,6 +28,7 @@ information of all networks available from Hi-net website.
 >>> from HinetPy import NETWORK
 >>> for code in NETWORK.keys():
 ...     print(code, NETWORK[code].name)
+...
 0101 NIED Hi-net
 0103 NIED F-net (broadband)
 0103A NIED F-net (strong motion)

@@ -1,12 +1,14 @@
 # for testing
-pytest
+pytest>=6.0
 pytest-cov
-coverage
+coverage[toml]
 codecov
 # for code style
 black
+blackdoc
 flake8
+isort
 # for documentation
-sphinx==1.6.7
+sphinx
 sphinx-intl
-guzzle_sphinx_theme
+sphinx_rtd_theme

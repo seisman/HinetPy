@@ -1,5 +1,5 @@
-.. image:: https://github.com/seisman/HinetPy/workflows/CI/badge.svg
-    :target: https://github.com/seisman/HinetPy/actions
+.. image:: https://github.com/seisman/HinetPy/actions/workflows/tests.yml/badge.svg
+    :target: https://github.com/seisman/HinetPy/actions/workflows/tests.yml
 
 .. image:: https://codecov.io/gh/seisman/HinetPy/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/seisman/HinetPy
@@ -60,7 +60,7 @@ responses as SAC polezero files.
 
     # Let's try to request 20-minute data starting at 2010-01-01T00:00(GMT+0900)
     # of the Hi-net network (with an internal network code of '0101')
-    data, ctable = client.get_continuous_waveform('0101', '201001010000', 20)
+    data, ctable = client.get_continuous_waveform("0101", "201001010000", 20)
 
     # The request and download process usually takes a few minutes
     # waiting for data request ...

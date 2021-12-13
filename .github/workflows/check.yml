@@ -1,0 +1,32 @@
+name: Check
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  check:
+    name: Code Styles
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2.3.1
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install black blackdoc flake8 isort
+
+      - name: Check code style
+        run: make check
