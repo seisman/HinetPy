@@ -15,8 +15,8 @@ from distutils.version import LooseVersion
 from multiprocessing.pool import ThreadPool
 
 import requests
+from pkg_resources import get_distribution
 
-from ._version import get_versions
 from .header import NETWORK
 from .utils import point_inside_box, point_inside_circular, split_integer, to_datetime
 from .win32 import merge
@@ -1229,7 +1229,7 @@ class Client:
             return False
         latest_release = r.json()["info"]["version"]
 
-        current_version = get_versions()["version"]
+        current_version = f'{get_distribution("HinetPy").version}'
         if LooseVersion(latest_release) > LooseVersion(current_version):
             logger.warning(
                 f"HinetPy v{latest_release} is released. See {url} for details."
