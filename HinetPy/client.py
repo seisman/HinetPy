@@ -1127,7 +1127,7 @@ class Client:
 
         stations = []
         for (i, text) in enumerate(parser.tabledata):
-            ## If the target station, grep both lon and lat.
+            # If the target station, grep both lon and lat.
             if re.match(pattern, text):
                 stations.append(
                     Station(
