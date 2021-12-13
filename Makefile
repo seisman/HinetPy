@@ -3,7 +3,6 @@ help:
 	@echo "Commands:"
 	@echo ""
 	@echo "  install    install in editable mode"
-	@echo "  package    build source and wheel distributions"
 	@echo "  test       run the test suite and report coverage"
 	@echo "  doc        build the documentation"
 	@echo "  format     run black to automatically format the code"
@@ -14,9 +13,6 @@ help:
 
 install:
 	pip install --no-deps -e .
-
-package:
-	python setup.py sdist bdist_wheel
 
 test:
 	pytest tests
