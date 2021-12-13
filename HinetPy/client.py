@@ -1229,7 +1229,7 @@ class Client:
             return False
         latest_release = r.json()["info"]["version"]
 
-        current_version = f'v{get_distribution("pygmt").version}'
+        current_version = f'v{get_distribution("HinetPy").version}'
         if LooseVersion(latest_release) > LooseVersion(current_version):
             logger.warning(
                 f"HinetPy v{latest_release} is released. See {url} for details."
