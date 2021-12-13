@@ -17,10 +17,11 @@ Basis usage:
 >>> win32.extract_pz(ctable)
 """
 
-from ._version import get_versions
+from pkg_resources import get_distribution
 from .client import Client
 from .header import NETWORK
 
 __all__ = ["Client", "NETWORK", "win32"]
-__version__ = get_versions()["version"]
-del get_versions
+# Get semantic version through setuptools-scm
+__version__ = f'v{get_distribution("pygmt").version}'  # e.g. v0.1.2.dev3+g0ab3cd78
+__commit__ = __version__.split("+g")[-1] if "+g" in __version__ else ""  # 0ab3cd78
