@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev19+g3a8905f documentation</title>
+  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev20+gf8104d9 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev19+g3a8905f
+                v0.6.10.dev20+gf8104d9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -414,11 +414,12 @@ parameters.</p></li>
 </dl>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">stations</span><span class="p">)</span>
 <span class="go">16</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
+<span class="gp">...</span>
 <span class="go">0101 N.WNNH 45.4883 141.885 -159.06</span>
 <span class="go">0101 N.SFNH 45.3346 142.1185 -81.6</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">station</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">]</span>
@@ -463,8 +464,8 @@ parameters.</p></li>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
 <p>Select only two stations of Hi-net:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;N.AAKH&#39;</span><span class="p">,</span> <span class="s1">&#39;N.ABNH&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">_get_selected_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;N.AAKH&quot;</span><span class="p">,</span> <span class="s2">&quot;N.ABNH&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">_get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
 <span class="go">2</span>
 </pre></div>
 </div>
@@ -485,8 +486,8 @@ parameters.</p></li>
 </pre></div>
 </div>
 <p>Select all Hi-net stations:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">_get_selected_stations</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">_get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
 <span class="go">0</span>
 </pre></div>
 </div>
