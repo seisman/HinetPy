@@ -13,6 +13,7 @@ import zipfile
 from datetime import datetime, timedelta
 from distutils.version import LooseVersion
 from multiprocessing.pool import ThreadPool
+from html.parser import HTMLParser
 
 import requests
 from pkg_resources import get_distribution
@@ -1039,7 +1040,7 @@ class Client:
         channels = NETWORK[code].channels
         # query the actual number of channels
         if code in ("0101", "0103", "0103A"):
-            stations = self.get_selected_stations(code)
+            stations = self._get_selected_stations(code)
             if stations != 0:
                 channels = stations * 3
 
@@ -1051,7 +1052,7 @@ class Client:
         else:
             return min(int(12000 / channels), 60)
 
-    def get_selected_stations(self, code):
+    def _get_selected_stations(self, code):
         """Query the number of stations selected for requesting data.
 
         Supported networks:
@@ -1079,6 +1080,65 @@ class Client:
 
         r = self.session.get(self._STATION, timeout=self.timeout)
         return len(re.findall(pattern, r.text))
+
+    def get_selected_stations(self, code):
+        """Query stations selected for requesting data.
+
+        Supported networks:
+
+        - Hi-net (0101)
+        - F-net (0103, 0103A)
+
+        Parameters
+        ----------
+        code: str
+            Network code.
+
+        Returns
+        -------
+        stations: list of `HinetPy.client.Station`
+            Dict of selected stations with Lon/Lat data.
+
+        Examples
+        --------
+        >>> stations = client.get_selected_stations('0101')
+        >>> len(stations)
+        16
+        >>> for station in stations:
+        ...     print(station)
+        0101 N.WNNH 45.4883 141.885 -159.06
+        0101 N.SFNH 45.3346 142.1185 -81.6
+        >>> names = [station.name for station in stations]
+        >>> print(*names)
+        N.WNNH N.SFNH ...
+        """
+        
+        if code == "0101":
+            pattern = r'N\..{3}H'
+        elif code in ("0103", "0103A"):
+            pattern = r'N\..{3}F'
+        else:
+            raise ValueError("Can only query stations of Hi-net/F-net")
+
+        r = self.session.get(self._STATION, timeout=self.timeout)
+        parser = _GrepTableData()
+        parser.feed(r.text)
+
+        stations = []
+        for (i,text) in enumerate(parser.tabledata):
+            ## If the target station, grep both lon and lat.
+            if re.match(pattern, text):
+                stations.append(
+                    Station(
+                        code=code,
+                        name=text,
+                        latitude=float(parser.tabledata[i+3].strip('N')),
+                        longitude=float(parser.tabledata[i+4].strip('E')),
+                        elevation=float(parser.tabledata[i+5].strip('m'))
+                    )
+                )
+        parser.close()
+        return stations
 
     def select_stations(
         self,
@@ -1133,8 +1193,8 @@ class Client:
         --------
         Select only two stations of Hi-net:
 
-        >>> client.select_stations("0101", ["N.AAKH", "N.ABNH"])
-        >>> client.get_selected_stations("0101")
+        >>> client.select_stations('0101', ['N.AAKH', 'N.ABNH'])
+        >>> client._get_selected_stations('0101')
         2
 
         Select stations in a box region:
@@ -1155,8 +1215,8 @@ class Client:
 
         Select all Hi-net stations:
 
-        >>> client.select_stations("0101")
-        >>> client.get_selected_stations("0101")
+        >>> client.select_stations('0101')
+        >>> client._get_selected_stations('0101')
         0
 
         """
@@ -1432,3 +1492,21 @@ def _parse_code(code):
     else:
         org, net, volc = code[0:2], code[2:], "0"
     return org, net, volc
+
+class _GrepTableData(HTMLParser):
+    """Parser to obtain `<td>` contents.
+    `handle_starttag()` flags when the HTML tag matches with `td`.
+    """
+    def __init__(self):
+        super().__init__()
+        self.if_tabledata = False
+        self.tabledata = []
+
+    def handle_starttag(self, tag, attrs):
+        if re.match('^td$', tag):
+            self.if_tabledata = True
+
+    def handle_data(self, data):
+        if self.if_tabledata:
+            self.tabledata.append(data)
+            self.if_tabledata = False
