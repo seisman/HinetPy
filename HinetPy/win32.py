@@ -1,5 +1,5 @@
 """
-Process waveform data in win32 format.
+Process seismic waveform data in win32 format.
 """
 import glob
 import logging
@@ -80,24 +80,23 @@ class Channel:
 
         Seismometers of the Hi-net network have a simple transfter function:
 
-            T = s^2 / (s^2+2hws+w^2)
+                     s^2
+            T = ---------------
+                 s^2+2hws+w^2
 
         Parameters
         ----------
         pzfile: str
             SAC PoleZero filename.
         keep_sensitivity: bool
-            Keep sensitivity in the constant or not.
-
-        Returns
-        -------
-        tuple:
-            A tuple of (real, imaginary, constant).
+            Keep sensitivity in the "constant" or not.
         """
         chan_info = f"{self.name}.{self.component} ({self.id})"
-        # Hi-net use moving coil velocity type seismometer.
+        # Hi-net uses a moving coil velocity type seismometer.
         if self.unit != "m/s":
-            logger.warning("%s: Unit is not velocity.", chan_info)
+            logger.warning(
+                "%s: Unit is not velocity. The PZ file may be wrong.", chan_info
+            )
 
         try:
             freq = 2.0 * math.pi / self.period
@@ -105,12 +104,12 @@ class Channel:
             logger.warning("%s: Natural period = 0. Skipped.", chan_info)
             return
 
-        # calculate poles, find roots of equation s^2+2hws+w^2=0
+        # calculate poles by finding roots of equation s^2+2hws+w^2=0
         real = 0.0 - self.damping * freq
         imaginary = freq * math.sqrt(1 - self.damping ** 2)
 
         # calculate constant
-        fn = 20  # alaways assume normalization frequency is 20 Hz
+        fn = 20.0  # alaways assume normalization frequency is 20 Hz
         s = complex(0, 2 * math.pi * fn)
         A0 = abs((s ** 2 + 2 * self.damping * freq * s + freq ** 2) / s ** 2)
         if keep_sensitivity:
@@ -153,8 +152,9 @@ def extract_sac(
     outdir: str
         Output directory. Defaults to current directory.
     pmax: int
-        Maximum number of data points. Defaults to 8640000. If the input data
-        is longer than one day, you have to to increase ``pmax``.
+        Maximum number of data points for a single channel. Defaults to 8640000.
+        If the win32 data have data points more than 8640000 (i.e., longer than
+        one day for a 100 Hz sampling rate), you MUST increase ``pmax``.
     filter_by_id: list of str or wildcard
         Filter channels by ID.
     filter_by_name: list of str or wildcard
@@ -162,16 +162,15 @@ def extract_sac(
     filter_by_component: list of str or wildcard
         Filter channels by component.
     with_pz: bool
-        Extract PZ files at the same time.
-        PZ file has default suffix ``.SAC_PZ``.
+        Aslo extract PZ files. PZ file has default suffix ``.SAC_PZ``.
     processes: int
-        Number of parallel processes to speed up data extraction.
+        Number of processes to speed up data extraction parallelly.
         Use all processes by default.
 
     Note
     ----
 
-    ``win2sac`` removes sensitivity from waveform, then multiply by 1.0e9.
+    ``win2sac`` removes sensitivity from waveform data, then multiply by 1.0e9.
     Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.
 
     Examples
@@ -200,7 +199,7 @@ def extract_sac(
         logger.error("data or ctable is `None'. Data requests may fail. Skipped.")
         return
 
-    channels = _get_channels(ctable)
+    channels = read_ctable(ctable)
     logger.info("%s channels found in %s.", len(channels), ctable)
     if filter_by_id or filter_by_name or filter_by_component:
         channels = _filter_channels(
@@ -296,7 +295,7 @@ def extract_pz(
         logger.error("ctable is `None'. Data requests may fail. Skipped.")
         return
 
-    channels = _get_channels(ctable)
+    channels = read_ctable(ctable)
     if filter_by_chid or filter_by_name or filter_by_component:
         channels = _filter_channels(
             channels, filter_by_chid, filter_by_name, filter_by_component
@@ -310,13 +309,19 @@ def extract_pz(
         )
 
 
-def _get_channels(ctable):
-    """Get channel information from channel table file.
+def read_ctable(ctable):
+    """
+    Read channel table file.
 
     Parameters
     ----------
     ctable: str
         Channle table file.
+
+    Returns
+    -------
+    list:
+        List of Channels.
     """
     channels = []
     with open(ctable, "r", encoding="utf8") as fct:
