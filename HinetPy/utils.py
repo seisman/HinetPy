@@ -160,7 +160,7 @@ def to_datetime(value):
 
     Returns
     -------
-    datetime:
+    datetime.datetime:
         A datetime in datetime format.
 
     Examples
