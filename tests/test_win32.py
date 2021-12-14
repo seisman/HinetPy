@@ -204,11 +204,3 @@ class TestWin32MergeClass:
         total_data = "test_merge_not_a_valid_wildcard.cnt"
         with pytest.raises(FileNotFoundError):
             win32.merge(datas, total_data)
-
-
-class TestWin32OthersClass:
-    def test_get_processes(self):
-        cpus = cpu_count()
-        assert win32._get_processes(0) == cpus - 1
-        assert win32._get_processes(-5) == cpus - 1
-        assert win32._get_processes(1) == 1
