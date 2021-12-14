@@ -34,7 +34,7 @@ class Channel:
         period=None,
         preamplification=None,
         lsb_value=None,
-    ):
+    ):  # pylint: disable=too-many-arguments
         """Initialize a channel.
 
         Parameters
@@ -44,13 +44,13 @@ class Channel:
         name: str
             Station Name.
         component: str
-            Channel component name (``U|N|E``).
+            Channel component name (e.g., ``U|N|E``).
         latitude: float
             Station latitude.
         longitude: float
             Station longitude.
         unit: str
-            Unit of data (``m``, ``m/s``, ``m/s/s``, ``rad``).
+            Unit of data (e.g., ``m``, ``m/s``, ``m/s/s``, ``rad``).
         gain: float
             Sensor sensitivity.
         damping: float
@@ -74,45 +74,44 @@ class Channel:
         self.preamplification = preamplification
         self.lsb_value = lsb_value
 
-    def to_pz(self, keep_sensitivity=False):
+    def write_sacpz(self, pzfile, keep_sensitivity=False):
         """
-        Convert NIED channel information to SAC polezero information.
+        Write channel information into a SAC polezero file.
 
-        Transfer function = s^2 / (s^2+2hws+w^2).
+        Seismometers of the Hi-net network have a simple transfter function:
+
+            T = s^2 / (s^2+2hws+w^2)
 
         Parameters
         ----------
+        pzfile: str
+            SAC PoleZero filename.
         keep_sensitivity: bool
-            Keep sensitivity in the constant or not
+            Keep sensitivity in the constant or not.
 
         Returns
         -------
         tuple:
             A tuple of (real, imaginary, constant).
         """
+        chan_info = f"{self.name}.{self.component} ({self.id})"
         # Hi-net use moving coil velocity type seismometer.
         if self.unit != "m/s":
-            logger.warning(
-                f"{self.name}.{self.component} ({self.id}): Unit is not velocity."
-            )
+            logger.warning("%s: Unit is not velocity.", chan_info)
 
         try:
             freq = 2.0 * math.pi / self.period
         except ZeroDivisionError:
-            logger.warning(
-                f"{self.name}.{self.component} ({self.id}): "
-                + "Natural period = 0. Skipped."
-            )
-            return None, None, None
+            logger.warning("%s: Natural period = 0. Skipped.", chan_info)
+            return
 
         # calculate poles, find roots of equation s^2+2hws+w^2=0
-        real = -self.damping * freq
+        real = 0.0 - self.damping * freq
         imaginary = freq * math.sqrt(1 - self.damping ** 2)
 
         # calculate constant
         fn = 20  # alaways assume normalization frequency is 20 Hz
         s = complex(0, 2 * math.pi * fn)
-
         A0 = abs((s ** 2 + 2 * self.damping * freq * s + freq ** 2) / s ** 2)
         if keep_sensitivity:
             factor = math.pow(10, self.preamplification / 20.0)
@@ -120,7 +119,13 @@ class Channel:
         else:
             constant = A0
 
-        return real, imaginary, constant
+        # write information to a SAC PZ file
+        with open(pzfile, "w", encoding="utf8") as pz:
+            pz.write("ZEROS 3\n")
+            pz.write("POLES 2\n")
+            pz.write(f"{real:9.6f} {imaginary:9.6f}\n")
+            pz.write(f"{real:9.6f} {-imaginary:9.6f}\n")
+            pz.write(f"CONSTANT {constant:e}\n")
 
 
 def extract_sac(
@@ -196,30 +201,34 @@ def extract_sac(
         return
 
     channels = _get_channels(ctable)
-    logger.info(f"{len(channels)} channels found in {ctable}.")
+    logger.info("%s channels found in %s.", len(channels), ctable)
     if filter_by_id or filter_by_name or filter_by_component:
         channels = _filter_channels(
             channels, filter_by_id, filter_by_name, filter_by_component
         )
-    logger.info(f"{len(channels)} channels to be extracted.")
+    logger.info("%s channels to be extracted.", len(channels))
 
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
 
     with Pool(processes=_get_processes(processes)) as pool:
-        with tempfile.NamedTemporaryFile() as ft:
-            _write_winprm(ctable, ft.name)
-            args = [(data, ch, suffix, outdir, ft.name, pmax) for ch in channels]
+        with tempfile.NamedTemporaryFile() as ftmp:
+            _write_winprm(ctable, ftmp.name)
+            args = [(data, ch, suffix, outdir, ftmp.name, pmax) for ch in channels]
             sacfiles = pool.starmap(_extract_channel, args)
-            nsacfiles = len(sacfiles) - sacfiles.count(None)
-            logger.info(f"{nsacfiles} SAC data successfully extracted.")
+            logger.info(
+                "%s SAC data successfully extracted.",
+                len(sacfiles) - sacfiles.count(None),
+            )
 
         if with_pz:
             # "SAC_PZ" here is hardcoded.
             args = [(ch, "SAC_PZ", outdir) for ch in channels]
             pzfiles = pool.starmap(_extract_sacpz, args)
-            npzfiles = len(pzfiles) - pzfiles.count(None)
-            logger.info(f"{npzfiles} SAC PZ files successfully extracted.")
+            logger.info(
+                "%s SAC PZ files successfully extracted.",
+                len(pzfiles) - pzfiles.count(None),
+            )
 
 
 def _get_processes(procs):
@@ -310,8 +319,8 @@ def _get_channels(ctable):
         Channle table file.
     """
     channels = []
-    with open(ctable, "r", encoding="utf8") as f:
-        for line in f:
+    with open(ctable, "r", encoding="utf8") as fct:
+        for line in fct:
             # skip blank lines and comment lines
             if not line.strip() or line.strip().startswith("#"):
                 continue
@@ -331,14 +340,14 @@ def _get_channels(ctable):
                     lsb_value=float(items[12]),
                 )
                 channels.append(channel)
-            except ValueError as e:
+            except ValueError as err:
                 logger.warning(
                     "Error in parsing channel information for %s.%s (%s). Skipped.",
                     items[3],
                     items[4],
                     items[0],
                 )
-                logger.warning("Original error message: %s", e)
+                logger.warning("Original error message: %s", err)
     return channels
 
 
@@ -388,9 +397,9 @@ def _write_winprm(ctable, prmfile="win.prm"):
     Four line parameters file.
     """
 
-    with open(prmfile, "w", encoding="utf8") as f:
+    with open(prmfile, "w", encoding="utf8") as fprm:
         msg = ".\n" + ctable + "\n" + ".\n.\n"
-        f.write(msg)
+        fprm.write(msg)
 
 
 def _extract_channel(
@@ -424,20 +433,21 @@ def _extract_channel(
         "-p" + prmfile,
         "-m" + str(pmax),
     ]
-    p = Popen(cmd, stdout=DEVNULL, stderr=PIPE)
-
-    # check stderr output
-    for line in p.stderr.read().decode().split("\n"):
-        if "The number of points is maximum over" in line:
-            msg = "The number of data points is over maximum. Try to increase pmax."
-            raise ValueError(msg)
-        if f"Data for channel {channel.id} not existed" in line:
-            # return None if no data avaiable
-            logger.warning(
-                f"Data for {channel.name}.{channel.component} ({channel.id}) "
-                + "not exists. Skipped."
-            )
-            return None
+    with Popen(cmd, stdout=DEVNULL, stderr=PIPE) as proc:
+        # check stderr output
+        for line in proc.stderr.read().decode().split("\n"):
+            if "The number of points is maximum over" in line:
+                msg = "The number of data points is over maximum. Try to increase pmax."
+                raise ValueError(msg)
+            if f"Data for channel {channel.id} not existed" in line:
+                # return None if no data avaiable
+                logger.warning(
+                    "Data for %s.%s (%s) not exists. Skipped.",
+                    channel.name,
+                    channel.component,
+                    channel.id,
+                )
+                return None
 
     filename = f"{channel.name}.{channel.component}.{suffix}"
     if outdir != ".":
@@ -448,43 +458,15 @@ def _extract_channel(
             os.rename(filename, filename[:-1])
             return filename[:-1]
         return filename
-
-
-def _write_pz(pzfile, real, imaginary, constant):
-    """Write SAC PZ file.
-
-    Parameters
-    ----------
-    pzfile: str
-        SAC PoleZero filename.
-    real: float
-        Real part of poles.
-    imaginary: float
-        Imaginary part of poles
-    constant: float
-        Constant in SAC PZ.
-    """
-    with open(pzfile, "w", encoding="utf8") as pz:
-        pz.write("ZEROS 3\n")
-        pz.write("POLES 2\n")
-        pz.write(f"{real:9.6f} {imaginary:9.6f}\n")
-        pz.write(f"{real:9.6f} {-imaginary:9.6f}\n")
-        pz.write(f"CONSTANT {constant:e}\n")
+    return None
 
 
 def _extract_sacpz(channel, suffix="SAC_PZ", outdir=".", keep_sensitivity=False):
-    real, imaginary, constant = channel.to_pz(keep_sensitivity=keep_sensitivity)
-    if (
-        real is None or imaginary is None or constant is None
-    ):  # something wrong with channel information, skipped
-        return None
-
     pzfile = f"{channel.name}.{channel.component}"
     if suffix:
         pzfile += "." + suffix
     pzfile = os.path.join(outdir, pzfile)
-    _write_pz(pzfile, real, imaginary, constant)
-
+    channel.write_sacpz(pzfile, keep_sensitivity=keep_sensitivity)
     return pzfile
 
 
