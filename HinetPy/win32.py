@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 class Channel:
     """Class for channel."""
+
     # pylint: disable=too-many-instance-attributes,invalid-name,redefined-builtin
     def __init__(
         self,
