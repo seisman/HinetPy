@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev32+ga69c3f8 文档</title>
+  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev33+ge96b824 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev32+ga69c3f8
+                v0.6.10.dev33+ge96b824
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -84,7 +84,7 @@
              
   <section id="module-HinetPy.win32">
 <span id="hinetpy-win32-module"></span><h1>HinetPy.win32 模块<a class="headerlink" href="#module-HinetPy.win32" title="永久链接至标题"></a></h1>
-<p>Process waveform data in win32 format.</p>
+<p>Process seismic waveform data in win32 format.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="HinetPy.win32.Channel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">Channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">damping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preamplification</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lsb_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.Channel" title="永久链接至目标"></a></dt>
@@ -113,20 +113,20 @@
 <dd><p>Write channel information into a SAC polezero file.</p>
 <p>Seismometers of the Hi-net network have a simple transfter function:</p>
 <blockquote>
-<div><p>T = s^2 / (s^2+2hws+w^2)</p>
+<div><blockquote>
+<div><p>s^2</p>
+</div></blockquote>
+<dl class="simple">
+<dt>T = —————</dt><dd><p>s^2+2hws+w^2</p>
+</dd>
+</dl>
 </div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">参数</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pzfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – SAC PoleZero filename.</p></li>
-<li><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.10)"><em>bool</em></a>) – Keep sensitivity in the constant or not.</p></li>
+<li><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.10)"><em>bool</em></a>) – Keep sensitivity in the “constant” or not.</p></li>
 </ul>
-</dd>
-<dt class="field-even">返回</dt>
-<dd class="field-even"><p>A tuple of (real, imaginary, constant).</p>
-</dd>
-<dt class="field-odd">返回类型</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(在 Python v3.10)">tuple</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -144,18 +144,22 @@
 <li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 通道表文件。</p></li>
 <li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 输出SAC文件的后缀。默认值为 <code class="docutils literal notranslate"><span class="pre">SAC</span></code> 。</p></li>
 <li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 输出目录。默认输出到当前目录。</p></li>
-<li><p><strong>pmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.10)"><em>int</em></a>) – 允许的最大数据点数。默认值为 8640000。若输出数据长度超过一天，你可以自行增加 <code class="docutils literal notranslate"><span class="pre">pmax</span></code> 的值。</p></li>
+<li><p><strong>pmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.10)"><em>int</em></a>) – Maximum number of data points for a single channel. Defaults to 8640000.
+If the win32 data have data points more than 8640000 (i.e., longer than
+one day for a 100 Hz sampling rate), you MUST increase <code class="docutils literal notranslate"><span class="pre">pmax</span></code>.</p></li>
 <li><p><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按ID筛选通道。</p></li>
 <li><p><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照台站名筛选通道。</p></li>
 <li><p><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照分量筛选通道。</p></li>
-<li><p><strong>with_pz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.10)"><em>bool</em></a>) – 同时提取SAC零极点文件。默认后缀为 <code class="docutils literal notranslate"><span class="pre">.SAC_PZ</span></code> 。</p></li>
-<li><p><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.10)"><em>int</em></a>) – 数据提取过程中所使用的并行进程数目。默认使用所有进程。</p></li>
+<li><p><strong>with_pz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.10)"><em>bool</em></a>) – Aslo extract PZ files. PZ file has default suffix <code class="docutils literal notranslate"><span class="pre">.SAC_PZ</span></code>.</p></li>
+<li><p><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.10)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly.
+Use all processes by default.</p></li>
 </ul>
 </dd>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p><code class="docutils literal notranslate"><span class="pre">win2sac</span></code> 从波形中去除了灵敏度，并将数据乘以1.0e9。因而提取出的SAC文件的以 nm/s 为单位的速度或以 nm/s/s 为单位的加速度。</p>
+<p><code class="docutils literal notranslate"><span class="pre">win2sac</span></code> removes sensitivity from waveform data, then multiply by 1.0e9.
+Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.</p>
 </div>
 <div class="admonition- admonition">
 <p class="admonition-title">实际案例</p>
@@ -221,6 +225,23 @@
 </pre></div>
 </div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="HinetPy.win32.read_ctable">
+<span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">read_ctable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.read_ctable" title="永久链接至目标"></a></dt>
+<dd><p>Read channel table file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – Channle table file.</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p>List of Channels.</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(在 Python v3.10)">list</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
