@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev33+ge96b824 文档</title>
+  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev35+g6ce1d3d 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev33+ge96b824
+                v0.6.10.dev35+g6ce1d3d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -135,7 +135,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="HinetPy.win32.extract_sac">
-<span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">extract_sac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SAC'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8640000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_pz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.extract_sac" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">extract_sac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SAC'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8640000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_pz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.extract_sac" title="永久链接至目标"></a></dt>
 <dd><p>提取数据并以SAC格式保存。</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数</dt>
@@ -152,7 +152,7 @@ one day for a 100 Hz sampling rate), you MUST increase <code class="docutils lit
 <li><p><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照分量筛选通道。</p></li>
 <li><p><strong>with_pz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.10)"><em>bool</em></a>) – Aslo extract PZ files. PZ file has default suffix <code class="docutils literal notranslate"><span class="pre">.SAC_PZ</span></code>.</p></li>
 <li><p><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.10)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly.
-Use all processes by default.</p></li>
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means using all CPUs.</p></li>
 </ul>
 </dd>
 </dl>
@@ -189,7 +189,7 @@ Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.</p
 
 <dl class="py function">
 <dt class="sig sig-object py" id="HinetPy.win32.extract_pz">
-<span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">extract_pz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SAC_PZ'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_sensitivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_chid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.extract_pz" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">extract_pz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SAC_PZ'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_sensitivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_chid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.extract_pz" title="永久链接至目标"></a></dt>
 <dd><p>从通道表中提取仪器响应信息并保存为SAC零极点文件。</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
@@ -202,10 +202,14 @@ Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.</p
 <li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 通道表文件。</p></li>
 <li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – SAC零极点文件后缀，默认为 <code class="docutils literal notranslate"><span class="pre">SAC_PZ</span></code> 。</p></li>
 <li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 输出目录。默认输出到当前目录。</p></li>
-<li><p><strong>keep_sensivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.10)"><em>bool</em></a>) – win2sac在将win32格式转换为SAC格式时，自动从波形数据中去除了灵敏度。因而生成的零极点文件中省去了灵敏度。</p></li>
+<li><p><strong>keep_sensivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.10)"><em>bool</em></a>) – win2sac automatically removes sensivity from waveform data
+during the win32-to-SAC format conversion.
+So the generated polezero file should omit the sensitivity.</p></li>
 <li><p><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按ID筛选通道。</p></li>
 <li><p><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照台站名筛选通道。</p></li>
 <li><p><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照分量筛选通道。</p></li>
+<li><p><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.10)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means using all CPUs.</p></li>
 </ul>
 </dd>
 </dl>
@@ -236,7 +240,7 @@ Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.</p
 <dd class="field-odd"><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – Channle table file.</p>
 </dd>
 <dt class="field-even">返回</dt>
-<dd class="field-even"><p>List of Channels.</p>
+<dd class="field-even"><p>List of <a class="reference internal" href="#HinetPy.win32.Channel" title="HinetPy.win32.Channel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Channel</span></code></a>.</p>
 </dd>
 <dt class="field-odd">返回类型</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(在 Python v3.10)">list</a></p>
