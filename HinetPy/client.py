@@ -733,14 +733,14 @@ class Client:
         include_unknown_mag=True,
         mindepth=None,
         maxdepth=None,
-        minlatitude=None,
-        maxlatitude=None,
-        minlongitude=None,
-        maxlongitude=None,
+        minlatitude=-90.0,
+        maxlatitude=90.0,
+        minlongitude=0.0,
+        maxlongitude=360.0,
         latitude=None,
         longitude=None,
-        minradius=None,
-        maxradius=None,
+        minradius=0.0,
+        maxradius=360.0,
     ):
         """Get event waveform data.
 
