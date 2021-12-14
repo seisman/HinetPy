@@ -210,7 +210,7 @@ def extract_sac(
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
 
-    with Pool(processes=_get_processes(processes)) as pool:
+    with Pool(processes=min(cpu_count(), processes)) as pool:
         with tempfile.NamedTemporaryFile() as ftmp:
             _write_winprm(ctable, ftmp.name)
             args = [(data, ch, suffix, outdir, ftmp.name, pmax) for ch in channels]
@@ -228,16 +228,6 @@ def extract_sac(
                 "%s SAC PZ files successfully extracted.",
                 len(pzfiles) - pzfiles.count(None),
             )
-
-
-def _get_processes(procs):
-    """Choose the best number of processes."""
-    cpus = cpu_count()
-    if cpus == 1:
-        return cpus
-    if not 0 < procs < cpus:
-        return cpus - 1
-    return procs
 
 
 def extract_pz(
@@ -321,7 +311,7 @@ def read_ctable(ctable):
     Returns
     -------
     list:
-        List of Channels.
+        List of :class:`~HinetPy.win32.Channel`.
     """
     channels = []
     with open(ctable, "r", encoding="utf8") as fct:
