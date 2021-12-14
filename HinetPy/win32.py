@@ -1,5 +1,5 @@
 """
-Processing data in win32 format.
+Process waveform data in win32 format.
 """
 import glob
 import logging
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 class Channel:
     """Class for channel."""
-
+    # pylint: disable=too-many-instance-attributes,invalid-name,redefined-builtin
     def __init__(
         self,
         id=None,
@@ -162,21 +162,15 @@ def extract_sac(
             _write_winprm(ctable, ft.name)
             args = [(data, ch, suffix, outdir, ft.name, pmax) for ch in channels]
             sacfiles = pool.starmap(_extract_channel, args)
-            logger.info(
-                "{} SAC data successfully extracted.".format(
-                    len(sacfiles) - sacfiles.count(None)
-                )
-            )
+            nsacfiles = len(sacfiles) - sacfiles.count(None)
+            logger.info(f"{nsacfiles} SAC data successfully extracted.")
 
         if with_pz:
             # "SAC_PZ" here is hardcoded.
             args = [(ch, "SAC_PZ", outdir) for ch in channels]
             pzfiles = pool.starmap(_extract_sacpz, args)
-            logger.info(
-                "{} SAC PZ files successfully extracted.".format(
-                    len(pzfiles) - pzfiles.count(None)
-                )
-            )
+            npzfiles = len(pzfiles) - pzfiles.count(None)
+            logger.info(f"{npzfiles} SAC PZ files successfully extracted.")
 
 
 def _get_processes(procs):
@@ -267,7 +261,7 @@ def _get_channels(ctable):
         Channle table file.
     """
     channels = []
-    with open(ctable, "r") as f:
+    with open(ctable, "r", encoding="utf8") as f:
         for line in f:
             # skip blank lines and comment lines
             if not line.strip() or line.strip().startswith("#"):
@@ -345,7 +339,7 @@ def _write_winprm(ctable, prmfile="win.prm"):
     Four line parameters file.
     """
 
-    with open(prmfile, "w") as f:
+    with open(prmfile, "w", encoding="utf8") as f:
         msg = ".\n" + ctable + "\n" + ".\n.\n"
         f.write(msg)
 
@@ -459,7 +453,7 @@ def _write_pz(pzfile, real, imaginary, constant):
     constant: float
         Constant in SAC PZ.
     """
-    with open(pzfile, "w") as pz:
+    with open(pzfile, "w", encoding="utf8") as pz:
         pz.write("ZEROS 3\n")
         pz.write("POLES 2\n")
         pz.write(f"{real:9.6f} {imaginary:9.6f}\n")
