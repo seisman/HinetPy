@@ -74,6 +74,54 @@ class Channel:
         self.preamplification = preamplification
         self.lsb_value = lsb_value
 
+    def to_pz(self, keep_sensitivity=False):
+        """
+        Convert NIED channel information to SAC polezero information.
+
+        Transfer function = s^2 / (s^2+2hws+w^2).
+
+        Parameters
+        ----------
+        keep_sensitivity: bool
+            Keep sensitivity in the constant or not
+
+        Returns
+        -------
+        tuple:
+            A tuple of (real, imaginary, constant).
+        """
+        # Hi-net use moving coil velocity type seismometer.
+        if self.unit != "m/s":
+            logger.warning(
+                f"{self.name}.{self.component} ({self.id}): Unit is not velocity."
+            )
+
+        try:
+            freq = 2.0 * math.pi / self.period
+        except ZeroDivisionError:
+            logger.warning(
+                f"{self.name}.{self.component} ({self.id}): "
+                + "Natural period = 0. Skipped."
+            )
+            return None, None, None
+
+        # calculate poles, find roots of equation s^2+2hws+w^2=0
+        real = -self.damping * freq
+        imaginary = freq * math.sqrt(1 - self.damping ** 2)
+
+        # calculate constant
+        fn = 20  # alaways assume normalization frequency is 20 Hz
+        s = complex(0, 2 * math.pi * fn)
+
+        A0 = abs((s ** 2 + 2 * self.damping * freq * s + freq ** 2) / s ** 2)
+        if keep_sensitivity:
+            factor = math.pow(10, self.preamplification / 20.0)
+            constant = A0 * self.gain * factor / self.lsb_value
+        else:
+            constant = A0
+
+        return real, imaginary, constant
+
 
 def extract_sac(
     data,
@@ -402,44 +450,6 @@ def _extract_channel(
         return filename
 
 
-def _channel2pz(channel, keep_sensitivity=False):
-    """Convert channel information to SAC polezero file.
-
-    Transfer function = s^2 / (s^2+2hws+w^2).
-    """
-    # Hi-net use moving coil velocity type seismometer.
-    if channel.unit != "m/s":
-        logger.warning(
-            f"{channel.name}.{channel.component} ({channel.id}): Unit is not velocity."
-        )
-
-    try:
-        freq = 2.0 * math.pi / channel.period
-    except ZeroDivisionError:
-        logger.warning(
-            f"{channel.name}.{channel.component} ({channel.id}): "
-            + "Natural period = 0. Skipped."
-        )
-        return None, None, None
-
-    # calculate poles, find roots of equation s^2+2hws+w^2=0
-    real = -channel.damping * freq
-    imaginary = freq * math.sqrt(1 - channel.damping ** 2)
-
-    # calculate constant
-    fn = 20  # alaways assume normalization frequency is 20 Hz
-    s = complex(0, 2 * math.pi * fn)
-
-    A0 = abs((s ** 2 + 2 * channel.damping * freq * s + freq ** 2) / s ** 2)
-    if keep_sensitivity:
-        factor = math.pow(10, channel.preamplification / 20.0)
-        constant = A0 * channel.gain * factor / channel.lsb_value
-    else:
-        constant = A0
-
-    return real, imaginary, constant
-
-
 def _write_pz(pzfile, real, imaginary, constant):
     """Write SAC PZ file.
 
@@ -463,7 +473,7 @@ def _write_pz(pzfile, real, imaginary, constant):
 
 
 def _extract_sacpz(channel, suffix="SAC_PZ", outdir=".", keep_sensitivity=False):
-    real, imaginary, constant = _channel2pz(channel, keep_sensitivity=keep_sensitivity)
+    real, imaginary, constant = channel.to_pz(keep_sensitivity=keep_sensitivity)
     if (
         real is None or imaginary is None or constant is None
     ):  # something wrong with channel information, skipped
