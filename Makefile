@@ -15,7 +15,7 @@ install:
 	pip install --no-deps -e .
 
 test:
-	pytest tests
+	pytest tests/test_*.py
 
 doc:
 	make -C docs docs
