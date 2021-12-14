@@ -94,7 +94,7 @@ def haversine(lat1, lon1, lat2, lon2):
     Calculate the great circle distance between two points
     on the earth (specified in decimal degrees) using haversine formula.
 
-    see https://stackoverflow.com/a/4913653/7770208
+    Reference: https://stackoverflow.com/a/4913653/7770208.
 
     >>> haversine(40, 130, 50, 140)
     12.224069629545902
@@ -140,7 +140,6 @@ def point_inside_circular(lat1, lon1, lat2, lon2, minradius=0.0, maxradius=360.0
 
     Examples
     --------
-
     >>> point_inside_circular(30, 50, 30, 52, 0, 5)
     True
     """
@@ -165,13 +164,11 @@ def to_datetime(value):
 
     Examples
     --------
-
     >>> to_datetime("201001010000")
     datetime.datetime(2010, 1, 1, 0, 0)
     >>> to_datetime("2010-01-01T03:45")
     datetime.datetime(2010, 1, 1, 3, 45)
     """
-
     # is datetime
     if isinstance(value, datetime):
         return value
