@@ -8,7 +8,7 @@ import os
 import subprocess
 import tempfile
 from fnmatch import fnmatch
-from multiprocessing import Pool, cpu_count
+from multiprocessing import Pool
 from subprocess import DEVNULL, PIPE, Popen
 
 # Setup the logger
@@ -137,7 +137,7 @@ def extract_sac(
     filter_by_name=None,
     filter_by_component=None,
     with_pz=False,
-    processes=0,
+    processes=None,
 ):
     """Extract data as SAC format files.
 
@@ -165,7 +165,7 @@ def extract_sac(
         Aslo extract PZ files. PZ file has default suffix ``.SAC_PZ``.
     processes: int
         Number of processes to speed up data extraction parallelly.
-        Use all processes by default.
+        ``None`` means using all CPUs.
 
     Note
     ----
@@ -210,7 +210,7 @@ def extract_sac(
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
 
-    with Pool(processes=min(cpu_count(), processes)) as pool:
+    with Pool(processes=processes) as pool:
         with tempfile.NamedTemporaryFile() as ftmp:
             _write_winprm(ctable, ftmp.name)
             args = [(data, ch, suffix, outdir, ftmp.name, pmax) for ch in channels]
@@ -238,6 +238,7 @@ def extract_pz(
     filter_by_chid=None,
     filter_by_name=None,
     filter_by_component=None,
+    processes=None,
 ):
     """Extract instrumental response in SAC PZ format from channel table.
 
@@ -258,7 +259,7 @@ def extract_pz(
         Output directory. Defaults to current directory.
     keep_sensivity: bool
         win2sac automatically removes sensivity from waveform data
-        during win32 format to SAC format conversion.
+        during the win32-to-SAC format conversion.
         So the generated polezero file should omit the sensitivity.
     filter_by_id: list of str or wildcard
         Filter channels by ID.
@@ -266,6 +267,9 @@ def extract_pz(
         Filter channels by name.
     filter_by_component: list of str or wildcard
         Filter channels by component.
+    processes: int
+        Number of processes to speed up data extraction parallelly.
+        ``None`` means using all CPUs.
 
     Examples
     --------
@@ -293,9 +297,12 @@ def extract_pz(
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
 
-    for channel in channels:
-        _extract_sacpz(
-            channel, suffix=suffix, outdir=outdir, keep_sensitivity=keep_sensitivity
+    with Pool(processes=processes) as pool:
+        args = [(ch, suffix, outdir, keep_sensitivity) for ch in channels]
+        pzfiles = pool.starmap(_extract_sacpz, args)
+        logger.info(
+            "%s SAC PZ files successfully extracted.",
+            len(pzfiles) - pzfiles.count(None),
         )
 
 
