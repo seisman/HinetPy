@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev29+gc70e580 文档</title>
+  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev30+g066a54e 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev29+gc70e580
+                v0.6.10.dev30+g066a54e
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -107,6 +107,24 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="HinetPy.win32.Channel.to_pz">
+<span class="sig-name descname"><span class="pre">to_pz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keep_sensitivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.Channel.to_pz" title="永久链接至目标"></a></dt>
+<dd><p>Convert NIED channel information to SAC polezero information.</p>
+<p>Transfer function = s^2 / (s^2+2hws+w^2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.10)"><em>bool</em></a>) – Keep sensitivity in the constant or not</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p>A tuple of (real, imaginary, constant).</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(在 Python v3.10)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py function">
