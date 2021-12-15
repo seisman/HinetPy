@@ -2,7 +2,6 @@ import filecmp
 import glob
 import os
 import shutil
-from multiprocessing import cpu_count
 
 import pytest
 from HinetPy import win32
