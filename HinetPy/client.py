@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 from distutils.version import LooseVersion
 from html.parser import HTMLParser
 from multiprocessing.pool import ThreadPool
+import urllib3
 
 import requests
 from pkg_resources import get_distribution
@@ -26,6 +27,9 @@ from .win32 import merge
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
 logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)
+
+# https://stackoverflow.com/a/63349178
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ALL:@SECLEVEL=1'
 
 
 class Client:
