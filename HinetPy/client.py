@@ -1225,21 +1225,21 @@ class Client(WaveformClient, CatalogClient, StationClient):
         :meth:`~HinetPy.client.Client.doctor` is a utility function which checks:
 
         - if HinetPy has a new release
-          (see :meth:`~HinetPy.client.Client.check_package_release`)
+          (see :meth:`~HinetPy.utils.check_package_release`)
         - if Hi-net web service is updated
           (see :meth:`~HinetPy.client.Client.check_service_update`)
         - if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH
-          (see :meth:`~HinetPy.client.Client.check_cmd_exists`)
+          (see :meth:`~HinetPy.utils.check_cmd_exists`)
 
         >>> client.doctor()
-        [2019-12-06 00:00:00] INFO: You're using the latest release (v0.x.x).
-        [2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.
-        [2019-12-06 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
-        [2019-12-06 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
+        You're using the latest release (v0.x.x).
+        Hi-net web service is NOT updated.
+        catwin32: /home/user/bin/catwin32.
+        win2sac_32: /home/user/bin/win2sac_32.
         """
-        self.check_package_release()
+        check_package_release()
         self.check_service_update()
-        self.check_cmd_exists()
+        check_cmd_exists()
 
     def _get_allowed_span(self, code):
         """Get allowed max span for each network.
