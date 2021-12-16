@@ -41,10 +41,6 @@ def test_check_package_release(client):
     assert not client.check_package_release()
 
 
-def test_check_cmd_exists(client):
-    assert client.check_cmd_exists()
-
-
 def test_docter(client):
     client.doctor()
 

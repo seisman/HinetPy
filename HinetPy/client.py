@@ -6,7 +6,6 @@ import json
 import logging
 import os
 import re
-import shutil
 import tempfile
 import time
 import zipfile
@@ -19,7 +18,13 @@ import requests
 from pkg_resources import get_distribution
 
 from .header import NETWORK
-from .utils import point_inside_box, point_inside_circular, split_integer, to_datetime
+from .utils import (
+    check_cmd_exists,
+    point_inside_box,
+    point_inside_circular,
+    split_integer,
+    to_datetime,
+)
 from .win32 import merge
 
 # Setup the logger
@@ -1311,29 +1316,6 @@ class Client(WaveformClient, CatalogClient, StationClient):
 
         logger.info(f"You're using the latest version (v{current_version}).")
         return False
-
-    def check_cmd_exists(self):
-        """Check if ``catwin32`` and ``win2sac_32`` from win32tools in PATH.
-
-        >>> client.check_cmd_exists()
-        [2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
-        [2017-01-01 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
-
-        This function reports errors if ``catwin32`` and/or ``win2sac_32``
-        are NOT found in PATH. In this case, please download win32tools from
-        `Hi-net <http://www.hinet.bosai.go.jp/>`_
-        and make sure both binary files are in your PATH.
-        """
-        error = 0
-        for cmd in ("catwin32", "win2sac_32"):
-            fullpath = shutil.which(cmd)
-            if fullpath:
-                logger.info(f"{cmd}: {fullpath}")
-            else:
-                logger.error(f"{cmd}: not found in PATH.")
-                error += 1
-
-        return False if error else True
 
     def info(self, code=None):
         """List information of networks.
