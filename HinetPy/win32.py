@@ -81,9 +81,7 @@ class Channel:
 
         Seismometers of the Hi-net network have a simple transfter function:
 
-                     s^2
-            T = ---------------
-                 s^2+2hws+w^2
+        T = s^2/(s^2+2hws+w^2)
 
         Parameters
         ----------
