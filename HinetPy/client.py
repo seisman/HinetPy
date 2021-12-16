@@ -28,9 +28,9 @@ logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%
 logger = logging.getLogger(__name__)
 
 
-class Client:
+class BaseClient:
     """
-    Core client for requesting Hi-net waveform data.
+    Base client for login in the Hi-net web site.
     """
 
     # Hinet website
@@ -160,28 +160,8 @@ class Client:
             msg = "Unauthorized. Check your username and password!"
             raise requests.ConnectionError(msg)
 
-    def doctor(self):
-        """Doctor does some checks.
 
-        :meth:`~HinetPy.client.Client.doctor` is a utility function which checks:
-
-        - if HinetPy has a new release
-          (see :meth:`~HinetPy.client.Client.check_package_release`)
-        - if Hi-net web service is updated
-          (see :meth:`~HinetPy.client.Client.check_service_update`)
-        - if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH
-          (see :meth:`~HinetPy.client.Client.check_cmd_exists`)
-
-        >>> client.doctor()
-        [2019-12-06 00:00:00] INFO: You're using the latest release (v0.x.x).
-        [2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.
-        [2019-12-06 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
-        [2019-12-06 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
-        """
-        self.check_package_release()
-        self.check_service_update()
-        self.check_cmd_exists()
-
+class WaveformClient(BaseClient):
     ###########################################################################
     #                                                                         #
     # Methods for requesting continuous waveforms.                            #
@@ -861,6 +841,8 @@ class Client:
             dirname = self._download_event_waveform(id)
             logger.info(f"{event} {dirname}")
 
+
+class CatalogClient(BaseClient):
     ###########################################################################
     #                                                                         #
     # Methods for get catalogs                                                #
@@ -949,6 +931,8 @@ class Client:
         """
         return self._get_catalog("mecha", startdate, span, filename, os)
 
+
+class StationClient(BaseClient):
     def get_station_list(self, code):
         """Get station list of a network.
 
@@ -1012,43 +996,6 @@ class Client:
         else:
             raise ValueError("Only support Hi-net, F-net, S-net and MeSO-net.")
         return stations
-
-    def _get_allowed_span(self, code):
-        """Get allowed max span for each network.
-
-        Hi-net server sets two limitations of data file size:
-
-        #. Number_of_channels * record_length(min.) <= 12000 min
-        #. record_length <= 60min
-
-        >>> client._get_allowed_span("0201")
-        60
-
-        Parameters
-        ----------
-        code: str
-            Network code.
-
-        Returns
-        -------
-        max_span: int
-            Maximum allowed span in mimutes.
-        """
-        # hard-coded total number of channels
-        channels = NETWORK[code].channels
-        # query the actual number of channels
-        if code in ("0101", "0103", "0103A"):
-            stations = self._get_selected_stations(code)
-            if stations != 0:
-                channels = stations * 3
-
-        if code in ("0103", "0103A"):
-            # Maximum allowed file size is ~55 MB for F-net
-            f_net_DL_factor = 8.8667638012
-            f_net_max_size = 55000
-            return int(f_net_max_size / (f_net_DL_factor * channels))
-        else:
-            return min(int(12000 / channels), 60)
 
     def _get_selected_stations(self, code):
         """Query the number of stations selected for requesting data.
@@ -1268,6 +1215,71 @@ class Client:
             "mode": "1",
         }
         self.session.post(self._CONT_SELECT, data=payload, timeout=self.timeout)
+
+
+class Client(WaveformClient, CatalogClient):
+    """
+    Core client for requesting Hi-net waveform data.
+    """
+
+    def doctor(self):
+        """Doctor does some checks.
+
+        :meth:`~HinetPy.client.Client.doctor` is a utility function which checks:
+
+        - if HinetPy has a new release
+          (see :meth:`~HinetPy.client.Client.check_package_release`)
+        - if Hi-net web service is updated
+          (see :meth:`~HinetPy.client.Client.check_service_update`)
+        - if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH
+          (see :meth:`~HinetPy.client.Client.check_cmd_exists`)
+
+        >>> client.doctor()
+        [2019-12-06 00:00:00] INFO: You're using the latest release (v0.x.x).
+        [2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.
+        [2019-12-06 00:00:00] INFO: catwin32: /home/user/bin/catwin32.
+        [2019-12-06 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.
+        """
+        self.check_package_release()
+        self.check_service_update()
+        self.check_cmd_exists()
+
+    def _get_allowed_span(self, code):
+        """Get allowed max span for each network.
+
+        Hi-net server sets two limitations of data file size:
+
+        #. Number_of_channels * record_length(min.) <= 12000 min
+        #. record_length <= 60min
+
+        >>> client._get_allowed_span("0201")
+        60
+
+        Parameters
+        ----------
+        code: str
+            Network code.
+
+        Returns
+        -------
+        max_span: int
+            Maximum allowed span in mimutes.
+        """
+        # hard-coded total number of channels
+        channels = NETWORK[code].channels
+        # query the actual number of channels
+        if code in ("0101", "0103", "0103A"):
+            stations = self._get_selected_stations(code)
+            if stations != 0:
+                channels = stations * 3
+
+        if code in ("0103", "0103A"):
+            # Maximum allowed file size is ~55 MB for F-net
+            f_net_DL_factor = 8.8667638012
+            f_net_max_size = 55000
+            return int(f_net_max_size / (f_net_DL_factor * channels))
+        else:
+            return min(int(12000 / channels), 60)
 
     def check_service_update(self):
         """Check if Hi-net service is updated.
