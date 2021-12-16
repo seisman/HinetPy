@@ -5,6 +5,7 @@ from datetime import date, datetime
 
 import pytest
 from HinetPy.utils import (
+    check_cmd_exists,
     haversine,
     point_inside_box,
     point_inside_circular,
@@ -86,3 +87,10 @@ def test_to_datetime():
 
     with pytest.raises(ValueError):
         to_datetime("2001023040506")
+
+
+def test_check_cmd_exists():
+    """
+    Make sure that all commands exist.
+    """
+    assert check_cmd_exists()

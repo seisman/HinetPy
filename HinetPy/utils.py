@@ -2,6 +2,7 @@
 Utility functions used in HinetPy.
 """
 import math
+import shutil
 from datetime import date, datetime
 
 
@@ -205,3 +206,28 @@ def to_datetime(value):
             strfmt = "%Y %m %d %H %M %S"
 
     return datetime.strptime(value, strfmt)
+
+
+def check_cmd_exists():
+    """
+    Check if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH.
+
+    >>> check_cmd_exists()
+    catwin32: /home/user/bin/catwin32.
+    win2sac_32: /home/user/bin/win2sac_32.
+
+    This function reports errors if ``catwin32`` and/or ``win2sac_32``
+    are NOT found in PATH. In this case, please download win32tools from
+    `Hi-net <http://www.hinet.bosai.go.jp/>`_
+    and make sure both binary files are in your PATH.
+    """
+    error = 0
+    for cmd in ["catwin32", "win2sac_32"]:
+        fullpath = shutil.which(cmd)
+        if fullpath:
+            print(f"{cmd}: {fullpath}")
+        else:
+            error += 1
+            print(f"{cmd}: not found in PATH.")
+
+    return False if error else True
