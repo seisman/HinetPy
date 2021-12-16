@@ -113,7 +113,7 @@ def test_extract_sac_with_polezero():
     """
     outdir = os.path.join(TESTDIR, "test6")
     win32.extract_sac(
-        data, ctable, filter_by_component=["N", "E"], outdir=outdir, with_pz=True
+        data, ctable, filter_by_component=["N", "E"], outdir=outdir, with_sacpz=True
     )
     sac = sorted(glob.glob(os.path.join(outdir, "N.*.SAC")))
     filelist = ["N.NGUH.E.SAC", "N.NGUH.N.SAC", "N.NNMH.E.SAC", "N.NNMH.N.SAC"]

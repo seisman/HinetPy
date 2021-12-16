@@ -137,7 +137,7 @@ def extract_sac(
     filter_by_id=None,
     filter_by_name=None,
     filter_by_component=None,
-    with_pz=False,
+    with_sacpz=False,
     processes=None,
 ):
     """Extract data as SAC format files.
@@ -162,11 +162,15 @@ def extract_sac(
         Filter channels by name.
     filter_by_component: list of str or wildcard
         Filter channels by component.
-    with_pz: bool
-        Aslo extract PZ files. PZ file has default suffix ``.SAC_PZ``.
+    with_sacpz: bool
+        Aslo extract SAC PZ files. PZ file has default suffix ``.SAC_PZ``.
     processes: int
         Number of processes to speed up data extraction parallelly.
         ``None`` means using all CPUs.
+
+    .. deprecated:: 0.7.0
+
+        Parameter ``with_pz`` is deprecated. Use ``with_sacpz`` instead.
 
     Note
     ----
@@ -222,7 +226,7 @@ def extract_sac(
                 len(sacfiles) - sacfiles.count(None),
             )
 
-        if with_pz:
+        if with_sacpz:
             # "SAC_PZ" here is hardcoded.
             pzfiles = pool.starmap(
                 _extract_sacpz, [(ch, "SAC_PZ", outdir) for ch in channels]

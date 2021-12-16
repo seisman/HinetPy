@@ -537,12 +537,10 @@ class Client:
         cleanup=True,
     ):
         """
-        .. versionchanged:: 0.6.0
+        .. deprecated:: 0.6.0
 
-            Deprecated.
-
-            :meth:`~HinetPy.client.Client.get_waveform` has been renamed to
-            :meth:`~HinetPy.client.Client.get_continuous_waveform`.
+            :meth:`~HinetPy.client.Client.get_waveform` is deprecated.
+            Use :meth:`~HinetPy.client.Client.get_continuous_waveform` instead.
         """
         logger.warning(
             "The get_waveform() function is deprecated. "
