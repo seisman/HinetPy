@@ -4,6 +4,10 @@ Utility functions used in HinetPy.
 import math
 import shutil
 from datetime import date, datetime
+from distutils.version import LooseVersion
+
+import requests
+from pkg_resources import get_distribution
 
 
 def split_integer(number, maxn):
@@ -212,12 +216,8 @@ def check_cmd_exists():
     """
     Check if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH.
 
-    >>> check_cmd_exists()
-    catwin32: /home/user/bin/catwin32.
-    win2sac_32: /home/user/bin/win2sac_32.
-
-    This function reports errors if ``catwin32`` and/or ``win2sac_32``
-    are NOT found in PATH. In this case, please download win32tools from
+    It reports errors if ``catwin32`` and/or ``win2sac_32`` are NOT found in PATH.
+    In this case, please download win32tools from
     `Hi-net <http://www.hinet.bosai.go.jp/>`_
     and make sure both binary files are in your PATH.
     """
@@ -229,5 +229,24 @@ def check_cmd_exists():
         else:
             error += 1
             print(f"{cmd}: not found in PATH.")
+    return not bool(error)
 
-    return False if error else True
+
+def check_package_release():
+    """
+    Check whether HinetPy has a new release.
+    """
+    url = "https://pypi.python.org/pypi/HinetPy/json"
+    res = requests.get(url)
+    if res.status_code != 200:
+        print("Error in connecting PyPI. Skipped.")
+        return False
+    latest_release = res.json()["info"]["version"]
+
+    current_version = f'{get_distribution("HinetPy").version}'
+    if LooseVersion(latest_release) > LooseVersion(current_version):
+        print(f"HinetPy v{latest_release} is released. See {url} for details.")
+        return True
+
+    print(f"You're using the latest version (v{current_version}).")
+    return False

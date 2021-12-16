@@ -37,10 +37,6 @@ def test_check_service_update(client):
     assert not client.check_service_update()
 
 
-def test_check_package_release(client):
-    assert not client.check_package_release()
-
-
 def test_docter(client):
     client.doctor()
 

@@ -10,16 +10,15 @@ import tempfile
 import time
 import zipfile
 from datetime import datetime, timedelta
-from distutils.version import LooseVersion
 from html.parser import HTMLParser
 from multiprocessing.pool import ThreadPool
 
 import requests
-from pkg_resources import get_distribution
 
 from .header import NETWORK
 from .utils import (
     check_cmd_exists,
+    check_package_release,
     point_inside_box,
     point_inside_circular,
     split_integer,
@@ -1293,29 +1292,6 @@ class Client(WaveformClient, CatalogClient, StationClient):
 
         logger.warning("Hi-net web service is updated. HinetPy may FAIL!")
         return True
-
-    def check_package_release(self):
-        """Check whether HinetPy has a new release.
-
-        >>> client.check_package_release()
-        [2019-12-06 00:00:00] INFO: You're using the latest release (v0.6.5).
-        """
-        url = "https://pypi.python.org/pypi/HinetPy/json"
-        r = requests.get(url)
-        if r.status_code != 200:
-            logger.warning("Error in connecting PyPI. Skipped.")
-            return False
-        latest_release = r.json()["info"]["version"]
-
-        current_version = f'{get_distribution("HinetPy").version}'
-        if LooseVersion(latest_release) > LooseVersion(current_version):
-            logger.warning(
-                f"HinetPy v{latest_release} is released. See {url} for details."
-            )
-            return True
-
-        logger.info(f"You're using the latest version (v{current_version}).")
-        return False
 
     def info(self, code=None):
         """List information of networks.
