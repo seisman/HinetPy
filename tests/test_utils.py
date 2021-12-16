@@ -6,6 +6,7 @@ from datetime import date, datetime
 import pytest
 from HinetPy.utils import (
     check_cmd_exists,
+    check_package_release,
     haversine,
     point_inside_box,
     point_inside_circular,
@@ -94,3 +95,10 @@ def test_check_cmd_exists():
     Make sure that all commands exist.
     """
     assert check_cmd_exists()
+
+
+def test_check_package_release():
+    """
+    Check if there is a new release.
+    """
+    assert not check_package_release()

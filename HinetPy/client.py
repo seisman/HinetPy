@@ -10,16 +10,15 @@ import tempfile
 import time
 import zipfile
 from datetime import datetime, timedelta
-from distutils.version import LooseVersion
 from html.parser import HTMLParser
 from multiprocessing.pool import ThreadPool
 
 import requests
-from pkg_resources import get_distribution
 
 from .header import NETWORK
 from .utils import (
     check_cmd_exists,
+    check_package_release,
     point_inside_box,
     point_inside_circular,
     split_integer,
@@ -171,19 +170,19 @@ class Client:
         :meth:`~HinetPy.client.Client.doctor` is a utility function which checks:
 
         - if HinetPy has a new release
-          (see :meth:`~HinetPy.client.Client.check_package_release`)
+          (see :meth:`~HinetPy.utils.check_package_release`)
         - if Hi-net web service is updated
           (see :meth:`~HinetPy.client.Client.check_service_update`)
         - if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH
           (see :meth:`~HinetPy.utils.check_cmd_exists`)
 
         >>> client.doctor()
-        [2019-12-06 00:00:00] INFO: You're using the latest release (v0.x.x).
+        You're using the latest release (v0.x.x).
         [2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.
         catwin32: /home/user/bin/catwin32.
         INFO: win2sac_32: /home/user/bin/win2sac_32.
         """
-        self.check_package_release()
+        check_package_release()
         self.check_service_update()
         check_cmd_exists()
 
@@ -1287,29 +1286,6 @@ class Client:
 
         logger.warning("Hi-net web service is updated. HinetPy may FAIL!")
         return True
-
-    def check_package_release(self):
-        """Check whether HinetPy has a new release.
-
-        >>> client.check_package_release()
-        [2019-12-06 00:00:00] INFO: You're using the latest release (v0.6.5).
-        """
-        url = "https://pypi.python.org/pypi/HinetPy/json"
-        r = requests.get(url)
-        if r.status_code != 200:
-            logger.warning("Error in connecting PyPI. Skipped.")
-            return False
-        latest_release = r.json()["info"]["version"]
-
-        current_version = f'{get_distribution("HinetPy").version}'
-        if LooseVersion(latest_release) > LooseVersion(current_version):
-            logger.warning(
-                f"HinetPy v{latest_release} is released. See {url} for details."
-            )
-            return True
-
-        logger.info(f"You're using the latest version (v{current_version}).")
-        return False
 
     def info(self, code=None):
         """List information of networks.
