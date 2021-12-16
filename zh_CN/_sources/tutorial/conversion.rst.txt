@@ -19,8 +19,8 @@ Extract waveform data of all channels as SAC format.
 
     The SAC files converted from win32 format are **NOT** in digital counts!!!
 
-    ``win2sac_32`` automatically removes sensitivity from waveforms and 
-    multipy by 1.0e9. Thus, the SAC files are velocity in nm/s or 
+    ``win2sac_32`` automatically removes sensitivity from waveforms and
+    multipy by 1.0e9. Thus, the SAC files are velocity in nm/s or
     accelaration in nm/s/s.
 
 The SAC files have a default filename ``STATION.COMPONENT.SAC`` (e.g. ``N.NABC.U.SAC``).
@@ -42,12 +42,12 @@ They accept a list of string or a string contains wildcard.
 Extract PZ
 ----------
 
-:meth:`~HinetPy.win32.extract_pz` can convert instrumental responses 
+:meth:`~HinetPy.win32.extract_sacpz` can convert instrumental responses
 from Hi-net's channel table to SAC PZ format.
 
 .. warning::
 
-    This function works for Hi-net network only. 
+    This function works for Hi-net network only.
 
     F-net data users are highly recommended to use `FnetPy <https://github.com/seisman/FnetPy>`_
     to request waveform data in SEED format and extract instrumental responses
@@ -55,23 +55,23 @@ from Hi-net's channel table to SAC PZ format.
 
 Extract information of all channels as SACPZ file:
 
->>> win32.extract_pz(ctable)
+>>> win32.extract_sacpz(ctable)
 
 The SACPZ file has a default name ``STATION.COMPONENT.SAC_PZ`` (e.g. ``N.NABC.U.SAC_PZ``).
 You can specify another SACPZ suffix and a different output directory.
 
->>> win32.extract_pz(ctable, suffix="SACPZ", outdir="PZ/")
+>>> win32.extract_sacpz(ctable, suffix="SACPZ", outdir="PZ/")
 
 If you want to extract only a small subset of channels, you can use ``filter_by_id``,
 ``filter_by_name`` and/or ``filter_by_component`` to filter the channels.
 They accept a list of string or a string contains wildcard.
 
 >>> # extract 3 channles by id
->>> win32.extract_pz(ctable, filter_by_id=["3e83", "3e84", "3e85"])
+>>> win32.extract_sacpz(ctable, filter_by_id=["3e83", "3e84", "3e85"])
 >>> # extract all channels whose name match 'N.NA*'
->>> win32.extract_pz(ctable, filter_by_name="N.NA*")
+>>> win32.extract_sacpz(ctable, filter_by_name="N.NA*")
 >>> # extract vertical(U) component channels whose name match 'N.NA*'
->>> win32.extract_pz(ctable, filter_by_name="N.NA*", filter_by_component="U")
+>>> win32.extract_sacpz(ctable, filter_by_name="N.NA*", filter_by_component="U")
 
 .. seealso::
 

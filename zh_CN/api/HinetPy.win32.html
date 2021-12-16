@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev40+g506ab17 文档</title>
+  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev41+gc9814af 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev40+g506ab17
+                v0.6.10.dev41+gc9814af
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -189,8 +189,8 @@ Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.</p
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="HinetPy.win32.extract_pz">
-<span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">extract_pz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SAC_PZ'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_sensitivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_chid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.extract_pz" title="永久链接至目标"></a></dt>
+<dt class="sig sig-object py" id="HinetPy.win32.extract_sacpz">
+<span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">extract_sacpz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SAC_PZ'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_sensitivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_chid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.extract_sacpz" title="永久链接至目标"></a></dt>
 <dd><p>从通道表中提取仪器响应信息并保存为SAC零极点文件。</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
@@ -216,19 +216,29 @@ So the generated polezero file should omit the sensitivity.</p></li>
 </dl>
 <div class="admonition- admonition">
 <p class="admonition-title">实际案例</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sacpz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>提取所有通道并指定SAC零极点文件后缀和输出目录：</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sacpz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>只提取指定通道：</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pz</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sacpz</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">&quot;[NE]&quot;</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="HinetPy.win32.extract_pz">
+<span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">extract_pz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.extract_pz" title="永久链接至目标"></a></dt>
+<dd><p>从通道表中提取仪器响应信息并保存为SAC零极点文件。</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">0.7.0 版后已移除: </span><a class="reference internal" href="#HinetPy.win32.extract_pz" title="HinetPy.win32.extract_pz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_pz()</span></code></a> is deprecated.
+Use <a class="reference internal" href="#HinetPy.win32.extract_sacpz" title="HinetPy.win32.extract_sacpz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_sacpz()</span></code></a> instead.</p>
 </div>
 </dd></dl>
 

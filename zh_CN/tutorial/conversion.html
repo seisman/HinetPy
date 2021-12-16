@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>数据转换 &mdash; HinetPy v0.6.10.dev40+g506ab17 文档</title>
+  <title>数据转换 &mdash; HinetPy v0.6.10.dev41+gc9814af 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev40+g506ab17
+                v0.6.10.dev41+gc9814af
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -122,27 +122,28 @@
 </section>
 <section id="extract-pz">
 <h2>提取零极点文件<a class="headerlink" href="#extract-pz" title="永久链接至标题"></a></h2>
-<p><a class="reference internal" href="../api/HinetPy.win32.html#HinetPy.win32.extract_pz" title="HinetPy.win32.extract_pz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_pz()</span></code></a> 可以将仪器响应从Hi-net的通道表格式转换为SAC PZ格式。</p>
+<p><a class="reference internal" href="../api/HinetPy.win32.html#HinetPy.win32.extract_sacpz" title="HinetPy.win32.extract_sacpz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_sacpz()</span></code></a> can convert instrumental responses
+from Hi-net’s channel table to SAC PZ format.</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p>此功能仅对Hi-net台网有效。</p>
 <p>强烈建议F-net数据用户使用 <a class="reference external" href="http://github.com/seisman/FnetPy">FnetPy</a> 从Fnet网站申请SEED格式的数据，并从SEED文件中提取RESP或PZ格式的仪器响应。</p>
 </div>
 <p>提取所有通道的仪器响应并保存为SACPZ文件：</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>SACPZ文件的默认文件名格式为 <code class="docutils literal notranslate"><span class="pre">STATION.COMPONENT.SAC_PZ</span></code> （例如 <code class="docutils literal notranslate"><span class="pre">N.NABC.U.SAC_PZ</span></code> ）。你可以指定其他SACPZ文件后缀和输出目录。</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SACPZ&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;PZ/&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SACPZ&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;PZ/&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>如果你只想提取一部分通道的波形数据，你可以使用 <code class="docutils literal notranslate"><span class="pre">filter_by_id</span></code> 、 <code class="docutils literal notranslate"><span class="pre">filter_by_name</span></code> 和/或 <code class="docutils literal notranslate"><span class="pre">filter_by_component</span></code> 以筛选需要的通道。这些参数都可以接受字符串列表或者包含通配符的字符串。</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract 3 channles by id</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;3e83&quot;</span><span class="p">,</span> <span class="s2">&quot;3e84&quot;</span><span class="p">,</span> <span class="s2">&quot;3e85&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;3e83&quot;</span><span class="p">,</span> <span class="s2">&quot;3e84&quot;</span><span class="p">,</span> <span class="s2">&quot;3e85&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match &#39;N.NA*&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract vertical(U) component channels whose name match &#39;N.NA*&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
