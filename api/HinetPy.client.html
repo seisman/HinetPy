@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev44+g94c7169 documentation</title>
+  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev46+g93e7ac2 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev44+g94c7169
+                v0.6.10.dev46+g93e7ac2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -152,17 +152,17 @@ unless you know what you’re doing.</p>
 <p><a class="reference internal" href="#HinetPy.client.Client.doctor" title="HinetPy.client.Client.doctor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">doctor()</span></code></a> is a utility function which checks:</p>
 <ul class="simple">
 <li><p>if HinetPy has a new release
-(see <a class="reference internal" href="#HinetPy.client.Client.check_package_release" title="HinetPy.client.Client.check_package_release"><code class="xref py py-meth docutils literal notranslate"><span class="pre">check_package_release()</span></code></a>)</p></li>
+(see <a class="reference internal" href="HinetPy.utils.html#HinetPy.utils.check_package_release" title="HinetPy.utils.check_package_release"><code class="xref py py-meth docutils literal notranslate"><span class="pre">check_package_release()</span></code></a>)</p></li>
 <li><p>if Hi-net web service is updated
 (see <a class="reference internal" href="#HinetPy.client.Client.check_service_update" title="HinetPy.client.Client.check_service_update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">check_service_update()</span></code></a>)</p></li>
 <li><p>if <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> and <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> from win32tools are in PATH
-(see <a class="reference internal" href="#HinetPy.client.Client.check_cmd_exists" title="HinetPy.client.Client.check_cmd_exists"><code class="xref py py-meth docutils literal notranslate"><span class="pre">check_cmd_exists()</span></code></a>)</p></li>
+(see <a class="reference internal" href="HinetPy.utils.html#HinetPy.utils.check_cmd_exists" title="HinetPy.utils.check_cmd_exists"><code class="xref py py-meth docutils literal notranslate"><span class="pre">check_cmd_exists()</span></code></a>)</p></li>
 </ul>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">doctor</span><span class="p">()</span>
-<span class="go">[2019-12-06 00:00:00] INFO: You&#39;re using the latest release (v0.x.x).</span>
+<span class="go">You&#39;re using the latest release (v0.x.x).</span>
 <span class="go">[2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.</span>
-<span class="go">[2019-12-06 00:00:00] INFO: catwin32: /home/user/bin/catwin32.</span>
-<span class="go">[2019-12-06 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
+<span class="go">catwin32: /home/user/bin/catwin32.</span>
+<span class="go">INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -501,31 +501,6 @@ parameters.</p></li>
 <span class="go">[2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HinetPy.client.Client.check_package_release">
-<span class="sig-name descname"><span class="pre">check_package_release</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_package_release" title="Permalink to this definition"></a></dt>
-<dd><p>Check whether HinetPy has a new release.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_package_release</span><span class="p">()</span>
-<span class="go">[2019-12-06 00:00:00] INFO: You&#39;re using the latest release (v0.6.5).</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HinetPy.client.Client.check_cmd_exists">
-<span class="sig-name descname"><span class="pre">check_cmd_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_cmd_exists" title="Permalink to this definition"></a></dt>
-<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> and <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> from win32tools in PATH.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_cmd_exists</span><span class="p">()</span>
-<span class="go">[2017-01-01 00:00:00] INFO: catwin32: /home/user/bin/catwin32.</span>
-<span class="go">[2017-01-01 00:00:00] INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
-</pre></div>
-</div>
-<p>This function reports errors if <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> and/or <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code>
-are NOT found in PATH. In this case, please download win32tools from
-<a class="reference external" href="http://www.hinet.bosai.go.jp/">Hi-net</a>
-and make sure both binary files are in your PATH.</p>
 </dd></dl>
 
 <dl class="py method">
