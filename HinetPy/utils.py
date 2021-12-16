@@ -229,7 +229,7 @@ def check_cmd_exists():
         else:
             error += 1
             print(f"{cmd}: not found in PATH.")
-    return bool(error)
+    return not bool(error)
 
 
 def check_package_release():
