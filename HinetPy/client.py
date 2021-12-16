@@ -1217,7 +1217,7 @@ class StationClient(BaseClient):
         self.session.post(self._CONT_SELECT, data=payload, timeout=self.timeout)
 
 
-class Client(WaveformClient, CatalogClient):
+class Client(WaveformClient, CatalogClient, StationClient):
     """
     Core client for requesting Hi-net waveform data.
     """
