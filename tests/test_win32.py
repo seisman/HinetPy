@@ -137,12 +137,12 @@ def test_extract_sac_none_input():
     assert win32.extract_sac(None, None) is None
 
 
-def test_extract_pz_default():
+def test_extract_sacpz_default():
     """
     Extract SAC PZ files using default settings.
     """
     outdir = os.path.join(TESTDIR, "ch1")
-    win32.extract_pz(ctable, outdir=outdir)
+    win32.extract_sacpz(ctable, outdir=outdir)
     pz_to_check = [
         "N.NNMH.U.SAC_PZ",
         "N.NNMH.N.SAC_PZ",
@@ -154,12 +154,12 @@ def test_extract_pz_default():
     assert sorted(os.listdir(outdir)) == sorted(pz_to_check)
 
 
-def test_extract_pz_custom_suffix():
+def test_extract_sacpz_custom_suffix():
     """
     Extract SAC PZ files using custom suffix.
     """
     outdir = os.path.join(TESTDIR, "ch2")
-    win32.extract_pz(ctable, suffix="SACPZ", outdir=outdir, keep_sensitivity=True)
+    win32.extract_sacpz(ctable, suffix="SACPZ", outdir=outdir, keep_sensitivity=True)
     pz_to_check = [
         "N.NNMH.U.SACPZ",
         "N.NNMH.N.SACPZ",
@@ -171,17 +171,17 @@ def test_extract_pz_custom_suffix():
     assert sorted(os.listdir(outdir)) == sorted(pz_to_check)
 
 
-def test_extract_pz_filter_by_component():
+def test_extract_sacpz_filter_by_component():
     """
     Extract SAC PZ files by filtering channels using components.
     """
     outdir = os.path.join(TESTDIR, "ch3")
-    win32.extract_pz(ctable, filter_by_component="U", outdir=outdir)
+    win32.extract_sacpz(ctable, filter_by_component="U", outdir=outdir)
     pz_to_check = ["N.NNMH.U.SAC_PZ", "N.NGUH.U.SAC_PZ"]
     assert sorted(os.listdir(outdir)) == sorted(pz_to_check)
 
 
-def test_extract_pz_non_input():
+def test_extract_sacpz_non_input():
     """
     Return None if the input is None.
     """

@@ -74,7 +74,7 @@ responses as SAC polezero files.
     win32.extract_sac(data, ctable)
 
     # Let's extract instrument response as PZ files from the channel table file
-    win32.extract_pz(ctable)
+    win32.extract_sacpz(ctable)
 
     # Now you can see several SAC and SAC_PZ files in your working directory
 

@@ -237,7 +237,7 @@ def extract_sac(
             )
 
 
-def extract_pz(
+def extract_sacpz(
     ctable,
     suffix="SAC_PZ",
     outdir=".",
@@ -280,15 +280,15 @@ def extract_pz(
 
     Examples
     --------
-    >>> extract_pz("0101_20100101.ch")
+    >>> extract_sacpz("0101_20100101.ch")
 
     Extract all channel with specified suffix and output directory:
 
-    >>> extract_pz("0101_20100101.ch", suffix="", outdir="20100101000")
+    >>> extract_sacpz("0101_20100101.ch", suffix="", outdir="20100101000")
 
     Extract only specified channels:
 
-    >>> extract_pz(
+    >>> extract_sacpz(
     ...     "0101_20100101.ch", filter_by_name="N.NA*", filter_by_component="[NE]"
     ... )
     """
@@ -311,6 +311,19 @@ def extract_pz(
             "%s SAC PZ files successfully extracted.",
             len(pzfiles) - pzfiles.count(None),
         )
+
+
+def extract_pz(**kwargs):
+    """
+    Extract instrumental response in SAC PZ format from channel table.
+
+    .. deprecated:: 0.7.0
+
+        :meth:`~HinetPy.win32.extract_pz` is deprecated.
+        Use :meth:`~HinetPy.win32.extract_sacpz` instead.
+    """
+    logger.warning("Function extract_pz() is deprecated. Use extract_sacpz() instead.")
+    return extract_sacpz(**kwargs)
 
 
 def read_ctable(ctable):
