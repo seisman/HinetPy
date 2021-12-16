@@ -21,6 +21,7 @@ class Channel:
     """Class for channel."""
 
     # pylint: disable=too-many-instance-attributes,invalid-name,redefined-builtin
+    # pylint: disable=too-few-public-methods
     def __init__(
         self,
         id=None,
@@ -169,7 +170,6 @@ def extract_sac(
 
     Note
     ----
-
     ``win2sac`` removes sensitivity from waveform data, then multiply by 1.0e9.
     Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.
 
@@ -213,8 +213,10 @@ def extract_sac(
     with Pool(processes=processes) as pool:
         with tempfile.NamedTemporaryFile() as ftmp:
             _write_winprm(ctable, ftmp.name)
-            args = [(data, ch, suffix, outdir, ftmp.name, pmax) for ch in channels]
-            sacfiles = pool.starmap(_extract_channel, args)
+            sacfiles = pool.starmap(
+                _extract_channel,
+                [(data, ch, suffix, outdir, ftmp.name, pmax) for ch in channels],
+            )
             logger.info(
                 "%s SAC data successfully extracted.",
                 len(sacfiles) - sacfiles.count(None),
@@ -222,8 +224,9 @@ def extract_sac(
 
         if with_pz:
             # "SAC_PZ" here is hardcoded.
-            args = [(ch, "SAC_PZ", outdir) for ch in channels]
-            pzfiles = pool.starmap(_extract_sacpz, args)
+            pzfiles = pool.starmap(
+                _extract_sacpz, [(ch, "SAC_PZ", outdir) for ch in channels]
+            )
             logger.info(
                 "%s SAC PZ files successfully extracted.",
                 len(pzfiles) - pzfiles.count(None),
@@ -257,9 +260,9 @@ def extract_pz(
         Suffix of SAC PZ files. Defaults to ``SAC_PZ``.
     outdir: str
         Output directory. Defaults to current directory.
-    keep_sensivity: bool
-        win2sac automatically removes sensivity from waveform data
-        during the win32-to-SAC format conversion.
+    keep_sensitivity: bool
+        The ``win2sac_32`` program automatically removes sensitivity from waveform
+        data during the win32-to-SAC format conversion.
         So the generated polezero file should omit the sensitivity.
     filter_by_id: list of str or wildcard
         Filter channels by ID.
@@ -267,7 +270,7 @@ def extract_pz(
         Filter channels by name.
     filter_by_component: list of str or wildcard
         Filter channels by component.
-    processes: int
+    processes: None or int
         Number of processes to speed up data extraction parallelly.
         ``None`` means using all CPUs.
 
@@ -396,11 +399,10 @@ def _filter_channels(
 
 def _write_winprm(ctable, prmfile="win.prm"):
     """
-    Four line parameters file.
+    Write a four-line parameter file.
     """
-
     with open(prmfile, "w", encoding="utf8") as fprm:
-        msg = ".\n" + ctable + "\n" + ".\n.\n"
+        msg = "\n".join([".", ctable, ".", "."])
         fprm.write(msg)
 
 
@@ -423,6 +425,11 @@ def _extract_channel(
         Win32 parameter file.
     pmax: int
         Maximum number of data points.
+
+    Returns
+    -------
+    str:
+        The extracted SAC file name.
     """
 
     cmd = [
@@ -464,6 +471,24 @@ def _extract_channel(
 
 
 def _extract_sacpz(channel, suffix="SAC_PZ", outdir=".", keep_sensitivity=False):
+    """Extract one SAC PZ file from a channel table file.
+
+    Parameters
+    ----------
+    channel: str
+        Channel to be extracted.
+    suffix: str
+        Suffix of the SAC PZ file.
+    outdir: str
+        Output directory.
+    keep_sensitivity: bool
+        Keep sensitivity in the "constant" or not.
+
+    Returns
+    -------
+    str:
+        The extracted SAC PZ file name.
+    """
     pzfile = f"{channel.name}.{channel.component}"
     if suffix:
         pzfile += "." + suffix
