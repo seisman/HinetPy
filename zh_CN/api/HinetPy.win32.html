@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev42+gfd13083 文档</title>
+  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev43+gb4573b8 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev42+gfd13083
+                v0.6.10.dev43+gb4573b8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -112,15 +112,7 @@
 <span class="sig-name descname"><span class="pre">write_sacpz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pzfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_sensitivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.Channel.write_sacpz" title="永久链接至目标"></a></dt>
 <dd><p>Write channel information into a SAC polezero file.</p>
 <p>Seismometers of the Hi-net network have a simple transfter function:</p>
-<blockquote>
-<div><blockquote>
-<div><p>s^2</p>
-</div></blockquote>
-<dl class="simple">
-<dt>T = —————</dt><dd><p>s^2+2hws+w^2</p>
-</dd>
-</dl>
-</div></blockquote>
+<p>T = s^2/(s^2+2hws+w^2)</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数</dt>
 <dd class="field-odd"><ul class="simple">
