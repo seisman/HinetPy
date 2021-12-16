@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev37+g93237f2 文档</title>
+  <title>HinetPy.win32 模块 &mdash; HinetPy v0.6.10.dev38+gc7fa23a 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev37+g93237f2
+                v0.6.10.dev38+gc7fa23a
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -202,13 +202,13 @@ Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.</p
 <li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 通道表文件。</p></li>
 <li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – SAC零极点文件后缀，默认为 <code class="docutils literal notranslate"><span class="pre">SAC_PZ</span></code> 。</p></li>
 <li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 输出目录。默认输出到当前目录。</p></li>
-<li><p><strong>keep_sensivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.10)"><em>bool</em></a>) – win2sac automatically removes sensivity from waveform data
-during the win32-to-SAC format conversion.
+<li><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(在 Python v3.10)"><em>bool</em></a>) – The <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> program automatically removes sensitivity from waveform
+data during the win32-to-SAC format conversion.
 So the generated polezero file should omit the sensitivity.</p></li>
 <li><p><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按ID筛选通道。</p></li>
 <li><p><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照台站名筛选通道。</p></li>
 <li><p><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – 按照分量筛选通道。</p></li>
-<li><p><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.10)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly.
+<li><p><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(在 Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.10)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly.
 <code class="docutils literal notranslate"><span class="pre">None</span></code> means using all CPUs.</p></li>
 </ul>
 </dd>
