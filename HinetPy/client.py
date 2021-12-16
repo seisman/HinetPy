@@ -1047,8 +1047,7 @@ class Client:
             f_net_DL_factor = 8.8667638012
             f_net_max_size = 55000
             return int(f_net_max_size / (f_net_DL_factor * channels))
-        else:
-            return min(int(12000 / channels), 60)
+        return min(int(12000 / channels), 60)
 
     def _get_selected_stations(self, code):
         """Query the number of stations selected for requesting data.
