@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.win32 module &mdash; HinetPy v0.6.10.dev51+g9ee966f documentation</title>
+  <title>HinetPy.win32 module &mdash; HinetPy v0.6.10.dev52+gad90991 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev51+g9ee966f
+                v0.6.10.dev52+gad90991
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -87,14 +87,14 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="HinetPy.win32.Channel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">Channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">damping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preamplification</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lsb_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.Channel" title="Permalink to this definition"></a></dt>
-<dd><p>Class for channel.</p>
+<dd><p>Class for channel which contain information for channels.</p>
 <p>Initialize a channel.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Channel ID.</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Station Name.</p></li>
-<li><p><strong>component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Channel component name (e.g., <code class="docutils literal notranslate"><span class="pre">U|N|E</span></code>).</p></li>
+<li><p><strong>component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Channel component name (e.g., <code class="docutils literal notranslate"><span class="pre">U</span></code>, <code class="docutils literal notranslate"><span class="pre">N</span></code> or <code class="docutils literal notranslate"><span class="pre">E</span></code>).</p></li>
 <li><p><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Station latitude.</p></li>
 <li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Station longitude.</p></li>
 <li><p><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Unit of data (e.g., <code class="docutils literal notranslate"><span class="pre">m</span></code>, <code class="docutils literal notranslate"><span class="pre">m/s</span></code>, <code class="docutils literal notranslate"><span class="pre">m/s/s</span></code>, <code class="docutils literal notranslate"><span class="pre">rad</span></code>).</p></li>
@@ -106,16 +106,19 @@
 </ul>
 </dd>
 </dl>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
+<p>The Hi-net website uses the moving-coil velocity-type seismometer.
+See <a class="reference internal" href="../appendix/response.html"><span class="doc">Instrumental Response</span></a> for details.</p>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.win32.Channel.write_sacpz">
 <span class="sig-name descname"><span class="pre">write_sacpz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pzfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_sensitivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.Channel.write_sacpz" title="Permalink to this definition"></a></dt>
 <dd><p>Write channel information into a SAC polezero file.</p>
-<p>Seismometers of the Hi-net network have a simple transfter function:</p>
-<p>T = s^2/(s^2+2hws+w^2)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pzfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – SAC PoleZero filename.</p></li>
+<li><p><strong>pzfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Name of the SAC PoleZero file.</p></li>
 <li><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Keep sensitivity in the “constant” or not.</p></li>
 </ul>
 </dd>
@@ -138,16 +141,19 @@
 <li><p><strong>pmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Maximum number of data points for a single channel. Defaults to 8640000.
 If the win32 data have data points more than 8640000 (i.e., longer than
 one day for a 100 Hz sampling rate), you MUST increase <code class="docutils literal notranslate"><span class="pre">pmax</span></code>.</p></li>
-<li><p><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by ID.</p></li>
-<li><p><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by name.</p></li>
-<li><p><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by component.</p></li>
-<li><p><strong>with_sacpz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Aslo extract SAC PZ files. PZ file has default suffix <code class="docutils literal notranslate"><span class="pre">.SAC_PZ</span></code>.</p></li>
-<li><p><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly.
+<li><p><strong>filter_by_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Filter channels by ID. It can be a list of IDs or a wildcard.</p></li>
+<li><p><strong>filter_by_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Filter channels by name. It can be a list of names or a wildcard.</p></li>
+<li><p><strong>filter_by_component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Filter channels by component. It can be a list of component names or
+a wildcard.</p></li>
+<li><p><strong>with_sacpz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Aslo extract SAC PZ files. The default suffix is <code class="docutils literal notranslate"><span class="pre">.SAC_PZ</span></code>.</p></li>
+<li><p><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly.
 <code class="docutils literal notranslate"><span class="pre">None</span></code> means using all CPUs.</p></li>
-<li><p><strong>deprecated:</strong> (<em>.</em>) – 0.7.0: Parameter <code class="docutils literal notranslate"><span class="pre">with_pz</span></code> is deprecated. Use <code class="docutils literal notranslate"><span class="pre">with_sacpz</span></code> instead.</p></li>
 </ul>
 </dd>
 </dl>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.7.0: </span>Parameter <code class="docutils literal notranslate"><span class="pre">with_pz</span></code> is deprecated. Use <code class="docutils literal notranslate"><span class="pre">with_sacpz</span></code> instead.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">win2sac</span></code> removes sensitivity from waveform data, then multiply by 1.0e9.
@@ -198,9 +204,10 @@ Thus the extracted SAC files are velocity in nm/s, or acceleration in nm/s/s.</p
 <li><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – The <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> program automatically removes sensitivity from waveform
 data during the win32-to-SAC format conversion.
 So the generated polezero file should omit the sensitivity.</p></li>
-<li><p><strong>filter_by_id</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by ID.</p></li>
-<li><p><strong>filter_by_name</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by name.</p></li>
-<li><p><strong>filter_by_component</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Filter channels by component.</p></li>
+<li><p><strong>filter_by_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Filter channels by ID. It can be a list of IDs or a wildcard.</p></li>
+<li><p><strong>filter_by_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Filter channels by name. It can be a list of names or a wildcard.</p></li>
+<li><p><strong>filter_by_component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Filter channels by component. It can be a list of component names or
+a wildcard.</p></li>
 <li><p><strong>processes</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly.
 <code class="docutils literal notranslate"><span class="pre">None</span></code> means using all CPUs.</p></li>
 </ul>
@@ -253,12 +260,12 @@ Use <a class="reference internal" href="#HinetPy.win32.extract_sacpz" title="Hin
 
 <dl class="py function">
 <dt class="sig sig-object py" id="HinetPy.win32.merge">
-<span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.merge" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.merge" title="Permalink to this definition"></a></dt>
 <dd><p>Merge several win32 files to one win32 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>datas</strong> (<em>list of str</em><em> or </em><em>wildcard</em>) – Win32 files to be merged.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Win32 files to be merged. It can be a list of file names or a wildcard.</p></li>
 <li><p><strong>total_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Filename of ouput win32 file.</p></li>
 <li><p><strong>force_sort</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Sort all win32 files by date.</p></li>
 </ul>
@@ -268,15 +275,15 @@ Use <a class="reference internal" href="#HinetPy.win32.extract_sacpz" title="Hin
 <p class="admonition-title">Examples</p>
 <p>If win32 files are named by starttime (e.g. <code class="docutils literal notranslate"><span class="pre">201304040203.cnt</span></code>), sorting
 win32 files in list by name/time is prefered:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">datas</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;20130404*.cnt&quot;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">datas</span><span class="p">,</span> <span class="s2">&quot;outdir/final.cnt&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;20130404*.cnt&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;outdir/final.cnt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If win32 files are named randomly, you should set <code class="docutils literal notranslate"><span class="pre">force_sort</span></code> to
 <code class="docutils literal notranslate"><span class="pre">True</span></code> to force <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> to sort all data by time.
 However, it’s time consuming. Do NOT use it unless necessary:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">datas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;001.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;002.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;003.cnt&quot;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">datas</span><span class="p">,</span> <span class="s2">&quot;final.cnt&quot;</span><span class="p">,</span> <span class="n">force_sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;001.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;002.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;003.cnt&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;final.cnt&quot;</span><span class="p">,</span> <span class="n">force_sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You can also use wildcard to specify the win32 files to be merged.</p>
