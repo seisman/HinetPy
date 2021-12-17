@@ -20,7 +20,7 @@ omit = []
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--verbose --doctest-modules --cov=HinetPy --cov-report=term-missing --cov-report=xml"
+addopts = "--verbose --cov=HinetPy --cov-report=term-missing --cov-report=xml"
 
 [tool.isort]
 profile = "black"
