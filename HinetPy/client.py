@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 
 class BaseClient:
     """
-    Base client for login in the Hi-net web site.
+    Base client to login in the Hi-net website.
     """
 
     # Hinet website
@@ -78,22 +78,21 @@ class BaseClient:
         sleep_time_in_seconds=5,
         max_sleep_count=30,
     ):
-        """Hi-net web service client.
-
+        """
         Parameters
         ----------
         user: str
             Username of Hi-net account.
         password: str
             Password of Hi-net account.
-        timeout: int or float
+        timeout: float
             Time to wait for the server to send data before giving up.
         retries: int
             How many times to retry if a request fails.
-        sleep_time_in_seconds: int or float
+        sleep_time_in_seconds: float
             Sleep time between each data status check. See notes below.
         max_sleep_count: int
-            Maximum number of sleeps before fail. See notes below.
+            Maximum number of sleeps before failing. See notes below.
 
         Notes
         -----
@@ -139,15 +138,15 @@ class BaseClient:
 
         Examples
         --------
-
         >>> from HinetPy import Client
         >>> client = Client()
         >>> client.login("username", "password")
         """
         self.user = user
-        # Hinet automatically trims password longer than 12 characters
-        if len(password) > 12:
-            logger.warning("Password with more than 12 characters may FAIL!")
+        if len(password) > 12:  # Hinet truncates password longer than 12 characters
+            logger.warning(
+                "Password longer than 12 characters may be truncated by Hi-net server."
+            )
         self.password = password[0:12]
         self.session = requests.Session()
         auth = {
@@ -155,10 +154,10 @@ class BaseClient:
             "auth_pw": self.password,
         }
         self.session.get(self._AUTH, timeout=self.timeout)  # get cookie
-        r = self.session.post(self._AUTH, data=auth, timeout=self.timeout)
+        res = self.session.post(self._AUTH, data=auth, timeout=self.timeout)
 
-        # Hi-net server return 200 even when unauthorized,
-        # thus I have to check the webpage content
+        # Hi-net server returns 200 even when the username or password is wrong, thus
+        # I have to check the webpage content to make sure login is successful
         inout = re.search(r"auth_log(?P<LOG>.*)\.png", r.text).group("LOG")
         if inout == "out":
             msg = "Unauthorized. Check your username and password!"
