@@ -457,7 +457,7 @@ class WaveformClient(BaseClient):
                 logger.error("No data requested succesuflly. Skipped.")
                 return None, None
             # check if all ids are not None
-            if not all([job.id for job in jobs]):
+            if not all(job.id for job in jobs):
                 logger.error("Fail to request some data. Skipped.")
                 return None, None
 
@@ -506,18 +506,7 @@ class WaveformClient(BaseClient):
 
         return data, ctable
 
-    def get_waveform(
-        self,
-        code,
-        starttime,
-        span,
-        max_span=None,
-        data=None,
-        ctable=None,
-        outdir=None,
-        threads=3,
-        cleanup=True,
-    ):
+    def get_waveform(self, **kwargs):
         """
         .. deprecated:: 0.6.0
 
@@ -528,17 +517,7 @@ class WaveformClient(BaseClient):
             "The get_waveform() function is deprecated. "
             "Use get_continuous_waveform() instead."
         )
-        return self.get_continuous_waveform(
-            code,
-            starttime,
-            span,
-            max_span=max_span,
-            data=data,
-            ctable=ctable,
-            outdir=outdir,
-            threads=threads,
-            cleanup=cleanup,
-        )
+        return self.get_continuous_waveform(**kwargs)
 
     def _search_event_by_day(
         self,
@@ -679,7 +658,7 @@ class WaveformClient(BaseClient):
                     timeout=self.timeout,
                 )
                 fname = r.headers["Content-Disposition"].split("=")[1].strip('"')
-                outdir = "_".join(fname.split("_")[0:2])
+                outdir = "_".join(fname.split("_")[:2])
 
                 with tempfile.NamedTemporaryFile() as ft:
                     # save to temporary file
@@ -694,9 +673,8 @@ class WaveformClient(BaseClient):
                     return outdir
             except Exception:
                 continue
-        else:
-            logger.error(f"Data download fails after {self.retries} retries.")
-            return None
+        logger.error(f"Data download fails after {self.retries} retries.")
+        return None
 
     def get_event_waveform(
         self,
@@ -774,7 +752,7 @@ class WaveformClient(BaseClient):
         # get event list
         events = []
         days = (endtime.date() - starttime.date()).days
-        for i in range(0, days + 1):
+        for i in range(days + 1):
             event_date = starttime.date() + timedelta(days=i)
             events.extend(
                 self._search_event_by_day(
@@ -804,34 +782,38 @@ class WaveformClient(BaseClient):
                 continue
 
             # select events in a box region
-            if minlatitude or maxlatitude or minlongitude or maxlongitude:
-                if not point_inside_box(
-                    event.latitude,
-                    event.longitude,
-                    minlatitude=minlatitude,
-                    maxlatitude=maxlatitude,
-                    minlongitude=minlongitude,
-                    maxlongitude=maxlongitude,
-                ):
-                    continue
+            if (
+                minlatitude or maxlatitude or minlongitude or maxlongitude
+            ) and not point_inside_box(
+                event.latitude,
+                event.longitude,
+                minlatitude=minlatitude,
+                maxlatitude=maxlatitude,
+                minlongitude=minlongitude,
+                maxlongitude=maxlongitude,
+            ):
+                continue
 
             # select events in a circular region
-            if (latitude and longitude) and (minradius or maxradius):
-                if not point_inside_circular(
+            if (
+                (latitude and longitude)
+                and (minradius or maxradius)
+                and not point_inside_circular(
                     event.latitude,
                     event.longitude,
                     latitude,
                     longitude,
                     minradius=minradius,
                     maxradius=maxradius,
-                ):
-                    continue
+                )
+            ):
+                continue
             selected_events.append(event)
 
         logger.info("EVENT WAVEFORM DOWNLOADER:")
         logger.info(f"{len(selected_events):d} events to download.")
-        for i in range(len(selected_events)):
-            logger.info(f"{selected_events[i]}")
+        for selected_event in selected_events:
+            logger.info(f"{selected_event}")
 
         for event in selected_events:
             id = self._request_event_waveform(event)
@@ -1401,10 +1383,9 @@ class Station:
         self.elevation = float(elevation)
 
     def __str__(self):
-        string = "{} {} {} {} {}".format(
+        return "{} {} {} {} {}".format(
             self.code, self.name, self.latitude, self.longitude, self.elevation
         )
-        return string
 
 
 class Event:
@@ -1433,10 +1414,9 @@ class Event:
         self.name_en = name_en
 
     def __str__(self):
-        string = "{} {} {} {} {}".format(
+        return "{} {} {} {} {}".format(
             self.origin, self.latitude, self.longitude, self.depth, self.magnitude
         )
-        return string
 
 
 def _parse_code(code):
@@ -1455,7 +1435,7 @@ def _parse_code(code):
     if code.startswith("0105") or code.startswith("0302"):
         org, net, volc = code[0:2], code[2:4], code
     else:
-        org, net, volc = code[0:2], code[2:], "0"
+        org, net, volc = code[:2], code[2:], "0"
     return org, net, volc
 
 
