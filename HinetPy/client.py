@@ -169,6 +169,7 @@ class WaveformClient(BaseClient):
     """
     Client for requesting waveform data.
     """
+
     def _request_cont_waveform(self, code, starttime, span):
         """
         Request continuous waveform.
@@ -843,6 +844,7 @@ class CatalogClient(BaseClient):
     """
     Client for request catalogs.
     """
+
     def _get_catalog(self, datatype, startdate, span, filename=None, os="DOS"):
         """Request JMA catalog."""
 
@@ -931,6 +933,7 @@ class StationClient(BaseClient):
     """
     Client for operate stations.
     """
+
     def get_station_list(self, code):
         """Get station list of a network.
 
@@ -1219,6 +1222,7 @@ class Client(WaveformClient, CatalogClient, StationClient):
     """
     Core client for requesting Hi-net waveform data.
     """
+
     def doctor(self):
         """Doctor does some checks.
 
