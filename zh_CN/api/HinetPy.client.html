@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client 模块 &mdash; HinetPy v0.6.10.dev47+g8d66d55 文档</title>
+  <title>HinetPy.client 模块 &mdash; HinetPy v0.6.10.dev48+ge90d8f4 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev47+g8d66d55
+                v0.6.10.dev48+ge90d8f4
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -82,9 +82,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-HinetPy.client">
-<span id="hinetpy-client-module"></span><h1>HinetPy.client 模块<a class="headerlink" href="#module-HinetPy.client" title="永久链接至标题"></a></h1>
-<p>Core client for requesting Hi-net waveform data.</p>
+  <section id="hinetpy-client-module">
+<h1>HinetPy.client 模块<a class="headerlink" href="#hinetpy-client-module" title="永久链接至标题"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="HinetPy.client.Client">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HinetPy.client.</span></span><span class="sig-name descname"><span class="pre">Client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_time_in_seconds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_sleep_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client" title="永久链接至目标"></a></dt>
@@ -125,28 +124,6 @@ unless you know what you’re doing.</p>
 </div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="HinetPy.client.Client.login">
-<span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.login" title="永久链接至目标"></a></dt>
-<dd><p>登陆Hi-net服务器。</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – Hi-net账户用户名。</p></li>
-<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – Hi-net账户密码。</p></li>
-</ul>
-</dd>
-</dl>
-<div class="admonition- admonition">
-<p class="admonition-title">实际案例</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.doctor">
 <span class="sig-name descname"><span class="pre">doctor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.doctor" title="永久链接至目标"></a></dt>
 <dd><p>做检查。</p>
@@ -160,10 +137,83 @@ unless you know what you’re doing.</p>
 </ul>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">doctor</span><span class="p">()</span>
 <span class="go">You&#39;re using the latest release (v0.x.x).</span>
-<span class="go">[2019-12-06 00:00:00] INFO: Hi-net web service is NOT updated.</span>
+<span class="go">Hi-net web service is NOT updated.</span>
 <span class="go">catwin32: /home/user/bin/catwin32.</span>
-<span class="go">INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
+<span class="go">win2sac_32: /home/user/bin/win2sac_32.</span>
 </pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HinetPy.client.Client.check_service_update">
+<span class="sig-name descname"><span class="pre">check_service_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_service_update" title="永久链接至目标"></a></dt>
+<dd><p>检查Hi-net网站是否被更新。</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_service_update</span><span class="p">()</span>
+<span class="go">[2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HinetPy.client.Client.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.info" title="永久链接至目标"></a></dt>
+<dd><p>列出台网信息。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(在 Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 台网代码。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">实际案例</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="go">0101   : NIED Hi-net</span>
+<span class="go">0103   : NIED F-net (broadband)</span>
+<span class="go">0103A  : NIED F-net (strong motion)</span>
+<span class="go">010501 : NIED V-net (Tokachidake)</span>
+<span class="gp">...</span>
+<span class="go">0703   : Aomori Prefectural Government</span>
+<span class="go">0705   : Shizuoka Prefectural Government</span>
+<span class="go">0801   : ADEP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
+<span class="go">== Information of Network 0101 ==</span>
+<span class="go">Name: NIED Hi-net</span>
+<span class="go">Starttime: 20040401</span>
+<span class="go">No. of channels: 2336</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HinetPy.client.Client.get_arrivaltime">
+<span class="sig-name descname"><span class="pre">get_arrivaltime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startdate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DOS'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_arrivaltime" title="永久链接至目标"></a></dt>
+<dd><p>从Hi-net获取JMA走时数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(在 Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) – 请求数据的开始时间。</p></li>
+<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.10)"><em>int</em></a>) – 数据长度，单位为天。</p></li>
+<li><p><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 文件格式。”DOS” 或 “UNIX”。</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 要保存的文件名。</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>filename</strong> – 要保存的文件名。</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)">str</a></p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">实际案例</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">startdate</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">&#39;measure_20100101_5.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;arrivaltime.txt&quot;</span><span class="p">)</span>
+<span class="go">&#39;arrivaltime.txt&#39;</span>
+</pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -249,15 +299,6 @@ sub-requsts.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HinetPy.client.Client.get_waveform">
-<span class="sig-name descname"><span class="pre">get_waveform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starttime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleanup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_waveform" title="永久链接至目标"></a></dt>
-<dd><div class="deprecated">
-<p><span class="versionmodified deprecated">0.6.0 版后已移除: </span><a class="reference internal" href="#HinetPy.client.Client.get_waveform" title="HinetPy.client.Client.get_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_waveform()</span></code></a> is deprecated.
-Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> instead.</p>
-</div>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.get_event_waveform">
 <span class="sig-name descname"><span class="pre">get_event_waveform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starttime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endtime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minmagnitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxmagnitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_unknown_mag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mindepth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxdepth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">90.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">360.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">360.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_event_waveform" title="永久链接至目标"></a></dt>
 <dd><p>获取事件波形数据。</p>
@@ -298,39 +339,6 @@ Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_wa
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HinetPy.client.Client.get_arrivaltime">
-<span class="sig-name descname"><span class="pre">get_arrivaltime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startdate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DOS'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_arrivaltime" title="永久链接至目标"></a></dt>
-<dd><p>从Hi-net获取JMA走时数据</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(在 Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(在 Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) – 请求数据的开始时间。</p></li>
-<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(在 Python v3.10)"><em>int</em></a>) – 数据长度，单位为天。</p></li>
-<li><p><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 文件格式。”DOS” 或 “UNIX”。</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 要保存的文件名。</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回</dt>
-<dd class="field-even"><p><strong>filename</strong> – 要保存的文件名。</p>
-</dd>
-<dt class="field-odd">返回类型</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)">str</a></p>
-</dd>
-</dl>
-<div class="admonition- admonition">
-<p class="admonition-title">实际案例</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">startdate</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="go">&#39;measure_20100101_5.txt&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;arrivaltime.txt&quot;</span><span class="p">)</span>
-<span class="go">&#39;arrivaltime.txt&#39;</span>
-</pre></div>
-</div>
-</div>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.get_focalmechanism">
 <span class="sig-name descname"><span class="pre">get_focalmechanism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startdate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DOS'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_focalmechanism" title="永久链接至目标"></a></dt>
 <dd><p>从Hi-net获取JMA震源机制解数据。</p>
@@ -360,28 +368,6 @@ Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_wa
 <span class="go">&#39;focal.txt&#39;</span>
 </pre></div>
 </div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HinetPy.client.Client.get_station_list">
-<span class="sig-name descname"><span class="pre">get_station_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_station_list" title="永久链接至目标"></a></dt>
-<dd><p>获取某个台网的台站列表。</p>
-<p>支持的台网:</p>
-<ul class="simple">
-<li><p>Hi-net (0101)</p></li>
-<li><p>F-net (0103, 0103A)</p></li>
-<li><p>S-net (0120, 0120A)</p></li>
-<li><p>MeSO-net (0131)</p></li>
-</ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
-<span class="gp">...</span>
-<span class="go">0101 N.WNNH 45.4883 141.885 -159.06</span>
-<span class="go">0101 N.SFNH 45.3346 142.1185 -81.6</span>
-<span class="gp">...</span>
-</pre></div>
 </div>
 </dd></dl>
 
@@ -418,6 +404,59 @@ Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_wa
 <span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">station</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">)</span>
 <span class="go">N.WNNH N.SFNH ...</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HinetPy.client.Client.get_station_list">
+<span class="sig-name descname"><span class="pre">get_station_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_station_list" title="永久链接至目标"></a></dt>
+<dd><p>获取某个台网的台站列表。</p>
+<p>支持的台网:</p>
+<ul class="simple">
+<li><p>Hi-net (0101)</p></li>
+<li><p>F-net (0103, 0103A)</p></li>
+<li><p>S-net (0120, 0120A)</p></li>
+<li><p>MeSO-net (0131)</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">0101 N.WNNH 45.4883 141.885 -159.06</span>
+<span class="go">0101 N.SFNH 45.3346 142.1185 -81.6</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HinetPy.client.Client.get_waveform">
+<span class="sig-name descname"><span class="pre">get_waveform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starttime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleanup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_waveform" title="永久链接至目标"></a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified deprecated">0.6.0 版后已移除: </span><a class="reference internal" href="#HinetPy.client.Client.get_waveform" title="HinetPy.client.Client.get_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_waveform()</span></code></a> is deprecated.
+Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> instead.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HinetPy.client.Client.login">
+<span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.login" title="永久链接至目标"></a></dt>
+<dd><p>登陆Hi-net服务器。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – Hi-net账户用户名。</p></li>
+<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – Hi-net账户密码。</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">实际案例</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -487,46 +526,18 @@ parameters.</p></li>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="HinetPy.client.Client.check_service_update">
-<span class="sig-name descname"><span class="pre">check_service_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_service_update" title="永久链接至目标"></a></dt>
-<dd><p>检查Hi-net网站是否被更新。</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_service_update</span><span class="p">()</span>
-<span class="go">[2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.</span>
-</pre></div>
-</div>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="HinetPy.client.Client.info">
-<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.info" title="永久链接至目标"></a></dt>
-<dd><p>列出台网信息。</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数</dt>
-<dd class="field-odd"><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(在 Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.10)"><em>str</em></a>) – 台网代码。</p>
-</dd>
-</dl>
-<div class="admonition- admonition">
-<p class="admonition-title">实际案例</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-<span class="go">0101   : NIED Hi-net</span>
-<span class="go">0103   : NIED F-net (broadband)</span>
-<span class="go">0103A  : NIED F-net (strong motion)</span>
-<span class="go">010501 : NIED V-net (Tokachidake)</span>
-<span class="gp">...</span>
-<span class="go">0703   : Aomori Prefectural Government</span>
-<span class="go">0705   : Shizuoka Prefectural Government</span>
-<span class="go">0801   : ADEP</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
-<span class="go">== Information of Network 0101 ==</span>
-<span class="go">Name: NIED Hi-net</span>
-<span class="go">Starttime: 20040401</span>
-<span class="go">No. of channels: 2336</span>
-</pre></div>
-</div>
-</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="HinetPy.client.Event">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HinetPy.client.</span></span><span class="sig-name descname"><span class="pre">Event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_en</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Event" title="永久链接至目标"></a></dt>
+<dd><p>Event class for requesting event waveforms.</p>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="HinetPy.client.Station">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HinetPy.client.</span></span><span class="sig-name descname"><span class="pre">Station</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elevation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Station" title="永久链接至目标"></a></dt>
+<dd><p>Class for Stations.</p>
 </dd></dl>
 
 </section>
