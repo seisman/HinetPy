@@ -154,7 +154,7 @@ class BaseClient:
             "auth_pw": self.password,
         }
         self.session.get(self._AUTH, timeout=self.timeout)  # get cookie
-        res = self.session.post(self._AUTH, data=auth, timeout=self.timeout)
+        r = self.session.post(self._AUTH, data=auth, timeout=self.timeout)
 
         # Hi-net server returns 200 even when the username or password is wrong, thus
         # I have to check the webpage content to make sure login is successful
