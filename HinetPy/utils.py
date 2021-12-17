@@ -1,5 +1,5 @@
 """
-Utility functions used in HinetPy.
+Utility functions.
 """
 import math
 import shutil
@@ -23,7 +23,7 @@ def split_integer(number, maxn):
 
     Returns
     -------
-    chunks: list
+    list
         List of integers.
 
     Examples
@@ -43,10 +43,10 @@ def split_integer(number, maxn):
 def point_inside_box(
     latitude,
     longitude,
-    minlatitude=-90,
-    maxlatitude=90,
-    minlongitude=0,
-    maxlongitude=360,
+    minlatitude=-90.0,
+    maxlatitude=90.0,
+    minlongitude=0.0,
+    maxlongitude=360.0,
 ):
     """
     Check if a point is inside a box region.
@@ -62,9 +62,9 @@ def point_inside_box(
     maxlatitude: float
         Maximum latitude of the box region.
     minlongitude: float
-        Minimum latitude of the box region.
+        Minimum longitude of the box region.
     maxlongitude: float
-        Maximum latitude of the box region.
+        Maximum longitude of the box region.
 
     Returns
     -------
@@ -84,8 +84,11 @@ def point_inside_box(
     >>> point_inside_box(40, -130, maxlongitude=300)
     True
     """
+    if minlongitude < 0.0 or maxlongitude < 0.0:
+        raise ValueError("minlongitude and maxlongitude should be in 0-360.")
+
     # Convert longitude to 0-360 range
-    longitude = longitude + 360.0 if longitude < 0 else longitude
+    longitude = longitude + 360.0 if longitude < 0.0 else longitude
     if (
         minlatitude <= latitude <= maxlatitude
         and minlongitude <= longitude <= maxlongitude
@@ -96,8 +99,8 @@ def point_inside_box(
 
 def haversine(lat1, lon1, lat2, lon2):
     """
-    Calculate the great circle distance between two points
-    on the earth (specified in decimal degrees) using haversine formula.
+    Calculate the great circle distance between two points on the earth
+    (specified in decimal degrees) using haversine formula.
 
     Reference: https://stackoverflow.com/a/4913653/7770208.
 
@@ -135,7 +138,7 @@ def point_inside_circular(lat1, lon1, lat2, lon2, minradius=0.0, maxradius=360.0
         Longitude of the second point.
     minradius: float
         Minimum radius in degrees.
-    maxradiuse: float
+    maxradius: float
         Maximum radius in degrees.
 
     Returns
@@ -155,17 +158,18 @@ def point_inside_circular(lat1, lon1, lat2, lon2, minradius=0.0, maxradius=360.0
 
 
 def to_datetime(value):
-    """Convert a string to datetime in a hard way.
+    """
+    Convert a datetime from :class:`str` to :class:`datetime.datetime` in a hard way.
 
     Parameters
     ----------
     value: str
-        A datetime in string format.
+        A datetime as a string.
 
     Returns
     -------
     datetime.datetime:
-        A datetime in datetime format.
+        A datetime as :class:`datetime.datetime`.
 
     Examples
     --------
@@ -236,16 +240,17 @@ def check_package_release():
     """
     Check whether HinetPy has a new release.
     """
-    url = "https://pypi.python.org/pypi/HinetPy/json"
-    res = requests.get(url)
+    res = requests.get("https://pypi.org/pypi/HinetPy/json")
     if res.status_code != 200:
-        print("Error in connecting PyPI. Skipped.")
-        return False
+        raise requests.HTTPError("Error in connecting PyPI.")
     latest_release = res.json()["info"]["version"]
 
     current_version = f'{get_distribution("HinetPy").version}'
     if LooseVersion(latest_release) > LooseVersion(current_version):
-        print(f"HinetPy v{latest_release} is released. See {url} for details.")
+        print(
+            f"HinetPy v{latest_release} is released."
+            + "See https://pypi.org/project/HinetPy/ for details."
+        )
         return True
 
     print(f"You're using the latest version (v{current_version}).")

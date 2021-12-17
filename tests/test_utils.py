@@ -36,6 +36,8 @@ def test_point_inside_box():
     assert not point_inside_box(40, 130, 50, 80, 100, 150)
     assert not point_inside_box(85, 130, 50, 80, 100, 150)
     assert not point_inside_box(60, 170, 50, 80, 100, 150)
+    with pytest.raises(ValueError):
+        point_inside_box(40, -130, 50, 80, -150, -140)
 
 
 def test_haversine():
