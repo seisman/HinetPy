@@ -506,7 +506,7 @@ class WaveformClient(BaseClient):
 
         return data, ctable
 
-    def get_waveform(self, **kwargs):
+    def get_waveform(self, code, starttime, span, **kwargs):
         """
         .. deprecated:: 0.6.0
 
@@ -517,7 +517,7 @@ class WaveformClient(BaseClient):
             "The get_waveform() function is deprecated. "
             "Use get_continuous_waveform() instead."
         )
-        return self.get_continuous_waveform(**kwargs)
+        return self.get_continuous_waveform(code, starttime, span, **kwargs)
 
     def _search_event_by_day(
         self,

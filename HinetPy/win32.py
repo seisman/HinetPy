@@ -317,7 +317,7 @@ def extract_sacpz(
         )
 
 
-def extract_pz(**kwargs):
+def extract_pz(ctable, **kwargs):
     """
     Extract instrumental response in SAC PZ format from channel table.
 
@@ -327,7 +327,7 @@ def extract_pz(**kwargs):
         Use :meth:`~HinetPy.win32.extract_sacpz` instead.
     """
     logger.warning("Function extract_pz() is deprecated. Use extract_sacpz() instead.")
-    return extract_sacpz(**kwargs)
+    return extract_sacpz(ctable, **kwargs)
 
 
 def read_ctable(ctable):
