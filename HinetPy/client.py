@@ -408,7 +408,7 @@ class WaveformClient(BaseClient):
             raise ValueError("Span is NOT in the allowed range [1, 357913]")
 
         # 2. check starttime and endtime
-        if code not in NETWORK.keys():
+        if code not in NETWORK:
             raise ValueError(f"{code}: Incorrect network code.")
 
         time0 = NETWORK[code].starttime
@@ -1313,7 +1313,7 @@ class Client(WaveformClient, CatalogClient, StationClient):
             info += f"No. of channels: {net.channels}"
             print(info)
         else:
-            for code in sorted(NETWORK.keys()):
+            for code in sorted(NETWORK):
                 print(f"{code:7s}: {NETWORK[code].name}")
 
     def _get_win32tools(self):
@@ -1429,7 +1429,7 @@ def _parse_code(code):
     >>> client._parse_code("010501")
     ('01', '05', '010501')
     """
-    if code not in NETWORK.keys():
+    if code not in NETWORK:
         raise ValueError(f"{code}: Incorrect network code.")
 
     if code.startswith("0105") or code.startswith("0302"):
