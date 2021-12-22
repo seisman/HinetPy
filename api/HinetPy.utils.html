@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.utils module &mdash; HinetPy v0.6.10.dev61+g923970b documentation</title>
+  <title>HinetPy.utils module &mdash; HinetPy v0.6.10.dev62+g58d7fd2 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev61+g923970b
+                v0.6.10.dev62+g58d7fd2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -225,12 +225,19 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="HinetPy.utils.check_cmd_exists">
-<span class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></span><span class="sig-name descname"><span class="pre">check_cmd_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.check_cmd_exists" title="Permalink to this definition"></a></dt>
-<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> and <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> from win32tools are in PATH.</p>
-<p>It reports errors if <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> and/or <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> are NOT found in PATH.
-In this case, please download win32tools from
-<a class="reference external" href="http://www.hinet.bosai.go.jp/">Hi-net</a>
-and make sure both binary files are in your PATH.</p>
+<span class="sig-prename descclassname"><span class="pre">HinetPy.utils.</span></span><span class="sig-name descname"><span class="pre">check_cmd_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.utils.check_cmd_exists" title="Permalink to this definition"></a></dt>
+<dd><p>Check if a command exists in PATH and is executable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cmd</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Name of the command.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True is the command exists in PATH is executable.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
