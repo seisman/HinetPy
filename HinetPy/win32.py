@@ -19,9 +19,8 @@ logger = logging.getLogger(__name__)
 
 class Channel:
     """
-    Class for channel which contain information for channels.
+    Class for channel information.
     """
-
     # pylint: disable=too-many-instance-attributes,invalid-name,redefined-builtin
     # pylint: disable=too-few-public-methods
     def __init__(
@@ -61,7 +60,7 @@ class Channel:
         period: float
             Natural period of the seismometer.
         preamplification:
-            Preamplification.
+            Preamplification value.
         lsb_value:
             LSB value.
 
@@ -89,12 +88,12 @@ class Channel:
         Parameters
         ----------
         pzfile: str
-            Name of the SAC PoleZero file.
+            Name of the SAC polezero file.
         keep_sensitivity: bool
-            Keep sensitivity in the "constant" or not.
+            Keep sensitivity in the SAC polezero "CONSTANT" or not.
         """
         chan_info = f"{self.name}.{self.component} ({self.id})"
-        # Hi-net uses a moving coil velocity type seismometer.
+        # Hi-net uses a moving-coil velocity-type seismometer.
         if self.unit != "m/s":
             logger.warning(
                 "%s: Unit is not velocity. The PZ file may be wrong.", chan_info
