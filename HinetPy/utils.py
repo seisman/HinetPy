@@ -116,10 +116,10 @@ def haversine(lat1, lon1, lat2, lon2):
     dlon = lon2 - lon1
     dlat = lat2 - lat1
     delta = (
-        math.sin(dlat / 2) ** 2
-        + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
+        math.sin(dlat / 2.0) ** 2.0
+        + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2.0) ** 2.0
     )
-    return 2 * math.asin(math.sqrt(delta)) * 180.0 / math.pi
+    return 2.0 * math.degrees(math.asin(math.sqrt(delta)))
 
 
 def point_inside_circular(lat1, lon1, lat2, lon2, minradius=0.0, maxradius=360.0):
@@ -129,21 +129,21 @@ def point_inside_circular(lat1, lon1, lat2, lon2, minradius=0.0, maxradius=360.0
     Parameters
     ----------
     lat1: float
-        Latitude of the first point.
+        Latitude of the point.
     lon1: float
-        Longitude of the first point.
+        Longitude of the point.
     lat2: float
-        Latitude of the second point.
+        Latitude of center of the circular region.
     lon2: float
-        Longitude of the second point.
+        Longitude of center of the circular region.
     minradius: float
-        Minimum radius in degrees.
+        Minimum radius in degrees of the circular region.
     maxradius: float
-        Maximum radius in degrees.
+        Maximum radius in degrees of the circular region.
 
     Returns
     -------
-    bool:
+    bool
         True if the point is inside the circular region.
 
     Examples
@@ -168,7 +168,7 @@ def to_datetime(value):
 
     Returns
     -------
-    datetime.datetime:
+    datetime.datetime
         A datetime as :class:`datetime.datetime`.
 
     Examples
