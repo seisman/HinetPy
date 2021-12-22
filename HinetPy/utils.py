@@ -242,13 +242,13 @@ def check_package_release():
     """
     res = requests.get("https://pypi.org/pypi/HinetPy/json")
     if res.status_code != 200:
-        raise requests.HTTPError("Error in connecting PyPI.")
+        raise requests.HTTPError("Error in connecting to PyPI.")
     latest_release = res.json()["info"]["version"]
 
     current_version = f'{get_distribution("HinetPy").version}'
     if LooseVersion(latest_release) > LooseVersion(current_version):
         print(
-            f"HinetPy v{latest_release} is released."
+            f"HinetPy v{latest_release} is released. "
             + "See https://pypi.org/project/HinetPy/ for details."
         )
         return True
