@@ -214,24 +214,26 @@ def to_datetime(value):
     return datetime.strptime(value, strfmt)
 
 
-def check_cmd_exists():
+def check_cmd_exists(cmd):
     """
-    Check if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH.
+    Check if a command exists in PATH and is executable.
 
-    It reports errors if ``catwin32`` and/or ``win2sac_32`` are NOT found in PATH.
-    In this case, please download win32tools from
-    `Hi-net <http://www.hinet.bosai.go.jp/>`_
-    and make sure both binary files are in your PATH.
+    Parameters
+    ----------
+    cmd: str
+        Name of the command.
+
+    Returns
+    -------
+    bool
+        True is the command exists in PATH is executable.
     """
-    error = 0
-    for cmd in ["catwin32", "win2sac_32"]:
-        fullpath = shutil.which(cmd)
-        if fullpath:
-            print(f"{cmd}: {fullpath}")
-        else:
-            error += 1
-            print(f"{cmd}: not found in PATH.")
-    return not bool(error)
+    fullpath = shutil.which(cmd)
+    if fullpath:
+        print(f"{cmd}: Full path is {fullpath}.")
+    else:
+        print(f"{cmd}: Not found in PATH or isn't executable.")
+    return bool(fullpath)
 
 
 def check_package_release():

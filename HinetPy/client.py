@@ -1219,12 +1219,13 @@ class Client(WaveformClient, CatalogClient, StationClient):
         >>> client.doctor()
         You're using the latest release (v0.x.x).
         Hi-net web service is NOT updated.
-        catwin32: /home/user/bin/catwin32.
-        win2sac_32: /home/user/bin/win2sac_32.
+        catwin32: Full path is /home/user/bin/catwin32.
+        win2sac_32: Full path is /home/user/bin/win2sac_32.
         """
         check_package_release()
         self.check_service_update()
-        check_cmd_exists()
+        check_cmd_exists("catwin32")
+        check_cmd_exists("win2sac_32")
 
     def _get_allowed_span(self, code):
         """Get allowed max span for each network.

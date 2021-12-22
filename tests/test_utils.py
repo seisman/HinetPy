@@ -96,7 +96,8 @@ def test_check_cmd_exists():
     """
     Make sure that all commands exist.
     """
-    assert check_cmd_exists()
+    assert check_cmd_exists("catwin32")
+    assert check_cmd_exists("win2sac_32")
 
 
 def test_check_package_release():
