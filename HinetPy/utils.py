@@ -178,6 +178,7 @@ def to_datetime(value):
     >>> to_datetime("2010-01-01T03:45")
     datetime.datetime(2010, 1, 1, 3, 45)
     """
+    # pylint: disable=too-many-branches
     # is datetime
     if isinstance(value, datetime):
         return value
@@ -186,11 +187,8 @@ def to_datetime(value):
         return datetime.combine(value, datetime.min.time())
 
     # is a string
-    value = value.replace("T", " ")
-    value = value.replace("-", " ")
-    value = value.replace(":", " ")
-    value = value.replace(",", " ")
-    value = value.replace("_", " ")
+    for char in ["T", "-", ":", ",", "_"]:
+        value = value.replace(char, " ")
 
     parts = value.split(" ")
     strfmt = "%Y%m%d%H%M%S"
