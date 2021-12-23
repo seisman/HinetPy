@@ -764,13 +764,11 @@ class WaveformClient(BaseClient):
             from the geographic point defined by the latitude and longitude
             parameters.
         """
-        starttime = to_datetime(starttime)
-        endtime = to_datetime(endtime)
+        starttime, endtime = to_datetime(starttime), to_datetime(endtime)
 
         # get event list
         events = []
-        days = (endtime.date() - starttime.date()).days
-        for i in range(days + 1):
+        for i in range((endtime.date() - starttime.date()).days + 1):
             event_date = starttime.date() + timedelta(days=i)
             events.extend(
                 self._search_event_by_day(
@@ -840,9 +838,7 @@ class WaveformClient(BaseClient):
 
 
 class CatalogClient(BaseClient):
-    """
-    Client for request catalogs.
-    """
+    """Client for requesting catalogs."""
 
     def _get_catalog(self, datatype, startdate, span, filename=None, os="DOS"):
         """Request JMA catalog."""
@@ -997,35 +993,6 @@ class StationClient(BaseClient):
             raise ValueError("Only support Hi-net, F-net, S-net and MeSO-net.")
         return stations
 
-    def _get_selected_stations(self, code):
-        """Query the number of stations selected for requesting data.
-
-        Supported networks:
-
-        - Hi-net (0101)
-        - F-net (0103, 0103A)
-
-        Parameters
-        ----------
-        code: str
-            Network code.
-
-        Returns
-        -------
-        no_of_stations: int
-            Number of selected stations.
-        """
-
-        if code == "0101":
-            pattern = r'<td class="td1">(?P<CHN>N\..{3}H)<\/td>'
-        elif code in ("0103", "0103A"):
-            pattern = r'<td class="td1">(?P<CHN>N\..{3}F)<\/td>'
-        else:
-            raise ValueError("Can only query stations of Hi-net/F-net")
-
-        r = self.session.get(self._STATION, timeout=self.timeout)
-        return len(re.findall(pattern, r.text))
-
     def get_selected_stations(self, code):
         """Query stations selected for requesting data.
 
@@ -1140,7 +1107,7 @@ class StationClient(BaseClient):
         Select only two stations of Hi-net:
 
         >>> client.select_stations("0101", ["N.AAKH", "N.ABNH"])
-        >>> client._get_selected_stations("0101")
+        >>> len(client.get_selected_stations("0101"))
         2
 
         Select stations in a box region:
@@ -1162,7 +1129,7 @@ class StationClient(BaseClient):
         Select all Hi-net stations:
 
         >>> client.select_stations("0101")
-        >>> client._get_selected_stations("0101")
+        >>> len(client.get_selected_stations("0101"))
         0
 
         """
@@ -1267,7 +1234,7 @@ class Client(WaveformClient, CatalogClient, StationClient):
         channels = NETWORK[code].channels
         # query the actual number of channels
         if code in ("0101", "0103", "0103A"):
-            stations = self._get_selected_stations(code)
+            stations = len(self.get_selected_stations(code))
             if stations != 0:
                 channels = stations * 3
 
