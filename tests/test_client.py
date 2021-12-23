@@ -282,5 +282,5 @@ def test_get_selected_stations(client):
 
 
 def test_get_win32tools(client):
-    assert client._get_win32tools() == "win32tools.tar.gz"
+    client._get_win32tools()
     os.remove("win32tools.tar.gz")

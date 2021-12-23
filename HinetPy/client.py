@@ -1336,18 +1336,15 @@ class Client(WaveformClient, CatalogClient, StationClient):
                 print(f"{code:7s}: {NETWORK[code].name}")
 
     def _get_win32tools(self):
-        """Download win32 tools."""
-        d = self.session.get(self._WIN32TOOLS, stream=True)
-        if d.status_code != 200:
+        """Download win32tools from Hi-net website."""
+        # pylint: disable=invalid-name
+        dl = self.session.get(self._WIN32TOOLS, stream=True)
+        if dl.status_code != 200:
             logger.error("Error in downloading win32tools.")
-            return None
-
-        filename = "win32tools.tar.gz"
-        with open(filename, "wb") as fd:
-            for chunk in d.iter_content(chunk_size=1024):
+        with open("win32tools.tar.gz", "wb") as fd:
+            for chunk in dl.iter_content(chunk_size=1024):
                 if chunk:  # filter out keep-alive new chunks
                     fd.write(chunk)
-        return filename
 
 
 def prepare_jobs(starttime, span, max_span):
