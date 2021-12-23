@@ -96,7 +96,7 @@ class BaseClient:
 
         Notes
         -----
-        Hi-net server ususally spends 10-60 seconds on data
+        The Hi-net server ususally spends 10-60 seconds on data
         preparation after receiving a data request. During the data
         preparation, users are **NOT** allowed to post another data request.
         So users have to wait until the data is ready.
@@ -105,7 +105,7 @@ class BaseClient:
         no more than ``max_sleep_count`` times, until the data is ready.
         If the data status is still NOT ready after
         ``max_sleep_count * sleep_time_in_seconds`` seconds,
-        it most likely means something wrong with the data request.
+        it most likely means something goes wrong with the data request.
         Then, HinetPy will retry to request the data ``retries`` times.
         Ususally, you don't need to modify these parameters
         unless you know what you're doing.
@@ -126,8 +126,30 @@ class BaseClient:
         self._code = None
         self._max_span = 0
 
+    def __str__(self):
+        """String representation for the client."""
+        string = "<== Hi-net web service client ==>\n"
+        string += f"{'url':22s}: {self._HINET}\n"
+        for key in (
+            "user",
+            "password",
+            "timeout",
+            "retries",
+            "debug",
+            "max_sleep_count",
+            "sleep_time_in_seconds",
+        ):
+            try:
+                value = getattr(self, key)
+                if key == "password":
+                    value = "*" * len(value)
+                string += f"{key:22s}: {value}\n"
+            except AttributeError:
+                continue
+        return string
+
     def login(self, user, password):
-        """Login in Hi-net server.
+        """Login in the Hi-net server.
 
         Parameters
         ----------
@@ -143,23 +165,19 @@ class BaseClient:
         >>> client.login("username", "password")
         """
         self.user = user
-        if len(password) > 12:  # Hinet truncates password longer than 12 characters
-            logger.warning(
-                "Password longer than 12 characters may be truncated by Hi-net server."
-            )
-        self.password = password[0:12]
+        self.password = password[:12]  # Hinet truncates password > 12 characters
+        if len(password) > 12:
+            logger.warning("Password longer than 12 characters may be truncated.")
         self.session = requests.Session()
-        auth = {
-            "auth_un": self.user,
-            "auth_pw": self.password,
-        }
         self.session.get(self._AUTH, timeout=self.timeout)  # get cookie
-        r = self.session.post(self._AUTH, data=auth, timeout=self.timeout)
-
+        resp = self.session.post(
+            self._AUTH,
+            data={"auth_un": self.user, "auth_pw": self.password},
+            timeout=self.timeout,
+        )
         # Hi-net server returns 200 even when the username or password is wrong, thus
         # I have to check the webpage content to make sure login is successful
-        inout = re.search(r"auth_log(?P<LOG>.*)\.png", r.text).group("LOG")
-        if inout == "out":
+        if re.search(r"auth_log(?P<LOG>.*)\.png", resp.text).group("LOG") == "out":
             msg = "Unauthorized. Check your username and password!"
             raise requests.ConnectionError(msg)
 
@@ -1330,27 +1348,6 @@ class Client(WaveformClient, CatalogClient, StationClient):
                 if chunk:  # filter out keep-alive new chunks
                     fd.write(chunk)
         return filename
-
-    def __str__(self):
-        string = "<== Hi-net web service client ==>\n"
-        string += f"{'url':22s}: {self._HINET}\n"
-        for key in (
-            "user",
-            "password",
-            "timeout",
-            "retries",
-            "debug",
-            "max_sleep_count",
-            "sleep_time_in_seconds",
-        ):
-            try:
-                value = getattr(self, key)
-                if key == "password":
-                    value = "*" * len(value)
-                string += f"{key:22s}: {value}\n"
-            except Exception:
-                continue
-        return string
 
 
 def prepare_jobs(starttime, span, max_span):
