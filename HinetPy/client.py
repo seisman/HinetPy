@@ -38,7 +38,7 @@ class BaseClient:
     """
 
     # Hinet website
-    _HINET = "http://www.hinet.bosai.go.jp/"
+    _HINET = "https://www.hinet.bosai.go.jp/"
     # Authorization page
     _AUTH = "https://hinetwww11.bosai.go.jp/auth/"
     # Download win32tools
