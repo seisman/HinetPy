@@ -930,7 +930,7 @@ class CatalogClient(BaseClient):
 
 class StationClient(BaseClient):
     """
-    Client for operate stations.
+    Client for manipulating stations.
     """
 
     def get_station_list(self, code):
@@ -1219,29 +1219,26 @@ class StationClient(BaseClient):
 
 class Client(WaveformClient, CatalogClient, StationClient):
     """
-    Core client for requesting Hi-net waveform data.
+    Wrapper client to request waveform, catalog and manipulate stations.
     """
 
     def doctor(self):
         """Doctor does some checks.
 
-        :meth:`~HinetPy.client.Client.doctor` is a utility function which checks:
+        This is a utility function that checks:
 
         - if HinetPy has a new release
-          (see :meth:`~HinetPy.utils.check_package_release`)
         - if Hi-net web service is updated
-          (see :meth:`~HinetPy.client.Client.check_service_update`)
-        - if ``catwin32`` and ``win2sac_32`` from win32tools are in PATH
-          (see :meth:`~HinetPy.utils.check_cmd_exists`)
+        - if ``catwin32`` and ``win2sac_32`` are in PATH
 
         >>> client.doctor()
-        You're using the latest release (v0.x.x).
         Hi-net web service is NOT updated.
+        You're using the latest release (v0.x.x).
         catwin32: Full path is /home/user/bin/catwin32.
         win2sac_32: Full path is /home/user/bin/win2sac_32.
         """
-        check_package_release()
         self.check_service_update()
+        check_package_release()
         check_cmd_exists("catwin32")
         check_cmd_exists("win2sac_32")
 
@@ -1288,17 +1285,16 @@ class Client(WaveformClient, CatalogClient, StationClient):
         >>> client.check_service_update()
         [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
         """
-        r = self.session.get(self._CONT + "/js/cont.js")
-
-        if r.headers["ETag"].strip('"') == self._ETAG:
+        resp = self.session.get(self._CONT + "/js/cont.js")
+        if resp.headers["ETag"].strip('"') == self._ETAG:
             logger.info("Hi-net web service is NOT updated.")
             return False
-
         logger.warning("Hi-net web service is updated. HinetPy may FAIL!")
         return True
 
     def info(self, code=None):
-        """List information of networks.
+        # pylint: disable=no-self-use
+        """Show information of networks.
 
         Parameters
         ----------
