@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev66+g5c276bd documentation</title>
+  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev67+g58b537a documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev66+g5c276bd
+                v0.6.10.dev67+g58b537a
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -101,7 +101,7 @@
 </dl>
 <div class="admonition-notes admonition">
 <p class="admonition-title">Notes</p>
-<p>Hi-net server ususally spends 10-60 seconds on data
+<p>The Hi-net server ususally spends 10-60 seconds on data
 preparation after receiving a data request. During the data
 preparation, users are <strong>NOT</strong> allowed to post another data request.
 So users have to wait until the data is ready.</p>
@@ -109,7 +109,7 @@ So users have to wait until the data is ready.</p>
 no more than <code class="docutils literal notranslate"><span class="pre">max_sleep_count</span></code> times, until the data is ready.
 If the data status is still NOT ready after
 <code class="docutils literal notranslate"><span class="pre">max_sleep_count</span> <span class="pre">*</span> <span class="pre">sleep_time_in_seconds</span></code> seconds,
-it most likely means something wrong with the data request.
+it most likely means something goes wrong with the data request.
 Then, HinetPy will retry to request the data <code class="docutils literal notranslate"><span class="pre">retries</span></code> times.
 Ususally, you don’t need to modify these parameters
 unless you know what you’re doing.</p>
@@ -448,7 +448,7 @@ Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_wa
 <dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.login">
 <span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.login" title="Permalink to this definition"></a></dt>
-<dd><p>Login in Hi-net server.</p>
+<dd><p>Login in the Hi-net server.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
