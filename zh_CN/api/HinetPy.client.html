@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client 模块 &mdash; HinetPy v0.6.10.dev69+g96ccf0c 文档</title>
+  <title>HinetPy.client 模块 &mdash; HinetPy v0.6.10.dev70+gc051123 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev69+g96ccf0c
+                v0.6.10.dev70+gc051123
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -494,7 +494,7 @@ parameters.</p></li>
 <p class="admonition-title">实际案例</p>
 <p>只选择Hi-net的两个台站：</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;N.AAKH&quot;</span><span class="p">,</span> <span class="s2">&quot;N.ABNH&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">_get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">))</span>
 <span class="go">2</span>
 </pre></div>
 </div>
@@ -516,7 +516,7 @@ parameters.</p></li>
 </div>
 <p>选择Hi-net的全部台站：</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">_get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">))</span>
 <span class="go">0</span>
 </pre></div>
 </div>
