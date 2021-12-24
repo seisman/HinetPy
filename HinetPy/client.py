@@ -977,10 +977,7 @@ class StationClient(BaseClient):
     def get_selected_stations(self, code):
         """Query stations selected for requesting data.
 
-        Supported networks:
-
-        - Hi-net (0101)
-        - F-net (0103, 0103A)
+        It supports two networks: Hi-net (0101) and F-net (0103, 0103A).
 
         Parameters
         ----------
@@ -989,8 +986,8 @@ class StationClient(BaseClient):
 
         Returns
         -------
-        stations: list of `HinetPy.client.Station`
-            Dict of selected stations with Lon/Lat data.
+        stations: list of :class:`~HinetPy.client.Station`
+            List of selected stations with station metadata information.
 
         Examples
         --------
@@ -1014,10 +1011,8 @@ class StationClient(BaseClient):
         else:
             raise ValueError("Can only query stations of Hi-net/F-net")
 
-        r = self.session.get(self._STATION, timeout=self.timeout)
         parser = _GrepTableData()
-        parser.feed(r.text)
-
+        parser.feed(self.session.get(self._STATION, timeout=self.timeout).text)
         stations = []
         for (i, text) in enumerate(parser.tabledata):
             # If the target station, grep both lon and lat.
@@ -1112,7 +1107,9 @@ class StationClient(BaseClient):
         """
         stations_selected = []
 
-        if isinstance(stations, str):  # stations is a str, i.e., one station
+        if stations is None:
+            pass
+        elif isinstance(stations, str):  # stations is a str, i.e., one station
             stations_selected.append(stations)
         elif isinstance(stations, list):  # list of stations
             stations_selected.extend(stations)
@@ -1369,8 +1366,8 @@ def _parse_code(code):
 
 
 class _GrepTableData(HTMLParser):
-    """Parser to obtain `<td>` contents.
-    `handle_starttag()` flags when the HTML tag matches with `td`.
+    """Parser to obtain ``<td>`` contents.
+    ``handle_starttag()`` flags when the HTML tag matches with `td`.
     """
 
     def __init__(self):
