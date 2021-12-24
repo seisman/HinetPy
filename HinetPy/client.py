@@ -182,9 +182,9 @@ class BaseClient:
             raise requests.ConnectionError(msg)
 
 
-class WaveformClient(BaseClient):
+class ContinuousWaveformClient(BaseClient):
     """
-    Client for requesting waveform data.
+    Client for requesting continuous waveform data.
     """
 
     def _request_cont_waveform(self, code, starttime, span):
@@ -537,6 +537,10 @@ class WaveformClient(BaseClient):
         )
         return self.get_continuous_waveform(code, starttime, span, **kwargs)
 
+
+class EventWaveformClient(BaseClient):
+    """Client for request event waveform data."""
+
     def _search_event_by_day(
         self,
         year,
@@ -878,12 +882,11 @@ class CatalogClient(BaseClient):
 
         Returns
         -------
-        filename: str
+        str
             Filename saved.
 
         Examples
         --------
-
         >>> from datetime import date
         >>> startdate = date(2010, 1, 1)
         >>> client.get_arrivaltime(startdate, 5)
@@ -909,7 +912,7 @@ class CatalogClient(BaseClient):
 
         Returns
         -------
-        filename: str
+        str
             Filename saved.
 
         Examples
@@ -1152,7 +1155,9 @@ class StationClient(BaseClient):
         self.session.post(self._CONT_SELECT, data=payload, timeout=self.timeout)
 
 
-class Client(WaveformClient, CatalogClient, StationClient):
+class Client(
+    ContinuousWaveformClient, EventWaveformClient, CatalogClient, StationClient
+):
     """
     Wrapper client to request waveform, catalog and manipulate stations.
     """
