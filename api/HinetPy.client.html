@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev70+gc051123 documentation</title>
+  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev71+gce1327e documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev70+gc051123
+                v0.6.10.dev71+gce1327e
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -415,13 +415,8 @@ parameters.</p></li>
 <dt class="sig sig-object py" id="HinetPy.client.Client.get_station_list">
 <span class="sig-name descname"><span class="pre">get_station_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_station_list" title="Permalink to this definition"></a></dt>
 <dd><p>Get station list of a network.</p>
-<p>Supported networks:</p>
-<ul class="simple">
-<li><p>Hi-net (0101)</p></li>
-<li><p>F-net (0103, 0103A)</p></li>
-<li><p>S-net (0120, 0120A)</p></li>
-<li><p>MeSO-net (0131)</p></li>
-</ul>
+<p>The function only supports the following networks:
+Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
