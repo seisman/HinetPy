@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev72+g9c05d83 documentation</title>
+  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev73+g5846846 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev72+g9c05d83
+                v0.6.10.dev73+g5846846
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -463,13 +463,8 @@ Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_wa
 <dt class="sig sig-object py" id="HinetPy.client.Client.select_stations">
 <span class="sig-name descname"><span class="pre">select_stations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.select_stations" title="Permalink to this definition"></a></dt>
 <dd><p>Select stations of a network.</p>
-<p>Supported networks:</p>
-<ul class="simple">
-<li><p>Hi-net (0101)</p></li>
-<li><p>F-net (0103, 0103A)</p></li>
-<li><p>S-net (0120, 0120A)</p></li>
-<li><p>MeSO-net (0131)</p></li>
-</ul>
+<p>It only supports the following networks:
+Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
