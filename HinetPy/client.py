@@ -964,10 +964,11 @@ class StationClient(BaseClient):
                 url = self._MESONET_STATION_INFO
                 ltext, rtext = "var mesonet_station = [", "];"
             json_text = self.session.get(url).text.lstrip(ltext).rstrip(rtext)
-            for station in json.loads(json_text)["features"]["properties"]:
-                name = station["station_cd"]
-                latitude, longitude = station["latitude"], station["longitude"]
-                elevation = station["sensor_height"]
+            for station in json.loads(json_text)["features"]:
+                prop = station["properties"]
+                name = prop["station_cd"]
+                latitude, longitude = prop["latitude"], prop["longitude"]
+                elevation = prop["sensor_height"]
                 stations.append(Station(code, name, latitude, longitude, elevation))
         else:
             raise ValueError("Only support Hi-net, F-net, S-net and MeSO-net.")
