@@ -539,7 +539,7 @@ class ContinuousWaveformClient(BaseClient):
 
 
 class EventWaveformClient(BaseClient):
-    """Client for request event waveform data."""
+    """Client for requesting event waveform data."""
 
     def _search_event_by_day(
         self,
@@ -585,9 +585,9 @@ class EventWaveformClient(BaseClient):
             "go": 1,
             "LANG": "en",
         }
-        r = self.session.post(self._EVENT, data=payload, timeout=self.timeout)
+        resp = self.session.post(self._EVENT, data=payload, timeout=self.timeout)
         events = []
-        for result in re.findall("openRequest\((.+)\)", r.text):  # noqa: W605
+        for result in re.findall("openRequest\((.+)\)", resp.text):  # noqa: W605
             items = [item.strip("'") for item in result.split(",")]
             events.append(Event(items[0], *items[3:10]))
         return events
@@ -598,7 +598,7 @@ class EventWaveformClient(BaseClient):
 
         Parameters
         ----------
-        event: HinetPy.client.Event
+        event: :class:`HinetPy.client.Event`
             Event to be requested.
         format: str
             Format of requested waveform package.
@@ -621,12 +621,12 @@ class EventWaveformClient(BaseClient):
         # retry if request fails else return id
         for _ in range(self.retries):
             try:
-                r = self.session.post(
+                resp = self.session.post(
                     self._EVENT_REQUEST, data=payload, timeout=self.timeout
                 )
                 # assume the first one on the status page is the current one
                 id = re.search(
-                    r'<td class="bgevlist2">(?P<ID>\d{10})</td>', r.text
+                    r'<td class="bgevlist2">(?P<ID>\d{10})</td>', resp.text
                 ).group("ID")
                 p = re.compile(
                     r'<tr class="bglist(?P<OPT>\d)">'
@@ -655,7 +655,7 @@ class EventWaveformClient(BaseClient):
             except Exception:
                 continue
         else:
-            logger.error(f"Data request fails after {self.retries} retries.")
+            logger.error("Data request fails after %d retries.", self.retries)
             return None
 
     def _download_event_waveform(self, id):
@@ -668,23 +668,21 @@ class EventWaveformClient(BaseClient):
             Request ID.
         """
 
-        payload = {"id": id, "encode": "D", "LANG": "en"}
-
         dlclient = Client(self.user, self.password)
         for _ in range(self.retries):
             try:
-                r = dlclient.session.get(
+                resp = dlclient.session.get(
                     self._EVENT_DOWNLOAD,
-                    params=payload,
+                    params={"id": id, "encode": "D", "LANG": "en"},
                     stream=True,
                     timeout=self.timeout,
                 )
-                fname = r.headers["Content-Disposition"].split("=")[1].strip('"')
+                fname = resp.headers["Content-Disposition"].split("=")[1].strip('"')
                 outdir = "_".join(fname.split("_")[:2])
 
                 with tempfile.NamedTemporaryFile() as ft:
                     # save to temporary file
-                    for chunk in r.iter_content(chunk_size=1024):
+                    for chunk in resp.iter_content(chunk_size=1024):
                         if chunk:  # filter out keep-alive new chunks
                             ft.write(chunk)
                     ft.flush()
@@ -695,7 +693,7 @@ class EventWaveformClient(BaseClient):
                     return outdir
             except Exception:
                 continue
-        logger.error(f"Data download fails after {self.retries} retries.")
+        logger.error("Data download fails after %d retries.", self.retries)
         return None
 
     def get_event_waveform(
@@ -708,14 +706,14 @@ class EventWaveformClient(BaseClient):
         include_unknown_mag=True,
         mindepth=None,
         maxdepth=None,
-        minlatitude=-90.0,
-        maxlatitude=90.0,
-        minlongitude=0.0,
-        maxlongitude=360.0,
+        minlatitude=None,
+        maxlatitude=None,
+        minlongitude=None,
+        maxlongitude=None,
         latitude=None,
         longitude=None,
-        minradius=0.0,
-        maxradius=360.0,
+        minradius=None,
+        maxradius=None,
     ):
         """Get event waveform data.
 
@@ -815,26 +813,20 @@ class EventWaveformClient(BaseClient):
                 continue
 
             # select events in a circular region
-            if (
-                (latitude and longitude)
-                and (minradius or maxradius)
-                and not point_inside_circular(
+            if (latitude and longitude) and (minradius or maxradius):
+                if point_inside_circular(
                     event.latitude,
                     event.longitude,
                     latitude,
                     longitude,
                     minradius=minradius,
                     maxradius=maxradius,
-                )
-            ):
-                continue
+                ):
+                    continue
             selected_events.append(event)
 
         logger.info("EVENT WAVEFORM DOWNLOADER:")
-        logger.info(f"{len(selected_events):d} events to download.")
-        for selected_event in selected_events:
-            logger.info(f"{selected_event}")
-
+        logger.info("%d events to download.", len(selected_events))
         for event in selected_events:
             id = self._request_event_waveform(event)
             dirname = self._download_event_waveform(id)
