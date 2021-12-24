@@ -932,12 +932,8 @@ class StationClient(BaseClient):
     def get_station_list(self, code):
         """Get station list of a network.
 
-        Supported networks:
-
-        - Hi-net (0101)
-        - F-net (0103, 0103A)
-        - S-net (0120, 0120A)
-        - MeSO-net (0131)
+        The function only supports the following networks:
+        Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).
 
         >>> stations = client.get_station_list("0101")
         >>> for station in stations:
@@ -949,45 +945,29 @@ class StationClient(BaseClient):
         """
         stations = []
         # remove trailing 'A' in network code
-        code = code[:4]
         if code in ["0101", "0103", "0103A"]:  # Hinet and Fnet
-            lines = (
-                requests.get(self._STATION_INFO).content.decode("utf-8").splitlines()
-            )
-            for row in csv.DictReader(lines, delimiter=","):
-                if (
-                    row["organization_id"].strip("'") + row["network_id"].strip("'")
-                    != code
-                ):
+            csvfile = requests.get(self._STATION_INFO).content.decode("utf-8")
+            for row in csv.DictReader(csvfile.splitlines(), delimiter=","):
+                org_id = row["organization_id"].strip("'")
+                net_id = row["network_id"].strip("'")
+                if org_id + net_id != code[:4]:
                     continue
-                stations.append(
-                    Station(
-                        code,
-                        row["station_cd"],
-                        row["latitude"],
-                        row["longitude"],
-                        row["height(m)"],
-                    )
-                )
+                name = row["station_cd"]
+                latitude, longitude = row["latitude"], row["longitude"]
+                elevation = row["height(m)"]
+                stations.append(Station(code, name, latitude, longitude, elevation))
         elif code in ["0120", "0120A", "0131"]:  # S-net and MeSO-net
             if code in ["0120", "0120A"]:
-                json_text = (
-                    self.session.get(self._SNET_STATION_INFO)
-                    .text.lstrip("var snet_station = [")
-                    .rstrip("];")
-                )
+                url = self._SNET_STATION_INFO
+                ltext, rtext = "var snet_station = [", "];"
             else:
-                json_text = (
-                    self.session.get(self._MESONET_STATION_INFO)
-                    .text.lstrip("var mesonet_station = [")
-                    .rstrip("];")
-                )
-            for station in json.loads(json_text)["features"]:
-                code = station["properties"]["id"]
-                name = station["properties"]["station_cd"]
-                latitude = station["properties"]["latitude"]
-                longitude = station["properties"]["longitude"]
-                elevation = station["properties"]["sensor_height"]
+                url = self._MESONET_STATION_INFO
+                ltext, rtext = "var mesonet_station = [", "];"
+            json_text = self.session.get(url).text.lstrip(ltext).rstrip(rtext)
+            for station in json.loads(json_text)["features"]["properties"]:
+                name = station["station_cd"]
+                latitude, longitude = station["latitude"], station["longitude"]
+                elevation = station["sensor_height"]
                 stations.append(Station(code, name, latitude, longitude, elevation))
         else:
             raise ValueError("Only support Hi-net, F-net, S-net and MeSO-net.")
