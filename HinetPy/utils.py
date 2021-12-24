@@ -43,10 +43,10 @@ def split_integer(number, maxn):
 def point_inside_box(
     latitude,
     longitude,
-    minlatitude=-90.0,
-    maxlatitude=90.0,
-    minlongitude=0.0,
-    maxlongitude=360.0,
+    minlatitude=None,
+    maxlatitude=None,
+    minlongitude=None,
+    maxlongitude=None,
 ):
     """
     Check if a point is inside a box region.
@@ -84,17 +84,19 @@ def point_inside_box(
     >>> point_inside_box(40, -130, maxlongitude=300)
     True
     """
-    if minlongitude < 0.0 or maxlongitude < 0.0:
+    if (minlongitude and minlongitude < 0.0) or (maxlongitude and maxlongitude < 0.0):
         raise ValueError("minlongitude and maxlongitude should be in 0-360.")
-
-    # Convert longitude to 0-360 range
     longitude = longitude + 360.0 if longitude < 0.0 else longitude
-    if (
-        minlatitude <= latitude <= maxlatitude
-        and minlongitude <= longitude <= maxlongitude
-    ):
-        return True
-    return False
+
+    if minlatitude and latitude < minlatitude:
+        return False
+    if maxlatitude and latitude > maxlatitude:
+        return False
+    if minlongitude and longitude < minlongitude:
+        return False
+    if maxlongitude and longitude > maxlongitude:
+        return False
+    return True
 
 
 def haversine(lat1, lon1, lat2, lon2):
@@ -122,7 +124,7 @@ def haversine(lat1, lon1, lat2, lon2):
     return 2.0 * math.degrees(math.asin(math.sqrt(delta)))
 
 
-def point_inside_circular(lat1, lon1, lat2, lon2, minradius=0.0, maxradius=360.0):
+def point_inside_circular(lat1, lon1, lat2, lon2, minradius=None, maxradius=None):
     """
     Check if a point is inside a circular region.
 
@@ -152,9 +154,9 @@ def point_inside_circular(lat1, lon1, lat2, lon2, minradius=0.0, maxradius=360.0
     True
     """
     radius = haversine(lat1, lon1, lat2, lon2)
-    if minradius <= radius <= maxradius:
-        return True
-    return False
+    if (minradius and radius < minradius) or (maxradius and radius > maxradius):
+        return False
+    return True
 
 
 def to_datetime(value):
