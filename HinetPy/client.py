@@ -1049,12 +1049,8 @@ class StationClient(BaseClient):
     ):
         """Select stations of a network.
 
-        Supported networks:
-
-        - Hi-net (0101)
-        - F-net (0103, 0103A)
-        - S-net (0120, 0120A)
-        - MeSO-net (0131)
+        It only supports the following networks:
+        Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).
 
         Parameters
         ----------
@@ -1116,11 +1112,9 @@ class StationClient(BaseClient):
         """
         stations_selected = []
 
-        if stations is None:
-            pass
-        elif isinstance(stations, str):  # stations is a str, i.e., one station
+        if isinstance(stations, str):  # stations is a str, i.e., one station
             stations_selected.append(stations)
-        elif isinstance(stations, list):
+        elif isinstance(stations, list):  # list of stations
             stations_selected.extend(stations)
         else:
             raise ValueError("stations should be either a str or a list.")
@@ -1131,9 +1125,7 @@ class StationClient(BaseClient):
         # select stations in a box region
         if minlatitude or maxlatitude or minlongitude or maxlongitude:
             for station in stations_at_server:
-                if station.code != code:
-                    continue
-                if point_inside_box(
+                if station.code == code and point_inside_box(
                     station.latitude,
                     station.longitude,
                     minlatitude=minlatitude,
@@ -1146,9 +1138,7 @@ class StationClient(BaseClient):
         # select stations in a circular region
         if (latitude and longitude) and (minradius or maxradius):
             for station in stations_at_server:
-                if station.code != code:
-                    continue
-                if point_inside_circular(
+                if station.code == code and point_inside_circular(
                     station.latitude,
                     station.longitude,
                     latitude,
