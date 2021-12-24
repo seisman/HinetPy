@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev74+g29c86ed documentation</title>
+  <title>HinetPy.client module &mdash; HinetPy v0.6.10.dev75+ge37575b documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev74+g29c86ed
+                v0.6.10.dev75+ge37575b
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -377,20 +377,16 @@ parameters.</p></li>
 <dt class="sig sig-object py" id="HinetPy.client.Client.get_selected_stations">
 <span class="sig-name descname"><span class="pre">get_selected_stations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_selected_stations" title="Permalink to this definition"></a></dt>
 <dd><p>Query stations selected for requesting data.</p>
-<p>Supported networks:</p>
-<ul class="simple">
-<li><p>Hi-net (0101)</p></li>
-<li><p>F-net (0103, 0103A)</p></li>
-</ul>
+<p>It supports two networks: Hi-net (0101) and F-net (0103, 0103A).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Network code.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>stations</strong> – Dict of selected stations with Lon/Lat data.</p>
+<dd class="field-even"><p><strong>stations</strong> – List of selected stations with station metadata information.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list of <cite>HinetPy.client.Station</cite></p>
+<dd class="field-odd"><p>list of <a class="reference internal" href="#HinetPy.client.Station" title="HinetPy.client.Station"><code class="xref py py-class docutils literal notranslate"><span class="pre">Station</span></code></a></p>
 </dd>
 </dl>
 <div class="admonition-examples admonition">
