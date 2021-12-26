@@ -226,12 +226,12 @@ class ContinuousWaveformClient(BaseClient):
             try:
                 # the timestamp determines the unique id
                 payload["rn"] = str(int(datetime.now().timestamp()))
-                r = self.session.post(
+                resp = self.session.post(
                     self._CONT_REQUEST, params=payload, timeout=self.timeout
                 )
                 # assume the first one on the status page is the current data
                 id = re.search(
-                    r'<td class="bgcolist2">(?P<ID>\d{10})</td>', r.text
+                    r'<td class="bgcolist2">(?P<ID>\d{10})</td>', resp.text
                 ).group("ID")
                 p = re.compile(
                     r'<tr class="bglist(?P<OPT>\d)">'
@@ -285,7 +285,7 @@ class ContinuousWaveformClient(BaseClient):
         dlclient = Client(self.user, self.password)
         for _ in range(self.retries):
             try:
-                r = dlclient.session.post(
+                resp = dlclient.session.post(
                     self._CONT_DOWNLOAD,
                     data={"id": job.id},
                     stream=True,
@@ -294,14 +294,13 @@ class ContinuousWaveformClient(BaseClient):
 
                 with tempfile.NamedTemporaryFile() as ft:
                     # save to temporary file
-                    for chunk in r.iter_content(chunk_size=1024):
+                    for chunk in resp.iter_content(chunk_size=1024):
                         if chunk:  # filter out keep-alive new chunks
                             ft.write(chunk)
                     ft.flush()
 
                     # unzip temporary file
-                    cnts = []
-                    ctable = None
+                    cnts, ctable = [], None
                     with zipfile.ZipFile(ft.name) as fz:
                         for filename in fz.namelist():
                             if filename.endswith(".cnt"):
@@ -435,11 +434,10 @@ class ContinuousWaveformClient(BaseClient):
         starttime = to_datetime(starttime)
         endtime = starttime + timedelta(minutes=span)
         if not time0 <= starttime < endtime <= time1:
-            msg = (
+            raise ValueError(
                 "Data not available in the time period. "
                 + f"Call Client.info('{code}') for help."
             )
-            raise ValueError(msg)
 
         # 3. set max_span
         if self._code != code:  # update default max_span
@@ -451,8 +449,7 @@ class ContinuousWaveformClient(BaseClient):
         # 4. prepare jobs
         jobs = prepare_jobs(starttime, span, max_span)
 
-        cnts = []
-        ch_euc = set()
+        cnts, ch_euc = [], set()
         logger.info("%s ~%s", starttime.strftime("%Y-%m-%d %H:%M"), span)
         # 5. request and download
         count = len(jobs)
@@ -1204,9 +1201,8 @@ class Client(
 
         if code in ("0103", "0103A"):
             # Maximum allowed file size is ~55 MB for F-net
-            f_net_DL_factor = 8.8667638012
-            f_net_max_size = 55000
-            return int(f_net_max_size / (f_net_DL_factor * channels))
+            f_net_dl_factor, f_net_max_size = 8.8667638012, 55000
+            return int(f_net_max_size / (f_net_dl_factor * channels))
         else:
             return min(int(12000 / channels), 60)
 
@@ -1336,9 +1332,7 @@ class Event:
         self.name_en = name_en
 
     def __str__(self):
-        return "{} {} {} {} {}".format(
-            self.origin, self.latitude, self.longitude, self.depth, self.magnitude
-        )
+        return f"{self.origin} {self.latitude} {self.longitude} {self.depth} {self.magnitude}"  # noqa: E501
 
 
 def _parse_code(code):
