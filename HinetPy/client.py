@@ -1255,8 +1255,8 @@ class Client(
             info += f"No. of channels: {net.channels}"
             print(info)
         else:
-            for code in sorted(NETWORK):
-                print(f"{code:7s}: {NETWORK[code].name}")
+            for network_code in sorted(NETWORK):
+                print(f"{network_code:7s}: {NETWORK[network_code].name}")
 
     def _get_win32tools(self):
         """Download win32tools from Hi-net website."""
@@ -1301,8 +1301,8 @@ class Station:
         self.elevation = float(elevation)
 
     def __str__(self):
-        return "{} {} {} {} {}".format(
-            self.code, self.name, self.latitude, self.longitude, self.elevation
+        return (
+            f"{self.code} {self.name} {self.latitude} {self.longitude} {self.elevation}"
         )
 
 
