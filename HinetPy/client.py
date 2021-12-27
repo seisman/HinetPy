@@ -260,7 +260,7 @@ class ContinuousWaveformClient(BaseClient):
             except Exception:
                 continue
         else:
-            logger.error(f"Data request fails after {self.retries} retries.")
+            logger.error("Data request fails after %d retries", self.retries)
             return None
 
     def _download_cont_waveform(self, job):
@@ -312,7 +312,7 @@ class ContinuousWaveformClient(BaseClient):
             except Exception:
                 continue
         else:
-            logger.error(f"Data download fails after {self.retries} retries")
+            logger.error("Data download fails after %d retries", self.retries)
             return None, None
 
     def get_continuous_waveform(
@@ -826,7 +826,7 @@ class EventWaveformClient(BaseClient):
         for event in selected_events:
             id = self._request_event_waveform(event)
             dirname = self._download_event_waveform(id)
-            logger.info(f"{event} {dirname}")
+            logger.info("%s %s", event, dirname)
 
 
 class CatalogClient(BaseClient):
@@ -1271,6 +1271,7 @@ class Client(
 
 
 def prepare_jobs(starttime, span, max_span):
+    """Prepare jobs."""
     spans = split_integer(span, max_span)
     jobs = [_Job(starttime=starttime, span=spans[0])]
     for i in range(1, len(spans)):
@@ -1289,9 +1290,7 @@ class _Job:
 
 
 class Station:
-    """
-    Class for Stations.
-    """
+    """Class for Stations."""
 
     def __init__(self, code, name, latitude, longitude, elevation):
         self.code = code
@@ -1307,9 +1306,7 @@ class Station:
 
 
 class Event:
-    """
-    Event class for requesting event waveforms.
-    """
+    """Event class for requesting event waveforms."""
 
     def __init__(
         self, evid, origin, latitude, longitude, depth, magnitude, name, name_en
