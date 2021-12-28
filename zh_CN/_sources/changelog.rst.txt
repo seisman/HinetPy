@@ -1,6 +1,18 @@
 Changelog
 =========
 
+0.7.0 (XXXX-XX-XX):
+  - Fix the incorrect maximum allowed time span for F-net
+  - `get_selected_stations` now returns a list of stations with station metadata
+    information
+  - Refactor the `_channel2pz()` and `_write_pz()` functions to `Channel.write_sacpz()`
+  - Refactor the `_get_channels` function to `win32.read_ctable()`
+  - The `win32.extrac_sacpz` function now supports parallel data processing
+  - The `with_pz` parameter in `win32.extract_sac()` is renamed to `with_sacpz`
+  - The `win32.extrac_pz()` function is renamed to `win32.extract_sacpz()`
+  - Move the function `Client.check_cmd_exists()` to `utils.check_cmd_exists()`
+  - Move the function `Client.check_package_release()` to `utils.check_package_release()`
+
 0.6.9 (2021-05-20):
   - Check invalid `stations` parameter type for `Client.select_stations()`
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; HinetPy v0.6.10.dev81+g7411ce2 文档</title>
+  <title>Changelog &mdash; HinetPy v0.6.10.dev82+g43cf9b2 文档</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev81+g7411ce2
+                v0.6.10.dev82+g43cf9b2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -78,6 +78,19 @@
   <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="永久链接至标题"></a></h1>
 <dl class="simple">
+<dt>0.7.0 (XXXX-XX-XX):</dt><dd><ul class="simple">
+<li><p>Fix the incorrect maximum allowed time span for F-net</p></li>
+<li><p><cite>get_selected_stations</cite> now returns a list of stations with station metadata
+information</p></li>
+<li><p>Refactor the <cite>_channel2pz()</cite> and <cite>_write_pz()</cite> functions to <cite>Channel.write_sacpz()</cite></p></li>
+<li><p>Refactor the <cite>_get_channels</cite> function to <cite>win32.read_ctable()</cite></p></li>
+<li><p>The <cite>win32.extrac_sacpz</cite> function now supports parallel data processing</p></li>
+<li><p>The <cite>with_pz</cite> parameter in <cite>win32.extract_sac()</cite> is renamed to <cite>with_sacpz</cite></p></li>
+<li><p>The <cite>win32.extrac_pz()</cite> function is renamed to <cite>win32.extract_sacpz()</cite></p></li>
+<li><p>Move the function <cite>Client.check_cmd_exists()</cite> to <cite>utils.check_cmd_exists()</cite></p></li>
+<li><p>Move the function <cite>Client.check_package_release()</cite> to <cite>utils.check_package_release()</cite></p></li>
+</ul>
+</dd>
 <dt>0.6.9 (2021-05-20):</dt><dd><ul class="simple">
 <li><p>Check invalid <cite>stations</cite> parameter type for <cite>Client.select_stations()</cite></p></li>
 </ul>
