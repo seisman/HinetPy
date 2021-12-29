@@ -14,7 +14,7 @@ Basis usage:
 >>> starttime = datetime(2010, 1, 1, 0, 0)
 >>> data, ctable = client.get_continuous_waveform("0101", starttime, 20)
 >>> win32.extract_sac(data, ctable)
->>> win32.extract_pz(ctable)
+>>> win32.extract_sacpz(ctable)
 """
 # pylint: disable=invalid-name
 

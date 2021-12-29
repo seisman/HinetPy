@@ -6,9 +6,10 @@ help:
 	@echo "  test       run the test suite and report coverage"
 	@echo "  doc        build the documentation"
 	@echo "  format     run black to automatically format the code"
-	@echo "  check      run code style and quality checks (black and flake8)"
+	@echo "  check      run code style and quality checks"
 	@echo "  lint       run pylint for a deeper quality check"
 	@echo "  clean      clean up build and generated files"
+	@echo "  dist-clean clean up egg-info files"
 	@echo ""
 
 install:
@@ -37,4 +38,8 @@ lint:
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
 	find . -name "*.mo" -exec rm -v {} \;
-	rm -rvf *.egg-info build dist sdist */__pycache__ .cache .pytest_cache .coverage* coverage.xml
+	rm -rvf build dist sdist */__pycache__ .cache .pytest_cache .coverage* coverage.xml .eggs/
+	rm -rvf testdir-*
+
+dist-clean: clean
+	rm -rvf *.egg-info

@@ -5,6 +5,8 @@ from datetime import date, datetime
 
 import pytest
 from HinetPy.utils import (
+    check_cmd_exists,
+    check_package_release,
     haversine,
     point_inside_box,
     point_inside_circular,
@@ -34,6 +36,8 @@ def test_point_inside_box():
     assert not point_inside_box(40, 130, 50, 80, 100, 150)
     assert not point_inside_box(85, 130, 50, 80, 100, 150)
     assert not point_inside_box(60, 170, 50, 80, 100, 150)
+    with pytest.raises(ValueError):
+        point_inside_box(40, -130, 50, 80, -150, -140)
 
 
 def test_haversine():
@@ -86,3 +90,18 @@ def test_to_datetime():
 
     with pytest.raises(ValueError):
         to_datetime("2001023040506")
+
+
+def test_check_cmd_exists():
+    """
+    Make sure that all commands exist.
+    """
+    assert check_cmd_exists("catwin32")
+    assert check_cmd_exists("win2sac_32")
+
+
+def test_check_package_release():
+    """
+    Check if there is a new release.
+    """
+    assert not check_package_release()

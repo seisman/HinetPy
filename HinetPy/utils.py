@@ -1,8 +1,13 @@
 """
-Utility functions used in HinetPy.
+Utility functions.
 """
 import math
+import shutil
 from datetime import date, datetime
+from distutils.version import LooseVersion
+
+import requests
+from pkg_resources import get_distribution
 
 
 def split_integer(number, maxn):
@@ -18,7 +23,7 @@ def split_integer(number, maxn):
 
     Returns
     -------
-    chunks: list
+    list
         List of integers.
 
     Examples
@@ -38,10 +43,10 @@ def split_integer(number, maxn):
 def point_inside_box(
     latitude,
     longitude,
-    minlatitude=-90,
-    maxlatitude=90,
-    minlongitude=0,
-    maxlongitude=360,
+    minlatitude=None,
+    maxlatitude=None,
+    minlongitude=None,
+    maxlongitude=None,
 ):
     """
     Check if a point is inside a box region.
@@ -57,9 +62,9 @@ def point_inside_box(
     maxlatitude: float
         Maximum latitude of the box region.
     minlongitude: float
-        Minimum latitude of the box region.
+        Minimum longitude of the box region.
     maxlongitude: float
-        Maximum latitude of the box region.
+        Maximum longitude of the box region.
 
     Returns
     -------
@@ -79,20 +84,25 @@ def point_inside_box(
     >>> point_inside_box(40, -130, maxlongitude=300)
     True
     """
-    # Convert longitude to 0-360 range
-    longitude = longitude + 360.0 if longitude < 0 else longitude
-    if (
-        minlatitude <= latitude <= maxlatitude
-        and minlongitude <= longitude <= maxlongitude
-    ):
-        return True
-    return False
+    if (minlongitude and minlongitude < 0.0) or (maxlongitude and maxlongitude < 0.0):
+        raise ValueError("minlongitude and maxlongitude should be in 0-360.")
+    longitude = longitude + 360.0 if longitude < 0.0 else longitude
+
+    if minlatitude and latitude < minlatitude:
+        return False
+    if maxlatitude and latitude > maxlatitude:
+        return False
+    if minlongitude and longitude < minlongitude:
+        return False
+    if maxlongitude and longitude > maxlongitude:
+        return False
+    return True
 
 
 def haversine(lat1, lon1, lat2, lon2):
     """
-    Calculate the great circle distance between two points
-    on the earth (specified in decimal degrees) using haversine formula.
+    Calculate the great circle distance between two points on the earth
+    (specified in decimal degrees) using haversine formula.
 
     Reference: https://stackoverflow.com/a/4913653/7770208.
 
@@ -108,34 +118,34 @@ def haversine(lat1, lon1, lat2, lon2):
     dlon = lon2 - lon1
     dlat = lat2 - lat1
     delta = (
-        math.sin(dlat / 2) ** 2
-        + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
+        math.sin(dlat / 2.0) ** 2.0
+        + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2.0) ** 2.0
     )
-    return 2 * math.asin(math.sqrt(delta)) * 180.0 / math.pi
+    return 2.0 * math.degrees(math.asin(math.sqrt(delta)))
 
 
-def point_inside_circular(lat1, lon1, lat2, lon2, minradius=0.0, maxradius=360.0):
+def point_inside_circular(lat1, lon1, lat2, lon2, minradius=None, maxradius=None):
     """
     Check if a point is inside a circular region.
 
     Parameters
     ----------
     lat1: float
-        Latitude of the first point.
+        Latitude of the point.
     lon1: float
-        Longitude of the first point.
+        Longitude of the point.
     lat2: float
-        Latitude of the second point.
+        Latitude of center of the circular region.
     lon2: float
-        Longitude of the second point.
+        Longitude of center of the circular region.
     minradius: float
-        Minimum radius in degrees.
-    maxradiuse: float
-        Maximum radius in degrees.
+        Minimum radius in degrees of the circular region.
+    maxradius: float
+        Maximum radius in degrees of the circular region.
 
     Returns
     -------
-    bool:
+    bool
         True if the point is inside the circular region.
 
     Examples
@@ -144,23 +154,24 @@ def point_inside_circular(lat1, lon1, lat2, lon2, minradius=0.0, maxradius=360.0
     True
     """
     radius = haversine(lat1, lon1, lat2, lon2)
-    if minradius <= radius <= maxradius:
-        return True
-    return False
+    if (minradius and radius < minradius) or (maxradius and radius > maxradius):
+        return False
+    return True
 
 
 def to_datetime(value):
-    """Convert a string to datetime in a hard way.
+    """
+    Convert a datetime from :class:`str` to :class:`datetime.datetime` in a hard way.
 
     Parameters
     ----------
     value: str
-        A datetime in string format.
+        A datetime as a string.
 
     Returns
     -------
-    datetime.datetime:
-        A datetime in datetime format.
+    datetime.datetime
+        A datetime as :class:`datetime.datetime`.
 
     Examples
     --------
@@ -169,6 +180,7 @@ def to_datetime(value):
     >>> to_datetime("2010-01-01T03:45")
     datetime.datetime(2010, 1, 1, 3, 45)
     """
+    # pylint: disable=too-many-branches
     # is datetime
     if isinstance(value, datetime):
         return value
@@ -177,11 +189,8 @@ def to_datetime(value):
         return datetime.combine(value, datetime.min.time())
 
     # is a string
-    value = value.replace("T", " ")
-    value = value.replace("-", " ")
-    value = value.replace(":", " ")
-    value = value.replace(",", " ")
-    value = value.replace("_", " ")
+    for char in ["T", "-", ":", ",", "_"]:
+        value = value.replace(char, " ")
 
     parts = value.split(" ")
     strfmt = "%Y%m%d%H%M%S"
@@ -205,3 +214,46 @@ def to_datetime(value):
             strfmt = "%Y %m %d %H %M %S"
 
     return datetime.strptime(value, strfmt)
+
+
+def check_cmd_exists(cmd):
+    """
+    Check if a command exists in PATH and is executable.
+
+    Parameters
+    ----------
+    cmd: str
+        Name of the command.
+
+    Returns
+    -------
+    bool
+        True is the command exists in PATH is executable.
+    """
+    fullpath = shutil.which(cmd)
+    if fullpath:
+        print(f"{cmd}: Full path is {fullpath}.")
+    else:
+        print(f"{cmd}: Not found in PATH or isn't executable.")
+    return bool(fullpath)
+
+
+def check_package_release():
+    """
+    Check whether HinetPy has a new release.
+    """
+    res = requests.get("https://pypi.org/pypi/HinetPy/json")
+    if res.status_code != 200:
+        raise requests.HTTPError("Error in connecting to PyPI.")
+    latest_release = res.json()["info"]["version"]
+
+    current_version = f'{get_distribution("HinetPy").version}'
+    if LooseVersion(latest_release) > LooseVersion(current_version):
+        print(
+            f"HinetPy v{latest_release} is released. "
+            + "See https://pypi.org/project/HinetPy/ for details."
+        )
+        return True
+
+    print(f"You're using the latest version (v{current_version}).")
+    return False

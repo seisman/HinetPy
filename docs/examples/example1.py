@@ -20,4 +20,4 @@ with open("events.csv") as csvfile:
         data, ctable = client.get_continuous_waveform(
             "0101", starttime, 20, outdir=outdir
         )
-        win32.extract_sac(data, ctable, outdir=outdir, with_pz=True)
+        win32.extract_sac(data, ctable, outdir=outdir, with_sacpz=True)
