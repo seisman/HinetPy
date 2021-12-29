@@ -150,7 +150,7 @@ class Client:
             "auth_un": self.user,
             "auth_pw": self.password,
         }
-        self.session.get(self._AUTH, timeout=self.timeout, verify=False)  # get cookie
+        self.session.get(self._AUTH, timeout=self.timeout)  # get cookie
         r = self.session.post(self._AUTH, data=auth, timeout=self.timeout)
 
         # Hi-net server return 200 even when unauthorized,
@@ -702,7 +702,6 @@ class Client:
                     params=payload,
                     stream=True,
                     timeout=self.timeout,
-                    verify=False,
                 )
                 fname = r.headers["Content-Disposition"].split("=")[1].strip('"')
                 outdir = "_".join(fname.split("_")[0:2])
@@ -975,7 +974,7 @@ class Client:
         code = code[:4]
         if code in ["0101", "0103", "0103A"]:  # Hinet and Fnet
             lines = (
-                requests.get(self._STATION_INFO, verify=False).content.decode("utf-8").splitlines()
+                requests.get(self._STATION_INFO).content.decode("utf-8").splitlines()
             )
             for row in csv.DictReader(lines, delimiter=","):
                 if (
@@ -995,13 +994,13 @@ class Client:
         elif code in ["0120", "0120A", "0131"]:  # S-net and MeSO-net
             if code in ["0120", "0120A"]:
                 json_text = (
-                    self.session.get(self._SNET_STATION_INFO, verify=False)
+                    self.session.get(self._SNET_STATION_INFO)
                     .text.lstrip("var snet_station = [")
                     .rstrip("];")
                 )
             else:
                 json_text = (
-                    self.session.get(self._MESONET_STATION_INFO, verify=False)
+                    self.session.get(self._MESONET_STATION_INFO)
                     .text.lstrip("var mesonet_station = [")
                     .rstrip("];")
                 )
@@ -1079,7 +1078,7 @@ class Client:
         else:
             raise ValueError("Can only query stations of Hi-net/F-net")
 
-        r = self.session.get(self._STATION, timeout=self.timeout, verify=False)
+        r = self.session.get(self._STATION, timeout=self.timeout)
         return len(re.findall(pattern, r.text))
 
     def get_selected_stations(self, code):
@@ -1122,7 +1121,7 @@ class Client:
         else:
             raise ValueError("Can only query stations of Hi-net/F-net")
 
-        r = self.session.get(self._STATION, timeout=self.timeout, verify=False)
+        r = self.session.get(self._STATION, timeout=self.timeout)
         parser = _GrepTableData()
         parser.feed(r.text)
 
@@ -1278,7 +1277,7 @@ class Client:
         >>> client.check_service_update()
         [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
         """
-        r = self.session.get(self._CONT + "/js/cont.js", verify=False)
+        r = self.session.get(self._CONT + "/js/cont.js")
 
         if r.headers["ETag"].strip('"') == self._ETAG:
             logger.info("Hi-net web service is NOT updated.")
@@ -1294,7 +1293,7 @@ class Client:
         [2019-12-06 00:00:00] INFO: You're using the latest release (v0.6.5).
         """
         url = "https://pypi.python.org/pypi/HinetPy/json"
-        r = requests.get(url, verify=False)
+        r = requests.get(url)
         if r.status_code != 200:
             logger.warning("Error in connecting PyPI. Skipped.")
             return False
@@ -1373,7 +1372,7 @@ class Client:
 
     def _get_win32tools(self):
         """Download win32 tools."""
-        d = self.session.get(self._WIN32TOOLS, stream=True, verify=False)
+        d = self.session.get(self._WIN32TOOLS, stream=True)
         if d.status_code != 200:
             logger.error("Error in downloading win32tools.")
             return None
