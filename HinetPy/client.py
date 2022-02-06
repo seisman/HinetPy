@@ -431,7 +431,7 @@ class ContinuousWaveformClient(BaseClient):
         #    allowed in code s4win2sacm.c
         if not isinstance(span, int):
             raise TypeError("span must be integer.")
-        if not 1 <= span <= (2 ** 31 - 1) / 6000:
+        if not 1 <= span <= (2**31 - 1) / 6000:
             raise ValueError("Span is NOT in the allowed range [1, 357913]")
 
         # 2. check starttime and endtime

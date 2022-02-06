@@ -108,12 +108,12 @@ class Channel:
 
         # calculate poles by finding roots of equation s^2+2hws+w^2=0
         real = 0.0 - self.damping * freq
-        imaginary = freq * math.sqrt(1.0 - self.damping ** 2.0)
+        imaginary = freq * math.sqrt(1.0 - self.damping**2.0)
 
         # calculate the CONSTANT
         fn = 20.0  # alaways assume normalization frequency is 20 Hz
         s = complex(0, 2 * math.pi * fn)
-        A0 = abs((s ** 2 + 2 * self.damping * freq * s + freq ** 2) / s ** 2)
+        A0 = abs((s**2 + 2 * self.damping * freq * s + freq**2) / s**2)
         if keep_sensitivity:
             factor = math.pow(10, self.preamplification / 20.0)
             constant = A0 * self.gain * factor / self.lsb_value
