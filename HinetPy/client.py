@@ -31,11 +31,15 @@ FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
 logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)
 
+# pylint: disable=redefined-builtin,invalid-name,redefined-outer-name,too-many-lines
+
 
 class BaseClient:
     """
     Base client to login in the Hi-net website.
     """
+
+    # pylint: disable=too-many-instance-attributes
 
     # Hinet website
     _HINET = "https://www.hinet.bosai.go.jp/"
@@ -187,6 +191,8 @@ class ContinuousWaveformClient(BaseClient):
     Client for requesting continuous waveform data.
     """
 
+    # pylint: disable=invalid-name
+
     def _request_cont_waveform(self, code, starttime, span):
         """
         Request continuous waveform.
@@ -257,8 +263,9 @@ class ContinuousWaveformClient(BaseClient):
                         break  # break to else clause
                 else:  # wait too long time
                     return None
-            except Exception:
+            except Exception:  # pylint: disable=broad-except
                 continue
+            break
         else:
             logger.error("Data request fails after %d retries", self.retries)
             return None
@@ -309,8 +316,9 @@ class ContinuousWaveformClient(BaseClient):
                                 ctable = filename
                         fz.extractall(members=cnts + [ctable])
                     return cnts, ctable
-            except Exception:
+            except Exception:  # pylint: disable=broad-except
                 continue
+            break
         else:
             logger.error("Data download fails after %d retries", self.retries)
             return None, None
@@ -416,12 +424,14 @@ class ContinuousWaveformClient(BaseClient):
         ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
         """
+        # pylint: disable=too-many-locals,too-many-branches,too-many-statements
+        # pylint: disable=no-member
         # 1. check span:
         #    max limit is determined by the max number of data points
         #    allowed in code s4win2sacm.c
         if not isinstance(span, int):
             raise TypeError("span must be integer.")
-        if not 1 <= span <= (2 ** 31 - 1) / 6000:
+        if not 1 <= span <= (2**31 - 1) / 6000:
             raise ValueError("Span is NOT in the allowed range [1, 357913]")
 
         # 2. check starttime and endtime
@@ -584,7 +594,7 @@ class EventWaveformClient(BaseClient):
         }
         resp = self.session.post(self._EVENT, data=payload, timeout=self.timeout)
         events = []
-        for result in re.findall("openRequest\((.+)\)", resp.text):  # noqa: W605
+        for result in re.findall(r"openRequest\((.+)\)", resp.text):  # noqa: W605
             items = [item.strip("'") for item in result.split(",")]
             events.append(Event(items[0], *items[3:10]))
         return events
@@ -649,8 +659,9 @@ class EventWaveformClient(BaseClient):
                         break  # break to else clause
                 else:  # wait too long time
                     return None
-            except Exception:
+            except Exception:  # pylint: disable=broad-except
                 continue
+            break
         else:
             logger.error("Data request fails after %d retries.", self.retries)
             return None
@@ -688,7 +699,7 @@ class EventWaveformClient(BaseClient):
                     with zipfile.ZipFile(ft.name) as fz:
                         fz.extractall(path=outdir)
                     return outdir
-            except Exception:
+            except Exception:  # pylint: disable=broad-except
                 continue
         logger.error("Data download fails after %d retries.", self.retries)
         return None
@@ -763,6 +774,7 @@ class EventWaveformClient(BaseClient):
             from the geographic point defined by the latitude and longitude
             parameters.
         """
+        # pylint: disable=too-many-arguments,too-many-locals
         starttime, endtime = to_datetime(starttime), to_datetime(endtime)
 
         # get event list
@@ -934,6 +946,7 @@ class StationClient(BaseClient):
         0101 N.SFNH 45.3346 142.1185 -81.6
         ...
         """
+        # pylint: disable=too-many-locals
         stations = []
         # remove trailing 'A' in network code
         if code in ["0101", "0103", "0103A"]:  # Hinet and Fnet
@@ -1096,6 +1109,7 @@ class StationClient(BaseClient):
         0
 
         """
+        # pylint: disable=too-many-arguments
         stations_selected = []
 
         if stations is None:
@@ -1203,8 +1217,7 @@ class Client(
             # Maximum allowed file size is ~55 MB for F-net
             f_net_dl_factor, f_net_max_size = 8.8667638012, 55000
             return int(f_net_max_size / (f_net_dl_factor * channels))
-        else:
-            return min(int(12000 / channels), 60)
+        return min(int(12000 / channels), 60)
 
     def check_service_update(self):
         """Check if Hi-net service is updated.
@@ -1283,6 +1296,8 @@ def prepare_jobs(starttime, span, max_span):
 class _Job:
     """Job class for internal use."""
 
+    # pylint: disable=too-few-public-methods
+
     def __init__(self, starttime, span, id=None):
         self.starttime = starttime
         self.span = span
@@ -1291,6 +1306,8 @@ class _Job:
 
 class Station:
     """Class for Stations."""
+
+    # pylint: disable=too-few-public-methods
 
     def __init__(self, code, name, latitude, longitude, elevation):
         self.code = code
@@ -1307,6 +1324,8 @@ class Station:
 
 class Event:
     """Event class for requesting event waveforms."""
+
+    # pylint: disable=too-few-public-methods,too-many-instance-attributes
 
     def __init__(
         self, evid, origin, latitude, longitude, depth, magnitude, name, name_en
@@ -1329,7 +1348,10 @@ class Event:
         self.name_en = name_en
 
     def __str__(self):
-        return f"{self.origin} {self.latitude} {self.longitude} {self.depth} {self.magnitude}"  # noqa: E501
+        return (
+            f"{self.origin} {self.latitude} {self.longitude}"
+            f" {self.depth} {self.magnitude}"
+        )
 
 
 def _parse_code(code):
@@ -1356,6 +1378,8 @@ class _GrepTableData(HTMLParser):
     """Parser to obtain ``<td>`` contents.
     ``handle_starttag()`` flags when the HTML tag matches with `td`.
     """
+
+    # pylint: disable=abstract-method
 
     def __init__(self):
         super().__init__()

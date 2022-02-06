@@ -2,9 +2,9 @@ name: Docs
 
 on:
   push:
-    branches: [ master ]
+    branches: [main]
   pull_request:
-    branches: [ master ]
+    branches: [main]
 
 jobs:
   deploy-docs:
@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python 3.x
-        uses: actions/setup-python@v2.3.1
+        uses: actions/setup-python@v2.3.2
         with:
           python-version: '3.x'
 
@@ -39,7 +39,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3.8.0
         # Only deploy on master branch
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
