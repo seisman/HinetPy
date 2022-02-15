@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy - A NIED Hi-net Client for seismologists &mdash; HinetPy v0.6.10.dev89+g422fb41 documentation</title>
+  <title>HinetPy - A NIED Hi-net Client for seismologists &mdash; HinetPy v0.6.10.dev90+g5943a55 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -29,7 +29,7 @@
             <a href="#" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev89+g422fb41
+                v0.6.10.dev90+g5943a55
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -85,15 +85,15 @@
 <a class="reference external image-reference" href="https://github.com/seisman/HinetPy/blob/master/LICENSE"><img alt="https://img.shields.io/github/license/seisman/HinetPy.svg" src="https://img.shields.io/github/license/seisman/HinetPy.svg" /></a>
 <a class="reference external image-reference" href="https://github.com/psf/black"><img alt="https://img.shields.io/badge/code%20style-black-000000.svg" src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a>
 <a class="reference external image-reference" href="https://zenodo.org/badge/latestdoi/23509035"><img alt="https://zenodo.org/badge/23509035.svg" src="https://zenodo.org/badge/23509035.svg" /></a>
-<p><a class="reference external" href="https://github.com/seisman/HinetPy">HinetPy</a> is a Python package to simplify tedious data
-request, download and format conversion tasks related to <a class="reference external" href="http://www.hinet.bosai.go.jp/">NIED Hi-net</a>.</p>
+<p><a class="reference external" href="https://github.com/seisman/HinetPy">HinetPy</a> is a Python package to request
+and process seismic data from <a class="reference external" href="http://www.hinet.bosai.go.jp/">NIED Hi-net</a>.</p>
 <p><a class="reference external" href="http://www.hinet.bosai.go.jp/">NIED Hi-net</a> | <a class="reference external" href="https://github.com/seisman/HinetPy">Source Code</a> | <a class="reference external" href="https://seisman.github.io/HinetPy">Documentation</a> | <a class="reference external" href="https://seisman.github.io/HinetPy/zh_CN/">中文文档</a></p>
 </section>
 <section id="features">
 <h1>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h1>
 <ul class="simple">
-<li><p>Request continuous and event waveform data from Hi-net</p></li>
-<li><p>Select Hi-net/F-net stations inside a box or circular region</p></li>
+<li><p>Request continuous/event waveform data and event catalog from NIED Hi-net</p></li>
+<li><p>Select Hi-net/F-net stations based on different criteria</p></li>
 <li><p>Convert waveform data from win32 format to SAC format</p></li>
 <li><p>Extract instrumental response as SAC polezero file</p></li>
 <li><p>Multithreads downloading and conversion to speedup</p></li>
@@ -112,8 +112,8 @@ responses as SAC polezero files.</p>
 <span class="c1"># You need a Hi-net account to access the data</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
 
-<span class="c1"># Let&#39;s try to request 20-minute data starting at 2010-01-01T00:00(GMT+0900)</span>
-<span class="c1"># of the Hi-net network (with an internal network code of &#39;0101&#39;)</span>
+<span class="c1"># Let&#39;s try to request 20-minute data of the Hi-net network (with an internal</span>
+<span class="c1"># network code of &#39;0101&#39;) starting at 2010-01-01T00:00 (JST, GMT+0900)</span>
 <span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;201001010000&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
 <span class="c1"># The request and download process usually takes a few minutes</span>
