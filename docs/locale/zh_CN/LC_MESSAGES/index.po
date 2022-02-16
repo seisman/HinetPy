@@ -7,82 +7,81 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-19 17:30-0500\n"
+"POT-Creation-Date: 2022-02-16 23:11+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.6.0\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: ../../index.rst:2
-msgid "HinetPy - A Hi-net Client powered by Python"
-msgstr "HinetPy——基于Python的Hi-net数据申请客户端"
+msgid "HinetPy"
+msgstr ""
 
-#: ../../../README.rst:22
+#: ../../../README.rst:3
 msgid ""
-"`HinetPy`_ is a Python package to automate and simplify tedious data "
-"request, downloading and format conversion tasks related to `NIED Hi-"
-"net`_."
-msgstr "`HinetPy`_ 是一个Python模块，致力于自动化和简化与 `NIED Hi-net`_ 相关的繁琐的数据申请、下载和格式转换工作。"
+"`NIED Hi-net <https://www.hinet.bosai.go.jp/>`__ | `Source Code "
+"<https://github.com/seisman/HinetPy>`__ | `Documentation "
+"<https://seisman.github.io/HinetPy>`__ | `中文文档 "
+"<https://seisman.github.io/HinetPy/zh_CN/>`__"
+msgstr ""
 
-#: ../../../README.rst:25
-msgid "`NIED Hi-net`_ | `Source Code`_ | `Documentation`_ | `中文文档`_"
-msgstr "`NIED Hi-net`_ | `源代码`_ | `Documentation`_ | `中文文档`_"
+#: ../../../README.rst:10
+msgid ""
+"`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package to "
+"request and process seismic data from `NIED Hi-net "
+"<https://www.hinet.bosai.go.jp/>`__."
+msgstr "`HinetPy <https://github.com/seisman/HinetPy>`_ 是一个可用于申请和处理 `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__ 地震数据的 Python 包。"
 
-#: ../../../README.rst:33
-msgid "Feature Support"
-msgstr "功能"
+#: ../../../README.rst:14
+msgid "Features"
+msgstr "功能与特性"
 
-#: ../../../README.rst:35
-msgid "Request continuous waveform data from Hi-net"
-msgstr "从Hi-net申请连续波形数据"
+#: ../../../README.rst:16
+msgid "Request continuous/event waveform data and event catalog from NIED Hi-net"
+msgstr "从 NIED Hi-net 申请连续/事件波形数据和地震目录"
 
-#: ../../../README.rst:36
-msgid "Request event waveform data from Hi-net"
-msgstr "从Hi-net申请事件波形数据"
+#: ../../../README.rst:17
+msgid "Select Hi-net/F-net stations based on different criteria"
+msgstr "基于不同的准则筛选 Hi-net/F-net 台站"
 
-#: ../../../README.rst:37
-msgid "Select Hi-net/F-net stations inside a box or circular region"
-msgstr "选择一个矩形或环形区域内的Hi-net/F-net台站"
-
-#: ../../../README.rst:38
+#: ../../../README.rst:18
 msgid "Convert waveform data from win32 format to SAC format"
-msgstr "将波形数据从win32格式转换为SAC格式"
+msgstr "将波形数据从 win32 格式转换为 SAC 格式"
 
-#: ../../../README.rst:39
+#: ../../../README.rst:19
 msgid "Extract instrumental response as SAC polezero file"
-msgstr "提取仪器响应信息并保存为SAC零极点文件"
+msgstr "提取仪器响应信息并保存为 SAC 零极点文件"
 
-#: ../../../README.rst:40
+#: ../../../README.rst:20
 msgid "Multithreads downloading and conversion to speedup"
 msgstr "多线程并行下载和转换以加快速度"
 
-#: ../../../README.rst:43
+#: ../../../README.rst:23
 msgid "A simple example"
 msgstr "一个简单的示例"
 
-#: ../../../README.rst:45
+#: ../../../README.rst:25
 msgid ""
-"The power of `HinetPy`_ makes it simple to request continuous waveform "
-"data from Hi-net, convert the data into SAC format and extract "
+"Here is an example showing how to use HinetPy to request continuous "
+"waveform data from Hi-net, convert the data into SAC format, and extract "
 "instrumental responses as SAC polezero files."
-msgstr "`HinetPy`_ 功能强大，使得从Hi-net申请连续数据、将数据转换为SAC格式、提取仪器响应文件并保存为SAC零极点文件变得很简单。"
+msgstr "下面的示例展示了如何使用 HinetPy 从 Hi-net 申请连续波形数据，将数据转换为 SAC 格式，并提取 SAC 零极点格式的仪器响应文件。"
 
-#: ../../../README.rst:76
+#: ../../../README.rst:67
 msgid "Citation"
 msgstr "引用"
 
-#: ../../../README.rst:78
+#: ../../../README.rst:69
 msgid "If you find this package useful, please consider citing via:"
 msgstr "如果你觉得这个软件包很有用，请考虑在文章中通过如下方式引用："
 
-#: ../../../README.rst:84
+#: ../../../README.rst:75
 msgid "License"
 msgstr "许可协议"
 
-#: ../../../README.rst:86
-msgid "This project is licensed under the terms of the `MIT license`_."
-msgstr "本项目使用 `MIT license`_ 许可协议。"
-
+#: ../../../README.rst:77
+msgid "This project is licensed under the terms of the MIT license."
+msgstr "本项目使用 MIT 许可协议。"

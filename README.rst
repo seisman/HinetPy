@@ -22,15 +22,17 @@
 .. image:: https://zenodo.org/badge/23509035.svg
     :target: https://zenodo.org/badge/latestdoi/23509035
 
+.. placeholder-for-doc-index
+
+`NIED Hi-net <https://www.hinet.bosai.go.jp/>`__ |
+`Source Code <https://github.com/seisman/HinetPy>`__ |
+`Documentation <https://seisman.github.io/HinetPy>`__ |
+`中文文档 <https://seisman.github.io/HinetPy/zh_CN/>`__
+
+----
+
 `HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package to request
-and process seismic data from `NIED Hi-net`_.
-
-`NIED Hi-net`_ | `Source Code`_ | `Documentation`_ | `中文文档`_
-
-.. _NIED Hi-net: http://www.hinet.bosai.go.jp/
-.. _Source Code: https://github.com/seisman/HinetPy
-.. _Documentation: https://seisman.github.io/HinetPy
-.. _中文文档: https://seisman.github.io/HinetPy/zh_CN/
+and process seismic data from `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__.
 
 Features
 ========
