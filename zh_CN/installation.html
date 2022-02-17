@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>安装 &mdash; HinetPy v0.6.10.dev90+g5943a55 文档</title>
+  <title>安装 &mdash; HinetPy v0.6.10.dev94+g9abbadb 文档</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,7 +20,7 @@
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
     <link rel="next" title="教程" href="tutorial.html" />
-    <link rel="prev" title="HinetPy - A NIED Hi-net Client for seismologists" href="index.html" /> 
+    <link rel="prev" title="HinetPy" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,7 +31,7 @@
             <a href="index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev90+g5943a55
+                v0.6.10.dev94+g9abbadb
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -43,8 +43,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">安装</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#install-hinetpy">Install HinetPy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#win32tools">win32tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">准备工作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-hinetpy">安装 HinetPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-win32tools">编译 win32tools</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">教程</a></li>
@@ -81,19 +82,22 @@
              
   <section id="installation">
 <h1>安装<a class="headerlink" href="#installation" title="永久链接至标题"></a></h1>
-<p>HinetPy needs Pyhon 3.6 or above. If you’re new to Python, I strongly recommend
-installing the <a class="reference external" href="https://www.anaconda.com/download/">Anaconda</a> Python distribution.</p>
+<section id="prerequisites">
+<h2>准备工作<a class="headerlink" href="#prerequisites" title="永久链接至标题"></a></h2>
+<p>为了使用 HinetPy，你需要:</p>
+<ul class="simple">
+<li><p>Python &gt;= 3.6</p></li>
+<li><p>NIED Hi-net 提供的 win32tools (安装指南见下面)</p></li>
+<li><p>Hi-net 账户（需要在 Hi-net 网站注册获取账号密码）</p></li>
+</ul>
+</section>
 <section id="install-hinetpy">
-<h2>Install HinetPy<a class="headerlink" href="#install-hinetpy" title="永久链接至标题"></a></h2>
-<p>To install the latest <strong>release/stable</strong> version from PyPI:</p>
+<h2>安装 HinetPy<a class="headerlink" href="#install-hinetpy" title="永久链接至标题"></a></h2>
+<p>安装最新的<strong>发布版/稳定版</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">HinetPy</span>
 </pre></div>
 </div>
-<p>To install the <strong>developing/unstable</strong> version:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">seisman</span><span class="o">/</span><span class="n">HinetPy</span><span class="o">.</span><span class="n">git</span>
-</pre></div>
-</div>
-<p>或者:</p>
+<p>安装最新的<strong>开发版/不稳定版</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">seisman</span><span class="o">/</span><span class="n">HinetPy</span>
 <span class="n">cd</span> <span class="n">HinetPy</span>
 <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
@@ -104,20 +108,16 @@ installing the <a class="reference external" href="https://www.anaconda.com/down
 </pre></div>
 </div>
 </section>
-<section id="win32tools">
-<h2>win32tools<a class="headerlink" href="#win32tools" title="永久链接至标题"></a></h2>
-<p><a class="reference external" href="https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools">win32tools</a> is a collection of tools provided by <a class="reference external" href="http://www.hinet.bosai.go.jp/">NIED Hi-net</a> to process
-win32 format data. HinetPy needs the <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> and <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> commands
-to process the win32 data.
-Make sure that <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> and <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> are in your PATH.</p>
-<p>To install win32tools:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>tar -xvf win32tools.tar.gz
-cd win32tools/
-make
-cp catwin32.src/catwin32 win2sac.src/win2sac_32 $HOME/bin/
+<section id="build-win32tools">
+<h2>编译 win32tools<a class="headerlink" href="#build-win32tools" title="永久链接至标题"></a></h2>
+<p><a class="reference external" href="https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?r=win32tools">win32tools</a> 是 <a class="reference external" href="https://www.hinet.bosai.go.jp/">NIED Hi-net</a> 提供的用于处理win32格式数据的一系列工具。HinetPy 需要其中的 <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> 和 <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code>。</p>
+<p>执行如下命令以编译 win32tools:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="o">-</span><span class="n">xvf</span> <span class="n">win32tools</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">cd</span> <span class="n">win32tools</span><span class="o">/</span>
+<span class="n">make</span>
 </pre></div>
 </div>
-<p>对于 macOS 用户，如果你因为遇到如下致命错误而失败:</p>
+<p>对于 macOS 用户，执行上面的命令可能会产生如下错误:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s4read_data</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span> <span class="n">fatal</span> <span class="n">error</span><span class="p">:</span> <span class="s1">&#39;malloc.h&#39;</span> <span class="n">file</span> <span class="ow">not</span> <span class="n">found</span>
 <span class="c1">#include    &lt;malloc.h&gt;</span>
             <span class="o">^</span>
@@ -125,7 +125,11 @@ cp catwin32.src/catwin32 win2sac.src/win2sac_32 $HOME/bin/
 <span class="n">make</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">***</span> <span class="p">[</span><span class="n">s4read_data</span><span class="o">.</span><span class="n">o</span><span class="p">]</span> <span class="n">Error</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>你需要将 <code class="docutils literal notranslate"><span class="pre">win2sac.src/s4read_data.c</span></code> 第三行的 <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;&lt;malloc.h&gt;&quot;</span></code> 修改为 <code class="docutils literal notranslate"><span class="pre">`#include</span> <span class="pre">&lt;stdlib.h&gt;</span></code>。</p>
+<p>遇到这种情况，你需要将 <code class="docutils literal notranslate"><span class="pre">win2sac.src/s4read_data.c</span></code> 第三行的 <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;&lt;malloc.h&gt;&quot;</span></code> 修改为 <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;stdlib.h&gt;</span></code>。</p>
+<p>成果编译 win32tools 后，你还需要确保 <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> 和 <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 位于你的 PATH 路径中。你可以直接执行如下命令将这两个可执行文件复制到你的 HOME 的 bin 目录下:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cp catwin32.src/catwin32 win2sac.src/win2sac_32 $HOME/bin/
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -133,7 +137,7 @@ cp catwin32.src/catwin32 win2sac.src/win2sac_32 $HOME/bin/
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="HinetPy - A NIED Hi-net Client for seismologists" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="HinetPy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="tutorial.html" class="btn btn-neutral float-right" title="教程" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

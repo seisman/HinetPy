@@ -1,5 +1,5 @@
-HinetPy - A NIED Hi-net Client for seismologists
-================================================
+HinetPy
+=======
 
 .. toctree::
    :maxdepth: 1
@@ -14,3 +14,4 @@ HinetPy - A NIED Hi-net Client for seismologists
    license
 
 .. include:: ../README.rst
+   :start-after: placeholder-for-doc-index
