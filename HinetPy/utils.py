@@ -241,6 +241,11 @@ def check_cmd_exists(cmd):
 def check_package_release():
     """
     Check whether HinetPy has a new release.
+
+    Returns
+    -------
+    bool
+        True if HinetPy has a new release.
     """
     res = requests.get("https://pypi.org/pypi/HinetPy/json")
     if res.status_code != 200:

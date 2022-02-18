@@ -8,7 +8,9 @@ AUTHOR = "Dongdong Tian"
 AUTHOR_EMAIL = "seisman.info@gmail.com"
 LICENSE = "MIT License"
 URL = "https://github.com/seisman/HinetPy"
-DESCRIPTION = "A NIED Hi-net web service client and win32 tools for seismologists."
+DESCRIPTION = (
+    "A Python package to request and process seismic waveform data from NIED Hi-net"
+)
 KEYWORDS = "Seismology, NIED, Hi-net, Waveform"
 with open("README.rst", "r", encoding="utf8") as f:
     LONG_DESCRIPTION = "".join(f.readlines())

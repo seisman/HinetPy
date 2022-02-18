@@ -22,21 +22,23 @@
 .. image:: https://zenodo.org/badge/23509035.svg
     :target: https://zenodo.org/badge/latestdoi/23509035
 
-`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package to simplify tedious data
-request, download and format conversion tasks related to `NIED Hi-net`_.
+.. placeholder-for-doc-index
 
-`NIED Hi-net`_ | `Source Code`_ | `Documentation`_ | `中文文档`_
+`NIED Hi-net <https://www.hinet.bosai.go.jp/>`__ |
+`Source Code <https://github.com/seisman/HinetPy>`__ |
+`Documentation <https://seisman.github.io/HinetPy>`__ |
+`中文文档 <https://seisman.github.io/HinetPy/zh_CN/>`__
 
-.. _NIED Hi-net: http://www.hinet.bosai.go.jp/
-.. _Source Code: https://github.com/seisman/HinetPy
-.. _Documentation: https://seisman.github.io/HinetPy
-.. _中文文档: https://seisman.github.io/HinetPy/zh_CN/
+----
+
+`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package to request
+and process seismic data from `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__.
 
 Features
 ========
 
-- Request continuous and event waveform data from Hi-net
-- Select Hi-net/F-net stations inside a box or circular region
+- Request continuous/event waveform data and event catalog from NIED Hi-net
+- Select Hi-net/F-net stations based on different criteria
 - Convert waveform data from win32 format to SAC format
 - Extract instrumental response as SAC polezero file
 - Multithreads downloading and conversion to speedup
@@ -58,8 +60,8 @@ responses as SAC polezero files.
     # You need a Hi-net account to access the data
     client = Client("username", "password")
 
-    # Let's try to request 20-minute data starting at 2010-01-01T00:00(GMT+0900)
-    # of the Hi-net network (with an internal network code of '0101')
+    # Let's try to request 20-minute data of the Hi-net network (with an internal
+    # network code of '0101') starting at 2010-01-01T00:00 (JST, GMT+0900)
     data, ctable = client.get_continuous_waveform("0101", "201001010000", 20)
 
     # The request and download process usually takes a few minutes
