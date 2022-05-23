@@ -26,6 +26,18 @@ from .utils import (
 )
 from .win32 import merge
 
+# Hacking solution for "ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small" error.
+# Reference: https://stackoverflow.com/a/41041028
+requests.packages.urllib3.disable_warnings()
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ":HIGH:!DH:!aNULL"
+try:
+    requests.packages.urllib3.contrib.pyopenssl.util.ssl_.DEFAULT_CIPHERS += (
+        ":HIGH:!DH:!aNULL"
+    )
+except AttributeError:
+    # no pyopenssl support used / needed / available
+    pass
+
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
 logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
