@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instrumental Response &mdash; HinetPy v0.6.10.dev100+gaa2bbfe documentation</title>
+  <title>Instrumental Response &mdash; HinetPy v0.6.10.dev101+gcd53630 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,6 +14,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -31,7 +32,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev100+gaa2bbfe
+                v0.6.10.dev101+gcd53630
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -92,13 +93,13 @@
            <div itemprop="articleBody">
              
   <section id="instrumental-response">
-<h1>Instrumental Response<a class="headerlink" href="#instrumental-response" title="Permalink to this headline"></a></h1>
+<h1>Instrumental Response<a class="headerlink" href="#instrumental-response" title="Permalink to this heading"></a></h1>
 <section id="input">
-<h2>Input<a class="headerlink" href="#input" title="Permalink to this headline"></a></h2>
+<h2>Input<a class="headerlink" href="#input" title="Permalink to this heading"></a></h2>
 <p>The unit of Hi-net input is determined by column [9], ususally <code class="docutils literal notranslate"><span class="pre">m/s</span></code>.</p>
 </section>
 <section id="analog-stage">
-<h2>Analog Stage<a class="headerlink" href="#analog-stage" title="Permalink to this headline"></a></h2>
+<h2>Analog Stage<a class="headerlink" href="#analog-stage" title="Permalink to this heading"></a></h2>
 <p>The moving coil velocity type seismometer is used in Hi-net and
 its transfer function in the Laplace domain is given as:</p>
 <div class="math notranslate nohighlight">
@@ -118,7 +119,7 @@ The normalization frequency of Hi-net seismometer is always 20 Hz.</p>
 It’s also easy to calculate A0, with <span class="math notranslate nohighlight">\(s=i*2*\pi*f_n\)</span>.</p>
 </section>
 <section id="preamplification">
-<h2>Preamplification<a class="headerlink" href="#preamplification" title="Permalink to this headline"></a></h2>
+<h2>Preamplification<a class="headerlink" href="#preamplification" title="Permalink to this heading"></a></h2>
 <p>The sensor ouput is amplified prior to A/D conversion.
 The amplification factor is determined by column [12] in dB.</p>
 <p>According to the definition of decibel of field quantities:</p>
@@ -127,16 +128,16 @@ The amplification factor is determined by column [12] in dB.</p>
 <p>Thus, the “sensitivity” in this stage is <span class="math notranslate nohighlight">\(10^{\frac{[12]}{20}}\)</span> .</p>
 </section>
 <section id="analog-digital-conversion">
-<h2>Analog-Digital Conversion<a class="headerlink" href="#analog-digital-conversion" title="Permalink to this headline"></a></h2>
+<h2>Analog-Digital Conversion<a class="headerlink" href="#analog-digital-conversion" title="Permalink to this heading"></a></h2>
 <p>The gain in this stage is given by <span class="math notranslate nohighlight">\(\frac{1}{[13]}\)</span>, in <code class="docutils literal notranslate"><span class="pre">counts/V</span></code>.</p>
 </section>
 <section id="digital-stage">
-<h2>Digital Stage<a class="headerlink" href="#digital-stage" title="Permalink to this headline"></a></h2>
+<h2>Digital Stage<a class="headerlink" href="#digital-stage" title="Permalink to this heading"></a></h2>
 <p>The gain in this stage is 1.0, according to the three RESP files provided
 on Hi-net website.</p>
 </section>
 <section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline"></a></h2>
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
 <p>The total sensitivity is:</p>
 <div class="math notranslate nohighlight">
 \[G = \frac{[8]*10^{\frac{[12]}{20}}}{[13]}\]</div>
@@ -153,7 +154,7 @@ The total sensivitity G is also omitted when generating PZ files.</p>
 </div>
 </section>
 <section id="q-a">
-<h2>Q&amp;A<a class="headerlink" href="#q-a" title="Permalink to this headline"></a></h2>
+<h2>Q&amp;A<a class="headerlink" href="#q-a" title="Permalink to this heading"></a></h2>
 <p>My question:</p>
 <blockquote>
 <div><p>Hi,</p>

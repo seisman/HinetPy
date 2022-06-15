@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Get continuous waveform &mdash; HinetPy v0.6.10.dev100+gaa2bbfe documentation</title>
+  <title>Get continuous waveform &mdash; HinetPy v0.6.10.dev101+gcd53630 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,6 +14,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -30,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev100+gaa2bbfe
+                v0.6.10.dev101+gcd53630
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -87,7 +88,7 @@
            <div itemprop="articleBody">
              
   <section id="get-continuous-waveform">
-<h1>Get continuous waveform<a class="headerlink" href="#get-continuous-waveform" title="Permalink to this headline"></a></h1>
+<h1>Get continuous waveform<a class="headerlink" href="#get-continuous-waveform" title="Permalink to this heading"></a></h1>
 <p>This tutorial shows how to use <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a>
 to request continuous waveform data from Hi-net in different ways.</p>
 <div class="admonition note">
@@ -95,7 +96,7 @@ to request continuous waveform data from Hi-net in different ways.</p>
 <p>All times in HinetPy and Hi-net website are in JST time (GMT+0900).</p>
 </div>
 <section id="basic-usage">
-<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline"></a></h2>
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading"></a></h2>
 <p>Request 20 minutes data since 2010-01-01T00:00 (GMT+0900) from Hi-net network:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
@@ -142,7 +143,7 @@ splitted into four 5-minutes short data subrequests.</p>
 </div>
 </section>
 <section id="custom-way">
-<h2>Custom way<a class="headerlink" href="#custom-way" title="Permalink to this headline"></a></h2>
+<h2>Custom way<a class="headerlink" href="#custom-way" title="Permalink to this heading"></a></h2>
 <p>You can set custom filename for both data and ctable, and also the output
 directory.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>

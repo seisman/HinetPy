@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>catwin32 &mdash; HinetPy v0.6.10.dev100+gaa2bbfe documentation</title>
+  <title>catwin32 &mdash; HinetPy v0.6.10.dev101+gcd53630 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,6 +14,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -30,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev100+gaa2bbfe
+                v0.6.10.dev101+gcd53630
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -86,10 +87,10 @@
            <div itemprop="articleBody">
              
   <section id="catwin32">
-<h1>catwin32<a class="headerlink" href="#catwin32" title="Permalink to this headline"></a></h1>
+<h1>catwin32<a class="headerlink" href="#catwin32" title="Permalink to this heading"></a></h1>
 <p>Merger of two or more data sets saved in WIN32 format.</p>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">catwin32</span> <span class="n">File_1</span> <span class="n">File_2</span> <span class="o">...</span> <span class="n">File_n</span> <span class="p">[</span><span class="o">-</span><span class="n">oOutFile</span> <span class="o">|</span> <span class="o">-</span><span class="n">o</span> <span class="n">OutFile</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">OutFile</span><span class="p">]</span>
     <span class="n">File_n</span>        <span class="p">:</span> <span class="n">Input</span> <span class="n">WIN32</span> <span class="n">file</span> <span class="n">name</span> <span class="p">(</span><span class="n">accept</span> <span class="n">wildcard</span><span class="p">)</span><span class="o">.</span>
     <span class="o">-</span><span class="n">o</span> <span class="n">OutFile</span>    <span class="p">:</span> <span class="n">Output</span> <span class="n">WIN32</span> <span class="n">file</span> <span class="n">name</span><span class="o">.</span> <span class="n">Defaults</span> <span class="n">to</span> <span class="n">stdout</span> <span class="k">if</span> <span class="o">-</span><span class="n">o</span> <span class="ow">is</span> <span class="n">ommitted</span><span class="o">.</span>
@@ -112,7 +113,7 @@ You can use <code class="docutils literal notranslate"><span class="pre">sorted(
 named by time.</p>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <p>Merge all win32 files matching <code class="docutils literal notranslate"><span class="pre">20100101*.cnt</span></code> into one win32 file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">catwin32</span> <span class="mi">20100101</span><span class="o">*.</span><span class="n">cnt</span> <span class="o">-</span><span class="n">o</span> <span class="mf">0101_201001010000_5.</span><span class="n">cnt</span>
 </pre></div>

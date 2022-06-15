@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>win2sac &mdash; HinetPy v0.6.10.dev100+gaa2bbfe 文档</title>
+  <title>win2sac &mdash; HinetPy v0.6.10.dev101+gcd53630 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,6 +14,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -31,7 +32,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev100+gaa2bbfe
+                v0.6.10.dev101+gcd53630
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -95,10 +96,10 @@
            <div itemprop="articleBody">
              
   <section id="win2sac">
-<h1>win2sac<a class="headerlink" href="#win2sac" title="永久链接至标题"></a></h1>
+<h1>win2sac<a class="headerlink" href="#win2sac" title="Permalink to this heading"></a></h1>
 <p>将WIN32格式转换为SAC格式，也支持BINARY/ASCII格式。</p>
 <section id="usage">
-<h2>用法<a class="headerlink" href="#usage" title="永久链接至标题"></a></h2>
+<h2>用法<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">win2sac_32</span> <span class="n">winfile</span> <span class="n">ch_no</span> <span class="n">sacfile</span> <span class="p">[</span><span class="n">outdir</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span><span class="p">(</span><span class="n">prmfile</span><span class="p">)]</span>
            <span class="p">[</span><span class="o">-</span><span class="n">Y</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span><span class="p">[</span><span class="n">BIN</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">ASC</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span><span class="p">(</span><span class="n">RATIO</span><span class="p">)]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span><span class="p">(</span><span class="n">PMAX</span><span class="p">)]</span>
 </pre></div>
@@ -134,15 +135,15 @@
 </dl>
 </section>
 <section id="examples">
-<h2>示例<a class="headerlink" href="#examples" title="永久链接至标题"></a></h2>
+<h2>示例<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">win2sac_32</span> <span class="mi">2000082404000101</span><span class="n">VM</span><span class="o">.</span><span class="n">cnt</span> <span class="mi">4</span><span class="n">c55</span><span class="p">,</span><span class="mi">4</span><span class="n">c65</span> <span class="n">SAC</span> <span class="n">DATA</span> <span class="o">-</span><span class="n">e</span> <span class="o">&gt;</span> <span class="n">junk</span><span class="o">.</span><span class="n">log</span>
 </pre></div>
 </div>
 </section>
 <section id="notes">
-<h2>注解<a class="headerlink" href="#notes" title="永久链接至标题"></a></h2>
+<h2>注解<a class="headerlink" href="#notes" title="Permalink to this heading"></a></h2>
 <section id="output-unit">
-<h3>输出的单位<a class="headerlink" href="#output-unit" title="永久链接至标题"></a></h3>
+<h3>输出的单位<a class="headerlink" href="#output-unit" title="Permalink to this heading"></a></h3>
 <div class="admonition important">
 <p class="admonition-title">重要</p>
 <p><code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 提取的SAC文件总是真实的物理量，而不是digital counts。</p>
@@ -151,11 +152,11 @@
 <p>输出的SAC文件的单位是 <code class="docutils literal notranslate"><span class="pre">nm/s</span></code> 、 <code class="docutils literal notranslate"><span class="pre">nm/s/s</span></code> 或 <code class="docutils literal notranslate"><span class="pre">micro</span> <span class="pre">radian</span></code></p>
 </section>
 <section id="filename-format">
-<h3>文件名格式<a class="headerlink" href="#filename-format" title="永久链接至标题"></a></h3>
+<h3>文件名格式<a class="headerlink" href="#filename-format" title="Permalink to this heading"></a></h3>
 <p>默认的文件名格式是 <code class="docutils literal notranslate"><span class="pre">STATION.COMPONENT.EXTENSION</span></code> （如 <code class="docutils literal notranslate"><span class="pre">N.NABC.U.SAC</span></code> ）。你可以修改此后缀名。</p>
 </section>
 <section id="channel-number-file-format">
-<h3>通道号文件格式<a class="headerlink" href="#channel-number-file-format" title="永久链接至标题"></a></h3>
+<h3>通道号文件格式<a class="headerlink" href="#channel-number-file-format" title="Permalink to this heading"></a></h3>
 <p>你可以将所有你要提取数据的通道号保存到一个文件中。</p>
 <ol class="arabic simple">
 <li><p>以 <code class="docutils literal notranslate"><span class="pre">#</span></code> 开头的行为注释行会被跳过</p></li>
@@ -184,7 +185,7 @@
 </div>
 </section>
 <section id="paramerter-file">
-<h3>参数文件<a class="headerlink" href="#paramerter-file" title="永久链接至标题"></a></h3>
+<h3>参数文件<a class="headerlink" href="#paramerter-file" title="Permalink to this heading"></a></h3>
 <p>win32系统需要一个参数文件才能执行。这个参数文件有很多行。然而， <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 只使用了第2和第4行并忽略其它行。</p>
 <p>四行的参数文件的示例:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span>
@@ -197,7 +198,7 @@
 <p>第四行是震相拾取文件的路径。大多数情况下都没有用。</p>
 </section>
 <section id="component">
-<h3>分量<a class="headerlink" href="#component" title="永久链接至标题"></a></h3>
+<h3>分量<a class="headerlink" href="#component" title="Permalink to this heading"></a></h3>
 <p>分量信息会被写到SAC头段变量 <code class="docutils literal notranslate"><span class="pre">CMPAZ</span></code> 和 <code class="docutils literal notranslate"><span class="pre">CMPINC</span></code> 中。</p>
 <ul class="simple">
 <li><p>U/Z: CMPAZ = 0.0, CMPINC = 0.0</p></li>
