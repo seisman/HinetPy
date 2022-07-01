@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; HinetPy v0.6.10.dev101+gcd53630 文档</title>
+  <title>Changelog &mdash; HinetPy v0.6.10.dev103+gca3deb1 文档</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.6.10.dev101+gcd53630
+                v0.6.10.dev103+gca3deb1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -80,9 +80,9 @@
 <h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading"></a></h1>
 <dl class="simple">
 <dt>0.7.0 (XXXX-XX-XX):</dt><dd><ul class="simple">
-<li><p>Fix the incorrect maximum allowed time span for F-net</p></li>
+<li><p>Fix the incorrect maximum allowed time span for F-net (#65)</p></li>
 <li><p><cite>get_selected_stations</cite> now returns a list of stations with station metadata
-information</p></li>
+information (#36)</p></li>
 <li><p>Refactor the <cite>_channel2pz()</cite> and <cite>_write_pz()</cite> functions to <cite>Channel.write_sacpz()</cite></p></li>
 <li><p>Refactor the <cite>_get_channels</cite> function to <cite>win32.read_ctable()</cite></p></li>
 <li><p>The <cite>win32.extrac_sacpz</cite> function now supports parallel data processing</p></li>
@@ -90,6 +90,7 @@ information</p></li>
 <li><p>The <cite>win32.extrac_pz()</cite> function is renamed to <cite>win32.extract_sacpz()</cite></p></li>
 <li><p>Move the function <cite>Client.check_cmd_exists()</cite> to <cite>utils.check_cmd_exists()</cite></p></li>
 <li><p>Move the function <cite>Client.check_package_release()</cite> to <cite>utils.check_package_release()</cite></p></li>
+<li><p>Fix the “ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small” error</p></li>
 </ul>
 </dd>
 <dt>0.6.9 (2021-05-20):</dt><dd><ul class="simple">
