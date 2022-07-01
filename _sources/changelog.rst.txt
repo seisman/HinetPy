@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.7.0 (XXXX-XX-XX):
+0.7.0 (2022-07-01):
   - Fix the incorrect maximum allowed time span for F-net (#65)
   - `get_selected_stations` now returns a list of stations with station metadata
     information (#36)
