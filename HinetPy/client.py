@@ -596,8 +596,8 @@ class EventWaveformClient(BaseClient):
             "month": f"{month:02d}",
             "day": f"{day:02d}",
             "region": region,
-            "mags": magmin,
-            "mage": magmax,
+            "mags": str(f"{magmin:.1f}"),  # magnitude must be 3.0, not 3
+            "mage": str(f"{magmax:.1f}"),
             "undet": 0 if include_unknown_mag else 1,
             "sort": 0,  # always sort by origin time in ascending order
             "arc": "ZIP",  # meaningless arguement in this request
