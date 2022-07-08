@@ -812,7 +812,9 @@ class EventWaveformClient(BaseClient):
             if not starttime <= event.origin <= endtime:
                 continue
             # select events based on magnitude
-            if not minmagnitude <= event.magnitude <= maxmagnitude:
+            if (event.magnitude != -99.9) and (
+                not minmagnitude <= event.magnitude <= maxmagnitude
+            ):
                 continue
             # select events based on depth
             if mindepth and event.depth < mindepth:
@@ -1355,7 +1357,10 @@ class Event:
             self.longitude = -float(longitude[:-1])
 
         self.depth = float(depth.strip("km"))
-        self.magnitude = float(magnitude)
+        if magnitude == "#":  # unknown magnitude
+            self.magnitude = -99.9
+        else:
+            self.magnitude = float(magnitude)
         self.name = name
         self.name_en = name_en
 
