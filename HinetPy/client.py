@@ -817,13 +817,18 @@ class EventWaveformClient(BaseClient):
             ):
                 continue
             # select events based on depth
-            if mindepth and event.depth < mindepth:
+            if mindepth is not None and event.depth < mindepth:
                 continue
-            if maxdepth and event.depth > maxdepth:
+            if maxdepth is not None and event.depth > maxdepth:
                 continue
 
             # select events in a box region
-            if minlatitude or maxlatitude or minlongitude or maxlongitude:
+            if (
+                minlatitude is not None
+                or maxlatitude is not None
+                or minlongitude is not None
+                or maxlongitude is not None
+            ):
                 if not point_inside_box(
                     event.latitude,
                     event.longitude,
@@ -835,7 +840,9 @@ class EventWaveformClient(BaseClient):
                     continue
 
             # select events in a circular region
-            if (latitude and longitude) and (minradius or maxradius):
+            if (latitude is not None and longitude is not None) and (
+                minradius is not None or maxradius is not None
+            ):
                 if not point_inside_circular(
                     event.latitude,
                     event.longitude,
