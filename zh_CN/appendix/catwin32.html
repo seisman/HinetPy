@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>catwin32 &mdash; HinetPy v0.7.1.dev4+g055e976 文档</title>
+  <title>catwin32 &mdash; HinetPy v0.7.2.dev1+g0f7f4db 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -32,7 +32,7 @@
             <a href="../index.html" class="icon icon-home"> HinetPy
           </a>
               <div class="version">
-                v0.7.1.dev4+g055e976
+                v0.7.2.dev1+g0f7f4db
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -88,10 +88,10 @@
            <div itemprop="articleBody">
              
   <section id="catwin32">
-<h1>catwin32<a class="headerlink" href="#catwin32" title="Permalink to this heading"></a></h1>
+<h1>catwin32<a class="headerlink" href="#catwin32" title="此标题的永久链接"></a></h1>
 <p>合并两个或多个WIN32格式的数据。</p>
 <section id="usage">
-<h2>用法<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<h2>用法<a class="headerlink" href="#usage" title="此标题的永久链接"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">catwin32</span> <span class="n">File_1</span> <span class="n">File_2</span> <span class="o">...</span> <span class="n">File_n</span> <span class="p">[</span><span class="o">-</span><span class="n">oOutFile</span> <span class="o">|</span> <span class="o">-</span><span class="n">o</span> <span class="n">OutFile</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">OutFile</span><span class="p">]</span>
     <span class="n">File_n</span>        <span class="p">:</span> <span class="n">Input</span> <span class="n">WIN32</span> <span class="n">file</span> <span class="n">name</span> <span class="p">(</span><span class="n">accept</span> <span class="n">wildcard</span><span class="p">)</span><span class="o">.</span>
     <span class="o">-</span><span class="n">o</span> <span class="n">OutFile</span>    <span class="p">:</span> <span class="n">Output</span> <span class="n">WIN32</span> <span class="n">file</span> <span class="n">name</span><span class="o">.</span> <span class="n">Defaults</span> <span class="n">to</span> <span class="n">stdout</span> <span class="k">if</span> <span class="o">-</span><span class="n">o</span> <span class="ow">is</span> <span class="n">ommitted</span><span class="o">.</span>
@@ -108,7 +108,7 @@
 <p>第一种方法更安全但更耗时，因而倾向于采用第二种方式。如果win32文件是按照日期命名的，则在Python里可以使用 <code class="docutils literal notranslate"><span class="pre">sorted(glob.glob(&quot;*.cnt&quot;))</span></code> 以保证输入文件是按照时间先后排序的。</p>
 </section>
 <section id="examples">
-<h2>示例<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2>示例<a class="headerlink" href="#examples" title="此标题的永久链接"></a></h2>
 <p>将所有文件名满足 <code class="docutils literal notranslate"><span class="pre">20100101*.cnt</span></code> 的文件合并到一个文件中:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">catwin32</span> <span class="mi">20100101</span><span class="o">*.</span><span class="n">cnt</span> <span class="o">-</span><span class="n">o</span> <span class="mf">0101_201001010000_5.</span><span class="n">cnt</span>
 </pre></div>
