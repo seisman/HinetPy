@@ -62,4 +62,4 @@ jobs:
           HINET_PASSWORD: ${{ secrets.HINET_PASSWORD }}
 
       - name: Upload coverage reports
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
