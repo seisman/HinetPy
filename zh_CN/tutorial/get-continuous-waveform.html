@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>获取连续波形数据 &mdash; HinetPy v0.7.2.dev13+g9039624 文档</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>获取连续波形数据 &mdash; HinetPy v0.7.2.dev24+gd39729c 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/translations.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=baf22bdd"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
@@ -36,7 +38,7 @@
             HinetPy
           </a>
               <div class="version">
-                v0.7.2.dev13+g9039624
+                v0.7.2.dev24+gd39729c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -63,7 +65,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">示例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API参考</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix.html">附录</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
 </ul>
 
@@ -93,14 +94,14 @@
            <div itemprop="articleBody">
              
   <section id="get-continuous-waveform">
-<h1>获取连续波形数据<a class="headerlink" href="#get-continuous-waveform" title="此标题的永久链接"></a></h1>
+<h1>获取连续波形数据<a class="headerlink" href="#get-continuous-waveform" title="Link to this heading"></a></h1>
 <p>本教程将展示如何通过 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> 用多种方式从Hi-net申请连续波形数据。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>HinetPy和Hi-net网站中的所有时间都是日本标准时间（东九区，GMT+0900）。</p>
 </div>
 <section id="basic-usage">
-<h2>基本用法<a class="headerlink" href="#basic-usage" title="此标题的永久链接"></a></h2>
+<h2>基本用法<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h2>
 <p>申请Hi-net台网从2010-01-01T00:00 (GMT+0900)开始的20分钟的数据：</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
@@ -119,7 +120,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01 00:00&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>并且 <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.11）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> 允许用户更灵活地操作日期和时间:</p>
+<p>并且 <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> 允许用户更灵活地操作日期和时间:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># JST time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -142,7 +143,7 @@
 </div>
 </section>
 <section id="custom-way">
-<h2>自定义<a class="headerlink" href="#custom-way" title="此标题的永久链接"></a></h2>
+<h2>自定义<a class="headerlink" href="#custom-way" title="Link to this heading"></a></h2>
 <p>你可以自定义数据文件和通道表的文件名，以及输出目录。</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -179,7 +180,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2014-2023, Dongdong Tian.</p>
+    <p>&#169; 版权所有 2014-2024, Dongdong Tian。</p>
   </div>
 
   利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
