@@ -1,6 +1,7 @@
 """
 Build and install the project.
 """
+
 from setuptools import find_packages, setup
 
 NAME = "HinetPy"

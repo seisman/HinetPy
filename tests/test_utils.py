@@ -1,6 +1,7 @@
 """
 Tests for utils.py.
 """
+
 from datetime import date, datetime
 
 import pytest

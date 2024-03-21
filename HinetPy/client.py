@@ -1,6 +1,7 @@
 """
 Client for requesting Hi-net waveform data and catalog.
 """
+
 import csv
 import json
 import logging
@@ -1027,7 +1028,7 @@ class StationClient(BaseClient):
         parser = _GrepTableData()
         parser.feed(self.session.get(self._STATION, timeout=self.timeout).text)
         stations = []
-        for (i, text) in enumerate(parser.tabledata):
+        for i, text in enumerate(parser.tabledata):
             # If the target station, grep both lon and lat.
             if re.match(pattern, text):
                 stations.append(

@@ -16,6 +16,7 @@ Basis usage:
 >>> win32.extract_sac(data, ctable)
 >>> win32.extract_sacpz(ctable)
 """
+
 # pylint: disable=invalid-name
 
 from pkg_resources import get_distribution
