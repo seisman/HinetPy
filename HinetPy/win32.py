@@ -1,6 +1,7 @@
 """
 Process seismic waveform data in win32 format.
 """
+
 import glob
 import logging
 import math

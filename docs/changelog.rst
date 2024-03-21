@@ -1,5 +1,8 @@
 Changelog
-=========
+=========a
+
+0.7.2 (2024-03-21)
+- Remove the hacking solution for SSL connection issue so it works well with urllib3 v2.x
 
 0.7.1 (2022-07-08):
 - Fix bugs in `get_event_waveform`

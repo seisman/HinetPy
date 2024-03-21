@@ -1,6 +1,7 @@
 """
 Client for requesting Hi-net waveform data and catalog.
 """
+
 import csv
 import json
 import logging
@@ -25,18 +26,6 @@ from .utils import (
     to_datetime,
 )
 from .win32 import merge
-
-# Hacking solution for "ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small" error.
-# Reference: https://stackoverflow.com/a/41041028
-requests.packages.urllib3.disable_warnings()
-requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ":HIGH:!DH:!aNULL"
-try:
-    requests.packages.urllib3.contrib.pyopenssl.util.ssl_.DEFAULT_CIPHERS += (
-        ":HIGH:!DH:!aNULL"
-    )
-except AttributeError:
-    # no pyopenssl support used / needed / available
-    pass
 
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
@@ -1039,7 +1028,7 @@ class StationClient(BaseClient):
         parser = _GrepTableData()
         parser.feed(self.session.get(self._STATION, timeout=self.timeout).text)
         stations = []
-        for (i, text) in enumerate(parser.tabledata):
+        for i, text in enumerate(parser.tabledata):
             # If the target station, grep both lon and lat.
             if re.match(pattern, text):
                 stations.append(
