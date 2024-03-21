@@ -26,7 +26,6 @@ from .utils import (
 )
 from .win32 import merge
 
-
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
 logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
