@@ -10,7 +10,7 @@ on:
       - 'HinetPy/*.py'
       - 'docs/**'
   pull_request:
-    branches: [main]
+    paths:
       - 'HinetPy/*.py'
       - 'docs/**'
 

@@ -3,6 +3,7 @@ name: Tests
 on:
   push:
     branches: [main]
+    paths:
       - 'HinetPy/**'
       - 'tests/**'
       - '.github/workflows/tests.yml'
