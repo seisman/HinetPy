@@ -15,7 +15,7 @@ Install HinetPy
 
 To install the latest **release/stable** version::
 
-    pip install HinetPy
+    python -m pip install HinetPy
 
 Or install the **developing/unstable** version::
 
@@ -25,7 +25,7 @@ Or install the **developing/unstable** version::
 
 If you want to uninstall HinetPy, just run::
 
-    pip uninstall HinetPy
+    python -m pip uninstall HinetPy
 
 Build win32tools
 ----------------
