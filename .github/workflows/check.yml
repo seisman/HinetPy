@@ -24,8 +24,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-          pip install black blackdoc flake8 isort
+          python -m pip install -r requirements.txt
+          python -m pip install black blackdoc flake8 isort
 
       - name: Check code style
         run: make check

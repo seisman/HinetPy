@@ -23,7 +23,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install setuptools wheel
+        python -m pip install setuptools wheel
 
     - name: Build and publish
       run: |
