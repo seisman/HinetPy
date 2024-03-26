@@ -1,3 +1,6 @@
+#
+# Code lint and style checks
+#
 name: Check
 
 on:
@@ -12,9 +15,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.12.1
-
       - name: Checkout
         uses: actions/checkout@v4
 

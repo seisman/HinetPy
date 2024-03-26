@@ -3,12 +3,15 @@ name: Tests
 on:
   push:
     branches: [main]
+      - 'HinetPy/**'
+      - 'tests/**'
+      - '.github/workflows/tests.yml'
   pull_request:
     branches: [main]
     paths:
       - 'HinetPy/**'
       - 'tests/**'
-      - '.github/workflows/**'
+      - '.github/workflows/tests.yml'
 
 jobs:
   test:
