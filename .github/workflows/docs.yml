@@ -1,10 +1,22 @@
+#
+# Build and deploy documentation
+#
 name: Docs
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'HinetPy/*.py'
+      - 'docs/**'
   pull_request:
     branches: [main]
+      - 'HinetPy/*.py'
+      - 'docs/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   deploy-docs:
@@ -12,9 +24,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.12.1
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
