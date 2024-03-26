@@ -31,7 +31,7 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install build sphinx sphinx-intl sphinx_rtd_theme
           python -m build --sdist
-          python -m install dist/*
+          python -m pip install dist/*
 
       - name: Build documentation
         run: make doc
