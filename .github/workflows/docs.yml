@@ -30,8 +30,8 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install sphinx sphinx-intl sphinx_rtd_theme
-          python setup.py sdist --formats=zip
-          pip install dist/*
+          python -m build --sdist
+          python -m install dist/*
 
       - name: Build documentation
         run: make doc

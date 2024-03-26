@@ -13,7 +13,7 @@ help:
 	@echo ""
 
 install:
-	pip install --no-deps -e .
+	python -m pip install --no-deps -e .
 
 test:
 	pytest tests/test_*.py
