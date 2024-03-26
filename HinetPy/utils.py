@@ -8,7 +8,7 @@ from datetime import date, datetime
 from distutils.version import LooseVersion
 
 import requests
-from pkg_resources import get_distribution
+from importlib.metadata import version
 
 
 def split_integer(number, maxn):
@@ -253,7 +253,7 @@ def check_package_release():
         raise requests.HTTPError("Error in connecting to PyPI.")
     latest_release = res.json()["info"]["version"]
 
-    current_version = f'{get_distribution("HinetPy").version}'
+    current_version = f'v{version("HinetPy")}'
     if LooseVersion(latest_release) > LooseVersion(current_version):
         print(
             f"HinetPy v{latest_release} is released. "
