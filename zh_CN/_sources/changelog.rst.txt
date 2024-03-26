@@ -3,6 +3,7 @@ Changelog
 
 0.7.2 (XXXX-XX-XX)
 - Remove the hacking solution for SSL connection issue so it works well with urllib3 v2.x
+- Drop support for Python 3.7.
 
 0.7.1 (2022-07-08):
 - Fix bugs in `get_event_waveform`
