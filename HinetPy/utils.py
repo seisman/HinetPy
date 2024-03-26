@@ -5,7 +5,7 @@ Utility functions.
 import math
 import shutil
 from datetime import date, datetime
-from distutils.version import LooseVersion
+from packaging.version import Version
 
 import requests
 from importlib.metadata import version
@@ -254,7 +254,7 @@ def check_package_release():
     latest_release = res.json()["info"]["version"]
 
     current_version = f'v{version("HinetPy")}'
-    if LooseVersion(latest_release) > LooseVersion(current_version):
+    if Version(latest_release) > Version(current_version):
         print(
             f"HinetPy v{latest_release} is released. "
             + "See https://pypi.org/project/HinetPy/ for details."
