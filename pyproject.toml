@@ -1,3 +1,50 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "HinetPy"
+description = "A Python package to request and process seismic waveform data from NIED Hi-neta"
+readme = "README.rst"
+requires-python = ">=3.8"
+authors = [{name = "Dongdong Tian", email = "seisman.info@gmail.com"}]
+keywords = ["seismology", "NIED", "Hi-net", "waveform"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Utilities",
+]
+dependencies = ["requests"]
+dynamic = ["version"]
+
+[project.urls]
+homepage = "https://seisman.github.io/HinetPy/"
+documentation = "https://seisman.github.io/HinetPy/"
+repository = "https://github.com/seisman/HinetPy"
+
+[tool.setuptools]
+license-files = ["LICENSE.txt"]
+
+[tool.setuptools.packages.find]
+include = ["HinetPy*"]
+exclude = ["docs", "tests"]
+
+[tool.setuptools_scm]
+local_scheme = "node-and-date"
+fallback_version = "999.999.999+unknown"
+
 [tool.black]
 line-length = 88
 exclude = '''

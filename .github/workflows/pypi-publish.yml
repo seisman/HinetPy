@@ -21,13 +21,10 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install dependencies
+    - name: Build
       run: |
-        python -m pip install setuptools wheel
-
-    - name: Build and publish
-      run: |
-        python setup.py sdist bdist_wheel
+        python -m install build
+        python -m build
         ls -lh dist/
 
     - name: Publish to PyPI

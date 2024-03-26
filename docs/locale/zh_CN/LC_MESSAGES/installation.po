@@ -29,7 +29,7 @@ msgid "To use HinetPy, you need:"
 msgstr "为了使用 HinetPy，你需要:"
 
 #: ../../installation.rst:9
-msgid "Python >= 3.7"
+msgid "Python >= 3.8"
 msgstr ""
 
 #: ../../installation.rst:10
