@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client module &mdash; HinetPy v0.7.2.dev30+g194f9fd documentation</title>
+  <title>HinetPy.client module &mdash; HinetPy v0.7.2.dev31+g6281ac3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=fd4796b0"></script>
+        <script src="../_static/documentation_options.js?v=4fa31fe2"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -37,7 +37,7 @@
             HinetPy
           </a>
               <div class="version">
-                v0.7.2.dev30+g194f9fd
+                v0.7.2.dev31+g6281ac3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -422,7 +422,6 @@ parameters.</p></li>
 <span class="go">16</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
-<span class="gp">...</span>
 <span class="go">0101 N.WNNH 45.4883 141.885 -159.06</span>
 <span class="go">0101 N.SFNH 45.3346 142.1185 -81.6</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">station</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">]</span>
@@ -442,7 +441,6 @@ Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
-<span class="gp">...</span>
 <span class="go">0101 N.WNNH 45.4883 141.885 -159.06</span>
 <span class="go">0101 N.SFNH 45.3346 142.1185 -81.6</span>
 <span class="go">...</span>
