@@ -5,10 +5,10 @@ Utility functions.
 import math
 import shutil
 from datetime import date, datetime
-from packaging.version import Version
+from importlib.metadata import version
 
 import requests
-from importlib.metadata import version
+from packaging.version import Version
 
 
 def split_integer(number, maxn):
@@ -181,7 +181,6 @@ def to_datetime(value):
     >>> to_datetime("2010-01-01T03:45")
     datetime.datetime(2010, 1, 1, 3, 45)
     """
-    # pylint: disable=too-many-branches
     # is datetime
     if isinstance(value, datetime):
         return value
@@ -209,10 +208,7 @@ def to_datetime(value):
     elif len(parts) == 5:
         strfmt = "%Y %m %d %H %M"
     elif len(parts) == 6:
-        if "." in value:
-            strfmt = "%Y %m %d %H %M %S.%f"
-        else:
-            strfmt = "%Y %m %d %H %M %S"
+        strfmt = "%Y %m %d %H %M %S.%f" if "." in value else "%Y %m %d %H %M %S"
 
     return datetime.strptime(value, strfmt)
 
@@ -248,7 +244,7 @@ def check_package_release():
     bool
         True if HinetPy has a new release.
     """
-    res = requests.get("https://pypi.org/pypi/HinetPy/json")
+    res = requests.get("https://pypi.org/pypi/HinetPy/json", timeout=30)
     if res.status_code != 200:
         raise requests.HTTPError("Error in connecting to PyPI.")
     latest_release = res.json()["info"]["version"]
@@ -257,7 +253,7 @@ def check_package_release():
     if Version(latest_release) > Version(current_version):
         print(
             f"HinetPy v{latest_release} is released. "
-            + "See https://pypi.org/project/HinetPy/ for details."
+            "See https://pypi.org/project/HinetPy/ for details."
         )
         return True
 

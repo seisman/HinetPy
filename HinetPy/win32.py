@@ -23,11 +23,9 @@ class Channel:
     Class for channel information.
     """
 
-    # pylint: disable=too-many-instance-attributes,invalid-name,redefined-builtin
-    # pylint: disable=too-few-public-methods
-    def __init__(
+    def __init__(  # noqa: PLR0913
         self,
-        id=None,
+        id=None,  # noqa: A002
         name=None,
         component=None,
         latitude=None,
@@ -38,8 +36,9 @@ class Channel:
         period=None,
         preamplification=None,
         lsb_value=None,
-    ):  # pylint: disable=too-many-arguments
-        """Initialize a channel.
+    ):
+        """
+        Initialize a channel.
 
         Parameters
         ----------
@@ -114,12 +113,12 @@ class Channel:
         # calculate the CONSTANT
         fn = 20.0  # alaways assume normalization frequency is 20 Hz
         s = complex(0, 2 * math.pi * fn)
-        A0 = abs((s**2 + 2 * self.damping * freq * s + freq**2) / s**2)
+        a0 = abs((s**2 + 2 * self.damping * freq * s + freq**2) / s**2)
         if keep_sensitivity:
             factor = math.pow(10, self.preamplification / 20.0)
-            constant = A0 * self.gain * factor / self.lsb_value
+            constant = a0 * self.gain * factor / self.lsb_value
         else:
-            constant = A0
+            constant = a0
 
         # write information to a SAC PZ file
         with open(pzfile, "w", encoding="utf8") as pz:
@@ -142,7 +141,8 @@ def extract_sac(
     with_sacpz=False,
     processes=None,
 ):
-    """Extract data as SAC format files.
+    """
+    Extract data as SAC format files.
 
     This function calls the ``win2sac_32`` command, available in the Hi-net win32tools
     package, to convert data files from win32 format to SAC fomrat. It can also
@@ -259,7 +259,8 @@ def extract_sacpz(
     filter_by_component=None,
     processes=None,
 ):
-    """Extract instrumental responses in SAC polezero format from a channel table.
+    """
+    Extract instrumental responses in SAC polezero format from a channel table.
 
     .. warning::
 
@@ -356,7 +357,7 @@ def read_ctable(ctable):
         List of :class:`~HinetPy.win32.Channel`.
     """
     channels = []
-    with open(ctable, "r", encoding="utf8") as fct:
+    with open(ctable, encoding="utf8") as fct:
         for line in fct:
             # skip blank lines and comment lines
             if not line.strip() or line.strip().startswith("#"):
@@ -392,7 +393,8 @@ def read_ctable(ctable):
 def _filter_channels(
     channels, filter_by_id=None, filter_by_name=None, filter_by_component=None
 ):
-    """Filter channels by id, name and/or component.
+    """
+    Filter channels by id, name and/or component.
 
     Parameters
     ----------
@@ -410,13 +412,15 @@ def _filter_channels(
     def _filter(channels, key, filters):
         filtered_channels = []
         if isinstance(filters, list):  # filter by list
-            for channel in channels:
-                if getattr(channel, key) in filters:
-                    filtered_channels.append(channel)
+            filtered_channels = [
+                channel for channel in channels if getattr(channel, key) in filters
+            ]
         elif isinstance(filters, str):  # filter by wildcard
-            for channel in channels:
-                if fnmatch(getattr(channel, key), filters):
-                    filtered_channels.append(channel)
+            filtered_channels = [
+                channel
+                for channel in channels
+                if fnmatch(getattr(channel, key), filters)
+            ]
         else:
             raise ValueError("Only list and wildcard filter are supported.")
         return filtered_channels
@@ -436,14 +440,14 @@ def _write_winprm(ctable, prmfile="win.prm"):
     Write a four-line parameter file.
     """
     with open(prmfile, "w", encoding="utf8") as fprm:
-        msg = "\n".join([".", ctable, ".", "."])
-        fprm.write(msg)
+        fprm.write(f".\n{ctable}\n.\n.")
 
 
 def _extract_channel_sac(
     winfile, channel, suffix="SAC", outdir=".", prmfile="win.prm", pmax=8640000
 ):
-    """Extract one channel data from win32 file.
+    """
+    Extract one channel data from win32 file.
 
     Parameters
     ----------
@@ -508,7 +512,8 @@ def _extract_channel_sac(
 def _extract_channel_sacpz(
     channel, suffix="SAC_PZ", outdir=".", keep_sensitivity=False
 ):
-    """Extract one SAC PZ file from a channel table file.
+    """
+    Extract one SAC PZ file from a channel table file.
 
     Parameters
     ----------
@@ -585,7 +590,7 @@ def merge(data, total_data, force_sort=False):
     if os.path.dirname(total_data):
         os.makedirs(os.path.dirname(total_data), exist_ok=True)
 
-    cmd = ["catwin32", "-o", total_data] + data
+    cmd = ["catwin32", "-o", total_data, *data]
     if force_sort:  # add -s option to force sort
         cmd.append("-s")
 

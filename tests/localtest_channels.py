@@ -21,5 +21,5 @@ for code in sorted(NETWORK.keys()):
     if count > NETWORK[code].channels:  # more
         difference[code] = count
 
-    for code in difference.keys():
-        print(code, difference[code])
+    for dcode in difference:
+        print(dcode, difference[dcode])

@@ -5,9 +5,8 @@ help:
 	@echo "  install    install in editable mode"
 	@echo "  test       run the test suite and report coverage"
 	@echo "  doc        build the documentation"
-	@echo "  format     run black to automatically format the code"
-	@echo "  check      run code style and quality checks"
-	@echo "  lint       run pylint for a deeper quality check"
+	@echo "  format     run ruff to automatically format the code"
+	@echo "  check      run ruff to check code style and quality"
 	@echo "  clean      clean up build and generated files"
 	@echo "  dist-clean clean up egg-info files"
 	@echo ""
@@ -22,18 +21,12 @@ doc:
 	make -C docs docs
 
 format:
-	isort .
-	black .
-	blackdoc .
+	ruff check --fix --exit-zero .
+	ruff format .
 
 check:
-	isort --check .
-	black --check .
-	blackdoc --check .
-	flake8 .
-
-lint:
-	pylint HinetPy docs tests
+	ruff check .
+	ruff format --check .
 
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
