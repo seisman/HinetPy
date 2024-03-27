@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client 模块 &mdash; HinetPy v0.7.2.dev31+g6281ac3 文档</title>
+  <title>HinetPy.client 模块 &mdash; HinetPy v0.7.2.dev37+g8070b81 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=249c9d54"></script>
+        <script src="../_static/documentation_options.js?v=344092a9"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=beaddf03"></script>
@@ -38,7 +38,7 @@
             HinetPy
           </a>
               <div class="version">
-                v0.7.2.dev31+g6281ac3
+                v0.7.2.dev37+g8070b81
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -128,18 +128,15 @@
 </dl>
 <div class="admonition- admonition">
 <p class="admonition-title">备注</p>
-<p>The Hi-net server ususally spends 10-60 seconds on data
-preparation after receiving a data request. During the data
-preparation, users are <strong>NOT</strong> allowed to post another data request.
-So users have to wait until the data is ready.</p>
-<p>HinetPy checks data status every <code class="docutils literal notranslate"><span class="pre">sleep_time_in_seconds</span></code> seconds for
-no more than <code class="docutils literal notranslate"><span class="pre">max_sleep_count</span></code> times, until the data is ready.
-If the data status is still NOT ready after
-<code class="docutils literal notranslate"><span class="pre">max_sleep_count</span> <span class="pre">*</span> <span class="pre">sleep_time_in_seconds</span></code> seconds,
-it most likely means something goes wrong with the data request.
-Then, HinetPy will retry to request the data <code class="docutils literal notranslate"><span class="pre">retries</span></code> times.
-Ususally, you don’t need to modify these parameters
-unless you know what you’re doing.</p>
+<p>The Hi-net server ususally spends 10-60 seconds on data preparation after
+receiving a data request. During the data preparation, users are <strong>NOT</strong> allowed
+to post another data request. So users have to wait until the data is ready.</p>
+<p>HinetPy checks data status every <code class="docutils literal notranslate"><span class="pre">sleep_time_in_seconds</span></code> seconds for no more
+than <code class="docutils literal notranslate"><span class="pre">max_sleep_count</span></code> times, until the data is ready. If the data status is
+still NOT ready after <code class="docutils literal notranslate"><span class="pre">max_sleep_count</span> <span class="pre">*</span> <span class="pre">sleep_time_in_seconds</span></code> seconds, it
+most likely means something goes wrong with the data request. Then, HinetPy will
+retry to request the data <code class="docutils literal notranslate"><span class="pre">retries</span></code> times. Ususally, you don’t need to modify
+these parameters unless you know what you’re doing.</p>
 </div>
 <div class="admonition- admonition">
 <p class="admonition-title">示例</p>
@@ -250,12 +247,12 @@ unless you know what you’re doing.</p>
 <li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 台网代码。见 <a class="reference internal" href="#HinetPy.client.Client.info" title="HinetPy.client.Client.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> 。</p></li>
 <li><p><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> or str) – Starttime of a data request.</p></li>
 <li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – 数据的时间长度，单位为分钟。</p></li>
-<li><p><strong>max_span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Maximum time span for sub-requests. Defaults to be determined
-automatically. See notes below.</p></li>
+<li><p><strong>max_span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Maximum time span for sub-requests. Defaults to be determined automatically.
+See notes below.</p></li>
 <li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 下载的win32数据的文件名。默认格式： <code class="docutils literal notranslate"><span class="pre">CODE_YYYYmmddHHMM_SPAN.cnt</span></code></p></li>
 <li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 下载的通道表文件名。默认格式为 <code class="docutils literal notranslate"><span class="pre">CODE_YYYYmmdd.ch</span></code></p></li>
-<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Save win32 and channel table data to a specified directory.
-Default is in the current directory.</p></li>
+<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Save win32 and channel table data to a specified directory. Default is in
+the current directory.</p></li>
 <li><p><strong>threads</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Parallel data download using more threads.</p></li>
 <li><p><strong>cleanup</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – 在合并文件之后清理1分钟长度的cnt文件。</p></li>
 </ul>
@@ -279,11 +276,10 @@ Default is in the current directory.</p></li>
 <li><p>通道数*数据长度不得大于12000分钟</p></li>
 <li><p>仅保留最近150次请求的数据</p></li>
 </ol>
-<p>For example, Hi-net network has about 24000 channels. Acoording to
-limitation 2, the record length should be no more than 5 minutes
-for each data request. HinetPy “break through” the limitation by
-splitting a long-duration data request into several short-duration
-sub-requsts.</p>
+<p>For example, Hi-net network has about 24000 channels. Acoording to limitation 2,
+the record length should be no more than 5 minutes for each data request.
+HinetPy “break through” the limitation by splitting a long-duration data request
+into several short-duration sub-requsts.</p>
 <p><strong>How it works</strong></p>
 <ol class="arabic simple">
 <li><p>做一些检查</p></li>
@@ -491,12 +487,10 @@ Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).</p>
 <li><p><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制台站经度小于指定值。</p></li>
 <li><p><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 指定用于半径搜索的纬度。</p></li>
 <li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 指定用于半径搜索的经度。</p></li>
-<li><p><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to stations within the specified minimum number of degrees
-from the geographic point defined by the latitude and longitude
-parameters.</p></li>
-<li><p><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to stations within the specified maximum number of degrees
-from the geographic point defined by the latitude and longitude
-parameters.</p></li>
+<li><p><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to stations within the specified minimum number of degrees from the
+geographic point defined by the latitude and longitude parameters.</p></li>
+<li><p><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to stations within the specified maximum number of degrees from the
+geographic point defined by the latitude and longitude parameters.</p></li>
 </ul>
 </dd>
 </dl>

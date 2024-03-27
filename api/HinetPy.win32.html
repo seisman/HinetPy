@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.win32 module &mdash; HinetPy v0.7.2.dev31+g6281ac3 documentation</title>
+  <title>HinetPy.win32 module &mdash; HinetPy v0.7.2.dev37+g8070b81 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=4fa31fe2"></script>
+        <script src="../_static/documentation_options.js?v=51a8fb1f"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -37,7 +37,7 @@
             HinetPy
           </a>
               <div class="version">
-                v0.7.2.dev31+g6281ac3
+                v0.7.2.dev37+g8070b81
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -150,13 +150,13 @@ See <a class="reference internal" href="../appendix/response.html"><span class="
 <span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">extract_sac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SAC'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8640000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_sacpz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.extract_sac" title="Link to this definition"></a></dt>
 <dd><p>Extract data as SAC format files.</p>
 <p>This function calls the <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> command, available in the Hi-net win32tools
-package, to convert data files from win32 format to SAC fomrat. It can also
-extract the channel information as SAC polezero files.</p>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> command always remove the instrument sensitivity
-from waveform data, and multiply the data by 1.0e9. Thus, the extracted SAC
-files are not in digital counts, but velocity in nm/s, or acceleration in nm/s/s.
-Due to the same reason, the extracted SAC polezero files does not keep the
-sensitivity in the “CONSTANT” of SAC polezero files.</p>
+package, to convert data files from win32 format to SAC fomrat. It can also extract
+the channel information as SAC polezero files.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> command always remove the instrument sensitivity from
+waveform data, and multiply the data by 1.0e9. Thus, the extracted SAC files are not
+in digital counts, but velocity in nm/s, or acceleration in nm/s/s. Due to the same
+reason, the extracted SAC polezero files does not keep the sensitivity in the
+“CONSTANT” of SAC polezero files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -164,23 +164,20 @@ sensitivity in the “CONSTANT” of SAC polezero files.</p>
 <li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Channel table file.</p></li>
 <li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Suffix of output SAC files. Defaults to <code class="docutils literal notranslate"><span class="pre">SAC</span></code>.</p></li>
 <li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Output directory. Defaults to current directory.</p></li>
-<li><p><strong>pmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Maximum number of data points for one channel. Defaults to 8640000.
-If one channel has more than 8640000 data points (i.e., longer than
-one day for a 100 Hz sampling rate), you MUST increase <code class="docutils literal notranslate"><span class="pre">pmax</span></code>.</p></li>
+<li><p><strong>pmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Maximum number of data points for one channel. Defaults to 8640000. If one
+channel has more than 8640000 data points (i.e., longer than one day for a
+100 Hz sampling rate), you MUST increase <code class="docutils literal notranslate"><span class="pre">pmax</span></code>.</p></li>
 <li><p><strong>filter_by_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Filter channels by ID. It can be a list of IDs or a wildcard.</p></li>
 <li><p><strong>filter_by_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Filter channels by name. It can be a list of names or a wildcard.</p></li>
-<li><p><strong>filter_by_component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Filter channels by component. It can be a list of component names or
-a wildcard.</p></li>
-<li><p><strong>with_sacpz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Aslo extract SAC PZ files. By default, the suffix is <code class="docutils literal notranslate"><span class="pre">.SAC_PZ</span></code> and
-the channel sensitivity is not kept in the “CONSTANT”.</p></li>
-<li><p><strong>processes</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly.
-<code class="docutils literal notranslate"><span class="pre">None</span></code> means using all CPUs.</p></li>
+<li><p><strong>filter_by_component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Filter channels by component. It can be a list of component names or a wildcard.</p></li>
+<li><p><strong>with_sacpz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Aslo extract SAC PZ files. By default, the suffix is <code class="docutils literal notranslate"><span class="pre">.SAC_PZ</span></code> and the channel
+sensitivity is not kept in the “CONSTANT”.</p></li>
+<li><p><strong>processes</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly. <code class="docutils literal notranslate"><span class="pre">None</span></code> means using
+all CPUs.</p></li>
+<li><p><strong>deprecated:</strong> (<em>..</em>) – 0.7.0: Parameter <code class="docutils literal notranslate"><span class="pre">with_pz</span></code> is deprecated. Use <code class="docutils literal notranslate"><span class="pre">with_sacpz</span></code> instead.</p></li>
 </ul>
 </dd>
 </dl>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 0.7.0: </span>Parameter <code class="docutils literal notranslate"><span class="pre">with_pz</span></code> is deprecated. Use <code class="docutils literal notranslate"><span class="pre">with_sacpz</span></code> instead.</p>
-</div>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
 <p>Extract all channels with default settings:</p>
@@ -224,15 +221,14 @@ the channel sensitivity is not kept in the “CONSTANT”.</p></li>
 <li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Channel table file.</p></li>
 <li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Suffix of SAC PZ files. Defaults to <code class="docutils literal notranslate"><span class="pre">SAC_PZ</span></code>.</p></li>
 <li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Output directory. Defaults to current directory.</p></li>
-<li><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – The <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> program automatically removes sensitivity from waveform
-data during the win32-to-SAC format conversion.
-So the generated polezero file should omit the sensitivity.</p></li>
+<li><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – The <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> program automatically removes sensitivity from waveform data
+during the win32-to-SAC format conversion. So the generated polezero file should
+omit the sensitivity.</p></li>
 <li><p><strong>filter_by_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Filter channels by ID. It can be a list of IDs or a wildcard.</p></li>
 <li><p><strong>filter_by_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Filter channels by name. It can be a list of names or a wildcard.</p></li>
-<li><p><strong>filter_by_component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Filter channels by component. It can be a list of component names or
-a wildcard.</p></li>
-<li><p><strong>processes</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly.
-<code class="docutils literal notranslate"><span class="pre">None</span></code> means using all CPUs.</p></li>
+<li><p><strong>filter_by_component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Filter channels by component. It can be a list of component names or a wildcard.</p></li>
+<li><p><strong>processes</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of processes to speed up data extraction parallelly. <code class="docutils literal notranslate"><span class="pre">None</span></code> means using
+all CPUs.</p></li>
 </ul>
 </dd>
 </dl>
@@ -288,13 +284,13 @@ Use <a class="reference internal" href="#HinetPy.win32.extract_sacpz" title="Hin
 <dd><p>Merge multiple win32 files into one large win32 file.</p>
 <p>The function calls the <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> command, available in the Hi-net win32tools
 package, to merge multiple win32 files into one large win32 file.</p>
-<p>By default, the <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> command simply concatenates all files in the order
-they are passed. So the files must be sorted by their start time before being
-passed. If your files are named by starttime like <code class="docutils literal notranslate"><span class="pre">201304040203.cnt</span></code>, you can use
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> command simply concatenates all files in the order they
+are passed. So the files must be sorted by their start time before being passed. If
+your files are named by starttime like <code class="docutils literal notranslate"><span class="pre">201304040203.cnt</span></code>, you can use
 <code class="docutils literal notranslate"><span class="pre">data=sorted(glob.glob(&quot;20130404*.cnt&quot;))</span></code> to pass the sorted list of files.
-Otherwise, you have to use <code class="docutils literal notranslate"><span class="pre">force_sort=True</span></code>, forcing <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> to sort
-all files by starttime before merging. However, the sorting process is very
-time consuming. Do NOT set <code class="docutils literal notranslate"><span class="pre">force_sort=True</span></code> unless necessary.</p>
+Otherwise, you have to use <code class="docutils literal notranslate"><span class="pre">force_sort=True</span></code>, forcing <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> to sort all
+files by starttime before merging. However, the sorting process is very time
+consuming. Do NOT set <code class="docutils literal notranslate"><span class="pre">force_sort=True</span></code> unless necessary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -306,20 +302,20 @@ time consuming. Do NOT set <code class="docutils literal notranslate"><span clas
 </dl>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
-<p>For win32 files that are named by starttime (e.g. <code class="docutils literal notranslate"><span class="pre">201304040203.cnt</span></code>),
-sorting win32 files using Python’s built-in <a class="reference external" href="https://docs.python.org/3/library/functions.html#sorted" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">sorted()</span></code></a> function is preferred:</p>
+<p>For win32 files that are named by starttime (e.g. <code class="docutils literal notranslate"><span class="pre">201304040203.cnt</span></code>), sorting
+win32 files using Python’s built-in <a class="reference external" href="https://docs.python.org/3/library/functions.html#sorted" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">sorted()</span></code></a> function is preferred:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;20130404*.cnt&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;outdir/final.cnt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If win32 files are randomly named, you should use <code class="docutils literal notranslate"><span class="pre">force_sort=True</span></code> to
-force <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> to sort all data by time before merging.</p>
+<p>If win32 files are randomly named, you should use <code class="docutils literal notranslate"><span class="pre">force_sort=True</span></code> to force
+<code class="docutils literal notranslate"><span class="pre">catwin32</span></code> to sort all data by time before merging.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;001.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;002.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;003.cnt&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;final.cnt&quot;</span><span class="p">,</span> <span class="n">force_sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You can also use wildcard to specify the win32 files to be merged.
-The function will sort the matched files for you automatically.</p>
+<p>You can also use wildcard to specify the win32 files to be merged. The function will
+sort the matched files for you automatically.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="s2">&quot;20130404*.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;final.cnt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
