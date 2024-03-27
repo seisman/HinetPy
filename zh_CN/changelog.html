@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; HinetPy v0.7.2.dev39+g683a84a 文档</title>
+  <title>Changelog &mdash; HinetPy v0.7.2.dev40+g97b0180 文档</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=26c08c48"></script>
+        <script src="_static/documentation_options.js?v=7ee9b4cc"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/translations.js?v=beaddf03"></script>
@@ -38,7 +38,7 @@
             HinetPy
           </a>
               <div class="version">
-                v0.7.2.dev39+g683a84a
+                v0.7.2.dev40+g97b0180
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -91,20 +91,15 @@
 - Fix bugs in <cite>get_event_waveform</cite></p>
 <p>0.7.0 (2022-07-01):
 - Fix the incorrect maximum allowed time span for F-net (#65)
-- <cite>get_selected_stations</cite> now returns a list of stations with station metadata</p>
-<blockquote>
-<div><p>information (#36)</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>Refactor the <cite>_channel2pz()</cite> and <cite>_write_pz()</cite> functions to <cite>Channel.write_sacpz()</cite></p></li>
-<li><p>Refactor the <cite>_get_channels</cite> function to <cite>win32.read_ctable()</cite></p></li>
-<li><p>The <cite>win32.extrac_sacpz</cite> function now supports parallel data processing</p></li>
-<li><p>The <cite>with_pz</cite> parameter in <cite>win32.extract_sac()</cite> is renamed to <cite>with_sacpz</cite></p></li>
-<li><p>The <cite>win32.extrac_pz()</cite> function is renamed to <cite>win32.extract_sacpz()</cite></p></li>
-<li><p>Move the function <cite>Client.check_cmd_exists()</cite> to <cite>utils.check_cmd_exists()</cite></p></li>
-<li><p>Move the function <cite>Client.check_package_release()</cite> to <cite>utils.check_package_release()</cite></p></li>
-<li><p>Fix the “ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small” error</p></li>
-</ul>
+- <cite>get_selected_stations</cite> now returns a list of stations with station metadata information (#36)
+- Refactor the <cite>_channel2pz()</cite> and <cite>_write_pz()</cite> functions to <cite>Channel.write_sacpz()</cite>
+- Refactor the <cite>_get_channels</cite> function to <cite>win32.read_ctable()</cite>
+- The <cite>win32.extrac_sacpz</cite> function now supports parallel data processing
+- The <cite>with_pz</cite> parameter in <cite>win32.extract_sac()</cite> is renamed to <cite>with_sacpz</cite>
+- The <cite>win32.extrac_pz()</cite> function is renamed to <cite>win32.extract_sacpz()</cite>
+- Move the function <cite>Client.check_cmd_exists()</cite> to <cite>utils.check_cmd_exists()</cite>
+- Move the function <cite>Client.check_package_release()</cite> to <cite>utils.check_package_release()</cite>
+- Fix the “ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small” error</p>
 <p>0.6.9 (2021-05-20):
 - Check invalid <cite>stations</cite> parameter type for <cite>Client.select_stations()</cite></p>
 <p>0.6.8 (2021-03-11):
@@ -156,16 +151,11 @@
 - remove tempfile after downloading.</p>
 <p>0.4.0 (2017-04-01):
 - <code class="docutils literal notranslate"><span class="pre">win32.extract_sac()</span></code>: skip if data not exists
-- <code class="docutils literal notranslate"><span class="pre">win32.extract_sac()</span></code>: support multiple processes to speedup, and</p>
-<blockquote>
-<div><p>no longer return values</p>
-</div></blockquote>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Client.get_waveform()</span></code>: support multi-threads to speedup</p></li>
-<li><p>Change <code class="docutils literal notranslate"><span class="pre">Client.help()</span></code> to <code class="docutils literal notranslate"><span class="pre">Client.info()</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Client.get_waveform()</span></code> now can automatically set <code class="docutils literal notranslate"><span class="pre">max_span</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Client.get_*()</span></code> now support startime in different string formats</p></li>
-</ul>
+- <code class="docutils literal notranslate"><span class="pre">win32.extract_sac()</span></code>: support multiple processes to speedup, and no longer return values
+- <code class="docutils literal notranslate"><span class="pre">Client.get_waveform()</span></code>: support multi-threads to speedup
+- Change <code class="docutils literal notranslate"><span class="pre">Client.help()</span></code> to <code class="docutils literal notranslate"><span class="pre">Client.info()</span></code>
+- <code class="docutils literal notranslate"><span class="pre">Client.get_waveform()</span></code> now can automatically set <code class="docutils literal notranslate"><span class="pre">max_span</span></code>
+- <code class="docutils literal notranslate"><span class="pre">Client.get_*()</span></code> now support startime in different string formats</p>
 <p>0.3.3 (2017-03-17):
 - Change <code class="docutils literal notranslate"><span class="pre">network</span></code> to <code class="docutils literal notranslate"><span class="pre">NETWORK</span></code> in <code class="docutils literal notranslate"><span class="pre">header.py</span></code>
 - Add wildcard support to <code class="docutils literal notranslate"><span class="pre">win32.merge()</span></code>

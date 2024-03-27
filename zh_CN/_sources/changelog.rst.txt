@@ -10,8 +10,7 @@ Changelog
 
 0.7.0 (2022-07-01):
 - Fix the incorrect maximum allowed time span for F-net (#65)
-- `get_selected_stations` now returns a list of stations with station metadata
-  information (#36)
+- `get_selected_stations` now returns a list of stations with station metadata information (#36)
 - Refactor the `_channel2pz()` and `_write_pz()` functions to `Channel.write_sacpz()`
 - Refactor the `_get_channels` function to `win32.read_ctable()`
 - The `win32.extrac_sacpz` function now supports parallel data processing
@@ -93,8 +92,7 @@ Changelog
 
 0.4.0 (2017-04-01):
 - ``win32.extract_sac()``: skip if data not exists
-- ``win32.extract_sac()``: support multiple processes to speedup, and
-  no longer return values
+- ``win32.extract_sac()``: support multiple processes to speedup, and no longer return values
 - ``Client.get_waveform()``: support multi-threads to speedup
 - Change ``Client.help()`` to ``Client.info()``
 - ``Client.get_waveform()`` now can automatically set ``max_span``
