@@ -1,11 +1,13 @@
-# for testing
+# General dependencies
+build
+# Dev dependencies for testing
 pytest
 pytest-cov
 coverage[toml]
 codecov
-# for code style
+# Dev dependencies for code style
 ruff
-# for documentation
+# Dev dependencies for documentation
 sphinx
 sphinx-intl
 sphinx_rtd_theme
