@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import logging
 import math
 
@@ -9,49 +11,51 @@ logger = logging.getLogger(__name__)
 
 class Channel:
     """
-    Class for channel information.
+    Channel information for a single channel.
+
+    The information can be used to generate SAC polezero files.
     """
 
     def __init__(  # noqa: PLR0913
         self,
-        id=None,  # noqa: A002
-        name=None,
-        component=None,
-        latitude=None,
-        longitude=None,
-        unit=None,
-        gain=None,
-        damping=None,
-        period=None,
-        preamplification=None,
-        lsb_value=None,
+        id: str,  # noqa: A002
+        name: str,
+        component: str,
+        latitude: float | str,
+        longitude: float | str,
+        unit: str,
+        gain: float | str,
+        damping: float | str,
+        period: float | str,
+        preamplification: float | str,
+        lsb_value: float | str,
     ):
         """
         Initialize a channel.
 
         Parameters
         ----------
-        id: str
+        id
             Channel ID.
-        name: str
+        name
             Station Name.
-        component: str
+        component
             Channel component name (e.g., ``U``, ``N`` or ``E``).
-        latitude: float
+        latitude
             Station latitude.
-        longitude: float
+        longitude
             Station longitude.
-        unit: str
+        unit
             Unit of data (e.g., ``m``, ``m/s``, ``m/s/s``, ``rad``).
-        gain: float
+        gain
             Sensor sensitivity.
-        damping: float
+        damping
             Damping constant of the sensor.
-        period: float
+        period
             Natural period of the seismometer.
-        preamplification:
+        preamplification
             Preamplification value.
-        lsb_value:
+        lsb_value
             LSB value.
 
         Notes
@@ -62,14 +66,14 @@ class Channel:
         self.id = id
         self.name = name
         self.component = component
-        self.latitude = latitude
-        self.longitude = longitude
+        self.latitude = float(latitude)
+        self.longitude = float(longitude)
         self.unit = unit
-        self.gain = gain
-        self.damping = damping
-        self.period = period
-        self.preamplification = preamplification
-        self.lsb_value = lsb_value
+        self.gain = float(gain)
+        self.damping = float(damping)
+        self.period = float(period)
+        self.preamplification = float(preamplification)
+        self.lsb_value = float(lsb_value)
 
     def write_sacpz(self, pzfile, keep_sensitivity=False):
         """

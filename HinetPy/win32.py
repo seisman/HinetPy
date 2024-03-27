@@ -256,14 +256,14 @@ def read_ctable(ctable):
                         id=items[0],
                         name=items[3],
                         component=items[4],
-                        latitude=float(items[13]),
-                        longitude=float(items[14]),
+                        latitude=items[13],
+                        longitude=items[14],
                         unit=items[8],
-                        gain=float(items[7]),
-                        damping=float(items[10]),
-                        period=float(items[9]),
-                        preamplification=float(items[11]),
-                        lsb_value=float(items[12]),
+                        gain=items[7],
+                        damping=items[10],
+                        period=items[9],
+                        preamplification=items[11],
+                        lsb_value=items[12],
                     )
                 )
             except ValueError as err:
