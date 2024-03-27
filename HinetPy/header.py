@@ -1,10 +1,13 @@
-"""Basic information of networks."""
+"""
+Basic information of networks.
+"""
 
 from collections import namedtuple
 from datetime import datetime
 
 Network = namedtuple("Network", "name, channels, starttime, url")
-""" An object containing information of a network.
+"""
+An object containing information of a network.
 
 .. py:attribute:: name
 
@@ -22,8 +25,8 @@ Network = namedtuple("Network", "name, channels, starttime, url")
 
    Homepage of the network.
 
-``NETWORK`` is a dict of :class:`~HinetPy.header.Network`, containing
-information of all networks available from Hi-net website.
+``NETWORK`` is a dict of :class:`~HinetPy.header.Network`, containing information of all
+networks available from Hi-net website.
 
 >>> from HinetPy import NETWORK
 >>> for code in NETWORK.keys():

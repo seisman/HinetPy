@@ -97,19 +97,16 @@ class BaseClient:
 
         Notes
         -----
-        The Hi-net server ususally spends 10-60 seconds on data
-        preparation after receiving a data request. During the data
-        preparation, users are **NOT** allowed to post another data request.
-        So users have to wait until the data is ready.
+        The Hi-net server ususally spends 10-60 seconds on data preparation after
+        receiving a data request. During the data preparation, users are **NOT** allowed
+        to post another data request. So users have to wait until the data is ready.
 
-        HinetPy checks data status every ``sleep_time_in_seconds`` seconds for
-        no more than ``max_sleep_count`` times, until the data is ready.
-        If the data status is still NOT ready after
-        ``max_sleep_count * sleep_time_in_seconds`` seconds,
-        it most likely means something goes wrong with the data request.
-        Then, HinetPy will retry to request the data ``retries`` times.
-        Ususally, you don't need to modify these parameters
-        unless you know what you're doing.
+        HinetPy checks data status every ``sleep_time_in_seconds`` seconds for no more
+        than ``max_sleep_count`` times, until the data is ready. If the data status is
+        still NOT ready after ``max_sleep_count * sleep_time_in_seconds`` seconds, it
+        most likely means something goes wrong with the data request. Then, HinetPy will
+        retry to request the data ``retries`` times. Ususally, you don't need to modify
+        these parameters unless you know what you're doing.
 
         Examples
         --------
@@ -343,17 +340,16 @@ class ContinuousWaveformClient(BaseClient):
         span: int
             Time span in minutes.
         max_span: int
-            Maximum time span for sub-requests. Defaults to be determined
-            automatically. See notes below.
+            Maximum time span for sub-requests. Defaults to be determined automatically.
+            See notes below.
         data: str
             Filename of downloaded win32 data.
             Default format: CODE_YYYYmmddHHMM_SPAN.cnt
         ctable: str
-            Filename of downloaded channel table file.
-            Default format: CODE_YYYYmmdd.ch
+            Filename of downloaded channel table file. Default format: CODE_YYYYmmdd.ch
         outdir: str
-            Save win32 and channel table data to a specified directory.
-            Default is in the current directory.
+            Save win32 and channel table data to a specified directory. Default is in
+            the current directory.
         threads: int
             Parallel data download using more threads.
         cleanup: bool
@@ -380,11 +376,10 @@ class ContinuousWaveformClient(BaseClient):
         2. Number_of_channels * Record_Length <= 12000 min
         3. Only the latest 150 requested data are kept
 
-        For example, Hi-net network has about 24000 channels. Acoording to
-        limitation 2, the record length should be no more than 5 minutes
-        for each data request. HinetPy "break through" the limitation by
-        splitting a long-duration data request into several short-duration
-        sub-requsts.
+        For example, Hi-net network has about 24000 channels. Acoording to limitation 2,
+        the record length should be no more than 5 minutes for each data request.
+        HinetPy "break through" the limitation by splitting a long-duration data request
+        into several short-duration sub-requsts.
 
         **How it works**
 
@@ -759,13 +754,11 @@ class EventWaveformClient(BaseClient):
         longitude: float
             Specify the longitude to be used for a radius search.
         minradius: float
-            Limit to events within the specified minimum number of degrees
-            from the geographic point defined by the latitude and longitude
-            parameters.
+            Limit to events within the specified minimum number of degrees from the
+            geographic point defined by the latitude and longitude parameters.
         maxradius: float
-            Limit to events within the specified maximum number of degrees
-            from the geographic point defined by the latitude and longitude
-            parameters.
+            Limit to events within the specified maximum number of degrees from the
+            geographic point defined by the latitude and longitude parameters.
         """
         starttime, endtime = to_datetime(starttime), to_datetime(endtime)
 
@@ -1075,13 +1068,11 @@ class StationClient(BaseClient):
         longitude: float
             Specify the longitude to be used for a radius search.
         minradius: float
-            Limit to stations within the specified minimum number of degrees
-            from the geographic point defined by the latitude and longitude
-            parameters.
+            Limit to stations within the specified minimum number of degrees from the
+            geographic point defined by the latitude and longitude parameters.
         maxradius: float
-            Limit to stations within the specified maximum number of degrees
-            from the geographic point defined by the latitude and longitude
-            parameters.
+            Limit to stations within the specified maximum number of degrees from the
+            geographic point defined by the latitude and longitude parameters.
 
         Examples
         --------

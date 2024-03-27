@@ -145,14 +145,14 @@ def extract_sac(
     Extract data as SAC format files.
 
     This function calls the ``win2sac_32`` command, available in the Hi-net win32tools
-    package, to convert data files from win32 format to SAC fomrat. It can also
-    extract the channel information as SAC polezero files.
+    package, to convert data files from win32 format to SAC fomrat. It can also extract
+    the channel information as SAC polezero files.
 
-    Note that the ``win2sac_32`` command always remove the instrument sensitivity
-    from waveform data, and multiply the data by 1.0e9. Thus, the extracted SAC
-    files are not in digital counts, but velocity in nm/s, or acceleration in nm/s/s.
-    Due to the same reason, the extracted SAC polezero files does not keep the
-    sensitivity in the "CONSTANT" of SAC polezero files.
+    Note that the ``win2sac_32`` command always remove the instrument sensitivity from
+    waveform data, and multiply the data by 1.0e9. Thus, the extracted SAC files are not
+    in digital counts, but velocity in nm/s, or acceleration in nm/s/s. Due to the same
+    reason, the extracted SAC polezero files does not keep the sensitivity in the
+    "CONSTANT" of SAC polezero files.
 
     Parameters
     ----------
@@ -165,23 +165,21 @@ def extract_sac(
     outdir: str
         Output directory. Defaults to current directory.
     pmax: int
-        Maximum number of data points for one channel. Defaults to 8640000.
-        If one channel has more than 8640000 data points (i.e., longer than
-        one day for a 100 Hz sampling rate), you MUST increase ``pmax``.
+        Maximum number of data points for one channel. Defaults to 8640000. If one
+        channel has more than 8640000 data points (i.e., longer than one day for a
+        100 Hz sampling rate), you MUST increase ``pmax``.
     filter_by_id: list or str
         Filter channels by ID. It can be a list of IDs or a wildcard.
     filter_by_name: list or str
         Filter channels by name. It can be a list of names or a wildcard.
     filter_by_component: list or str
-        Filter channels by component. It can be a list of component names or
-        a wildcard.
+        Filter channels by component. It can be a list of component names or a wildcard.
     with_sacpz: bool
-        Aslo extract SAC PZ files. By default, the suffix is ``.SAC_PZ`` and
-        the channel sensitivity is not kept in the "CONSTANT".
+        Aslo extract SAC PZ files. By default, the suffix is ``.SAC_PZ`` and the channel
+        sensitivity is not kept in the "CONSTANT".
     processes: None or int
-        Number of processes to speed up data extraction parallelly.
-        ``None`` means using all CPUs.
-
+        Number of processes to speed up data extraction parallelly. ``None`` means using
+        all CPUs.
 
     .. deprecated:: 0.7.0
 
@@ -278,19 +276,18 @@ def extract_sacpz(
     outdir: str
         Output directory. Defaults to current directory.
     keep_sensitivity: bool
-        The ``win2sac_32`` program automatically removes sensitivity from waveform
-        data during the win32-to-SAC format conversion.
-        So the generated polezero file should omit the sensitivity.
+        The ``win2sac_32`` program automatically removes sensitivity from waveform data
+        during the win32-to-SAC format conversion. So the generated polezero file should
+        omit the sensitivity.
     filter_by_id: list or str
         Filter channels by ID. It can be a list of IDs or a wildcard.
     filter_by_name: list or str
         Filter channels by name. It can be a list of names or a wildcard.
     filter_by_component: list or str
-        Filter channels by component. It can be a list of component names or
-        a wildcard.
+        Filter channels by component. It can be a list of component names or a wildcard.
     processes: None or int
-        Number of processes to speed up data extraction parallelly.
-        ``None`` means using all CPUs.
+        Number of processes to speed up data extraction parallelly. ``None`` means using
+        all CPUs.
 
     Examples
     --------
@@ -405,8 +402,7 @@ def _filter_channels(
     filter_by_name: list or str
         Filter channels by name. It can be a list of names or a wildcard.
     filter_by_component: list or str
-        Filter channels by component. It can be a list of component names or
-        a wildcard.
+        Filter channels by component. It can be a list of component names or a wildcard.
     """
 
     def _filter(channels, key, filters):
@@ -546,13 +542,13 @@ def merge(data, total_data, force_sort=False):
     The function calls the ``catwin32`` command, available in the Hi-net win32tools
     package, to merge multiple win32 files into one large win32 file.
 
-    By default, the ``catwin32`` command simply concatenates all files in the order
-    they are passed. So the files must be sorted by their start time before being
-    passed. If your files are named by starttime like ``201304040203.cnt``, you can use
+    By default, the ``catwin32`` command simply concatenates all files in the order they
+    are passed. So the files must be sorted by their start time before being passed. If
+    your files are named by starttime like ``201304040203.cnt``, you can use
     ``data=sorted(glob.glob("20130404*.cnt"))`` to pass the sorted list of files.
-    Otherwise, you have to use ``force_sort=True``, forcing ``catwin32`` to sort
-    all files by starttime before merging. However, the sorting process is very
-    time consuming. Do NOT set ``force_sort=True`` unless necessary.
+    Otherwise, you have to use ``force_sort=True``, forcing ``catwin32`` to sort all
+    files by starttime before merging. However, the sorting process is very time
+    consuming. Do NOT set ``force_sort=True`` unless necessary.
 
     Parameters
     ----------
@@ -565,20 +561,20 @@ def merge(data, total_data, force_sort=False):
 
     Examples
     --------
-    For win32 files that are named by starttime (e.g. ``201304040203.cnt``),
-    sorting win32 files using Python's built-in :func:`sorted` function is preferred:
+    For win32 files that are named by starttime (e.g. ``201304040203.cnt``), sorting
+    win32 files using Python's built-in :func:`sorted` function is preferred:
 
     >>> data = sorted(glob.glob("20130404*.cnt"))
     >>> merge(data, "outdir/final.cnt")
 
-    If win32 files are randomly named, you should use ``force_sort=True`` to
-    force ``catwin32`` to sort all data by time before merging.
+    If win32 files are randomly named, you should use ``force_sort=True`` to force
+    ``catwin32`` to sort all data by time before merging.
 
     >>> data = ["001.cnt", "002.cnt", "003.cnt"]
     >>> merge(data, "final.cnt", force_sort=True)
 
-    You can also use wildcard to specify the win32 files to be merged.
-    The function will sort the matched files for you automatically.
+    You can also use wildcard to specify the win32 files to be merged. The function will
+    sort the matched files for you automatically.
 
     >>> merge("20130404*.cnt", "final.cnt")
     """

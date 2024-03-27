@@ -102,8 +102,8 @@ def point_inside_box(
 
 def haversine(lat1, lon1, lat2, lon2):
     """
-    Calculate the great circle distance between two points on the earth
-    (specified in decimal degrees) using haversine formula.
+    Calculate the great circle distance between two points on the earth (specified in
+    decimal degrees) using haversine formula.
 
     Reference: https://stackoverflow.com/a/4913653/7770208.
 
