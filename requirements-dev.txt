@@ -11,3 +11,6 @@ ruff
 sphinx
 sphinx-intl
 sphinx_rtd_theme
+# Dev dependencies for static type checks
+mypy
+types-requests

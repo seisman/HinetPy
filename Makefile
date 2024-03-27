@@ -7,6 +7,7 @@ help:
 	@echo "  doc        build the documentation"
 	@echo "  format     run ruff to automatically format the code"
 	@echo "  check      run ruff to check code style and quality"
+	@echo "  typecheck  run mypy for static type check"
 	@echo "  clean      clean up build and generated files"
 	@echo "  dist-clean clean up egg-info files"
 	@echo ""
@@ -27,6 +28,9 @@ format:
 check:
 	ruff check .
 	ruff format --check .
+
+typecheck:
+	mypy HinetPy
 
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
