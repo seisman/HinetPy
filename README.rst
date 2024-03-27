@@ -1,21 +1,15 @@
 .. image:: https://github.com/seisman/HinetPy/actions/workflows/tests.yml/badge.svg
     :target: https://github.com/seisman/HinetPy/actions/workflows/tests.yml
-
 .. image:: https://codecov.io/gh/seisman/HinetPy/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/seisman/HinetPy
-
 .. image:: https://img.shields.io/github/release/seisman/HinetPy.svg
     :target: https://github.com/seisman/HinetPy/releases
-
 .. image:: https://img.shields.io/pypi/v/HinetPy.svg
     :target: https://pypi.org/project/HinetPy/
-
 .. image:: https://img.shields.io/pypi/pyversions/HinetPy.svg
     :target: https://pypi.org/project/HinetPy/
-
 .. image:: https://img.shields.io/github/license/seisman/HinetPy.svg
     :target: https://github.com/seisman/HinetPy/blob/master/LICENSE
-
 .. image:: https://zenodo.org/badge/23509035.svg
     :target: https://zenodo.org/badge/latestdoi/23509035
 
