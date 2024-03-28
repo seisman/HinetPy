@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.header module &mdash; HinetPy v0.7.2.dev41+g36486e7 documentation</title>
+  <title>HinetPy.header module &mdash; HinetPy v0.7.2.dev43+g7fc59ac documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=10198441"></script>
+        <script src="../_static/documentation_options.js?v=e2f1b6f0"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -37,7 +37,7 @@
             HinetPy
           </a>
               <div class="version">
-                v0.7.2.dev41+g36486e7
+                v0.7.2.dev43+g7fc59ac
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -56,13 +56,7 @@
 <li class="toctree-l2"><a class="reference internal" href="HinetPy.win32.html">HinetPy.win32 module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HinetPy.channel.html">HinetPy.channel module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">HinetPy.header module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#HinetPy.header.Network"><code class="docutils literal notranslate"><span class="pre">Network</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#HinetPy.header.Network.name"><code class="docutils literal notranslate"><span class="pre">Network.name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#HinetPy.header.Network.channels"><code class="docutils literal notranslate"><span class="pre">Network.channels</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#HinetPy.header.Network.starttime"><code class="docutils literal notranslate"><span class="pre">Network.starttime</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#HinetPy.header.Network.url"><code class="docutils literal notranslate"><span class="pre">Network.url</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#HinetPy.header.Network"><code class="docutils literal notranslate"><span class="pre">Network</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="HinetPy.utils.html">HinetPy.utils module</a></li>
@@ -98,52 +92,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="hinetpy-header-module">
-<h1>HinetPy.header module<a class="headerlink" href="#hinetpy-header-module" title="Link to this heading"></a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="HinetPy.header.Network">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HinetPy.header.</span></span><span class="sig-name descname"><span class="pre">Network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starttime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.header.Network" title="Link to this definition"></a></dt>
-<dd><p>An object containing information of a network.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="HinetPy.header.Network.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#HinetPy.header.Network.name" title="Link to this definition"></a></dt>
-<dd><p>Network name.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="HinetPy.header.Network.channels">
-<span class="sig-name descname"><span class="pre">channels</span></span><a class="headerlink" href="#HinetPy.header.Network.channels" title="Link to this definition"></a></dt>
-<dd><p>Number of channels the network has.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="HinetPy.header.Network.starttime">
-<span class="sig-name descname"><span class="pre">starttime</span></span><a class="headerlink" href="#HinetPy.header.Network.starttime" title="Link to this definition"></a></dt>
-<dd><p>Start time (JST: UTC+0900) when waveform data is avaiable.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="HinetPy.header.Network.url">
-<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#HinetPy.header.Network.url" title="Link to this definition"></a></dt>
-<dd><p>Homepage of the network.</p>
-</dd></dl>
-
-<p><code class="docutils literal notranslate"><span class="pre">NETWORK</span></code> is a dict of <a class="reference internal" href="#HinetPy.header.Network" title="HinetPy.header.Network"><code class="xref py py-class docutils literal notranslate"><span class="pre">Network</span></code></a>, containing information of all
-networks available from Hi-net website.</p>
+  <section id="module-HinetPy.header">
+<span id="hinetpy-header-module"></span><h1>HinetPy.header module<a class="headerlink" href="#module-HinetPy.header" title="Link to this heading"></a></h1>
+<p>This module provides a dict of seismic networks that are available from the Hi-net
+website.</p>
+<p>The dict is named <code class="docutils literal notranslate"><span class="pre">NETWORK</span></code>. The network code is the key of the dict, and the value is
+a <a class="reference internal" href="#HinetPy.header.Network" title="HinetPy.header.Network"><code class="xref py py-class docutils literal notranslate"><span class="pre">Network</span></code></a> object, which contains the network name, number of
+channels, start time when waveform data is available, and the homepage URL. The network
+code is a string, e.g., “0101” for Hi-net. The number of channels, start time, and
+homepage URL are obtained from the Hi-net website, but they may not be up-to-date so
+don’t rely on them too much.</p>
+<p>To view the list of supported networks, use:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">NETWORK</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">NETWORK</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">NETWORK</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="gp">...</span>
 <span class="go">0101 NIED Hi-net</span>
 <span class="go">0103 NIED F-net (broadband)</span>
 <span class="go">0103A NIED F-net (strong motion)</span>
-<span class="go">0120 NIED S-net (speed motion)</span>
-<span class="go">0120A NIED S-net (acceleration)</span>
-<span class="go">0131 NIED MeSO-net</span>
-<span class="go">0201 Hokkaido University</span>
-<span class="go">...</span>
+<span class="go">0106 NIED Temp. obs. in eastern Shikoku</span>
+<span class="go">0120 NIED S-net (velocity)...</span>
 </pre></div>
 </div>
+<dl class="py class">
+<dt class="sig sig-object py" id="HinetPy.header.Network">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HinetPy.header.</span></span><span class="sig-name descname"><span class="pre">Network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">starttime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.header.Network" title="Link to this definition"></a></dt>
+<dd><p>A seismic network and its information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Network name.</p></li>
+<li><p><strong>channels</strong> – Number of channels the network has.</p></li>
+<li><p><strong>starttime</strong> – Start time (JST: UTC+0900) when waveform data is avaiable.</p></li>
+<li><p><strong>url</strong> – Homepage of the network.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
