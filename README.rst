@@ -22,13 +22,14 @@
 
 ----
 
-`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package to request
-and process seismic data from `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__.
+`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package to request and
+process seismic data from `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__.
 
 Features
 ========
 
 - Request continuous/event waveform data and event catalog from NIED Hi-net
+- Support networks like Hi-net, F-net, V-net, S-net and more
 - Select Hi-net/F-net stations based on different criteria
 - Convert waveform data from win32 format to SAC format
 - Extract instrumental response as SAC polezero file
@@ -37,9 +38,9 @@ Features
 A simple example
 ================
 
-Here is an example showing how to use HinetPy to request continuous waveform data
-from Hi-net, convert the data into SAC format, and extract instrumental
-responses as SAC polezero files.
+Here is an example showing how to use HinetPy to request continuous waveform data from
+Hi-net, convert the data into SAC format, and extract instrumental responses as SAC
+polezero files.
 
 .. code-block:: python
 
