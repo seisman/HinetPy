@@ -12,12 +12,12 @@ Start python
 ------------
 
 Run ``python`` (or ``ipython`` if you have it), and make sure you're using
-Python 3.4 or above::
+Python 3.8 or above::
 
     $ python
-    Python 3.5.3 |Anaconda custom (64-bit)| (default, Feb 22 2017, 21:13:27)
-    [GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+    Python 3.11.6 | packaged by conda-forge | (main, Oct  3 2023, 10:40:35) [GCC 12.3.0] on linux
     Type "help", "copyright", "credits" or "license" for more information.
+    >>>
 
 Create a Client
 ---------------
