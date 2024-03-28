@@ -1,96 +1,147 @@
 Changelog
 =========
 
-0.7.2 (XXXX-XX-XX)
+0.8.0 (2024-03-28)
+------------------
+
+- Support more newly added networks
 - Remove the hacking solution for SSL connection issue so it works well with urllib3 v2.x
 - Drop support for Python 3.7.
 
-0.7.1 (2022-07-08):
-- Fix bugs in `get_event_waveform`
+0.7.1 (2022-07-08)
+------------------
 
-0.7.0 (2022-07-01):
+- Fix bugs in ``get_event_waveform``
+
+0.7.0 (2022-07-01)
+------------------
+
 - Fix the incorrect maximum allowed time span for F-net (#65)
-- `get_selected_stations` now returns a list of stations with station metadata information (#36)
-- Refactor the `_channel2pz()` and `_write_pz()` functions to `Channel.write_sacpz()`
-- Refactor the `_get_channels` function to `win32.read_ctable()`
-- The `win32.extrac_sacpz` function now supports parallel data processing
-- The `with_pz` parameter in `win32.extract_sac()` is renamed to `with_sacpz`
-- The `win32.extrac_pz()` function is renamed to `win32.extract_sacpz()`
-- Move the function `Client.check_cmd_exists()` to `utils.check_cmd_exists()`
-- Move the function `Client.check_package_release()` to `utils.check_package_release()`
+- ``get_selected_stations`` now returns a list of stations with station metadata information (#36)
+- Refactor the ``_channel2pz()`` and ``_write_pz()`` functions to ``Channel.write_sacpz()``
+- Refactor the ``_get_channels`` function to ``win32.read_ctable()``
+- The ``win32.extrac_sacpz`` function now supports parallel data processing
+- The ``with_pz`` parameter in ``win32.extract_sac()`` is renamed to ``with_sacpz``
+- The ``win32.extrac_pz()`` function is renamed to ``win32.extract_sacpz()``
+- Move the function ``Client.check_cmd_exists()`` to ``utils.check_cmd_exists()``
+- Move the function ``Client.check_package_release()`` to ``utils.check_package_release()``
 - Fix the "ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small" error
 
-0.6.9 (2021-05-20):
-- Check invalid `stations` parameter type for `Client.select_stations()`
+0.6.9 (2021-05-20)
+------------------
 
-0.6.8 (2021-03-11):
+- Check invalid ``stations`` parameter type for ``Client.select_stations()``
+
+0.6.8 (2021-03-11)
+------------------
+
 - include_unknown_mag does not work in get_event_waveform()
 - Fail to download S-net data.
 
-0.6.7 (2020-06-08):
+0.6.7 (2020-06-08)
+------------------
+
 - Improve code styles, tests and CI.
 
-0.6.6 (2020-03-02):
+0.6.6 (2020-03-02)
+------------------
+
 - win32.extract_pz cannot filter channels by ID and name (#27)
 
-0.6.5 (2019-12-06):
-- Fix PZ files if dampling constant is zero (#24)
+0.6.5 (2019-12-06)
+------------------
 
-0.6.4 (2019-08-23):
+- Fix PZ files if damping constant is zero (#24)
+
+0.6.4 (2019-08-23)
+------------------
+
 - Capture exception caused by incorrect channel information (#22)
 
-0.6.3 (2019-06-13):
+0.6.3 (2019-06-13)
+------------------
+
 - Fix ``select_stations()`` (#19)
 - Rename ``string2datetime()`` to ``to_datetime()``
 
-0.6.2 (2019-05-06):
+0.6.2 (2019-05-06)
+------------------
+
 - Fix download focal mechanism catalog issue (#18).
 
-0.6.1 (2019-02-20):
+0.6.1 (2019-02-20)
+------------------
+
 - Fix selecting events in a rectangular region.
 
-0.6.0 (2019-02-19):
+0.6.0 (2019-02-19)
+------------------
+
 - Support request event waveform data (#16).
 - ``get_waveform()`` is renamed to ``get_continuous_waveform()``.
 
-0.5.2 (2019-02-19):
+0.5.2 (2019-02-19)
+------------------
+
 - Fix selecting stations in a rectangular region (#17).
 
-0.5.1 (2018-12-08):
+0.5.1 (2018-12-08)
+------------------
+
 - Fix typo from longtitude to longitude.
 
-0.5.0 (2018-11-21):
+0.5.0 (2018-11-21)
+------------------
+
 - Fix issues of wrong CONSTANT in SAC polezero file (#8).
 - Fix login failure issue with password longer than 12 characters (#13).
 
-0.4.8 (2018-10-04):
+0.4.8 (2018-10-04)
+------------------
+
 - ``get_station_list()``: must specify a network code; support S-net and MeSO-net.
 - ``select_stations()``: support S-net and MeSO-net
 
-0.4.7 (2018-10-04):
+0.4.7 (2018-10-04)
+------------------
+
 - Support S-net and MeSO-net (#9 and #10)
 - Fix an issue when channel table contains blank lines
 
-0.4.6 (2018-03-20):
+0.4.6 (2018-03-20)
+------------------
+
 - Fix ``Too many open files`` (#6)
 
-0.4.5 (2018-03-07):
+0.4.5 (2018-03-07)
+------------------
+
 - ``get_station_list()``: return a list of stations
 - ``select_stations()``: support selecting stations in a box or circular region
 
-0.4.4 (2017-11-30):
+0.4.4 (2017-11-30)
+------------------
+
 - Fix a technical issue related to packaging
 
-0.4.3 (2017-11-30):
+0.4.3 (2017-11-30)
+------------------
+
 - Add Chinese documentation
 
-0.4.2 (2017-06-18):
+0.4.2 (2017-06-18)
+------------------
+
 - Fix a bug with requests>=2.17
 
-0.4.1 (2017-06-18):
+0.4.1 (2017-06-18)
+------------------
+
 - remove tempfile after downloading.
 
-0.4.0 (2017-04-01):
+0.4.0 (2017-04-01)
+------------------
+
 - ``win32.extract_sac()``: skip if data not exists
 - ``win32.extract_sac()``: support multiple processes to speedup, and no longer return values
 - ``Client.get_waveform()``: support multi-threads to speedup
@@ -98,7 +149,9 @@ Changelog
 - ``Client.get_waveform()`` now can automatically set ``max_span``
 - ``Client.get_*()`` now support startime in different string formats
 
-0.3.3 (2017-03-17):
+0.3.3 (2017-03-17)
+------------------
+
 - Change ``network`` to ``NETWORK`` in ``header.py``
 - Add wildcard support to ``win32.merge()``
 - Change ``Client.check_module_release()`` to ``Client.check_package_release()``
@@ -107,19 +160,29 @@ Changelog
 - Set ``pmax`` to 8640000 by default
 - Fix typos
 
-0.3.2 (2017-03-12):
+0.3.2 (2017-03-12)
+------------------
+
 - Fix another technical issue related to pypi
 
-0.3.1 (2017-03-12):
+0.3.1 (2017-03-12)
+------------------
+
 - Fix a technical issue related to pypi
 
-0.3.0 (2017-03-12):
+0.3.0 (2017-03-12)
+------------------
+
 - Rewritten as a Python package
 
-0.2.0 (2016-08-24):
+0.2.0 (2016-08-24)
+------------------
+
 - Some small fixes and improvements
 
-0.1.0 (2016-08-04):
+0.1.0 (2016-08-04)
+------------------
+
 - First public release
 - ``HinetDoctor.py``: check dependencies
 - ``HinetContRequest.py``: request continuous data from Hi-net
