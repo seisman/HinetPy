@@ -23,7 +23,7 @@ jobs:
 
     - name: Build
       run: |
-        python -m install build
+        python -m pip install build
         python -m build
         ls -lh dist/
 
