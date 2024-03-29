@@ -1,19 +1,16 @@
+"""
+Class for channels.
+"""
+
 from __future__ import annotations
 
-import logging
 import math
-
-# Setup the logger
-FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
-logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
-logger = logging.getLogger(__name__)
+import warnings
 
 
 class Channel:
     """
-    Channel information for a single channel.
-
-    The information can be used to generate SAC polezero files.
+    Information for a single channel.
     """
 
     def __init__(  # noqa: PLR0913
@@ -31,8 +28,6 @@ class Channel:
         lsb_value: float | str,
     ):
         """
-        Initialize a channel.
-
         Parameters
         ----------
         id
@@ -60,8 +55,8 @@ class Channel:
 
         Notes
         -----
-        The Hi-net website uses the moving-coil velocity-type seismometer.
-        See :doc:`/appendix/response` for details.
+        The Hi-net website uses the moving-coil velocity-type seismometer. See
+        :doc:`/appendix/response` for details.
         """
         self.id = id
         self.name = name
@@ -75,6 +70,27 @@ class Channel:
         self.preamplification = float(preamplification)
         self.lsb_value = float(lsb_value)
 
+    def _get_polezero(self):
+        """
+        Determine the polezero parameters.
+        """
+        # Calculate natural frequency
+        freq = 2.0 * math.pi / self.period
+
+        # Calculate poles by finding roots of equation s^2+2hws+w^2=0
+        self.zeros = 3
+        self.poles = 2
+        self.real = 0.0 - self.damping * freq
+        self.imaginary = freq * math.sqrt(1.0 - self.damping**2.0)
+
+        # Calculate the CONSTANT
+        fn = 20.0  # alaways assume normalization frequency is 20 Hz
+        s = complex(0, 2 * math.pi * fn)
+        self.a0 = abs((s**2 + 2 * self.damping * freq * s + freq**2) / s**2)
+        self.sensitivity = (
+            self.gain * math.pow(10, self.preamplification / 20.0) / self.lsb_value
+        )
+
     def write_sacpz(self, pzfile, keep_sensitivity=False):
         """
         Write channel information into a SAC polezero file.
@@ -83,40 +99,25 @@ class Channel:
         ----------
         pzfile: str
             Name of the SAC polezero file.
-        keep_sensitivity: bool
+        k9.999513e-01eep_sensitivity: bool
             Keep sensitivity in the SAC polezero "CONSTANT" or not.
         """
         chan_info = f"{self.name}.{self.component} ({self.id})"
         # Hi-net uses a moving-coil velocity-type seismometer.
         if self.unit != "m/s":
-            logger.warning(
-                "%s: Unit is not velocity. The PZ file may be wrong.", chan_info
-            )
-
-        try:
-            freq = 2.0 * math.pi / self.period
-        except ZeroDivisionError:
-            logger.warning("%s: Natural period = 0. Skipped.", chan_info)
+            msg = f"{chan_info}: Unit is not velocity. The PZ file may be wrong."
+            warnings.warn(msg, category=RuntimeWarning, stacklevel=2)
+        if self.period == 0.0:
+            msg = f"{chan_info}): Natural period = 0.0. Skipped."
+            warnings.warn(message=msg, category=RuntimeWarning, stacklevel=2)
             return
 
-        # calculate poles by finding roots of equation s^2+2hws+w^2=0
-        real = 0.0 - self.damping * freq
-        imaginary = freq * math.sqrt(1.0 - self.damping**2.0)
-
-        # calculate the CONSTANT
-        fn = 20.0  # alaways assume normalization frequency is 20 Hz
-        s = complex(0, 2 * math.pi * fn)
-        a0 = abs((s**2 + 2 * self.damping * freq * s + freq**2) / s**2)
-        if keep_sensitivity:
-            factor = math.pow(10, self.preamplification / 20.0)
-            constant = a0 * self.gain * factor / self.lsb_value
-        else:
-            constant = a0
-
+        self._get_polezero()
+        constant = self.a0 * self.sensitivity if keep_sensitivity else self.a0
         # write information to a SAC PZ file
         with open(pzfile, "w", encoding="utf8") as pz:
-            pz.write("ZEROS 3\n")
-            pz.write("POLES 2\n")
-            pz.write(f"{real:9.6f} {imaginary:9.6f}\n")
-            pz.write(f"{real:9.6f} {-imaginary:9.6f}\n")
+            pz.write(f"ZEROS {self.zeros}\n")
+            pz.write(f"POLES {self.poles}\n")
+            pz.write(f"{self.real:9.6f} {self.imaginary:9.6f}\n")
+            pz.write(f"{self.real:9.6f} {-self.imaginary:9.6f}\n")
             pz.write(f"CONSTANT {constant:e}\n")
