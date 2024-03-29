@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "HinetPy"
-description = "A Python package to request and process seismic waveform data from NIED Hi-neta"
+description = "A Python package to request and process seismic waveform data from NIED Hi-net"
 readme = "README.rst"
 requires-python = ">=3.8"
 authors = [{name = "Dongdong Tian", email = "seisman.info@gmail.com"}]
@@ -15,6 +15,7 @@ classifiers = [
     "Intended Audience :: Education",
     "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
