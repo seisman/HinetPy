@@ -99,7 +99,7 @@ def extract_sac(
     ...     filter_by_component="[NE]",
     ... )
     """
-    if not (data and ctable):
+    if data is None or ctable is None:
         logger.error("data or ctable is `None'. Data requests may fail. Skipped.")
         return
 
@@ -195,7 +195,7 @@ def extract_sacpz(
     ...     "0101_20100101.ch", filter_by_name="N.NA*", filter_by_component="[NE]"
     ... )
     """
-    if not ctable:
+    if ctable is None:
         logger.error("ctable is `None'. Data requests may fail. Skipped.")
         return
 
@@ -296,28 +296,22 @@ def _filter_channels(
     """
 
     def _filter(channels, key, filters):
-        filtered_channels = []
+        """
+        Filter channels by filters, which can be either a list or a wildcard.
+        """
         if isinstance(filters, list):  # filter by list
-            filtered_channels = [
-                channel for channel in channels if getattr(channel, key) in filters
-            ]
-        elif isinstance(filters, str):  # filter by wildcard
-            filtered_channels = [
-                channel
-                for channel in channels
-                if fnmatch(getattr(channel, key), filters)
-            ]
-        else:
-            raise ValueError("Only list and wildcard filter are supported.")
-        return filtered_channels
+            return [chn for chn in channels if getattr(chn, key) in filters]
+        if isinstance(filters, str):  # filter by wildcard
+            return [chn for chn in channels if fnmatch(getattr(chn, key), filters)]
+        raise ValueError("Only list and wildcard filter are supported.")
 
-    if filter_by_id:
-        channels = _filter(channels, "id", filter_by_id)
-    if filter_by_name:
-        channels = _filter(channels, "name", filter_by_name)
-    if filter_by_component:
-        channels = _filter(channels, "component", filter_by_component)
-
+    for key, filter_by in (
+        ("id", filter_by_id),
+        ("name", filter_by_name),
+        ("component", filter_by_component),
+    ):
+        if filter_by is not None:
+            channels = _filter(channels, key, filter_by)
     return channels
 
 
