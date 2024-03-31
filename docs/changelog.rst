@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.8.1 (2024-03-31)
+------------------
+
+- Minor changes to simplify some internal functions.
+
 0.8.0 (2024-03-28)
 ------------------
 
