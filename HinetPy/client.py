@@ -525,7 +525,6 @@ class ContinuousWaveformClient(BaseClient):
             ctable = os.path.join(dirname, ctable)
         if dirname and not os.path.exists(dirname):
             os.makedirs(dirname, exist_ok=True)
-        #os.rename(ch_euc, ctable)
         shutil.move(ch_euc, ctable)
         # 4. cleanup
         if cleanup:
