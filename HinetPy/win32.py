@@ -5,6 +5,7 @@ Process seismic waveform data in win32 format.
 import glob
 import logging
 import os
+import shutil
 import subprocess
 import tempfile
 from fnmatch import fnmatch
@@ -383,7 +384,7 @@ def _extract_channel_sac(
 
     if os.path.exists(filename):  # some channels have no data
         if suffix == "":  # remove extra dot if suffix is empty
-            os.rename(filename, filename[:-1])
+            shutil.move(filename, filename[:-1])
             return filename[:-1]
         return filename
     return None

@@ -7,13 +7,13 @@ import json
 import logging
 import os
 import re
+import shutil
 import tempfile
 import time
 import zipfile
 from datetime import datetime, timedelta
 from html.parser import HTMLParser
 from multiprocessing.pool import ThreadPool
-import shutil
 
 import requests
 from requests.adapters import HTTPAdapter
