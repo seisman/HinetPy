@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.8.3 (2024-06-05)
+------------------
+
+- Fix the "OSError: [Errno 18] Invalid cross-device link." for cross-system operations.
+
 0.8.2 (2024-04-05)
 ------------------
 
