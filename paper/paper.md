@@ -25,7 +25,7 @@ National Research Institute for Earth Science and Disaster Resilience (NIED) Hi-
 challenging due to the limited functionality of the web UI and backend data server.
 Additionally, the seismic data is stored in a non-standard format, which adds an extra
 layer of complexity. HinetPy solves these challenges by offering a user-friendly interface
-for accessing seismic data from NIED Hi-net and converting it into commonly used data
+for accessing seismic data from NIED Hi-net and converting it to commonly used data
 formats. It streamlines the workflow for seismologists, enabling them to more effectively
 utilize this valuable dataset.
 
@@ -40,12 +40,12 @@ provides access to high-quality seismic data from 2004 onwards, including data f
 other seismic networks such as F-net, S-net, V-net, and more. The NIED Hi-net data has
 been widely used in various research from the study of earthquakes [e.g., @Ishii2005; @Peng2007]
 to the structure of the Earth's deep interior [e.g., @Niu2005; @Yee2014; @Tian2017].
-Despite the value of the data provided by NIED Hi-net, accessing and processing it can be challenging.
+Despite the value of the data provided by NIED Hi-net, accessing and processing them can be challenging.
 
 ## Challenges in accessing NIED Hi-net data
 
 The NIED Hi-net data is available for free through the NIED Hi-net website after users
-register for an account. However, accessing it can still be challenging. While most seismic
+register for an account. However, accessing them can still be challenging. While most seismic
 data centers have transitioned to standard FDSN web services
 ([https://www.fdsn.org/webservices/](https://www.fdsn.org/webservices/)) in recent years,
 allowing users to request seismic data using open-source tools like ObsPy [@ObsPy2015],
@@ -70,16 +70,30 @@ NIED Hi-net stores seismic data in a non-standard format called WIN32, accompani
 software, such as ObsPy, cannot directly use these non-standard formats. Therefore, additional
 processing is required to convert the data to commonly used formats, which poses challenges
 for researchers. Although NIED Hi-net provides a set of commands in their win32tools package
-to process WIN32 data and convert it to the SAC format, there are currently no tools available
-to convert the channels table to a more commonly used format, such as SAC polezero files.
+to process WIN32 data and convert to the SAC format, there are currently no tools available
+to convert the channels table to a more commonly used format, such as the SAC polezero file format.
 This limitation hinders the broader utilization of NIED Hi-net data.
 
 # HinetPy for easy data accessing and processing
 
-HinetPy addresses the challenges of accessing and processing NIED Hi-net data by providing
-a straightforward and user-friendly interface for researchers to download waveform data and
-station metadata. Additionally, HinetPy offers interfaces to the win32tools package to convert
-WIN32 data to the SAC format and create SAC polezero files from the channels table.
+HinetPy is designed to address specific challenges with accessing and processing
+NIED Hi-net data through a user-friendly interface. It primarily offers two key components:
+the `Client` class for data access and the `win32` module for data processing.
+
+The `Client` class utilizes the popular HTTP library [Requests](https://github.com/psf/requests)
+to handle user authentication, data requests, status queries, and downloads. This simplifies
+the process of accessing NIED Hi-net data, allowing users to access data without any
+manual operations on the Hi-net website.
+
+The `win32` module provides several functions for processing WIN32 data, including:
+
+- Merging multiple small WIN32 data files into a single large WIN32 file.
+- Converting data from WIN32 format to SAC format.
+- Creating instrumental responses in SAC polezero format.
+
+Internally, the `win32` module currently relies on the `catwin32` and `win2sac_32` commands
+from the NIED win32tools package for WIN32 data processing. Therefore, the win32tools package
+(at least the two required commands) must be installed before using HinetPy.
 
 This is an example demonstrating how to request 20 minutes of waveform data of the Hi-net
 network starting at 2010-01-01T00:00 (JST, GMT+0900), convert the data to SAC format
@@ -111,10 +125,8 @@ win32.extract_sacpz(ctable)
 # N.NGUH.E.SAC_PZ  ...
 ```
 
-The `Client` class is for requesting and downloading waveform data and the `win32` module
-is for processing the WIN32 data and the channels table. `"0101"` is the internal network code
-of the Hi-net network. The full list of supported seismic networks and their internal
-network codes can be obtained via `client.info()`.
+`"0101"` is the internal network code of the Hi-net network. The full list of supported
+seismic networks and their internal network codes can be obtained via `client.info()`.
 
 # Key features
 
