@@ -23,7 +23,7 @@ National Research Institute for Earth Science and Disaster Resilience (NIED) Hi-
 (High-sensitivity seismograph network) in Japan. The seismic network comprises approximately
 800 stations with high-quality seismic data. Accessing and processing the data can be
 challenging due to the limited functionality of the web UI and backend data server.
-Additonally, the seismic data is stored in a non-standard format, which adds an extra
+Additionally, the seismic data is stored in a non-standard format, which adds an extra
 layer of complexity. HinetPy solves these challenges by offering a user-friendly interface
 for accessing seismic data from NIED Hi-net and converting it into commonly used data
 formats. It streamlines the workflow for seismologists, enabling them to more effectively
@@ -56,11 +56,11 @@ size and length in a single request. Specifically, the record length of a single
 cannot exceed 60 minutes, and the total record length of
 all channels cannot exceed 12,000 minutes. Considering that NIED Hi-net comprises about 800 seismic
 stations and 24,000 channels (3 channels per station), the record length in a single
-request must not exceed 5 minutes. If users requires 30 minutes of data, they must divide the
+request must not exceed 5 minutes. If users require 30 minutes of data, they must divide the
 time range into six subranges and submit six separate requests. The NIED Hi-net website
 does not allow users to post multiple data requests simultaneously. Therefore, to obtain
 the requested data, users must post a request, wait for the data to be prepared, and then
-post sebsequent requests. After all data is ready, users must manually download the files
+post subsequent requests. After all data is ready, users must manually download the files
 and combine them into a single file. The entire process can be time-consuming and cumbersome.
 
 ## Challenges in processing NIED Hi-net data
@@ -69,7 +69,7 @@ NIED Hi-net stores seismic data in a non-standard format called WIN32, accompani
 'channels table' text file containing metadata for each channel. Most seismic data processing
 software, such as ObsPy, cannot directly use these non-standard formats. Therefore, additional
 processing is required to convert the data to commonly used formats, which poses challenges
-for researches. Although NIED Hi-net provides a set of commands in their win32tools package
+for researchers. Although NIED Hi-net provides a set of commands in their win32tools package
 to process WIN32 data and convert it to the SAC format, there are currently no tools available
 to convert the channels table to a more commonly used format, such as SAC polezero files.
 This limitation hinders the broader utilization of NIED Hi-net data.
@@ -78,7 +78,7 @@ This limitation hinders the broader utilization of NIED Hi-net data.
 
 HinetPy addresses the challenges of accessing and processing NIED Hi-net data by providing
 a straightforward and user-friendly interface for researchers to download waveform data and
-station metadata. Addtionally, HinetPy offers interfaces to the win32tools package to convert
+station metadata. Additionally, HinetPy offers interfaces to the win32tools package to convert
 WIN32 data to the SAC format and create SAC polezero files from the channels table.
 
 This is an example demonstrating how to request 20 minutes of waveform data of the Hi-net
@@ -87,7 +87,7 @@ and extract SAC polezero files:
 ```python
 from HinetPy import Client, win32
 
-# You need to registert a Hi-net account first
+# You need to register a Hi-net account first
 client = Client("username", "password")
 
 # Let's try to request 20-minute data of the Hi-net network (with an internal
@@ -145,6 +145,6 @@ member at the China University of Geosciences, Wuhan. The authors would like to 
 users who report bugs and request features. The author is supported by
 the National Natural Science Foundation of China under grant NSFC42274122,
 the “CUG Scholar” Scientific Research Funds at China University of Geosciences (Wuhan) (Project No. 2022012),
-and the Fundamental Research Funds for the Central Universities, China University of Geosciences (Wuhan) (No.CUG230604).
+and the Fundamental Research Funds for the Central Universities, China University of Geosciences (Wuhan) (No. CUG230604).
 
 # References
