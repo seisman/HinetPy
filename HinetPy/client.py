@@ -15,6 +15,7 @@ from datetime import datetime, timedelta
 from html.parser import HTMLParser
 from multiprocessing.pool import ThreadPool
 
+import certifi
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3 import PoolManager
@@ -184,7 +185,9 @@ class BaseClient:
         self.session = requests.Session()
         self.session.mount(self._HINET, AddedCipherAdapter())
         self.session.mount(self._AUTH, AddedCipherAdapter())
-        self.session.get(self._AUTH, timeout=self.timeout)  # get cookie
+        self.session.get(
+            self._AUTH, timeout=self.timeout, verify=certifi.where()
+        )  # get cookie
         resp = self.session.post(
             self._AUTH,
             data={"auth_un": self.user, "auth_pw": self.password},
