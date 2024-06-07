@@ -87,6 +87,13 @@ If you find this package useful, please consider citing via:
 .. image:: https://zenodo.org/badge/23509035.svg
     :target: https://zenodo.org/badge/latestdoi/23509035
 
+Contributing
+============
+
+Feedback and contributions are welcome! Please feel free to open an issue or pull
+request if you have any suggestions or would like to contribute a feature.
+For additional information or specific questions, please open an issue directly.
+
 License
 =======
 
