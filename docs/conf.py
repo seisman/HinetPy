@@ -21,7 +21,7 @@ import HinetPy
 year = datetime.date.today().year
 project = "HinetPy"
 author = "Dongdong Tian"
-copyright = f"2014-{year}, {author}"
+copyright = f"2014-{year}, {author}"  # noqa: A001
 
 # The full version, including alpha/beta/rc tags
 version = HinetPy.__version__

@@ -1,14 +1,16 @@
-# for testing
-pytest>=6.0
+# General dependencies
+build
+# Dev dependencies for testing
+pytest
 pytest-cov
 coverage[toml]
 codecov
-# for code style
-black
-blackdoc
-flake8
-isort
-# for documentation
+# Dev dependencies for code style
+ruff
+# Dev dependencies for documentation
 sphinx
 sphinx-intl
 sphinx_rtd_theme
+# Dev dependencies for static type checks
+mypy
+types-requests

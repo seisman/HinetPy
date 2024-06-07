@@ -1,31 +1,132 @@
-[tool.black]
-line-length = 88
-exclude = '''
-(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)
-'''
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
 
-[tool.coverage.run]
-omit = []
+[project]
+name = "HinetPy"
+description = "A Python package to request and process seismic waveform data from NIED Hi-net"
+readme = "README.rst"
+requires-python = ">=3.8"
+authors = [{name = "Dongdong Tian", email = "seisman.info@gmail.com"}]
+keywords = ["seismology", "NIED", "Hi-net", "waveform"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Utilities",
+]
+dependencies = ["packaging", "requests"]
+dynamic = ["version"]
+
+[project.urls]
+homepage = "https://seisman.github.io/HinetPy/"
+documentation = "https://seisman.github.io/HinetPy/"
+repository = "https://github.com/seisman/HinetPy"
+
+[tool.setuptools]
+license-files = ["LICENSE.txt"]
+
+[tool.setuptools.packages.find]
+include = ["HinetPy*"]
+exclude = ["docs", "tests"]
+
+[tool.setuptools_scm]
+local_scheme = "node-and-date"
+fallback_version = "999.999.999+unknown"
+
+# All the ruff settings are directly copied from the PyGMT project.
+[tool.ruff]
+line-length = 88
+output-format = "full"
+
+[tool.ruff.format]
+line-ending = "lf"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+
+[tool.ruff.lint]
+select = [
+    "A",    # flake8-builtins
+    "B",    # flake8-bugbear
+    "BLE",  # flake8-blind-except
+    "C4",   # flake8-comprehensions
+    "E",    # pycodestyle
+    "EXE",  # flake8-executable
+    "F",    # pyflakes
+    "FA",   # flake8-future-annotations
+    "FLY",  # flynt
+    "I",    # isort
+    "ICN",  # flake8-import-conventions
+    "ISC",  # flake8-implicit-str-concat
+    "N",    # pep8-naming
+    "NPY",  # numpy
+    "PD",   # pandas-vet
+    "PERF", # perflint
+    "PGH",  # pygrep-hooks
+    "PIE",  # flake8-pie
+    "PL",   # pylint
+    "RET",  # flake8-return
+    "RSE",  # flake8-raise
+    "RUF",  # ruff-specific
+    "S",    # flake8-bandit
+    "SIM",  # flake8-simplify
+    "TCH",  # flake8-type-checking
+    "TID",  # flake8-tidy-imports
+    "UP",   # pyupgrade
+    "W",    # pycodestyle warnings
+    "YTT",  # flake8-2020
+]
+extend-select = [
+    "D213",  # Summary lines should be positioned on the second physical line of the docstring.
+    "D410",  # A blank line after section headings.
+]
+ignore = [
+    "D200",     # One-line docstring should fit on one line
+    "D202",     # No blank lines allowed after function docstring
+    "D205",     # 1 blank line required between summary line and description
+    "D400",     # First line should end with a period
+    "D401",     # First line of docstring should be in imperative mood
+    "D412",     # No blank lines allowed between a section header and its content
+    "E501",     # Avoid enforcing line-length violations
+    "ISC001",   # Single-line-implicit-string-concatenation, conflict with formatter
+    "PD901",    # Allow using the generic variable name `df` for DataFrames
+    "PT023",    # Allow using pytest marker without parentheses
+    "PLR2004",  # Allow any magic values
+    "RET504",   # Allow variable assignment and return immediately for readability
+    "S603",     # Allow method calls that initiate a subprocess without a shell
+    "SIM117",   # Allow nested `with` statements
+]
+
+[tool.ruff.lint.isort]
+known-third-party = ["HinetPy"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # Ignore `F401` (unused-import) in all `__init__.py` files
+"tests/test_*.py" = ["S101"]  # Ignore `S101` (use of assert) in all tests files
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 88
+
+[tool.ruff.lint.pydocstyle]
+# See https://docs.astral.sh/ruff/faq/#does-ruff-support-numpy-or-google-style-docstrings
+# for the enabled/disabled rules for the "numpy" convention.
+convention = "numpy"
+
+[tool.ruff.lint.pylint]
+max-args=10
 
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "--verbose --cov=HinetPy --cov-report=term-missing --cov-report=xml"
-
-[tool.isort]
-profile = "black"
-skip_gitignore = true
-known_third_party = "HinetPy"
-
-[tool.pylint.design]
-max-args = 10

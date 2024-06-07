@@ -1,6 +1,7 @@
 """
 Tests for utils.py.
 """
+
 from datetime import date, datetime
 
 import pytest
@@ -61,7 +62,6 @@ def test_to_datetime():
     """
     Test to_datetime.
     """
-    # pylint: disable=invalid-name
     dt = datetime(2010, 2, 3)
     assert dt == to_datetime(dt)
 

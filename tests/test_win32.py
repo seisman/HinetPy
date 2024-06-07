@@ -1,6 +1,7 @@
 """
 Tests for win32.py
 """
+
 import filecmp
 import glob
 import os

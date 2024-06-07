@@ -1,29 +1,32 @@
 """
 Utility functions.
 """
+
+from __future__ import annotations
+
 import math
 import shutil
 from datetime import date, datetime
-from distutils.version import LooseVersion
+from importlib.metadata import version
 
 import requests
-from pkg_resources import get_distribution
+from packaging.version import Version
 
 
-def split_integer(number, maxn):
+def split_integer(number: int, maxn: int) -> list[int]:
     """
     Split an integer into evenly sized chunks.
 
     Parameters
     ----------
-    number: int
+    number
         An interger that to be split into chunks.
-    maxn: int
+    maxn
         The maximum number in each chunk.
 
     Returns
     -------
-    list
+    chunks
         List of integers.
 
     Examples
@@ -41,29 +44,29 @@ def split_integer(number, maxn):
 
 
 def point_inside_box(
-    latitude,
-    longitude,
-    minlatitude=None,
-    maxlatitude=None,
-    minlongitude=None,
-    maxlongitude=None,
-):
+    latitude: float,
+    longitude: float,
+    minlatitude: float | None = None,
+    maxlatitude: float | None = None,
+    minlongitude: float | None = None,
+    maxlongitude: float | None = None,
+) -> bool:
     """
     Check if a point is inside a box region.
 
     Parameters
     ----------
-    latitude: float
+    latitude
         Latitude of the point.
-    longitude: float
+    longitude
         Longitude of the point.
-    minlatitude: float
+    minlatitude
         Minimum latitude of the box region.
-    maxlatitude: float
+    maxlatitude
         Maximum latitude of the box region.
-    minlongitude: float
+    minlongitude
         Minimum longitude of the box region.
-    maxlongitude: float
+    maxlongitude
         Maximum longitude of the box region.
 
     Returns
@@ -99,10 +102,10 @@ def point_inside_box(
     return True
 
 
-def haversine(lat1, lon1, lat2, lon2):
+def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     """
-    Calculate the great circle distance between two points on the earth
-    (specified in decimal degrees) using haversine formula.
+    Calculate the great circle distance between two points on the earth (specified in
+    decimal degrees) using haversine formula.
 
     Reference: https://stackoverflow.com/a/4913653/7770208.
 
@@ -124,23 +127,30 @@ def haversine(lat1, lon1, lat2, lon2):
     return 2.0 * math.degrees(math.asin(math.sqrt(delta)))
 
 
-def point_inside_circular(lat1, lon1, lat2, lon2, minradius=None, maxradius=None):
+def point_inside_circular(
+    lat1: float,
+    lon1: float,
+    lat2: float,
+    lon2: float,
+    minradius: float | None = None,
+    maxradius: float | None = None,
+) -> bool:
     """
     Check if a point is inside a circular region.
 
     Parameters
     ----------
-    lat1: float
+    lat1
         Latitude of the point.
-    lon1: float
+    lon1
         Longitude of the point.
-    lat2: float
+    lat2
         Latitude of center of the circular region.
-    lon2: float
+    lon2
         Longitude of center of the circular region.
-    minradius: float
+    minradius
         Minimum radius in degrees of the circular region.
-    maxradius: float
+    maxradius
         Maximum radius in degrees of the circular region.
 
     Returns
@@ -159,18 +169,18 @@ def point_inside_circular(lat1, lon1, lat2, lon2, minradius=None, maxradius=None
     return True
 
 
-def to_datetime(value):
+def to_datetime(value: str | datetime | date) -> datetime:
     """
     Convert a datetime from :class:`str` to :class:`datetime.datetime` in a hard way.
 
     Parameters
     ----------
-    value: str
-        A datetime as a string.
+    value
+        A :class:`datetime.datetime` object or a datetime string.
 
     Returns
     -------
-    datetime.datetime
+    datetime
         A datetime as :class:`datetime.datetime`.
 
     Examples
@@ -180,7 +190,6 @@ def to_datetime(value):
     >>> to_datetime("2010-01-01T03:45")
     datetime.datetime(2010, 1, 1, 3, 45)
     """
-    # pylint: disable=too-many-branches
     # is datetime
     if isinstance(value, datetime):
         return value
@@ -208,21 +217,18 @@ def to_datetime(value):
     elif len(parts) == 5:
         strfmt = "%Y %m %d %H %M"
     elif len(parts) == 6:
-        if "." in value:
-            strfmt = "%Y %m %d %H %M %S.%f"
-        else:
-            strfmt = "%Y %m %d %H %M %S"
+        strfmt = "%Y %m %d %H %M %S.%f" if "." in value else "%Y %m %d %H %M %S"
 
     return datetime.strptime(value, strfmt)
 
 
-def check_cmd_exists(cmd):
+def check_cmd_exists(cmd: str) -> bool:
     """
     Check if a command exists in PATH and is executable.
 
     Parameters
     ----------
-    cmd: str
+    cmd
         Name of the command.
 
     Returns
@@ -238,7 +244,7 @@ def check_cmd_exists(cmd):
     return bool(fullpath)
 
 
-def check_package_release():
+def check_package_release() -> bool:
     """
     Check whether HinetPy has a new release.
 
@@ -247,16 +253,16 @@ def check_package_release():
     bool
         True if HinetPy has a new release.
     """
-    res = requests.get("https://pypi.org/pypi/HinetPy/json")
+    res = requests.get("https://pypi.org/pypi/HinetPy/json", timeout=30)
     if res.status_code != 200:
         raise requests.HTTPError("Error in connecting to PyPI.")
     latest_release = res.json()["info"]["version"]
 
-    current_version = f'{get_distribution("HinetPy").version}'
-    if LooseVersion(latest_release) > LooseVersion(current_version):
+    current_version = f'v{version("HinetPy")}'
+    if Version(latest_release) > Version(current_version):
         print(
             f"HinetPy v{latest_release} is released. "
-            + "See https://pypi.org/project/HinetPy/ for details."
+            "See https://pypi.org/project/HinetPy/ for details."
         )
         return True
 

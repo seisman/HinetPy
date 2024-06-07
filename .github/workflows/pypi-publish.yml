@@ -21,17 +21,14 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install dependencies
+    - name: Build
       run: |
-        pip install setuptools wheel
-
-    - name: Build and publish
-      run: |
-        python setup.py sdist bdist_wheel
+        python -m pip install build
+        python -m build
         ls -lh dist/
 
     - name: Publish to PyPI
       if: startsWith(github.ref, 'refs/tags')
-      uses: pypa/gh-action-pypi-publish@v1.8.11
+      uses: pypa/gh-action-pypi-publish@v1.8.14
       with:
         password: ${{ secrets.PYPI_API_TOKEN }}

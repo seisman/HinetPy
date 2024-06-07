@@ -3,12 +3,16 @@ name: Tests
 on:
   push:
     branches: [main]
+    paths:
+      - 'HinetPy/**'
+      - 'tests/**'
+      - '.github/workflows/tests.yml'
   pull_request:
     branches: [main]
     paths:
       - 'HinetPy/**'
       - 'tests/**'
-      - '.github/workflows/**'
+      - '.github/workflows/tests.yml'
 
 jobs:
   test:
@@ -18,7 +22,8 @@ jobs:
       max-parallel: 1  # Hinet doesn't allow parallel data request
       fail-fast: false
       matrix:
-        python-version: ["3.7", "3.10"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        #python-version: ["3.8", "3.12"]
         os: [macos-latest, ubuntu-latest]
 
     steps:
@@ -38,10 +43,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-          pip install pytest>=6.0 pytest-cov coverage[toml] codecov
-          python setup.py sdist --formats=zip
-          pip install dist/*
+          python -m pip install -r requirements.txt
+          python -m pip install build pytest pytest-cov coverage[toml] codecov
+          python -m build --sdist
+          python -m pip install dist/*
 
       - name: Install win32tools
         run: |

@@ -1,24 +1,15 @@
 .. image:: https://github.com/seisman/HinetPy/actions/workflows/tests.yml/badge.svg
     :target: https://github.com/seisman/HinetPy/actions/workflows/tests.yml
-
-.. image:: https://codecov.io/gh/seisman/HinetPy/branch/master/graph/badge.svg
+.. image:: https://codecov.io/gh/seisman/HinetPy/branch/main/graph/badge.svg
    :target: https://codecov.io/gh/seisman/HinetPy
-
 .. image:: https://img.shields.io/github/release/seisman/HinetPy.svg
     :target: https://github.com/seisman/HinetPy/releases
-
 .. image:: https://img.shields.io/pypi/v/HinetPy.svg
     :target: https://pypi.org/project/HinetPy/
-
 .. image:: https://img.shields.io/pypi/pyversions/HinetPy.svg
     :target: https://pypi.org/project/HinetPy/
-
 .. image:: https://img.shields.io/github/license/seisman/HinetPy.svg
-    :target: https://github.com/seisman/HinetPy/blob/master/LICENSE
-
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/psf/black
-
+    :target: https://github.com/seisman/HinetPy/blob/main/LICENSE
 .. image:: https://zenodo.org/badge/23509035.svg
     :target: https://zenodo.org/badge/latestdoi/23509035
 
@@ -31,13 +22,14 @@
 
 ----
 
-`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package to request
-and process seismic data from `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__.
+`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package to request and
+process seismic data from `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__.
 
 Features
 ========
 
 - Request continuous/event waveform data and event catalog from NIED Hi-net
+- Support networks like Hi-net, F-net, V-net, S-net and more
 - Select Hi-net/F-net stations based on different criteria
 - Convert waveform data from win32 format to SAC format
 - Extract instrumental response as SAC polezero file
@@ -46,9 +38,9 @@ Features
 A simple example
 ================
 
-Here is an example showing how to use HinetPy to request continuous waveform data
-from Hi-net, convert the data into SAC format, and extract instrumental
-responses as SAC polezero files.
+Here is an example showing how to use HinetPy to request continuous waveform data from
+Hi-net, convert the data into SAC format, and extract instrumental responses as SAC
+polezero files.
 
 .. code-block:: python
 

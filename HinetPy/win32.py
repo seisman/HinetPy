@@ -1,132 +1,23 @@
 """
 Process seismic waveform data in win32 format.
 """
+
 import glob
 import logging
-import math
 import os
+import shutil
 import subprocess
 import tempfile
 from fnmatch import fnmatch
 from multiprocessing import Pool
 from subprocess import DEVNULL, PIPE, Popen
 
+from .channel import Channel
+
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
 logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)
-
-
-class Channel:
-    """
-    Class for channel information.
-    """
-
-    # pylint: disable=too-many-instance-attributes,invalid-name,redefined-builtin
-    # pylint: disable=too-few-public-methods
-    def __init__(
-        self,
-        id=None,
-        name=None,
-        component=None,
-        latitude=None,
-        longitude=None,
-        unit=None,
-        gain=None,
-        damping=None,
-        period=None,
-        preamplification=None,
-        lsb_value=None,
-    ):  # pylint: disable=too-many-arguments
-        """Initialize a channel.
-
-        Parameters
-        ----------
-        id: str
-            Channel ID.
-        name: str
-            Station Name.
-        component: str
-            Channel component name (e.g., ``U``, ``N`` or ``E``).
-        latitude: float
-            Station latitude.
-        longitude: float
-            Station longitude.
-        unit: str
-            Unit of data (e.g., ``m``, ``m/s``, ``m/s/s``, ``rad``).
-        gain: float
-            Sensor sensitivity.
-        damping: float
-            Damping constant of the sensor.
-        period: float
-            Natural period of the seismometer.
-        preamplification:
-            Preamplification value.
-        lsb_value:
-            LSB value.
-
-        Notes
-        -----
-        The Hi-net website uses the moving-coil velocity-type seismometer.
-        See :doc:`/appendix/response` for details.
-        """
-        self.id = id
-        self.name = name
-        self.component = component
-        self.latitude = latitude
-        self.longitude = longitude
-        self.unit = unit
-        self.gain = gain
-        self.damping = damping
-        self.period = period
-        self.preamplification = preamplification
-        self.lsb_value = lsb_value
-
-    def write_sacpz(self, pzfile, keep_sensitivity=False):
-        """
-        Write channel information into a SAC polezero file.
-
-        Parameters
-        ----------
-        pzfile: str
-            Name of the SAC polezero file.
-        keep_sensitivity: bool
-            Keep sensitivity in the SAC polezero "CONSTANT" or not.
-        """
-        chan_info = f"{self.name}.{self.component} ({self.id})"
-        # Hi-net uses a moving-coil velocity-type seismometer.
-        if self.unit != "m/s":
-            logger.warning(
-                "%s: Unit is not velocity. The PZ file may be wrong.", chan_info
-            )
-
-        try:
-            freq = 2.0 * math.pi / self.period
-        except ZeroDivisionError:
-            logger.warning("%s: Natural period = 0. Skipped.", chan_info)
-            return
-
-        # calculate poles by finding roots of equation s^2+2hws+w^2=0
-        real = 0.0 - self.damping * freq
-        imaginary = freq * math.sqrt(1.0 - self.damping**2.0)
-
-        # calculate the CONSTANT
-        fn = 20.0  # alaways assume normalization frequency is 20 Hz
-        s = complex(0, 2 * math.pi * fn)
-        A0 = abs((s**2 + 2 * self.damping * freq * s + freq**2) / s**2)
-        if keep_sensitivity:
-            factor = math.pow(10, self.preamplification / 20.0)
-            constant = A0 * self.gain * factor / self.lsb_value
-        else:
-            constant = A0
-
-        # write information to a SAC PZ file
-        with open(pzfile, "w", encoding="utf8") as pz:
-            pz.write("ZEROS 3\n")
-            pz.write("POLES 2\n")
-            pz.write(f"{real:9.6f} {imaginary:9.6f}\n")
-            pz.write(f"{real:9.6f} {-imaginary:9.6f}\n")
-            pz.write(f"CONSTANT {constant:e}\n")
 
 
 def extract_sac(
@@ -141,17 +32,18 @@ def extract_sac(
     with_sacpz=False,
     processes=None,
 ):
-    """Extract data as SAC format files.
+    """
+    Extract data as SAC format files.
 
     This function calls the ``win2sac_32`` command, available in the Hi-net win32tools
-    package, to convert data files from win32 format to SAC fomrat. It can also
-    extract the channel information as SAC polezero files.
+    package, to convert data files from win32 format to SAC fomrat. It can also extract
+    the channel information as SAC polezero files.
 
-    Note that the ``win2sac_32`` command always remove the instrument sensitivity
-    from waveform data, and multiply the data by 1.0e9. Thus, the extracted SAC
-    files are not in digital counts, but velocity in nm/s, or acceleration in nm/s/s.
-    Due to the same reason, the extracted SAC polezero files does not keep the
-    sensitivity in the "CONSTANT" of SAC polezero files.
+    Note that the ``win2sac_32`` command always remove the instrument sensitivity from
+    waveform data, and multiply the data by 1.0e9. Thus, the extracted SAC files are not
+    in digital counts, but velocity in nm/s, or acceleration in nm/s/s. Due to the same
+    reason, the extracted SAC polezero files does not keep the sensitivity in the
+    "CONSTANT" of SAC polezero files.
 
     Parameters
     ----------
@@ -164,23 +56,21 @@ def extract_sac(
     outdir: str
         Output directory. Defaults to current directory.
     pmax: int
-        Maximum number of data points for one channel. Defaults to 8640000.
-        If one channel has more than 8640000 data points (i.e., longer than
-        one day for a 100 Hz sampling rate), you MUST increase ``pmax``.
+        Maximum number of data points for one channel. Defaults to 8640000. If one
+        channel has more than 8640000 data points (i.e., longer than one day for a
+        100 Hz sampling rate), you MUST increase ``pmax``.
     filter_by_id: list or str
         Filter channels by ID. It can be a list of IDs or a wildcard.
     filter_by_name: list or str
         Filter channels by name. It can be a list of names or a wildcard.
     filter_by_component: list or str
-        Filter channels by component. It can be a list of component names or
-        a wildcard.
+        Filter channels by component. It can be a list of component names or a wildcard.
     with_sacpz: bool
-        Aslo extract SAC PZ files. By default, the suffix is ``.SAC_PZ`` and
-        the channel sensitivity is not kept in the "CONSTANT".
+        Aslo extract SAC PZ files. By default, the suffix is ``.SAC_PZ`` and the channel
+        sensitivity is not kept in the "CONSTANT".
     processes: None or int
-        Number of processes to speed up data extraction parallelly.
-        ``None`` means using all CPUs.
-
+        Number of processes to speed up data extraction parallelly. ``None`` means using
+        all CPUs.
 
     .. deprecated:: 0.7.0
 
@@ -210,7 +100,7 @@ def extract_sac(
     ...     filter_by_component="[NE]",
     ... )
     """
-    if not (data and ctable):
+    if data is None or ctable is None:
         logger.error("data or ctable is `None'. Data requests may fail. Skipped.")
         return
 
@@ -258,7 +148,8 @@ def extract_sacpz(
     filter_by_component=None,
     processes=None,
 ):
-    """Extract instrumental responses in SAC polezero format from a channel table.
+    """
+    Extract instrumental responses in SAC polezero format from a channel table.
 
     .. warning::
 
@@ -276,19 +167,18 @@ def extract_sacpz(
     outdir: str
         Output directory. Defaults to current directory.
     keep_sensitivity: bool
-        The ``win2sac_32`` program automatically removes sensitivity from waveform
-        data during the win32-to-SAC format conversion.
-        So the generated polezero file should omit the sensitivity.
+        The ``win2sac_32`` program automatically removes sensitivity from waveform data
+        during the win32-to-SAC format conversion. So the generated polezero file should
+        omit the sensitivity.
     filter_by_id: list or str
         Filter channels by ID. It can be a list of IDs or a wildcard.
     filter_by_name: list or str
         Filter channels by name. It can be a list of names or a wildcard.
     filter_by_component: list or str
-        Filter channels by component. It can be a list of component names or
-        a wildcard.
+        Filter channels by component. It can be a list of component names or a wildcard.
     processes: None or int
-        Number of processes to speed up data extraction parallelly.
-        ``None`` means using all CPUs.
+        Number of processes to speed up data extraction parallelly. ``None`` means using
+        all CPUs.
 
     Examples
     --------
@@ -306,7 +196,7 @@ def extract_sacpz(
     ...     "0101_20100101.ch", filter_by_name="N.NA*", filter_by_component="[NE]"
     ... )
     """
-    if not ctable:
+    if ctable is None:
         logger.error("ctable is `None'. Data requests may fail. Skipped.")
         return
 
@@ -355,7 +245,7 @@ def read_ctable(ctable):
         List of :class:`~HinetPy.win32.Channel`.
     """
     channels = []
-    with open(ctable, "r", encoding="utf8") as fct:
+    with open(ctable, encoding="utf8") as fct:
         for line in fct:
             # skip blank lines and comment lines
             if not line.strip() or line.strip().startswith("#"):
@@ -367,14 +257,14 @@ def read_ctable(ctable):
                         id=items[0],
                         name=items[3],
                         component=items[4],
-                        latitude=float(items[13]),
-                        longitude=float(items[14]),
+                        latitude=items[13],
+                        longitude=items[14],
                         unit=items[8],
-                        gain=float(items[7]),
-                        damping=float(items[10]),
-                        period=float(items[9]),
-                        preamplification=float(items[11]),
-                        lsb_value=float(items[12]),
+                        gain=items[7],
+                        damping=items[10],
+                        period=items[9],
+                        preamplification=items[11],
+                        lsb_value=items[12],
                     )
                 )
             except ValueError as err:
@@ -391,7 +281,8 @@ def read_ctable(ctable):
 def _filter_channels(
     channels, filter_by_id=None, filter_by_name=None, filter_by_component=None
 ):
-    """Filter channels by id, name and/or component.
+    """
+    Filter channels by id, name and/or component.
 
     Parameters
     ----------
@@ -402,31 +293,26 @@ def _filter_channels(
     filter_by_name: list or str
         Filter channels by name. It can be a list of names or a wildcard.
     filter_by_component: list or str
-        Filter channels by component. It can be a list of component names or
-        a wildcard.
+        Filter channels by component. It can be a list of component names or a wildcard.
     """
 
     def _filter(channels, key, filters):
-        filtered_channels = []
+        """
+        Filter channels by filters, which can be either a list or a wildcard.
+        """
         if isinstance(filters, list):  # filter by list
-            for channel in channels:
-                if getattr(channel, key) in filters:
-                    filtered_channels.append(channel)
-        elif isinstance(filters, str):  # filter by wildcard
-            for channel in channels:
-                if fnmatch(getattr(channel, key), filters):
-                    filtered_channels.append(channel)
-        else:
-            raise ValueError("Only list and wildcard filter are supported.")
-        return filtered_channels
+            return [chn for chn in channels if getattr(chn, key) in filters]
+        if isinstance(filters, str):  # filter by wildcard
+            return [chn for chn in channels if fnmatch(getattr(chn, key), filters)]
+        raise ValueError("Only list and wildcard filter are supported.")
 
-    if filter_by_id:
-        channels = _filter(channels, "id", filter_by_id)
-    if filter_by_name:
-        channels = _filter(channels, "name", filter_by_name)
-    if filter_by_component:
-        channels = _filter(channels, "component", filter_by_component)
-
+    for key, filter_by in (
+        ("id", filter_by_id),
+        ("name", filter_by_name),
+        ("component", filter_by_component),
+    ):
+        if filter_by is not None:
+            channels = _filter(channels, key, filter_by)
     return channels
 
 
@@ -435,14 +321,14 @@ def _write_winprm(ctable, prmfile="win.prm"):
     Write a four-line parameter file.
     """
     with open(prmfile, "w", encoding="utf8") as fprm:
-        msg = "\n".join([".", ctable, ".", "."])
-        fprm.write(msg)
+        fprm.write(f".\n{ctable}\n.\n.")
 
 
 def _extract_channel_sac(
     winfile, channel, suffix="SAC", outdir=".", prmfile="win.prm", pmax=8640000
 ):
-    """Extract one channel data from win32 file.
+    """
+    Extract one channel data from win32 file.
 
     Parameters
     ----------
@@ -498,7 +384,7 @@ def _extract_channel_sac(
 
     if os.path.exists(filename):  # some channels have no data
         if suffix == "":  # remove extra dot if suffix is empty
-            os.rename(filename, filename[:-1])
+            shutil.move(filename, filename[:-1])
             return filename[:-1]
         return filename
     return None
@@ -507,7 +393,8 @@ def _extract_channel_sac(
 def _extract_channel_sacpz(
     channel, suffix="SAC_PZ", outdir=".", keep_sensitivity=False
 ):
-    """Extract one SAC PZ file from a channel table file.
+    """
+    Extract one SAC PZ file from a channel table file.
 
     Parameters
     ----------
@@ -540,13 +427,13 @@ def merge(data, total_data, force_sort=False):
     The function calls the ``catwin32`` command, available in the Hi-net win32tools
     package, to merge multiple win32 files into one large win32 file.
 
-    By default, the ``catwin32`` command simply concatenates all files in the order
-    they are passed. So the files must be sorted by their start time before being
-    passed. If your files are named by starttime like ``201304040203.cnt``, you can use
+    By default, the ``catwin32`` command simply concatenates all files in the order they
+    are passed. So the files must be sorted by their start time before being passed. If
+    your files are named by starttime like ``201304040203.cnt``, you can use
     ``data=sorted(glob.glob("20130404*.cnt"))`` to pass the sorted list of files.
-    Otherwise, you have to use ``force_sort=True``, forcing ``catwin32`` to sort
-    all files by starttime before merging. However, the sorting process is very
-    time consuming. Do NOT set ``force_sort=True`` unless necessary.
+    Otherwise, you have to use ``force_sort=True``, forcing ``catwin32`` to sort all
+    files by starttime before merging. However, the sorting process is very time
+    consuming. Do NOT set ``force_sort=True`` unless necessary.
 
     Parameters
     ----------
@@ -559,20 +446,20 @@ def merge(data, total_data, force_sort=False):
 
     Examples
     --------
-    For win32 files that are named by starttime (e.g. ``201304040203.cnt``),
-    sorting win32 files using Python's built-in :func:`sorted` function is preferred:
+    For win32 files that are named by starttime (e.g. ``201304040203.cnt``), sorting
+    win32 files using Python's built-in :func:`sorted` function is preferred:
 
     >>> data = sorted(glob.glob("20130404*.cnt"))
     >>> merge(data, "outdir/final.cnt")
 
-    If win32 files are randomly named, you should use ``force_sort=True`` to
-    force ``catwin32`` to sort all data by time before merging.
+    If win32 files are randomly named, you should use ``force_sort=True`` to force
+    ``catwin32`` to sort all data by time before merging.
 
     >>> data = ["001.cnt", "002.cnt", "003.cnt"]
     >>> merge(data, "final.cnt", force_sort=True)
 
-    You can also use wildcard to specify the win32 files to be merged.
-    The function will sort the matched files for you automatically.
+    You can also use wildcard to specify the win32 files to be merged. The function will
+    sort the matched files for you automatically.
 
     >>> merge("20130404*.cnt", "final.cnt")
     """
@@ -584,7 +471,7 @@ def merge(data, total_data, force_sort=False):
     if os.path.dirname(total_data):
         os.makedirs(os.path.dirname(total_data), exist_ok=True)
 
-    cmd = ["catwin32", "-o", total_data] + data
+    cmd = ["catwin32", "-o", total_data, *data]
     if force_sort:  # add -s option to force sort
         cmd.append("-s")
 

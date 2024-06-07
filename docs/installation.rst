@@ -6,7 +6,7 @@ Prerequisites
 
 To use HinetPy, you need:
 
-- Python >= 3.7
+- Python >= 3.8
 - win32tools provided by NIED Hi-net (see below for install instructions)
 - a Hi-net account (register on Hi-net website to get your user name and password)
 
@@ -15,17 +15,17 @@ Install HinetPy
 
 To install the latest **release/stable** version::
 
-    pip install HinetPy
+    python -m pip install HinetPy
 
 Or install the **developing/unstable** version::
 
     git clone https://github.com/seisman/HinetPy
     cd HinetPy
-    python setup.py install
+    python -m pip install .
 
 If you want to uninstall HinetPy, just run::
 
-    pip uninstall HinetPy
+    python -m pip uninstall HinetPy
 
 Build win32tools
 ----------------

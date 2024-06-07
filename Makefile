@@ -5,15 +5,15 @@ help:
 	@echo "  install    install in editable mode"
 	@echo "  test       run the test suite and report coverage"
 	@echo "  doc        build the documentation"
-	@echo "  format     run black to automatically format the code"
-	@echo "  check      run code style and quality checks"
-	@echo "  lint       run pylint for a deeper quality check"
+	@echo "  format     run ruff to automatically format the code"
+	@echo "  check      run ruff to check code style and quality"
+	@echo "  typecheck  run mypy for static type check"
 	@echo "  clean      clean up build and generated files"
 	@echo "  dist-clean clean up egg-info files"
 	@echo ""
 
 install:
-	pip install --no-deps -e .
+	python -m pip install --no-deps -e .
 
 test:
 	pytest tests/test_*.py
@@ -22,23 +22,21 @@ doc:
 	make -C docs docs
 
 format:
-	isort .
-	black .
-	blackdoc .
+	ruff check --fix --exit-zero .
+	ruff format .
 
 check:
-	isort --check .
-	black --check .
-	blackdoc --check .
-	flake8 .
+	ruff check .
+	ruff format --check .
 
-lint:
-	pylint HinetPy docs tests
+typecheck:
+	mypy HinetPy
 
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
 	find . -name "*.mo" -exec rm -v {} \;
-	rm -rvf build dist sdist */__pycache__ .cache .pytest_cache .coverage* coverage.xml .eggs/
+	rm -rvf build dist sdist */__pycache__ .eggs/
+	rm -rvf .cache .pytest_cache .coverage* coverage.xml .ruff_cache .mypy_cache
 	rm -rvf testdir-*
 
 dist-clean: clean

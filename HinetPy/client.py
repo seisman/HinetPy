@@ -1,11 +1,13 @@
 """
 Client for requesting Hi-net waveform data and catalog.
 """
+
 import csv
 import json
 import logging
 import os
 import re
+import shutil
 import tempfile
 import time
 import zipfile
@@ -14,6 +16,9 @@ from html.parser import HTMLParser
 from multiprocessing.pool import ThreadPool
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3 import PoolManager
+from urllib3.util import create_urllib3_context
 
 from .header import NETWORK
 from .utils import (
@@ -26,32 +31,26 @@ from .utils import (
 )
 from .win32 import merge
 
-# Hacking solution for "ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small" error.
-# Reference: https://stackoverflow.com/a/41041028
-requests.packages.urllib3.disable_warnings()
-requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ":HIGH:!DH:!aNULL"
-try:
-    requests.packages.urllib3.contrib.pyopenssl.util.ssl_.DEFAULT_CIPHERS += (
-        ":HIGH:!DH:!aNULL"
-    )
-except AttributeError:
-    # no pyopenssl support used / needed / available
-    pass
-
 # Setup the logger
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
 logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)
 
-# pylint: disable=redefined-builtin,invalid-name,redefined-outer-name,too-many-lines
+
+# Hacking solution for "ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small" error.
+# Reference: https://stackoverflow.com/a/76217135
+class AddedCipherAdapter(HTTPAdapter):
+    def init_poolmanager(self, connections, maxsize, block=False):
+        ctx = create_urllib3_context(ciphers=":HIGH:!DH:!aNULL")
+        self.poolmanager = PoolManager(
+            num_pools=connections, maxsize=maxsize, block=block, ssl_context=ctx
+        )
 
 
 class BaseClient:
     """
     Base client to login in the Hi-net website.
     """
-
-    # pylint: disable=too-many-instance-attributes
 
     # Hinet website
     _HINET = "https://www.hinet.bosai.go.jp/"
@@ -112,19 +111,16 @@ class BaseClient:
 
         Notes
         -----
-        The Hi-net server ususally spends 10-60 seconds on data
-        preparation after receiving a data request. During the data
-        preparation, users are **NOT** allowed to post another data request.
-        So users have to wait until the data is ready.
+        The Hi-net server ususally spends 10-60 seconds on data preparation after
+        receiving a data request. During the data preparation, users are **NOT** allowed
+        to post another data request. So users have to wait until the data is ready.
 
-        HinetPy checks data status every ``sleep_time_in_seconds`` seconds for
-        no more than ``max_sleep_count`` times, until the data is ready.
-        If the data status is still NOT ready after
-        ``max_sleep_count * sleep_time_in_seconds`` seconds,
-        it most likely means something goes wrong with the data request.
-        Then, HinetPy will retry to request the data ``retries`` times.
-        Ususally, you don't need to modify these parameters
-        unless you know what you're doing.
+        HinetPy checks data status every ``sleep_time_in_seconds`` seconds for no more
+        than ``max_sleep_count`` times, until the data is ready. If the data status is
+        still NOT ready after ``max_sleep_count * sleep_time_in_seconds`` seconds, it
+        most likely means something goes wrong with the data request. Then, HinetPy will
+        retry to request the data ``retries`` times. Ususally, you don't need to modify
+        these parameters unless you know what you're doing.
 
         Examples
         --------
@@ -160,12 +156,13 @@ class BaseClient:
                 if key == "password":
                     value = "*" * len(value)
                 string += f"{key:22s}: {value}\n"
-            except AttributeError:
+            except AttributeError:  # noqa: PERF203
                 continue
         return string
 
     def login(self, user, password):
-        """Login in the Hi-net server.
+        """
+        Login in the Hi-net server.
 
         Parameters
         ----------
@@ -185,6 +182,8 @@ class BaseClient:
         if len(password) > 12:
             logger.warning("Password longer than 12 characters may be truncated.")
         self.session = requests.Session()
+        self.session.mount(self._HINET, AddedCipherAdapter())
+        self.session.mount(self._AUTH, AddedCipherAdapter())
         self.session.get(self._AUTH, timeout=self.timeout)  # get cookie
         resp = self.session.post(
             self._AUTH,
@@ -202,8 +201,6 @@ class ContinuousWaveformClient(BaseClient):
     """
     Client for requesting continuous waveform data.
     """
-
-    # pylint: disable=invalid-name
 
     def _request_cont_waveform(self, code, starttime, span):
         """
@@ -248,11 +245,11 @@ class ContinuousWaveformClient(BaseClient):
                     self._CONT_REQUEST, params=payload, timeout=self.timeout
                 )
                 # assume the first one on the status page is the current data
-                id = re.search(
+                id = re.search(  # noqa: A001
                     r'<td class="bgcolist2">(?P<ID>\d{10})</td>', resp.text
                 ).group("ID")
                 p = re.compile(
-                    r'<tr class="bglist(?P<OPT>\d)">'
+                    r'<tr class="bglist(?P<OPT>\d)">'  # noqa: ISC003
                     + r'<td class="bgcolist2">'
                     + id
                     + r"</td>"
@@ -275,7 +272,7 @@ class ContinuousWaveformClient(BaseClient):
                         break  # break to else clause
                 else:  # wait too long time
                     return None
-            except Exception:  # pylint: disable=broad-except
+            except Exception:  # noqa: BLE001, S112
                 continue
             break
         else:
@@ -326,16 +323,16 @@ class ContinuousWaveformClient(BaseClient):
                                 cnts.append(filename)
                             elif filename.endswith(".euc.ch"):
                                 ctable = filename
-                        fz.extractall(members=cnts + [ctable])
+                        fz.extractall(members=[*cnts, ctable])
                     return cnts, ctable
-            except Exception:  # pylint: disable=broad-except
+            except Exception:  # noqa: BLE001, S112
                 continue
             break
         else:
             logger.error("Data download fails after %d retries", self.retries)
             return None, None
 
-    def get_continuous_waveform(
+    def get_continuous_waveform(  # noqa: PLR0915, PLR0912
         self,
         code,
         starttime,
@@ -359,17 +356,16 @@ class ContinuousWaveformClient(BaseClient):
         span: int
             Time span in minutes.
         max_span: int
-            Maximum time span for sub-requests. Defaults to be determined
-            automatically. See notes below.
+            Maximum time span for sub-requests. Defaults to be determined automatically.
+            See notes below.
         data: str
             Filename of downloaded win32 data.
             Default format: CODE_YYYYmmddHHMM_SPAN.cnt
         ctable: str
-            Filename of downloaded channel table file.
-            Default format: CODE_YYYYmmdd.ch
+            Filename of downloaded channel table file. Default format: CODE_YYYYmmdd.ch
         outdir: str
-            Save win32 and channel table data to a specified directory.
-            Default is in the current directory.
+            Save win32 and channel table data to a specified directory. Default is in
+            the current directory.
         threads: int
             Parallel data download using more threads.
         cleanup: bool
@@ -396,11 +392,10 @@ class ContinuousWaveformClient(BaseClient):
         2. Number_of_channels * Record_Length <= 12000 min
         3. Only the latest 150 requested data are kept
 
-        For example, Hi-net network has about 24000 channels. Acoording to
-        limitation 2, the record length should be no more than 5 minutes
-        for each data request. HinetPy "break through" the limitation by
-        splitting a long-duration data request into several short-duration
-        sub-requsts.
+        For example, Hi-net network has about 24000 channels. Acoording to limitation 2,
+        the record length should be no more than 5 minutes for each data request.
+        HinetPy "break through" the limitation by splitting a long-duration data request
+        into several short-duration sub-requsts.
 
         **How it works**
 
@@ -436,8 +431,6 @@ class ContinuousWaveformClient(BaseClient):
         ('0103_201001010000_1440.cnt', '0103_20100101.ch')
 
         """
-        # pylint: disable=too-many-locals,too-many-branches,too-many-statements
-        # pylint: disable=no-member
         # 1. check span:
         #    max limit is determined by the max number of data points
         #    allowed in code s4win2sacm.c
@@ -456,10 +449,8 @@ class ContinuousWaveformClient(BaseClient):
         starttime = to_datetime(starttime)
         endtime = starttime + timedelta(minutes=span)
         if not time0 <= starttime < endtime <= time1:
-            raise ValueError(
-                "Data not available in the time period. "
-                + f"Call Client.info('{code}') for help."
-            )
+            msg = f"Data not available in the time period. Call Client.info('{code}') for help."
+            raise ValueError(msg)
 
         # 3. set max_span
         if self._code != code:  # update default max_span
@@ -509,7 +500,7 @@ class ContinuousWaveformClient(BaseClient):
         # 1. always sort cnts by name/time to avoid use -s option of catwin32
         cnts = sorted(cnts)
         #    always use the first ctable
-        ch_euc = list(sorted(ch_euc))[0]
+        ch_euc = sorted(ch_euc)[0]
 
         # 2. merge all cnt files
         if not data:
@@ -534,8 +525,7 @@ class ContinuousWaveformClient(BaseClient):
             ctable = os.path.join(dirname, ctable)
         if dirname and not os.path.exists(dirname):
             os.makedirs(dirname, exist_ok=True)
-        os.rename(ch_euc, ctable)
-
+        shutil.move(ch_euc, ctable)
         # 4. cleanup
         if cleanup:
             for cnt in cnts:
@@ -606,12 +596,12 @@ class EventWaveformClient(BaseClient):
         }
         resp = self.session.post(self._EVENT, data=payload, timeout=self.timeout)
         events = []
-        for result in re.findall(r"openRequest\((.+)\)", resp.text):  # noqa: W605
+        for result in re.findall(r"openRequest\((.+)\)", resp.text):
             items = [item.strip("'") for item in result.split(",")]
             events.append(Event(items[0], *items[3:10]))
         return events
 
-    def _request_event_waveform(self, event, format="ZIP"):
+    def _request_event_waveform(self, event, format="ZIP"):  # noqa: A002
         """
         Request event waveform.
 
@@ -644,11 +634,11 @@ class EventWaveformClient(BaseClient):
                     self._EVENT_REQUEST, data=payload, timeout=self.timeout
                 )
                 # assume the first one on the status page is the current one
-                id = re.search(
+                id = re.search(  # noqa: A001
                     r'<td class="bgevlist2">(?P<ID>\d{10})</td>', resp.text
                 ).group("ID")
                 p = re.compile(
-                    r'<tr class="bglist(?P<OPT>\d)">'
+                    r'<tr class="bglist(?P<OPT>\d)">'  # noqa: ISC003
                     + r'<td class="bgevlist2">'
                     + id
                     + r"</td>"
@@ -671,14 +661,14 @@ class EventWaveformClient(BaseClient):
                         break  # break to else clause
                 else:  # wait too long time
                     return None
-            except Exception:  # pylint: disable=broad-except
+            except Exception:  # noqa: BLE001, S112
                 continue
             break
         else:
             logger.error("Data request fails after %d retries.", self.retries)
             return None
 
-    def _download_event_waveform(self, id):
+    def _download_event_waveform(self, id):  # noqa: A002
         """
         Download event waveform.
 
@@ -711,12 +701,12 @@ class EventWaveformClient(BaseClient):
                     with zipfile.ZipFile(ft.name) as fz:
                         fz.extractall(path=outdir)
                     return outdir
-            except Exception:  # pylint: disable=broad-except
+            except Exception:  # noqa: BLE001, S112, PERF203
                 continue
         logger.error("Data download fails after %d retries.", self.retries)
         return None
 
-    def get_event_waveform(
+    def get_event_waveform(  # noqa: PLR0913
         self,
         starttime,
         endtime,
@@ -735,7 +725,8 @@ class EventWaveformClient(BaseClient):
         minradius=None,
         maxradius=None,
     ):
-        """Get event waveform data.
+        """
+        Get event waveform data.
 
         Parameters
         ----------
@@ -778,15 +769,12 @@ class EventWaveformClient(BaseClient):
         longitude: float
             Specify the longitude to be used for a radius search.
         minradius: float
-            Limit to events within the specified minimum number of degrees
-            from the geographic point defined by the latitude and longitude
-            parameters.
+            Limit to events within the specified minimum number of degrees from the
+            geographic point defined by the latitude and longitude parameters.
         maxradius: float
-            Limit to events within the specified maximum number of degrees
-            from the geographic point defined by the latitude and longitude
-            parameters.
+            Limit to events within the specified maximum number of degrees from the
+            geographic point defined by the latitude and longitude parameters.
         """
-        # pylint: disable=too-many-arguments,too-many-locals
         starttime, endtime = to_datetime(starttime), to_datetime(endtime)
 
         # get event list
@@ -828,36 +816,36 @@ class EventWaveformClient(BaseClient):
                 or maxlatitude is not None
                 or minlongitude is not None
                 or maxlongitude is not None
+            ) and not point_inside_box(
+                event.latitude,
+                event.longitude,
+                minlatitude=minlatitude,
+                maxlatitude=maxlatitude,
+                minlongitude=minlongitude,
+                maxlongitude=maxlongitude,
             ):
-                if not point_inside_box(
-                    event.latitude,
-                    event.longitude,
-                    minlatitude=minlatitude,
-                    maxlatitude=maxlatitude,
-                    minlongitude=minlongitude,
-                    maxlongitude=maxlongitude,
-                ):
-                    continue
+                continue
 
             # select events in a circular region
-            if (latitude is not None and longitude is not None) and (
-                minradius is not None or maxradius is not None
-            ):
-                if not point_inside_circular(
+            if (
+                (latitude is not None and longitude is not None)
+                and (minradius is not None or maxradius is not None)
+                and not point_inside_circular(
                     event.latitude,
                     event.longitude,
                     latitude,
                     longitude,
                     minradius=minradius,
                     maxradius=maxradius,
-                ):
-                    continue
+                )
+            ):
+                continue
             selected_events.append(event)
 
         logger.info("EVENT WAVEFORM DOWNLOADER:")
         logger.info("%d events to download.", len(selected_events))
         for event in selected_events:
-            id = self._request_event_waveform(event)
+            id = self._request_event_waveform(event)  # noqa: A001
             dirname = self._download_event_waveform(id)
             logger.info("%s %s", event, dirname)
 
@@ -888,7 +876,8 @@ class CatalogClient(BaseClient):
         return filename
 
     def get_arrivaltime(self, startdate, span, filename=None, os="DOS"):
-        """Get JMA arrival time data from Hi-net.
+        """
+        Get JMA arrival time data from Hi-net.
 
         Parameters
         ----------
@@ -918,7 +907,8 @@ class CatalogClient(BaseClient):
         return self._get_catalog("measure", startdate, span, filename, os)
 
     def get_focalmechanism(self, startdate, span, filename=None, os="DOS"):
-        """Get JMA focal mechanism data from Hi-net.
+        """
+        Get JMA focal mechanism data from Hi-net.
 
         Parameters
         ----------
@@ -954,7 +944,8 @@ class StationClient(BaseClient):
     """
 
     def get_station_list(self, code):
-        """Get station list of a network.
+        """
+        Get station list of a network.
 
         The function only supports the following networks:
         Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).
@@ -962,16 +953,16 @@ class StationClient(BaseClient):
         >>> stations = client.get_station_list("0101")
         >>> for station in stations:
         ...     print(station)
-        ...
         0101 N.WNNH 45.4883 141.885 -159.06
         0101 N.SFNH 45.3346 142.1185 -81.6
         ...
         """
-        # pylint: disable=too-many-locals
         stations = []
         # remove trailing 'A' in network code
         if code in ["0101", "0103", "0103A"]:  # Hinet and Fnet
-            csvfile = requests.get(self._STATION_INFO).content.decode("utf-8")
+            csvfile = requests.get(self._STATION_INFO, timeout=30).content.decode(
+                "utf-8"
+            )
             for row in csv.DictReader(csvfile.splitlines(), delimiter=","):
                 org_id = row["organization_id"].strip("'")
                 net_id = row["network_id"].strip("'")
@@ -1000,7 +991,8 @@ class StationClient(BaseClient):
         return stations
 
     def get_selected_stations(self, code):
-        """Query stations selected for requesting data.
+        """
+        Query stations selected for requesting data.
 
         It supports two networks: Hi-net (0101) and F-net (0103, 0103A).
 
@@ -1021,7 +1013,6 @@ class StationClient(BaseClient):
         16
         >>> for station in stations:
         ...     print(station)
-        ...
         0101 N.WNNH 45.4883 141.885 -159.06
         0101 N.SFNH 45.3346 142.1185 -81.6
         >>> names = [station.name for station in stations]
@@ -1039,7 +1030,7 @@ class StationClient(BaseClient):
         parser = _GrepTableData()
         parser.feed(self.session.get(self._STATION, timeout=self.timeout).text)
         stations = []
-        for (i, text) in enumerate(parser.tabledata):
+        for i, text in enumerate(parser.tabledata):
             # If the target station, grep both lon and lat.
             if re.match(pattern, text):
                 stations.append(
@@ -1054,7 +1045,7 @@ class StationClient(BaseClient):
         parser.close()
         return stations
 
-    def select_stations(
+    def select_stations(  # noqa: PLR0913
         self,
         code,
         stations=None,
@@ -1067,7 +1058,8 @@ class StationClient(BaseClient):
         minradius=None,
         maxradius=None,
     ):
-        """Select stations of a network.
+        """
+        Select stations of a network.
 
         It only supports the following networks:
         Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).
@@ -1091,13 +1083,11 @@ class StationClient(BaseClient):
         longitude: float
             Specify the longitude to be used for a radius search.
         minradius: float
-            Limit to stations within the specified minimum number of degrees
-            from the geographic point defined by the latitude and longitude
-            parameters.
+            Limit to stations within the specified minimum number of degrees from the
+            geographic point defined by the latitude and longitude parameters.
         maxradius: float
-            Limit to stations within the specified maximum number of degrees
-            from the geographic point defined by the latitude and longitude
-            parameters.
+            Limit to stations within the specified maximum number of degrees from the
+            geographic point defined by the latitude and longitude parameters.
 
         Examples
         --------
@@ -1130,7 +1120,6 @@ class StationClient(BaseClient):
         0
 
         """
-        # pylint: disable=too-many-arguments
         stations_selected = []
 
         if stations is None:
@@ -1147,29 +1136,35 @@ class StationClient(BaseClient):
 
         # select stations in a box region
         if minlatitude or maxlatitude or minlongitude or maxlongitude:
-            for station in stations_at_server:
-                if station.code == code and point_inside_box(
+            stations_selected = [
+                station.name
+                for station in stations_at_server
+                if station.code == code
+                and point_inside_box(
                     station.latitude,
                     station.longitude,
                     minlatitude=minlatitude,
                     maxlatitude=maxlatitude,
                     minlongitude=minlongitude,
                     maxlongitude=maxlongitude,
-                ):
-                    stations_selected.append(station.name)
+                )
+            ]
 
         # select stations in a circular region
         if (latitude and longitude) and (minradius or maxradius):
-            for station in stations_at_server:
-                if station.code == code and point_inside_circular(
+            stations_selected = [
+                station.name
+                for station in stations_at_server
+                if station.code == code
+                and point_inside_circular(
                     station.latitude,
                     station.longitude,
                     latitude,
                     longitude,
                     minradius=minradius,
                     maxradius=maxradius,
-                ):
-                    stations_selected.append(station.name)
+                )
+            ]
         payload = {
             "net": code,
             "stcds": ":".join(stations_selected) if stations_selected else None,
@@ -1186,7 +1181,8 @@ class Client(
     """
 
     def doctor(self):
-        """Doctor does some checks.
+        """
+        Doctor does some checks.
 
         This is a utility function that checks:
 
@@ -1206,7 +1202,8 @@ class Client(
         check_cmd_exists("win2sac_32")
 
     def _get_allowed_span(self, code):
-        """Get allowed max span for each network.
+        """
+        Get allowed max span for each network.
 
         Hi-net server sets two limitations of data file size:
 
@@ -1241,7 +1238,8 @@ class Client(
         return min(int(12000 / channels), 60)
 
     def check_service_update(self):
-        """Check if Hi-net service is updated.
+        """
+        Check if Hi-net service is updated.
 
         >>> client.check_service_update()
         [2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.
@@ -1254,8 +1252,8 @@ class Client(
         return True
 
     def info(self, code=None):
-        # pylint: disable=no-self-use
-        """Show information of networks.
+        """
+        Show information of networks.
 
         Parameters
         ----------
@@ -1294,7 +1292,6 @@ class Client(
 
     def _get_win32tools(self):
         """Download win32tools from Hi-net website."""
-        # pylint: disable=invalid-name
         dl = self.session.get(self._WIN32TOOLS, stream=True)
         if dl.status_code != 200:
             logger.error("Error in downloading win32tools.")
@@ -1317,9 +1314,7 @@ def prepare_jobs(starttime, span, max_span):
 class _Job:
     """Job class for internal use."""
 
-    # pylint: disable=too-few-public-methods
-
-    def __init__(self, starttime, span, id=None):
+    def __init__(self, starttime, span, id=None):  # noqa: A002
         self.starttime = starttime
         self.span = span
         self.id = id
@@ -1327,8 +1322,6 @@ class _Job:
 
 class Station:
     """Class for Stations."""
-
-    # pylint: disable=too-few-public-methods
 
     def __init__(self, code, name, latitude, longitude, elevation):
         self.code = code
@@ -1345,8 +1338,6 @@ class Station:
 
 class Event:
     """Event class for requesting event waveforms."""
-
-    # pylint: disable=too-few-public-methods,too-many-instance-attributes
 
     def __init__(
         self, evid, origin, latitude, longitude, depth, magnitude, name, name_en
@@ -1379,7 +1370,8 @@ class Event:
 
 
 def _parse_code(code):
-    """Parse network code.
+    """
+    Parse network code.
 
     >>> client._parse_code("0101")
     ('01', '01', '0')
@@ -1391,7 +1383,7 @@ def _parse_code(code):
     if code not in NETWORK:
         raise ValueError(f"{code}: Incorrect network code.")
 
-    if code.startswith("0105") or code.startswith("0302"):
+    if code.startswith(("0105", "0302")):
         org, net, volc = code[0:2], code[2:4], code
     else:
         org, net, volc = code[:2], code[2:], "0"
@@ -1399,11 +1391,10 @@ def _parse_code(code):
 
 
 class _GrepTableData(HTMLParser):
-    """Parser to obtain ``<td>`` contents.
+    """
+    Parser to obtain ``<td>`` contents.
     ``handle_starttag()`` flags when the HTML tag matches with `td`.
     """
-
-    # pylint: disable=abstract-method
 
     def __init__(self):
         super().__init__()

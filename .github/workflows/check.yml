@@ -1,10 +1,12 @@
+#
+# Code lint and style checks
+#
 name: Check
 
 on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
 
 jobs:
   check:
@@ -12,9 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.12.1
-
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -25,8 +24,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-          pip install black blackdoc flake8 isort
+          python -m pip install -r requirements.txt
+          python -m pip install ruff
 
       - name: Check code style
         run: make check
