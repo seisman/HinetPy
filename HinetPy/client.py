@@ -184,7 +184,7 @@ class BaseClient:
         self.session = requests.Session()
         self.session.mount(self._HINET, AddedCipherAdapter())
         self.session.mount(self._AUTH, AddedCipherAdapter())
-        self.session.get(self._AUTH, timeout=self.timeout)  # get cookie
+        self.session.get(self._AUTH, timeout=self.timeout, verify=False)  # get cookie
         resp = self.session.post(
             self._AUTH,
             data={"auth_un": self.user, "auth_pw": self.password},
