@@ -1292,7 +1292,7 @@ class Client(
 
     def _get_win32tools(self):
         """Download win32tools from Hi-net website."""
-        dl = self.session.get(self._WIN32TOOLS, stream=True, verify=False)
+        dl = self.session.get(self._WIN32TOOLS, stream=True)
         if dl.status_code != 200:
             logger.error("Error in downloading win32tools.")
         with open("win32tools.tar.gz", "wb") as fd:
