@@ -4,7 +4,6 @@ tags:
   - Python
   - geophysics
   - seismology
-
 authors:
  - name: Dongdong Tian
    orcid: 0000-0001-7967-1197
@@ -40,7 +39,7 @@ provides access to high-quality seismic data from 2004 onwards, including data f
 other seismic networks such as F-net, S-net, V-net, and more. The NIED Hi-net data has
 been widely used in various research from the study of earthquakes [e.g., @Ishii2005; @Peng2007]
 to the structure of the Earth's deep interior [e.g., @Niu2005; @Yee2014; @Tian2017].
-Despite the value of the data provided by NIED Hi-net, accessing and processing them can be challenging.
+Despite the value of the data provided by NIED Hi-net, accessing and processing it can be challenging.
 
 ## Challenges in accessing NIED Hi-net data
 
@@ -55,7 +54,7 @@ It is important to note that the NIED Hi-net website has limitations on the data
 size and length in a single request. Specifically, the record length of a single channel
 cannot exceed 60 minutes, and the total record length of
 all channels cannot exceed 12,000 minutes. Considering that NIED Hi-net comprises about 800 seismic
-stations and 24,000 channels (3 channels per station), the record length in a single
+stations and 2,400 channels (3 channels per station), the record length in a single
 request must not exceed 5 minutes. If users require 30 minutes of data, they must divide the
 time range into six subranges and submit six separate requests. The NIED Hi-net website
 does not allow users to post multiple data requests simultaneously. Therefore, to obtain
@@ -78,7 +77,7 @@ This limitation hinders the broader utilization of NIED Hi-net data.
 
 HinetPy is designed to address specific challenges with accessing and processing
 NIED Hi-net data through a user-friendly interface. It primarily offers two key components:
-the `Client` class for data access and the `win32` module for data processing.
+the `Client` class for data accessing and the `win32` module for data processing.
 
 The `Client` class utilizes the popular HTTP library [Requests](https://github.com/psf/requests)
 to handle user authentication, data requests, status queries, and downloads. This simplifies
@@ -139,7 +138,7 @@ Here is a summary of the key features of HinetPy:
 3. Selects a subset of stations based on geographical location or station name [Supports
    Hi-net, F-net, S-net and MeSO-net only].
 4. Converts waveform data to SAC format and instrumental responses to SAC polezero files.
-5. Speed up with multithreads downloading and processing.
+5. Speeds up with multithreads downloading and processing.
 
 # Important notes on the use of NIED Hi-net data
 
