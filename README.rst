@@ -10,6 +10,8 @@
     :target: https://pypi.org/project/HinetPy/
 .. image:: https://img.shields.io/github/license/seisman/HinetPy.svg
     :target: https://github.com/seisman/HinetPy/blob/main/LICENSE
+.. image:: https://joss.theoj.org/papers/10.21105/joss.06840/status.svg
+   :target: https://doi.org/10.21105/joss.06840
 .. image:: https://zenodo.org/badge/23509035.svg
     :target: https://zenodo.org/badge/latestdoi/23509035
 
