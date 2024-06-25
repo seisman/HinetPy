@@ -22,18 +22,20 @@
 
 ----
 
-`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package to request and
-process seismic data from `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__.
+`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package for accessing and
+processing seismic data from `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__.
 
-Features
-========
+Key Features
+============
 
-- Request continuous/event waveform data and event catalog from NIED Hi-net
-- Support networks like Hi-net, F-net, V-net, S-net and more
-- Select Hi-net/F-net stations based on different criteria
-- Convert waveform data from win32 format to SAC format
-- Extract instrumental response as SAC polezero file
-- Multithreads downloading and conversion to speedup
+- Facilitates easy access to NIED Hi-net seismic data, including continuous/event
+  waveform data and event catalogs.
+- Supports multiple seismic networks (e.g., F-net, S-net, MeSO-net and more in addition
+  to Hi-net) in Japan.
+- Selects a subset of stations based on geographical location or station name (Supports
+  Hi-net, F-net, S-net and MeSO-net only).
+- Converts waveform data to SAC format and instrumental responses to SAC polezero files.
+- Speeds up the downloading and processing workflow via the use of multithreading.
 
 A simple example
 ================
@@ -43,9 +45,6 @@ Hi-net, convert the data into SAC format, and extract instrumental responses as 
 polezero files.
 
 .. code-block:: python
-
-    #!/usr/bin/env python
-    # -*- coding: utf-8 -*-
 
     from HinetPy import Client, win32
 
@@ -82,10 +81,25 @@ polezero files.
 Citation
 ========
 
-If you find this package useful, please consider citing via:
+If you find this package useful, please consider cite the package in either of the
+following ways:
 
-.. image:: https://zenodo.org/badge/23509035.svg
-    :target: https://zenodo.org/badge/latestdoi/23509035
+**Cite the HinetPy paper (preferred)**
+
+A formal paper is published on `The Journal of Open Source Software <https://joss.theoj.org/>`__
+since HinetPy v0.9.0. This is the **preferred** way.
+
+> Tian. (2024). HinetPy: A Python package for accessing and processing NIED Hi-net seismic data.
+> Journal of Open Source Software, 9(98), 6840. https://doi.org/10.21105/joss.06840
+
+**Cite a specific HinetPy version**
+
+If you'd like to cite a specific HinetPy version, you can visit
+`Zenodo <https://zenodo.org/records/12523911>`__, choose the version you want to cite,
+and cite like this:
+
+> Tian. (20XX). HinetPy: A Python package for accessing and processing NIED Hi-net seismic data (X.X.X).
+> Zenodo. https://doi.org/10.5281/zenodo.xxxxxxxx
 
 Contributing
 ============
