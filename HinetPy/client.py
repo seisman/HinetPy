@@ -7,6 +7,7 @@ import json
 import logging
 import os
 import re
+import shutil
 import tempfile
 import time
 import zipfile
@@ -14,7 +15,11 @@ from datetime import datetime, timedelta
 from html.parser import HTMLParser
 from multiprocessing.pool import ThreadPool
 
+import certifi
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3 import PoolManager
+from urllib3.util import create_urllib3_context
 
 from .header import NETWORK
 from .utils import (
@@ -31,6 +36,16 @@ from .win32 import merge
 FORMAT = "[%(asctime)s] %(levelname)s: %(message)s"
 logging.basicConfig(level=logging.INFO, format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)
+
+
+# Hacking solution for "ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small" error.
+# Reference: https://stackoverflow.com/a/76217135
+class AddedCipherAdapter(HTTPAdapter):
+    def init_poolmanager(self, connections, maxsize, block=False):
+        ctx = create_urllib3_context(ciphers=":HIGH:!DH:!aNULL")
+        self.poolmanager = PoolManager(
+            num_pools=connections, maxsize=maxsize, block=block, ssl_context=ctx
+        )
 
 
 class BaseClient:
@@ -168,7 +183,11 @@ class BaseClient:
         if len(password) > 12:
             logger.warning("Password longer than 12 characters may be truncated.")
         self.session = requests.Session()
-        self.session.get(self._AUTH, timeout=self.timeout)  # get cookie
+        self.session.mount(self._HINET, AddedCipherAdapter())
+        self.session.mount(self._AUTH, AddedCipherAdapter())
+        self.session.get(
+            self._AUTH, timeout=self.timeout, verify=certifi.where()
+        )  # get cookie
         resp = self.session.post(
             self._AUTH,
             data={"auth_un": self.user, "auth_pw": self.password},
@@ -509,8 +528,7 @@ class ContinuousWaveformClient(BaseClient):
             ctable = os.path.join(dirname, ctable)
         if dirname and not os.path.exists(dirname):
             os.makedirs(dirname, exist_ok=True)
-        os.rename(ch_euc, ctable)
-
+        shutil.move(ch_euc, ctable)
         # 4. cleanup
         if cleanup:
             for cnt in cnts:

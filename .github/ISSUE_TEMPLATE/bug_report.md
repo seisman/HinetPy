@@ -13,6 +13,8 @@ A clear and concise description of what the bug is.
 
 **Full code that generated the error**
 
+*Please be careful not to post your real username and password in the codes.*
+
 ```python
 PASTE CODE HERE
 ```

@@ -1,6 +1,16 @@
 Changelog
 =========
 
+0.8.3 (2024-06-05)
+------------------
+
+- Fix the "OSError: [Errno 18] Invalid cross-device link." for cross-system operations.
+
+0.8.2 (2024-04-05)
+------------------
+
+- Add the updated solution for the "ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small" error
+
 0.8.1 (2024-03-31)
 ------------------
 
