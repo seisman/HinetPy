@@ -129,16 +129,16 @@ seismic networks and their internal network codes can be obtained via `client.in
 
 # Key features
 
-Here is a summary of the key features of HinetPy:
+The key features of HinetPy are:
 
 1. Facilitates easy access to NIED Hi-net seismic data, including continuous/event waveform
    data and event catalogs.
 2. Supports multiple seismic networks (e.g., F-net, S-net, MeSO-net and more in addition
    to Hi-net) in Japan.
-3. Selects a subset of stations based on geographical location or station name [Supports
-   Hi-net, F-net, S-net and MeSO-net only].
+3. Selects a subset of stations based on geographical location or station name (Supports
+   Hi-net, F-net, S-net and MeSO-net only).
 4. Converts waveform data to SAC format and instrumental responses to SAC polezero files.
-5. Speeds up with multithreads downloading and processing.
+5. Speeds up the downloading and processing workflow via the use of multithreading.
 
 # Important notes on the use of NIED Hi-net data
 
