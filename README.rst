@@ -91,8 +91,8 @@ following ways:
 A formal paper is published on `The Journal of Open Source Software <https://joss.theoj.org/>`__
 since HinetPy v0.9.0. This is the **preferred** way for citation.
 
-> Tian, D. (2024). HinetPy: A Python package for accessing and processing NIED Hi-net seismic data. 
-> Journal of Open Source Software, 9(98), 6840. https://doi.org/10.21105/joss.06840
+    Tian, D. (2024). HinetPy: A Python package for accessing and processing NIED Hi-net seismic data. 
+    Journal of Open Source Software, 9(98), 6840. https://doi.org/10.21105/joss.06840
 
 **Cite a specific HinetPy version**
 
@@ -100,8 +100,8 @@ If you'd like to cite a specific HinetPy version, you can visit
 `Zenodo <https://zenodo.org/records/12523911>`__, choose the version you want to cite,
 and cite like this:
 
-> Tian, D. (20XX). HinetPy: A Python package for accessing and processing NIED Hi-net seismic data (X.X.X).
-> Zenodo. https://doi.org/10.5281/zenodo.xxxxxxxx
+    Tian, D. (20XX). HinetPy: A Python package for accessing and processing NIED Hi-net seismic data (X.X.X).
+    Zenodo. https://doi.org/10.5281/zenodo.xxxxxxxx
 
 Contributing
 ============
