@@ -1,0 +1,32 @@
+# YAML 1.2
+# Metadata for citation of this software according to the CFF format (https://citation-file-format.github.io/)
+cff-version: "1.2.0"
+message: If you use this software, please cite our article in the Journal of Open Source Software.
+title: "HinetPy: A Python package for accessing and processing NIED Hi-net seismic data"
+authors:
+- family-names: Tian
+  given-names: Dongdong
+  orcid: "https://orcid.org/0000-0001-7967-1197"
+version: 0.9.0
+date-released: 2024-06-25
+doi: 10.5281/zenodo.12523911
+type: software
+license: MIT
+repository-code: "https://github.com/seisman/HinetPy"
+preferred-citation:
+  title: "HinetPy: A Python package for accessing and processing NIED Hi-net seismic data"
+  authors:
+  - family-names: Tian
+    given-names: Dongdong
+    orcid: "https://orcid.org/0000-0001-7967-1197"
+  date-published: 2024-06-25
+  doi: 10.21105/joss.06840
+  volume: 9
+  issue: 98
+  start: 6840
+  journal: Journal of Open Source Software
+  issn: 2475-9066
+  publisher:
+    name: Open Journals
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.06840"
