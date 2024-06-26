@@ -9,10 +9,12 @@ on:
     paths:
       - 'HinetPy/*.py'
       - 'docs/**'
+      - 'README.rst'
   pull_request:
     paths:
       - 'HinetPy/*.py'
       - 'docs/**'
+      - 'README.rst'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
