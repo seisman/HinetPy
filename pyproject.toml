@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "HinetPy"
-description = "A Python package to request and process seismic waveform data from NIED Hi-net"
+description = "A Python package for accessing and processing NIED Hi-net seismic data"
 readme = "README.rst"
 requires-python = ">=3.8"
 authors = [{name = "Dongdong Tian", email = "seisman.info@gmail.com"}]
@@ -36,11 +36,11 @@ documentation = "https://seisman.github.io/HinetPy/"
 repository = "https://github.com/seisman/HinetPy"
 
 [tool.setuptools]
-license-files = ["LICENSE.txt"]
+license-files = ["LICENSE"]
 
 [tool.setuptools.packages.find]
 include = ["HinetPy*"]
-exclude = ["docs", "tests"]
+exclude = ["docs", "tests", "paper"]
 
 [tool.setuptools_scm]
 local_scheme = "node-and-date"
