@@ -1,7 +1,9 @@
 prune .github*
 prune doc*
+prune paper*
 prune tests*
 exclude .gitignore
+exclude CITATION.cff
 exclude Makefile
 exclude requirements.txt
 exclude requirements-dev.txt
