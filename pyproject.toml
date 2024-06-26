@@ -27,7 +27,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Physics",
     "Topic :: Utilities",
 ]
-dependencies = ["packaging", "requests"]
+dependencies = ["certifi", "packaging", "requests", "urllib3"]
 dynamic = ["version"]
 
 [project.urls]
