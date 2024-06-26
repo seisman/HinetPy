@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.9.0 (2024-06-25)
+------------------
+
+- The HinetPy paper is published on JOSS. Check it at https://doi.org/10.21105/joss.06840.
+
 0.8.3 (2024-06-05)
 ------------------
 
