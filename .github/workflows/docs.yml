@@ -15,6 +15,7 @@ on:
       - 'HinetPy/*.py'
       - 'docs/**'
       - 'README.rst'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
