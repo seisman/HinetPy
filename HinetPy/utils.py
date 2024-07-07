@@ -97,9 +97,7 @@ def point_inside_box(
         return False
     if minlongitude and longitude < minlongitude:
         return False
-    if maxlongitude and longitude > maxlongitude:
-        return False
-    return True
+    return not (maxlongitude and longitude > maxlongitude)
 
 
 def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
@@ -164,9 +162,9 @@ def point_inside_circular(
     True
     """
     radius = haversine(lat1, lon1, lat2, lon2)
-    if (minradius and radius < minradius) or (maxradius and radius > maxradius):
-        return False
-    return True
+    return not (
+        (minradius and radius < minradius) or (maxradius and radius > maxradius)
+    )
 
 
 def to_datetime(value: str | datetime | date) -> datetime:
