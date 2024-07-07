@@ -63,6 +63,27 @@ html_theme = "sphinx_rtd_theme"
 # so a file named "default.css" will overwrite the builtin "default.css".
 # html_static_path = ['_static']
 
+html_context = {
+    "menu_links": [
+        (
+            '<i class="fa fa-github fa-fw"></i> Source Code',
+            "https://github.com/seisman/HinetPy",
+        ),
+        (
+            '<i class="fa fa-globe fa-fw"></i> NIED Hi-net',
+            "https://www.hinet.bosai.go.jp/",
+        ),
+        (
+            '<i class="fa fa-book fa-fw"></i> Documentation',
+            "https://seisman.github.io/HinetPy/",
+        ),
+        (
+            '<i class="fa fa-book fa-fw"></i> 中文文档',
+            "https://seisman.github.io/HinetPy/zh_CN/",
+        )
+    ]
+}
+
 # autodoc options
 autodoc_member_order = "bysource"
 autoclass_content = "both"
@@ -72,7 +93,9 @@ napoleon_use_admonition_for_examples = True
 napoleon_use_admonition_for_references = True
 
 # intersphinx configurations
-intersphinx_mapping = {"https://docs.python.org/3/": None}
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3/", None)
+}
 
 # Chinese translation
 locale_dirs = ["locale/"]  # path is example but recommended.

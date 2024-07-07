@@ -15,7 +15,6 @@
 .. image:: https://zenodo.org/badge/23509035.svg
     :target: https://zenodo.org/badge/latestdoi/23509035
 
-.. placeholder-for-doc-index
 
 `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__ |
 `Source Code <https://github.com/seisman/HinetPy>`__ |
@@ -23,6 +22,8 @@
 `中文文档 <https://seisman.github.io/HinetPy/zh_CN/>`__
 
 ----
+
+.. placeholder-for-doc-index
 
 `HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package for accessing and
 processing seismic data from `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__.
@@ -91,7 +92,7 @@ following ways:
 A formal paper is published on `The Journal of Open Source Software <https://joss.theoj.org/>`__
 since HinetPy v0.9.0. This is the **preferred** way for citation.
 
-    Tian, D. (2024). HinetPy: A Python package for accessing and processing NIED Hi-net seismic data. 
+    Tian, D. (2024). HinetPy: A Python package for accessing and processing NIED Hi-net seismic data.
     Journal of Open Source Software, 9(98), 6840. https://doi.org/10.21105/joss.06840
 
 **Cite a specific HinetPy version**
