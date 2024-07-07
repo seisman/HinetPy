@@ -80,7 +80,7 @@ html_context = {
         (
             '<i class="fa fa-book fa-fw"></i> 中文文档',
             "https://seisman.github.io/HinetPy/zh_CN/",
-        )
+        ),
     ]
 }
 
@@ -93,9 +93,7 @@ napoleon_use_admonition_for_examples = True
 napoleon_use_admonition_for_references = True
 
 # intersphinx configurations
-intersphinx_mapping = {
-    "python": ("https://docs.python.org/3/", None)
-}
+intersphinx_mapping = {"python": ("https://docs.python.org/3/", None)}
 
 # Chinese translation
 locale_dirs = ["locale/"]  # path is example but recommended.
