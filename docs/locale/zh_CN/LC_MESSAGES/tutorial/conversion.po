@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-21 16:01-0500\n"
+"POT-Creation-Date: 2024-07-07 23:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.6.0\n"
+"Generated-By: Babel 2.13.1\n"
 
 #: ../../tutorial/conversion.rst:2
 msgid "Data conversion"
@@ -47,7 +47,8 @@ msgid ""
 "multipy by 1.0e9. Thus, the SAC files are velocity in nm/s or "
 "accelaration in nm/s/s."
 msgstr ""
-"``win2sac_32`` 会自动从波形中去除灵敏度，并乘以1.0e9。因而，SAC文件是以 nm/s 为单位的速度或以 nm/s/s 为单位的加速度。"
+"``win2sac_32`` 会自动从波形中去除灵敏度，并乘以1.0e9。因而，SAC文件是以 nm/s 为单位的速度或以 nm/s/s "
+"为单位的加速度。"
 
 #: ../../tutorial/conversion.rst:26
 msgid ""
@@ -74,10 +75,9 @@ msgstr "提取零极点文件"
 
 #: ../../tutorial/conversion.rst:45
 msgid ""
-":meth:`~HinetPy.win32.extract_pz` can convert instrumental responses from"
-" Hi-net's channel table to SAC PZ format."
-msgstr ""
-":meth:`~HinetPy.win32.extract_pz` 可以将仪器响应从Hi-net的通道表格式转换为SAC PZ格式。"
+":meth:`~HinetPy.win32.extract_sacpz` can convert instrumental responses "
+"from Hi-net's channel table to SAC PZ format."
+msgstr ":meth:`~HinetPy.win32.extract_sacpz` 可以将仪器响应从Hi-net的通道表格式转换为SAC PZ格式。"
 
 #: ../../tutorial/conversion.rst:50
 msgid "This function works for Hi-net network only."
@@ -89,7 +89,8 @@ msgid ""
 "<https://github.com/seisman/FnetPy>`_ to request waveform data in SEED "
 "format and extract instrumental responses in RESP or PZ format from SEED "
 "files."
-msgstr "强烈建议F-net数据用户使用 `FnetPy <http://github.com/seisman/FnetPy>`_ "
+msgstr ""
+"强烈建议F-net数据用户使用 `FnetPy <http://github.com/seisman/FnetPy>`_ "
 "从Fnet网站申请SEED格式的数据，并从SEED文件中提取RESP或PZ格式的仪器响应。"
 
 #: ../../tutorial/conversion.rst:56
@@ -114,3 +115,4 @@ msgstr ""
 #: ../../tutorial/conversion.rst:79
 msgid "`Hi-net FAQ Q08 <http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08>`_"
 msgstr ""
+

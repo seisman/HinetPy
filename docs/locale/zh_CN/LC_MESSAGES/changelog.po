@@ -8,318 +8,542 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-08 00:16-0400\n"
+"POT-Creation-Date: 2024-07-07 23:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"Generated-By: Babel 2.13.1\n"
 
 #: ../../changelog.rst:2
 msgid "Changelog"
 msgstr ""
 
 #: ../../changelog.rst:5
-msgid "0.6.6 (2020-03-02):"
+msgid "0.9.0 (2024-06-25)"
 msgstr ""
 
-#: ../../changelog.rst:5
-msgid "win32.extract_pz cannot filter channels by ID and name (#27)"
+#: ../../changelog.rst:7
+msgid ""
+"The HinetPy paper is published on JOSS. Check it at "
+"https://doi.org/10.21105/joss.06840."
 msgstr ""
 
-#: ../../changelog.rst:8
-msgid "0.6.5 (2019-12-06):"
+#: ../../changelog.rst:10
+msgid "0.8.3 (2024-06-05)"
 msgstr ""
 
-#: ../../changelog.rst:8
-msgid "Fix PZ files if dampling constant is zero (#24)"
-msgstr ""
-
-#: ../../changelog.rst:11
-msgid "0.6.4 (2019-08-23):"
-msgstr ""
-
-#: ../../changelog.rst:11
-msgid "Capture exception caused by incorrect channel information (#22)"
+#: ../../changelog.rst:12
+msgid ""
+"Fix the \"OSError: [Errno 18] Invalid cross-device link.\" for cross-"
+"system operations."
 msgstr ""
 
 #: ../../changelog.rst:15
-msgid "0.6.3 (2019-06-13):"
+msgid "0.8.2 (2024-04-05)"
 msgstr ""
 
-#: ../../changelog.rst:14
-msgid "Fix ``select_stations()`` (#19)"
+#: ../../changelog.rst:17
+msgid ""
+"Add the updated solution for the \"ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] "
+"dh key too small\" error"
 msgstr ""
 
-#: ../../changelog.rst:15
-msgid "Rename ``string2datetime()`` to ``to_datetime()``"
+#: ../../changelog.rst:20
+msgid "0.8.1 (2024-03-31)"
 msgstr ""
 
-#: ../../changelog.rst:18
-msgid "0.6.2 (2019-05-06):"
-msgstr ""
-
-#: ../../changelog.rst:18
-msgid "Fix download focal mechanism catalog issue (#18)."
-msgstr ""
-
-#: ../../changelog.rst:21
-msgid "0.6.1 (2019-02-20):"
-msgstr ""
-
-#: ../../changelog.rst:21
-msgid "Fix selecting events in a rectangular region."
+#: ../../changelog.rst:22
+msgid "Minor changes to simplify some internal functions."
 msgstr ""
 
 #: ../../changelog.rst:25
-msgid "0.6.0 (2019-02-19):"
+msgid "0.8.0 (2024-03-28)"
 msgstr ""
 
-#: ../../changelog.rst:24
-msgid "Support request event waveform data (#16)."
-msgstr ""
-
-#: ../../changelog.rst:25
-msgid "``get_waveform()`` is renamed to ``get_continuous_waveform()``."
+#: ../../changelog.rst:27
+msgid "Support more newly added networks"
 msgstr ""
 
 #: ../../changelog.rst:28
-msgid "0.5.2 (2019-02-19):"
+msgid ""
+"Remove the hacking solution for SSL connection issue so it works well "
+"with urllib3 v2.x"
 msgstr ""
 
-#: ../../changelog.rst:28
-msgid "Fix selecting stations in a rectangular region (#17)."
+#: ../../changelog.rst:29
+msgid "Drop support for Python 3.7."
 msgstr ""
 
-#: ../../changelog.rst:31
-msgid "0.5.1 (2018-12-08):"
-msgstr ""
-
-#: ../../changelog.rst:31
-msgid "Fix typo from longtitude to longitude."
-msgstr ""
-
-#: ../../changelog.rst:35
-msgid "0.5.0 (2018-11-21):"
+#: ../../changelog.rst:32
+msgid "0.7.1 (2022-07-08)"
 msgstr ""
 
 #: ../../changelog.rst:34
-msgid "Fix issues of wrong CONSTANT in SAC polezero file (#8)."
+msgid "Fix bugs in ``get_event_waveform``"
 msgstr ""
 
-#: ../../changelog.rst:35
-msgid "Fix login failure issue with password longer than 12 characters (#13)."
+#: ../../changelog.rst:37
+msgid "0.7.0 (2022-07-01)"
 msgstr ""
 
 #: ../../changelog.rst:39
-msgid "0.4.8 (2018-10-04):"
+msgid "Fix the incorrect maximum allowed time span for F-net (#65)"
 msgstr ""
 
-#: ../../changelog.rst:38
+#: ../../changelog.rst:40
+msgid ""
+"``get_selected_stations`` now returns a list of stations with station "
+"metadata information (#36)"
+msgstr ""
+
+#: ../../changelog.rst:41
+msgid ""
+"Refactor the ``_channel2pz()`` and ``_write_pz()`` functions to "
+"``Channel.write_sacpz()``"
+msgstr ""
+
+#: ../../changelog.rst:42
+msgid "Refactor the ``_get_channels`` function to ``win32.read_ctable()``"
+msgstr ""
+
+#: ../../changelog.rst:43
+msgid "The ``win32.extrac_sacpz`` function now supports parallel data processing"
+msgstr ""
+
+#: ../../changelog.rst:44
+msgid ""
+"The ``with_pz`` parameter in ``win32.extract_sac()`` is renamed to "
+"``with_sacpz``"
+msgstr ""
+
+#: ../../changelog.rst:45
+msgid "The ``win32.extrac_pz()`` function is renamed to ``win32.extract_sacpz()``"
+msgstr ""
+
+#: ../../changelog.rst:46
+msgid ""
+"Move the function ``Client.check_cmd_exists()`` to "
+"``utils.check_cmd_exists()``"
+msgstr ""
+
+#: ../../changelog.rst:47
+msgid ""
+"Move the function ``Client.check_package_release()`` to "
+"``utils.check_package_release()``"
+msgstr ""
+
+#: ../../changelog.rst:48
+msgid "Fix the \"ssl.SSLError: [SSL: DH_KEY_TOO_SMALL] dh key too small\" error"
+msgstr ""
+
+#: ../../changelog.rst:51
+msgid "0.6.9 (2021-05-20)"
+msgstr ""
+
+#: ../../changelog.rst:53
+msgid "Check invalid ``stations`` parameter type for ``Client.select_stations()``"
+msgstr ""
+
+#: ../../changelog.rst:56
+msgid "0.6.8 (2021-03-11)"
+msgstr ""
+
+#: ../../changelog.rst:58
+msgid "include_unknown_mag does not work in get_event_waveform()"
+msgstr ""
+
+#: ../../changelog.rst:59
+msgid "Fail to download S-net data."
+msgstr ""
+
+#: ../../changelog.rst:62
+msgid "0.6.7 (2020-06-08)"
+msgstr ""
+
+#: ../../changelog.rst:64
+msgid "Improve code styles, tests and CI."
+msgstr ""
+
+#: ../../changelog.rst:67
+msgid "0.6.6 (2020-03-02)"
+msgstr ""
+
+#: ../../changelog.rst:69
+msgid "win32.extract_pz cannot filter channels by ID and name (#27)"
+msgstr ""
+
+#: ../../changelog.rst:72
+msgid "0.6.5 (2019-12-06)"
+msgstr ""
+
+#: ../../changelog.rst:74
+msgid "Fix PZ files if damping constant is zero (#24)"
+msgstr ""
+
+#: ../../changelog.rst:77
+msgid "0.6.4 (2019-08-23)"
+msgstr ""
+
+#: ../../changelog.rst:79
+msgid "Capture exception caused by incorrect channel information (#22)"
+msgstr ""
+
+#: ../../changelog.rst:82
+msgid "0.6.3 (2019-06-13)"
+msgstr ""
+
+#: ../../changelog.rst:84
+msgid "Fix ``select_stations()`` (#19)"
+msgstr ""
+
+#: ../../changelog.rst:85
+msgid "Rename ``string2datetime()`` to ``to_datetime()``"
+msgstr ""
+
+#: ../../changelog.rst:88
+msgid "0.6.2 (2019-05-06)"
+msgstr ""
+
+#: ../../changelog.rst:90
+msgid "Fix download focal mechanism catalog issue (#18)."
+msgstr ""
+
+#: ../../changelog.rst:93
+msgid "0.6.1 (2019-02-20)"
+msgstr ""
+
+#: ../../changelog.rst:95
+msgid "Fix selecting events in a rectangular region."
+msgstr ""
+
+#: ../../changelog.rst:98
+msgid "0.6.0 (2019-02-19)"
+msgstr ""
+
+#: ../../changelog.rst:100
+msgid "Support request event waveform data (#16)."
+msgstr ""
+
+#: ../../changelog.rst:101
+msgid "``get_waveform()`` is renamed to ``get_continuous_waveform()``."
+msgstr ""
+
+#: ../../changelog.rst:104
+msgid "0.5.2 (2019-02-19)"
+msgstr ""
+
+#: ../../changelog.rst:106
+msgid "Fix selecting stations in a rectangular region (#17)."
+msgstr ""
+
+#: ../../changelog.rst:109
+msgid "0.5.1 (2018-12-08)"
+msgstr ""
+
+#: ../../changelog.rst:111
+msgid "Fix typo from longtitude to longitude."
+msgstr ""
+
+#: ../../changelog.rst:114
+msgid "0.5.0 (2018-11-21)"
+msgstr ""
+
+#: ../../changelog.rst:116
+msgid "Fix issues of wrong CONSTANT in SAC polezero file (#8)."
+msgstr ""
+
+#: ../../changelog.rst:117
+msgid "Fix login failure issue with password longer than 12 characters (#13)."
+msgstr ""
+
+#: ../../changelog.rst:120
+msgid "0.4.8 (2018-10-04)"
+msgstr ""
+
+#: ../../changelog.rst:122
 msgid ""
 "``get_station_list()``: must specify a network code; support S-net and "
 "MeSO-net."
 msgstr ""
 
-#: ../../changelog.rst:39
+#: ../../changelog.rst:123
 msgid "``select_stations()``: support S-net and MeSO-net"
 msgstr ""
 
-#: ../../changelog.rst:43
-msgid "0.4.7 (2018-10-04):"
+#: ../../changelog.rst:126
+msgid "0.4.7 (2018-10-04)"
 msgstr ""
 
-#: ../../changelog.rst:42
+#: ../../changelog.rst:128
 msgid "Support S-net and MeSO-net (#9 and #10)"
 msgstr ""
 
-#: ../../changelog.rst:43
+#: ../../changelog.rst:129
 msgid "Fix an issue when channel table contains blank lines"
 msgstr ""
 
-#: ../../changelog.rst:46
-msgid "0.4.6 (2018-03-20):"
+#: ../../changelog.rst:132
+msgid "0.4.6 (2018-03-20)"
 msgstr ""
 
-#: ../../changelog.rst:46
+#: ../../changelog.rst:134
 msgid "Fix ``Too many open files`` (#6)"
 msgstr ""
 
-#: ../../changelog.rst:50
-msgid "0.4.5 (2018-03-07):"
+#: ../../changelog.rst:137
+msgid "0.4.5 (2018-03-07)"
 msgstr ""
 
-#: ../../changelog.rst:49
+#: ../../changelog.rst:139
 msgid "``get_station_list()``: return a list of stations"
 msgstr ""
 
-#: ../../changelog.rst:50
+#: ../../changelog.rst:140
 msgid ""
 "``select_stations()``: support selecting stations in a box or circular "
 "region"
 msgstr ""
 
-#: ../../changelog.rst:53
-msgid "0.4.4 (2017-11-30):"
+#: ../../changelog.rst:143
+msgid "0.4.4 (2017-11-30)"
 msgstr ""
 
-#: ../../changelog.rst:53
+#: ../../changelog.rst:145
 msgid "Fix a technical issue related to packaging"
 msgstr ""
 
-#: ../../changelog.rst:56
-msgid "0.4.3 (2017-11-30):"
+#: ../../changelog.rst:148
+msgid "0.4.3 (2017-11-30)"
 msgstr ""
 
-#: ../../changelog.rst:56
+#: ../../changelog.rst:150
 msgid "Add Chinese documentation"
 msgstr ""
 
-#: ../../changelog.rst:59
-msgid "0.4.2 (2017-06-18):"
+#: ../../changelog.rst:153
+msgid "0.4.2 (2017-06-18)"
 msgstr ""
 
-#: ../../changelog.rst:59
+#: ../../changelog.rst:155
 msgid "Fix a bug with requests>=2.17"
 msgstr ""
 
-#: ../../changelog.rst:62
-msgid "0.4.1 (2017-06-18):"
+#: ../../changelog.rst:158
+msgid "0.4.1 (2017-06-18)"
 msgstr ""
 
-#: ../../changelog.rst:62
+#: ../../changelog.rst:160
 msgid "remove tempfile after downloading."
 msgstr ""
 
-#: ../../changelog.rst:71
-msgid "0.4.0 (2017-04-01):"
+#: ../../changelog.rst:163
+msgid "0.4.0 (2017-04-01)"
 msgstr ""
 
-#: ../../changelog.rst:65
+#: ../../changelog.rst:165
 msgid "``win32.extract_sac()``: skip if data not exists"
 msgstr ""
 
-#: ../../changelog.rst:66
+#: ../../changelog.rst:166
 msgid ""
 "``win32.extract_sac()``: support multiple processes to speedup, and no "
 "longer return values"
 msgstr ""
 
-#: ../../changelog.rst:68
+#: ../../changelog.rst:167
 msgid "``Client.get_waveform()``: support multi-threads to speedup"
 msgstr ""
 
-#: ../../changelog.rst:69
+#: ../../changelog.rst:168
 msgid "Change ``Client.help()`` to ``Client.info()``"
 msgstr ""
 
-#: ../../changelog.rst:70
+#: ../../changelog.rst:169
 msgid "``Client.get_waveform()`` now can automatically set ``max_span``"
 msgstr ""
 
-#: ../../changelog.rst:71
+#: ../../changelog.rst:170
 msgid "``Client.get_*()`` now support startime in different string formats"
 msgstr ""
 
-#: ../../changelog.rst:80
-msgid "0.3.3 (2017-03-17):"
+#: ../../changelog.rst:173
+msgid "0.3.3 (2017-03-17)"
 msgstr ""
 
-#: ../../changelog.rst:74
+#: ../../changelog.rst:175
 msgid "Change ``network`` to ``NETWORK`` in ``header.py``"
 msgstr ""
 
-#: ../../changelog.rst:75
+#: ../../changelog.rst:176
 msgid "Add wildcard support to ``win32.merge()``"
 msgstr ""
 
-#: ../../changelog.rst:76
+#: ../../changelog.rst:177
 msgid ""
 "Change ``Client.check_module_release()`` to "
 "``Client.check_package_release()``"
 msgstr ""
 
-#: ../../changelog.rst:77
+#: ../../changelog.rst:178
 msgid "Support output filename with deep directory"
 msgstr ""
 
-#: ../../changelog.rst:78
+#: ../../changelog.rst:179
 msgid "Always sort cnt files to avoid merge error"
 msgstr ""
 
-#: ../../changelog.rst:79
+#: ../../changelog.rst:180
 msgid "Set ``pmax`` to 8640000 by default"
 msgstr ""
 
-#: ../../changelog.rst:80
+#: ../../changelog.rst:181
 msgid "Fix typos"
 msgstr ""
 
-#: ../../changelog.rst:83
-msgid "0.3.2 (2017-03-12):"
+#: ../../changelog.rst:184
+msgid "0.3.2 (2017-03-12)"
 msgstr ""
 
-#: ../../changelog.rst:83
+#: ../../changelog.rst:186
 msgid "Fix another technical issue related to pypi"
 msgstr ""
 
-#: ../../changelog.rst:86
-msgid "0.3.1 (2017-03-12):"
+#: ../../changelog.rst:189
+msgid "0.3.1 (2017-03-12)"
 msgstr ""
 
-#: ../../changelog.rst:86
+#: ../../changelog.rst:191
 msgid "Fix a technical issue related to pypi"
 msgstr ""
 
-#: ../../changelog.rst:89
-msgid "0.3.0 (2017-03-12):"
+#: ../../changelog.rst:194
+msgid "0.3.0 (2017-03-12)"
 msgstr ""
 
-#: ../../changelog.rst:89
+#: ../../changelog.rst:196
 msgid "Rewritten as a Python package"
 msgstr ""
 
-#: ../../changelog.rst:92
-msgid "0.2.0 (2016-08-24):"
+#: ../../changelog.rst:199
+msgid "0.2.0 (2016-08-24)"
 msgstr ""
 
-#: ../../changelog.rst:92
+#: ../../changelog.rst:201
 msgid "Some small fixes and improvements"
 msgstr ""
 
-#: ../../changelog.rst:100
-msgid "0.1.0 (2016-08-04):"
+#: ../../changelog.rst:204
+msgid "0.1.0 (2016-08-04)"
 msgstr ""
 
-#: ../../changelog.rst:95
+#: ../../changelog.rst:206
 msgid "First public release"
 msgstr ""
 
-#: ../../changelog.rst:96
+#: ../../changelog.rst:207
 msgid "``HinetDoctor.py``: check dependencies"
 msgstr ""
 
-#: ../../changelog.rst:97
+#: ../../changelog.rst:208
 msgid "``HinetContRequest.py``: request continuous data from Hi-net"
 msgstr ""
 
-#: ../../changelog.rst:98
+#: ../../changelog.rst:209
 msgid ""
 "``StationSelector.py``: select Hi-net/F-net stations before requesting "
 "data"
 msgstr ""
 
-#: ../../changelog.rst:99
+#: ../../changelog.rst:210
 msgid "``HinetJMARequest.py``: request JMA catalogs from Hi-net website"
 msgstr ""
 
-#: ../../changelog.rst:100
+#: ../../changelog.rst:211
 msgid "``rdhinet.py``: convert WIN32 format to SAC format"
 msgstr ""
 
-#: ../../changelog.rst:101
+#: ../../changelog.rst:212
 msgid "``ch2pz.py``: extract SAC PZ files from Hi-net channel table files"
 msgstr ""
+
+#~ msgid "0.6.6 (2020-03-02):"
+#~ msgstr ""
+
+#~ msgid "0.6.5 (2019-12-06):"
+#~ msgstr ""
+
+#~ msgid "Fix PZ files if dampling constant is zero (#24)"
+#~ msgstr ""
+
+#~ msgid "0.6.4 (2019-08-23):"
+#~ msgstr ""
+
+#~ msgid "0.6.3 (2019-06-13):"
+#~ msgstr ""
+
+#~ msgid "0.6.2 (2019-05-06):"
+#~ msgstr ""
+
+#~ msgid "0.6.1 (2019-02-20):"
+#~ msgstr ""
+
+#~ msgid "0.6.0 (2019-02-19):"
+#~ msgstr ""
+
+#~ msgid "0.5.2 (2019-02-19):"
+#~ msgstr ""
+
+#~ msgid "0.5.1 (2018-12-08):"
+#~ msgstr ""
+
+#~ msgid "0.5.0 (2018-11-21):"
+#~ msgstr ""
+
+#~ msgid "0.4.8 (2018-10-04):"
+#~ msgstr ""
+
+#~ msgid "0.4.7 (2018-10-04):"
+#~ msgstr ""
+
+#~ msgid "0.4.6 (2018-03-20):"
+#~ msgstr ""
+
+#~ msgid "0.4.5 (2018-03-07):"
+#~ msgstr ""
+
+#~ msgid "0.4.4 (2017-11-30):"
+#~ msgstr ""
+
+#~ msgid "0.4.3 (2017-11-30):"
+#~ msgstr ""
+
+#~ msgid "0.4.2 (2017-06-18):"
+#~ msgstr ""
+
+#~ msgid "0.4.1 (2017-06-18):"
+#~ msgstr ""
+
+#~ msgid "0.4.0 (2017-04-01):"
+#~ msgstr ""
+
+#~ msgid "0.3.3 (2017-03-17):"
+#~ msgstr ""
+
+#~ msgid "0.3.2 (2017-03-12):"
+#~ msgstr ""
+
+#~ msgid "0.3.1 (2017-03-12):"
+#~ msgstr ""
+
+#~ msgid "0.3.0 (2017-03-12):"
+#~ msgstr ""
+
+#~ msgid "0.2.0 (2016-08-24):"
+#~ msgstr ""
+
+#~ msgid "0.1.0 (2016-08-04):"
+#~ msgstr ""
 

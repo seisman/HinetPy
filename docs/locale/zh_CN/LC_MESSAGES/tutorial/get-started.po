@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-21 16:10-0500\n"
+"POT-Creation-Date: 2024-07-07 23:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.6.0\n"
+"Generated-By: Babel 2.13.1\n"
 
 #: ../../tutorial/get-started.rst:2
 msgid "Get Started"
@@ -42,8 +42,8 @@ msgstr "启动Python"
 #: ../../tutorial/get-started.rst:14
 msgid ""
 "Run ``python`` (or ``ipython`` if you have it), and make sure you're "
-"using Python 3.4 or above::"
-msgstr "在终端中运行 ``python`` （或 ``ipython`` ），并确保你所使用的Python版本大于等于3.4::"
+"using Python 3.8 or above::"
+msgstr "在终端中运行 ``python`` （或 ``ipython`` ），并确保你所使用的Python版本大于等于3.8::"
 
 #: ../../tutorial/get-started.rst:23
 msgid "Create a Client"
@@ -107,8 +107,9 @@ msgid ""
 "Users are highly recommended to use `FnetPy "
 "<https://github.com/seisman/FnetPy>`_ if they need F-net data, since "
 "HinetPy cannot deal with F-net instrumental responses correctly."
-msgstr "强烈建议Fnet用户使用 `FnetPy <https://github.com/seisman/FnetPy>`_ "
-"获取Fnet数据，因而HinetPy无法正确处理F-net的仪器响应。"
+msgstr ""
+"强烈建议Fnet用户使用 `FnetPy <https://github.com/seisman/FnetPy>`_ 获取Fnet数据"
+"，因而HinetPy无法正确处理F-net的仪器响应。"
 
 #: ../../tutorial/get-started.rst:88
 msgid "Stations"
@@ -123,7 +124,7 @@ msgstr ""
 "你可以调用 :meth:`~HinetPy.client.Client.get_station_list` 以查看Hi-net和F-"
 "net台网的台站信息（目前仅支持查看这两个台网的台站信息）。"
 
-#: ../../tutorial/get-started.rst:104
+#: ../../tutorial/get-started.rst:105
 msgid ""
 "Hi-net/F-net has a lot of stations. If you only need a few of them, you "
 "can select the stations you want. Hi-net website also provide a web "
@@ -134,3 +135,4 @@ msgstr ""
 "Hi-net/F-net有很多台。如果你只需要申请其中某些台站的数据，你可以选择你需要的台站。Hi-"
 "net网站提供了一个网页界面以筛选台站，通常建议值接使用这一网页界面。如果你想要在申请的过程中动态选择台站，你可以使用 "
 ":meth:`~HinetPy.client.Client.select_stations` 。"
+

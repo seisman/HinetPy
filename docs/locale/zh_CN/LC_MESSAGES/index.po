@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-16 23:11+0800\n"
+"POT-Creation-Date: 2024-07-07 23:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.13.1\n"
 
 #: ../../index.rst:2
 msgid "HinetPy"
@@ -22,66 +22,123 @@ msgstr ""
 
 #: ../../../README.rst:3
 msgid ""
-"`NIED Hi-net <https://www.hinet.bosai.go.jp/>`__ | `Source Code "
-"<https://github.com/seisman/HinetPy>`__ | `Documentation "
-"<https://seisman.github.io/HinetPy>`__ | `中文文档 "
-"<https://seisman.github.io/HinetPy/zh_CN/>`__"
-msgstr ""
-
-#: ../../../README.rst:10
-msgid ""
-"`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package to "
-"request and process seismic data from `NIED Hi-net "
+"`HinetPy <https://github.com/seisman/HinetPy>`_ is a Python package for "
+"accessing and processing seismic data from `NIED Hi-net "
 "<https://www.hinet.bosai.go.jp/>`__."
-msgstr "`HinetPy <https://github.com/seisman/HinetPy>`_ 是一个可用于申请和处理 `NIED Hi-net <https://www.hinet.bosai.go.jp/>`__ 地震数据的 Python 包。"
+msgstr ""
+"`HinetPy <https://github.com/seisman/HinetPy>`_ 是一个可用于申请和处理 `NIED Hi-net "
+"<https://www.hinet.bosai.go.jp/>`__ 地震数据的 Python 包。"
 
-#: ../../../README.rst:14
-msgid "Features"
-msgstr "功能与特性"
+#: ../../../README.rst:7
+msgid "Key Features"
+msgstr "主要功能"
+
+#: ../../../README.rst:9
+msgid ""
+"Facilitates easy access to NIED Hi-net seismic data, including "
+"continuous/event waveform data and event catalogs."
+msgstr "方便访问 NIED Hi-net 地震数据，包括连续/事件波形数据和事件目录。"
+
+#: ../../../README.rst:11
+msgid ""
+"Supports multiple seismic networks (e.g., F-net, S-net, MeSO-net and more"
+" in addition to Hi-net) in Japan."
+msgstr "支持日本多个地震台网（如 Hi-net、F-net、S-net、MeSO-net 等）。"
+
+#: ../../../README.rst:13
+msgid ""
+"Selects a subset of stations based on geographical location or station "
+"name (Supports Hi-net, F-net, S-net and MeSO-net only)."
+msgstr "根据地理位置或台站名称选择台站子集（仅支持 Hi-net、F-net、S-net 和 MeSO-net）。"
+
+#: ../../../README.rst:15
+msgid ""
+"Converts waveform data to SAC format and instrumental responses to SAC "
+"polezero files."
+msgstr "将波形数据转换为 SAC 格式，将仪器响应转换为 SAC 极零文件。"
 
 #: ../../../README.rst:16
-msgid "Request continuous/event waveform data and event catalog from NIED Hi-net"
-msgstr "从 NIED Hi-net 申请连续/事件波形数据和地震目录"
-
-#: ../../../README.rst:17
-msgid "Select Hi-net/F-net stations based on different criteria"
-msgstr "基于不同的准则筛选 Hi-net/F-net 台站"
-
-#: ../../../README.rst:18
-msgid "Convert waveform data from win32 format to SAC format"
-msgstr "将波形数据从 win32 格式转换为 SAC 格式"
+msgid ""
+"Speeds up the downloading and processing workflow via the use of "
+"multithreading."
+msgstr "通过使用多线程，加快下载和处理工作流程。"
 
 #: ../../../README.rst:19
-msgid "Extract instrumental response as SAC polezero file"
-msgstr "提取仪器响应信息并保存为 SAC 零极点文件"
-
-#: ../../../README.rst:20
-msgid "Multithreads downloading and conversion to speedup"
-msgstr "多线程并行下载和转换以加快速度"
-
-#: ../../../README.rst:23
 msgid "A simple example"
 msgstr "一个简单的示例"
 
-#: ../../../README.rst:25
+#: ../../../README.rst:21
 msgid ""
 "Here is an example showing how to use HinetPy to request continuous "
 "waveform data from Hi-net, convert the data into SAC format, and extract "
 "instrumental responses as SAC polezero files."
 msgstr "下面的示例展示了如何使用 HinetPy 从 Hi-net 申请连续波形数据，将数据转换为 SAC 格式，并提取 SAC 零极点格式的仪器响应文件。"
 
-#: ../../../README.rst:67
+#: ../../../README.rst:60
 msgid "Citation"
 msgstr "引用"
 
-#: ../../../README.rst:69
-msgid "If you find this package useful, please consider citing via:"
-msgstr "如果你觉得这个软件包很有用，请考虑在文章中通过如下方式引用："
+#: ../../../README.rst:62
+msgid ""
+"If you find this package useful, please consider cite the package in "
+"either of the following ways:"
+msgstr "如果你觉得这个软件包很有用，请考虑通过如下方式中的任一种引用该软件："
+
+#: ../../../README.rst:65
+msgid "**Cite the HinetPy paper (preferred)**"
+msgstr "**引用 HinetPy 的文章（推荐）**"
+
+#: ../../../README.rst:67
+msgid ""
+"A formal paper is published on `The Journal of Open Source Software "
+"<https://joss.theoj.org/>`__ since HinetPy v0.9.0. This is the "
+"**preferred** way for citation."
+msgstr "自 HinetPy v0.9.0 起，HinetPy 的介绍文章发表在 `The Journal of Open Source Software "
+"<https://joss.theoj.org/>`__ 上。这是首选的引用方式。"
+
+#: ../../../README.rst:70
+msgid ""
+"Tian, D. (2024). HinetPy: A Python package for accessing and processing "
+"NIED Hi-net seismic data. Journal of Open Source Software, 9(98), 6840. "
+"https://doi.org/10.21105/joss.06840"
+msgstr ""
+
+#: ../../../README.rst:73
+msgid "**Cite a specific HinetPy version**"
+msgstr "**引用特定的 HinetPy 版本**"
 
 #: ../../../README.rst:75
+msgid ""
+"If you'd like to cite a specific HinetPy version, you can visit `Zenodo "
+"<https://zenodo.org/records/12523911>`__, choose the version you want to "
+"cite, and cite like this:"
+msgstr "如果想引用特定的 HinetPy 版本，可以访问 `Zenodo <https:////zenodo.org/records/12523911>`__，"
+"选择要引用的版本，然后像这样引用："
+
+#: ../../../README.rst:79
+msgid ""
+"Tian, D. (20XX). HinetPy: A Python package for accessing and processing "
+"NIED Hi-net seismic data (X.X.X). Zenodo. "
+"https://doi.org/10.5281/zenodo.xxxxxxxx"
+msgstr ""
+
+#: ../../../README.rst:83
+msgid "Contributing"
+msgstr "贡献指南"
+
+#: ../../../README.rst:85
+msgid ""
+"Feedback and contributions are welcome! Please feel free to open an issue"
+" or pull request if you have any suggestions or would like to contribute "
+"a feature. For additional information or specific questions, please open "
+"an issue directly."
+msgstr "欢迎反馈和贡献！如果您有任何建议或想贡献一项功能，请新建一个 issue 或 pull request。"
+"如需其他信息或具体问题，请直接提交 issue。"
+
+#: ../../../README.rst:90
 msgid "License"
 msgstr "许可协议"
 
-#: ../../../README.rst:77
+#: ../../../README.rst:92
 msgid "This project is licensed under the terms of the MIT license."
 msgstr "本项目使用 MIT 许可协议。"

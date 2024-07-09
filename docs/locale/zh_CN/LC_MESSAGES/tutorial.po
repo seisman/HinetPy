@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the HinetPy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.1\n"
