@@ -5,7 +5,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client 模块 &mdash; HinetPy v0.9.1.dev14+g6808e9bc 文档</title>
+  <title>HinetPy.client module &mdash; HinetPy v0.9.1.dev16+g30b7e28c 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -16,14 +16,14 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=9a31d3b9"></script>
+        <script src="../_static/documentation_options.js?v=c45f2afb"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="HinetPy.win32 模块" href="HinetPy.win32.html" />
+    <link rel="next" title="HinetPy.win32 module" href="HinetPy.win32.html" />
     <link rel="prev" title="API参考" href="../api.html" /> 
 </head>
 
@@ -39,7 +39,7 @@
             HinetPy
           </a>
               <div class="version">
-                v0.9.1.dev14+g6808e9bc
+                v0.9.1.dev16+g30b7e28c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -55,7 +55,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">教程</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">示例</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API参考</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">HinetPy.client 模块</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HinetPy.client module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#HinetPy.client.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#HinetPy.client.Client.doctor"><code class="docutils literal notranslate"><span class="pre">Client.doctor()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#HinetPy.client.Client.check_service_update"><code class="docutils literal notranslate"><span class="pre">Client.check_service_update()</span></code></a></li>
@@ -75,10 +75,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#HinetPy.client.Station"><code class="docutils literal notranslate"><span class="pre">Station</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="HinetPy.win32.html">HinetPy.win32 模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.win32.html">HinetPy.win32 module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HinetPy.channel.html">HinetPy.channel module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HinetPy.header.html">HinetPy.header模块</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HinetPy.utils.html">HinetPy.utils 模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.header.html">HinetPy.header module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.utils.html">HinetPy.utils module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix.html">附录</a></li>
@@ -119,7 +119,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../api.html">API参考</a></li>
-      <li class="breadcrumb-item active">HinetPy.client 模块</li>
+      <li class="breadcrumb-item active">HinetPy.client module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/HinetPy.client.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -130,7 +130,7 @@
            <div itemprop="articleBody">
              
   <section id="hinetpy-client-module">
-<h1>HinetPy.client 模块<a class="headerlink" href="#hinetpy-client-module" title="Link to this heading"></a></h1>
+<h1>HinetPy.client module<a class="headerlink" href="#hinetpy-client-module" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="HinetPy.client.Client">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HinetPy.client.</span></span><span class="sig-name descname"><span class="pre">Client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_time_in_seconds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_sleep_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client" title="Link to this definition"></a></dt>
@@ -138,8 +138,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Hi-net账户用户名。</p></li>
-<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Hi-net账户密码。</p></li>
+<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Username of Hi-net account.</p></li>
+<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Password of Hi-net account.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Time to wait for the server to send data before giving up.</p></li>
 <li><p><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – How many times to retry if a request fails.</p></li>
 <li><p><strong>sleep_time_in_seconds</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Sleep time between each data status check. See notes below.</p></li>
@@ -169,7 +169,7 @@ these parameters unless you know what you’re doing.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.doctor">
 <span class="sig-name descname"><span class="pre">doctor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.doctor" title="Link to this definition"></a></dt>
-<dd><p>做检查。</p>
+<dd><p>Doctor does some checks.</p>
 <p>This is a utility function that checks:</p>
 <ul class="simple">
 <li><p>if HinetPy has a new release</p></li>
@@ -188,7 +188,7 @@ these parameters unless you know what you’re doing.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.check_service_update">
 <span class="sig-name descname"><span class="pre">check_service_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.check_service_update" title="Link to this definition"></a></dt>
-<dd><p>检查Hi-net网站是否被更新。</p>
+<dd><p>Check if Hi-net service is updated.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">check_service_update</span><span class="p">()</span>
 <span class="go">[2017-01-01 00:00:00] INFO: Hi-net web service is NOT updated.</span>
 </pre></div>
@@ -201,7 +201,7 @@ these parameters unless you know what you’re doing.</p>
 <dd><p>Show information of networks.</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>code</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 台网代码。</p>
+<dd class="field-odd"><p><strong>code</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Network code.</p>
 </dd>
 </dl>
 <div class="admonition- admonition">
@@ -228,14 +228,14 @@ these parameters unless you know what you’re doing.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.get_arrivaltime">
 <span class="sig-name descname"><span class="pre">get_arrivaltime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startdate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DOS'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_arrivaltime" title="Link to this definition"></a></dt>
-<dd><p>从Hi-net获取JMA走时数据</p>
+<dd><p>Get JMA arrival time data from Hi-net.</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) – 请求数据的开始时间。</p></li>
-<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – 数据长度，单位为天。</p></li>
-<li><p><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 文件格式。”DOS” 或 “UNIX”。</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 要保存的文件名。</p></li>
+<li><p><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) – Start date to request.</p></li>
+<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Data length in days.</p></li>
+<li><p><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – File format. “DOS” or “UNIX”.</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filename to save.</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
@@ -265,37 +265,38 @@ these parameters unless you know what you’re doing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 台网代码。见 <a class="reference internal" href="#HinetPy.client.Client.info" title="HinetPy.client.Client.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> 。</p></li>
+<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Network code. See <a class="reference internal" href="#HinetPy.client.Client.info" title="HinetPy.client.Client.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> for details.</p></li>
 <li><p><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> or str) – Starttime of a data request.</p></li>
-<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – 数据的时间长度，单位为分钟。</p></li>
+<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Time span in minutes.</p></li>
 <li><p><strong>max_span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Maximum time span for sub-requests. Defaults to be determined automatically.
 See notes below.</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 下载的win32数据的文件名。默认格式： <code class="docutils literal notranslate"><span class="pre">CODE_YYYYmmddHHMM_SPAN.cnt</span></code></p></li>
-<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 下载的通道表文件名。默认格式为 <code class="docutils literal notranslate"><span class="pre">CODE_YYYYmmdd.ch</span></code></p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filename of downloaded win32 data.
+Default format: CODE_YYYYmmddHHMM_SPAN.cnt</p></li>
+<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filename of downloaded channel table file. Default format: CODE_YYYYmmdd.ch</p></li>
 <li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Save win32 and channel table data to a specified directory. Default is in
 the current directory.</p></li>
 <li><p><strong>threads</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Parallel data download using more threads.</p></li>
-<li><p><strong>cleanup</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – 在合并文件之后清理1分钟长度的cnt文件。</p></li>
+<li><p><strong>cleanup</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – Clean up one-minute cnt files after merging.</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>data</strong> (<em>str</em>) – 下载得到的win32数据的文件名。</p></li>
-<li><p><strong>ctable</strong> (<em>str</em>) – 下载的通道表文件的文件名。</p></li>
+<li><p><strong>data</strong> (<em>str</em>) – Filename of downloaded win32 data.</p></li>
+<li><p><strong>ctable</strong> (<em>str</em>) – Filename of downloaded channel table file.</p></li>
 </ul>
 </p>
 </dd>
 </dl>
 <div class="admonition- admonition">
 <p class="admonition-title">备注</p>
-<p><strong>时区</strong></p>
+<p><strong>TimeZone</strong></p>
 <p>All times in HinetPy and in Hi-net data are in JST (UTC+0900).</p>
 <p><strong>max_span</strong></p>
 <p>Hi-net server sets three limitations for each data request:</p>
 <ol class="arabic simple">
-<li><p>数据长度不大于60分钟</p></li>
-<li><p>通道数*数据长度不得大于12000分钟</p></li>
-<li><p>仅保留最近150次请求的数据</p></li>
+<li><p>Record_Length &lt;= 60 min</p></li>
+<li><p>Number_of_channels * Record_Length &lt;= 12000 min</p></li>
+<li><p>Only the latest 150 requested data are kept</p></li>
 </ol>
 <p>For example, Hi-net network has about 24000 channels. Acoording to limitation 2,
 the record length should be no more than 5 minutes for each data request.
@@ -303,8 +304,8 @@ HinetPy “break through” the limitation by splitting a long-duration data req
 into several short-duration sub-requsts.</p>
 <p><strong>How it works</strong></p>
 <ol class="arabic simple">
-<li><p>做一些检查</p></li>
-<li><p>将长数据请求分割成多个短的数据子请求</p></li>
+<li><p>do several checks</p></li>
+<li><p>split a long-duration request into several short-duration sub-requests</p></li>
 <li><p>loop over all sub-requests and return the data IDs</p></li>
 <li><p>download all data based on the data IDs</p></li>
 <li><p>extract all zip files and merge them into one single win32 data</p></li>
@@ -318,7 +319,7 @@ into several short-duration sub-requsts.</p>
 <span class="go">(&#39;0101_201001010535_6.cnt&#39;, &#39;0101_20100101.ch&#39;)</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">starttime</span></code> 也支持其他常见的格式：</p>
+<p>Several other string formats of <code class="docutils literal notranslate"><span class="pre">starttime</span></code> are also supported:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01 05:35&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01T05:35&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 </pre></div>
@@ -341,13 +342,13 @@ into several short-duration sub-requsts.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.get_event_waveform">
 <span class="sig-name descname"><span class="pre">get_event_waveform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starttime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endtime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minmagnitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxmagnitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_unknown_mag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mindepth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxdepth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_event_waveform" title="Link to this definition"></a></dt>
-<dd><p>获取事件波形数据。</p>
+<dd><p>Get event waveform data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> or str) – 事件的开始事件。</p></li>
-<li><p><strong>endtime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> or str) – 事件的结束事件。</p></li>
-<li><p><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – <p>限制事件在指定的区域内。可选值包括：</p>
+<li><p><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> or str) – Starttime of events.</p></li>
+<li><p><strong>endtime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> or str) – Endtime of events.</p></li>
+<li><p><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – <p>Limit events in specified region. Allowed values are:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">00</span></code>: Whole Japan</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">01</span></code>: Hokkaido Region</p></li>
@@ -360,19 +361,21 @@ into several short-duration sub-requsts.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">08</span></code>: Others</p></li>
 </ul>
 </p></li>
-<li><p><strong>minmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制事件震级大于指定值。</p></li>
-<li><p><strong>maxmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制事件震级小于指定值。</p></li>
-<li><p><strong>include_unknown_mag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – 包括/排除未定震级的时间。</p></li>
-<li><p><strong>mindepth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制事件深度大于指定值。</p></li>
-<li><p><strong>maxdepth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制事件深度小于指定值。</p></li>
-<li><p><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制台站纬度大于指定值。</p></li>
-<li><p><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制台站纬度小于指定值。</p></li>
-<li><p><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制台站经度大于指定值。</p></li>
-<li><p><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制台站经度小于指定值。</p></li>
-<li><p><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 指定用于半径搜索的纬度。</p></li>
-<li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 指定用于半径搜索的经度。</p></li>
-<li><p><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 指定环形搜索区域的最小半径。</p></li>
-<li><p><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 指定环形搜索区域的最大半径。</p></li>
+<li><p><strong>minmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to events with a magnitude larger than speicified minimum.</p></li>
+<li><p><strong>maxmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to events with a magnitude smaller than speicified maximum.</p></li>
+<li><p><strong>include_unknown_mag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – Include/exclude undetermined magnitude events.</p></li>
+<li><p><strong>mindepth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to events deeper than the specified minimum.</p></li>
+<li><p><strong>maxdepth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to events shallower than the specified maximum.</p></li>
+<li><p><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to events with a latitude larger than the specified minimum.</p></li>
+<li><p><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to events with a latitude smaller than the specified maximum.</p></li>
+<li><p><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to events with a longitude larger than the specified minimum.</p></li>
+<li><p><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to events with a longitude smaller than the specified maximum.</p></li>
+<li><p><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Specify the latitude to be used for a radius search.</p></li>
+<li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Specify the longitude to be used for a radius search.</p></li>
+<li><p><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to events within the specified minimum number of degrees from the
+geographic point defined by the latitude and longitude parameters.</p></li>
+<li><p><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to events within the specified maximum number of degrees from the
+geographic point defined by the latitude and longitude parameters.</p></li>
 </ul>
 </dd>
 </dl>
@@ -381,14 +384,14 @@ into several short-duration sub-requsts.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.get_focalmechanism">
 <span class="sig-name descname"><span class="pre">get_focalmechanism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startdate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DOS'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_focalmechanism" title="Link to this definition"></a></dt>
-<dd><p>从Hi-net获取JMA震源机制解数据。</p>
+<dd><p>Get JMA focal mechanism data from Hi-net.</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) – 请求数据的开始时间。</p></li>
-<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – 数据长度，单位为天。</p></li>
-<li><p><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 文件格式。”DOS” 或 “UNIX”。</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 要保存的文件名。</p></li>
+<li><p><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="（在 Python v3.12）"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) – Start date to request.</p></li>
+<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Data length in days.</p></li>
+<li><p><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – File format. “DOS” or “UNIX”.</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filename to save.</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
@@ -418,7 +421,7 @@ into several short-duration sub-requsts.</p>
 <p>It supports two networks: Hi-net (0101) and F-net (0103, 0103A).</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 台网代码。</p>
+<dd class="field-odd"><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Network code.</p>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>stations</strong> – List of selected stations with station metadata information.</p>
@@ -447,7 +450,7 @@ into several short-duration sub-requsts.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.get_station_list">
 <span class="sig-name descname"><span class="pre">get_station_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_station_list" title="Link to this definition"></a></dt>
-<dd><p>获取某个台网的台站列表。</p>
+<dd><p>Get station list of a network.</p>
 <p>The function only supports the following networks:
 Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
@@ -476,8 +479,8 @@ Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_wa
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Hi-net账户用户名。</p></li>
-<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Hi-net账户密码。</p></li>
+<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Username of Hi-net account.</p></li>
+<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Password of Hi-net account.</p></li>
 </ul>
 </dd>
 </dl>
@@ -494,20 +497,20 @@ Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_wa
 <dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.select_stations">
 <span class="sig-name descname"><span class="pre">select_stations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlatitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlongitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxradius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.select_stations" title="Link to this definition"></a></dt>
-<dd><p>获取某个台网的台站列表。</p>
+<dd><p>Select stations of a network.</p>
 <p>It only supports the following networks:
 Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 台网代码。</p></li>
-<li><p><strong>stations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a>) – 要选择的台站。</p></li>
-<li><p><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制台站纬度大于指定值。</p></li>
-<li><p><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制台站纬度小于指定值。</p></li>
-<li><p><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制台站经度大于指定值。</p></li>
-<li><p><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 限制台站经度小于指定值。</p></li>
-<li><p><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 指定用于半径搜索的纬度。</p></li>
-<li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – 指定用于半径搜索的经度。</p></li>
+<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Network code.</p></li>
+<li><p><strong>stations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a>) – Stations to select.</p></li>
+<li><p><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to stations with a latitude larger than the specified minimum.</p></li>
+<li><p><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to stations with a latitude smaller than the specified maximum.</p></li>
+<li><p><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to stations with a longitude larger than the specified minimum.</p></li>
+<li><p><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to stations with a longitude smaller than the specified maximum.</p></li>
+<li><p><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Specify the latitude to be used for a radius search.</p></li>
+<li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Specify the longitude to be used for a radius search.</p></li>
 <li><p><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to stations within the specified minimum number of degrees from the
 geographic point defined by the latitude and longitude parameters.</p></li>
 <li><p><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="（在 Python v3.12）"><em>float</em></a>) – Limit to stations within the specified maximum number of degrees from the
@@ -517,13 +520,13 @@ geographic point defined by the latitude and longitude parameters.</p></li>
 </dl>
 <div class="admonition- admonition">
 <p class="admonition-title">示例</p>
-<p>只选择Hi-net的两个台站：</p>
+<p>Select only two stations of Hi-net:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;N.AAKH&quot;</span><span class="p">,</span> <span class="s2">&quot;N.ABNH&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">))</span>
 <span class="go">2</span>
 </pre></div>
 </div>
-<p>选择矩形框内的台站:</p>
+<p>Select stations in a box region:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;0101&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">minlatitude</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
@@ -533,13 +536,13 @@ geographic point defined by the latitude and longitude parameters.</p></li>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>选择环形区域内的台站:</p>
+<p>Select stations in a circular region:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mi">139</span><span class="p">,</span> <span class="n">minradius</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxradius</span><span class="o">=</span><span class="mi">2</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>选择Hi-net的全部台站：</p>
+<p>Select all Hi-net stations:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">))</span>
 <span class="go">0</span>
@@ -569,7 +572,7 @@ geographic point defined by the latitude and longitude parameters.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="../api.html" class="btn btn-neutral float-left" title="API参考" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="HinetPy.win32.html" class="btn btn-neutral float-right" title="HinetPy.win32 模块" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="HinetPy.win32.html" class="btn btn-neutral float-right" title="HinetPy.win32 module" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

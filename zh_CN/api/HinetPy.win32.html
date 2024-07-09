@@ -5,7 +5,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.win32 模块 &mdash; HinetPy v0.9.1.dev14+g6808e9bc 文档</title>
+  <title>HinetPy.win32 module &mdash; HinetPy v0.9.1.dev16+g30b7e28c 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=9a31d3b9"></script>
+        <script src="../_static/documentation_options.js?v=c45f2afb"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=beaddf03"></script>
@@ -24,7 +24,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="HinetPy.channel module" href="HinetPy.channel.html" />
-    <link rel="prev" title="HinetPy.client 模块" href="HinetPy.client.html" /> 
+    <link rel="prev" title="HinetPy.client module" href="HinetPy.client.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             HinetPy
           </a>
               <div class="version">
-                v0.9.1.dev14+g6808e9bc
+                v0.9.1.dev16+g30b7e28c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -55,8 +55,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">教程</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">示例</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API参考</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="HinetPy.client.html">HinetPy.client 模块</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">HinetPy.win32 模块</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.client.html">HinetPy.client module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HinetPy.win32 module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#HinetPy.win32.extract_sac"><code class="docutils literal notranslate"><span class="pre">extract_sac()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#HinetPy.win32.extract_sacpz"><code class="docutils literal notranslate"><span class="pre">extract_sacpz()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#HinetPy.win32.extract_pz"><code class="docutils literal notranslate"><span class="pre">extract_pz()</span></code></a></li>
@@ -65,8 +65,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="HinetPy.channel.html">HinetPy.channel module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HinetPy.header.html">HinetPy.header模块</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HinetPy.utils.html">HinetPy.utils 模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.header.html">HinetPy.header module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HinetPy.utils.html">HinetPy.utils module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix.html">附录</a></li>
@@ -107,7 +107,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../api.html">API参考</a></li>
-      <li class="breadcrumb-item active">HinetPy.win32 模块</li>
+      <li class="breadcrumb-item active">HinetPy.win32 module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/HinetPy.win32.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -118,12 +118,12 @@
            <div itemprop="articleBody">
              
   <section id="module-HinetPy.win32">
-<span id="hinetpy-win32-module"></span><h1>HinetPy.win32 模块<a class="headerlink" href="#module-HinetPy.win32" title="Link to this heading"></a></h1>
+<span id="hinetpy-win32-module"></span><h1>HinetPy.win32 module<a class="headerlink" href="#module-HinetPy.win32" title="Link to this heading"></a></h1>
 <p>Process seismic waveform data in win32 format.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="HinetPy.win32.extract_sac">
 <span class="sig-prename descclassname"><span class="pre">HinetPy.win32.</span></span><span class="sig-name descname"><span class="pre">extract_sac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SAC'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8640000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_by_component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_sacpz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.win32.extract_sac" title="Link to this definition"></a></dt>
-<dd><p>提取数据并以SAC格式保存。</p>
+<dd><p>Extract data as SAC format files.</p>
 <p>This function calls the <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> command, available in the Hi-net win32tools
 package, to convert data files from win32 format to SAC fomrat. It can also extract
 the channel information as SAC polezero files.</p>
@@ -135,10 +135,10 @@ reason, the extracted SAC polezero files does not keep the sensitivity in the
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 要处理的win32文件。</p></li>
-<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 通道表文件。</p></li>
-<li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 输出SAC文件的后缀。默认值为 <code class="docutils literal notranslate"><span class="pre">SAC</span></code> 。</p></li>
-<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 输出目录。默认输出到当前目录。</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – win32 file to be processed.</p></li>
+<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Channel table file.</p></li>
+<li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Suffix of output SAC files. Defaults to <code class="docutils literal notranslate"><span class="pre">SAC</span></code>.</p></li>
+<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Output directory. Defaults to current directory.</p></li>
 <li><p><strong>pmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Maximum number of data points for one channel. Defaults to 8640000. If one
 channel has more than 8640000 data points (i.e., longer than one day for a
 100 Hz sampling rate), you MUST increase <code class="docutils literal notranslate"><span class="pre">pmax</span></code>.</p></li>
@@ -168,7 +168,7 @@ all CPUs.</p></li>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>只提取指定通道：</p>
+<p>Extract only specified channels:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sac</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;0101_201001010000_5.cnt&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span>
@@ -193,9 +193,9 @@ all CPUs.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 通道表文件。</p></li>
-<li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – SAC零极点文件后缀，默认为 <code class="docutils literal notranslate"><span class="pre">SAC_PZ</span></code> 。</p></li>
-<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 输出目录。默认输出到当前目录。</p></li>
+<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Channel table file.</p></li>
+<li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Suffix of SAC PZ files. Defaults to <code class="docutils literal notranslate"><span class="pre">SAC_PZ</span></code>.</p></li>
+<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Output directory. Defaults to current directory.</p></li>
 <li><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – The <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> program automatically removes sensitivity from waveform data
 during the win32-to-SAC format conversion. So the generated polezero file should
 omit the sensitivity.</p></li>
@@ -217,7 +217,7 @@ all CPUs.</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sacpz</span><span class="p">(</span><span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;20100101000&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>只提取指定通道：</p>
+<p>Extract only specified channels:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_sacpz</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;0101_20100101.ch&quot;</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">&quot;[NE]&quot;</span>
 <span class="gp">... </span><span class="p">)</span>
@@ -303,7 +303,7 @@ sort the matched files for you automatically.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="HinetPy.client.html" class="btn btn-neutral float-left" title="HinetPy.client 模块" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="HinetPy.client.html" class="btn btn-neutral float-left" title="HinetPy.client module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="HinetPy.channel.html" class="btn btn-neutral float-right" title="HinetPy.channel module" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
