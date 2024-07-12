@@ -84,7 +84,7 @@ polezero files.
 Citation
 ========
 
-If you find this package useful, please consider cite the package in either of the
+If you find this package useful, please consider citing the package in either of the
 following ways:
 
 **Cite the HinetPy paper (preferred)**
