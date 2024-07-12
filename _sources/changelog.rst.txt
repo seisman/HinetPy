@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.9.1 (2024-07-12)
+==================
+
+- ``get_selected_station``: Be more careful with checking the parsed values of stations
+
 0.9.0 (2024-06-25)
 ------------------
 
