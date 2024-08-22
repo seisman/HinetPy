@@ -2,7 +2,7 @@ Changelog
 =========
 
 0.9.1 (2024-07-12)
-==================
+------------------
 
 - ``get_selected_station``: Be more careful with checking the parsed values of stations
 
