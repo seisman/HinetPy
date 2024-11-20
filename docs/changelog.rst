@@ -1,6 +1,23 @@
 Changelog
 =========
 
+0.10.0 (2024-11-21)
+-------------------
+
+**Improved support for MeSO-net**
+
+MeSO-net has two network codes for different time periods:
+
+- ``0131`` for data after 20170401
+- ``0231`` for data 20080516-20170401
+
+In previous versions, you need to know the above information and choose the correct
+network code when requesting data before or after 20170401. In this new version, HinetPy
+can automatically switch the network code for you, depending on the data time you're
+requesting. Note that you will get an error if the time span you requested crosses the
+date 20170401.
+
+
 0.9.1 (2024-07-12)
 ------------------
 
