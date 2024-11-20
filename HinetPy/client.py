@@ -446,11 +446,28 @@ class ContinuousWaveformClient(BaseClient):
         if code not in NETWORK:
             raise ValueError(f"{code}: Incorrect network code.")
 
+        starttime = to_datetime(starttime)
+        endtime = starttime + timedelta(minutes=span)
+
+        # Special handling for MeSO-net since it has two network codes:
+        # - 0131: Data after 20170401
+        # - 0231: Data 20080516-20170401
+        mesonet_time = NETWORK["0131"].starttime
+        if code == "0131" and starttime < mesonet_time:
+            code = "0231"
+        if code == "0231" and starttime >= mesonet_time:
+            code = "0131"
+        if code in ("0131", "0231") and starttime <= mesonet_time <= endtime:
+            msg = (
+                "MeSO-net has two network codes: '0131' for data after 20170401, and "
+                "'0231' for data 20080516-20170401. But the time span you requested "
+                "crosses the date 20170401. Please use the correct network code."
+            )
+            raise ValueError(msg)
+
         time0 = NETWORK[code].starttime
         # time1 = UTCTime + JST (UTC+0900) - 2 hour delay
         time1 = datetime.utcnow() + timedelta(hours=9) + timedelta(hours=-2)
-        starttime = to_datetime(starttime)
-        endtime = starttime + timedelta(minutes=span)
         if not time0 <= starttime < endtime <= time1:
             msg = f"Data not available in the time period. Call Client.info('{code}') for help."
             raise ValueError(msg)
@@ -1052,7 +1069,7 @@ class StationClient(BaseClient):
         parser.close()
         return stations
 
-    def select_stations(  # noqa: PLR0913
+    def select_stations(
         self,
         code,
         stations=None,
