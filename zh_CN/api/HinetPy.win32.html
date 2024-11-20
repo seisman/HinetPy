@@ -1,25 +1,23 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.win32 module &mdash; HinetPy v0.9.2.dev1+ga80be444 文档</title>
+  <title>HinetPy.win32 module &mdash; HinetPy v0.9.2.dev8+g271ad327 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=9542cb4f"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/translations.js?v=beaddf03"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=ce8d5298"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
@@ -38,9 +36,6 @@
           <a href="../index.html" class="icon icon-home">
             HinetPy
           </a>
-              <div class="version">
-                v0.9.2.dev1+ga80be444
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
@@ -131,25 +126,25 @@ the channel information as SAC polezero files.</p>
 waveform data, and multiply the data by 1.0e9. Thus, the extracted SAC files are not
 in digital counts, but velocity in nm/s, or acceleration in nm/s/s. Due to the same
 reason, the extracted SAC polezero files does not keep the sensitivity in the
-“CONSTANT” of SAC polezero files.</p>
+&quot;CONSTANT&quot; of SAC polezero files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – win32 file to be processed.</p></li>
-<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Channel table file.</p></li>
-<li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Suffix of output SAC files. Defaults to <code class="docutils literal notranslate"><span class="pre">SAC</span></code>.</p></li>
-<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Output directory. Defaults to current directory.</p></li>
-<li><p><strong>pmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Maximum number of data points for one channel. Defaults to 8640000. If one
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- win32 file to be processed.</p></li>
+<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Channel table file.</p></li>
+<li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Suffix of output SAC files. Defaults to <code class="docutils literal notranslate"><span class="pre">SAC</span></code>.</p></li>
+<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Output directory. Defaults to current directory.</p></li>
+<li><p><strong>pmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a>) -- Maximum number of data points for one channel. Defaults to 8640000. If one
 channel has more than 8640000 data points (i.e., longer than one day for a
 100 Hz sampling rate), you MUST increase <code class="docutils literal notranslate"><span class="pre">pmax</span></code>.</p></li>
-<li><p><strong>filter_by_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filter channels by ID. It can be a list of IDs or a wildcard.</p></li>
-<li><p><strong>filter_by_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filter channels by name. It can be a list of names or a wildcard.</p></li>
-<li><p><strong>filter_by_component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filter channels by component. It can be a list of component names or a wildcard.</p></li>
-<li><p><strong>with_sacpz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – Aslo extract SAC PZ files. By default, the suffix is <code class="docutils literal notranslate"><span class="pre">.SAC_PZ</span></code> and the channel
-sensitivity is not kept in the “CONSTANT”.</p></li>
-<li><p><strong>processes</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Number of processes to speed up data extraction parallelly. <code class="docutils literal notranslate"><span class="pre">None</span></code> means using
+<li><p><strong>filter_by_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Filter channels by ID. It can be a list of IDs or a wildcard.</p></li>
+<li><p><strong>filter_by_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Filter channels by name. It can be a list of names or a wildcard.</p></li>
+<li><p><strong>filter_by_component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Filter channels by component. It can be a list of component names or a wildcard.</p></li>
+<li><p><strong>with_sacpz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.13）"><em>bool</em></a>) -- Aslo extract SAC PZ files. By default, the suffix is <code class="docutils literal notranslate"><span class="pre">.SAC_PZ</span></code> and the channel
+sensitivity is not kept in the &quot;CONSTANT&quot;.</p></li>
+<li><p><strong>processes</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a>) -- Number of processes to speed up data extraction parallelly. <code class="docutils literal notranslate"><span class="pre">None</span></code> means using
 all CPUs.</p></li>
-<li><p><strong>deprecated:</strong> (<em>..</em>) – 0.7.0: Parameter <code class="docutils literal notranslate"><span class="pre">with_pz</span></code> is deprecated. Use <code class="docutils literal notranslate"><span class="pre">with_sacpz</span></code> instead.</p></li>
+<li><p><strong>deprecated:</strong> (<em>..</em>) -- 0.7.0: Parameter <code class="docutils literal notranslate"><span class="pre">with_pz</span></code> is deprecated. Use <code class="docutils literal notranslate"><span class="pre">with_sacpz</span></code> instead.</p></li>
 </ul>
 </dd>
 </dl>
@@ -193,16 +188,16 @@ all CPUs.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Channel table file.</p></li>
-<li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Suffix of SAC PZ files. Defaults to <code class="docutils literal notranslate"><span class="pre">SAC_PZ</span></code>.</p></li>
-<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Output directory. Defaults to current directory.</p></li>
-<li><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – The <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> program automatically removes sensitivity from waveform data
+<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Channel table file.</p></li>
+<li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Suffix of SAC PZ files. Defaults to <code class="docutils literal notranslate"><span class="pre">SAC_PZ</span></code>.</p></li>
+<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Output directory. Defaults to current directory.</p></li>
+<li><p><strong>keep_sensitivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.13）"><em>bool</em></a>) -- The <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> program automatically removes sensitivity from waveform data
 during the win32-to-SAC format conversion. So the generated polezero file should
 omit the sensitivity.</p></li>
-<li><p><strong>filter_by_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filter channels by ID. It can be a list of IDs or a wildcard.</p></li>
-<li><p><strong>filter_by_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filter channels by name. It can be a list of names or a wildcard.</p></li>
-<li><p><strong>filter_by_component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filter channels by component. It can be a list of component names or a wildcard.</p></li>
-<li><p><strong>processes</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>) – Number of processes to speed up data extraction parallelly. <code class="docutils literal notranslate"><span class="pre">None</span></code> means using
+<li><p><strong>filter_by_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Filter channels by ID. It can be a list of IDs or a wildcard.</p></li>
+<li><p><strong>filter_by_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Filter channels by name. It can be a list of names or a wildcard.</p></li>
+<li><p><strong>filter_by_component</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Filter channels by component. It can be a list of component names or a wildcard.</p></li>
+<li><p><strong>processes</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a>) -- Number of processes to speed up data extraction parallelly. <code class="docutils literal notranslate"><span class="pre">None</span></code> means using
 all CPUs.</p></li>
 </ul>
 </dd>
@@ -242,13 +237,13 @@ Use <a class="reference internal" href="#HinetPy.win32.extract_sacpz" title="Hin
 <dd><p>Read a channel table file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Channle table file.</p>
+<dd class="field-odd"><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Channle table file.</p>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p>List of <code class="xref py py-class docutils literal notranslate"><span class="pre">Channel</span></code>.</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）">list</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）">list</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -269,16 +264,16 @@ consuming. Do NOT set <code class="docutils literal notranslate"><span class="pr
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Win32 files to be merged. It can be a list of file names or a wildcard.</p></li>
-<li><p><strong>total_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – Filename of the ouput win32 file.</p></li>
-<li><p><strong>force_sort</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – Sort all win32 files by starttime before merging.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Win32 files to be merged. It can be a list of file names or a wildcard.</p></li>
+<li><p><strong>total_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) -- Filename of the ouput win32 file.</p></li>
+<li><p><strong>force_sort</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.13）"><em>bool</em></a>) -- Sort all win32 files by starttime before merging.</p></li>
 </ul>
 </dd>
 </dl>
 <div class="admonition- admonition">
 <p class="admonition-title">示例</p>
 <p>For win32 files that are named by starttime (e.g. <code class="docutils literal notranslate"><span class="pre">201304040203.cnt</span></code>), sorting
-win32 files using Python’s built-in <a class="reference external" href="https://docs.python.org/3/library/functions.html#sorted" title="（在 Python v3.12）"><code class="xref py py-func docutils literal notranslate"><span class="pre">sorted()</span></code></a> function is preferred:</p>
+win32 files using Python's built-in <a class="reference external" href="https://docs.python.org/3/library/functions.html#sorted" title="（在 Python v3.13）"><code class="xref py py-func docutils literal notranslate"><span class="pre">sorted()</span></code></a> function is preferred:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;20130404*.cnt&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;outdir/final.cnt&quot;</span><span class="p">)</span>
 </pre></div>
