@@ -22,6 +22,6 @@ from importlib.metadata import version
 from .client import Client
 from .header import NETWORK
 
-__all__ = ["Client", "NETWORK", "win32"]
+__all__ = ["NETWORK", "Client", "win32"]
 # Get semantic version through setuptools-scm
 __version__ = f'v{version("HinetPy")}'  # e.g. v0.1.2.dev3+g0ab3cd78
