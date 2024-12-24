@@ -82,8 +82,8 @@ class BaseClient:
     _EVENT_REQUEST = _EVENT + "event_request.php"
     _EVENT_DOWNLOAD = _EVENT + "event_download.php"
 
-    # ETAG for v160422
-    _ETAG = "1b61-5774e12e97f00"
+    # ETAG for v220621_1
+    _ETAG = "1bcd-6242bd1e67900"
 
     def __init__(
         self,
