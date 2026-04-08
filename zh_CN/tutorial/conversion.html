@@ -7,17 +7,17 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>数据转换 &mdash; HinetPy v0.10.1.dev3+gc87c685b 文档</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+  <title>数据转换 &mdash; HinetPy v0.10.1.dev13+gba1252419 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=0e359f5e"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="../_static/translations.js?v=beaddf03"></script>
+      <script src="../_static/documentation_options.js?v=eb821d8a"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=540d3cec"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
@@ -110,15 +110,15 @@
            <div itemprop="articleBody">
              
   <section id="data-conversion">
-<h1>数据转换<a class="headerlink" href="#data-conversion" title="Link to this heading"></a></h1>
+<h1>数据转换<a class="headerlink" href="#data-conversion" title="链接到此标题。"></a></h1>
 <p>Hi-net提供了win32格式的波形数据和通道表形式的仪器响应。 <a class="reference internal" href="../api/HinetPy.win32.html#module-HinetPy.win32" title="HinetPy.win32"><code class="xref py py-mod docutils literal notranslate"><span class="pre">win32</span></code></a> 可以将其转换为SAC和SAC零极点格式。</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">win32</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">win32</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;0101_201001010000_20.cnt&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ctable</span> <span class="o">=</span> <span class="s2">&quot;0101_20100101.ch&quot;</span>
 </pre></div>
 </div>
 <section id="extract-waveform-data">
-<h2>提取波形数据<a class="headerlink" href="#extract-waveform-data" title="Link to this heading"></a></h2>
+<h2>提取波形数据<a class="headerlink" href="#extract-waveform-data" title="链接到此标题。"></a></h2>
 <p>提取所有通道的数据数据并保存为SAC格式。</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">)</span>
 </pre></div>
@@ -143,7 +143,7 @@
 </div>
 </section>
 <section id="extract-pz">
-<h2>提取零极点文件<a class="headerlink" href="#extract-pz" title="Link to this heading"></a></h2>
+<h2>提取零极点文件<a class="headerlink" href="#extract-pz" title="链接到此标题。"></a></h2>
 <p><a class="reference internal" href="../api/HinetPy.win32.html#HinetPy.win32.extract_sacpz" title="HinetPy.win32.extract_sacpz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_sacpz()</span></code></a> 可以将仪器响应从Hi-net的通道表格式转换为SAC PZ格式。</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
@@ -188,7 +188,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2014-2024, Dongdong Tian。</p>
+    <p>&#169; 版权所有 2014-2026, Dongdong Tian。</p>
   </div>
 
   利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
