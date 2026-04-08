@@ -56,6 +56,7 @@ URL = {
     "Vnet": "http://www.vnet.bosai.go.jp",
     "JMA": "http://www.jma.go.jp/jma/indexe.html",
     "Snet": "https://www.seafloor.bosai.go.jp/",
+    "Nnet": "http://www.seafloor.bosai.go.jp/N-net/",
 }
 JMA_VNET = "JMA Volcanic Seismometer Network "
 
@@ -84,6 +85,7 @@ _networks = [
     ("0120B", "NIED S-net (acceleration 2LG)", 450, "20160815", URL["Hinet"]),
     ("0120C", "NIED S-net (acceleration 2HG)", 450, "20160815", URL["Hinet"]),
     ("0131", "NIED MeSO-net", 900, "20170401", URL["Hinet"]),
+    ("0150", "NIED N-net", 108, "20240701", URL["Nnet"]),
     ("0201", "Hokkaido University", 205, "20040401", "http://www.sci.hokudai.ac.jp/isv/english/"),
     ("0202", "Tohoku University", 157, "20040401", "http://www.aob.geophys.tohoku.ac.jp/aob-e/"),
     ("0203", "Tokyo University", 316, "20040401", "http://www.eri.u-tokyo.ac.jp/eng/"),
