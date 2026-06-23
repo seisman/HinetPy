@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy &mdash; HinetPy v0.12.1.dev23+gbfbf6e275 文档</title>
+  <title>HinetPy &mdash; HinetPy v0.12.1.dev25+gc99bdf172 文档</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=8c59e049"></script>
+      <script src="_static/documentation_options.js?v=32629fd1"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/translations.js?v=540d3cec"></script>
@@ -88,7 +88,7 @@
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">HinetPy</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="_sources/index.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -100,20 +100,21 @@
 <h1>HinetPy<a class="headerlink" href="#hinetpy" title="链接到此标题。"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p><a class="reference external" href="https://github.com/seisman/HinetPy">HinetPy</a> 是一个可用于申请和处理 <a class="reference external" href="https://www.hinet.bosai.go.jp/">NIED Hi-net</a> 地震数据的 Python 包。</p>
-</section>
+<p><a class="reference external" href="https://github.com/seisman/HinetPy">HinetPy</a> is a Python package for accessing and
+processing seismic data from <a class="reference external" href="https://www.hinet.bosai.go.jp/">NIED Hi-net</a>.</p>
 <section id="key-features">
-<h1>主要功能<a class="headerlink" href="#key-features" title="链接到此标题。"></a></h1>
+<h2>主要功能<a class="headerlink" href="#key-features" title="链接到此标题。"></a></h2>
 <ul class="simple">
 <li><p>方便访问 NIED Hi-net 地震数据，包括连续/事件波形数据和事件目录。</p></li>
 <li><p>支持日本多个地震台网（如 Hi-net、F-net、S-net、MeSO-net 等）。</p></li>
-<li><p>根据地理位置或台站名称选择台站子集（仅支持 Hi-net、F-net、S-net 和 MeSO-net）。</p></li>
+<li><p>Selects a subset of stations based on geographical location or station name (supports
+Hi-net, F-net, S-net and MeSO-net only).</p></li>
 <li><p>将波形数据转换为 SAC 格式，将仪器响应转换为 SAC 极零文件。</p></li>
 <li><p>通过使用多线程，加快下载和处理工作流程。</p></li>
 </ul>
 </section>
 <section id="a-simple-example">
-<h1>一个简单的示例<a class="headerlink" href="#a-simple-example" title="链接到此标题。"></a></h1>
+<h2>A Simple Example<a class="headerlink" href="#a-simple-example" title="链接到此标题。"></a></h2>
 <p>下面的示例展示了如何使用 HinetPy 从 Hi-net 申请连续波形数据，将数据转换为 SAC 格式，并提取 SAC 零极点格式的仪器响应文件。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">win32</span>
 
@@ -150,29 +151,36 @@
 </div>
 </section>
 <section id="citation">
-<h1>引用<a class="headerlink" href="#citation" title="链接到此标题。"></a></h1>
+<h2>引用<a class="headerlink" href="#citation" title="链接到此标题。"></a></h2>
 <p>If you find this package useful, please consider citing the package in either of the
 following ways:</p>
 <p><strong>引用 HinetPy 的文章（推荐）</strong></p>
-<p>自 HinetPy v0.9.0 起，HinetPy 的介绍文章发表在 <a class="reference external" href="https://joss.theoj.org/">The Journal of Open Source Software</a> 上。这是首选的引用方式。</p>
+<p>A formal paper is published in <a class="reference external" href="https://joss.theoj.org/">The Journal of Open Source Software</a>
+since HinetPy v0.9.0. This is the <strong>preferred</strong> way for citation.</p>
 <blockquote>
-<div><p>Tian, D. (2024). HinetPy: A Python package for accessing and processing NIED Hi-net seismic data.
-Journal of Open Source Software, 9(98), 6840. <a class="reference external" href="https://doi.org/10.21105/joss.06840">https://doi.org/10.21105/joss.06840</a></p>
+<div><p>Tian, D. (2024). HinetPy: A Python package for accessing and processing NIED Hi-net
+seismic data. Journal of Open Source Software, 9(98), 6840.
+https://doi.org/10.21105/joss.06840</p>
 </div></blockquote>
 <p><strong>引用特定的 HinetPy 版本</strong></p>
-<p>如果想引用特定的 HinetPy 版本，可以访问 <a class="reference external" href="https:////zenodo.org/records/12523911">Zenodo</a>，选择要引用的版本，然后像这样引用：</p>
+<p>If you'd like to cite a specific HinetPy version, you can visit
+<a class="reference external" href="https://zenodo.org/records/12523911">Zenodo</a>, choose the version you want to cite,
+and cite like this:</p>
 <blockquote>
-<div><p>Tian, D. (20XX). HinetPy: A Python package for accessing and processing NIED Hi-net seismic data (X.X.X).
-Zenodo. <a class="reference external" href="https://doi.org/10.5281/zenodo.xxxxxxxx">https://doi.org/10.5281/zenodo.xxxxxxxx</a></p>
+<div><p>Tian, D. (20XX). HinetPy: A Python package for accessing and processing NIED Hi-net
+seismic data (X.X.X). Zenodo. https://doi.org/10.5281/zenodo.xxxxxxxx</p>
 </div></blockquote>
 </section>
 <section id="contributing">
-<h1>贡献指南<a class="headerlink" href="#contributing" title="链接到此标题。"></a></h1>
-<p>欢迎反馈和贡献！如果您有任何建议或想贡献一项功能，请新建一个 issue 或 pull request。如需其他信息或具体问题，请直接提交 issue。</p>
+<h2>贡献指南<a class="headerlink" href="#contributing" title="链接到此标题。"></a></h2>
+<p>Feedback and contributions are welcome. Please feel free to open an issue or pull
+request if you have any suggestions or would like to contribute a feature.
+For additional information or specific questions, please open an issue directly.</p>
 </section>
 <section id="license">
-<h1>许可协议<a class="headerlink" href="#license" title="链接到此标题。"></a></h1>
+<h2>许可协议<a class="headerlink" href="#license" title="链接到此标题。"></a></h2>
 <p>本项目使用 MIT 许可协议。</p>
+</section>
 </section>
 
 
