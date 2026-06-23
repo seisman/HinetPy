@@ -524,7 +524,7 @@ class ContinuousWaveformClient(BaseClient):
 
         # 2. merge all cnt files
         if not data:
-            data = f'{code}_{starttime.strftime("%Y%m%d%H%M")}_{span:d}.cnt'
+            data = f"{code}_{starttime.strftime('%Y%m%d%H%M')}_{span:d}.cnt"
         dirname = None
         if os.path.dirname(data):
             dirname = os.path.dirname(data)
@@ -535,7 +535,7 @@ class ContinuousWaveformClient(BaseClient):
 
         # 3. rename channeltable file
         if not ctable:
-            ctable = f'{code}_{starttime.strftime("%Y%m%d")}.ch'
+            ctable = f"{code}_{starttime.strftime('%Y%m%d')}.ch"
 
         dirname = None
         if os.path.dirname(ctable):
@@ -888,7 +888,7 @@ class CatalogClient(BaseClient):
         }
         d = self.session.post(self._JMA, params=params, stream=True)
         if not filename:
-            filename = f'{datatype}_{startdate.strftime("%Y%m%d")}_{span}.txt'
+            filename = f"{datatype}_{startdate.strftime('%Y%m%d')}_{span}.txt"
         with open(filename, "wb") as fd:
             for chunk in d.iter_content(chunk_size=1024):
                 if chunk:  # filter out keep-alive new chunks

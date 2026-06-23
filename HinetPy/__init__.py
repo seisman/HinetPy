@@ -24,4 +24,4 @@ from .header import NETWORK
 
 __all__ = ["NETWORK", "Client", "win32"]
 # Get semantic version through setuptools-scm
-__version__ = f'v{version("HinetPy")}'  # e.g. v0.1.2.dev3+g0ab3cd78
+__version__ = f"v{version('HinetPy')}"  # e.g. v0.1.2.dev3+g0ab3cd78

@@ -129,7 +129,7 @@ def test_get_continuous_waveform_custom_name_4(client):
 
 def test_get_waveform_alias(client):
     starttime = datetime(2010, 1, 1, 0, 0)
-    data, ctable = client.get_waveform("0101", starttime, 1)
+    _data, _ctable = client.get_waveform("0101", starttime, 1)
 
 
 def test_get_continuous_waveform_wrong_span_1(client):
