@@ -1,0 +1,28 @@
+name: hinetpy
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python>=3.9
+  - pip
+  - setuptools>=64
+  - setuptools_scm>=6.2
+  # Runtime dependencies
+  - certifi
+  - packaging
+  - requests
+  - urllib3
+  # Build dependencies
+  - python-build
+  # Test dependencies
+  - pytest
+  - pytest-cov
+  # Code style dependencies
+  - ruff
+  # Documentation dependencies
+  - sphinx
+  - sphinx-intl
+  - sphinx-rtd-theme
+  # Static type check dependencies
+  - mypy
+  - types-requests

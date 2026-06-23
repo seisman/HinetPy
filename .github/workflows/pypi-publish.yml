@@ -27,7 +27,7 @@ jobs:
     - name: Build
       run: |
         python -m pip install build
-        python -m build
+        make build
         ls -lh dist/
 
     - name: Publish to PyPI

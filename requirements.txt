@@ -1,4 +1,0 @@
-certifi
-packaging
-requests
-urllib3

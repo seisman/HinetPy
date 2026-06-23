@@ -3,6 +3,7 @@ help:
 	@echo "Commands:"
 	@echo ""
 	@echo "  install    install in editable mode"
+	@echo "  build      build source and wheel distributions"
 	@echo "  test       run the test suite and report coverage"
 	@echo "  doc        build the documentation"
 	@echo "  format     run ruff to automatically format the code"
@@ -14,6 +15,9 @@ help:
 
 install:
 	python -m pip install --no-deps -e .
+
+build:
+	python -m build
 
 test:
 	pytest tests/test_*.py
