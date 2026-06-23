@@ -4,6 +4,7 @@
 # Distribution / packaging
 build/
 dist/
+sdist/
 *.egg
 *.egg-info/
 .eggs/
@@ -13,6 +14,16 @@ dist/
 htmlcov/
 .coverage*
 coverage.xml
+.mypy_cache/
+
+# HinetPy test / download artifacts
+testdir-*/
+win32tools/
+win32tools.tar.gz
+*.cnt
+*.ch
+*.SAC
+*.SAC_PZ
 
 # Sphinx documentation
 _build/
