@@ -1159,7 +1159,10 @@ class StationClient(BaseClient):
         stations_at_server = self.get_station_list(code)
 
         # select stations in a box region
-        if minlatitude or maxlatitude or minlongitude or maxlongitude:
+        if any(
+            v is not None
+            for v in (minlatitude, maxlatitude, minlongitude, maxlongitude)
+        ):
             stations_selected = [
                 station.name
                 for station in stations_at_server
@@ -1175,7 +1178,11 @@ class StationClient(BaseClient):
             ]
 
         # select stations in a circular region
-        if (latitude and longitude) and (minradius or maxradius):
+        if (
+            latitude is not None
+            and longitude is not None
+            and (minradius is not None or maxradius is not None)
+        ):
             stations_selected = [
                 station.name
                 for station in stations_at_server

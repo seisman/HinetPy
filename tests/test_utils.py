@@ -38,6 +38,7 @@ def test_point_inside_box():
     assert not point_inside_box(40, 130, 50, 80, 100, 150)
     assert not point_inside_box(85, 130, 50, 80, 100, 150)
     assert not point_inside_box(60, 170, 50, 80, 100, 150)
+    assert point_inside_box(0, 0, minlatitude=0, maxlatitude=0, minlongitude=0, maxlongitude=0)
     with pytest.raises(ValueError):
         point_inside_box(40, -130, 50, 80, -150, -140)
 
@@ -55,6 +56,7 @@ def test_point_inside_circular():
     Test point_inside_circular.
     """
     assert point_inside_circular(30, 50, 30, 52, 0, 5)
+    assert point_inside_circular(30, 50, 30, 50, 0, 0)
     assert not point_inside_circular(30, 50, 30, 60, 0, 5)
     assert not point_inside_circular(30, 50, 30, 60, 30, 50)
 

@@ -87,17 +87,19 @@ def point_inside_box(
     >>> point_inside_box(40, -130, maxlongitude=300)
     True
     """
-    if (minlongitude and minlongitude < 0.0) or (maxlongitude and maxlongitude < 0.0):
+    if (minlongitude is not None and minlongitude < 0.0) or (
+        maxlongitude is not None and maxlongitude < 0.0
+    ):
         raise ValueError("minlongitude and maxlongitude should be in 0-360.")
     longitude = longitude + 360.0 if longitude < 0.0 else longitude
 
-    if minlatitude and latitude < minlatitude:
+    if minlatitude is not None and latitude < minlatitude:
         return False
-    if maxlatitude and latitude > maxlatitude:
+    if maxlatitude is not None and latitude > maxlatitude:
         return False
-    if minlongitude and longitude < minlongitude:
+    if minlongitude is not None and longitude < minlongitude:
         return False
-    return not (maxlongitude and longitude > maxlongitude)
+    return not (maxlongitude is not None and longitude > maxlongitude)
 
 
 def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
@@ -163,7 +165,8 @@ def point_inside_circular(
     """
     radius = haversine(lat1, lon1, lat2, lon2)
     return not (
-        (minradius and radius < minradius) or (maxradius and radius > maxradius)
+        (minradius is not None and radius < minradius)
+        or (maxradius is not None and radius > maxradius)
     )
 
 
