@@ -5,6 +5,7 @@ Tests for utils.py.
 from datetime import date, datetime
 
 import pytest
+
 from HinetPy.utils import (
     check_cmd_exists,
     check_package_release,

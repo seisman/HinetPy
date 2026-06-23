@@ -4,6 +4,7 @@ from datetime import date, datetime
 
 import pytest
 import requests
+
 from HinetPy import Client
 
 username = os.environ["HINET_USERNAME"]

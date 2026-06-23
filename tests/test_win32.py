@@ -9,6 +9,7 @@ import shutil
 import uuid
 
 import pytest
+
 from HinetPy import Client, win32
 
 username = os.environ["HINET_USERNAME"]

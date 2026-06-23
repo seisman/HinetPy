@@ -1,9 +1,10 @@
 import os
 from datetime import timedelta
 
-from HinetPy import Client, win32
 from obspy import UTCDateTime
 from obspy.clients.fdsn import Client as fdsnClient
+
+from HinetPy import Client, win32
 
 fdsnclient = fdsnClient("IRIS")
 starttime = UTCDateTime("2005-01-01")

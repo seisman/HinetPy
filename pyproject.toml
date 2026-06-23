@@ -107,9 +107,6 @@ ignore = [
     "SIM117",   # Allow nested `with` statements
 ]
 
-[tool.ruff.lint.isort]
-known-third-party = ["HinetPy"]
-
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # Ignore `F401` (unused-import) in all `__init__.py` files
 "tests/test_*.py" = ["S101"]  # Ignore `S101` (use of assert) in all tests files
