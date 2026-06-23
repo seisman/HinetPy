@@ -4,4 +4,5 @@ prune paper*
 prune tests*
 exclude .gitignore
 exclude CITATION.cff
+exclude environment.yml
 exclude Makefile
