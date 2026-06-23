@@ -22,6 +22,7 @@ concurrency:
 jobs:
   test:
     name: ${{ matrix.os }} - Python ${{ matrix.python-version }}
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ${{ matrix.os }}
     strategy:
       max-parallel: 1  # Hinet doesn't allow parallel data request
@@ -51,9 +52,12 @@ jobs:
           python -m pip install dist/*
 
       - name: Install win32tools
+        env:
+          HINET_USERNAME: ${{ secrets.HINET_USERNAME }}
+          HINET_PASSWORD: ${{ secrets.HINET_PASSWORD }}
         run: |
           # Download win32tools
-          python -c "from HinetPy import Client; Client('${{ secrets.HINET_USERNAME }}', '${{ secrets.HINET_PASSWORD }}')._get_win32tools()"
+          python -c "import os; from HinetPy import Client; Client(os.environ['HINET_USERNAME'], os.environ['HINET_PASSWORD'])._get_win32tools()"
           # Compile and install win32tools
           tar -xf win32tools.tar.gz && rm win32tools.tar.gz
           # patch the win2sac source code on macOS
