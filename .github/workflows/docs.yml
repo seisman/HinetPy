@@ -9,12 +9,12 @@ on:
     paths:
       - 'HinetPy/*.py'
       - 'docs/**'
-      - 'README.rst'
+      - 'README.md'
   pull_request:
     paths:
       - 'HinetPy/*.py'
       - 'docs/**'
-      - 'README.rst'
+      - 'README.md'
   workflow_dispatch:
 
 concurrency:
@@ -43,7 +43,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install build sphinx sphinx-intl sphinx_rtd_theme
+          python -m pip install build myst-parser sphinx sphinx-intl sphinx_rtd_theme
           make build
           python -m pip install dist/*.whl
 
