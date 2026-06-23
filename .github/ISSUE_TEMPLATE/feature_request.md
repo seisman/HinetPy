@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Request the addtion of a new feature
+about: Request the addition of a new feature
 title: ''
 labels: ''
 assignees: ''
