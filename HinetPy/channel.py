@@ -99,7 +99,7 @@ class Channel:
         ----------
         pzfile: str
             Name of the SAC polezero file.
-        k9.999513e-01eep_sensitivity: bool
+        keep_sensitivity: bool
             Keep sensitivity in the SAC polezero "CONSTANT" or not.
         """
         chan_info = f"{self.name}.{self.component} ({self.id})"
