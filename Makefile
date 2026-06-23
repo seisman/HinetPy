@@ -14,7 +14,7 @@ help:
 	@echo ""
 
 install:
-	python -m pip install --no-deps -e .
+	python -m pip install -e .
 
 build:
 	python -m build
@@ -39,7 +39,7 @@ typecheck:
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
 	find . -name "*.mo" -exec rm -v {} \;
-	rm -rvf build dist sdist */__pycache__ .eggs/
+	rm -rvf build dist sdist **/__pycache__ .eggs/
 	rm -rvf .cache .pytest_cache .coverage* coverage.xml .ruff_cache .mypy_cache
 	rm -rvf testdir-*
 
