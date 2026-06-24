@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>win2sac &mdash; HinetPy v0.12.1.dev36+g6e0a8badd 文档</title>
+  <title>win2sac &mdash; HinetPy v0.12.1.dev38+g60547a359 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=e8d340d0"></script>
+      <script src="../_static/documentation_options.js?v=a4f90525"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=540d3cec"></script>
@@ -199,7 +199,7 @@
 <li><p>通道号可以用空格、制表符或逗号分隔</p></li>
 <li><p>每行最多不超过2000字符</p></li>
 </ol>
-<p>下面是一个示例::</p>
+<p>下面是一个示例：</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>6034,6035
 # 6036 # this line is ignored
 6038 6039
@@ -208,12 +208,12 @@
 <div class="admonition danger">
 <p class="admonition-title">危险</p>
 <p>使用这一特性可能会造成数据损失。因为 <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 程序在某个通道的数据不存在时会自动退出。</p>
-<p>如果你依然想要使用这一特性，你需要将 <code class="docutils literal notranslate"><span class="pre">s4win2sacm.c</span></code> 的386行从::</p>
+<p>如果你依然想要使用这一特性，你需要将 <code class="docutils literal notranslate"><span class="pre">s4win2sacm.c</span></code> 的386行从：</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Data for channel %x not existed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sysch</span><span class="p">);</span>
 <span class="n">iRet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>修改为::</p>
+<p>修改为：</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Data for channel %x not existed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sysch</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -222,7 +222,7 @@
 <section id="parameter-file">
 <h3>参数文件<a class="headerlink" href="#parameter-file" title="链接到此标题。"></a></h3>
 <p>win32系统需要一个参数文件才能执行。这个参数文件有很多行。然而， <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 只使用了第2和第4行并忽略其它行。</p>
-<p>四行的参数文件的示例::</p>
+<p>四行的参数文件的示例：</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
 0101_20100101.ch
 .

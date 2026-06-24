@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.12.0 (2026-04-13)
+
+- Add support for NIED N-net acceleration data (`0150A`).
+
+## 0.11.0 (2026-04-08)
+
+- Add support for NIED N-net (`0150`).
+- Update the Hi-net web service ETAG to `v220621_1`.
+
 ## 0.10.0 (2024-11-21)
 
 **Improved support for MeSO-net**
