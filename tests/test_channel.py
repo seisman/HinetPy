@@ -2,6 +2,8 @@
 Tests for channel.
 """
 
+import pytest
+
 from HinetPy.channel import Channel
 
 
@@ -25,7 +27,7 @@ def test_channel():
     chn._get_polezero()
     assert chn.zeros == 3
     assert chn.poles == 2
-    assert chn.real == -4.487989505128276
-    assert chn.imaginary == 4.578665119846432
-    assert chn.a0 == 0.999951325192476
-    assert chn.sensitivity == 1790811339.198436
+    assert chn.real == pytest.approx(-4.487989505128276)
+    assert chn.imaginary == pytest.approx(4.578665119846432)
+    assert chn.a0 == pytest.approx(0.999951325192476)
+    assert chn.sensitivity == pytest.approx(1790811339.198436)
