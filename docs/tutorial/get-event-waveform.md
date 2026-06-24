@@ -1,12 +1,12 @@
-Get Event Waveform
-==================
+# Get Event Waveform
 
 Since v0.6.0, HinetPy supports requesting event waveform data via
-:meth:`~HinetPy.client.Client.get_event_waveform`.
+{meth}`~HinetPy.client.Client.get_event_waveform`.
 
 Following is a simple example code to request waveforms of events
 in a specified time range, magnitude and depth.
 
+```pycon
 >>> from HinetPy import Client
 >>> client = Client("username", "password")
 >>> client.get_event_waveform(
@@ -17,6 +17,7 @@ in a specified time range, magnitude and depth.
 ...     mindepth=0,
 ...     maxdepth=70,
 ... )
+```
 
 You can also limit events to a specified region by three ways:
 
@@ -24,4 +25,4 @@ You can also limit events to a specified region by three ways:
 - specify a box region
 - specify a circular region
 
-See :meth:`~HinetPy.client.Client.get_event_waveform` for more available options.
+See {meth}`~HinetPy.client.Client.get_event_waveform` for more available options.

@@ -1,5 +1,4 @@
-Get Started
-===========
+# Get Started
 
 For new users of Hi-net data, I highly recommand you to request and download
 waveform data from Hi-net website and try to process the data using win32tools.
@@ -8,54 +7,57 @@ the whole procedures and the unfriendness and limitations of Hi-net website.
 
 Now let's get started.
 
-Start python
-------------
+## Start python
 
-Run ``python`` (or ``ipython`` if you have it), and make sure you're using
-Python 3.8 or above::
+Run `python` (or `ipython` if you have it), and make sure you're using Python
+3.8 or above:
 
-    $ python
-    Python 3.11.6 | packaged by conda-forge | (main, Oct  3 2023, 10:40:35) [GCC 12.3.0] on linux
-    Type "help", "copyright", "credits" or "license" for more information.
-    >>>
+```console
+$ python
+Python 3.11.6 | packaged by conda-forge | (main, Oct  3 2023, 10:40:35) [GCC 12.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
 
-Create a Client
----------------
+## Create a Client
 
-HinetPy provide a :class:`~HinetPy.client.Client` class, which provide several
+HinetPy provide a {class}`~HinetPy.client.Client` class, which provide several
 methods to help you get waveform data.
 
+```pycon
 >>> from HinetPy import Client
 >>> client = Client("username", "password")  # use your own account.
+```
 
-.. note::
+```{note}
+You need a Hi-net account to access Hi-net waveform data.
+```
 
-   You need a Hi-net account to access Hi-net waveform data.
+## Do checks
 
-Do checks
----------
+Let our {meth}`~HinetPy.client.Client.doctor` checks if everything goes right:
 
-Let our :meth:`~HinetPy.client.Client.doctor` checks if everything goes right:
-
+```pycon
 >>> client.doctor()
 [2019-06-14 16:11:47] INFO: You're using the latest release (v0.6.3).
 [2019-06-14 16:11:46] INFO: Hi-net web service is NOT updated.
 [2019-06-14 16:11:47] INFO: catwin32: /home/user/bin/catwin32.
 [2019-06-14 16:11:47] INFO: win2sac_32: /home/user/bin/win2sac_32.
+```
 
 Congratulations! You're using the latest version of HinetPy, and the Hi-net
 web service is NOT updated since the release of HinetPy, which means HinetPy
-is still working. And you have ``catwin32`` and ``win2sac_32`` in your PATH.
+is still working. And you have `catwin32` and `win2sac_32` in your PATH.
 Everything seems OK.
 
-Network Codes
--------------
+## Network Codes
 
 Hi-net website provide seismic waveform data from several organizations and
 networks, e.g. Hi-net, F-net and V-net. Each network has a unique network code.
 In order to request waveform data from specified network, you need to know
-the network code. See :meth:`~HinetPy.client.Client.info` for details.
+the network code. See {meth}`~HinetPy.client.Client.info` for details.
 
+```pycon
 >>> client.info()
 0101   : NIED Hi-net
 0103   : NIED F-net (broadband)
@@ -74,23 +76,24 @@ Name: NIED Hi-net
 Homepage: http://www.hinet.bosai.go.jp/
 Starttime: 20040401
 No. of channels: 2336
+```
 
 Now we know Hi-net starts from 2004-04-01 and has a total number of
 2336 channels (about 780 stations).
 
-.. note::
+```{note}
+Users are highly recommended to use [FnetPy](https://github.com/seisman/FnetPy)
+if they need F-net data, since HinetPy cannot deal with F-net instrumental
+responses correctly.
+```
 
-   Users are highly recommended to use `FnetPy <https://github.com/seisman/FnetPy>`_
-   if they need F-net data, since HinetPy cannot deal with F-net instrumental
-   responses correctly.
-
-Stations
---------
+## Stations
 
 If you want, you can have a quick view of stations of Hi-net and F-net
 (Only these two networks are supported).
-See :meth:`~HinetPy.client.Client.get_station_list` for details.
+See {meth}`~HinetPy.client.Client.get_station_list` for details.
 
+```pycon
 >>> stations = client.get_station_list("0101")
 >>> for station in stations:
 ...     print(station)
@@ -101,13 +104,15 @@ See :meth:`~HinetPy.client.Client.get_station_list` for details.
 0101 N.WNEH 45.2303 141.8806 -174.6
 0101 N.SFSH 45.2163 142.2254 -96.6
 ...
+```
 
 Hi-net/F-net has a lot of stations. If you only need a few of them, you can
 select the stations you want. Hi-net website also provide a web interface to
 do that, which is prefered for most cases. If you want to dynamically select
 stations in your script, you can try
-:meth:`~HinetPy.client.Client.select_stations`.
+{meth}`~HinetPy.client.Client.select_stations`.
 
+```pycon
 >>> # select only two stations of Hi-net if you know the station names
 >>> client.select_stations("0101", ["N.AAKH", "N.ABNH"])
 >>>
@@ -120,3 +125,4 @@ stations in your script, you can try
 >>> client.select_stations("0101", latitude=36, longitude=139, minradius=0, maxradius=3)
 >>> # select all Hi-net stations
 >>> client.select_stations("0101")
+```
