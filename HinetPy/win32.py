@@ -475,4 +475,4 @@ def merge(data, total_data, force_sort=False):
     if force_sort:  # add -s option to force sort
         cmd.append("-s")
 
-    subprocess.call(cmd, stdout=DEVNULL, stderr=DEVNULL)
+    subprocess.run(cmd, stdout=DEVNULL, stderr=DEVNULL, check=True)
