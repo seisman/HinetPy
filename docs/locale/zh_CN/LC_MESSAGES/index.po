@@ -27,8 +27,8 @@ msgid ""
 "accessing and processing seismic data from [NIED Hi-net](https://"
 "www.hinet.bosai.go.jp/)."
 msgstr ""
-"`HinetPy <https://github.com/seisman/HinetPy>`_ 是一个可用于申请和处理 `NIED "
-"Hi-net <https://www.hinet.bosai.go.jp/>`__ 地震数据的 Python 包。"
+"[HinetPy](https://github.com/seisman/HinetPy) 是一个可用于申请和处理 "
+"[NIED Hi-net](https://www.hinet.bosai.go.jp/) 地震数据的 Python 包。"
 
 #: ../../../README.md:1177
 msgid "Key Features"
@@ -99,8 +99,8 @@ msgid ""
 "joss.theoj.org/) since HinetPy v0.9.0. This is the **preferred** way for "
 "citation."
 msgstr ""
-"自 HinetPy v0.9.0 起，HinetPy 的介绍文章发表在 `The Journal of Open Source "
-"Software <https://joss.theoj.org/>`__ 上。这是首选的引用方式。"
+"自 HinetPy v0.9.0 起，HinetPy 的介绍文章发表在"
+"[The Journal of Open Source Software](https://joss.theoj.org/) 上。这是首选的引用方式。"
 
 #: ../../../README.md:1238
 msgid ""
@@ -119,8 +119,8 @@ msgid ""
 "(https://zenodo.org/records/12523911), choose the version you want to cite, "
 "and cite like this:"
 msgstr ""
-"如果想引用特定的 HinetPy 版本，可以访问 `Zenodo <https:////zenodo.org/"
-"records/12523911>`__，选择要引用的版本，然后像这样引用："
+"如果想引用特定的 HinetPy 版本，可以访问 "
+"[Zenodo](https://zenodo.org/records/12523911)，选择要引用的版本，然后像这样引用："
 
 #: ../../../README.md:1248
 msgid ""

@@ -27,7 +27,7 @@ msgstr "通道表文件中包含了通道的重要信息。"
 
 #: ../../appendix/channeltable.md:5
 msgid "Below is an example of one channel in channel table file:"
-msgstr "下面是通道表中一个通道的信息::"
+msgstr "下面是通道表中一个通道的信息："
 
 #: ../../appendix/channeltable.md:9
 msgid "\\[1\\]: Hexadecimal channel number (2-byte)"

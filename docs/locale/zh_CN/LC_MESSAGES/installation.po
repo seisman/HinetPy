@@ -49,15 +49,15 @@ msgstr "安装 HinetPy"
 
 #: ../../installation.md:13
 msgid "To install the latest **release/stable** version:"
-msgstr "安装最新的\\ **发布版/稳定版**::"
+msgstr "安装最新的**发布版/稳定版**："
 
 #: ../../installation.md:17
 msgid "Or install the **developing/unstable** version:"
-msgstr "安装最新的\\ **开发版/不稳定版**::"
+msgstr "安装最新的**开发版/不稳定版**："
 
 #: ../../installation.md:23
 msgid "If you want to uninstall HinetPy, just run:"
-msgstr "如果想要卸载 HinetPy，直接执行::"
+msgstr "如果想要卸载 HinetPy，直接执行："
 
 #: ../../installation.md:27
 msgid "Build win32tools"
@@ -70,8 +70,9 @@ msgid ""
 "www.hinet.bosai.go.jp/) to process win32 format data. HinetPy needs the "
 "`catwin32` and `win2sac_32` commands to process the win32 data."
 msgstr ""
-"`win32tools`_ 是 `NIED Hi-net`_ 提供的用于处理win32格式数据的一系列工具。"
-"HinetPy 需要其中的 `catwin32` 和 `win2sac_32`\\ 。"
+"[win32tools](https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?"
+"r=win32tools) 是 [NIED Hi-net](https://www.hinet.bosai.go.jp/) 提供的用于"
+"处理win32格式数据的一系列工具。HinetPy 需要其中的 `catwin32` 和 `win2sac_32`。"
 
 #: ../../installation.md:31
 msgid "Run the following commands to build win32tools:"
@@ -96,6 +97,6 @@ msgid ""
 "`catwin32` and `win2sac_32` are in your PATH. You can simply run the "
 "following command to copy the two commands into your HOME's bin directory:"
 msgstr ""
-"成果编译 win32tools 后，你还需要确保 `catwin32` 和 `win2sac_32` 位于你的 "
+"成功编译 win32tools 后，你还需要确保 `catwin32` 和 `win2sac_32` 位于你的 "
 "PATH 路径中。你可以直接执行如下命令将这两个可执行文件复制到你的 HOME 的 bin "
-"目录下::"
+"目录下："

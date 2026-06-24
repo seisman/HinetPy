@@ -70,10 +70,10 @@ msgstr "示例"
 
 #: ../../appendix/catwin32.md:24
 msgid "Merge all win32 files matching `20100101*.cnt` into one win32 file:"
-msgstr "将所有文件名满足 `20100101*.cnt` 的文件合并到一个文件中::"
+msgstr "将所有文件名满足 `20100101*.cnt` 的文件合并到一个文件中："
 
 #: ../../appendix/catwin32.md:28
 msgid ""
 "Merge several win32 files into one win32 file, sorted by date and channel "
 "number:"
-msgstr "将多个win32文件合并到一个win32文件中，并强制按日期和通道号排序::"
+msgstr "将多个win32文件合并到一个win32文件中，并强制按日期和通道号排序："

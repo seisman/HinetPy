@@ -92,7 +92,7 @@ msgid ""
 "seisman/FnetPy) to request waveform data in SEED format and extract "
 "instrumental responses in RESP or PZ format from SEED files."
 msgstr ""
-"强烈建议F-net数据用户使用 `FnetPy <http://github.com/seisman/FnetPy>`_ 从Fnet"
+"强烈建议F-net数据用户使用 [FnetPy](https://github.com/seisman/FnetPy) 从Fnet"
 "网站申请SEED格式的数据，并从SEED文件中提取RESP或PZ格式的仪器响应。"
 
 #: ../../tutorial/conversion.md:62

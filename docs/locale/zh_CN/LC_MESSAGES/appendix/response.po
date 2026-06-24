@@ -51,15 +51,15 @@ msgstr "其中，"
 
 #: ../../appendix/response.md:18
 msgid "{math}`G`: gain factor, given as column [8] in `V/unit_of_input`"
-msgstr ":math:`G`: 增益因子，在第8列给出，单位为 `V/unit_of_input`"
+msgstr "{math}`G`: 增益因子，在第8列给出，单位为 `V/unit_of_input`"
 
 #: ../../appendix/response.md:19
 msgid "{math}`h`: damping constant, given as column [11]"
-msgstr ":math:`h`: 阻尼常数，在第11列给出"
+msgstr "{math}`h`: 阻尼常数，在第11列给出"
 
 #: ../../appendix/response.md:20
 msgid "{math}`w`: natural angular frequency, given as column [10]"
-msgstr ":math:`w`: 自然角频率，在第10列给出"
+msgstr "{math}`w`: 自然角频率，在第10列给出"
 
 #: ../../appendix/response.md:22
 msgid ""
@@ -77,7 +77,7 @@ msgid ""
 "It's easy to know that the instrumental response has two poles and two "
 "zeros. It's also easy to calculate A0, with {math}`s=i*2*\\pi*f_n`."
 msgstr ""
-"易知，仪器响应有两个极点和零点，将 :math:`s=i*2*\\pi*f_n` 带入可算出 A0。"
+"易知，仪器响应有两个极点和零点，将 {math}`s=i*2*\\pi*f_n` 带入可算出 A0。"
 
 #: ../../appendix/response.md:31
 msgid "Preamplification"
@@ -102,7 +102,7 @@ msgstr ""
 #: ../../appendix/response.md:42
 msgid ""
 "Thus, the \"sensitivity\" in this stage is {math}`10^{\\frac{[12]}{20}}`."
-msgstr "因而，这一阶段的敏感度是 :math:`10^{\\frac{[12]}{20}}` 。"
+msgstr "因而，这一阶段的敏感度是 {math}`10^{\\frac{[12]}{20}}`。"
 
 #: ../../appendix/response.md:44
 msgid "Analog-Digital Conversion"
@@ -111,7 +111,7 @@ msgstr "模拟-数字转换"
 #: ../../appendix/response.md:46
 msgid ""
 "The gain in this stage is given by {math}`\\frac{1}{[13]}`, in `counts/V`."
-msgstr "这一阶段的增益是 :math:`\\frac{1}{[13]}` ，单位是 `counts/V` 。"
+msgstr "这一阶段的增益是 {math}`\\frac{1}{[13]}`，单位是 `counts/V`。"
 
 #: ../../appendix/response.md:48
 msgid "Digital Stage"

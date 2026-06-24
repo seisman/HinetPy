@@ -213,7 +213,7 @@ msgstr "每行最多不超过2000字符"
 
 #: ../../appendix/win2sac.md:65
 msgid "Below is an example:"
-msgstr "下面是一个示例::"
+msgstr "下面是一个示例："
 
 #: ../../appendix/win2sac.md:74
 msgid ""
@@ -227,11 +227,11 @@ msgstr ""
 msgid ""
 "If you still want to use this feature, you can modify Line 386 of "
 "`s4win2sacm.c` from:"
-msgstr "如果你依然想要使用这一特性，你需要将 `s4win2sacm.c` 的386行从::"
+msgstr "如果你依然想要使用这一特性，你需要将 `s4win2sacm.c` 的386行从："
 
 #: ../../appendix/win2sac.md:85
 msgid "to:"
-msgstr "修改为::"
+msgstr "修改为："
 
 #: ../../appendix/win2sac.md:92
 msgid "Parameter File"
@@ -248,7 +248,7 @@ msgstr ""
 
 #: ../../appendix/win2sac.md:98
 msgid "An example of a four line parameter file:"
-msgstr "四行的参数文件的示例::"
+msgstr "四行的参数文件的示例："
 
 #: ../../appendix/win2sac.md:107
 msgid ""

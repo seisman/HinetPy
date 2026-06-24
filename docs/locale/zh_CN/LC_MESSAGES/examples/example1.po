@@ -32,8 +32,8 @@ msgid ""
 "Below is an example catalog file in CSV format. The catalog is obtained from "
 "[IRIS web service](http://service.iris.edu/fdsnws/event/1/)."
 msgstr ""
-"下面的CSV格式的示例地震目录来自于 `IRIS web service <http://service.iris.edu/"
-"fdsnws/event/1/>`_ 。"
+"下面的CSV格式的示例地震目录来自于 [IRIS web service](http://service.iris.edu/"
+"fdsnws/event/1/)。"
 
 #: ../../examples/example1.md:11
 msgid "Python script:"
