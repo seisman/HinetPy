@@ -5,7 +5,9 @@ Tests for utils.py.
 from datetime import date, datetime
 
 import pytest
+import requests
 
+from HinetPy import utils
 from HinetPy.utils import (
     check_cmd_exists,
     check_package_release,
@@ -97,16 +99,40 @@ def test_to_datetime():
         to_datetime("2001023040506")
 
 
-def test_check_cmd_exists():
+def test_check_cmd_exists(monkeypatch):
     """
     Make sure that all commands exist.
     """
+    monkeypatch.setattr(utils.shutil, "which", lambda cmd: "/usr/bin/catwin32")
     assert check_cmd_exists("catwin32")
-    assert check_cmd_exists("win2sac_32")
+
+    monkeypatch.setattr(utils.shutil, "which", lambda cmd: None)
+    assert not check_cmd_exists("catwin32")
 
 
-def test_check_package_release():
+def test_check_package_release(monkeypatch):
     """
     Check if there is a new release.
     """
+
+    class Response:
+        status_code = 200
+
+        def __init__(self, latest_release):
+            self.latest_release = latest_release
+
+        def json(self):
+            return {"info": {"version": self.latest_release}}
+
+    monkeypatch.setattr(utils, "version", lambda package: "1.0.0")
+    monkeypatch.setattr(utils.requests, "get", lambda url, timeout: Response("1.0.0"))
     assert not check_package_release()
+
+    monkeypatch.setattr(utils.requests, "get", lambda url, timeout: Response("1.0.1"))
+    assert check_package_release()
+
+    response = Response("1.0.0")
+    response.status_code = 404
+    monkeypatch.setattr(utils.requests, "get", lambda url, timeout: response)
+    with pytest.raises(requests.HTTPError):
+        check_package_release()
