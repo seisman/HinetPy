@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.0 (2026-06-24)
+
+- Require Python 3.10 or newer.
+- Handle zero-valued geographic filters correctly.
+- **BREAKING**: `win32.extract_sacpz`: Rename parameter from `filter_by_chid` to `filter_by_id`
+
 ## 0.12.0 (2026-04-13)
 
 - Add support for NIED N-net acceleration data (`0150A`).
