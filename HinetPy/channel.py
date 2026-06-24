@@ -106,7 +106,7 @@ class Channel:
             msg = f"{chan_info}: Unit is not velocity. The PZ file may be wrong."
             warnings.warn(msg, category=RuntimeWarning, stacklevel=2)
         if self.period == 0.0:
-            msg = f"{chan_info}): Natural period = 0.0. Skipped."
+            msg = f"{chan_info}: Natural period = 0.0. Skipped."
             warnings.warn(message=msg, category=RuntimeWarning, stacklevel=2)
             return
 
