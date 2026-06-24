@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>catwin32 &mdash; HinetPy v0.12.1.dev25+gc99bdf172 documentation</title>
+  <title>catwin32 &mdash; HinetPy v0.12.1.dev31+g7bba8de6e documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=db64bd31"></script>
+      <script src="../_static/documentation_options.js?v=a22ff643"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -99,7 +99,7 @@
           <li class="breadcrumb-item"><a href="../appendix.html">Appendix</a></li>
       <li class="breadcrumb-item active">catwin32</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/appendix/catwin32.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/appendix/catwin32.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -112,36 +112,29 @@
 <p>Merger of two or more data sets saved in WIN32 format.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">catwin32</span> <span class="n">File_1</span> <span class="n">File_2</span> <span class="o">...</span> <span class="n">File_n</span> <span class="p">[</span><span class="o">-</span><span class="n">oOutFile</span> <span class="o">|</span> <span class="o">-</span><span class="n">o</span> <span class="n">OutFile</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">OutFile</span><span class="p">]</span>
-    <span class="n">File_n</span>        <span class="p">:</span> <span class="n">Input</span> <span class="n">WIN32</span> <span class="n">file</span> <span class="n">name</span> <span class="p">(</span><span class="n">accept</span> <span class="n">wildcard</span><span class="p">)</span><span class="o">.</span>
-    <span class="o">-</span><span class="n">o</span> <span class="n">OutFile</span>    <span class="p">:</span> <span class="n">Output</span> <span class="n">WIN32</span> <span class="n">file</span> <span class="n">name</span><span class="o">.</span> <span class="n">Defaults</span> <span class="n">to</span> <span class="n">stdout</span> <span class="k">if</span> <span class="o">-</span><span class="n">o</span> <span class="ow">is</span> <span class="n">ommitted</span><span class="o">.</span>
-    <span class="o">-</span><span class="n">s</span>            <span class="p">:</span> <span class="n">Sort</span> <span class="n">by</span> <span class="n">date</span> <span class="ow">and</span> <span class="n">channel</span> <span class="n">number</span><span class="o">.</span> <span class="n">This</span> <span class="n">option</span> <span class="ow">is</span> <span class="n">time</span> <span class="n">consuming</span><span class="o">.</span>
-    <span class="o">-</span><span class="n">h</span>            <span class="p">:</span> <span class="n">This</span> <span class="n">usage</span> <span class="nb">print</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>catwin32 File_1 File_2 ... File_n [-oOutFile | -o OutFile] [-s] [-h] &gt; [OutFile]
+    File_n        : Input WIN32 file name (accept wildcard).
+    -o OutFile    : Output WIN32 file name. Defaults to stdout if -o is ommitted.
+    -s            : Sort by date and channel number. This option is time consuming.
+    -h            : This usage print.
 </pre></div>
 </div>
-<p>By default, <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> will merge all input win32 files into one output
-win32 file, following the order they appear in arguments list. If the input
-files in arguments list is not sorted by date and <code class="docutils literal notranslate"><span class="pre">-s</span></code> option is not used,
-<code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> will fail to convert the output win32 format to SAC format,
-resulting an error <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">time</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">sort.</span></code></p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> will merge all input win32 files into one output win32 file, following the order they appear in arguments list. If the input files in arguments list is not sorted by date and <code class="docutils literal notranslate"><span class="pre">-s</span></code> option is not used, <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> will fail to convert the output win32 format to SAC format, resulting an error <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">time</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">sort.</span></code></p>
 <p>Two ways to solve this issue:</p>
 <ol class="arabic simple">
 <li><p>use <code class="docutils literal notranslate"><span class="pre">-s</span></code> option</p></li>
 <li><p>make sure all the win32 files in arguments list are sorted by date</p></li>
 </ol>
-<p>The first way is safer, but time-consuming. The second way is prefered.
-You can use <code class="docutils literal notranslate"><span class="pre">sorted(glob.glob(&quot;*.cnt&quot;))</span></code> in Python if the win32 files are
-named by time.</p>
+<p>The first way is safer, but time-consuming. The second way is prefered. You can use <code class="docutils literal notranslate"><span class="pre">sorted(glob.glob(&quot;*.cnt&quot;))</span></code> in Python if the win32 files are named by time.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>Merge all win32 files matching <code class="docutils literal notranslate"><span class="pre">20100101*.cnt</span></code> into one win32 file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">catwin32</span> <span class="mi">20100101</span><span class="o">*.</span><span class="n">cnt</span> <span class="o">-</span><span class="n">o</span> <span class="mf">0101_201001010000_5.</span><span class="n">cnt</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>catwin32 20100101*.cnt -o 0101_201001010000_5.cnt
 </pre></div>
 </div>
-<p>Merge several win32 files into one win32 file, sorted by date and
-channal number:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">catwin32</span> <span class="mf">1.</span><span class="n">cnt</span> <span class="mf">2.</span><span class="n">cnt</span> <span class="mf">3.</span><span class="n">cnt</span> <span class="o">-</span><span class="n">o</span> <span class="n">total</span><span class="o">.</span><span class="n">cnt</span> <span class="o">-</span><span class="n">s</span>
+<p>Merge several win32 files into one win32 file, sorted by date and channal number:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>catwin32 1.cnt 2.cnt 3.cnt -o total.cnt -s
 </pre></div>
 </div>
 </section>

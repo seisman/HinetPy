@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instrumental Response &mdash; HinetPy v0.12.1.dev25+gc99bdf172 documentation</title>
+  <title>Instrumental Response &mdash; HinetPy v0.12.1.dev31+g7bba8de6e documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=db64bd31"></script>
+      <script src="../_static/documentation_options.js?v=a22ff643"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
@@ -105,7 +105,7 @@
           <li class="breadcrumb-item"><a href="../appendix.html">Appendix</a></li>
       <li class="breadcrumb-item active">Instrumental Response</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/appendix/response.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/appendix/response.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -146,7 +146,7 @@ The amplification factor is determined by column [12] in dB.</p>
 <p>According to the definition of decibel of field quantities:</p>
 <div class="math notranslate nohighlight">
 \[L_{F}=20\log _{10}\left({\frac {F}{F_{0}}}\right)\!~\mathrm {dB} .\]</div>
-<p>Thus, the “sensitivity” in this stage is <span class="math notranslate nohighlight">\(10^{\frac{[12]}{20}}\)</span> .</p>
+<p>Thus, the “sensitivity” in this stage is <span class="math notranslate nohighlight">\(10^{\frac{[12]}{20}}\)</span>.</p>
 </section>
 <section id="analog-digital-conversion">
 <h2>Analog-Digital Conversion<a class="headerlink" href="#analog-digital-conversion" title="Link to this heading"></a></h2>
@@ -191,13 +191,13 @@ important for correct data processing.</p>
 <li><p>At line 19, do all channels have the same A0 Normalization factor (0.999953)?</p></li>
 <li><p>In the FAQ Q08, one equation is given to convert the A/D value from an WIN32
 file to the corresponding physical quantity. It is</p>
-<blockquote>
-<div><p>v = I * [13] / ([8] * 10 ^ ([12] / 20 ) )</p>
-</div></blockquote>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>v = I * [13] / ([8] * 10 ^ ([12] / 20 ) )
+</pre></div>
+</div>
 <p>If I want to generate a SAC PZ file, the CONSTANT will be</p>
-<blockquote>
-<div><p>CONSTANT = [8]*10^([12]/20) / [13] * A0 ?</p>
-</div></blockquote>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CONSTANT = [8]*10^([12]/20) / [13] * A0 ?
+</pre></div>
+</div>
 </li>
 </ol>
 </div></blockquote>
@@ -211,9 +211,9 @@ the zeros, the poles, and the A0 normalization factor can change
 depending on the parameters of the seismometer. The moving coil velocity
 type seismometer is used in Hi-net and its transfer function in the
 Laplace domain is given as:</p>
-<blockquote>
-<div><p>Gs^2/(s^2 + 2hws + w^2)</p>
-</div></blockquote>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Gs^2/(s^2 + 2hws + w^2)
+</pre></div>
+</div>
 <p>where G, h and w are the gain factor, the damping constant, and the
 natural angular frequency, respectively. Roots of the numerator and the
 denominator correspond to the zeros and the poles, respectively, and the

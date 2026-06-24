@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>根据CSV地震目录申请连续波形数据 &mdash; HinetPy v0.12.1.dev25+gc99bdf172 文档</title>
+  <title>根据CSV地震目录申请连续波形数据 &mdash; HinetPy v0.12.1.dev31+g7bba8de6e 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=32629fd1"></script>
+      <script src="../_static/documentation_options.js?v=97942d40"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=540d3cec"></script>
@@ -94,7 +94,7 @@
           <li class="breadcrumb-item"><a href="../examples.html">示例</a></li>
       <li class="breadcrumb-item active">根据CSV地震目录申请连续波形数据</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/examples/example1.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/examples/example1.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -105,7 +105,7 @@
   <section id="request-continuous-waveform-data-from-csv-catalog">
 <h1>根据CSV地震目录申请连续波形数据<a class="headerlink" href="#request-continuous-waveform-data-from-csv-catalog" title="链接到此标题。"></a></h1>
 <p>这个例子展示了如何根据CSV格式的地震目录申请波形数据。</p>
-<p>下面的CSV格式的示例地震目录来自于 <a class="reference external" href="http://service.iris.edu/fdsnws/event/1/">IRIS web service</a> 。</p>
+<p>Below is an example catalog file in CSV format. The catalog is obtained from <a class="reference external" href="http://service.iris.edu/fdsnws/event/1/">IRIS web service</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#EventID | Time | Latitude | Longitude | Depth/km | Author | Catalog | Contributor | ContributorID | MagType | Magnitude | MagAuthor | EventLocationName</span>
 <span class="mi">9993759</span><span class="o">|</span><span class="mi">2017</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">22</span><span class="n">T04</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">22</span><span class="o">|-</span><span class="mf">6.2145</span><span class="o">|</span><span class="mf">155.1442</span><span class="o">|</span><span class="mf">135.0</span><span class="o">|</span><span class="n">pt</span><span class="p">,</span><span class="n">us</span><span class="p">,</span><span class="n">at</span><span class="o">|</span><span class="n">NEIC</span> <span class="n">PDE</span><span class="o">|</span><span class="n">us</span><span class="o">|</span><span class="n">us10007uph</span><span class="p">,</span><span class="n">pt17022050</span><span class="p">,</span><span class="n">at00ok5z6p</span><span class="o">|</span><span class="n">mww</span><span class="o">|</span><span class="mf">7.9</span><span class="o">|</span><span class="n">us</span><span class="o">|</span><span class="n">SOLOMON</span> <span class="n">ISLANDS</span>
 <span class="mi">9993037</span><span class="o">|</span><span class="mi">2017</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">19</span><span class="n">T23</span><span class="p">:</span><span class="mi">04</span><span class="p">:</span><span class="mi">21</span><span class="o">|-</span><span class="mf">10.3433</span><span class="o">|</span><span class="mf">161.318</span><span class="o">|</span><span class="mf">36.0</span><span class="o">|</span><span class="n">pt</span><span class="p">,</span><span class="n">us</span><span class="p">,</span><span class="n">at</span><span class="o">|</span><span class="n">NEIC</span> <span class="n">PDE</span><span class="o">|</span><span class="n">us</span><span class="o">|</span><span class="n">us10007u7n</span><span class="p">,</span><span class="n">at00ok1ura</span><span class="p">,</span><span class="n">pt17019050</span><span class="o">|</span><span class="n">mww</span><span class="o">|</span><span class="mf">6.5</span><span class="o">|</span><span class="n">us</span><span class="o">|</span><span class="n">SOLOMON</span> <span class="n">ISLANDS</span>

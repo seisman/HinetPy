@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>获取连续波形数据 &mdash; HinetPy v0.12.1.dev25+gc99bdf172 文档</title>
+  <title>获取连续波形数据 &mdash; HinetPy v0.12.1.dev31+g7bba8de6e 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=32629fd1"></script>
+      <script src="../_static/documentation_options.js?v=97942d40"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=540d3cec"></script>
@@ -101,7 +101,7 @@
           <li class="breadcrumb-item"><a href="../tutorial.html">教程</a></li>
       <li class="breadcrumb-item active">获取连续波形数据</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/tutorial/get-continuous-waveform.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/tutorial/get-continuous-waveform.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -111,7 +111,9 @@
              
   <section id="get-continuous-waveform">
 <h1>获取连续波形数据<a class="headerlink" href="#get-continuous-waveform" title="链接到此标题。"></a></h1>
-<p>本教程将展示如何通过 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> 用多种方式从Hi-net申请连续波形数据。</p>
+<p>This tutorial shows how to use
+<a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> to request continuous
+waveform data from Hi-net in different ways.</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>HinetPy和Hi-net网站中的所有时间都是日本标准时间（东九区，GMT+0900）。</p>
@@ -119,7 +121,7 @@
 <section id="basic-usage">
 <h2>基本用法<a class="headerlink" href="#basic-usage" title="链接到此标题。"></a></h2>
 <p>申请Hi-net台网从2010-01-01T00:00 (GMT+0900)开始的20分钟的数据：</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;201001010000&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="go">[2017-03-11 17:46:20] INFO: 2010-01-01 00:00 ~20</span>
@@ -131,21 +133,24 @@
 <span class="go">0101_201001010000_20.cnt 0101_20100101.ch</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> 中 <code class="docutils literal notranslate"><span class="pre">starttime</span></code> 还可以用其他常见格式：</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01T00:00&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<p><a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> also supports
+<code class="docutils literal notranslate"><span class="pre">starttime</span></code> in other common used formats:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01T00:00&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01 00:00&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>并且 <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(位于 Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> 允许用户更灵活地操作日期和时间:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<p>and <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(位于 Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> to allow users manipulate datetimes in a
+more flexible way.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># JST time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>现在我们得到了：</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">0101_201001010000_20.cnt</span></code>: win32格式的波形数据，默认文件名格式为 s <code class="docutils literal notranslate"><span class="pre">CODE_YYYYmmddHHMM_LENGTH.cnt</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">0101_20100101.ch</span></code>: ctable数据（即通道表，类似于仪器响应文件），默认文件名格式为 <code class="docutils literal notranslate"><span class="pre">CODE_YYYYmmdd.ch</span></code> 。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0101_201001010000_20.cnt</span></code>: waveform data in win32 format, default name format is <code class="docutils literal notranslate"><span class="pre">CODE_YYYYmmddHHMM_LENGTH.cnt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0101_20100101.ch</span></code>: ctable (aka channel table, similar to instrument response file),
+default name format is <code class="docutils literal notranslate"><span class="pre">CODE_YYYYmmdd.ch</span></code>.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
@@ -161,7 +166,7 @@
 <section id="custom-way">
 <h2>自定义<a class="headerlink" href="#custom-way" title="链接到此标题。"></a></h2>
 <p>你可以自定义数据文件和通道表的文件名，以及输出目录。</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># JST time</span>
