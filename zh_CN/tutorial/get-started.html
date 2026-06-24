@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>入门 &mdash; HinetPy v0.12.1.dev35+gec4090b3b 文档</title>
+  <title>入门 &mdash; HinetPy v0.12.1.dev36+g6e0a8badd 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=12ff9f85"></script>
+      <script src="../_static/documentation_options.js?v=e8d340d0"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=540d3cec"></script>
@@ -118,8 +118,7 @@
 <p>现在开始吧。</p>
 <section id="start-python">
 <h2>启动Python<a class="headerlink" href="#start-python" title="链接到此标题。"></a></h2>
-<p>Run <code class="docutils literal notranslate"><span class="pre">python</span></code> (or <code class="docutils literal notranslate"><span class="pre">ipython</span></code> if you have it), and make sure you're using Python
-3.10 or above:</p>
+<p>在终端中运行 <code class="docutils literal notranslate"><span class="pre">python</span></code> （或 <code class="docutils literal notranslate"><span class="pre">ipython</span></code> ），并确保你所使用的Python版本大于等于3.10::</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python
 <span class="go">Python 3.11.6 | packaged by conda-forge | (main, Oct  3 2023, 10:40:35) [GCC 12.3.0] on linux</span>
 <span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
@@ -129,8 +128,7 @@
 </section>
 <section id="create-a-client">
 <h2>创建一个客户端<a class="headerlink" href="#create-a-client" title="链接到此标题。"></a></h2>
-<p>HinetPy provide a <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client" title="HinetPy.client.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a> class, which provide several
-methods to help you get waveform data.</p>
+<p>HinetPy 中的类 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client" title="HinetPy.client.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a> 提供了多个方法帮助你获取波形数据。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>  <span class="c1"># use your own account.</span>
 </pre></div>
@@ -142,7 +140,7 @@ methods to help you get waveform data.</p>
 </section>
 <section id="do-checks">
 <h2>做一些检查<a class="headerlink" href="#do-checks" title="链接到此标题。"></a></h2>
-<p>Let our <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.doctor" title="HinetPy.client.Client.doctor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">doctor()</span></code></a> checks if everything goes right:</p>
+<p>用 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.doctor" title="HinetPy.client.Client.doctor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">doctor()</span></code></a> 检查是否一切正常：</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">doctor</span><span class="p">()</span>
 <span class="go">[2019-06-14 16:11:47] INFO: You&#39;re using the latest release (v0.6.3).</span>
 <span class="go">[2019-06-14 16:11:46] INFO: Hi-net web service is NOT updated.</span>
@@ -150,17 +148,11 @@ methods to help you get waveform data.</p>
 <span class="go">[2019-06-14 16:11:47] INFO: win2sac_32: /home/user/bin/win2sac_32.</span>
 </pre></div>
 </div>
-<p>Congratulations! You're using the latest version of HinetPy, and the Hi-net
-web service is NOT updated since the release of HinetPy, which means HinetPy
-is still working. And you have <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> and <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> in your PATH.
-Everything seems OK.</p>
+<p>恭喜你！你正在使用HinetPy的最新版本，且Hi-net网站在这个版本HinetPy发布之后没有再更新，这意味着HinetPy依然可以正常工作。并且，<code class="docutils literal notranslate"><span class="pre">catwin32</span></code> 和 <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 在你的PATH中。一切看起来都正常。</p>
 </section>
 <section id="network-codes">
 <h2>台网代码<a class="headerlink" href="#network-codes" title="链接到此标题。"></a></h2>
-<p>Hi-net website provide seismic waveform data from several organizations and
-networks, e.g. Hi-net, F-net and V-net. Each network has a unique network code.
-In order to request waveform data from specified network, you need to know
-the network code. See <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.info" title="HinetPy.client.Client.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> for details.</p>
+<p>Hi-net网站提供了来自于多个组织或台网的地震波形数据，比如Hi-net、F-net和V-net。每个台网有唯一的台网代码。为了申请指定台网的波形数据，你必须首先知道台网代码。使用 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.info" title="HinetPy.client.Client.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> 以了解更多信息。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 <span class="go">0101   : NIED Hi-net</span>
 <span class="go">0103   : NIED F-net (broadband)</span>
@@ -184,16 +176,12 @@ the network code. See <a class="reference internal" href="../api/HinetPy.client.
 <p>现在我们知道Hi-net开始于2004-04-01，总共有2336个通道（约780个台站）。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>Users are highly recommended to use <a class="reference external" href="https://github.com/seisman/FnetPy">FnetPy</a>
-if they need F-net data, since HinetPy cannot deal with F-net instrumental
-responses correctly.</p>
+<p>强烈建议Fnet用户使用 <code class="docutils literal notranslate"><span class="pre">FnetPy</span> <span class="pre">&lt;https://github.com/seisman/FnetPy&gt;</span></code>_ 获取Fnet数据，因而HinetPy无法正确处理F-net的仪器响应。</p>
 </div>
 </section>
 <section id="stations">
 <h2>台站<a class="headerlink" href="#stations" title="链接到此标题。"></a></h2>
-<p>If you want, you can have a quick view of stations of Hi-net and F-net
-(Only these two networks are supported).
-See <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_station_list" title="HinetPy.client.Client.get_station_list"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_station_list()</span></code></a> for details.</p>
+<p>你可以调用 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_station_list" title="HinetPy.client.Client.get_station_list"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_station_list()</span></code></a> 以查看Hi-net和F-net台网的台站信息（目前仅支持查看这两个台网的台站信息）。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
@@ -206,11 +194,7 @@ See <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.clien
 <span class="go">...</span>
 </pre></div>
 </div>
-<p>Hi-net/F-net has a lot of stations. If you only need a few of them, you can
-select the stations you want. Hi-net website also provide a web interface to
-do that, which is prefered for most cases. If you want to dynamically select
-stations in your script, you can try
-<a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.select_stations" title="HinetPy.client.Client.select_stations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">select_stations()</span></code></a>.</p>
+<p>Hi-net/F-net有很多台。如果你只需要申请其中某些台站的数据，你可以选择你需要的台站。Hi-net网站提供了一个网页界面以筛选台站，通常建议值接使用这一网页界面。如果你想要在申请的过程中动态选择台站，你可以使用 <a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.select_stations" title="HinetPy.client.Client.select_stations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">select_stations()</span></code></a> 。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># select only two stations of Hi-net if you know the station names</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;N.AAKH&quot;</span><span class="p">,</span> <span class="s2">&quot;N.ABNH&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt;</span>

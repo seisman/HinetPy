@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>win2sac &mdash; HinetPy v0.12.1.dev35+gec4090b3b 文档</title>
+  <title>win2sac &mdash; HinetPy v0.12.1.dev36+g6e0a8badd 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=12ff9f85"></script>
+      <script src="../_static/documentation_options.js?v=e8d340d0"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=540d3cec"></script>
@@ -58,8 +58,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#notes">注解</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#output-unit">输出的单位</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#filename-format">文件名格式</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#channel-number-file-format">Channel Number File Format</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameter-file">Parameter File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#channel-number-file-format">通道号文件格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameter-file">参数文件</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#component">分量</a></li>
 </ul>
 </li>
@@ -134,37 +134,37 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">winfile</span></code></p></td>
-<td><p><strong>One</strong> win32 file to be converted.</p></td>
+<td><p><strong>一个</strong> 要转换的win32文件。</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ch_no</span></code></p></td>
 <td><p>Channel numbers to be extracted. It can be a channel number such as <code class="docutils literal notranslate"><span class="pre">3345</span></code>, a comma-separated list such as <code class="docutils literal notranslate"><span class="pre">3345,3f65,4f75</span></code>, or a file containing channel numbers. See details below.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sacfile</span></code></p></td>
-<td><p>Extension of output SAC files.</p></td>
+<td><p>输出的SAC文件的后缀</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">outdir</span></code></p></td>
-<td><p>Output directory. Default is current directory if not specified or is <code class="docutils literal notranslate"><span class="pre">-</span></code>. The output directory must exist.</p></td>
+<td><p>输出目录名。若未指定或值为 <code class="docutils literal notranslate"><span class="pre">-</span></code> 则默认为当前目录。输出目录必须存在。</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-p(prmfile)</span></code></p></td>
-<td><p>Specify parameter file. Default name is <code class="docutils literal notranslate"><span class="pre">win.prm</span></code>. See details below.</p></td>
+<td><p>指定参数文件。默认文件名是 <code class="docutils literal notranslate"><span class="pre">win.prm</span></code> 。详情见下面的介绍。</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-Y</span></code></p></td>
-<td><p>Use wild channel code, i.e. organization id + network id + channel id.</p></td>
+<td><p>使用宽通道码。组织ID + 台网ID + 通道ID。</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-e</span></code></p></td>
-<td><p>Specify SAC/BIN output to use endian of current machine. Defaults to use big endian.</p></td>
+<td><p>指定SAC/BIN输出时所使用的字节序。默认使用大字节序。</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-b[BIN]</span></code></p></td>
-<td><p>Extension of BIN format. Defaults to <code class="docutils literal notranslate"><span class="pre">bin</span></code>.</p></td>
+<td><p>BIN格式文件的后缀。默认值为 <code class="docutils literal notranslate"><span class="pre">bin</span></code> 。</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-a[ASC]</span></code></p></td>
-<td><p>Extension of ASC format. Defaults to <code class="docutils literal notranslate"><span class="pre">asc</span></code>.</p></td>
+<td><p>ASC格式文件的后缀。默认值为 <code class="docutils literal notranslate"><span class="pre">asc</span></code> 。</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-r(RATIO)</span></code></p></td>
-<td><p>The ratio to multiply for BIN/ASC format. Defaults to 1.0.</p></td>
+<td><p>以BIN/ASC格式输出时要乘以的比例。默认值为1.0。</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-m(PMAX)</span></code></p></td>
-<td><p>Maximum number of data points. Defaults to <code class="docutils literal notranslate"><span class="pre">2000000</span></code>. If your data has more data points, you must increase this value.</p></td>
+<td><p>数据点的最大数目。默认值为 <code class="docutils literal notranslate"><span class="pre">2000000</span></code> 。如果你的数据有更多的点数，必须增加该值。</p></td>
 </tr>
 </tbody>
 </table>
@@ -181,30 +181,25 @@
 <h3>输出的单位<a class="headerlink" href="#output-unit" title="链接到此标题。"></a></h3>
 <div class="admonition important">
 <p class="admonition-title">重要</p>
-<p>The SAC files extracted by <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> are always in physical quality, not in
-digital counts.</p>
+<p><code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 提取的SAC文件总是真实的物理量，而不是digital counts。</p>
 </div>
-<p>The raw data saved in win32 format is in digital counts. When extracting data
-from win32 format, <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> always convert digital counts to the
-corresponding physical quantity by remove sensitivity from waveform data, and
-multiply by 1.0e9 to convert unit from meter to nanometer.</p>
-<p>The output SAC files are in <code class="docutils literal notranslate"><span class="pre">nm/s</span></code>, <code class="docutils literal notranslate"><span class="pre">nm/s/s</span></code> or <code class="docutils literal notranslate"><span class="pre">micro</span> <span class="pre">radian</span></code>.</p>
+<p>win32格式中保存的原始数据是digital counts。当从win32格式中提取数据时， <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 总是从波形中去除灵敏度以将digital counts转换为对应的物理量，并乘以1.0e9将单位从米转换为纳米。</p>
+<p>输出的SAC文件的单位是 <code class="docutils literal notranslate"><span class="pre">nm/s</span></code> 、 <code class="docutils literal notranslate"><span class="pre">nm/s/s</span></code> 或 <code class="docutils literal notranslate"><span class="pre">micro</span> <span class="pre">radian</span></code></p>
 </section>
 <section id="filename-format">
 <h3>文件名格式<a class="headerlink" href="#filename-format" title="链接到此标题。"></a></h3>
-<p>The default filename format is <code class="docutils literal notranslate"><span class="pre">STATION.COMPONENT.EXTENSION</span></code> (e.g.
-<code class="docutils literal notranslate"><span class="pre">N.NABC.U.SAC</span></code>). You can only modify the extensions.</p>
+<p>默认的文件名格式是 <code class="docutils literal notranslate"><span class="pre">STATION.COMPONENT.EXTENSION</span></code> （如 <code class="docutils literal notranslate"><span class="pre">N.NABC.U.SAC</span></code> ）。你可以修改此后缀名。</p>
 </section>
 <section id="channel-number-file-format">
-<h3>Channel Number File Format<a class="headerlink" href="#channel-number-file-format" title="链接到此标题。"></a></h3>
+<h3>通道号文件格式<a class="headerlink" href="#channel-number-file-format" title="链接到此标题。"></a></h3>
 <p>你可以将所有你要提取数据的通道号保存到一个文件中。</p>
 <ol class="arabic simple">
-<li><p>Lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code> are comment lines and skipped.</p></li>
-<li><p>Blank lines are skipped.</p></li>
-<li><p>Channel numbers can be separated by spaces, tabs, or commas.</p></li>
-<li><p>Each line can contain no more than 2000 characters.</p></li>
+<li><p>以 <code class="docutils literal notranslate"><span class="pre">#</span></code> 开头的行为注释行会被跳过</p></li>
+<li><p>空行会被跳过</p></li>
+<li><p>通道号可以用空格、制表符或逗号分隔</p></li>
+<li><p>每行最多不超过2000字符</p></li>
 </ol>
-<p>Below is an example:</p>
+<p>下面是一个示例::</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>6034,6035
 # 6036 # this line is ignored
 6038 6039
@@ -212,40 +207,34 @@ multiply by 1.0e9 to convert unit from meter to nanometer.</p>
 </div>
 <div class="admonition danger">
 <p class="admonition-title">危险</p>
-<p>Using this feature may result in data loss, as <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> will exit if data
-of any channel doesn't exist in the win32 file.</p>
-<p>If you still want to use this feature, you can modify Line 386 of
-<code class="docutils literal notranslate"><span class="pre">s4win2sacm.c</span></code> from:</p>
+<p>使用这一特性可能会造成数据损失。因为 <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 程序在某个通道的数据不存在时会自动退出。</p>
+<p>如果你依然想要使用这一特性，你需要将 <code class="docutils literal notranslate"><span class="pre">s4win2sacm.c</span></code> 的386行从::</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Data for channel %x not existed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sysch</span><span class="p">);</span>
 <span class="n">iRet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>to:</p>
+<p>修改为::</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Data for channel %x not existed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sysch</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </section>
 <section id="parameter-file">
-<h3>Parameter File<a class="headerlink" href="#parameter-file" title="链接到此标题。"></a></h3>
-<p>win32 system need a parameter file to run. This parameter file has many lines.
-However, <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> only uses the 2nd and 4th lines, and ignores all other
-lines.</p>
-<p>An example of a four line parameter file:</p>
+<h3>参数文件<a class="headerlink" href="#parameter-file" title="链接到此标题。"></a></h3>
+<p>win32系统需要一个参数文件才能执行。这个参数文件有很多行。然而， <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 只使用了第2和第4行并忽略其它行。</p>
+<p>四行的参数文件的示例::</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
 0101_20100101.ch
 .
 .
 </pre></div>
 </div>
-<p>The 2nd line is the name of channel table file. <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> need to read this
-file to extract waveform of specified channels.</p>
+<p>第二行是通道表文件名。 <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 需要读取该文件以提取指定通道的波形。</p>
 <p>第四行是震相拾取文件的路径。大多数情况下都没有用。</p>
 </section>
 <section id="component">
 <h3>分量<a class="headerlink" href="#component" title="链接到此标题。"></a></h3>
-<p>The component information is written to SAC header variables <code class="docutils literal notranslate"><span class="pre">CPMAZ</span></code> and
-<code class="docutils literal notranslate"><span class="pre">CMPINC</span></code>.</p>
+<p>分量信息会被写到SAC头段变量 <code class="docutils literal notranslate"><span class="pre">CMPAZ</span></code> 和 <code class="docutils literal notranslate"><span class="pre">CMPINC</span></code> 中。</p>
 <ul class="simple">
 <li><p>U/Z: CMPAZ = 0.0, CMPINC = 0.0</p></li>
 <li><p>N/X: CMPAZ = 0.0, CMPINC = 90.0</p></li>
@@ -255,7 +244,7 @@ file to extract waveform of specified channels.</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>传感器的方位角是 <strong>不</strong> 精确的。</p>
-<p>See <a class="reference external" href="https://hinetwww11.bosai.go.jp/auth/direc/?LANG=en">https://hinetwww11.bosai.go.jp/auth/direc/?LANG=en</a> for details.</p>
+<p>详情参考 https://hinetwww11.bosai.go.jp/auth/direc/?LANG 。</p>
 </div>
 </section>
 </section>

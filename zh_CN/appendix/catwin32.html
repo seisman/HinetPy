@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>catwin32 &mdash; HinetPy v0.12.1.dev35+gec4090b3b 文档</title>
+  <title>catwin32 &mdash; HinetPy v0.12.1.dev36+g6e0a8badd 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=12ff9f85"></script>
+      <script src="../_static/documentation_options.js?v=e8d340d0"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=540d3cec"></script>
@@ -120,21 +120,21 @@
     -h            : This usage print.
 </pre></div>
 </div>
-<p>By default, <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> will merge all input win32 files into one output win32 file, following the order they appear in arguments list. If the input files in arguments list is not sorted by date and <code class="docutils literal notranslate"><span class="pre">-s</span></code> option is not used, <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> will fail to convert the output win32 format to SAC format, resulting an error <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">time</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">sort.</span></code></p>
+<p>默认情况下， <code class="docutils literal notranslate"><span class="pre">catwin32</span></code> 会将所有输入的win32文件按照它们在参数列表中出现的顺序合并到输出的win32文件中。如果参数列表中输入文件不是按照日期排序且没有使用 <code class="docutils literal notranslate"><span class="pre">-s</span></code> 选项，则 <code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 无法将输出的win32格式转换为SAC格式，并报错 <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">time</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">sort.</span></code>。</p>
 <p>两个解决此问题的方法：</p>
 <ol class="arabic simple">
-<li><p>use <code class="docutils literal notranslate"><span class="pre">-s</span></code> option</p></li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">-s</span></code> 选项</p></li>
 <li><p>确保参数列表中所有win32文件是按照日期排序的</p></li>
 </ol>
-<p>The first way is safer, but time-consuming. The second way is prefered. You can use <code class="docutils literal notranslate"><span class="pre">sorted(glob.glob(&quot;*.cnt&quot;))</span></code> in Python if the win32 files are named by time.</p>
+<p>第一种方法更安全但更耗时，因而倾向于采用第二种方式。如果win32文件是按照日期命名的，则在Python里可以使用 <code class="docutils literal notranslate"><span class="pre">sorted(glob.glob(&quot;*.cnt&quot;))</span></code> 以保证输入文件是按照时间先后排序的。</p>
 </section>
 <section id="examples">
 <h2>示例<a class="headerlink" href="#examples" title="链接到此标题。"></a></h2>
-<p>Merge all win32 files matching <code class="docutils literal notranslate"><span class="pre">20100101*.cnt</span></code> into one win32 file:</p>
+<p>将所有文件名满足 <code class="docutils literal notranslate"><span class="pre">20100101*.cnt</span></code> 的文件合并到一个文件中::</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>catwin32 20100101*.cnt -o 0101_201001010000_5.cnt
 </pre></div>
 </div>
-<p>Merge several win32 files into one win32 file, sorted by date and channal number:</p>
+<p>将多个win32文件合并到一个win32文件中，并强制按日期和通道号排序::</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>catwin32 1.cnt 2.cnt 3.cnt -o total.cnt -s
 </pre></div>
 </div>

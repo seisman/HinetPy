@@ -17,7 +17,7 @@ Two ways to solve this issue:
 1.  use `-s` option
 2.  make sure all the win32 files in arguments list are sorted by date
 
-The first way is safer, but time-consuming. The second way is prefered. You can use `sorted(glob.glob("*.cnt"))` in Python if the win32 files are named by time.
+The first way is safer, but time-consuming. The second way is preferred. You can use `sorted(glob.glob("*.cnt"))` in Python if the win32 files are named by time.
 
 ## Examples
 
@@ -25,6 +25,6 @@ Merge all win32 files matching `20100101*.cnt` into one win32 file:
 
     catwin32 20100101*.cnt -o 0101_201001010000_5.cnt
 
-Merge several win32 files into one win32 file, sorted by date and channal number:
+Merge several win32 files into one win32 file, sorted by date and channel number:
 
     catwin32 1.cnt 2.cnt 3.cnt -o total.cnt -s

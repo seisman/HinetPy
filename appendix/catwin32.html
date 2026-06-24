@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>catwin32 &mdash; HinetPy v0.12.1.dev35+gec4090b3b documentation</title>
+  <title>catwin32 &mdash; HinetPy v0.12.1.dev36+g6e0a8badd documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8472e93f"></script>
+      <script src="../_static/documentation_options.js?v=bbf3d61f"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -125,7 +125,7 @@
 <li><p>use <code class="docutils literal notranslate"><span class="pre">-s</span></code> option</p></li>
 <li><p>make sure all the win32 files in arguments list are sorted by date</p></li>
 </ol>
-<p>The first way is safer, but time-consuming. The second way is prefered. You can use <code class="docutils literal notranslate"><span class="pre">sorted(glob.glob(&quot;*.cnt&quot;))</span></code> in Python if the win32 files are named by time.</p>
+<p>The first way is safer, but time-consuming. The second way is preferred. You can use <code class="docutils literal notranslate"><span class="pre">sorted(glob.glob(&quot;*.cnt&quot;))</span></code> in Python if the win32 files are named by time.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
@@ -133,7 +133,7 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>catwin32 20100101*.cnt -o 0101_201001010000_5.cnt
 </pre></div>
 </div>
-<p>Merge several win32 files into one win32 file, sorted by date and channal number:</p>
+<p>Merge several win32 files into one win32 file, sorted by date and channel number:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>catwin32 1.cnt 2.cnt 3.cnt -o total.cnt -s
 </pre></div>
 </div>

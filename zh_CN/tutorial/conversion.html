@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>数据转换 &mdash; HinetPy v0.12.1.dev35+gec4090b3b 文档</title>
+  <title>数据转换 &mdash; HinetPy v0.12.1.dev36+g6e0a8badd 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=12ff9f85"></script>
+      <script src="../_static/documentation_options.js?v=e8d340d0"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=540d3cec"></script>
@@ -111,9 +111,7 @@
              
   <section id="data-conversion">
 <h1>数据转换<a class="headerlink" href="#data-conversion" title="链接到此标题。"></a></h1>
-<p>Hi-net provide waveform data in win32 format and instrument responses in a
-channel table. <a class="reference internal" href="../api/HinetPy.win32.html#module-HinetPy.win32" title="HinetPy.win32"><code class="xref py py-mod docutils literal notranslate"><span class="pre">win32</span></code></a> can convert them into SAC and SAC polezero
-formats.</p>
+<p>Hi-net提供了win32格式的波形数据和通道表形式的仪器响应。 <a class="reference internal" href="../api/HinetPy.win32.html#module-HinetPy.win32" title="HinetPy.win32"><code class="xref py py-mod docutils literal notranslate"><span class="pre">win32</span></code></a> 可以将其转换为SAC和SAC零极点格式。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">win32</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;0101_201001010000_20.cnt&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ctable</span> <span class="o">=</span> <span class="s2">&quot;0101_20100101.ch&quot;</span>
@@ -128,18 +126,13 @@ formats.</p>
 <div class="admonition important">
 <p class="admonition-title">重要</p>
 <p>从win32格式转换得到的SAC文件的单位不是digital counts！！！</p>
-<p><code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> automatically removes sensitivity from waveforms and multipy by
-1.0e9. Thus, the SAC files are velocity in nm/s or accelaration in nm/s/s.</p>
+<p><code class="docutils literal notranslate"><span class="pre">win2sac_32</span></code> 会自动从波形中去除灵敏度，并乘以1.0e9。因而，SAC文件是以 nm/s 为单位的速度或以 nm/s/s 为单位的加速度。</p>
 </div>
-<p>The SAC files have a default filename <code class="docutils literal notranslate"><span class="pre">STATION.COMPONENT.SAC</span></code> (e.g.
-<code class="docutils literal notranslate"><span class="pre">N.NABC.U.SAC</span></code>). You can specify another SAC suffix and a different output
-directory.</p>
+<p>SAC文件的默认文件名格式为 <code class="docutils literal notranslate"><span class="pre">STATION.COMPONENT.SAC</span></code> （例如 <code class="docutils literal notranslate"><span class="pre">N.NABC.U.SAC</span></code> ）。你可以指定其他SAC文件后缀和输出目录。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;SAC&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If you want to extract only a small subset of channels, you can use
-<code class="docutils literal notranslate"><span class="pre">filter_by_id</span></code>, <code class="docutils literal notranslate"><span class="pre">filter_by_name</span></code> and/or <code class="docutils literal notranslate"><span class="pre">filter_by_component</span></code> to filter the
-channels. They accept a list of string or a string contains wildcard.</p>
+<p>如果你只想提取一部分通道的波形数据，你可以使用 <code class="docutils literal notranslate"><span class="pre">filter_by_id</span></code> 、 <code class="docutils literal notranslate"><span class="pre">filter_by_name</span></code> 和/或 <code class="docutils literal notranslate"><span class="pre">filter_by_component</span></code> 以筛选需要的通道。这些参数都可以接受字符串列表或者包含通配符的字符串。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract 3 channles by id</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;3e83&quot;</span><span class="p">,</span> <span class="s2">&quot;3e84&quot;</span><span class="p">,</span> <span class="s2">&quot;3e85&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match &#39;N.NA*&#39;</span>
@@ -151,28 +144,21 @@ channels. They accept a list of string or a string contains wildcard.</p>
 </section>
 <section id="extract-pz">
 <h2>提取零极点文件<a class="headerlink" href="#extract-pz" title="链接到此标题。"></a></h2>
-<p><a class="reference internal" href="../api/HinetPy.win32.html#HinetPy.win32.extract_sacpz" title="HinetPy.win32.extract_sacpz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_sacpz()</span></code></a> can convert instrumental responses
-from Hi-net's channel table to SAC PZ format.</p>
+<p><a class="reference internal" href="../api/HinetPy.win32.html#HinetPy.win32.extract_sacpz" title="HinetPy.win32.extract_sacpz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_sacpz()</span></code></a> 可以将仪器响应从Hi-net的通道表格式转换为SAC PZ格式。</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p>此功能仅对Hi-net台网有效。</p>
-<p>F-net data users are highly recommended to use
-<a class="reference external" href="https://github.com/seisman/FnetPy">FnetPy</a> to request waveform data in SEED
-format and extract instrumental responses in RESP or PZ format from SEED files.</p>
+<p>强烈建议F-net数据用户使用 <code class="docutils literal notranslate"><span class="pre">FnetPy</span> <span class="pre">&lt;http://github.com/seisman/FnetPy&gt;</span></code>_ 从Fnet网站申请SEED格式的数据，并从SEED文件中提取RESP或PZ格式的仪器响应。</p>
 </div>
 <p>提取所有通道的仪器响应并保存为SACPZ文件：</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The SACPZ file has a default name <code class="docutils literal notranslate"><span class="pre">STATION.COMPONENT.SAC_PZ</span></code> (e.g.
-<code class="docutils literal notranslate"><span class="pre">N.NABC.U.SAC_PZ</span></code>). You can specify another SACPZ suffix and a different output
-directory.</p>
+<p>SACPZ文件的默认文件名格式为 <code class="docutils literal notranslate"><span class="pre">STATION.COMPONENT.SAC_PZ</span></code> （例如 <code class="docutils literal notranslate"><span class="pre">N.NABC.U.SAC_PZ</span></code> ）。你可以指定其他SACPZ文件后缀和输出目录。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SACPZ&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;PZ/&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If you want to extract only a small subset of channels, you can use
-<code class="docutils literal notranslate"><span class="pre">filter_by_id</span></code>, <code class="docutils literal notranslate"><span class="pre">filter_by_name</span></code> and/or <code class="docutils literal notranslate"><span class="pre">filter_by_component</span></code> to filter the
-channels. They accept a list of string or a string contains wildcard.</p>
+<p>如果你只想提取一部分通道的波形数据，你可以使用 <code class="docutils literal notranslate"><span class="pre">filter_by_id</span></code> 、 <code class="docutils literal notranslate"><span class="pre">filter_by_name</span></code> 和/或 <code class="docutils literal notranslate"><span class="pre">filter_by_component</span></code> 以筛选需要的通道。这些参数都可以接受字符串列表或者包含通配符的字符串。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract 3 channles by id</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;3e83&quot;</span><span class="p">,</span> <span class="s2">&quot;3e84&quot;</span><span class="p">,</span> <span class="s2">&quot;3e85&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match &#39;N.NA*&#39;</span>

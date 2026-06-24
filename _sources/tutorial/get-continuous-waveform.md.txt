@@ -57,7 +57,7 @@ Hi-net sets three limitations for data request:
 
 For the example above, Hi-net has about 2350 channels, the record length
 should be no more than 5 minutes. Thus the 20-minutes long data request is
-splitted into four 5-minutes short data subrequests.
+split into four 5-minute short data subrequests.
 ```
 
 ## Custom way

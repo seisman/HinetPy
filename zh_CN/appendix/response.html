@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>仪器响应 &mdash; HinetPy v0.12.1.dev35+gec4090b3b 文档</title>
+  <title>仪器响应 &mdash; HinetPy v0.12.1.dev36+g6e0a8badd 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=12ff9f85"></script>
+      <script src="../_static/documentation_options.js?v=e8d340d0"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=540d3cec"></script>
@@ -118,7 +118,7 @@
 <h1>仪器响应<a class="headerlink" href="#instrumental-response" title="链接到此标题。"></a></h1>
 <section id="input">
 <h2>输入<a class="headerlink" href="#input" title="链接到此标题。"></a></h2>
-<p>The unit of Hi-net input is determined by column [9], ususally <code class="docutils literal notranslate"><span class="pre">m/s</span></code>.</p>
+<p>Hi-net输入的单位由第9列决定，通常单位是 <code class="docutils literal notranslate"><span class="pre">m/s</span></code> 。</p>
 </section>
 <section id="analog-stage">
 <h2>数字阶段<a class="headerlink" href="#analog-stage" title="链接到此标题。"></a></h2>
@@ -127,17 +127,12 @@
 \[\frac{Gs^2}{s^2 + 2hws + w^2}\]</div>
 <p>其中，</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(G\)</span>: gain factor, given as column [8] in <code class="docutils literal notranslate"><span class="pre">V/unit_of_input</span></code></p></li>
-<li><p><span class="math notranslate nohighlight">\(h\)</span>: damping constant, given as column [11]</p></li>
-<li><p><span class="math notranslate nohighlight">\(w\)</span>: natural angular frequency, given as column [10]</p></li>
+<li><p>:math:<code class="docutils literal notranslate"><span class="pre">G</span></code>: 增益因子，在第8列给出，单位为 <code class="docutils literal notranslate"><span class="pre">V/unit_of_input</span></code></p></li>
+<li><p>:math:<code class="docutils literal notranslate"><span class="pre">h</span></code>: 阻尼常数，在第11列给出</p></li>
+<li><p>:math:<code class="docutils literal notranslate"><span class="pre">w</span></code>: 自然角频率，在第10列给出</p></li>
 </ul>
-<p>Roots of the numerator and the denominator correspond to the
-zeros and the poles, respectively, and the A0 normalization factor
-is the inverse of the absolute value of the
-above equation except G at the normalization frequency (<span class="math notranslate nohighlight">\(f_n\)</span>).
-The normalization frequency of Hi-net seismometer is always 20 Hz.</p>
-<p>It's easy to know that the instrumental response has two poles and two zeros.
-It's also easy to calculate A0, with <span class="math notranslate nohighlight">\(s=i*2*\pi*f_n\)</span>.</p>
+<p>分子和分母的根分别对应于零点和极点。A0归一化因子是上面方程在归一化频率处的绝对值的倒数。Hi-net地震仪的归一化频率总是20 Hz。</p>
+<p>易知，仪器响应有两个极点和零点，将 :math:<code class="docutils literal notranslate"><span class="pre">s=i*2*\pi*f_n</span></code> 带入可算出 A0。</p>
 </section>
 <section id="preamplification">
 <h2>放大系数<a class="headerlink" href="#preamplification" title="链接到此标题。"></a></h2>
@@ -145,11 +140,11 @@ It's also easy to calculate A0, with <span class="math notranslate nohighlight">
 <p>根据场物理量的分贝的定义：</p>
 <div class="math notranslate nohighlight">
 \[L_{F}=20\log _{10}\left({\frac {F}{F_{0}}}\right)\!~\mathrm {dB} .\]</div>
-<p>Thus, the &quot;sensitivity&quot; in this stage is <span class="math notranslate nohighlight">\(10^{\frac{[12]}{20}}\)</span>.</p>
+<p>因而，这一阶段的敏感度是 :math:<code class="docutils literal notranslate"><span class="pre">10^{\frac{[12]}{20}}</span></code> 。</p>
 </section>
 <section id="analog-digital-conversion">
 <h2>模拟-数字转换<a class="headerlink" href="#analog-digital-conversion" title="链接到此标题。"></a></h2>
-<p>The gain in this stage is given by <span class="math notranslate nohighlight">\(\frac{1}{[13]}\)</span>, in <code class="docutils literal notranslate"><span class="pre">counts/V</span></code>.</p>
+<p>这一阶段的增益是 :math:<code class="docutils literal notranslate"><span class="pre">\frac{1}{[13]}</span></code> ，单位是 <code class="docutils literal notranslate"><span class="pre">counts/V</span></code> 。</p>
 </section>
 <section id="digital-stage">
 <h2>数字阶段<a class="headerlink" href="#digital-stage" title="链接到此标题。"></a></h2>
@@ -160,7 +155,7 @@ It's also easy to calculate A0, with <span class="math notranslate nohighlight">
 <p>总的敏感度为：</p>
 <div class="math notranslate nohighlight">
 \[G = \frac{[8]*10^{\frac{[12]}{20}}}{[13]}\]</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">CONSTANT</span></code> in SAC PZ file should be:</p>
+<p>SAC PZ文件中的 <code class="docutils literal notranslate"><span class="pre">CONSTANT</span></code> 应该为：</p>
 <div class="math notranslate nohighlight">
 \[CONSTANT = A0 * G = A0 * \frac{[8]*10^{\frac{[12]}{20}}}{[13]}\]</div>
 <div class="admonition important">
