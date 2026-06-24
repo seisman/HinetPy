@@ -123,4 +123,3 @@ max-args=10
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--verbose --cov=HinetPy --cov-report=term-missing --cov-report=xml"

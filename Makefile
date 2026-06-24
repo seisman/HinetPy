@@ -20,7 +20,7 @@ build:
 	python -m build
 
 test:
-	pytest tests/test_*.py
+	pytest --verbose --cov=HinetPy --cov-report=term-missing --cov-report=xml
 
 doc:
 	make -C docs docs
