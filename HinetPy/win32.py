@@ -143,7 +143,7 @@ def extract_sacpz(
     suffix="SAC_PZ",
     outdir=".",
     keep_sensitivity=False,
-    filter_by_chid=None,
+    filter_by_id=None,
     filter_by_name=None,
     filter_by_component=None,
     processes=None,
@@ -201,9 +201,9 @@ def extract_sacpz(
         return
 
     channels = read_ctable(ctable)
-    if filter_by_chid or filter_by_name or filter_by_component:
+    if filter_by_id or filter_by_name or filter_by_component:
         channels = _filter_channels(
-            channels, filter_by_chid, filter_by_name, filter_by_component
+            channels, filter_by_id, filter_by_name, filter_by_component
         )
     if not os.path.exists(outdir):
         os.makedirs(outdir, exist_ok=True)
