@@ -7,34 +7,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-19 17:30-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2026-06-24 15:12+0800\n"
+"PO-Revision-Date: 2026-06-24 15:12+0800\n"
+"Last-Translator: Dongdong Tian <seisman.info@gmail.com>\n"
+"Language-Team: Chinese\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.6.0\n"
 
-#: ../../examples/example1.rst:2
+#: ../../examples/example1.md:1
 msgid "Request continuous waveform data from CSV catalog"
 msgstr "根据CSV地震目录申请连续波形数据"
 
-#: ../../examples/example1.rst:4
+#: ../../examples/example1.md:3
 msgid ""
-"This example shows how to request waveform data based on a catalog in CSV"
-" format."
+"This example shows how to request waveform data based on a catalog in CSV "
+"format."
 msgstr "这个例子展示了如何根据CSV格式的地震目录申请波形数据。"
 
-#: ../../examples/example1.rst:6
+#: ../../examples/example1.md:5
 msgid ""
-"Below is an example catalog file in CSV format. The catalog is obtained "
-"from `IRIS web service <http://service.iris.edu/fdsnws/event/1/>`_."
+"Below is an example catalog file in CSV format. The catalog is obtained from "
+"[IRIS web service](http://service.iris.edu/fdsnws/event/1/)."
 msgstr ""
-"下面的CSV格式的示例地震目录来自于 `IRIS web service "
-"<http://service.iris.edu/fdsnws/event/1/>`_ 。"
+"下面的CSV格式的示例地震目录来自于 `IRIS web service <http://service.iris.edu/"
+"fdsnws/event/1/>`_ 。"
 
-#: ../../examples/example1.rst:12
+#: ../../examples/example1.md:11
 msgid "Python script:"
 msgstr "Python脚本"
-

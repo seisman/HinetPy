@@ -1,9 +1,9 @@
 # Get Started
 
-For new users of Hi-net data, I highly recommand you to request and download
+For new users of Hi-net data, I highly recommend you request and download
 waveform data from Hi-net website and try to process the data using win32tools.
 Do all the things **manually** at least one time, make sure that you understand
-the whole procedures and the unfriendness and limitations of Hi-net website.
+the whole procedure and the limitations of Hi-net website.
 
 Now let's get started.
 
@@ -21,7 +21,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## Create a Client
 
-HinetPy provide a {class}`~HinetPy.client.Client` class, which provide several
+HinetPy provides a {class}`~HinetPy.client.Client` class, which provides several
 methods to help you get waveform data.
 
 ```pycon
@@ -35,7 +35,7 @@ You need a Hi-net account to access Hi-net waveform data.
 
 ## Do checks
 
-Let our {meth}`~HinetPy.client.Client.doctor` checks if everything goes right:
+Let {meth}`~HinetPy.client.Client.doctor` check if everything goes right:
 
 ```pycon
 >>> client.doctor()
@@ -52,7 +52,7 @@ Everything seems OK.
 
 ## Network Codes
 
-Hi-net website provide seismic waveform data from several organizations and
+Hi-net website provides seismic waveform data from several organizations and
 networks, e.g. Hi-net, F-net and V-net. Each network has a unique network code.
 In order to request waveform data from specified network, you need to know
 the network code. See {meth}`~HinetPy.client.Client.info` for details.
@@ -107,8 +107,8 @@ See {meth}`~HinetPy.client.Client.get_station_list` for details.
 ```
 
 Hi-net/F-net has a lot of stations. If you only need a few of them, you can
-select the stations you want. Hi-net website also provide a web interface to
-do that, which is prefered for most cases. If you want to dynamically select
+select the stations you want. Hi-net website also provides a web interface to
+do that, which is preferred for most cases. If you want to dynamically select
 stations in your script, you can try
 {meth}`~HinetPy.client.Client.select_stations`.
 

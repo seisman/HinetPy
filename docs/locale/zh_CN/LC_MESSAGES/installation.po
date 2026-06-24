@@ -7,94 +7,95 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-17 21:21+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2026-06-24 15:12+0800\n"
+"PO-Revision-Date: 2026-06-24 15:12+0800\n"
+"Last-Translator: Dongdong Tian <seisman.info@gmail.com>\n"
+"Language-Team: Chinese\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: ../../installation.rst:2
+#: ../../installation.md:1
 msgid "Installation"
 msgstr "安装"
 
-#: ../../installation.rst:5
+#: ../../installation.md:3
 msgid "Prerequisites"
 msgstr "准备工作"
 
-#: ../../installation.rst:7
+#: ../../installation.md:5
 msgid "To use HinetPy, you need:"
 msgstr "为了使用 HinetPy，你需要:"
 
-#: ../../installation.rst:9
-msgid "Python >= 3.10"
+#: ../../installation.md:7
+msgid "Python \\>= 3.10"
 msgstr ""
 
-#: ../../installation.rst:10
+#: ../../installation.md:8
 msgid "win32tools provided by NIED Hi-net (see below for install instructions)"
 msgstr "NIED Hi-net 提供的 win32tools (安装指南见下面)"
 
-#: ../../installation.rst:11
+#: ../../installation.md:9
 msgid ""
 "a Hi-net account (register on Hi-net website to get your user name and "
 "password)"
 msgstr "Hi-net 账户（需要在 Hi-net 网站注册获取账号密码）"
 
-#: ../../installation.rst:14
+#: ../../installation.md:11
 msgid "Install HinetPy"
 msgstr "安装 HinetPy"
 
-#: ../../installation.rst:16
-msgid "To install the latest **release/stable** version::"
+#: ../../installation.md:13
+msgid "To install the latest **release/stable** version:"
 msgstr "安装最新的\\ **发布版/稳定版**::"
 
-#: ../../installation.rst:20
-msgid "Or install the **developing/unstable** version::"
+#: ../../installation.md:17
+msgid "Or install the **developing/unstable** version:"
 msgstr "安装最新的\\ **开发版/不稳定版**::"
 
-#: ../../installation.rst:26
-msgid "If you want to uninstall HinetPy, just run::"
+#: ../../installation.md:23
+msgid "If you want to uninstall HinetPy, just run:"
 msgstr "如果想要卸载 HinetPy，直接执行::"
 
-#: ../../installation.rst:31
+#: ../../installation.md:27
 msgid "Build win32tools"
 msgstr "编译 win32tools"
 
-#: ../../installation.rst:33
+#: ../../installation.md:29
 msgid ""
-"`win32tools`_ is a collection of tools provided by `NIED Hi-net`_ to "
-"process win32 format data. HinetPy needs the ``catwin32`` and "
-"``win2sac_32`` commands to process the win32 data."
+"[win32tools](https://hinetwww11.bosai.go.jp/auth/manual/dlDialogue.php?"
+"r=win32tools) is a collection of tools provided by [NIED Hi-net](https://"
+"www.hinet.bosai.go.jp/) to process win32 format data. HinetPy needs the "
+"`catwin32` and `win2sac_32` commands to process the win32 data."
 msgstr ""
-"`win32tools`_ 是 `NIED Hi-net`_ 提供的用于处理win32格式数据的一系列工具。HinetPy 需要其中的 "
-"``catwin32`` 和 ``win2sac_32``\\ 。"
+"`win32tools`_ 是 `NIED Hi-net`_ 提供的用于处理win32格式数据的一系列工具。"
+"HinetPy 需要其中的 `catwin32` 和 `win2sac_32`\\ 。"
 
-#: ../../installation.rst:37
-msgid "Run the following commands to build win32tools::"
-msgstr "执行如下命令以编译 win32tools::"
+#: ../../installation.md:31
+msgid "Run the following commands to build win32tools:"
+msgstr "执行如下命令以编译 win32tools："
 
-#: ../../installation.rst:43
+#: ../../installation.md:37
 msgid ""
-"For macOS users, the above command may fail with an fatal error like "
-"this::"
-msgstr "对于 macOS 用户，执行上面的命令可能会产生如下错误::"
+"For macOS users, the above command may fail with an fatal error like this:"
+msgstr "对于 macOS 用户，执行上面的命令可能会产生如下错误："
 
-#: ../../installation.rst:51
+#: ../../installation.md:45
 msgid ""
-"In this case, you should change ``#include <malloc.h>`` to ``#include "
-"<stdlib.h>`` at line 3 of ``win2sac.src/s4read_data.c``."
+"In this case, you should change `#include <malloc.h>` to `#include "
+"<stdlib.h>` at line 3 of `win2sac.src/s4read_data.c`."
 msgstr ""
-"遇到这种情况，你需要将 ``win2sac.src/s4read_data.c`` 第三行的 ``#include "
-"\"<malloc.h>\"`` 修改为 ``#include <stdlib.h>``\\ 。"
+"遇到这种情况，你需要将 `win2sac.src/s4read_data.c` 第三行的 `#include "
+"<malloc.h>` 修改为 `#include <stdlib.h>`。"
 
-#: ../../installation.rst:54
+#: ../../installation.md:47
 msgid ""
 "After successfully building win32tools, you need to make sure that "
-"``catwin32`` and ``win2sac_32`` are in your PATH. You can simply run the "
-"following command to copy the two commands into your HOME's bin "
-"directory::"
+"`catwin32` and `win2sac_32` are in your PATH. You can simply run the "
+"following command to copy the two commands into your HOME's bin directory:"
 msgstr ""
-"成果编译 win32tools 后，你还需要确保 ``catwin32`` 和 ``win2sac_32`` 位于你的 PATH "
-"路径中。你可以直接执行如下命令将这两个可执行文件复制到你的 HOME 的 bin 目录下::"
+"成果编译 win32tools 后，你还需要确保 `catwin32` 和 `win2sac_32` 位于你的 "
+"PATH 路径中。你可以直接执行如下命令将这两个可执行文件复制到你的 HOME 的 bin "
+"目录下::"

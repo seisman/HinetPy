@@ -63,7 +63,7 @@ class BaseClient:
     # Catalog
     _JMA = _AUTH + "JMA/dlDialogue.php"
 
-    # Continuous wavefroms
+    # Continuous waveforms
     _CONT = _AUTH + "download/cont/"
     _CONT_STATUS = _CONT + "cont_status.php"
     _CONT_REQUEST = _CONT + "cont_request.php"
@@ -395,10 +395,10 @@ class ContinuousWaveformClient(BaseClient):
         2. Number_of_channels * Record_Length <= 12000 min
         3. Only the latest 150 requested data are kept
 
-        For example, Hi-net network has about 24000 channels. Acoording to limitation 2,
+        For example, Hi-net network has about 24000 channels. According to limitation 2,
         the record length should be no more than 5 minutes for each data request.
         HinetPy "break through" the limitation by splitting a long-duration data request
-        into several short-duration sub-requsts.
+        into several short-duration sub-requests.
 
         **How it works**
 

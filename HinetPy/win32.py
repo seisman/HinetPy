@@ -369,7 +369,7 @@ def _extract_channel_sac(
                     "The number of data points is over maximum. Try to increase pmax."
                 )
             if f"Data for channel {channel.id} not existed" in line:
-                # return None if no data avaiable
+                # return None if no data available
                 logger.warning(
                     "Data for %s.%s (%s) not exists. Skipped.",
                     channel.name,

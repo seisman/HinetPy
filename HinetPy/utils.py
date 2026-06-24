@@ -18,7 +18,7 @@ def split_integer(number: int, maxn: int) -> list[int]:
     Parameters
     ----------
     number
-        An interger that to be split into chunks.
+        An integer to be split into chunks.
     maxn
         The maximum number in each chunk.
 

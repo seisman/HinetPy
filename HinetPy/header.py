@@ -38,7 +38,7 @@ class Network:
         channels
             Number of channels the network has.
         starttime
-            Start time (JST: UTC+0900) when waveform data is avaiable.
+            Start time (JST: UTC+0900) when waveform data is available.
         url
             Homepage of the network.
         """

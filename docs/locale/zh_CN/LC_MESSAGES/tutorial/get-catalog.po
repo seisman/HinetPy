@@ -7,32 +7,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HinetPy 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-22 12:20+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2026-06-24 15:12+0800\n"
+"PO-Revision-Date: 2026-06-24 15:12+0800\n"
+"Last-Translator: Dongdong Tian <seisman.info@gmail.com>\n"
+"Language-Team: Chinese\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: ../../tutorial/get_catalog.rst:2
+#: ../../tutorial/get-catalog.md:1
 msgid "Get Catalog"
 msgstr "获取目录"
 
-#: ../../tutorial/get_catalog.rst:5
+#: ../../tutorial/get-catalog.md:3
 msgid "Get arrival time catalog"
 msgstr "获取走时目录"
 
-#: ../../tutorial/get_catalog.rst:7
+#: ../../tutorial/get-catalog.md:5
 msgid "Hi-net provide JMA arrivaltime data for downloading."
 msgstr "Hi-net提供了JMA走时数据供下载。"
 
-#: ../../tutorial/get_catalog.rst:17
+#: ../../tutorial/get-catalog.md:16
 msgid "Get focal mechanism catalog"
 msgstr "获取震源机制解目录"
 
-#: ../../tutorial/get_catalog.rst:19
+#: ../../tutorial/get-catalog.md:18
 msgid "Hi-net provide JMA focal mechanism catalog for downloading."
 msgstr "Hi-net提供了JMA震源机制解目录供下载。"
-
