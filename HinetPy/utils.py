@@ -257,7 +257,7 @@ def check_package_release() -> bool:
         raise requests.HTTPError("Error in connecting to PyPI.")
     latest_release = res.json()["info"]["version"]
 
-    current_version = f"v{version('HinetPy')}"
+    current_version = version("HinetPy")
     if Version(latest_release) > Version(current_version):
         print(
             f"HinetPy v{latest_release} is released. "
