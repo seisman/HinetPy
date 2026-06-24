@@ -42,8 +42,8 @@ msgstr "启动Python"
 #: ../../tutorial/get-started.rst:14
 msgid ""
 "Run ``python`` (or ``ipython`` if you have it), and make sure you're "
-"using Python 3.8 or above::"
-msgstr "在终端中运行 ``python`` （或 ``ipython`` ），并确保你所使用的Python版本大于等于3.8::"
+"using Python 3.10 or above::"
+msgstr "在终端中运行 ``python`` （或 ``ipython`` ），并确保你所使用的Python版本大于等于3.10::"
 
 #: ../../tutorial/get-started.rst:23
 msgid "Create a Client"
@@ -135,4 +135,3 @@ msgstr ""
 "Hi-net/F-net有很多台。如果你只需要申请其中某些台站的数据，你可以选择你需要的台站。Hi-"
 "net网站提供了一个网页界面以筛选台站，通常建议值接使用这一网页界面。如果你想要在申请的过程中动态选择台站，你可以使用 "
 ":meth:`~HinetPy.client.Client.select_stations` 。"
-

@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "HinetPy"
 description = "A Python package for accessing and processing NIED Hi-net seismic data"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [{name = "Dongdong Tian", email = "seisman.info@gmail.com"}]
 license = "MIT"
 license-files = ["LICENSE"]
@@ -18,7 +18,6 @@ classifiers = [
     "Operating System :: POSIX :: Linux",
     "Operating System :: MacOS",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",

@@ -21,8 +21,6 @@ To view the list of supported networks, use:
 0120 NIED S-net (velocity)...
 """
 
-from __future__ import annotations
-
 from datetime import datetime
 
 

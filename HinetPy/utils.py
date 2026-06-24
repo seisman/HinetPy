@@ -2,8 +2,6 @@
 Utility functions.
 """
 
-from __future__ import annotations
-
 import math
 import shutil
 from datetime import date, datetime

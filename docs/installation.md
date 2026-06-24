@@ -4,7 +4,7 @@
 
 To use HinetPy, you need:
 
-- Python \>= 3.8
+- Python \>= 3.10
 - win32tools provided by NIED Hi-net (see below for install instructions)
 - a Hi-net account (register on Hi-net website to get your user name and password)
 
