@@ -5,7 +5,7 @@ channels:
 dependencies:
   - python>=3.9
   - pip
-  - setuptools>=64
+  - setuptools>=77
   - setuptools_scm>=6.2
   # Runtime dependencies
   - certifi
@@ -20,6 +20,7 @@ dependencies:
   # Code style dependencies
   - ruff
   # Documentation dependencies
+  - myst-parser
   - sphinx
   - sphinx-intl
   - sphinx-rtd-theme
