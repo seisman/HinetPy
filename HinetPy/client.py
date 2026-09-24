@@ -985,11 +985,15 @@ class StationClient(BaseClient):
             # its cipher workaround when available.
             session = getattr(self, "session", None)
             if session is None:
-                session = requests.Session()
-                session.mount(self._HINET, AddedCipherAdapter())
-            csvfile = session.get(self._STATION_INFO, timeout=30).content.decode(
-                "utf-8"
-            )
+                with requests.Session() as fresh_session:
+                    fresh_session.mount(self._HINET, AddedCipherAdapter())
+                    csvfile = fresh_session.get(
+                        self._STATION_INFO, timeout=30
+                    ).content.decode("utf-8")
+            else:
+                csvfile = session.get(self._STATION_INFO, timeout=30).content.decode(
+                    "utf-8"
+                )
             for row in csv.DictReader(csvfile.splitlines(), delimiter=","):
                 org_id = row["organization_id"].strip("'")
                 net_id = row["network_id"].strip("'")
