@@ -726,7 +726,7 @@ class EventWaveformClient(BaseClient):
         logger.error("Data download fails after %d retries.", self.retries)
         return None
 
-    def get_event_waveform(  # noqa: PLR0913
+    def get_event_waveform(  # noqa: PLR0913,PLR0917
         self,
         starttime,
         endtime,
