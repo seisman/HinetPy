@@ -97,7 +97,6 @@ See {meth}`~HinetPy.client.Client.get_station_list` for details.
 >>> stations = client.get_station_list("0101")
 >>> for station in stations:
 ...     print(station)
-...
 0101 N.WNNH 45.4883 141.885 -159.06
 0101 N.SFNH 45.3346 142.1185 -81.6
 0101 N.WNWH 45.2531 141.6334 -130.6
