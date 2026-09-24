@@ -376,6 +376,18 @@ def _extract_channel_sac(
                     channel.component,
                     channel.id,
                 )
+                filename = f"{channel.name}.{channel.component}.{suffix}"
+                if outdir != ".":
+                    filename = os.path.join(outdir, filename)
+                if os.path.exists(filename):
+                    logger.warning(
+                        "No new data for %s.%s (%s), but %s already exists "
+                        "on disk and may be stale.",
+                        channel.name,
+                        channel.component,
+                        channel.id,
+                        filename,
+                    )
                 return None
 
     filename = f"{channel.name}.{channel.component}.{suffix}"
