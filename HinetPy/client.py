@@ -980,7 +980,14 @@ class StationClient(BaseClient):
         stations = []
         # remove trailing 'A' in network code
         if code in ["0101", "0103", "0103A"]:  # Hinet and Fnet
-            csvfile = requests.get(self._STATION_INFO, timeout=30).content.decode(
+            # _STATION_INFO lives on the old Hi-net server, whose DH key is
+            # rejected by modern OpenSSL — reuse the logged-in session with
+            # its cipher workaround when available.
+            session = getattr(self, "session", None)
+            if session is None:
+                session = requests.Session()
+                session.mount(self._HINET, AddedCipherAdapter())
+            csvfile = session.get(self._STATION_INFO, timeout=30).content.decode(
                 "utf-8"
             )
             for row in csv.DictReader(csvfile.splitlines(), delimiter=","):
