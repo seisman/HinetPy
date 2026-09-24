@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data conversion &mdash; HinetPy v0.12.1.dev39+g29747bac4 documentation</title>
+  <title>Data conversion &mdash; HinetPy v0.13.1.dev2+g5e6f6c9c1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=65aad093"></script>
+      <script src="../_static/documentation_options.js?v=74bd3522"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -114,8 +114,8 @@
 channel table. <a class="reference internal" href="../api/HinetPy.win32.html#module-HinetPy.win32" title="HinetPy.win32"><code class="xref py py-mod docutils literal notranslate"><span class="pre">win32</span></code></a> can convert them into SAC and SAC polezero
 formats.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">win32</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;0101_201001010000_20.cnt&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ctable</span> <span class="o">=</span> <span class="s2">&quot;0101_20100101.ch&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="s2">"0101_201001010000_20.cnt"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctable</span> <span class="o">=</span> <span class="s2">"0101_20100101.ch"</span>
 </pre></div>
 </div>
 <section id="extract-waveform-data">
@@ -133,18 +133,18 @@ formats.</p>
 <p>The SAC files have a default filename <code class="docutils literal notranslate"><span class="pre">STATION.COMPONENT.SAC</span></code> (e.g.
 <code class="docutils literal notranslate"><span class="pre">N.NABC.U.SAC</span></code>). You can specify another SAC suffix and a different output
 directory.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;SAC&quot;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">"SAC"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If you want to extract only a small subset of channels, you can use
 <code class="docutils literal notranslate"><span class="pre">filter_by_id</span></code>, <code class="docutils literal notranslate"><span class="pre">filter_by_name</span></code> and/or <code class="docutils literal notranslate"><span class="pre">filter_by_component</span></code> to filter the
 channels. They accept a list of string or a string contains wildcard.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract 3 channles by id</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;3e83&quot;</span><span class="p">,</span> <span class="s2">&quot;3e84&quot;</span><span class="p">,</span> <span class="s2">&quot;3e85&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match &#39;N.NA*&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract vertical(U) component channels whose name match &#39;N.NA*&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s2">"3e83"</span><span class="p">,</span> <span class="s2">"3e84"</span><span class="p">,</span> <span class="s2">"3e85"</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match 'N.NA*'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">"N.NA*"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract vertical(U) component channels whose name match 'N.NA*'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">"N.NA*"</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">"U"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -166,18 +166,18 @@ format and extract instrumental responses in RESP or PZ format from SEED files.<
 <p>The SACPZ file has a default name <code class="docutils literal notranslate"><span class="pre">STATION.COMPONENT.SAC_PZ</span></code> (e.g.
 <code class="docutils literal notranslate"><span class="pre">N.NABC.U.SAC_PZ</span></code>). You can specify another SACPZ suffix and a different output
 directory.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;SACPZ&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;PZ/&quot;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">"SACPZ"</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">"PZ/"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If you want to extract only a small subset of channels, you can use
 <code class="docutils literal notranslate"><span class="pre">filter_by_id</span></code>, <code class="docutils literal notranslate"><span class="pre">filter_by_name</span></code> and/or <code class="docutils literal notranslate"><span class="pre">filter_by_component</span></code> to filter the
 channels. They accept a list of string or a string contains wildcard.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract 3 channles by id</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;3e83&quot;</span><span class="p">,</span> <span class="s2">&quot;3e84&quot;</span><span class="p">,</span> <span class="s2">&quot;3e85&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match &#39;N.NA*&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract vertical(U) component channels whose name match &#39;N.NA*&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">&quot;N.NA*&quot;</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_id</span><span class="o">=</span><span class="p">[</span><span class="s2">"3e83"</span><span class="p">,</span> <span class="s2">"3e84"</span><span class="p">,</span> <span class="s2">"3e85"</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract all channels whose name match 'N.NA*'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">"N.NA*"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract vertical(U) component channels whose name match 'N.NA*'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">,</span> <span class="n">filter_by_name</span><span class="o">=</span><span class="s2">"N.NA*"</span><span class="p">,</span> <span class="n">filter_by_component</span><span class="o">=</span><span class="s2">"U"</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition seealso">

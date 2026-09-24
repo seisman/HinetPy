@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Get continuous waveform &mdash; HinetPy v0.12.1.dev39+g29747bac4 documentation</title>
+  <title>Get continuous waveform &mdash; HinetPy v0.13.1.dev2+g5e6f6c9c1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=65aad093"></script>
+      <script src="../_static/documentation_options.js?v=74bd3522"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -121,8 +121,8 @@ waveform data from Hi-net in different ways.</p>
 <h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h2>
 <p>Request 20 minutes data since 2010-01-01T00:00 (GMT+0900) from Hi-net network:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;201001010000&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">"username"</span><span class="p">,</span> <span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">,</span> <span class="s2">"201001010000"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="go">[2017-03-11 17:46:20] INFO: 2010-01-01 00:00 ~20</span>
 <span class="go">[2017-03-11 17:46:20] INFO: [1/4] =&gt; 2010-01-01 00:00 ~5</span>
 <span class="go">[2017-03-11 17:46:41] INFO: [2/4] =&gt; 2010-01-01 00:05 ~5</span>
@@ -134,15 +134,15 @@ waveform data from Hi-net in different ways.</p>
 </div>
 <p><a class="reference internal" href="../api/HinetPy.client.html#HinetPy.client.Client.get_continuous_waveform" title="HinetPy.client.Client.get_continuous_waveform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_continuous_waveform()</span></code></a> also supports
 <code class="docutils literal notranslate"><span class="pre">starttime</span></code> in other common used formats:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01T00:00&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01 00:00&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">,</span> <span class="s2">"2010-01-01T00:00"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">,</span> <span class="s2">"2010-01-01 00:00"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>and <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> to allow users manipulate datetimes in a
 more flexible way.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># JST time</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now we get:</p>
@@ -170,23 +170,23 @@ split into four 5-minute short data subrequests.</p>
 directory.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">"username"</span><span class="p">,</span> <span class="s2">"password"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># JST time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;0101&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"0101"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">starttime</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="mi">20</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">data</span><span class="o">=</span><span class="s2">&quot;201001010000.cnt&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">ctable</span><span class="o">=</span><span class="s2">&quot;0101.ch&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;201001010000&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">data</span><span class="o">=</span><span class="s2">"201001010000.cnt"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">ctable</span><span class="o">=</span><span class="s2">"0101.ch"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">outdir</span><span class="o">=</span><span class="s2">"201001010000"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="go">[2017-03-11 17:46:20] INFO: 2010-01-01 00:00 ~20</span>
 <span class="go">[2017-03-11 17:46:20] INFO: [1/4] =&gt; 2010-01-01 00:00 ~5</span>
 <span class="go">[2017-03-11 17:46:41] INFO: [2/4] =&gt; 2010-01-01 00:05 ~5</span>
 <span class="go">[2017-03-11 17:46:50] INFO: [3/4] =&gt; 2010-01-01 00:10 ~5</span>
 <span class="go">[2017-03-11 17:47:04] INFO: [4/4] =&gt; 2010-01-01 00:15 ~5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># You should see a directory &quot;201001010000&quot; with two files</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># &quot;0101.ch&quot; and &quot;201001010000.cnt&quot; inside.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># You should see a directory "201001010000" with two files</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># "0101.ch" and "201001010000.cnt" inside.</span>
 </pre></div>
 </div>
 </section>

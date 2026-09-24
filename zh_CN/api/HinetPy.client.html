@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy.client module &mdash; HinetPy v0.12.1.dev39+g29747bac4 文档</title>
+  <title>HinetPy.client module &mdash; HinetPy v0.13.1.dev2+g5e6f6c9c1 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=4411ec3c"></script>
+      <script src="../_static/documentation_options.js?v=2057fa64"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=540d3cec"></script>
@@ -133,12 +133,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Username of Hi-net account.</p></li>
-<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Password of Hi-net account.</p></li>
-<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Time to wait for the server to send data before giving up.</p></li>
-<li><p><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- How many times to retry if a request fails.</p></li>
-<li><p><strong>sleep_time_in_seconds</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Sleep time between each data status check. See notes below.</p></li>
-<li><p><strong>max_sleep_count</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Maximum number of sleeps before failing. See notes below.</p></li>
+<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Username of Hi-net account.</p></li>
+<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Password of Hi-net account.</p></li>
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Time to wait for the server to send data before giving up.</p></li>
+<li><p><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- How many times to retry if a request fails.</p></li>
+<li><p><strong>sleep_time_in_seconds</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Sleep time between each data status check. See notes below.</p></li>
+<li><p><strong>max_sleep_count</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Maximum number of sleeps before failing. See notes below.</p></li>
 </ul>
 </dd>
 </dl>
@@ -157,7 +157,7 @@ these parameters unless you know what you're doing.</p>
 <div class="admonition- admonition">
 <p class="admonition-title">示例</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">"username"</span><span class="p">,</span> <span class="s2">"password"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -173,7 +173,7 @@ these parameters unless you know what you're doing.</p>
 </ul>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">doctor</span><span class="p">()</span>
 <span class="go">Hi-net web service is NOT updated.</span>
-<span class="go">You&#39;re using the latest release (v0.x.x).</span>
+<span class="go">You're using the latest release (v0.x.x).</span>
 <span class="go">catwin32: Full path is /home/user/bin/catwin32.</span>
 <span class="go">win2sac_32: Full path is /home/user/bin/win2sac_32.</span>
 </pre></div>
@@ -196,7 +196,7 @@ these parameters unless you know what you're doing.</p>
 <dd><p>Show information of networks.</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>code</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Network code.</p>
+<dd class="field-odd"><p><strong>code</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Network code.</p>
 </dd>
 </dl>
 <div class="admonition- admonition">
@@ -210,7 +210,7 @@ these parameters unless you know what you're doing.</p>
 <span class="go">0703   : Aomori Prefectural Government</span>
 <span class="go">0705   : Shizuoka Prefectural Government</span>
 <span class="go">0801   : ADEP</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">)</span>
 <span class="go">== Information of Network 0101 ==</span>
 <span class="go">Name: NIED Hi-net</span>
 <span class="go">Starttime: 20040401</span>
@@ -228,16 +228,16 @@ these parameters unless you know what you're doing.</p>
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(位于 Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(位于 Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) -- Start date to request.</p></li>
-<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Data length in days.</p></li>
-<li><p><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- File format. &quot;DOS&quot; or &quot;UNIX&quot;.</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Filename to save.</p></li>
+<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Data length in days.</p></li>
+<li><p><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- File format. &quot;DOS&quot; or &quot;UNIX&quot;.</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Filename to save.</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p>Filename saved.</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)">str</a></p>
 </dd>
 </dl>
 <div class="admonition- admonition">
@@ -245,9 +245,9 @@ these parameters unless you know what you're doing.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">startdate</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="go">&#39;measure_20100101_5.txt&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;arrivaltime.txt&quot;</span><span class="p">)</span>
-<span class="go">&#39;arrivaltime.txt&#39;</span>
+<span class="go">'measure_20100101_5.txt'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">"arrivaltime.txt"</span><span class="p">)</span>
+<span class="go">'arrivaltime.txt'</span>
 </pre></div>
 </div>
 </div>
@@ -260,18 +260,18 @@ these parameters unless you know what you're doing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Network code. See <a class="reference internal" href="#HinetPy.client.Client.info" title="HinetPy.client.Client.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> for details.</p></li>
+<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Network code. See <a class="reference internal" href="#HinetPy.client.Client.info" title="HinetPy.client.Client.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> for details.</p></li>
 <li><p><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(位于 Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> or str) -- Starttime of a data request.</p></li>
-<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Time span in minutes.</p></li>
-<li><p><strong>max_span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Maximum time span for sub-requests. Defaults to be determined automatically.
+<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Time span in minutes.</p></li>
+<li><p><strong>max_span</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Maximum time span for sub-requests. Defaults to be determined automatically.
 See notes below.</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Filename of downloaded win32 data.
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Filename of downloaded win32 data.
 Default format: CODE_YYYYmmddHHMM_SPAN.cnt</p></li>
-<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Filename of downloaded channel table file. Default format: CODE_YYYYmmdd.ch</p></li>
-<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Save win32 and channel table data to a specified directory. Default is in
+<li><p><strong>ctable</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Filename of downloaded channel table file. Default format: CODE_YYYYmmdd.ch</p></li>
+<li><p><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Save win32 and channel table data to a specified directory. Default is in
 the current directory.</p></li>
-<li><p><strong>threads</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Parallel data download using more threads.</p></li>
-<li><p><strong>cleanup</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(位于 Python v3.14)"><em>bool</em></a>) -- Clean up one-minute cnt files after merging.</p></li>
+<li><p><strong>threads</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Parallel data download using more threads.</p></li>
+<li><p><strong>cleanup</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(位于 Python v3.14)"><em>bool</em></a>) -- Clean up one-minute cnt files after merging.</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
@@ -310,25 +310,25 @@ into several short-duration sub-requests.</p>
 <div class="admonition- admonition">
 <p class="admonition-title">示例</p>
 <p>Request 6-minute data since 2010-01-01T05:35 (UTC+0900) from Hi-net.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;201001010535&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="go">(&#39;0101_201001010535_6.cnt&#39;, &#39;0101_20100101.ch&#39;)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">,</span> <span class="s2">"201001010535"</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">('0101_201001010535_6.cnt', '0101_20100101.ch')</span>
 </pre></div>
 </div>
 <p>Several other string formats of <code class="docutils literal notranslate"><span class="pre">starttime</span></code> are also supported:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01 05:35&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-01-01T05:35&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">,</span> <span class="s2">"2010-01-01 05:35"</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">,</span> <span class="s2">"2010-01-01T05:35"</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(位于 Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> is also supported:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starttime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="go">(&#39;0101_201001010535_6.cnt&#39;, &#39;0101_20100101.ch&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">('0101_201001010535_6.cnt', '0101_20100101.ch')</span>
 </pre></div>
 </div>
 <p>Request full-day data of 2010-01-01T00:00 (UTC+0900) of F-net:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0103&quot;</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">1440</span><span class="p">,</span> <span class="n">max_span</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
-<span class="go">(&#39;0103_201001010000_1440.cnt&#39;, &#39;0103_20100101.ch&#39;)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">"0103"</span><span class="p">,</span> <span class="n">starttime</span><span class="p">,</span> <span class="mi">1440</span><span class="p">,</span> <span class="n">max_span</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="go">('0103_201001010000_1440.cnt', '0103_20100101.ch')</span>
 </pre></div>
 </div>
 </div>
@@ -343,7 +343,7 @@ into several short-duration sub-requests.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(位于 Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> or str) -- Starttime of events.</p></li>
 <li><p><strong>endtime</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(位于 Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> or str) -- Endtime of events.</p></li>
-<li><p><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- <p>Limit events in specified region. Allowed values are:</p>
+<li><p><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- <p>Limit events in specified region. Allowed values are:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">00</span></code>: Whole Japan</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">01</span></code>: Hokkaido Region</p></li>
@@ -356,20 +356,20 @@ into several short-duration sub-requests.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">08</span></code>: Others</p></li>
 </ul>
 </p></li>
-<li><p><strong>minmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a magnitude larger than speicified minimum.</p></li>
-<li><p><strong>maxmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a magnitude smaller than speicified maximum.</p></li>
-<li><p><strong>include_unknown_mag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(位于 Python v3.14)"><em>bool</em></a>) -- Include/exclude undetermined magnitude events.</p></li>
-<li><p><strong>mindepth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events deeper than the specified minimum.</p></li>
-<li><p><strong>maxdepth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events shallower than the specified maximum.</p></li>
-<li><p><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a latitude larger than the specified minimum.</p></li>
-<li><p><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a latitude smaller than the specified maximum.</p></li>
-<li><p><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a longitude larger than the specified minimum.</p></li>
-<li><p><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a longitude smaller than the specified maximum.</p></li>
-<li><p><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Specify the latitude to be used for a radius search.</p></li>
-<li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Specify the longitude to be used for a radius search.</p></li>
-<li><p><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events within the specified minimum number of degrees from the
+<li><p><strong>minmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a magnitude larger than speicified minimum.</p></li>
+<li><p><strong>maxmagnitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a magnitude smaller than speicified maximum.</p></li>
+<li><p><strong>include_unknown_mag</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(位于 Python v3.14)"><em>bool</em></a>) -- Include/exclude undetermined magnitude events.</p></li>
+<li><p><strong>mindepth</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events deeper than the specified minimum.</p></li>
+<li><p><strong>maxdepth</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events shallower than the specified maximum.</p></li>
+<li><p><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a latitude larger than the specified minimum.</p></li>
+<li><p><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a latitude smaller than the specified maximum.</p></li>
+<li><p><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a longitude larger than the specified minimum.</p></li>
+<li><p><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events with a longitude smaller than the specified maximum.</p></li>
+<li><p><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Specify the latitude to be used for a radius search.</p></li>
+<li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Specify the longitude to be used for a radius search.</p></li>
+<li><p><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events within the specified minimum number of degrees from the
 geographic point defined by the latitude and longitude parameters.</p></li>
-<li><p><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events within the specified maximum number of degrees from the
+<li><p><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to events within the specified maximum number of degrees from the
 geographic point defined by the latitude and longitude parameters.</p></li>
 </ul>
 </dd>
@@ -384,16 +384,16 @@ geographic point defined by the latitude and longitude parameters.</p></li>
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>startdate</strong> (str, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(位于 Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(位于 Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) -- Start date to request.</p></li>
-<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Data length in days.</p></li>
-<li><p><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- File format. &quot;DOS&quot; or &quot;UNIX&quot;.</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Filename to save.</p></li>
+<li><p><strong>span</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(位于 Python v3.14)"><em>int</em></a>) -- Data length in days.</p></li>
+<li><p><strong>os</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- File format. &quot;DOS&quot; or &quot;UNIX&quot;.</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Filename to save.</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p>Filename saved.</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)">str</a></p>
 </dd>
 </dl>
 <div class="admonition- admonition">
@@ -401,9 +401,9 @@ geographic point defined by the latitude and longitude parameters.</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">startdate</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_focalmechanism</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="go">&#39;focal_20100101_5.txt&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_focalmechanism</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;focal.txt&quot;</span><span class="p">)</span>
-<span class="go">&#39;focal.txt&#39;</span>
+<span class="go">'focal_20100101_5.txt'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_focalmechanism</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">"focal.txt"</span><span class="p">)</span>
+<span class="go">'focal.txt'</span>
 </pre></div>
 </div>
 </div>
@@ -411,7 +411,7 @@ geographic point defined by the latitude and longitude parameters.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="HinetPy.client.Client.get_selected_stations">
-<span class="sig-name descname"><span class="pre">get_selected_stations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_selected_stations" title="链接到此定义。"></a></dt>
+<span class="sig-name descname"><span class="pre">get_selected_stations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HinetPy.client.Client.get_selected_stations" title="链接到此定义。"></a></dt>
 <dd><p>Query stations selected for requesting data.</p>
 <p>It supports two networks: Hi-net (0101) and F-net (0103, 0103A).</p>
 <dl class="field-list simple">
@@ -427,7 +427,7 @@ geographic point defined by the latitude and longitude parameters.</p></li>
 </dl>
 <div class="admonition- admonition">
 <p class="admonition-title">示例</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">stations</span><span class="p">)</span>
 <span class="go">16</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
@@ -448,7 +448,7 @@ geographic point defined by the latitude and longitude parameters.</p></li>
 <dd><p>Get station list of a network.</p>
 <p>The function only supports the following networks:
 Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_station_list</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">stations</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">station</span><span class="p">)</span>
 <span class="go">0101 N.WNNH 45.4883 141.885 -159.06</span>
@@ -474,8 +474,8 @@ Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_wa
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Username of Hi-net account.</p></li>
-<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Password of Hi-net account.</p></li>
+<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Username of Hi-net account.</p></li>
+<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Password of Hi-net account.</p></li>
 </ul>
 </dd>
 </dl>
@@ -483,7 +483,7 @@ Use <a class="reference internal" href="#HinetPy.client.Client.get_continuous_wa
 <p class="admonition-title">示例</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s2">"username"</span><span class="p">,</span> <span class="s2">"password"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -498,17 +498,17 @@ Hi-net (0101), F-net (0103, 0103A), S-net (0120, 0120A) and MeSO-net (0131).</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Network code.</p></li>
-<li><p><strong>stations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(位于 Python v3.14)"><em>list</em></a>) -- Stations to select.</p></li>
-<li><p><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations with a latitude larger than the specified minimum.</p></li>
-<li><p><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations with a latitude smaller than the specified maximum.</p></li>
-<li><p><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations with a longitude larger than the specified minimum.</p></li>
-<li><p><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations with a longitude smaller than the specified maximum.</p></li>
-<li><p><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Specify the latitude to be used for a radius search.</p></li>
-<li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Specify the longitude to be used for a radius search.</p></li>
-<li><p><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations within the specified minimum number of degrees from the
+<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a>) -- Network code.</p></li>
+<li><p><strong>stations</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(位于 Python v3.14)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(位于 Python v3.14)"><em>list</em></a>) -- Stations to select.</p></li>
+<li><p><strong>minlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations with a latitude larger than the specified minimum.</p></li>
+<li><p><strong>maxlatitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations with a latitude smaller than the specified maximum.</p></li>
+<li><p><strong>minlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations with a longitude larger than the specified minimum.</p></li>
+<li><p><strong>maxlongitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations with a longitude smaller than the specified maximum.</p></li>
+<li><p><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Specify the latitude to be used for a radius search.</p></li>
+<li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Specify the longitude to be used for a radius search.</p></li>
+<li><p><strong>minradius</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations within the specified minimum number of degrees from the
 geographic point defined by the latitude and longitude parameters.</p></li>
-<li><p><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations within the specified maximum number of degrees from the
+<li><p><strong>maxradius</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(位于 Python v3.14)"><em>float</em></a>) -- Limit to stations within the specified maximum number of degrees from the
 geographic point defined by the latitude and longitude parameters.</p></li>
 </ul>
 </dd>
@@ -516,14 +516,14 @@ geographic point defined by the latitude and longitude parameters.</p></li>
 <div class="admonition- admonition">
 <p class="admonition-title">示例</p>
 <p>Select only two stations of Hi-net:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;N.AAKH&quot;</span><span class="p">,</span> <span class="s2">&quot;N.ABNH&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"N.AAKH"</span><span class="p">,</span> <span class="s2">"N.ABNH"</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">))</span>
 <span class="go">2</span>
 </pre></div>
 </div>
 <p>Select stations in a box region:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;0101&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"0101"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">minlatitude</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">maxlatitude</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">minlongitude</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span>
@@ -533,13 +533,13 @@ geographic point defined by the latitude and longitude parameters.</p></li>
 </div>
 <p>Select stations in a circular region:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mi">139</span><span class="p">,</span> <span class="n">minradius</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxradius</span><span class="o">=</span><span class="mi">2</span>
+<span class="gp">... </span>    <span class="s2">"0101"</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mi">139</span><span class="p">,</span> <span class="n">minradius</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxradius</span><span class="o">=</span><span class="mi">2</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Select all Hi-net stations:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">select_stations</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_selected_stations</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">))</span>
 <span class="go">0</span>
 </pre></div>
 </div>

@@ -7,14 +7,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HinetPy &mdash; HinetPy v0.12.1.dev39+g29747bac4 文档</title>
+  <title>HinetPy &mdash; HinetPy v0.13.1.dev2+g5e6f6c9c1 文档</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=4411ec3c"></script>
+      <script src="_static/documentation_options.js?v=2057fa64"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/translations.js?v=540d3cec"></script>
@@ -117,11 +117,11 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">HinetPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">win32</span>
 
 <span class="c1"># You need a Hi-net account to access the data</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">"username"</span><span class="p">,</span> <span class="s2">"password"</span><span class="p">)</span>
 
-<span class="c1"># Let&#39;s try to request 20-minute data of the Hi-net network (with an internal</span>
-<span class="c1"># network code of &#39;0101&#39;) starting at 2010-01-01T00:00 (JST, GMT+0900)</span>
-<span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">&quot;0101&quot;</span><span class="p">,</span> <span class="s2">&quot;201001010000&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="c1"># Let's try to request 20-minute data of the Hi-net network (with an internal</span>
+<span class="c1"># network code of '0101') starting at 2010-01-01T00:00 (JST, GMT+0900)</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_continuous_waveform</span><span class="p">(</span><span class="s2">"0101"</span><span class="p">,</span> <span class="s2">"201001010000"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
 <span class="c1"># The request and download process usually takes a few minutes</span>
 <span class="c1"># waiting for data request ...</span>
@@ -131,10 +131,10 @@
 <span class="c1"># waveform data (in win32 format) : 0101_201001010000_20.cnt</span>
 <span class="c1"># channel table (plaintext file)  : 0101_20100101.ch</span>
 
-<span class="c1"># Let&#39;s convert data from win32 format to SAC format</span>
+<span class="c1"># Let's convert data from win32 format to SAC format</span>
 <span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">)</span>
 
-<span class="c1"># Let&#39;s extract instrument response as PZ files from the channel table file</span>
+<span class="c1"># Let's extract instrument response as PZ files from the channel table file</span>
 <span class="n">win32</span><span class="o">.</span><span class="n">extract_sacpz</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span>
 
 <span class="c1"># Now you can see several SAC and SAC_PZ files in your working directory</span>
