@@ -136,3 +136,11 @@ def test_check_package_release(monkeypatch):
     monkeypatch.setattr(utils.requests, "get", lambda url, timeout: response)
     with pytest.raises(requests.HTTPError):
         check_package_release()
+
+
+def test_to_datetime_invalid_string():
+    """
+    Test that to_datetime reports the original input string when parsing fails.
+    """
+    with pytest.raises(ValueError, match=r"2010-01-01T03:45:12,5"):
+        to_datetime("2010-01-01T03:45:12,5")
