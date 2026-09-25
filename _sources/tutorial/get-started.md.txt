@@ -9,8 +9,8 @@ Now let's get started.
 
 ## Start python
 
-Run `python` (or `ipython` if you have it), and make sure you're using Python
-3.10 or above:
+Run `python` (or `ipython` if you have it), and make sure you're using Python 3.11 or
+above:
 
 ```console
 $ python
