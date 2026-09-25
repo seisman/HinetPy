@@ -30,7 +30,7 @@ msgid "To use HinetPy, you need:"
 msgstr "为了使用 HinetPy，你需要:"
 
 #: ../../installation.md:7
-msgid "Python \\>= 3.10"
+msgid "Python \\>= 3.11"
 msgstr ""
 
 #: ../../installation.md:8

@@ -157,7 +157,7 @@ class BaseClient:
                 if key == "password":
                     value = "*" * len(value)
                 string += f"{key:22s}: {value}\n"
-            except AttributeError:  # noqa: PERF203
+            except AttributeError:
                 continue
         return string
 
@@ -721,7 +721,7 @@ class EventWaveformClient(BaseClient):
                     with zipfile.ZipFile(ft.name) as fz:
                         fz.extractall(path=outdir)
                     return outdir
-            except Exception:  # noqa: BLE001, S112, PERF203
+            except Exception:  # noqa: BLE001, S112
                 continue
         logger.error("Data download fails after %d retries.", self.retries)
         return None

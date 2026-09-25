@@ -43,10 +43,10 @@ msgstr "启动Python"
 #: ../../tutorial/get-started.md:12
 msgid ""
 "Run `python` (or `ipython` if you have it), and make sure you're using "
-"Python 3.10 or above:"
+"Python 3.11 or above:"
 msgstr ""
 "在终端中运行 `python` （或 `ipython` ），并确保你所使用的Python版本大于等于"
-"3.10："
+"3.11："
 
 #: ../../tutorial/get-started.md:22
 msgid "Create a Client"
