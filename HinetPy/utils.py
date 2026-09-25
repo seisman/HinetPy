@@ -197,6 +197,7 @@ def to_datetime(value: str | datetime | date) -> datetime:
         return datetime.combine(value, datetime.min.time())
 
     # is a string
+    original = value
     for char in ["T", "-", ":", ",", "_"]:
         value = value.replace(char, " ")
 
@@ -218,7 +219,11 @@ def to_datetime(value: str | datetime | date) -> datetime:
     elif len(parts) == 6:
         strfmt = "%Y %m %d %H %M %S.%f" if "." in value else "%Y %m %d %H %M %S"
 
-    return datetime.strptime(value, strfmt)
+    try:
+        return datetime.strptime(value, strfmt)
+    except ValueError as err:
+        msg = f"Unable to parse {original!r} as a datetime."
+        raise ValueError(msg) from err
 
 
 def check_cmd_exists(cmd: str) -> bool:

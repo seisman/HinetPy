@@ -11,7 +11,7 @@ class Channel:
     Information for a single channel.
     """
 
-    def __init__(  # noqa: PLR0913
+    def __init__(  # noqa: PLR0913,PLR0917
         self,
         id: str,  # noqa: A002
         name: str,
